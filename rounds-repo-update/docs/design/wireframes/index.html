@@ -1,0 +1,170 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Rounds wireframes</title><style>
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-600-normal.woff2); font-weight: 600; }
+@font-face { font-family: "Archivo Narrow"; src: url(../fonts/archivo-narrow-latin-700-normal.woff2); font-weight: 700; }
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Archivo", sans-serif; background: #E9ECF0; padding: 40px; display: flex; flex-wrap: wrap; gap: 40px; align-items: flex-start; color: #2B2F36; }
+.wf { display: flex; flex-direction: column; gap: 12px; width: 360px; background: #E9ECF0; }
+.wf h2 { font: 700 18px "Archivo Narrow"; }
+.screen { width: 360px; height: 740px; border: 2px solid #2B2F36; border-radius: 36px; background: #fff; padding: 46px 18px 0; display: flex; flex-direction: column; gap: 10px; position: relative; overflow: hidden; }
+.b { border: 1.5px solid #2B2F36; border-radius: 12px; padding: 10px 12px; font-size: 13px; display: flex; align-items: center; gap: 8px; position: relative; }
+.g { background: #EEF0F3; border-color: #B9BFC8; }
+.d { border-style: dashed; }
+.pill { border-radius: 999px; justify-content: center; font-weight: 600; }
+.primary { background: #2B2F36; color: #fff; }
+.t { font: 700 26px/1.1 "Archivo Narrow"; }
+.q { font: 700 22px/1.15 "Archivo Narrow"; }
+.s { font-size: 12px; color: #6A717C; }
+.ln { height: 8px; border-radius: 4px; background: #D5D9DF; }
+.row { display: flex; gap: 8px; }
+.col { display: flex; flex-direction: column; gap: 6px; }
+.grow { flex: 1; }
+.tabs { position: absolute; left: 0; right: 0; bottom: 0; height: 64px; border-top: 1.5px solid #2B2F36; display: grid; grid-template-columns: repeat(4,1fr); font-size: 11px; text-align: center; padding-top: 10px; }
+.tabs b { font-weight: 600; text-decoration: underline; }
+.n { position: absolute; top: -9px; right: -9px; width: 20px; height: 20px; border-radius: 50%; background: #E0662A; color: #fff; font: 600 11px/20px "Archivo"; text-align: center; }
+.notes { font-size: 13px; line-height: 1.45; padding-left: 20px; }
+.notes li { margin-bottom: 4px; }
+.spacer { flex: 1; }
+.screen p, .screen span:not(.n) { position: relative; }
+.n { z-index: 2; }
+.rung { width: 34px; height: 30px; border: 1.5px solid #2B2F36; border-radius: 8px; display: grid; place-items: center; font: 700 15px "Archivo Narrow"; }
+.rung.on { background: #2B2F36; color: #fff; }
+.rung.dim { border-color: #C3C8CF; color: #9AA1AB; }
+</style></head><body><div class="wf"><h2>01 Onboarding</h2><div class="screen">
+<p class="t">Set up Rounds</p><p class="s">Two questions. Change any time.</p>
+<p style="font-weight:600;margin-top:10px">What year are you?</p>
+<div class="row"><div class="b g pill grow">MS1</div><div class="b g pill grow">MS2</div><div class="b pill primary grow">MS3</div><div class="b g pill grow">MS4</div></div>
+<p style="font-weight:600;margin-top:10px">Current rotation</p>
+<div class="b" style="position:relative"><span class="n">1</span>Internal medicine <span class="grow"></span>✓</div>
+<div class="b g">Surgery</div><div class="b g">Pediatrics</div><div class="b g">OB/GYN</div><div class="b g">More…</div>
+<div class="spacer"></div>
+<div class="b pill primary" style="height:46px;margin-bottom:20px">Continue</div></div><ol class="notes"><li>Rotation list sets the default script pool. MS1–2 hide rotation and show organ systems instead (shadowing mode).</li><li>No account wall before value: sign-in is asked for after the first session.</li></ol></div><div class="wf"><h2>02 Pimp (home)</h2><div class="screen">
+<div class="row" style="justify-content:space-between;align-items:center"><span class="s">Date</span><div class="b pill" style="padding:4px 10px"><span class="n">4</span>Rank</div></div><p class="t">Internal medicine</p><p class="s">Week 3 of 8, change rotation</p>
+<div class="b g col" style="align-items:stretch;padding:14px;margin-top:6px"><span class="n">5</span>
+<div class="row" style="justify-content:space-between"><span style="font-weight:600">Today's rounds</span><span class="s">1 of 3</span></div>
+<div class="row" style="gap:4px"><div class="ln grow" style="background:#2B2F36"></div><div class="ln grow"></div><div class="ln grow"></div></div>
+<span class="s">Shift streak line</span>
+<span style="font-weight:600;margin-top:4px">Persona</span><div class="row"><div class="b pill grow" style="background:#fff">Teacher</div><div class="b pill grow" style="background:#fff">Surgeon</div><div class="b pill primary grow"><span class="n">1</span>Internist</div></div>
+<div class="ln" style="width:80%"></div>
+<div class="b pill primary" style="height:50px;font-size:16px"><span class="n">2</span>🎤 Pimp me</div></div>
+<div class="row" style="margin-top:8px"><span style="font-weight:600" class="grow">From today's patients</span><span class="s">Log one</span></div>
+<div class="b"><span class="n">3</span><div class="col grow"><div class="ln" style="width:70%"></div><div class="ln" style="width:58%"></div></div><div class="b pill" style="padding:4px 10px">Start</div></div>
+<div class="b"><div class="col grow"><div class="ln" style="width:70%"></div><div class="ln" style="width:58%"></div></div><div class="b pill" style="padding:4px 10px">Start</div></div><div class="tabs"><span><b>Pimp</b></span><span>Log</span><span>Review</span><span>Profile</span></div></div><ol class="notes"><li>Persona remembers the last choice.</li><li>Single primary action on the screen. Starts a session on a script chosen from the rotation, weighted toward weak spots.</li><li>Each logged patient is a one-tap session on that script. Empty state: "Log a patient to practise on them tonight."</li><li>Rank chip opens Profile. Title only, no number.</li><li>Daily goal: 3 sessions = rounds done, which counts as a shift for the streak. Goal adjustable (1 to 5) in Settings.</li></ol></div><div class="wf"><h2>03 Script picker</h2><div class="screen">
+<p class="t">Choose a topic</p>
+<div class="b">🔍 Search diagnoses</div>
+<div class="row"><div class="b pill primary">All</div><div class="b pill g">Cardio</div><div class="b pill g">Renal</div><div class="b pill g">GI</div></div>
+<div class="b"><div class="col grow"><div class="ln" style="width:60%"></div><span class="s">Best rung 5</span></div>›</div>
+<div class="b"><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">Best rung 2</span></div>›</div>
+<div class="b"><span class="n">1</span><div class="col grow"><div class="ln" style="width:65%"></div><span class="s">Not tried</span></div>›</div>
+<div class="b"><div class="col grow"><div class="ln" style="width:45%"></div><span class="s">Best rung 6</span></div>›</div><div class="tabs"><span><b>Pimp</b></span><span>Log</span><span>Review</span><span>Profile</span></div></div><ol class="notes"><li>Reached from "Change rotation" or long-press on Pimp me. Shows best rung per script so weak topics stand out.</li></ol></div><div class="wf"><h2>04 Live session (voice)</h2><div class="screen">
+<div class="row" style="justify-content:space-between"><span>✕</span><span class="s">Persona</span><span>0:42</span></div>
+<div style="margin-top:10px"><span class="n">1</span><div class="col" style="flex-direction:column-reverse;gap:5px"><div class="row" style="align-items:center"><span class="rung ">1</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">2</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung on">3</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">4</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">5</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">6</span><span class="s">rung label</span></div></div></div>
+<p class="s" style="margin-top:10px">Script name</p>
+<p class="q"><span class="n">2</span>Question text is the largest type on screen, up to three lines.</p>
+<div class="spacer"></div>
+<div class="b g col" style="align-items:stretch"><span class="n">3</span><div class="row" style="align-items:center"><div class="b pill primary" style="width:44px;height:44px">🎤</div><span class="s">waveform</span></div><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="row" style="margin-bottom:20px"><div class="b pill g grow">Type instead</div><div class="b pill g grow">I don't know</div></div></div><ol class="notes"><li>Ladder: 6 rungs, bottom to top. Animate only when a rung is passed (one moment of motion).</li><li>Question is spoken and shown at the same time.</li><li>Live transcript. Answer ends after ~1.2 s of silence, or on tap.</li></ol></div><div class="wf"><h2>05 Live session (text)</h2><div class="screen">
+<div class="row" style="justify-content:space-between"><span>✕</span><span class="s">Persona</span><span>0:42</span></div>
+<div class="row" style="gap:4px;margin-top:6px"><span class="n">1</span><span class="rung">1</span><span class="rung">2</span><span class="rung on">3</span><span class="rung dim">4</span><span class="rung dim">5</span><span class="rung dim">6</span></div>
+<p class="q" style="margin-top:12px">Question text</p>
+<div class="spacer"></div>
+<div class="b" style="height:90px;align-items:flex-start">Type your answer…</div>
+<div class="b pill primary" style="height:46px">Submit</div>
+<div class="b g" style="height:150px;margin-bottom:0;justify-content:center">keyboard</div></div><ol class="notes"><li>Ladder collapses to a horizontal strip when the keyboard is up. Same grading as voice.</li></ol></div><div class="wf"><h2>06 List feedback</h2><div class="screen">
+<p class="s">Script, rung 2</p><p class="q">Name five causes.</p>
+<p class="t" style="font-size:40px"><span class="n">1</span>3 <span class="s" style="font-size:16px">/ 5 · partial credit</span></p>
+<div class="b g">✓ answer</div><div class="b g">✓ answer</div><div class="b g">✓ answer</div>
+<div class="b d"><span class="n">2</span>– missed answer</div><div class="b d">– missed answer</div>
+<div class="col"><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="spacer"></div><div class="b pill primary" style="height:46px;margin-bottom:20px">Next question</div></div><ol class="notes"><li>Pass threshold set per question in the script (e.g., 3 of 5 climbs).</li><li>Missed items are dashed outlines: gaps, not errors.</li></ol></div><div class="wf"><h2>07 Session result</h2><div class="screen">
+<div class="row" style="justify-content:space-between"><span>✕</span><span class="s">Script name</span><span></span></div>
+<div class="row" style="align-items:flex-end;gap:20px"><div class="col" style="flex-direction:column-reverse;gap:5px"><div class="row" style="align-items:center"><span class="rung ">1</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">2</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">3</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung on">4</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">5</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">6</span><span class="s">rung label</span></div></div><div><span class="n">1</span><p class="t" style="font-size:64px">4</p><p class="s">rungs climbed · best 5</p></div></div>
+<div class="b g col" style="align-items:stretch"><span class="n">2</span><span class="s">Missed on: rung name</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:76%"></div></div>
+<div class="b"><span class="n">3</span>Unsuspend 3 Anki cards ›</div>
+<div class="row"><div class="b g col grow" style="align-items:stretch"><span class="n">4</span><span class="s">Today's rounds</span><div class="ln"></div></div><div class="b g col grow" style="align-items:stretch"><span class="s">Toward next rank</span><div class="ln"></div></div></div>
+<div class="spacer"></div><div class="row" style="margin-bottom:20px"><div class="b pill g" style="width:90px">Done</div><div class="b pill primary grow">Go again</div></div></div><ol class="notes"><li>The rung reached is the only score. No percentages.</li><li>One-line explanation of the miss, quoting what the student said.</li><li>Hidden when Anki isn't connected; shows "Connect Anki" instead.</li><li>Progress updates here, never mid-session, so sessions stay focused.</li></ol></div><div class="wf"><h2>08 Log</h2><div class="screen">
+<p class="t">Log a patient</p><p class="s">Diagnosis only</p>
+<div class="b" style="border-color:#E0662A"><span class="n">1</span>🔍 typed text…</div>
+<div class="b d" style="border-color:#E0662A">⚠ privacy warning text</div>
+<p class="s">Matching scripts</p>
+<div class="b"><div class="col grow"><div class="ln" style="width:60%"></div></div><div class="b pill g" style="padding:4px 10px">Save</div></div>
+<div class="b"><div class="col grow"><div class="ln" style="width:50%"></div></div><div class="b pill g" style="padding:4px 10px">Save</div></div>
+<p style="font-weight:600;margin-top:8px"><span class="n">2</span>Logged today</p>
+<div class="b g">● <div class="ln" style="width:50%"></div></div><div class="b g">● <div class="ln" style="width:60%"></div></div><div class="tabs"><span>Pimp</span><span><b>Log</b></span><span>Review</span><span>Profile</span></div></div><ol class="notes"><li>Autocomplete against script names. PHI check runs on every keystroke (names, titles like Mr./Mrs., dates, 6+ digit numbers, phone numbers). Save disabled while flagged.</li><li>Dot colour: pimped (pass) or not yet (signal).</li></ol></div><div class="wf"><h2>09 Review</h2><div class="screen">
+<p class="t">Tonight's review</p><p class="s">About N minutes</p>
+<p style="font-weight:600"><span class="n">1</span>Missed today</p>
+<div class="b">● <div class="col grow"><div class="ln" style="width:70%"></div><div class="ln" style="width:58%"></div></div>›</div><div class="b">● <div class="col grow"><div class="ln" style="width:60%"></div><div class="ln" style="width:48%"></div></div>›</div>
+<p style="font-weight:600;margin-top:6px"><span class="n">2</span>Mix-up</p>
+<div class="row"><div class="b g col grow" style="align-items:stretch;height:110px"><div class="ln" style="width:90%"></div><div class="ln" style="width:78%"></div><div class="ln" style="width:66%"></div><div class="ln" style="width:54%"></div></div><div class="b g col grow" style="align-items:stretch;height:110px"><div class="ln" style="width:90%"></div><div class="ln" style="width:78%"></div><div class="ln" style="width:66%"></div><div class="ln" style="width:54%"></div></div></div>
+<div class="b pill g">Drill this pair</div>
+<div class="b d"><span class="n">3</span>Anki sync status</div><div class="tabs"><span>Pimp</span><span>Log</span><span><b>Review</b></span><span>Profile</span></div></div><ol class="notes"><li>Max 5 misses; the rest roll to tomorrow so the list always ends.</li><li>Shown only when the same pair was confused 2+ times in 7 days.</li><li>Anki row hidden until the add-on is connected.</li></ol></div><div class="wf"><h2>10 Illness script</h2><div class="screen">
+<p class="s">‹ Back</p><p class="t">Script name</p><p class="s"><span class="n">1</span>Reviewed by, date</p>
+<div class="row"><div class="b pill g">Rotation</div><div class="b pill g">Rotation</div></div>
+<div class="col" style="gap:4px;margin-top:6px"><span class="s">Who gets it</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="col" style="gap:4px"><span class="s">Key findings</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div><div class="ln" style="width:76%"></div></div>
+<div class="col" style="gap:4px"><span class="s">Diagnosis</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="col" style="gap:4px"><span class="s">Management</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="col" style="gap:4px"><span class="s"><span class="n">2</span>Confused with</span><div class="row"><div class="b pill g">link</div><div class="b pill g">link</div></div></div>
+<div class="b" style="font-size:12px">⚑ This is wrong</div>
+<div class="spacer"></div><div class="b pill primary" style="height:46px;margin-bottom:20px">🎤 Pimp me on this</div></div><ol class="notes"><li>Only approved scripts are visible to students. The reviewer line builds trust.</li><li>Chips link to the other script; a chip turns coral if it's one of the student's mix-ups.</li></ol></div><div class="wf"><h2>11 Profile</h2><div class="screen">
+<p class="t">Progress</p>
+<div class="b g col" style="align-items:stretch"><span class="n">1</span><div class="row" style="justify-content:space-between"><span class="q">Rank</span><span class="s">816 rungs climbed</span></div>
+<div class="row" style="align-items:flex-end;gap:4px"><div class="grow" style="height:8px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:13px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:18px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:23px;border:1.5px solid #2B2F36;border-radius:5px;background:#fff"></div><div class="grow" style="height:28px;border:1.5px solid #2B2F36;border-radius:5px;background:#fff"></div><div class="grow" style="height:33px;border:1.5px solid #2B2F36;border-radius:5px;background:#fff"></div></div><span class="s">MS3, Sub-I, Intern, Resident, Chief, Attending</span></div>
+<div class="row" style="justify-content:space-between"><span style="font-weight:600"><span class="n">2</span>Shifts</span><span class="s">12 in a row</span></div>
+<div class="b g" style="height:56px;justify-content:center">28-day grid, post-call days outlined</div>
+<div class="row" style="justify-content:space-between"><span style="font-weight:600"><span class="n">3</span>Mastered by rotation</span><span class="s">All scripts</span></div>
+<div class="b g col" style="align-items:stretch;gap:10px"><div class="row" style="align-items:center"><span class="s" style="width:80px">Rotation</span><div class="ln grow" style="background:linear-gradient(90deg,#2B2F36 50%,#D5D9DF 50%)"></div><span class="s">x/y</span></div><div class="row" style="align-items:center"><span class="s" style="width:80px">Rotation</span><div class="ln grow" style="background:linear-gradient(90deg,#2B2F36 37%,#D5D9DF 37%)"></div><span class="s">x/y</span></div><div class="row" style="align-items:center"><span class="s" style="width:80px">Rotation</span><div class="ln grow" style="background:linear-gradient(90deg,#2B2F36 27%,#D5D9DF 27%)"></div><span class="s">x/y</span></div><div class="row" style="align-items:center"><span class="s" style="width:80px">Rotation</span><div class="ln grow" style="background:linear-gradient(90deg,#2B2F36 11%,#D5D9DF 11%)"></div><span class="s">x/y</span></div></div>
+<div class="b">Settings ›</div><div class="tabs"><span>Pimp</span><span>Log</span><span>Review</span><span><b>Profile</b></span></div></div><ol class="notes"><li>Rank: six clinical titles earned by total rungs climbed (0, 150, 500, 1,200, 2,500, 5,000). Ranks never go down.</li><li>A shift = a day rounds were finished. One post-call day per week is automatic and doesn't break the streak. Missing a day is never called out.</li><li>Mastered = rung 6 reached on two different days. The lowest rotation is coloured miss.</li></ol></div><div class="wf"><h2>12 Settings and Anki</h2><div class="screen">
+<p class="s">‹ Profile</p><p class="t">Settings</p>
+<p style="font-weight:600"><span class="n">1</span>Anki</p>
+<div class="b col" style="align-items:stretch"><div class="ln" style="width:80%"></div><div class="ln" style="width:68%"></div><div class="b pill primary">Connect Anki</div><span class="s">Install the Rounds add-on, then enter this code: ABCD-1234</span></div>
+<p style="font-weight:600">Voice</p>
+<div class="b">Attending voice speed <span class="grow"></span>1.0×</div>
+<div class="b"><span class="n">2</span>Answer timeout <span class="grow"></span>Persona default</div>
+<p style="font-weight:600">Appearance</p>
+<div class="row"><div class="b pill g grow">Light</div><div class="b pill primary grow">Dark</div><div class="b pill g grow">System</div></div>
+<div class="b">Account and subscription ›</div><div class="tabs"><span>Pimp</span><span>Log</span><span>Review</span><span><b>Profile</b></span></div></div><ol class="notes"><li>Add-on pairing uses a short one-time code, no password typed into Anki.</li><li>Surgeon persona defaults to a short timeout; this overrides it.</li></ol></div><div class="wf"><h2>13 Clean run</h2><div class="screen">
+<div class="row" style="justify-content:space-between"><span>✕</span><span class="s">Script name</span><span></span></div>
+<div class="row" style="align-items:flex-end;gap:20px"><div class="col" style="flex-direction:column-reverse;gap:5px"><div class="row" style="align-items:center"><span class="rung ">1</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">2</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">3</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">4</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">5</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">6</span><span class="s">rung label</span></div></div><div><p class="t" style="font-size:64px">6</p><p class="s">Top of the ladder, new best</p></div></div>
+<div class="row"><span class="n">1</span><div class="b pill g">✓ Clean run</div><div class="b pill g">Script mastered</div></div>
+<div class="col"><span class="n">2</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="row"><div class="b g col grow" style="align-items:stretch"><span class="s">Rounds done</span><div class="ln" style="background:#2B2F36"></div></div><div class="b g col grow" style="align-items:stretch"><span class="s">Toward next rank</span><div class="ln"></div></div></div>
+<div class="b"><span class="n">3</span>Mini ladder. Rotation: 15 of 30 mastered</div>
+<div class="spacer"></div><div class="row" style="margin-bottom:20px"><div class="b pill g" style="width:90px">Done</div><div class="b pill primary grow">Next patient</div></div></div><ol class="notes"><li>Badges, at most two per result: Clean run (no partial answers), Script mastered, New best. No other badge types.</li><li>The persona gets one line. It can tease, never gush.</li><li>Mastery count links to the collection.</li></ol></div><div class="wf"><h2>14 Promotion</h2><div class="screen">
+<div class="row" style="justify-content:flex-end"><span>✕</span></div>
+<div class="spacer"></div>
+<div class="row" style="align-items:flex-end;gap:6px"><span class="n">1</span><div class="grow" style="height:14px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:24px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:34px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:44px;border:1.5px solid #2B2F36;border-radius:5px;background:#2B2F36"></div><div class="grow" style="height:54px;border:1.5px solid #2B2F36;border-radius:5px;background:#fff"></div><div class="grow" style="height:64px;border:1.5px solid #2B2F36;border-radius:5px;background:#fff"></div></div>
+<p class="s">Promoted</p><p class="t" style="font-size:48px">New rank</p>
+<div class="col"><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="col"><span class="n">2</span><div class="ln" style="width:80%"></div><div class="ln" style="width:68%"></div><span class="s">Persona name</span></div>
+<div class="spacer"></div><div class="b pill primary" style="height:46px;margin-bottom:20px">Back to rounds</div></div><ol class="notes"><li>The only full-screen celebration, shown once per rank (5 times ever). The new step rises into place: one 400 ms animation plus a success haptic.</li><li>A dry line from the student's usual persona.</li></ol></div><div class="wf"><h2>15 Script collection</h2><div class="screen">
+<p class="s">‹ Progress</p><p class="t">Rotation name</p><p class="s">15 of 30 mastered</p>
+<div class="row"><span class="n">1</span><div class="b pill primary">All</div><div class="b pill g">Mastered</div><div class="b pill g">Due</div><div class="b pill g">New</div></div>
+<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+<div class="b" style="height:62px;border-width:2.5px"><span class="n">2</span>Mastered</div><div class="b g" style="height:62px">In progress</div>
+<div class="b d" style="height:62px"><span class="n">3</span>Re-check due</div><div class="b g" style="height:62px">In progress</div>
+<div class="b g" style="height:62px;color:#9AA1AB"><span class="n">4</span>Not tried</div><div class="b g" style="height:62px">In progress</div>
+<div class="b" style="height:62px;border-width:2.5px">Mastered</div><div class="b g" style="height:62px;color:#9AA1AB">Not tried</div>
+</div><div class="tabs"><span>Pimp</span><span>Log</span><span>Review</span><span><b>Profile</b></span></div></div><ol class="notes"><li>Filter. Default sort: due first, then in progress, new, mastered.</li><li>Tile = script name + mini ladder (6 bars, best rung filled). Mastered tiles get a signal-colour outline.</li><li>30 days after mastery a tile becomes a dashed "Re-check due". Reaching rung 6 again keeps it mastered, so mastery follows spaced repetition.</li><li>Tap to open the script; long-press to pimp on it.</li></ol></div><div class="wf"><h2>16 Team board (later)</h2><div class="screen">
+<p class="s">‹ Progress</p>
+<div class="row" style="justify-content:space-between;align-items:flex-end"><p class="t">Team name</p><div class="b pill" style="padding:4px 10px">Invite</div></div>
+<p class="s">This week, resets Monday</p>
+<div class="b g col" style="align-items:stretch"><span class="n">1</span><div class="row" style="justify-content:space-between"><span style="font-weight:600">Together</span><span class="s">1,240 of 1,500 rungs</span></div><div class="ln" style="background:linear-gradient(90deg,#2B2F36 83%,#D5D9DF 83%)"></div></div>
+<div class="row" style="justify-content:space-between"><span style="font-weight:600"><span class="n">2</span>Rungs this week</span><span class="s">5 members</span></div>
+<div class="b" style=""><span style="width:14px;font:700 15px Archivo Narrow">1</span><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #2B2F36;display:block"></span><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">● ● ● ○ ● ○ ○</span></div><span>###</span></div><div style="position:relative"><span class="n">3</span><div class="b" style="background:#EEF0F3;"><span style="width:14px;font:700 15px Archivo Narrow">2</span><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #2B2F36;display:block"></span><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">● ● ● ○ ● ○ ○</span></div><span>###</span></div></div><div class="b" style=""><span style="width:14px;font:700 15px Archivo Narrow">3</span><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #2B2F36;display:block"></span><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">● ● ● ○ ● ○ ○</span></div><span>###</span></div><div class="b" style=""><span style="width:14px;font:700 15px Archivo Narrow">4</span><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #2B2F36;display:block"></span><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">● ● ● ○ ● ○ ○</span></div><span>###</span></div><div class="b" style=""><span style="width:14px;font:700 15px Archivo Narrow">5</span><span style="width:26px;height:26px;border-radius:50%;border:1.5px solid #2B2F36;display:block"></span><div class="col grow"><div class="ln" style="width:50%"></div><span class="s">● ● ● ○ ● ○ ○</span></div><span>###</span></div>
+<div class="b g"><span class="n">4</span>Incoming challenge <span class="grow"></span><div class="b pill primary" style="padding:4px 10px">Take it</div></div><div class="tabs"><span>Pimp</span><span>Log</span><span>Review</span><span><b>Profile</b></span></div></div><ol class="notes"><li>Shared weekly goal comes first: cooperation before competition. Goal = 300 rungs per member, rounded.</li><li>Sorted by rungs this week. Dots = days rounds were finished. No colour for last place, no 'behind' labels.</li><li>Your own row is tinted. Members can hide their row (they still count toward the shared goal).</li><li>Challenges: one script, same ladder. Only the challenger's best rung is shown. A notification is sent only if the receiver allowed it.</li></ol></div><div class="wf"><h2>17 Join a team (later)</h2><div class="screen">
+<p class="s">‹ Progress</p><p class="t">Join a team</p><p class="s">Up to 12 people, invite only</p>
+<div class="b" style="height:48px;font-size:18px"><span class="n">1</span>Invite code</div>
+<p class="s">Joining Team name, N members</p>
+<p style="font-weight:600;margin-top:6px"><span class="n">2</span>Teammates will see</p>
+<div class="b">First name and rank <span class="grow"></span>✓</div>
+<div class="b">Rungs this week <span class="grow"></span>[toggle]</div>
+<div class="b">Days you finished rounds <span class="grow"></span>[toggle]</div>
+<p style="font-weight:600;margin-top:6px"><span class="n">3</span>Never shared</p>
+<div class="col"><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="spacer"></div><div class="b pill primary" style="height:46px">Join team</div><p class="s" style="text-align:center;margin-bottom:20px">Create a new team instead</p></div><ol class="notes"><li>Code or invite link. Teams are off by default and live under Profile; there's no 5th tab.</li><li>Each shared item can be switched off later in Settings.</li><li>Spelled out: misses, weak spots, mix-ups, scripts and logged patients are never shared.</li></ol></div><div class="wf"><h2>18 Challenge result (later)</h2><div class="screen">
+<div class="row" style="justify-content:space-between"><span>✕</span><span class="s">Challenge: script name</span><span></span></div>
+<div class="row" style="align-items:flex-end;gap:20px"><div class="col" style="flex-direction:column-reverse;gap:5px"><div class="row" style="align-items:center"><span class="rung ">1</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">2</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">3</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung ">4</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung on">5</span><span class="s">rung label</span></div><div class="row" style="align-items:center"><span class="rung dim">6</span><span class="s">rung label</span></div></div><div><p class="t" style="font-size:64px">5</p><p class="s">rungs climbed</p></div></div>
+<div class="b g" style="justify-content:space-between"><span class="n">1</span><span>You 5</span><span class="s">tied</span><span>Priya 5</span></div>
+<div class="col"><span class="n">2</span><div class="ln" style="width:100%"></div><div class="ln" style="width:88%"></div></div>
+<div class="spacer"></div><div class="row" style="margin-bottom:20px"><div class="b pill g" style="width:90px">Done</div><div class="b pill primary grow">Challenge back</div></div></div><ol class="notes"><li>Comparison is one line: you vs. them. Words only: 'you passed', 'tied', or 'Priya leads'. Never 'you lost'.</li><li>The persona comments on the shared gap when both stopped at the same rung.</li></ol></div></body></html>

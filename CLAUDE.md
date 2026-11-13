@@ -47,6 +47,17 @@ pnpm comes from corepack (version pinned in root `package.json`).
 5. **No patient data (PHI), ever.** The patient log stores a diagnosis label, rotation and date only. Free-text inputs must warn on, and block, anything resembling names, dates of birth, medical record numbers, phone numbers or addresses. Do not add fields that could hold patient details.
 6. **Licensed content:** never store or reproduce AnKing card text or Qbank questions. Reference them by external ID only.
 
+## Design
+
+Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before building any UI.
+- Structure and behaviour: `docs/design/png/wireframes/` (18 screens with numbered notes; 16–18 are the later-stage Teams feature).
+- Look and feel: `docs/design/png/mockups/` (14 in dark mode, 7 in light).
+- Gamification rules (rounds, shifts, rank, mastery) are in DESIGN.md → Progression. Don't add mechanics beyond those. Teams is Stage 5: don't build it before then.
+- Theme values come only from `docs/design/tokens.json` → `packages/shared/theme`. No raw hex in components.
+- Fonts: Archivo and Archivo Narrow via `@expo-google-fonts`. Icons: `lucide-react-native`.
+- When building a screen, open its PNG and match it. If something's unclear, follow DESIGN.md rather than inventing a new pattern.
+- The vision video (`apps/video`, Remotion) is specified in `docs/design/VIDEO.md`.
+
 ## Code conventions
 
 - TypeScript strict mode. No `any` without a comment explaining why.
