@@ -36,6 +36,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
 - `pnpm --filter video studio`: preview the vision video. `pnpm --filter video render`: export both MP4s and posters to `apps/video/out` (gitignored)
 - `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)
+- The app is dark by default. To check light mode, set `EXPO_PUBLIC_THEME=light` (or `system`) in `apps/mobile/.env.local` and restart `pnpm dev`.
 - Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
 - `packages/shared` uses explicit `.ts` extensions on relative imports, so Edge Functions (Deno) can import it directly.
 
@@ -54,7 +55,8 @@ Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before bui
 - Structure and behaviour: `docs/design/png/wireframes/` (18 screens with numbered notes; 16–18 are the later-stage Teams feature).
 - Look and feel: `docs/design/png/mockups/` (14 in dark mode, 7 in light).
 - Gamification rules (rounds, shifts, rank, mastery) are in DESIGN.md → Progression. Don't add mechanics beyond those. Teams is Stage 5: don't build it before then.
-- Theme values come only from `docs/design/tokens.json` → `packages/shared/theme`. No raw hex in components.
+- Theme values come only from `docs/design/tokens.json` → `packages/shared/theme` (a test keeps them in sync). No raw hex in components.
+- App building blocks live in `apps/mobile/src/ui/` (text styles, buttons, ladder, progress pieces). Reuse them before adding new ones.
 - Fonts: Archivo and Archivo Narrow via `@expo-google-fonts`. Icons: `lucide-react-native`.
 - When building a screen, open its PNG and match it. If something's unclear, follow DESIGN.md rather than inventing a new pattern.
 - The vision video (`apps/video`, Remotion) is specified in `docs/design/VIDEO.md`. It shows one session end to end; DESIGN.md → "The session, start to finish" turns that into rules for the app.

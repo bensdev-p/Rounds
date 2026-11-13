@@ -4,6 +4,7 @@
  * everything written is validated before it leaves the client.
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
+import { z } from 'zod';
 import type { Database } from '../db/database.types.ts';
 import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../db/rows.ts';
 import type { Confusable } from '../grading/localGrader.ts';
@@ -16,7 +17,8 @@ import {
   type Attempt,
   type GradeResponse,
 } from '../schemas/attempt.ts';
-import type { IllnessScript } from '../schemas/illnessScript.ts';
+import { ScriptIdSchema, type IllnessScript } from '../schemas/illnessScript.ts';
+import type { SessionRecord } from '../progress/progression.ts';
 import { traceQuestionToScript, type Question } from '../schemas/question.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
@@ -182,6 +184,40 @@ export async function finishSession(
     'Finishing session',
   );
   return progress.best_rung;
+}
+
+const FinishedSessionSchema = z.strictObject({
+  script_id: ScriptIdSchema,
+  score: z.number().int().min(0).max(6),
+  status: z.enum(['missed', 'completed']),
+  ended_at: z.string().min(1),
+});
+
+/**
+ * The student's finished sessions, oldest first: everything progression
+ * (rounds, shifts, rank, mastery) is derived from these.
+ */
+export async function listFinishedSessions(
+  client: RoundsClient,
+  onReject: RejectHandler = warnRejected,
+): Promise<SessionRecord[]> {
+  const rows = unwrap(
+    await client
+      .from('ladder_sessions')
+      .select('id, script_id, score, status, ended_at')
+      .neq('status', 'in_progress')
+      .order('ended_at'),
+    'Loading progress',
+  );
+  const sessions: SessionRecord[] = [];
+  const rejected: ParseResult<unknown>['rejected'] = [];
+  for (const { id, ...row } of rows) {
+    const parsed = FinishedSessionSchema.safeParse(row);
+    if (parsed.success) sessions.push(parsed.data);
+    else rejected.push({ id, error: parsed.error.message });
+  }
+  onReject('ladder_sessions', rejected);
+  return sessions;
 }
 
 export const GRADE_TIMEOUT_MS = 13_000;

@@ -1,0 +1,185 @@
+/**
+ * Illness script, read only. Wireframe 10, mockup script.png. Only approved
+ * scripts are visible; the reviewer line is why students can trust it.
+ */
+import type { IllnessScript } from '@rounds/shared';
+import { getLadderContent } from '@rounds/shared/api';
+import { router, useLocalSearchParams } from 'expo-router';
+import { ChevronLeft } from 'lucide-react-native';
+import { StyleSheet, View } from 'react-native';
+import { Disclaimer } from '@/components/Disclaimer';
+import { ErrorView, Loading } from '@/components/StatusView';
+import { useClient } from '@/lib/auth';
+import { ROTATION_NAMES } from '@/lib/copy';
+import { usePersona } from '@/lib/prefs';
+import { useAsync } from '@/lib/useAsync';
+import { space, useTheme } from '@/theme';
+import { Button, Chip, Link } from '@/ui/controls';
+import { LadderIcon } from '@/ui/icons';
+import { Screen } from '@/ui/Screen';
+import { Txt } from '@/ui/Text';
+
+const join = (items: readonly string[]) => items.join(', ');
+const sentence = (text: string) => {
+  const t = text.trim();
+  const capped = t.charAt(0).toUpperCase() + t.slice(1);
+  return /[.!?]$/.test(capped) ? capped : `${capped}.`;
+};
+
+function sections(s: IllnessScript): { title: string; body: string }[] {
+  const findings = [
+    ...s.key_findings.history,
+    ...s.key_findings.exam,
+    ...s.key_findings.labs,
+    ...s.key_findings.imaging,
+  ];
+  return [
+    {
+      title: 'Who gets it',
+      body: [
+        sentence(s.epidemiology.who),
+        s.epidemiology.risk_factors.length > 0 &&
+          `Risk factors: ${sentence(join(s.epidemiology.risk_factors))}`,
+      ]
+        .filter(Boolean)
+        .join(' '),
+    },
+    { title: 'Key findings', body: sentence(join(findings)) },
+    {
+      title: 'Diagnosis',
+      body: [
+        sentence(join(s.diagnosis.confirmatory_tests)),
+        s.diagnosis.criteria.length > 0 && sentence(join(s.diagnosis.criteria)),
+      ]
+        .filter(Boolean)
+        .join(' '),
+    },
+    {
+      title: 'Management',
+      body: [
+        sentence(join(s.management.first_line)),
+        s.management.next_line.length > 0 && `Next: ${sentence(join(s.management.next_line))}`,
+      ]
+        .filter(Boolean)
+        .join(' '),
+    },
+    ...(s.pearls.length > 0 ? [{ title: 'Pearls', body: s.pearls.map(sentence).join(' ') }] : []),
+  ].filter((section) => section.body.length > 1);
+}
+
+function reviewedLine(s: IllnessScript): string | null {
+  if (!s.reviewed_by || !s.reviewed_at) return null;
+  const date = new Date(s.reviewed_at).toLocaleDateString('en-US', {
+    month: 'short',
+    day: 'numeric',
+  });
+  return `Reviewed by ${s.reviewed_by}, on ${date}`;
+}
+
+export default function ScriptScreen() {
+  const { c } = useTheme();
+  const client = useClient();
+  const [persona] = usePersona();
+  const { scriptId } = useLocalSearchParams<{ scriptId: string }>();
+  const content = useAsync(() => getLadderContent(client, scriptId), scriptId);
+
+  if (content.status === 'loading') return <Loading label="Loading the script" />;
+  if (content.status === 'error') {
+    return (
+      <ErrorView
+        message={`Couldn't load this script. ${content.error.message}`}
+        onRetry={content.reload}
+      />
+    );
+  }
+  if (!content.data) return <ErrorView message="That script isn't available." />;
+  const { script, confusables } = content.data;
+  const reviewed = reviewedLine(script);
+  const approvedLinks = script.confused_with.filter((link) =>
+    confusables.some((c2) => c2.script_id === link.script_id),
+  );
+
+  return (
+    <Screen
+      footer={
+        content.data.questions.length > 0 ? (
+          <Button
+            label="Pimp me on this"
+            icon={LadderIcon}
+            onPress={() =>
+              router.replace({ pathname: '/session/[scriptId]', params: { scriptId, persona } })
+            }
+          />
+        ) : null
+      }
+    >
+      <Link
+        label="Back"
+        icon={ChevronLeft}
+        onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
+      />
+      <Txt variant="h1" accessibilityRole="header" style={styles.title}>
+        {script.name}
+      </Txt>
+      {reviewed && (
+        <Txt variant="meta" tone="text2" fontSize={15} style={styles.reviewed}>
+          {reviewed}
+        </Txt>
+      )}
+      <View style={styles.chips}>
+        {script.rotation.map((r) => (
+          <Chip key={r} label={ROTATION_NAMES[r]} />
+        ))}
+      </View>
+
+      {sections(script).map((section) => (
+        <View key={section.title} style={[styles.block, { borderTopColor: c.line }]}>
+          <Txt variant="small" weight="bodySemi" tone="ceil" fontSize={14} accessibilityRole="header">
+            {section.title}
+          </Txt>
+          <Txt variant="body" fontSize={16} lineHeight={24}>
+            {section.body}
+          </Txt>
+        </View>
+      ))}
+
+      {approvedLinks.length > 0 && (
+        <View style={[styles.block, { borderTopColor: c.line }]}>
+          <Txt variant="small" weight="bodySemi" tone="ceil" fontSize={14} accessibilityRole="header">
+            Confused with
+          </Txt>
+          <View style={styles.chips}>
+            {approvedLinks.map((link) => {
+              const name = confusables.find((x) => x.script_id === link.script_id)?.names[0];
+              return (
+                <Chip
+                  key={link.script_id}
+                  label={name ?? link.script_id}
+                  accessibilityHint="Opens that script"
+                  onPress={() =>
+                    router.push({ pathname: '/script/[scriptId]', params: { scriptId: link.script_id } })
+                  }
+                />
+              );
+            })}
+          </View>
+          {approvedLinks.map((link) => (
+            <Txt key={link.script_id} variant="meta" tone="text2" style={styles.tell}>
+              {sentence(link.how_to_tell_apart)}
+            </Txt>
+          ))}
+        </View>
+      )}
+
+      <Disclaimer />
+    </Screen>
+  );
+}
+
+const styles = StyleSheet.create({
+  title: { marginTop: space.lg },
+  reviewed: { marginTop: space.sm },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginVertical: space.lg },
+  block: { borderTopWidth: 1, paddingVertical: space.lg, gap: 6 },
+  tell: { marginTop: 2 },
+});
