@@ -4,3 +4,7 @@ packages:
 
 # React Native / Metro is most reliable with a flat node_modules.
 nodeLinker: hoisted
+
+# esbuild (via tsx) ships prebuilt binaries; its install script isn't needed.
+allowBuilds:
+  esbuild: false

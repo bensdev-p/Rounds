@@ -28,6 +28,10 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm format`: Prettier (code only; Markdown is left alone)
 - `pnpm db:start` / `pnpm db:reset`: local Supabase (needs Docker Desktop running)
 - `pnpm db:test`: pgTAP tests in `supabase/tests` (RLS)
+- `pnpm db:types`: regenerate `packages/shared/src/db/database.types.ts` after a migration
+- `pnpm content:seed`: validate content and regenerate `supabase/seed.sql` (then `pnpm db:reset`)
+- `pnpm test:integration`: API client tests against the local Supabase stack (needs `pnpm db:start`)
+- `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)
 - Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
 
 ## Core domain rules

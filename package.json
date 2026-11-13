@@ -14,7 +14,10 @@
     "supabase": "supabase",
     "db:start": "supabase start",
     "db:reset": "supabase db reset",
-    "db:test": "supabase test db"
+    "db:test": "supabase test db",
+    "db:types": "supabase gen types typescript --local --schema public > packages/shared/src/db/database.types.ts && prettier --write packages/shared/src/db/database.types.ts",
+    "content:seed": "pnpm --filter @rounds/shared content:seed",
+    "test:integration": "pnpm --filter @rounds/shared test:integration"
   },
   "devDependencies": {
     "prettier": "^3.10.1",

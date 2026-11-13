@@ -9,3 +9,6 @@ export * from './ladder/missTags';
 export * from './ladder/engine';
 export * from './phi/detectPhi';
 export { normalize, containsTerm } from './text';
+export * from './db/rows';
+export * from './db/seed';
+export type { Database, Json } from './db/database.types';
