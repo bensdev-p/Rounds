@@ -57,10 +57,14 @@ describe('Rounds API against local Supabase', () => {
   });
 
   it('lists approved scripts that have questions', async () => {
+    // Approved real scripts from content/ may be seeded too; the fixtures are always there.
     const scripts = await listPimpableScripts(await newStudent());
-    expect(scripts.map((s) => s.script.id)).toEqual(['zorblax-syndrome']);
-    expect(scripts[0]!.questionCount).toBe(6);
-    expect(scripts[0]!.bestRung).toBeNull();
+    const zorblax = scripts.find((s) => s.script.id === 'zorblax-syndrome');
+    expect(zorblax?.questionCount).toBe(6);
+    expect(zorblax?.bestRung).toBeNull();
+    // quellan-fever is approved but has no questions, so it isn't pimpable.
+    expect(scripts.map((s) => s.script.id)).not.toContain('quellan-fever');
+    expect(scripts.every((s) => s.script.status === 'approved')).toBe(true);
   });
 
   it('loads a ladder with traced questions and confusables', () => {
@@ -91,7 +95,9 @@ describe('Rounds API against local Supabase', () => {
       { passed: false, miss_tag: 'unknown' },
     ]);
 
-    const [summary] = await listPimpableScripts(student);
+    const summary = (await listPimpableScripts(student)).find(
+      (s) => s.script.id === 'zorblax-syndrome',
+    );
     expect(summary!.bestRung).toBe(2);
   });
 
@@ -119,7 +125,7 @@ describe('Rounds API against local Supabase', () => {
     const { data: attempts } = await b.from('attempts').select('id');
     expect(sessions).toEqual([]);
     expect(attempts).toEqual([]);
-    expect((await listPimpableScripts(b))[0]!.bestRung).toBeNull();
+    expect((await listPimpableScripts(b)).every((s) => s.bestRung === null)).toBe(true);
 
     const finishAsB = await b.rpc('finish_ladder_session', {
       p_session_id: sessionId,

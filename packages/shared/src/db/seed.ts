@@ -20,6 +20,8 @@ function jsonb(value: unknown): string {
 export function validateContent(
   scripts: readonly IllnessScript[],
   questions: readonly Question[],
+  /** Ids a `confused_with` link may point at. Defaults to `scripts`. */
+  linkTargets: ReadonlySet<string> = new Set(scripts.map((s) => s.id)),
 ): string[] {
   const problems: string[] = [];
   const byId = new Map(scripts.map((s) => [s.id, s]));
@@ -31,7 +33,7 @@ export function validateContent(
 
   for (const script of scripts) {
     for (const link of script.confused_with) {
-      if (!byId.has(link.script_id)) {
+      if (!linkTargets.has(link.script_id)) {
         problems.push(`${script.id}: confused_with links to unknown script ${link.script_id}`);
       }
     }
@@ -58,8 +60,9 @@ export function buildSeedSql(
   scripts: readonly IllnessScript[],
   questions: readonly Question[],
   header: string,
+  linkTargets?: ReadonlySet<string>,
 ): string {
-  const problems = validateContent(scripts, questions);
+  const problems = validateContent(scripts, questions, linkTargets);
   if (problems.length > 0) {
     throw new SeedError(`Content failed validation:\n- ${problems.join('\n- ')}`);
   }

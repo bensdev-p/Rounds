@@ -15,7 +15,10 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test:integration": "vitest run --config vitest.integration.config.ts",
-    "content:seed": "tsx scripts/build-seed.ts"
+    "content:seed": "tsx scripts/build-seed.ts",
+    "content:check": "tsx scripts/content-check.ts",
+    "content:review": "tsx scripts/content-review.ts",
+    "content:approve": "tsx scripts/content-approve.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
