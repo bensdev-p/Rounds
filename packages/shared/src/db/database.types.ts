@@ -10,6 +10,8 @@ export type Database = {
           credit: number;
           elapsed_ms: number;
           grade: Database['public']['Enums']['grade'];
+          grader: Database['public']['Enums']['grader'];
+          grader_version: string | null;
           id: string;
           miss_tag: string | null;
           passed: boolean;
@@ -25,6 +27,8 @@ export type Database = {
           credit: number;
           elapsed_ms: number;
           grade: Database['public']['Enums']['grade'];
+          grader?: Database['public']['Enums']['grader'];
+          grader_version?: string | null;
           id?: string;
           miss_tag?: string | null;
           passed: boolean;
@@ -39,6 +43,8 @@ export type Database = {
           credit?: number;
           elapsed_ms?: number;
           grade?: Database['public']['Enums']['grade'];
+          grader?: Database['public']['Enums']['grader'];
+          grader_version?: string | null;
           id?: string;
           miss_tag?: string | null;
           passed?: boolean;
@@ -240,6 +246,7 @@ export type Database = {
     };
     Enums: {
       grade: 'correct' | 'partial' | 'incorrect';
+      grader: 'local' | 'llm';
       ladder_rung: 'recall' | 'second_order' | 'differentiate' | 'workup' | 'management' | 'pearl';
       ladder_status: 'in_progress' | 'missed' | 'completed';
       persona: 'teacher' | 'internist' | 'surgeon';
@@ -356,6 +363,7 @@ export const Constants = {
   public: {
     Enums: {
       grade: ['correct', 'partial', 'incorrect'],
+      grader: ['local', 'llm'],
       ladder_rung: ['recall', 'second_order', 'differentiate', 'workup', 'management', 'pearl'],
       ladder_status: ['in_progress', 'missed', 'completed'],
       persona: ['teacher', 'internist', 'surgeon'],

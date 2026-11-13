@@ -3,7 +3,7 @@
 begin;
 create extension if not exists pgtap with schema extensions;
 
-select plan(17);
+select plan(18);
 
 -- ─── Structure ──────────────────────────────────────────────────────────────
 
@@ -93,6 +93,14 @@ select throws_ok(
             'x', 1, 'incorrect', 'x', 0, false, 'confused_with:Not A Slug')$$,
   '23514', null,
   'Malformed miss tags are rejected'
+);
+
+select throws_ok(
+  $$insert into public.attempts (session_id, question_id, answer, elapsed_ms, grade, reason, credit, passed, grader)
+    values (current_setting('test.session_a')::uuid, 'pgtap-approved.recall.1',
+            'x', 1, 'correct', 'x', 1, true, 'llm')$$,
+  '23514', null,
+  'LLM-graded attempts must record the grader version'
 );
 
 insert into public.script_progress (script_id, best_rung, sessions_count) values ('pgtap-approved', 2, 1);
