@@ -42,6 +42,22 @@ Scripts are drafted by AI and approved by a human medical reviewer. Each questio
 - **Automatic miss tags:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`.
 - **Grading:** the AI compares the student's answer to the script's accepted answers and synonyms, and returns `correct | partial | incorrect` plus a one-line reason. It never grades against facts outside the script.
 
+### Planned: the miss card
+**Status: planned, not built.** Build it when the result screen is built, or as a follow-up to it. It is not a reason to pull later-stage work forward.
+
+When a session ends on a miss, the result screen explains that miss in one card, as on `docs/design/png/mockups/result.png` and in the vision video (scene 4):
+- A label naming the rung: "Missed on management".
+- One sentence that quotes what the student said next to what the script says: "You said "keep them NPO until the pain resolves." Early oral feeding, as tolerated, is preferred in mild disease."
+- A "Review the script" link to that script.
+
+Rules:
+- The correction is taken from the approved script field the question was built on (domain rule 1). The AI may phrase the sentence; it never supplies the fact.
+- The quote is the student's own answer for that question. It is free text, so it goes through the same PHI guard as other free-text input before it is stored or shown.
+- List questions keep their own feedback (got and missed pills); the card is for the miss that ends a session.
+- No card on a clean run.
+
+A possible extension, not decided: open the next session on the same script with the missed question.
+
 ## Supporting features (minor, mostly automatic)
 - **Mix-up detector:** repeated `confused_with` misses between two scripts → a side-by-side comparison drill.
 - **Weakness map:** by rotation, system and script, from ladder results and Anki data.
@@ -87,3 +103,11 @@ Oral presentation coach · virtual patients · crowdsourced rotation guides · p
 
 ## Name
 Working name **Rounds**. Use "Pimp me" as the in-app button label, not the brand.
+
+## Recommendations (not decided)
+Suggestions that came out of making the vision video (November 2026). **None of these are requirements.** Don't build or design toward them unless the developer says so; raise them when the related work comes up.
+
+- **Sell the morning.** The moment students dread is being asked on morning rounds. A three-minute warm-up on yesterday's logged patients, before rounds, may be a stronger habit than the evening review. The video's line for this is "Get asked here first."
+- **Show the reviewer in the session.** "Reviewed by Dr. J. Patel, PGY-3" currently appears only on the script page. Showing it with the question is the reason to trust Rounds over a general chatbot.
+- **Revisit the word "pimp".** The Name section keeps it on the button only, and VIDEO.md bans it from marketing. Some schools treat the practice as mistreatment, so the button label may matter for school licenses (Stage 5). "Ask me" is the neutral option.
+- **Sharpen the Stage 1 success test.** "5 days in a row unprompted" could be narrowed to "opens it before rounds, unprompted", which tests the morning habit directly.

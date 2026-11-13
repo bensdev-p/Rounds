@@ -11,6 +11,7 @@ Visual guidance for building the app. If a screen isn't covered here, follow the
 | `wireframes/index.html` | Source for the wireframes (open in a browser to see all at once) |
 | `mockups/index.html`, `mockups/light.html`, `mockups/rounds.css` | Source for the mockups. The CSS is a readable reference for exact values. |
 | `VIDEO.md` | Spec for the animated vision video (Remotion, `apps/video`) |
+| `apps/video/src/screens/` (outside this folder) | Seven screens already recreated in React from these tokens for the video: Home, live session, list feedback, result (miss and clean run), Log, Review, Promotion. They are web React, not React Native, so use them as a worked reference for values and structure, not as code to import. |
 | `tokens.json` | Colours, type, spacing, radii, motion. Import into `packages/shared/theme`. |
 | `fonts/` | Archivo and Archivo Narrow (also on npm as `@expo-google-fonts/archivo` and `@expo-google-fonts/archivo-narrow`) |
 
@@ -31,6 +32,21 @@ It should feel calm and confident: dark-first, big condensed numbers, readable a
 - rungs not reached yet are dim.
 
 The ladder is the most distinctive thing in the app, so everything around it stays quiet.
+
+## The session, start to finish
+
+The vision video (`VIDEO.md`) shows one session end to end. Build the app's flow to match it:
+
+1. **Home.** One tap on "Pimp me" starts the session with the chosen persona.
+2. **Live session.** The ladder sits above the question. While the attending is asking, the mic is idle: the waveform is a flat row of dots. It goes live when the question ends.
+3. **Each pass.** The rung fills green and the next rung pops amber. The question and transcript are replaced by the next ones; nothing else on the screen moves.
+4. **The miss.** The current rung turns coral, its label turns coral, the waveform stops and the clock stops. No sound, no shake, no modal.
+5. **Result.** About a second later the result screen replaces the session. It shows the rung reached and the miss card (below).
+6. **That evening.** The miss appears in Review under "Missed today", with the same wording as the miss card's label.
+
+Layout rules that keep this calm:
+- The transcript panel always reserves three lines, so it never changes height while the student is speaking.
+- The question is replaced in place. It never pushes the ladder or the panel.
 
 ## Progression (the gamified part)
 
@@ -133,6 +149,8 @@ Rules:
 - **List row:** title, optional `small` subtitle, trailing chip, chevron or value.
 - **Rung:** 44×44 square, numeral centred, label to the right.
 - **Answer pill:** `got` (green tint, check icon) or `missed` (dashed coral outline, minus icon). Missed items read as gaps, not errors.
+- **Miss card:** a `surface` panel (radius 18, padding 16) on the result screen. A `small` label ("Missed on management"), one 15 pt sentence that quotes the student's words in `miss` and then states what the script says in `text`, and a "Review the script" link in `ceil`. One card per session, never on a clean run. It is planned, not built: see PRODUCT.md → Planned: the miss card.
+- **Rank progress line** (result screen): "+4 rungs, 6 to go". On the session that earns a rank it reads "+6 rungs. Resident", the bar is full, and the Promotion screen follows.
 - **Field:** 52 high. Error state = coral border plus a warning block underneath that says exactly what to remove.
 - **Comparison:** two columns, same keys on both sides (mix-up drill).
 - **Bars:** 8 pt tall, rounded. The weakest bar is coral, the rest amber.
@@ -151,6 +169,8 @@ There are two memorable moments, and nothing else:
 
 Result screens can count the score up once (under 600 ms). Rounds segments fill without animation.
 
+The video also uses slow camera push-ins and a touch dot where the student taps. Those are for the video only; don't add them to the app.
+
 Everything else is plain and quick: sheets slide at 240 ms, no entrance animations on lists, no looping decoration. The voice waveform is the only continuous animation, and only while the mic is live. Respect Reduce Motion: swap the animations for instant state changes.
 
 ## Voice and copy
@@ -160,6 +180,7 @@ Everything else is plain and quick: sheets slide at 240 ms, no entrance animatio
 - Errors say what's wrong and how to fix it: "This looks like a patient's name. Remove 'Mr. Alvarez' and keep only the diagnosis."
 - Empty states invite an action: "Log a patient to practise on them tonight."
 - No guilt: missed days are never called out. No confetti, no mascots, no sparkle icons.
+- Outside the app (video, store listing, site), the line is "Get asked here first." The longer form is "Practice the questions before rounds ask them." Neither uses the word "pimp".
 - Hospital vocabulary is the theme: rounds, shifts, post-call, ranks. Use it plainly; don't pun on top of it.
 
 ## Avoid

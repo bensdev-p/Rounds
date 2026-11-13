@@ -57,7 +57,14 @@ Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before bui
 - Theme values come only from `docs/design/tokens.json` → `packages/shared/theme`. No raw hex in components.
 - Fonts: Archivo and Archivo Narrow via `@expo-google-fonts`. Icons: `lucide-react-native`.
 - When building a screen, open its PNG and match it. If something's unclear, follow DESIGN.md rather than inventing a new pattern.
-- The vision video (`apps/video`, Remotion) is specified in `docs/design/VIDEO.md`.
+- The vision video (`apps/video`, Remotion) is specified in `docs/design/VIDEO.md`. It shows one session end to end; DESIGN.md → "The session, start to finish" turns that into rules for the app.
+- `apps/video/src/screens/` holds seven screens already recreated in web React from the tokens. Use them as a worked reference when building the real screens; don't import them into the app.
+- Session content in the video lives in `apps/video/src/session.ts`. Its questions and answers trace to the script mockup, so keep domain rule 1 in mind when editing it.
+
+## Planned and proposed
+
+- **Planned feature, the miss card:** specified in `docs/PRODUCT.md` → "Planned: the miss card". Build it with or after the result screen, not before.
+- **Recommendations:** `docs/PRODUCT.md` → "Recommendations (not decided)" lists ideas that are not requirements. Don't build toward them unless asked.
 
 ## Code conventions
 
