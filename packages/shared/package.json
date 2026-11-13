@@ -6,7 +6,8 @@
   "exports": {
     ".": "./src/index.ts",
     "./api": "./src/api/index.ts",
-    "./fixtures": "./src/fixtures/index.ts"
+    "./fixtures": "./src/fixtures/index.ts",
+    "./theme": "./src/theme/index.ts"
   },
   "scripts": {
     "test": "vitest run",
