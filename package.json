@@ -18,9 +18,13 @@
     "db:types": "supabase gen types typescript --local --schema public > packages/shared/src/db/database.types.ts && prettier --write packages/shared/src/db/database.types.ts",
     "functions:serve": "supabase functions serve",
     "functions:serve:fake": "supabase functions serve --env-file supabase/functions/.env.test",
-    "functions:check": "deno check --config supabase/functions/grade-answer/deno.json supabase/functions/grade-answer/index.ts",
+    "functions:check": "deno check --config supabase/functions/grade-answer/deno.json supabase/functions/grade-answer/index.ts supabase/functions/grade-answer/eval/run.ts",
     "content:seed": "pnpm --filter @rounds/shared content:seed",
-    "test:integration": "pnpm --filter @rounds/shared test:integration"
+    "test:integration": "pnpm --filter @rounds/shared test:integration",
+    "content:check": "pnpm --filter @rounds/shared content:check",
+    "content:review": "pnpm --filter @rounds/shared content:review",
+    "content:approve": "pnpm --filter @rounds/shared content:approve",
+    "eval:grading": "deno run --config supabase/functions/grade-answer/deno.json --allow-read --allow-env --allow-net=api.anthropic.com --allow-write=supabase/functions/grade-answer/eval/results supabase/functions/grade-answer/eval/run.ts"
   },
   "devDependencies": {
     "prettier": "^3.10.1",

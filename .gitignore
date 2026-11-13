@@ -15,3 +15,9 @@ supabase/.temp
 
 # rendered video output
 apps/video/out/
+
+# generated review sheets (pnpm content:review)
+content/review/
+
+# grading eval output (pnpm eval:grading)
+supabase/functions/grade-answer/eval/results/

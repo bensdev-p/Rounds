@@ -1,17 +1,8 @@
-import {
-  buildGradingContext,
-  detectPhi,
-  gradeLocally,
-  LlmGradeOutputSchema,
-  MAX_ANSWER_LENGTH,
-  QuestionIdSchema,
-  sanitizeLlmGrade,
-  type GradeResponse,
-} from '@rounds/shared';
+import { detectPhi, MAX_ANSWER_LENGTH, QuestionIdSchema } from '@rounds/shared';
 import { getLadderContent, type RoundsClient } from '@rounds/shared/api';
 import { z } from 'zod';
-import { PROMPT_VERSION, renderUserMessage, SYSTEM } from '../_prompts/grade-answer/v1.ts';
 import type { LlmProvider, LlmUsage } from '../_shared/llm/types.ts';
+import { gradeAnswerStep, type GradeOutcome } from './grade.ts';
 
 export const corsHeaders = {
   'Access-Control-Allow-Origin': '*',
@@ -27,7 +18,7 @@ const BodySchema = z.strictObject({
 /** One structured log line per request. Never includes the answer text. */
 export interface GradeLog {
   question_id: string;
-  outcome: 'local_match' | 'local_only' | 'llm' | `llm_${string}`;
+  outcome: GradeOutcome;
   model: string | null;
   latency_ms: number;
   usage: LlmUsage | null;
@@ -80,42 +71,22 @@ export function createHandler(deps: HandlerDeps): (request: Request) => Promise<
     if (!content || !question) return json(404, { error: 'Question not found' });
 
     const started = Date.now();
-    const local = gradeLocally(question, answer, content.confusables);
-    const reply = (response: GradeResponse, log: Omit<GradeLog, 'question_id' | 'latency_ms'>) => {
-      deps.log({ question_id, latency_ms: Date.now() - started, ...log });
-      return json(200, response);
-    };
-    const localReply = (outcome: GradeLog['outcome'], model: string | null = null) =>
-      reply(
-        { result: local, grader: 'local', grader_version: null },
-        { outcome, model, usage: null, discarded: [] },
-      );
-
-    if (local.grade === 'correct') return localReply('local_match');
-    if (!deps.llm || answer.trim() === '') return localReply('local_only');
-
-    const call = await deps.llm.generateStructured({
-      system: SYSTEM,
-      user: renderUserMessage(
-        buildGradingContext(question, content.script, content.confusables),
-        answer,
-      ),
-      schema: LlmGradeOutputSchema,
-      maxTokens: 4096,
-      signal: AbortSignal.timeout(deps.llmDeadlineMs),
-    });
-    // Grading never blocks the ladder: any model failure falls back to the local grade.
-    if (!call.ok) return localReply(`llm_${call.reason}`, deps.llm.model);
-
-    const { result, discarded } = sanitizeLlmGrade(
-      call.value,
+    const step = await gradeAnswerStep({
       question,
-      content.confusables,
-      local,
-    );
-    return reply(
-      { result, grader: 'llm', grader_version: `${PROMPT_VERSION}@${call.model}` },
-      { outcome: 'llm', model: call.model, usage: call.usage, discarded },
-    );
+      script: content.script,
+      confusables: content.confusables,
+      answer,
+      llm: deps.llm,
+      deadlineMs: deps.llmDeadlineMs,
+    });
+    deps.log({
+      question_id,
+      outcome: step.outcome,
+      model: step.model,
+      latency_ms: Date.now() - started,
+      usage: step.usage,
+      discarded: step.discarded,
+    });
+    return json(200, step.response);
   };
 }

@@ -9,13 +9,15 @@ export interface AnthropicOptions {
   /** Per HTTP attempt, in milliseconds. */
   timeoutMs: number;
   maxRetries: number;
+  /**
+   * Server-side refusal fallback: if a safety classifier declines a benign
+   * medical question, the API retries on the model Anthropic recommends.
+   * Not available on every model (e.g. Claude Haiku 5.5), so it's a switch.
+   */
+  serverFallback: boolean;
 }
 
-/**
- * Claude via the official SDK, using structured outputs. Server-side refusal
- * fallbacks are on: if a safety classifier declines a (benign) medical
- * question, the API retries on the model Anthropic recommends, in the same call.
- */
+/** Claude via the official SDK, using structured outputs. */
 export function createAnthropicProvider(options: AnthropicOptions): LlmProvider {
   const client = new Anthropic({
     apiKey: options.apiKey,
@@ -32,8 +34,9 @@ export function createAnthropicProvider(options: AnthropicOptions): LlmProvider 
           {
             model: options.model,
             max_tokens: request.maxTokens,
-            betas: ['server-side-fallback-2026-07-01'],
-            fallbacks: 'default',
+            ...(options.serverFallback
+              ? { betas: ['server-side-fallback-2026-07-01'], fallbacks: 'default' as const }
+              : {}),
             system: request.system,
             messages: [{ role: 'user', content: request.user }],
             output_config: {
@@ -80,4 +83,9 @@ export function createAnthropicProvider(options: AnthropicOptions): LlmProvider 
       }
     },
   };
+}
+
+/** Claude Haiku has no server-side refusal fallback; the others used here do. */
+export function supportsServerFallback(model: string): boolean {
+  return !model.startsWith('claude-haiku');
 }

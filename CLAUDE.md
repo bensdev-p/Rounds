@@ -29,10 +29,14 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm db:start` / `pnpm db:reset`: local Supabase (needs Docker Desktop running)
 - `pnpm db:test`: pgTAP tests in `supabase/tests` (RLS)
 - `pnpm db:types`: regenerate `packages/shared/src/db/database.types.ts` after a migration
-- `pnpm content:seed`: validate content and regenerate `supabase/seed.sql` (then `pnpm db:reset`)
+- `pnpm content:check`: validate every script in `content/scripts` (drafts included; also part of `pnpm test`)
+- `pnpm content:review`: write review sheets for unapproved scripts to `content/review/` (gitignored)
+- `pnpm content:approve <id> --by "Name, role"`: record a medical reviewer's approval. Only on the reviewer's explicit sign-off; never run it yourself. See `content/README.md`
+- `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
 - `pnpm functions:serve:fake`: the same, with a fake model that spends nothing
 - `pnpm functions:check`: Deno type-check of the Edge Functions (also run by `pnpm typecheck`)
+- `pnpm eval:grading --dry-run`: validate the grading eval cases for free. Without `--dry-run` it calls Claude and is billed: get the developer's OK first. `--model claude-haiku-5-5` compares models
 - `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
 - `pnpm --filter video studio`: preview the vision video. `pnpm --filter video render`: export both MP4s and posters to `apps/video/out` (gitignored)
 - `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)

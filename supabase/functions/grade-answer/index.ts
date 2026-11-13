@@ -13,7 +13,7 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import type { Database } from '@rounds/shared';
-import { createAnthropicProvider } from '../_shared/llm/anthropic.ts';
+import { createAnthropicProvider, supportsServerFallback } from '../_shared/llm/anthropic.ts';
 import type { LlmProvider } from '../_shared/llm/types.ts';
 import { createFakeGrader } from './fakeGrader.ts';
 import { createHandler } from './handler.ts';
@@ -32,12 +32,14 @@ function createLlm(): LlmProvider | null {
     console.warn('[grade-answer] ANTHROPIC_API_KEY is not set; grading locally only');
     return null;
   }
+  const model = env('GRADER_MODEL') ?? 'claude-opus-5-5';
   return createAnthropicProvider({
     apiKey,
-    model: env('GRADER_MODEL') ?? 'claude-opus-5-5',
+    model,
     effort: 'low',
     timeoutMs: 8_000,
     maxRetries: 1,
+    serverFallback: supportsServerFallback(model),
   });
 }
 
