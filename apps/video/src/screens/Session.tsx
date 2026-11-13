@@ -1,8 +1,20 @@
+import { MISSED_RUNG, STEPS, TRANSCRIPT_FRAMES_PER_WORD } from '../session.ts';
 import { color, num, radius } from '../theme.ts';
-import { FPS, FRAMES_PER_WORD, RUNG_PASSES, ramp, rungPass, scene, wordsShown } from '../timeline.ts';
+import {
+  BEATS,
+  FPS,
+  MISS_FRAME,
+  POSTER_FRAME,
+  RUNG_PASSES,
+  SESSION_START,
+  ramp,
+  rungPass,
+  wordsShown,
+} from '../timeline.ts';
 import {
   Button,
   Icon,
+  LADDER_LABELS,
   Ladder,
   RUNG_DIM,
   type RungVisual,
@@ -12,74 +24,49 @@ import {
   text,
 } from '../ui.tsx';
 
-/* Live session (mockup: session.png). Scenes 2 and 3 share this screen.
-   Every answer traces to the "Who gets it" field of the acute pancreatitis
-   script in script.png; the rung 3 question and transcript are the mockup's. */
-const STEPS = [
-  {
-    question: 'What are the two most common causes of acute pancreatitis?',
-    transcript: '"Gallstones first, then heavy alcohol use."',
-    questionDelay: 20,
-    answerDelay: 30,
-  },
-  {
-    question: 'And the next most common cause after those?',
-    transcript: '"Hypertriglyceridemia. It can also follow an ERCP."',
-    questionDelay: 6,
-    answerDelay: 8,
-  },
-  {
-    question: 'How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?',
-    transcript:
-      '"I\'d check the ALT. If it\'s more than three times normal, that points to gallstones, and then right upper quadrant…',
-    questionDelay: 6,
-    answerDelay: 6,
-  },
-] as const;
+/* Live session (mockup: session.png). The session and climb scenes share this
+   screen. The ladder climbs rung by rung and ends on the first miss. */
 
-const TRANSCRIPT_FRAMES_PER_WORD = 3.5;
 const WAVE = [10, 18, 30, 22, 40, 28, 14, 34, 24, 12, 20, 8, 16, 26, 12];
-const TIMER_START_SECONDS = 25;
 
-const [PASS_1, PASS_2] = RUNG_PASSES;
-const SESSION_START = scene('session').from;
+// The clock reads 0:42 on the poster frame, as on the mockup.
+const TIMER_START_SECONDS = 42 - Math.floor((POSTER_FRAME - SESSION_START) / FPS);
 
-/** The amber pop for the rung that becomes current at `at`. */
-const popped = (frame: number, at: number): Pick<RungVisual, 'now' | 'scale'> => {
-  if (frame < at) return { now: 0, scale: 1 };
-  const { pop, fill } = rungPass(frame, at);
-  return { now: fill, scale: 0.7 + 0.3 * pop };
+const rungAt = (frame: number, index: number): RungVisual => {
+  // Rungs above the miss are never reached.
+  if (index >= MISSED_RUNG) return RUNG_DIM;
+  const becameCurrent = index === 0 ? null : (RUNG_PASSES[index - 1] ?? null);
+  if (becameCurrent !== null && frame < becameCurrent) return RUNG_DIM;
+
+  // The amber pop for the rung that has just become current.
+  const pop = becameCurrent === null ? { fill: 1, pop: 1 } : rungPass(frame, becameCurrent);
+  const now = { now: pop.fill, scale: 0.7 + 0.3 * pop.pop };
+
+  if (index === MISSED_RUNG - 1) {
+    const miss = ramp(frame, MISS_FRAME, 6);
+    return { ...now, done: 0, miss, label: miss > 0 ? 'miss' : 'now' };
+  }
+  const passedAt = RUNG_PASSES[index];
+  const done = passedAt === undefined ? 0 : rungPass(frame, passedAt).fill;
+  return { ...now, done, miss: 0, label: done > 0 ? 'done' : 'now' };
 };
 
-const ladderAt = (frame: number): RungVisual[] => [
-  { now: 1, scale: 1, done: rungPass(frame, PASS_1).fill, label: frame < PASS_1 ? 'now' : 'done' },
-  {
-    ...popped(frame, PASS_1),
-    done: rungPass(frame, PASS_2).fill,
-    label: frame < PASS_1 ? 'dim' : frame < PASS_2 ? 'now' : 'done',
-  },
-  { ...popped(frame, PASS_2), done: 0, label: frame < PASS_2 ? 'dim' : 'now' },
-  RUNG_DIM,
-  RUNG_DIM,
-  RUNG_DIM,
-];
-
 const clock = (frame: number): string => {
-  const seconds = TIMER_START_SECONDS + Math.floor(Math.max(0, frame - SESSION_START) / FPS);
+  // The clock stops on the miss.
+  const elapsed = Math.max(0, Math.min(frame, MISS_FRAME) - SESSION_START);
+  const seconds = TIMER_START_SECONDS + Math.floor(elapsed / FPS);
   return `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, '0')}`;
 };
 
 /** `frame` is the global frame. */
 export const SessionScreen = ({ frame }: { frame: number }) => {
-  const stepIndex = frame < PASS_1 ? 0 : frame < PASS_2 ? 1 : 2;
+  const stepIndex = Math.min(STEPS.length - 1, RUNG_PASSES.filter((at) => frame >= at).length);
   const step = STEPS[stepIndex];
-  const stepStart = [SESSION_START, PASS_1, PASS_2][stepIndex] ?? SESSION_START;
+  const beat = BEATS[stepIndex];
+  if (!step || !beat) return null;
 
-  const questionStart = stepStart + step.questionDelay;
-  const questionEnd = questionStart + step.question.split(' ').length * FRAMES_PER_WORD;
-  const answerStart = questionEnd + step.answerDelay;
-  // The mic goes live once the attending has finished asking.
-  const live = ramp(frame, questionEnd, 6);
+  // The mic goes live once the attending has finished asking, and stops on the miss.
+  const live = ramp(frame, beat.questionEnd, 6) * (1 - ramp(frame, MISS_FRAME, 6));
 
   return (
     <Screen padding="8px 20px 28px">
@@ -88,12 +75,12 @@ export const SessionScreen = ({ frame }: { frame: number }) => {
         right={<span style={{ ...num, fontSize: 18, color: color.text2 }}>{clock(frame)}</span>}
       />
       <div style={{ marginTop: 26 }}>
-        <Ladder rungs={ladderAt(frame)} width={190} />
+        <Ladder rungs={LADDER_LABELS.map((_, i) => rungAt(frame, i))} width={190} />
       </div>
       <div style={{ marginTop: 30 }}>
         <div style={text.meta}>Acute pancreatitis</div>
         <div style={{ ...text.question, marginTop: 8 }}>
-          <Words value={step.question} shown={wordsShown(frame, questionStart)} />
+          <Words value={step.question} shown={wordsShown(frame, beat.questionStart)} />
         </div>
       </div>
       <div style={{ flex: 1 }} />
@@ -135,7 +122,7 @@ export const SessionScreen = ({ frame }: { frame: number }) => {
         <div style={{ ...text.quote, marginTop: 12, minHeight: 63 }}>
           <Words
             value={step.transcript}
-            shown={wordsShown(frame, answerStart, TRANSCRIPT_FRAMES_PER_WORD)}
+            shown={wordsShown(frame, beat.answerStart, TRANSCRIPT_FRAMES_PER_WORD)}
           />
         </div>
       </div>

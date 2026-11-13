@@ -8,7 +8,7 @@
     "render": "pnpm render:vertical && pnpm render:wide && pnpm posters",
     "render:vertical": "remotion render VisionVertical out/rounds-vision-vertical.mp4",
     "render:wide": "remotion render VisionWide out/rounds-vision-wide.mp4",
-    "posters": "remotion still VisionVertical out/rounds-vision-vertical-poster.png --frame=630 && remotion still VisionWide out/rounds-vision-wide-poster.png --frame=630",
+    "posters": "remotion still VisionVertical out/rounds-vision-vertical-poster.png --frame=566 && remotion still VisionWide out/rounds-vision-wide-poster.png --frame=566",
     "test": "vitest run",
     "typecheck": "tsc --noEmit",
     "lint": "eslint ."

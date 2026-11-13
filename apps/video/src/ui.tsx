@@ -216,10 +216,13 @@ export const Screen = ({
   children,
   tab = null,
   padding = '8px 20px 0',
+  overlay = null,
 }: {
   children: ReactNode;
   tab?: TabId | null;
   padding?: string;
+  /** Drawn above the screen in screen coordinates (touch cues). */
+  overlay?: ReactNode;
 }) => (
   <div
     style={{
@@ -244,8 +247,31 @@ export const Screen = ({
       {children}
     </div>
     {tab ? <TabBar active={tab} /> : null}
+    {overlay}
   </div>
 );
+
+/** A fingertip: appears where the student taps, then fades. `t` is frames since the tap. */
+export const Touch = ({ x, y, t }: { x: number; y: number; t: number }) => {
+  if (t < -4 || t > 10) return null;
+  const opacity = t < 0 ? (t + 4) / 4 : 1 - t / 10;
+  const scale = t < 0 ? 1.15 - 0.15 * ((t + 4) / 4) : 1 + 0.25 * (t / 10);
+  return (
+    <span
+      style={{
+        position: 'absolute',
+        left: x - 22,
+        top: y - 22,
+        width: 44,
+        height: 44,
+        borderRadius: '50%',
+        background: color.text,
+        opacity: 0.28 * opacity,
+        transform: `scale(${scale})`,
+      }}
+    />
+  );
+};
 
 // ------------------------------------------------------------- controls
 
@@ -396,14 +422,17 @@ export interface RungVisual {
   now: number;
   /** 0–1: how far the green "passed" state has filled, bottom to top. */
   done: number;
+  /** 0–1: how much of the coral "missed" state shows. */
+  miss: number;
   /** Scale of the square, for the amber pop. */
   scale: number;
-  label: 'dim' | 'now' | 'done';
+  label: 'dim' | 'now' | 'done' | 'miss';
 }
 
-export const RUNG_DIM: RungVisual = { now: 0, done: 0, scale: 1, label: 'dim' };
-export const RUNG_NOW: RungVisual = { now: 1, done: 0, scale: 1, label: 'now' };
-export const RUNG_DONE: RungVisual = { now: 0, done: 1, scale: 1, label: 'done' };
+export const RUNG_DIM: RungVisual = { now: 0, done: 0, miss: 0, scale: 1, label: 'dim' };
+export const RUNG_NOW: RungVisual = { now: 1, done: 0, miss: 0, scale: 1, label: 'now' };
+export const RUNG_DONE: RungVisual = { now: 0, done: 1, miss: 0, scale: 1, label: 'done' };
+export const RUNG_MISS: RungVisual = { now: 0, done: 0, miss: 1, scale: 1, label: 'miss' };
 
 const rungFace: CSSProperties = {
   position: 'absolute',
@@ -417,6 +446,7 @@ const labelStyle: Record<RungVisual['label'], CSSProperties> = {
   dim: { ...font.bodyMedium, color: color.text3 },
   done: { ...font.bodyMedium, color: color.text2 },
   now: { ...font.bodySemi, color: color.text },
+  miss: { ...font.bodySemi, color: color.miss },
 };
 
 const Rung = ({ n, label, visual }: { n: number; label: string; visual: RungVisual }) => (
@@ -450,6 +480,11 @@ const Rung = ({ n, label, visual }: { n: number; label: string; visual: RungVisu
           }}
         >
           <span style={{ ...rungFace, background: color.passSoft, color: color.pass }}>{n}</span>
+        </span>
+      ) : null}
+      {visual.miss > 0 ? (
+        <span style={{ ...rungFace, background: color.bg, opacity: visual.miss }}>
+          <span style={{ ...rungFace, background: color.missSoft, color: color.miss }}>{n}</span>
         </span>
       ) : null}
     </div>

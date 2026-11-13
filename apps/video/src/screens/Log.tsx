@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { interpolateColors } from 'remotion';
 import { color, radius, size } from '../theme.ts';
 import { clamp01, ramp } from '../timeline.ts';
-import { Chip, Icon, List, Mark, Row, Screen, SectionTitle, text } from '../ui.tsx';
+import { Chip, Icon, List, Mark, Row, Screen, SectionTitle, Touch, text } from '../ui.tsx';
 
 /* Log, with the privacy guard (mockup: log.png). Scene 5.
    "Mr. Alvarez CHF" is typed, the guard fires, the name is deleted, and the
@@ -19,6 +19,8 @@ const DELETE_START = 120;
 const FRAMES_PER_DELETE = 2;
 const NAME_DELETED = DELETE_START + NAME.length * FRAMES_PER_DELETE; // the guard clears
 const SAVED = 168;
+// Centre of the first Save chip once the warning has collapsed.
+const SAVE_CHIP = { x: 327, y: 274 };
 
 const COLLAPSE = 8;
 
@@ -65,7 +67,7 @@ export const LogScreen = ({ f }: { f: number }) => {
   const newRow = ramp(f, SAVED, COLLAPSE);
 
   return (
-    <Screen tab="log">
+    <Screen tab="log" overlay={<Touch {...SAVE_CHIP} t={f - (SAVED - 4)} />}>
       <div style={text.h1}>Log a patient</div>
       <div style={{ ...text.meta, marginTop: 6 }}>Diagnosis only. No names, dates or record numbers.</div>
 
