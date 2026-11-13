@@ -1,7 +1,7 @@
 import type { GradeResult } from '../schemas/attempt.ts';
 import type { IllnessScript } from '../schemas/illnessScript.ts';
 import type { AcceptedAnswer, Question } from '../schemas/question.ts';
-import { containsAffirmedTerm } from '../text.ts';
+import { affirmedSpans, containsAffirmedTerm, type Span } from '../text.ts';
 import { listCredit } from './listCredit.ts';
 
 /** A script the student might mistake this one for: its id plus the names it goes by. */
@@ -21,8 +21,28 @@ export function confusablesFor(
   });
 }
 
-function hits(text: string, accepted: AcceptedAnswer): boolean {
-  return [accepted.answer, ...accepted.synonyms].some((term) => containsAffirmedTerm(text, term));
+function spansOf(text: string, accepted: AcceptedAnswer): Span[] {
+  return [accepted.answer, ...accepted.synonyms].flatMap((term) => affirmedSpans(text, term));
+}
+
+const inside = ([s1, e1]: Span, [s2, e2]: Span) => s2 <= s1 && e1 <= e2 && e2 - s2 > e1 - s1;
+
+/**
+ * Accepted answers named in `text`. When one answer's match sits inside a
+ * longer match for another ("influenza" inside "H influenza"), only the
+ * longer one counts, so a single phrase can't earn credit twice.
+ */
+function namedIn(text: string, accepted: readonly AcceptedAnswer[]): string[] {
+  const hits = accepted
+    .map((a) => ({ answer: a.answer, spans: spansOf(text, a) }))
+    .filter((h) => h.spans.length > 0);
+  return hits
+    .filter((h) =>
+      h.spans.some(
+        (span) => !hits.some((other) => other !== h && other.spans.some((o) => inside(span, o))),
+      ),
+    )
+    .map((h) => h.answer);
 }
 
 /** Splits a list answer on commas, semicolons, newlines and "and"/"or". */
@@ -52,12 +72,12 @@ export function gradeLocally(
   answer: string,
   confusables: readonly Confusable[] = [],
 ): GradeResult {
-  const found =
+  const named =
     question.kind === 'single'
-      ? question.accepted_answers.filter((a) => hits(answer, a)).map((a) => a.answer)
-      : question.accepted_answers
-          .filter((a) => splitListAnswer(answer).some((item) => hits(item, a)))
-          .map((a) => a.answer);
+      ? namedIn(answer, question.accepted_answers)
+      : splitListAnswer(answer).flatMap((item) => namedIn(item, question.accepted_answers));
+  // Keep the script's order, each answer once.
+  const found = question.accepted_answers.map((a) => a.answer).filter((a) => named.includes(a));
   return gradeFromMatches(question, found, findConfusable(answer, confusables));
 }
 

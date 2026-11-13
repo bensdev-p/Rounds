@@ -37,20 +37,29 @@ function negated(before: readonly string[]): boolean {
   });
 }
 
+/** A matched run of words, as [start, end) word indexes into the normalized text. */
+export type Span = readonly [number, number];
+
 /**
- * Like `containsTerm`, but ignores an occurrence that a nearby word negates:
- * "not a CT angiogram" does not affirm "CT angiogram". True if any occurrence
- * stands un-negated. A term that itself starts with "no" ("no P waves") is
- * fine: only the words before it are checked.
+ * Where `term` appears in `text`, skipping occurrences that a nearby word
+ * negates ("not a CT angiogram" does not affirm "CT angiogram"). A term that
+ * itself starts with "no" ("no P waves") is fine: only the words before it
+ * are checked.
  */
-export function containsAffirmedTerm(text: string, term: string): boolean {
+export function affirmedSpans(text: string, term: string): Span[] {
   const t = normalize(term).split(' ');
-  if (t[0] === '') return false;
+  if (t[0] === '') return [];
   const words = normalize(text).split(' ');
+  const spans: Span[] = [];
   for (let i = 0; i + t.length <= words.length; i++) {
     if (t.every((w, j) => words[i + j] === w)) {
-      if (!negated(words.slice(Math.max(0, i - NEGATION_WINDOW), i))) return true;
+      if (!negated(words.slice(Math.max(0, i - NEGATION_WINDOW), i))) spans.push([i, i + t.length]);
     }
   }
-  return false;
+  return spans;
+}
+
+/** True if `term` appears in `text` at least once without being negated. */
+export function containsAffirmedTerm(text: string, term: string): boolean {
+  return affirmedSpans(text, term).length > 0;
 }

@@ -6,6 +6,7 @@
  *   pnpm eval:grading --dry-run           free: checks cases, shows which reach the model
  *   pnpm eval:grading                     real calls with GRADER_MODEL (BILLED)
  *   pnpm eval:grading --model claude-haiku-5-5
+ *   pnpm eval:grading --only pneumonia    just the matching cases
  *
  * Reads ANTHROPIC_API_KEY from supabase/functions/.env (never printed).
  * Results go to eval/results/ (gitignored).
@@ -94,9 +95,16 @@ const envFile = await readEnvFile();
 const model = arg('--model') ?? envFile.GRADER_MODEL ?? 'claude-opus-5-5';
 const effort = (arg('--effort') ?? 'low') as 'low' | 'medium' | 'high';
 
-const { cases } = JSON.parse(await Deno.readTextFile(new URL('cases.json', here))) as {
+const only = arg('--only');
+const { cases: allCases } = JSON.parse(await Deno.readTextFile(new URL('cases.json', here))) as {
   cases: EvalCase[];
 };
+// --only <text>: run just the cases whose question id or answer contains it.
+const cases = only ? allCases.filter((c) => c.q.includes(only) || c.answer.includes(only)) : allCases;
+if (cases.length === 0) {
+  console.error(`No eval case matches --only "${only}"`);
+  Deno.exit(1);
+}
 const files = await loadContent();
 const byQuestion = new Map<string, { question: Question; file: ContentFile }>();
 for (const file of files) for (const question of file.questions) byQuestion.set(question.id, { question, file });

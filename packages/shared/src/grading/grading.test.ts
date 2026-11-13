@@ -103,6 +103,27 @@ describe('gradeLocally: negation', () => {
   });
 });
 
+describe('gradeLocally: overlapping matches', () => {
+  it('credits a phrase once, to the longest match', () => {
+    const question = {
+      ...list,
+      accepted_answers: [
+        { answer: 'Haemophilus influenzae', synonyms: ['H influenza'] },
+        { answer: 'respiratory viruses', synonyms: ['influenza'] },
+        { answer: 'glimmer exposure', synonyms: [] },
+      ],
+    };
+    expect(gradeLocally(question, 'h influenza, glimmer exposure').matched).toEqual([
+      'Haemophilus influenzae',
+      'glimmer exposure',
+    ]);
+    expect(gradeLocally(question, 'influenza, H influenza').matched).toEqual([
+      'Haemophilus influenzae',
+      'respiratory viruses',
+    ]);
+  });
+});
+
 describe('gradeLocally: list', () => {
   it('grades a full list as correct', () => {
     const result = gradeLocally(list, 'glimmer, night shift and family hx');
