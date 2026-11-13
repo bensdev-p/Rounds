@@ -34,6 +34,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm functions:serve:fake`: the same, with a fake model that spends nothing
 - `pnpm functions:check`: Deno type-check of the Edge Functions (also run by `pnpm typecheck`)
 - `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
+- `pnpm --filter video studio`: preview the vision video. `pnpm --filter video render`: export both MP4s and posters to `apps/video/out` (gitignored)
 - `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)
 - Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
 - `packages/shared` uses explicit `.ts` extensions on relative imports, so Edge Functions (Deno) can import it directly.

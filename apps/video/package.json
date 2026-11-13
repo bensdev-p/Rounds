@@ -1,0 +1,31 @@
+{
+  "name": "video",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "pnpm render:vertical && pnpm render:wide && pnpm posters",
+    "render:vertical": "remotion render VisionVertical out/rounds-vision-vertical.mp4",
+    "render:wide": "remotion render VisionWide out/rounds-vision-wide.mp4",
+    "posters": "remotion still VisionVertical out/rounds-vision-vertical-poster.png --frame=630 && remotion still VisionWide out/rounds-vision-wide-poster.png --frame=630",
+    "test": "vitest run",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.543",
+    "react": "19.3.0",
+    "react-dom": "19.3.0",
+    "remotion": "4.0.543"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.0",
+    "@types/node": "^24.19.2",
+    "@types/react": "~19.3.0",
+    "eslint": "^9.39.0",
+    "typescript": "~6.0.3",
+    "typescript-eslint": "^8.72.2",
+    "vitest": "^5.1.0"
+  }
+}

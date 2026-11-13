@@ -12,3 +12,6 @@ coverage/
 # supabase local state
 supabase/.branches
 supabase/.temp
+
+# rendered video output
+apps/video/out/
