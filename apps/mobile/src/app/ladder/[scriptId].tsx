@@ -8,18 +8,24 @@ import {
   RUNGS,
   startLadder,
   submitAnswer,
+  type Confusable,
   type GradeResult,
   type IllnessScript,
+  type Question,
   type LadderState,
   type MissTag,
   type Rung,
 } from '@rounds/shared';
+import { getLadderContent } from '@rounds/shared/api';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
 import { Button } from '@/components/Button';
 import { Disclaimer } from '@/components/Disclaimer';
-import { getConfusables, getQuestions, getScript } from '@/lib/content';
+import { ErrorView, Loading } from '@/components/StatusView';
+import { useClient } from '@/lib/auth';
+import { useAsync } from '@/lib/useAsync';
+import { useLadderRecorder, type SaveState } from '@/lib/useLadderRecorder';
 import { space, useTheme, type Theme } from '@/theme';
 
 const RUNG_LABEL: Record<Rung, string> = {
@@ -33,21 +39,46 @@ const RUNG_LABEL: Record<Rung, string> = {
 
 export default function LadderScreen() {
   const theme = useTheme();
+  const client = useClient();
   const { scriptId } = useLocalSearchParams<{ scriptId: string }>();
-  const script = getScript(scriptId);
+  const content = useAsync(() => getLadderContent(client, scriptId), scriptId);
 
-  if (!script) {
+  if (content.status === 'loading') return <Loading label="Loading questions" />;
+  if (content.status === 'error') {
     return (
-      <View style={styles.container}>
-        <Text style={{ color: theme.text }}>That script isn&apos;t available.</Text>
-      </View>
+      <ErrorView
+        message={`Couldn't load this script. ${content.error.message}`}
+        onRetry={content.reload}
+      />
     );
   }
-  return <Ladder script={script} theme={theme} />;
+  if (!content.data || content.data.questions.length === 0) {
+    return <ErrorView message="That script isn't available." />;
+  }
+  return (
+    <Ladder
+      script={content.data.script}
+      questions={content.data.questions}
+      confusables={content.data.confusables}
+      theme={theme}
+    />
+  );
 }
 
-function Ladder({ script, theme }: { script: IllnessScript; theme: Theme }) {
-  const [state, setState] = useState<LadderState>(() => startLadder(getQuestions(script.id)));
+function Ladder({
+  script,
+  questions,
+  confusables,
+  theme,
+}: {
+  script: IllnessScript;
+  questions: Question[];
+  confusables: Confusable[];
+  theme: Theme;
+}) {
+  const client = useClient();
+  const [state, setState] = useState<LadderState>(() => startLadder(questions));
+  const recorder = useLadderRecorder(client, script, state.persona);
   const [answer, setAnswer] = useState('');
   const [warning, setWarning] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<GradeResult | null>(null);
@@ -66,15 +97,20 @@ function Ladder({ script, theme }: { script: IllnessScript; theme: Theme }) {
       setWarning(phi);
       return;
     }
-    const result = gradeLocally(question, answer, getConfusables(script));
-    setState((s) => submitAnswer(s, { answer, elapsed_ms: Date.now() - shownAt.current, result }));
+    const result = gradeLocally(question, answer, confusables);
+    const next = submitAnswer(state, { answer, elapsed_ms: Date.now() - shownAt.current, result });
+    setState(next);
+    const attempt = next.attempts.at(-1);
+    if (attempt) recorder.record(attempt);
+    if (next.status !== 'in_progress') recorder.finish(next);
     setFeedback(result);
     setWarning(null);
     setAnswer('');
   }
 
   function restart() {
-    setState(startLadder(getQuestions(script.id)));
+    recorder.reset();
+    setState(startLadder(questions));
     setFeedback(null);
     setWarning(null);
     setAnswer('');
@@ -85,6 +121,11 @@ function Ladder({ script, theme }: { script: IllnessScript; theme: Theme }) {
       <Stack.Screen options={{ title: script.name }} />
       <ScrollView contentContainerStyle={styles.container} keyboardShouldPersistTaps="handled">
         <RungProgress state={state} theme={theme} />
+        {recorder.save.status === 'error' && (
+          <Text accessibilityRole="alert" style={[styles.warning, { color: theme.warning }]}>
+            Progress not saved. You can keep going.
+          </Text>
+        )}
 
         {feedback && (
           <Text
@@ -137,7 +178,14 @@ function Ladder({ script, theme }: { script: IllnessScript; theme: Theme }) {
             <Button label="Submit" onPress={submit} disabled={!answer.trim()} />
           </View>
         ) : (
-          <Summary state={state} script={script} theme={theme} onRestart={restart} />
+          <Summary
+            state={state}
+            script={script}
+            confusables={confusables}
+            save={recorder.save}
+            theme={theme}
+            onRestart={restart}
+          />
         )}
 
         <Disclaimer />
@@ -164,13 +212,12 @@ function RungProgress({ state, theme }: { state: LadderState; theme: Theme }) {
   );
 }
 
-function describeMiss(tag: MissTag, script: IllnessScript): string {
+function describeMiss(tag: MissTag, script: IllnessScript, confusables: Confusable[]): string {
   if (tag === 'unknown') return 'Missed.';
   if (tag === 'slow') return 'Right answer, but too slow.';
   if (tag === 'partial_list') return 'Not enough items named.';
   const otherId = tag.slice('confused_with:'.length);
-  const otherName =
-    getConfusables(script).find((c) => c.script_id === otherId)?.names[0] ?? otherId;
+  const otherName = confusables.find((c) => c.script_id === otherId)?.names[0] ?? otherId;
   const link = script.confused_with.find((c) => c.script_id === otherId);
   return link
     ? `Mixed up with ${otherName}. ${link.how_to_tell_apart}`
@@ -180,11 +227,15 @@ function describeMiss(tag: MissTag, script: IllnessScript): string {
 function Summary({
   state,
   script,
+  confusables,
+  save,
   theme,
   onRestart,
 }: {
   state: LadderState;
   script: IllnessScript;
+  confusables: Confusable[];
+  save: SaveState;
   theme: Theme;
   onRestart: () => void;
 }) {
@@ -202,7 +253,7 @@ function Summary({
       </Text>
       {miss?.miss_tag && (
         <Text style={{ color: theme.muted, fontSize: 16 }}>
-          {describeMiss(miss.miss_tag, script)}
+          {describeMiss(miss.miss_tag, script, confusables)}
         </Text>
       )}
       {missedQuestion && (
@@ -210,6 +261,13 @@ function Summary({
           Accepted: {missedQuestion.accepted_answers.map((a) => a.answer).join(', ')}
         </Text>
       )}
+      <Text style={{ color: theme.muted, fontSize: 16 }}>
+        {save.status === 'saved'
+          ? `Your best on this script: ${save.bestRung} / ${RUNGS.length}`
+          : save.status === 'error'
+            ? 'This run was not saved.'
+            : 'Saving…'}
+      </Text>
       <Button label="Pimp me again" onPress={onRestart} />
     </View>
   );
