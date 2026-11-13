@@ -11,6 +11,7 @@ import { currentQuestion, startLadder, submitAnswer, type LadderState } from '..
 import {
   finishSession,
   getLadderContent,
+  listFinishedSessions,
   listPimpableScripts,
   recordAttempt,
   startSession,
@@ -92,6 +93,21 @@ describe('Rounds API against local Supabase', () => {
 
     const [summary] = await listPimpableScripts(student);
     expect(summary!.bestRung).toBe(2);
+  });
+
+  it('lists finished sessions for progression, oldest first', async () => {
+    const student = await newStudent();
+    expect(await listFinishedSessions(student)).toEqual([]);
+    await playToMiss(student, content);
+    // An unfinished session is not counted.
+    await startSession(student, content.script, 'teacher');
+    await playToMiss(student, content);
+
+    const sessions = await listFinishedSessions(student);
+    expect(sessions).toHaveLength(2);
+    expect(sessions[0]).toMatchObject({ script_id: 'zorblax-syndrome', score: 2, status: 'missed' });
+    expect(Date.parse(sessions[0]!.ended_at)).toBeLessThanOrEqual(Date.parse(sessions[1]!.ended_at));
+    expect(await listFinishedSessions(await newStudent())).toEqual([]);
   });
 
   it('keeps each student to their own data', async () => {
