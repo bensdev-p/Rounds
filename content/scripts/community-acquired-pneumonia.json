@@ -1,0 +1,272 @@
+{
+  "script": {
+    "id": "community-acquired-pneumonia",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Community-acquired pneumonia",
+    "aliases": [
+      "CAP"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "FM"
+    ],
+    "epidemiology": {
+      "who": "Adults living in the community; risk rises with age and chronic lung disease",
+      "risk_factors": [
+        "age 65 or older",
+        "smoking",
+        "COPD",
+        "alcohol use disorder",
+        "immunosuppression"
+      ]
+    },
+    "pathophysiology": "Infection of the lung parenchyma, usually after aspiration of upper airway organisms. Streptococcus pneumoniae is the most common cause; others include Haemophilus influenzae, Mycoplasma pneumoniae, respiratory viruses, Staphylococcus aureus and Legionella.",
+    "timeline": {
+      "onset": "Acute, over a few days",
+      "course": "Most patients improve within 48 to 72 hours of appropriate antibiotics"
+    },
+    "key_findings": {
+      "history": [
+        "fever",
+        "cough with sputum",
+        "pleuritic chest pain",
+        "dyspnea"
+      ],
+      "exam": [
+        "focal crackles",
+        "bronchial breath sounds",
+        "dullness to percussion",
+        "tachypnea"
+      ],
+      "labs": [
+        "leukocytosis",
+        "hypoxemia"
+      ],
+      "imaging": [
+        "chest X-ray showing a new lobar or focal infiltrate"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "chest X-ray"
+      ],
+      "criteria": [
+        "compatible symptoms plus a new infiltrate on chest imaging"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "outpatient without comorbidities: amoxicillin or doxycycline (a macrolide only where pneumococcal macrolide resistance is below 25%)",
+        "outpatient with comorbidities: amoxicillin-clavulanate or a cephalosporin plus a macrolide or doxycycline, or a respiratory fluoroquinolone alone",
+        "inpatient, not severe: ceftriaxone plus azithromycin, or a respiratory fluoroquinolone alone"
+      ],
+      "next_line": [
+        "add MRSA or Pseudomonas coverage only with prior isolation of those organisms or other validated risk factors",
+        "ICU admission for severe pneumonia"
+      ]
+    },
+    "complications": [
+      "parapneumonic effusion",
+      "empyema",
+      "sepsis",
+      "ARDS",
+      "lung abscess"
+    ],
+    "confused_with": [
+      {
+        "script_id": "pulmonary-embolism",
+        "how_to_tell_apart": "Pulmonary embolism also causes pleuritic pain, dyspnea and tachycardia, but usually has clear lungs and a near-normal chest X-ray despite hypoxemia; suspect it when there are risk factors for clots."
+      },
+      {
+        "script_id": "heart-failure-exacerbation",
+        "how_to_tell_apart": "Heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP, with bilateral interstitial edema and effusions on X-ray rather than a focal consolidation, and usually no fever."
+      }
+    ],
+    "pearls": [
+      "CURB-65 (confusion, urea over 19 mg/dL, respiratory rate 30 or more, low blood pressure, age 65 or older) is a quick bedside guide to admission; the ATS/IDSA guideline prefers the Pneumonia Severity Index."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.exam",
+        "diagnosis.confirmatory_tests",
+        "management.first_line[0]"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia: An Official Clinical Practice Guideline of the ATS and IDSA (2019)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "community-acquired-pneumonia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 68-year-old smoker has three days of fever, productive cough and crackles over the right lower lobe. Most likely diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Community-acquired pneumonia",
+          "synonyms": [
+            "CAP",
+            "pneumonia",
+            "lobar pneumonia",
+            "bacterial pneumonia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Strep pneumoniae is the most common cause of CAP. Name three other common organisms.",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Haemophilus influenzae",
+          "synonyms": [
+            "H. influenzae",
+            "H flu",
+            "haemophilus",
+            "hemophilus influenzae"
+          ]
+        },
+        {
+          "answer": "Mycoplasma pneumoniae",
+          "synonyms": [
+            "mycoplasma"
+          ]
+        },
+        {
+          "answer": "respiratory viruses",
+          "synonyms": [
+            "viruses",
+            "viral",
+            "influenza",
+            "RSV",
+            "COVID-19",
+            "SARS-CoV-2"
+          ]
+        },
+        {
+          "answer": "Staphylococcus aureus",
+          "synonyms": [
+            "S. aureus",
+            "staph aureus",
+            "MRSA",
+            "staph"
+          ]
+        },
+        {
+          "answer": "Legionella",
+          "synonyms": [
+            "Legionella pneumophila"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Dyspnea and crackles. What on the chest X-ray points to pneumonia rather than heart failure?",
+      "source_fields": [
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "focal consolidation",
+          "synonyms": [
+            "consolidation",
+            "lobar consolidation",
+            "focal infiltrate",
+            "lobar infiltrate",
+            "infiltrate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms the diagnosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "chest X-ray",
+          "synonyms": [
+            "CXR",
+            "chest radiograph",
+            "chest film",
+            "chest x ray"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Healthy 40-year-old, no comorbidities, well enough to go home. First-line antibiotic?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amoxicillin",
+          "synonyms": [
+            "amox"
+          ]
+        },
+        {
+          "answer": "doxycycline",
+          "synonyms": [
+            "doxy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What does the C in CURB-65 stand for?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "confusion",
+          "synonyms": [
+            "altered mental status",
+            "AMS",
+            "delirium",
+            "confused"
+          ]
+        }
+      ]
+    }
+  ]
+}

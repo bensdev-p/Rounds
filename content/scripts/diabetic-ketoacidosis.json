@@ -1,0 +1,307 @@
+{
+  "script": {
+    "id": "diabetic-ketoacidosis",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Diabetic ketoacidosis",
+    "aliases": [
+      "DKA"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Mostly people with type 1 diabetes, often as the first presentation; also type 2 diabetes under acute stress or on SGLT2 inhibitors",
+      "risk_factors": [
+        "infection",
+        "insulin omission",
+        "new-onset diabetes",
+        "SGLT2 inhibitors",
+        "myocardial infarction",
+        "pancreatitis"
+      ]
+    },
+    "pathophysiology": "Insulin deficiency plus excess counterregulatory hormones (glucagon, cortisol, catecholamines) drive lipolysis and hepatic ketogenesis, causing an anion gap metabolic acidosis. Hyperglycemia causes an osmotic diuresis with volume depletion and a total-body potassium deficit.",
+    "timeline": {
+      "onset": "Develops over hours, usually less than 24 hours",
+      "course": "Resolves over about a day with fluids, insulin and potassium; can recur if the precipitant is not treated"
+    },
+    "key_findings": {
+      "history": [
+        "polyuria and polydipsia",
+        "nausea and vomiting",
+        "abdominal pain"
+      ],
+      "exam": [
+        "Kussmaul respirations (deep, rapid breathing)",
+        "fruity (acetone) breath",
+        "signs of volume depletion: tachycardia, dry mucous membranes"
+      ],
+      "labs": [
+        "glucose usually above 250 mg/dL",
+        "anion gap metabolic acidosis",
+        "raised serum beta-hydroxybutyrate",
+        "serum potassium often normal or high despite a total-body deficit"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum beta-hydroxybutyrate",
+        "venous blood gas",
+        "basic metabolic panel with anion gap"
+      ],
+      "criteria": [
+        "glucose of 200 mg/dL or more, or known diabetes",
+        "ketosis: beta-hydroxybutyrate of 3.0 mmol/L or more, or urine ketones 2+ or more",
+        "acidosis: pH below 7.3 and/or bicarbonate below 18 mEq/L"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "IV isotonic fluids",
+        "IV insulin infusion",
+        "potassium replacement"
+      ],
+      "next_line": [
+        "add dextrose to the fluids when glucose falls below 250 mg/dL",
+        "bicarbonate only if pH is below 7.0",
+        "overlap subcutaneous basal insulin by 1 to 2 hours before stopping the infusion",
+        "treat the precipitant"
+      ]
+    },
+    "complications": [
+      "hypokalemia",
+      "hypoglycemia",
+      "cerebral edema, mainly in children",
+      "recurrence after stopping the infusion too early"
+    ],
+    "confused_with": [
+      {
+        "script_id": "acute-pancreatitis",
+        "how_to_tell_apart": "DKA causes abdominal pain and can raise lipase, but the labs show an anion gap acidosis with high ketones, and the pain eases as the acidosis is corrected; in pancreatitis the pain persists and imaging shows an inflamed pancreas."
+      }
+    ],
+    "pearls": [
+      "Check potassium before starting insulin: if it is below 3.5 mEq/L, replace it first and hold insulin, because insulin drives potassium into cells."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.exam[0]",
+        "management.first_line",
+        "diagnosis.criteria"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (Diabetes Care, 2024)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "diabetic-ketoacidosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 19-year-old with type 1 diabetes has two days of vomiting, deep rapid breathing and fruity breath. Most likely diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Diabetic ketoacidosis",
+          "synonyms": [
+            "DKA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name three common precipitants of DKA.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "infection",
+          "synonyms": [
+            "sepsis",
+            "pneumonia",
+            "UTI",
+            "urinary tract infection"
+          ]
+        },
+        {
+          "answer": "insulin omission",
+          "synonyms": [
+            "missed insulin",
+            "missed insulin doses",
+            "insulin nonadherence",
+            "stopped insulin",
+            "not taking insulin"
+          ]
+        },
+        {
+          "answer": "new-onset diabetes",
+          "synonyms": [
+            "new diagnosis",
+            "new-onset type 1 diabetes",
+            "first presentation",
+            "undiagnosed diabetes"
+          ]
+        },
+        {
+          "answer": "SGLT2 inhibitors",
+          "synonyms": [
+            "SGLT2 inhibitor",
+            "SGLT2i",
+            "gliflozins",
+            "empagliflozin",
+            "dapagliflozin",
+            "canagliflozin"
+          ]
+        },
+        {
+          "answer": "myocardial infarction",
+          "synonyms": [
+            "MI",
+            "heart attack",
+            "ACS",
+            "acute coronary syndrome"
+          ]
+        },
+        {
+          "answer": "pancreatitis",
+          "synonyms": [
+            "acute pancreatitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Abdominal pain and a raised lipase. How do the labs point to DKA rather than pancreatitis?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "anion gap acidosis",
+          "synonyms": [
+            "anion gap metabolic acidosis",
+            "high anion gap",
+            "gap acidosis",
+            "metabolic acidosis"
+          ]
+        },
+        {
+          "answer": "high ketones",
+          "synonyms": [
+            "ketones",
+            "ketonemia",
+            "ketosis",
+            "raised beta-hydroxybutyrate",
+            "beta-hydroxybutyrate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test confirms the ketosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum beta-hydroxybutyrate",
+          "synonyms": [
+            "beta-hydroxybutyrate",
+            "beta hydroxybutyrate",
+            "BHB",
+            "serum ketones",
+            "blood ketones"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.management.1",
+      "rung": "management",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name the three pillars of initial DKA management.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV isotonic fluids",
+          "synonyms": [
+            "IV fluids",
+            "fluids",
+            "normal saline",
+            "lactated Ringer's",
+            "crystalloid",
+            "balanced crystalloid"
+          ]
+        },
+        {
+          "answer": "IV insulin infusion",
+          "synonyms": [
+            "insulin drip",
+            "insulin infusion",
+            "IV insulin",
+            "insulin"
+          ]
+        },
+        {
+          "answer": "potassium replacement",
+          "synonyms": [
+            "potassium",
+            "replace potassium",
+            "replete potassium",
+            "KCl"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which lab must you check before starting the insulin infusion?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "potassium",
+          "synonyms": [
+            "serum potassium",
+            "potassium level"
+          ]
+        }
+      ]
+    }
+  ]
+}

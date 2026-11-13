@@ -1,0 +1,320 @@
+{
+  "script": {
+    "id": "pulmonary-embolism",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Pulmonary embolism",
+    "aliases": [
+      "PE"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Adults with risk factors for venous thromboembolism",
+      "risk_factors": [
+        "recent surgery",
+        "immobilization",
+        "active cancer",
+        "prior VTE",
+        "estrogen use or pregnancy",
+        "inherited thrombophilia"
+      ]
+    },
+    "pathophysiology": "A thrombus, usually from the deep veins of the legs, lodges in the pulmonary arteries, causing ventilation-perfusion mismatch and hypoxemia; a large clot strains the right ventricle and can cause shock.",
+    "timeline": {
+      "onset": "Sudden",
+      "course": "Most stable patients recover with anticoagulation; massive PE can cause sudden death"
+    },
+    "key_findings": {
+      "history": [
+        "sudden dyspnea",
+        "pleuritic chest pain",
+        "hemoptysis",
+        "unilateral leg swelling"
+      ],
+      "exam": [
+        "tachycardia",
+        "tachypnea",
+        "hypoxemia",
+        "clear lungs"
+      ],
+      "labs": [
+        "raised D-dimer",
+        "raised troponin or BNP with right ventricular strain"
+      ],
+      "imaging": [
+        "CT pulmonary angiography showing a filling defect",
+        "echocardiogram may show right ventricular dilation"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "CT pulmonary angiography",
+        "V/Q scan if CT contrast is contraindicated"
+      ],
+      "criteria": [
+        "use the Wells score to estimate pretest probability",
+        "with low pretest probability, a negative D-dimer rules out PE"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "anticoagulation, preferably a direct oral anticoagulant such as apixaban or rivaroxaban"
+      ],
+      "next_line": [
+        "systemic thrombolysis for high-risk PE with hypotension",
+        "catheter-directed therapy or surgical embolectomy if thrombolysis fails or is contraindicated",
+        "IVC filter only if anticoagulation is contraindicated"
+      ]
+    },
+    "complications": [
+      "right heart failure",
+      "obstructive shock",
+      "pulmonary infarction",
+      "chronic thromboembolic pulmonary hypertension"
+    ],
+    "confused_with": [
+      {
+        "script_id": "community-acquired-pneumonia",
+        "how_to_tell_apart": "Pneumonia usually brings fever, productive cough, focal crackles and a consolidation on chest X-ray; PE more often has clear lungs and a near-normal X-ray despite hypoxemia."
+      }
+    ],
+    "pearls": [
+      "The most common ECG finding in PE is sinus tachycardia; the classic S1Q3T3 pattern is uncommon."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "epidemiology.risk_factors",
+        "diagnosis.confirmatory_tests[0]",
+        "management.first_line[0]"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line[0]",
+        "diagnosis.criteria[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism"
+      },
+      {
+        "title": "Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline and Expert Panel Report (2021)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "pulmonary-embolism.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Three days after a hip replacement: sudden pleuritic chest pain, dyspnea, heart rate 118, clear lungs. Most likely diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Pulmonary embolism",
+          "synonyms": [
+            "PE",
+            "pulmonary embolus",
+            "pulmonary thromboembolism"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name three risk factors for PE.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "recent surgery",
+          "synonyms": [
+            "surgery",
+            "post-op",
+            "postoperative"
+          ]
+        },
+        {
+          "answer": "immobilization",
+          "synonyms": [
+            "immobility",
+            "bed rest",
+            "long flight",
+            "long-haul flight",
+            "prolonged travel",
+            "hospitalization"
+          ]
+        },
+        {
+          "answer": "active cancer",
+          "synonyms": [
+            "cancer",
+            "malignancy"
+          ]
+        },
+        {
+          "answer": "prior VTE",
+          "synonyms": [
+            "previous VTE",
+            "prior DVT",
+            "previous DVT",
+            "prior PE",
+            "previous PE",
+            "history of clots",
+            "history of DVT"
+          ]
+        },
+        {
+          "answer": "estrogen use or pregnancy",
+          "synonyms": [
+            "estrogen",
+            "OCP",
+            "oral contraceptives",
+            "birth control pills",
+            "pregnancy",
+            "postpartum",
+            "hormone therapy",
+            "HRT"
+          ]
+        },
+        {
+          "answer": "inherited thrombophilia",
+          "synonyms": [
+            "thrombophilia",
+            "factor V Leiden",
+            "protein C deficiency",
+            "protein S deficiency",
+            "antithrombin deficiency",
+            "prothrombin gene mutation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Hypoxemic with pleuritic pain. What on exam and X-ray points to PE rather than pneumonia?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "clear lungs",
+          "synonyms": [
+            "clear lung exam",
+            "no crackles",
+            "normal lung exam"
+          ]
+        },
+        {
+          "answer": "near-normal X-ray",
+          "synonyms": [
+            "normal chest X-ray",
+            "normal CXR",
+            "clear chest X-ray",
+            "no consolidation",
+            "normal X-ray"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Moderate pretest probability, stable, normal kidney function. Which test confirms PE?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CT pulmonary angiography",
+          "synonyms": [
+            "CTPA",
+            "CT angiogram",
+            "CT angiography",
+            "CT PE protocol",
+            "PE protocol CT",
+            "CTA chest"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Stable PE confirmed, no contraindications. First-line treatment?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "anticoagulation",
+          "synonyms": [
+            "anticoagulant",
+            "anticoagulate",
+            "blood thinner",
+            "blood thinners",
+            "heparin",
+            "LMWH",
+            "enoxaparin"
+          ]
+        },
+        {
+          "answer": "direct oral anticoagulant",
+          "synonyms": [
+            "DOAC",
+            "NOAC"
+          ]
+        },
+        {
+          "answer": "apixaban",
+          "synonyms": [
+            "Eliquis"
+          ]
+        },
+        {
+          "answer": "rivaroxaban",
+          "synonyms": [
+            "Xarelto"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the most common ECG finding in PE?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sinus tachycardia",
+          "synonyms": [
+            "sinus tach"
+          ]
+        }
+      ]
+    }
+  ]
+}

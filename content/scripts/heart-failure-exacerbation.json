@@ -1,0 +1,167 @@
+{
+  "script": {
+    "id": "heart-failure-exacerbation",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Acute decompensated heart failure",
+    "aliases": ["heart failure exacerbation", "ADHF", "CHF exacerbation"],
+    "rotation": ["IM", "EM"],
+    "epidemiology": {
+      "who": "Adults with known chronic heart failure, with reduced or preserved ejection fraction",
+      "risk_factors": [
+        "high salt intake",
+        "medication nonadherence",
+        "myocardial ischemia",
+        "atrial fibrillation",
+        "uncontrolled hypertension",
+        "infection",
+        "NSAIDs"
+      ]
+    },
+    "pathophysiology": "Worsening cardiac function or a precipitant raises left-sided filling pressures, causing pulmonary congestion, while sodium and water retention cause systemic venous congestion.",
+    "timeline": {
+      "onset": "Usually over days, sometimes hours",
+      "course": "Most improve with diuresis over several days; each admission marks a worse long-term prognosis"
+    },
+    "key_findings": {
+      "history": ["worsening dyspnea", "orthopnea", "paroxysmal nocturnal dyspnea", "weight gain", "leg swelling"],
+      "exam": ["raised JVP", "bibasilar crackles", "S3 gallop", "pitting edema"],
+      "labs": ["raised BNP or NT-proBNP", "troponin may be mildly raised"],
+      "imaging": [
+        "chest X-ray: pulmonary vascular congestion, interstitial edema, Kerley B lines, pleural effusions",
+        "echocardiogram to assess ejection fraction"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": ["BNP or NT-proBNP", "echocardiogram", "chest X-ray"],
+      "criteria": ["clinical diagnosis: symptoms and signs of congestion, supported by a raised natriuretic peptide"]
+    },
+    "management": {
+      "first_line": ["IV loop diuretics such as furosemide", "supplemental oxygen if hypoxemic", "treat the precipitant"],
+      "next_line": [
+        "add a thiazide-type diuretic such as metolazone if diuresis is inadequate",
+        "noninvasive ventilation for respiratory distress",
+        "vasodilators such as nitroglycerin if hypertensive",
+        "inotropes for low output with hypoperfusion"
+      ]
+    },
+    "complications": ["cardiogenic shock", "acute kidney injury", "arrhythmias", "hypokalemia from diuresis"],
+    "confused_with": [
+      {
+        "script_id": "community-acquired-pneumonia",
+        "how_to_tell_apart": "Pneumonia usually brings fever, productive cough and a focal consolidation; heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP."
+      }
+    ],
+    "pearls": ["The first IV loop diuretic dose should equal or exceed the patient's total daily oral dose."],
+    "difficulty_tiers": {
+      "MS1-2": ["pathophysiology"],
+      "MS3": ["key_findings.exam", "diagnosis.confirmatory_tests", "management.first_line[0]"],
+      "MS4": ["pearls[0]", "management.next_line[0]"]
+    },
+    "anki_refs": [],
+    "sources": [{ "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure" }]
+  },
+  "questions": [
+    {
+      "id": "heart-failure-exacerbation.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old with a known low ejection fraction has three days of orthopnea, a 3 kg weight gain, a raised JVP and bibasilar crackles. Diagnosis?",
+      "source_fields": ["name"],
+      "accepted_answers": [
+        {
+          "answer": "Acute decompensated heart failure",
+          "synonyms": [
+            "ADHF",
+            "heart failure exacerbation",
+            "CHF exacerbation",
+            "decompensated heart failure",
+            "acute heart failure",
+            "heart failure",
+            "CHF"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name three common precipitants of a heart failure exacerbation.",
+      "source_fields": ["epidemiology.risk_factors"],
+      "accepted_answers": [
+        {
+          "answer": "high salt intake",
+          "synonyms": ["dietary indiscretion", "dietary nonadherence", "high sodium diet", "salty food", "salt intake"]
+        },
+        {
+          "answer": "medication nonadherence",
+          "synonyms": ["missed medications", "stopped diuretics", "nonadherence", "noncompliance", "not taking meds"]
+        },
+        {
+          "answer": "myocardial ischemia",
+          "synonyms": ["ischemia", "MI", "ACS", "acute coronary syndrome", "heart attack"]
+        },
+        { "answer": "atrial fibrillation", "synonyms": ["AF", "afib", "a fib", "arrhythmia"] },
+        { "answer": "uncontrolled hypertension", "synonyms": ["hypertension", "high blood pressure"] },
+        { "answer": "infection", "synonyms": ["pneumonia", "sepsis"] },
+        { "answer": "NSAIDs", "synonyms": ["NSAID", "ibuprofen", "naproxen"] }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Dyspnea and crackles. Which blood test helps tell heart failure from pneumonia?",
+      "source_fields": ["confused_with[0].how_to_tell_apart"],
+      "accepted_answers": [
+        {
+          "answer": "BNP",
+          "synonyms": ["NT-proBNP", "brain natriuretic peptide", "B-type natriuretic peptide", "natriuretic peptide", "pro-BNP"]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test tells you the ejection fraction?",
+      "source_fields": ["diagnosis.confirmatory_tests"],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": ["echo", "TTE", "transthoracic echocardiogram", "cardiac ultrasound"]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment for the congestion?",
+      "source_fields": ["management.first_line"],
+      "accepted_answers": [
+        {
+          "answer": "IV loop diuretics",
+          "synonyms": ["loop diuretic", "loop diuretics", "IV furosemide", "furosemide", "Lasix", "bumetanide", "torsemide", "diuretics", "diuresis"]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How should the first IV loop diuretic dose compare with the patient's total daily oral dose?",
+      "source_fields": ["pearls[0]"],
+      "accepted_answers": [
+        {
+          "answer": "equal or exceed",
+          "synonyms": ["at least equal", "at least the same", "same or higher", "equal or higher", "equal to or greater", "higher", "at least the oral dose", "double"]
+        }
+      ]
+    }
+  ]
+}

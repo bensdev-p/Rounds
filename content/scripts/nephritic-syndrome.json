@@ -1,0 +1,176 @@
+{
+  "script": {
+    "id": "nephritic-syndrome",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Nephritic syndrome",
+    "aliases": ["acute glomerulonephritis"],
+    "rotation": ["IM", "peds"],
+    "epidemiology": {
+      "who": "Children and adults; post-infectious glomerulonephritis is common in children, and IgA nephropathy is the most common glomerulonephritis worldwide",
+      "risk_factors": [
+        "post-streptococcal glomerulonephritis",
+        "IgA nephropathy",
+        "lupus nephritis",
+        "ANCA-associated vasculitis",
+        "anti-GBM disease",
+        "infective endocarditis"
+      ]
+    },
+    "pathophysiology": "Immune-mediated inflammation of the glomeruli damages the capillary walls, letting red cells into the urine and lowering filtration, which causes salt and water retention, hypertension and a rising creatinine.",
+    "timeline": {
+      "onset": "Days to weeks",
+      "course": "Post-streptococcal disease usually resolves in children; rapidly progressive forms can cause kidney failure within weeks"
+    },
+    "key_findings": {
+      "history": ["cola-colored urine", "reduced urine output", "recent sore throat or skin infection"],
+      "exam": ["hypertension", "periorbital or leg edema"],
+      "labs": [
+        "hematuria with red blood cell casts and dysmorphic red cells",
+        "rising creatinine",
+        "proteinuria usually below 3.5 g/day",
+        "low complement C3 in post-streptococcal glomerulonephritis and lupus nephritis"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "urinalysis with microscopy for red blood cell casts",
+        "complement levels (C3 and C4)",
+        "serologies: ANCA, anti-GBM, ANA, ASO",
+        "kidney biopsy"
+      ],
+      "criteria": ["hematuria with red cell casts, hypertension, edema and reduced kidney function"]
+    },
+    "management": {
+      "first_line": [
+        "supportive care",
+        "blood pressure control",
+        "loop diuretics and salt restriction for fluid overload",
+        "treat the underlying cause"
+      ],
+      "next_line": [
+        "immunosuppression (steroids with cyclophosphamide or rituximab) for rapidly progressive disease such as ANCA vasculitis",
+        "plasma exchange for anti-GBM disease",
+        "dialysis for refractory fluid overload, hyperkalemia or uremia"
+      ]
+    },
+    "complications": [
+      "acute kidney injury",
+      "hypertensive emergency",
+      "pulmonary edema",
+      "progression to chronic kidney disease"
+    ],
+    "confused_with": [
+      {
+        "script_id": "nephrotic-syndrome",
+        "how_to_tell_apart": "Nephrotic syndrome has heavy proteinuria above 3.5 g/day, low albumin and a bland urine sediment; nephritic syndrome has red blood cell casts, hypertension and a rising creatinine."
+      }
+    ],
+    "pearls": [
+      "IgA nephropathy causes hematuria within a few days of an upper respiratory infection, while post-streptococcal glomerulonephritis appears 1 to 3 weeks after a sore throat."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": ["pathophysiology"],
+      "MS3": ["key_findings.labs[0]", "epidemiology.risk_factors", "management.first_line"],
+      "MS4": ["pearls[0]", "management.next_line[1]"]
+    },
+    "anki_refs": [],
+    "sources": [{ "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases" }]
+  },
+  "questions": [
+    {
+      "id": "nephritic-syndrome.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 10-year-old has cola-colored urine and puffy eyes two weeks after strep throat. Blood pressure is 150/95. Which syndrome?",
+      "source_fields": ["name"],
+      "accepted_answers": [
+        {
+          "answer": "Nephritic syndrome",
+          "synonyms": [
+            "nephritic",
+            "acute glomerulonephritis",
+            "glomerulonephritis",
+            "post-streptococcal glomerulonephritis",
+            "poststreptococcal glomerulonephritis",
+            "PSGN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name three causes of nephritic syndrome.",
+      "source_fields": ["epidemiology.risk_factors"],
+      "accepted_answers": [
+        {
+          "answer": "post-streptococcal glomerulonephritis",
+          "synonyms": ["PSGN", "post-strep", "post-infectious glomerulonephritis", "poststreptococcal"]
+        },
+        { "answer": "IgA nephropathy", "synonyms": ["IgAN", "Berger disease", "IgA"] },
+        { "answer": "lupus nephritis", "synonyms": ["lupus", "SLE"] },
+        {
+          "answer": "ANCA-associated vasculitis",
+          "synonyms": ["ANCA vasculitis", "granulomatosis with polyangiitis", "GPA", "microscopic polyangiitis", "MPA", "EGPA"]
+        },
+        {
+          "answer": "anti-GBM disease",
+          "synonyms": ["Goodpasture", "Goodpasture syndrome", "Goodpasture disease", "anti-glomerular basement membrane disease"]
+        },
+        { "answer": "infective endocarditis", "synonyms": ["endocarditis"] }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which urine microscopy finding marks a nephritic rather than a nephrotic picture?",
+      "source_fields": ["confused_with[0].how_to_tell_apart"],
+      "accepted_answers": [
+        {
+          "answer": "red blood cell casts",
+          "synonyms": ["RBC casts", "red cell casts", "red cell cast", "RBC cast"]
+        }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test is low in post-streptococcal glomerulonephritis but normal in IgA nephropathy?",
+      "source_fields": ["key_findings.labs[3]"],
+      "accepted_answers": [
+        { "answer": "C3", "synonyms": ["complement C3", "complement", "complement levels", "low complement"] }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Post-streptococcal glomerulonephritis with edema and a blood pressure of 160/100. How do you manage it?",
+      "source_fields": ["management.first_line"],
+      "accepted_answers": [
+        { "answer": "supportive care", "synonyms": ["supportive"] },
+        {
+          "answer": "blood pressure control",
+          "synonyms": ["BP control", "antihypertensives", "lower the blood pressure"]
+        },
+        { "answer": "loop diuretics", "synonyms": ["loop diuretic", "diuretics", "diuretic", "furosemide", "Lasix"] }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Hematuria starts two days into a cold. Which glomerulonephritis is that?",
+      "source_fields": ["pearls[0]"],
+      "accepted_answers": [{ "answer": "IgA nephropathy", "synonyms": ["IgAN", "Berger disease", "IgA"] }]
+    }
+  ]
+}

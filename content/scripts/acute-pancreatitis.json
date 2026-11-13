@@ -1,0 +1,255 @@
+{
+  "script": {
+    "id": "acute-pancreatitis",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Acute pancreatitis",
+    "aliases": [],
+    "rotation": [
+      "IM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Adults; gallstones are the most common cause, then heavy alcohol use",
+      "risk_factors": [
+        "gallstones",
+        "alcohol",
+        "hypertriglyceridemia",
+        "post-ERCP",
+        "medications",
+        "hypercalcemia"
+      ]
+    },
+    "pathophysiology": "Premature activation of pancreatic enzymes (trypsin) inside the gland causes autodigestion and local inflammation, which can become a systemic inflammatory response.",
+    "timeline": {
+      "onset": "Sudden, over hours",
+      "course": "Mild disease settles within a week; severe disease brings organ failure lasting over 48 hours and local complications"
+    },
+    "key_findings": {
+      "history": [
+        "sudden epigastric pain radiating to the back",
+        "nausea and vomiting",
+        "recent heavy alcohol use or known gallstones"
+      ],
+      "exam": [
+        "epigastric tenderness",
+        "tachycardia",
+        "flank or periumbilical bruising in severe disease"
+      ],
+      "labs": [
+        "lipase more than 3 times the upper limit of normal",
+        "raised ALT in gallstone pancreatitis"
+      ],
+      "imaging": [
+        "right upper quadrant ultrasound to look for gallstones",
+        "contrast CT only if the diagnosis is unclear or the patient is not improving"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum lipase",
+        "right upper quadrant ultrasound"
+      ],
+      "criteria": [
+        "two of three: typical epigastric pain, lipase more than 3 times the upper limit of normal, characteristic imaging findings"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "early goal-directed IV fluids with lactated Ringer's",
+        "pain control",
+        "early oral feeding as tolerated"
+      ],
+      "next_line": [
+        "cholecystectomy during the same admission for mild gallstone pancreatitis",
+        "ERCP within 24 hours if there is cholangitis",
+        "no prophylactic antibiotics"
+      ]
+    },
+    "complications": [
+      "pancreatic pseudocyst",
+      "walled-off necrosis",
+      "infected necrosis",
+      "ARDS",
+      "acute kidney injury"
+    ],
+    "confused_with": [
+      {
+        "script_id": "diabetic-ketoacidosis",
+        "how_to_tell_apart": "DKA can cause abdominal pain and a mildly raised lipase, but it has high glucose, ketones and an anion gap acidosis, and the pain improves as the acidosis is treated."
+      }
+    ],
+    "pearls": [
+      "Gallstone pancreatitis is suggested by an ALT more than 3 times the upper limit of normal."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.history[0]",
+        "diagnosis.criteria[0]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "American College of Gastroenterology Guideline: Management of Acute Pancreatitis (2024)"
+      },
+      {
+        "title": "Classification of acute pancreatitis: revision of the Atlanta classification by international consensus (2012)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "acute-pancreatitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Sudden epigastric pain radiating to the back after a weekend of heavy drinking. Most likely diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pancreatitis",
+          "synonyms": [
+            "pancreatitis",
+            "alcoholic pancreatitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Gallstones and alcohol are the top two causes. Name three more.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertriglyceridemia",
+          "synonyms": [
+            "high triglycerides",
+            "triglycerides"
+          ]
+        },
+        {
+          "answer": "post-ERCP",
+          "synonyms": [
+            "ERCP",
+            "after ERCP"
+          ]
+        },
+        {
+          "answer": "medications",
+          "synonyms": [
+            "drugs",
+            "drug-induced",
+            "azathioprine",
+            "valproate",
+            "thiazides",
+            "didanosine"
+          ]
+        },
+        {
+          "answer": "hypercalcemia",
+          "synonyms": [
+            "high calcium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which lab finding suggests the pancreatitis is from gallstones rather than alcohol?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ALT",
+          "synonyms": [
+            "raised ALT",
+            "high ALT",
+            "alanine aminotransferase",
+            "elevated ALT",
+            "transaminases"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test do you order first?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right upper quadrant ultrasound",
+          "synonyms": [
+            "RUQ ultrasound",
+            "abdominal ultrasound",
+            "ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Mild pancreatitis, pain improving on day 1. When do you let them eat?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "early oral feeding as tolerated",
+          "synonyms": [
+            "as tolerated",
+            "early oral feeding",
+            "when hungry",
+            "early feeding"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Mild gallstone pancreatitis is settling. When should the gallbladder come out?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "during the same admission",
+          "synonyms": [
+            "same admission",
+            "before discharge",
+            "this admission",
+            "index admission",
+            "same hospitalization"
+          ]
+        }
+      ]
+    }
+  ]
+}

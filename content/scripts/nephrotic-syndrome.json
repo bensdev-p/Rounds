@@ -1,0 +1,155 @@
+{
+  "script": {
+    "id": "nephrotic-syndrome",
+    "status": "draft",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Nephrotic syndrome",
+    "aliases": [],
+    "rotation": ["IM", "peds"],
+    "epidemiology": {
+      "who": "Children, usually from minimal change disease, and adults, most often from membranous nephropathy, FSGS or diabetic kidney disease",
+      "risk_factors": [
+        "minimal change disease",
+        "focal segmental glomerulosclerosis",
+        "membranous nephropathy",
+        "diabetic nephropathy",
+        "amyloidosis",
+        "lupus nephritis"
+      ]
+    },
+    "pathophysiology": "Injury to the glomerular filtration barrier (the podocytes) lets large amounts of protein leak into the urine, causing low serum albumin, edema and a compensatory rise in hepatic lipoprotein synthesis. Urinary loss of anticoagulant proteins makes patients hypercoagulable.",
+    "timeline": {
+      "onset": "Usually over weeks",
+      "course": "Minimal change disease often remits with steroids; other causes may progress to chronic kidney disease"
+    },
+    "key_findings": {
+      "history": ["swelling around the eyes and legs", "foamy urine", "weight gain"],
+      "exam": ["pitting edema", "periorbital edema", "ascites or pleural effusions"],
+      "labs": [
+        "proteinuria above 3.5 g/day",
+        "serum albumin below 3 g/dL",
+        "hyperlipidemia",
+        "fatty casts and oval fat bodies in the urine"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "urine protein-to-creatinine ratio",
+        "24-hour urine protein",
+        "kidney biopsy to find the cause in adults"
+      ],
+      "criteria": ["proteinuria above 3.5 g/day with hypoalbuminemia and edema; hyperlipidemia is common"]
+    },
+    "management": {
+      "first_line": [
+        "ACE inhibitor or ARB to reduce proteinuria",
+        "loop diuretics and salt restriction for edema",
+        "treat the underlying cause"
+      ],
+      "next_line": [
+        "corticosteroids for minimal change disease",
+        "statin for persistent hyperlipidemia",
+        "anticoagulation for thrombosis"
+      ]
+    },
+    "complications": [
+      "renal vein thrombosis",
+      "deep vein thrombosis and pulmonary embolism",
+      "infection",
+      "acute kidney injury"
+    ],
+    "confused_with": [
+      {
+        "script_id": "nephritic-syndrome",
+        "how_to_tell_apart": "Nephritic syndrome has hematuria with red blood cell casts, hypertension and a rising creatinine, with proteinuria usually below 3.5 g/day; nephrotic syndrome has heavy proteinuria above 3.5 g/day with a bland sediment."
+      }
+    ],
+    "pearls": [
+      "Urinary loss of antithrombin III makes nephrotic patients hypercoagulable; renal vein thrombosis is classic with membranous nephropathy."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": ["pathophysiology"],
+      "MS3": ["diagnosis.criteria[0]", "epidemiology.risk_factors", "management.first_line[0]"],
+      "MS4": ["pearls[0]"]
+    },
+    "anki_refs": [],
+    "sources": [{ "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases" }]
+  },
+  "questions": [
+    {
+      "id": "nephrotic-syndrome.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 6-year-old has puffy eyes and swollen legs. Urine dipstick is 4+ protein and serum albumin is 1.9 g/dL. Which syndrome?",
+      "source_fields": ["name"],
+      "accepted_answers": [{ "answer": "Nephrotic syndrome", "synonyms": ["nephrotic", "nephrosis"] }]
+    },
+    {
+      "id": "nephrotic-syndrome.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "required_count": 3,
+      "prompt": "Name three causes of nephrotic syndrome.",
+      "source_fields": ["epidemiology.risk_factors"],
+      "accepted_answers": [
+        { "answer": "minimal change disease", "synonyms": ["minimal change", "MCD"] },
+        { "answer": "focal segmental glomerulosclerosis", "synonyms": ["FSGS"] },
+        { "answer": "membranous nephropathy", "synonyms": ["membranous", "membranous glomerulonephritis"] },
+        { "answer": "diabetic nephropathy", "synonyms": ["diabetic kidney disease", "diabetes"] },
+        { "answer": "amyloidosis", "synonyms": ["amyloid"] },
+        { "answer": "lupus nephritis", "synonyms": ["lupus", "SLE"] }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "How does the urine sediment in nephrotic syndrome differ from nephritic syndrome?",
+      "source_fields": ["confused_with[0].how_to_tell_apart"],
+      "accepted_answers": [
+        {
+          "answer": "bland sediment",
+          "synonyms": ["bland", "no red cell casts", "no RBC casts", "no red blood cell casts", "no hematuria"]
+        }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which spot urine test quantifies the proteinuria?",
+      "source_fields": ["diagnosis.confirmatory_tests"],
+      "accepted_answers": [
+        {
+          "answer": "urine protein-to-creatinine ratio",
+          "synonyms": ["UPCR", "protein to creatinine ratio", "protein creatinine ratio", "spot protein to creatinine ratio"]
+        }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class reduces the proteinuria in most adults with nephrotic syndrome?",
+      "source_fields": ["management.first_line[0]"],
+      "accepted_answers": [
+        { "answer": "ACE inhibitor", "synonyms": ["ACE inhibitors", "ACEi", "lisinopril", "enalapril", "ramipril"] },
+        {
+          "answer": "ARB",
+          "synonyms": ["ARBs", "angiotensin receptor blocker", "losartan", "valsartan", "irbesartan"]
+        }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which clotting complication is classic in membranous nephropathy?",
+      "source_fields": ["pearls[0]"],
+      "accepted_answers": [{ "answer": "renal vein thrombosis", "synonyms": ["RVT", "renal vein clot"] }]
+    }
+  ]
+}
