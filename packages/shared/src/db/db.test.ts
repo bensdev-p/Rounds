@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures';
-import type { Question } from '../schemas/question';
-import type { Json } from './database.types';
+import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import type { Question } from '../schemas/question.ts';
+import type { Json } from './database.types.ts';
 import {
   parseRows,
   questionFromRow,
@@ -10,8 +10,8 @@ import {
   scriptToRow,
   type QuestionRow,
   type ScriptRow,
-} from './rows';
-import { buildSeedSql, SeedError, validateContent } from './seed';
+} from './rows.ts';
+import { buildSeedSql, SeedError, validateContent } from './seed.ts';
 
 const now = '2026-11-13T00:00:00.000Z';
 

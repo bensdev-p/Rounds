@@ -1,7 +1,7 @@
-import type { Attempt, GradeResult } from '../schemas/attempt';
-import { RUNGS, rungIndex, type Question, type Rung } from '../schemas/question';
-import { answerCredit, classifyMiss } from './missTags';
-import { DEFAULT_PERSONA, PERSONAS, type PersonaId } from './personas';
+import type { Attempt, GradeResult, Grader } from '../schemas/attempt.ts';
+import { RUNGS, rungIndex, type Question, type Rung } from '../schemas/question.ts';
+import { answerCredit, classifyMiss } from './missTags.ts';
+import { DEFAULT_PERSONA, PERSONAS, type PersonaId } from './personas.ts';
 
 export type LadderStatus = 'in_progress' | 'missed' | 'completed';
 
@@ -19,6 +19,9 @@ export interface SubmittedAnswer {
   answer: string;
   elapsed_ms: number;
   result: GradeResult;
+  /** Defaults to the local grader. */
+  grader?: Grader;
+  grader_version?: string | null;
 }
 
 export class LadderError extends Error {
@@ -73,6 +76,8 @@ export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): La
     credit: answerCredit(question, submitted.result),
     passed,
     miss_tag,
+    grader: submitted.grader ?? 'local',
+    grader_version: submitted.grader_version ?? null,
   };
 
   const nextIndex = state.index + 1;

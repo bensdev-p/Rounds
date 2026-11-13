@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { collectStrings, FieldPathSchema, resolveFieldPath } from './fieldPath';
+import { collectStrings, FieldPathSchema, resolveFieldPath } from './fieldPath.ts';
 
 const doc = {
   name: 'X',

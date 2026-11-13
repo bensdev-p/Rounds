@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures';
-import { QuestionSchema, traceQuestionToScript, type Question } from './question';
+import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import { QuestionSchema, traceQuestionToScript, type Question } from './question.ts';
 
 const script = TEST_SCRIPTS[0]!;
 const recall = TEST_QUESTIONS[0]!;

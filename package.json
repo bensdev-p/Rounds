@@ -8,7 +8,7 @@
   "scripts": {
     "dev": "turbo run dev --filter=mobile",
     "test": "turbo run test",
-    "typecheck": "turbo run typecheck",
+    "typecheck": "turbo run typecheck && pnpm functions:check",
     "lint": "turbo run lint",
     "format": "prettier --write .",
     "supabase": "supabase",
@@ -16,6 +16,9 @@
     "db:reset": "supabase db reset",
     "db:test": "supabase test db",
     "db:types": "supabase gen types typescript --local --schema public > packages/shared/src/db/database.types.ts && prettier --write packages/shared/src/db/database.types.ts",
+    "functions:serve": "supabase functions serve",
+    "functions:serve:fake": "supabase functions serve --env-file supabase/functions/.env.test",
+    "functions:check": "deno check --config supabase/functions/grade-answer/deno.json supabase/functions/grade-answer/index.ts",
     "content:seed": "pnpm --filter @rounds/shared content:seed",
     "test:integration": "pnpm --filter @rounds/shared test:integration"
   },
@@ -23,5 +26,12 @@
     "prettier": "^3.10.1",
     "supabase": "^3.1.0",
     "turbo": "^2.11.11"
+  },
+  "devEngines": {
+    "runtime": {
+      "name": "deno",
+      "version": "2.9.6",
+      "onFail": "download"
+    }
   }
 }

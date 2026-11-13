@@ -6,8 +6,8 @@
  */
 import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
-import { buildSeedSql, SeedError } from '../src/db/seed';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../src/fixtures';
+import { buildSeedSql, SeedError } from '../src/db/seed.ts';
+import { TEST_QUESTIONS, TEST_SCRIPTS } from '../src/fixtures/index.ts';
 
 const target = fileURLToPath(new URL('../../../supabase/seed.sql', import.meta.url));
 

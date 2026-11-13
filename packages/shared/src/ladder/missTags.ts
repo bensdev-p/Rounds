@@ -1,6 +1,6 @@
-import { listCredit } from '../grading/listCredit';
-import { confusedWithTag, type GradeResult, type MissTag } from '../schemas/attempt';
-import type { Question } from '../schemas/question';
+import { listCredit } from '../grading/listCredit.ts';
+import { confusedWithTag, type GradeResult, type MissTag } from '../schemas/attempt.ts';
+import type { Question } from '../schemas/question.ts';
 
 export interface MissInput {
   question: Question;

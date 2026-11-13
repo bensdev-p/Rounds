@@ -1,6 +1,6 @@
-import type { IllnessScript } from '../schemas/illnessScript';
-import { traceQuestionToScript, type Question } from '../schemas/question';
-import { questionToRow, scriptToRow } from './rows';
+import type { IllnessScript } from '../schemas/illnessScript.ts';
+import { traceQuestionToScript, type Question } from '../schemas/question.ts';
+import { questionToRow, scriptToRow } from './rows.ts';
 
 export class SeedError extends Error {
   override name = 'SeedError';

@@ -5,9 +5,9 @@
  */
 import { createClient } from '@supabase/supabase-js';
 import { beforeAll, describe, expect, inject, it } from 'vitest';
-import type { Database } from '../db/database.types';
-import { gradeLocally } from '../grading/localGrader';
-import { currentQuestion, startLadder, submitAnswer, type LadderState } from '../ladder/engine';
+import type { Database } from '../db/database.types.ts';
+import { gradeLocally } from '../grading/localGrader.ts';
+import { currentQuestion, startLadder, submitAnswer, type LadderState } from '../ladder/engine.ts';
 import {
   finishSession,
   getLadderContent,
@@ -16,7 +16,7 @@ import {
   startSession,
   type LadderContent,
   type RoundsClient,
-} from './index';
+} from './index.ts';
 
 async function newStudent(): Promise<RoundsClient> {
   const client = createClient<Database>(inject('supabaseUrl'), inject('supabaseKey'), {
@@ -126,6 +126,8 @@ describe('Rounds API against local Supabase', () => {
         credit: 0,
         passed: false,
         miss_tag: 'unknown',
+        grader: 'local',
+        grader_version: null,
       }),
     ).rejects.toThrow(/patient details/);
   });

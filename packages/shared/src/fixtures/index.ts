@@ -3,8 +3,8 @@
  * Stage 1 demo exercise the ladder without putting unreviewed medical content
  * in the repo. Never ship them as real content.
  */
-import { IllnessScriptSchema, type IllnessScript } from '../schemas/illnessScript';
-import { QuestionSchema, type Question } from '../schemas/question';
+import { IllnessScriptSchema, type IllnessScript } from '../schemas/illnessScript.ts';
+import { QuestionSchema, type Question } from '../schemas/question.ts';
 
 const zorblax = IllnessScriptSchema.parse({
   id: 'zorblax-syndrome',

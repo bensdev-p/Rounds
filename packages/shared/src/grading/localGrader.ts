@@ -1,8 +1,8 @@
-import type { GradeResult } from '../schemas/attempt';
-import type { IllnessScript } from '../schemas/illnessScript';
-import type { AcceptedAnswer, Question } from '../schemas/question';
-import { containsTerm } from '../text';
-import { listCredit } from './listCredit';
+import type { GradeResult } from '../schemas/attempt.ts';
+import type { IllnessScript } from '../schemas/illnessScript.ts';
+import type { AcceptedAnswer, Question } from '../schemas/question.ts';
+import { containsTerm } from '../text.ts';
+import { listCredit } from './listCredit.ts';
 
 /** A script the student might mistake this one for: its id plus the names it goes by. */
 export interface Confusable {
@@ -50,42 +50,53 @@ export function gradeLocally(
   answer: string,
   confusables: readonly Confusable[] = [],
 ): GradeResult {
+  const found =
+    question.kind === 'single'
+      ? question.accepted_answers.filter((a) => hits(answer, a)).map((a) => a.answer)
+      : question.accepted_answers
+          .filter((a) => splitListAnswer(answer).some((item) => hits(item, a)))
+          .map((a) => a.answer);
+  return gradeFromMatches(question, found, findConfusable(answer, confusables));
+}
+
+/**
+ * Builds the grade from which canonical accepted answers the student named.
+ * Shared by the local and LLM graders so both score and word results the same
+ * way. `confusedWith` only counts when nothing correct was named.
+ */
+export function gradeFromMatches(
+  question: Question,
+  found: readonly string[],
+  confusedWith: string | null,
+): GradeResult {
   if (question.kind === 'single') {
-    const matched = question.accepted_answers.filter((a) => hits(answer, a)).map((a) => a.answer);
+    const canonical = question.accepted_answers.map((a) => a.answer);
+    const matched = canonical.filter((a) => found.includes(a));
     if (matched.length > 0) {
       return { grade: 'correct', reason: 'Correct.', matched, confused_with_script_id: null };
     }
-    const confused = findConfusable(answer, confusables);
-    const expected = question.accepted_answers[0]?.answer ?? '';
+    const expected = canonical[0] ?? '';
     return {
       grade: 'incorrect',
-      reason: confused
+      reason: confusedWith
         ? `That describes a different condition. Expected: ${expected}.`
         : `Expected: ${expected}.`,
       matched: [],
-      confused_with_script_id: confused,
+      confused_with_script_id: confusedWith,
     };
   }
 
-  const items = splitListAnswer(answer);
-  const found = question.accepted_answers
-    .filter((a) => items.some((item) => hits(item, a)))
-    .map((a) => a.answer);
   const credit = listCredit(question, found);
-  const grade =
-    found.length >= question.required_count
-      ? 'correct'
-      : found.length > 0
-        ? 'partial'
-        : 'incorrect';
+  const count = credit.found.length;
+  const grade = count >= question.required_count ? 'correct' : count > 0 ? 'partial' : 'incorrect';
   const reason =
     grade === 'correct'
-      ? `Named ${found.length} of ${question.required_count}.`
-      : `Named ${found.length} of ${question.required_count}. Missed: ${credit.missed.join(', ')}.`;
+      ? `Named ${count} of ${question.required_count}.`
+      : `Named ${count} of ${question.required_count}. Missed: ${credit.missed.join(', ')}.`;
   return {
     grade,
     reason: reason.length > 200 ? `${reason.slice(0, 197)}...` : reason,
     matched: credit.found,
-    confused_with_script_id: found.length === 0 ? findConfusable(answer, confusables) : null,
+    confused_with_script_id: count === 0 ? confusedWith : null,
   };
 }

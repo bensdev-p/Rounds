@@ -8,9 +8,9 @@ import {
   IllnessScriptSchema,
   type IllnessScript,
   type IllnessScriptContent,
-} from '../schemas/illnessScript';
-import { QuestionSchema, type Question } from '../schemas/question';
-import type { Json, Tables, TablesInsert } from './database.types';
+} from '../schemas/illnessScript.ts';
+import { QuestionSchema, type Question } from '../schemas/question.ts';
+import type { Json, Tables, TablesInsert } from './database.types.ts';
 
 export type ScriptRow = Tables<'illness_scripts'>;
 export type QuestionRow = Tables<'questions'>;

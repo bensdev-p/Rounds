@@ -4,19 +4,30 @@
  * everything written is validated before it leaves the client.
  */
 import type { SupabaseClient } from '@supabase/supabase-js';
-import type { Database } from '../db/database.types';
-import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../db/rows';
-import type { Confusable } from '../grading/localGrader';
-import { ladderScore, type LadderState } from '../ladder/engine';
-import type { PersonaId } from '../ladder/personas';
-import { AttemptSchema, type Attempt } from '../schemas/attempt';
-import type { IllnessScript } from '../schemas/illnessScript';
-import { traceQuestionToScript, type Question } from '../schemas/question';
+import type { Database } from '../db/database.types.ts';
+import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../db/rows.ts';
+import type { Confusable } from '../grading/localGrader.ts';
+import { ladderScore, type LadderState } from '../ladder/engine.ts';
+import type { PersonaId } from '../ladder/personas.ts';
+import {
+  AnswerTextSchema,
+  AttemptSchema,
+  GradeResponseSchema,
+  type Attempt,
+  type GradeResponse,
+} from '../schemas/attempt.ts';
+import type { IllnessScript } from '../schemas/illnessScript.ts';
+import { traceQuestionToScript, type Question } from '../schemas/question.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
 
 export class RoundsApiError extends Error {
   override name = 'RoundsApiError';
+}
+
+/** The answer was refused (it looks like patient details). Do not retry or grade it elsewhere. */
+export class GradeRejectedError extends RoundsApiError {
+  override name = 'GradeRejectedError';
 }
 
 /** Called with rows that failed validation and were skipped. Defaults to console.warn. */
@@ -171,4 +182,48 @@ export async function finishSession(
     'Finishing session',
   );
   return progress.best_rung;
+}
+
+export const GRADE_TIMEOUT_MS = 13_000;
+
+/**
+ * Grades an answer on the server (`grade-answer` Edge Function). The server
+ * loads the question itself, so only the id and the answer are sent. The
+ * answer is checked for patient details first and never leaves the device if
+ * it fails. Throws `GradeRejectedError` when the answer is refused (422) and `RoundsApiError` on
+ * anything else, so callers can fall back to grading locally.
+ */
+export async function gradeAnswer(
+  client: RoundsClient,
+  questionId: string,
+  answer: string,
+  /** Longer than the server's model deadline, so a slow model still returns its local fallback. */
+  timeoutMs = GRADE_TIMEOUT_MS,
+): Promise<GradeResponse> {
+  if (!AnswerTextSchema.safeParse(answer).success) {
+    throw new GradeRejectedError('Answer looks like it contains patient details');
+  }
+  const { data, error } = await client.functions.invoke<unknown>('grade-answer', {
+    body: { question_id: questionId, answer },
+    timeout: timeoutMs,
+  });
+  if (error) {
+    // `context` is the fetch Response for HTTP errors.
+    const response: unknown = (error as { context?: unknown }).context;
+    if (response instanceof Response && response.status === 422) {
+      const body: unknown = await response
+        .clone()
+        .json()
+        .catch(() => null);
+      const message =
+        body && typeof body === 'object' && 'error' in body && typeof body.error === 'string'
+          ? body.error
+          : `HTTP ${response.status}`;
+      throw new GradeRejectedError(`Grading: ${message}`);
+    }
+    throw new RoundsApiError(`Grading: ${error.message}`);
+  }
+  const parsed = GradeResponseSchema.safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Grading: unexpected response');
+  return parsed.data;
 }

@@ -1,0 +1,121 @@
+import {
+  buildGradingContext,
+  detectPhi,
+  gradeLocally,
+  LlmGradeOutputSchema,
+  MAX_ANSWER_LENGTH,
+  QuestionIdSchema,
+  sanitizeLlmGrade,
+  type GradeResponse,
+} from '@rounds/shared';
+import { getLadderContent, type RoundsClient } from '@rounds/shared/api';
+import { z } from 'zod';
+import { PROMPT_VERSION, renderUserMessage, SYSTEM } from '../_prompts/grade-answer/v1.ts';
+import type { LlmProvider, LlmUsage } from '../_shared/llm/types.ts';
+
+export const corsHeaders = {
+  'Access-Control-Allow-Origin': '*',
+  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+  'Access-Control-Allow-Methods': 'POST, OPTIONS',
+};
+
+const BodySchema = z.strictObject({
+  question_id: QuestionIdSchema,
+  answer: z.string().max(MAX_ANSWER_LENGTH),
+});
+
+/** One structured log line per request. Never includes the answer text. */
+export interface GradeLog {
+  question_id: string;
+  outcome: 'local_match' | 'local_only' | 'llm' | `llm_${string}`;
+  model: string | null;
+  latency_ms: number;
+  usage: LlmUsage | null;
+  discarded: string[];
+}
+
+export interface HandlerDeps {
+  /** null: no API key configured, grade locally only. */
+  llm: LlmProvider | null;
+  /** A database client that acts as the caller (their JWT), so RLS applies. */
+  dbFor: (request: Request) => RoundsClient;
+  /** Overall budget for the model call, retries included. */
+  llmDeadlineMs: number;
+  log: (entry: GradeLog) => void;
+}
+
+function json(status: number, body: unknown): Response {
+  return new Response(JSON.stringify(body), {
+    status,
+    headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+  });
+}
+
+export function createHandler(deps: HandlerDeps): (request: Request) => Promise<Response> {
+  return async (request) => {
+    if (request.method === 'OPTIONS') return new Response('ok', { headers: corsHeaders });
+    if (request.method !== 'POST') return json(405, { error: 'Use POST' });
+
+    const body = BodySchema.safeParse(await request.json().catch(() => null));
+    if (!body.success) return json(400, { error: 'Expected { question_id, answer }' });
+    const { question_id, answer } = body.data;
+
+    // Before anything else, so patient details never reach a third party (domain rule 5).
+    if (detectPhi(answer).blocked) {
+      return json(422, { error: 'Answer looks like it contains patient details' });
+    }
+
+    const db = deps.dbFor(request);
+    const { data: row, error } = await db
+      .from('questions')
+      .select('script_id')
+      .eq('id', question_id)
+      .maybeSingle();
+    if (error) return json(500, { error: 'Could not load the question' });
+    if (!row) return json(404, { error: 'Question not found' });
+
+    // Approved content only (RLS), and only questions that trace to their script.
+    const content = await getLadderContent(db, row.script_id, () => {}).catch(() => null);
+    const question = content?.questions.find((q) => q.id === question_id);
+    if (!content || !question) return json(404, { error: 'Question not found' });
+
+    const started = Date.now();
+    const local = gradeLocally(question, answer, content.confusables);
+    const reply = (response: GradeResponse, log: Omit<GradeLog, 'question_id' | 'latency_ms'>) => {
+      deps.log({ question_id, latency_ms: Date.now() - started, ...log });
+      return json(200, response);
+    };
+    const localReply = (outcome: GradeLog['outcome'], model: string | null = null) =>
+      reply(
+        { result: local, grader: 'local', grader_version: null },
+        { outcome, model, usage: null, discarded: [] },
+      );
+
+    if (local.grade === 'correct') return localReply('local_match');
+    if (!deps.llm || answer.trim() === '') return localReply('local_only');
+
+    const call = await deps.llm.generateStructured({
+      system: SYSTEM,
+      user: renderUserMessage(
+        buildGradingContext(question, content.script, content.confusables),
+        answer,
+      ),
+      schema: LlmGradeOutputSchema,
+      maxTokens: 4096,
+      signal: AbortSignal.timeout(deps.llmDeadlineMs),
+    });
+    // Grading never blocks the ladder: any model failure falls back to the local grade.
+    if (!call.ok) return localReply(`llm_${call.reason}`, deps.llm.model);
+
+    const { result, discarded } = sanitizeLlmGrade(
+      call.value,
+      question,
+      content.confusables,
+      local,
+    );
+    return reply(
+      { result, grader: 'llm', grader_version: `${PROMPT_VERSION}@${call.model}` },
+      { outcome: 'llm', model: call.model, usage: call.usage, discarded },
+    );
+  };
+}

@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { detectPhi } from '../phi/detectPhi';
-import { ScriptIdSchema } from './illnessScript';
-import { QuestionIdSchema } from './question';
+import { detectPhi } from '../phi/detectPhi.ts';
+import { ScriptIdSchema } from './illnessScript.ts';
+import { QuestionIdSchema } from './question.ts';
 
 export const GRADES = ['correct', 'partial', 'incorrect'] as const;
 export const GradeSchema = z.enum(GRADES);
@@ -18,6 +18,21 @@ export const GradeResultSchema = z.strictObject({
   confused_with_script_id: ScriptIdSchema.nullable(),
 });
 export type GradeResult = z.infer<typeof GradeResultSchema>;
+
+/** Who graded an attempt: the deterministic matcher or the LLM. */
+export const GraderSchema = z.enum(['local', 'llm']);
+export type Grader = z.infer<typeof GraderSchema>;
+
+/** e.g. `grade-answer/v1@claude-opus-5-5`. Null for the local grader. */
+export const GraderVersionSchema = z.string().min(1).max(100).nullable();
+
+/** Response body of the `grade-answer` Edge Function. */
+export const GradeResponseSchema = z.strictObject({
+  result: GradeResultSchema,
+  grader: GraderSchema,
+  grader_version: GraderVersionSchema,
+});
+export type GradeResponse = z.infer<typeof GradeResponseSchema>;
 
 const CONFUSED_WITH_RE = /^confused_with:[a-z0-9]+(?:-[a-z0-9]+)*$/;
 export type ConfusedWithTag = `confused_with:${string}`;
@@ -55,5 +70,7 @@ export const AttemptSchema = z.strictObject({
   credit: z.number().min(0).max(1),
   passed: z.boolean(),
   miss_tag: MissTagSchema.nullable(),
+  grader: GraderSchema,
+  grader_version: GraderVersionSchema,
 });
 export type Attempt = z.infer<typeof AttemptSchema>;

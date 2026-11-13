@@ -1,5 +1,5 @@
 import { z } from 'zod';
-import { FieldPathSchema, resolveFieldPath } from './fieldPath';
+import { FieldPathSchema, resolveFieldPath } from './fieldPath.ts';
 
 export const ROTATIONS = ['IM', 'surgery', 'peds', 'obgyn', 'psych', 'neuro', 'FM', 'EM'] as const;
 export const RotationSchema = z.enum(ROTATIONS);

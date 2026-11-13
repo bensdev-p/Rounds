@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures';
-import { confusablesFor, gradeLocally } from '../grading/localGrader';
-import type { GradeResult } from '../schemas/attempt';
-import { RUNGS, type ListQuestion, type Question } from '../schemas/question';
+import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import { confusablesFor, gradeLocally } from '../grading/localGrader.ts';
+import type { GradeResult } from '../schemas/attempt.ts';
+import { RUNGS, type ListQuestion, type Question } from '../schemas/question.ts';
 import {
   bestRung,
   clearedRungs,
@@ -13,9 +13,9 @@ import {
   startLadder,
   submitAnswer,
   type LadderState,
-} from './engine';
-import { classifyMiss } from './missTags';
-import { PERSONAS, type PersonaId } from './personas';
+} from './engine.ts';
+import { classifyMiss } from './missTags.ts';
+import { PERSONAS, type PersonaId } from './personas.ts';
 
 const confusables = confusablesFor(TEST_SCRIPTS[0]!, TEST_SCRIPTS);
 const recall = TEST_QUESTIONS[0]!;

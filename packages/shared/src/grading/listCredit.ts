@@ -1,4 +1,4 @@
-import type { ListQuestion } from '../schemas/question';
+import type { ListQuestion } from '../schemas/question.ts';
 
 /** A list answer passes the rung at or above this share of `required_count`. */
 export const LIST_PASS_THRESHOLD = 0.6;

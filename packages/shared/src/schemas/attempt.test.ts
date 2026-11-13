@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { AnswerTextSchema, MissTagSchema } from './attempt';
+import { AnswerTextSchema, MissTagSchema } from './attempt.ts';
 
 describe('MissTagSchema', () => {
   it.each(['unknown', 'slow', 'partial_list', 'confused_with:quellan-fever'])('accepts %s', (tag) =>

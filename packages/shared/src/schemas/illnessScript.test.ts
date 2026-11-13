@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_SCRIPTS } from '../fixtures';
-import { IllnessScriptSchema, isPimpable } from './illnessScript';
+import { TEST_SCRIPTS } from '../fixtures/index.ts';
+import { IllnessScriptSchema, isPimpable } from './illnessScript.ts';
 
 const base = (): Record<string, unknown> => structuredClone(TEST_SCRIPTS[0]!);
 

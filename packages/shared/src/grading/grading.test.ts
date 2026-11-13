@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures';
-import type { ListQuestion } from '../schemas/question';
-import { normalize } from '../text';
-import { LIST_PASS_THRESHOLD, listCredit } from './listCredit';
-import { confusablesFor, gradeLocally, splitListAnswer } from './localGrader';
+import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import type { ListQuestion } from '../schemas/question.ts';
+import { normalize } from '../text.ts';
+import { LIST_PASS_THRESHOLD, listCredit } from './listCredit.ts';
+import { confusablesFor, gradeLocally, splitListAnswer } from './localGrader.ts';
 
 const [zorblax] = TEST_SCRIPTS;
 const recall = TEST_QUESTIONS[0]!;

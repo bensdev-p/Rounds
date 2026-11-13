@@ -1,7 +1,7 @@
 import { z } from 'zod';
-import { collectStrings, FieldPathSchema, resolveFieldPath } from './fieldPath';
-import { ScriptIdSchema, type IllnessScript } from './illnessScript';
-import { containsTerm } from '../text';
+import { collectStrings, FieldPathSchema, resolveFieldPath } from './fieldPath.ts';
+import { ScriptIdSchema, type IllnessScript } from './illnessScript.ts';
+import { containsTerm } from '../text.ts';
 
 /** Ladder rungs, lowest to highest. Order matters: the ladder climbs this list. */
 export const RUNGS = [

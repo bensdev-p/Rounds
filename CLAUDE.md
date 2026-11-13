@@ -30,9 +30,13 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm db:test`: pgTAP tests in `supabase/tests` (RLS)
 - `pnpm db:types`: regenerate `packages/shared/src/db/database.types.ts` after a migration
 - `pnpm content:seed`: validate content and regenerate `supabase/seed.sql` (then `pnpm db:reset`)
-- `pnpm test:integration`: API client tests against the local Supabase stack (needs `pnpm db:start`)
+- `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
+- `pnpm functions:serve:fake`: the same, with a fake model that spends nothing
+- `pnpm functions:check`: Deno type-check of the Edge Functions (also run by `pnpm typecheck`)
+- `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
 - `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)
 - Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
+- `packages/shared` uses explicit `.ts` extensions on relative imports, so Edge Functions (Deno) can import it directly.
 
 ## Core domain rules
 

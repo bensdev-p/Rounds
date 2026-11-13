@@ -15,8 +15,9 @@ import {
   type LadderState,
   type MissTag,
   type Rung,
+  type SubmittedAnswer,
 } from '@rounds/shared';
-import { getLadderContent } from '@rounds/shared/api';
+import { getLadderContent, GradeRejectedError, gradeAnswer } from '@rounds/shared/api';
 import { Stack, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { KeyboardAvoidingView, ScrollView, StyleSheet, Text, TextInput, View } from 'react-native';
@@ -82,6 +83,9 @@ function Ladder({
   const [answer, setAnswer] = useState('');
   const [warning, setWarning] = useState<string | null>(null);
   const [feedback, setFeedback] = useState<GradeResult | null>(null);
+  const [grading, setGrading] = useState(false);
+  // Bumped on restart so a grade that arrives late is ignored.
+  const run = useRef(0);
   // When the current question appeared, for the persona time limit.
   const shownAt = useRef(0);
   useEffect(() => {
@@ -90,25 +94,48 @@ function Ladder({
 
   const question = currentQuestion(state);
 
-  function submit() {
-    if (!question || !answer.trim()) return;
+  async function submit() {
+    if (!question || !answer.trim() || grading) return;
     const phi = phiWarning(detectPhi(answer));
     if (phi) {
       setWarning(phi);
       return;
     }
-    const result = gradeLocally(question, answer, confusables);
-    const next = submitAnswer(state, { answer, elapsed_ms: Date.now() - shownAt.current, result });
+    // Time to answer stops at submit; grading time doesn't count against the student.
+    const elapsed_ms = Date.now() - shownAt.current;
+    const runAtSubmit = run.current;
+    setGrading(true);
+    let graded: Pick<SubmittedAnswer, 'result' | 'grader' | 'grader_version'>;
+    try {
+      graded = await gradeAnswer(client, question.id, answer);
+    } catch (error) {
+      if (run.current !== runAtSubmit) return;
+      if (error instanceof GradeRejectedError) {
+        setGrading(false);
+        setWarning(
+          'That answer looks like it contains patient details. Remove them and try again.',
+        );
+        return;
+      }
+      // Server unreachable: grade on the device so the ladder keeps moving.
+      graded = { result: gradeLocally(question, answer, confusables), grader: 'local' };
+    }
+    if (run.current !== runAtSubmit) return;
+
+    const next = submitAnswer(state, { answer, elapsed_ms, ...graded });
     setState(next);
     const attempt = next.attempts.at(-1);
     if (attempt) recorder.record(attempt);
     if (next.status !== 'in_progress') recorder.finish(next);
-    setFeedback(result);
+    setFeedback(graded.result);
     setWarning(null);
     setAnswer('');
+    setGrading(false);
   }
 
   function restart() {
+    run.current += 1;
+    setGrading(false);
     recorder.reset();
     setState(startLadder(questions));
     setFeedback(null);
@@ -157,7 +184,8 @@ function Ladder({
                 setAnswer(text);
                 if (warning) setWarning(null);
               }}
-              onSubmitEditing={submit}
+              onSubmitEditing={() => void submit()}
+              editable={!grading}
               placeholder={question.kind === 'list' ? 'item, item, item' : 'Your answer'}
               placeholderTextColor={theme.muted}
               autoCapitalize="none"
@@ -175,7 +203,11 @@ function Ladder({
                 {warning}
               </Text>
             )}
-            <Button label="Submit" onPress={submit} disabled={!answer.trim()} />
+            <Button
+              label={grading ? 'Grading…' : 'Submit'}
+              onPress={() => void submit()}
+              disabled={grading || !answer.trim()}
+            />
           </View>
         ) : (
           <Summary

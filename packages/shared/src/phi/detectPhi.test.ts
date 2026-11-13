@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { detectPhi, phiWarning, type PhiKind } from './detectPhi';
+import { detectPhi, phiWarning, type PhiKind } from './detectPhi.ts';
 
 const kinds = (text: string, checkNames = false): PhiKind[] => [
   ...new Set(detectPhi(text, { checkNames }).findings.map((f) => f.kind)),
