@@ -23,7 +23,10 @@
       "output": "single"
     },
     "scheme": "rounds",
-    "plugins": ["expo-router"],
+    "plugins": [
+      "expo-router",
+      "expo-font"
+    ],
     "experiments": {
       "typedRoutes": true
     }

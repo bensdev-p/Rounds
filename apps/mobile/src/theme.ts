@@ -1,35 +1,49 @@
-import { useColorScheme } from 'react-native';
+/**
+ * App theme. Values come only from the shared tokens (docs/design/tokens.json),
+ * never raw hex. Dark is the default (DESIGN.md); light uses the same layouts.
+ * Until Settings exists, EXPO_PUBLIC_THEME=light|system overrides the default.
+ */
+import {
+  colors,
+  fonts,
+  typeScale,
+  type ColorScheme,
+  type Palette,
+  type TypeToken,
+} from '@rounds/shared/theme';
+import { useColorScheme, type TextStyle } from 'react-native';
 
-const light = {
-  background: '#FFFFFF',
-  surface: '#F3F4F6',
-  text: '#111827',
-  muted: '#4B5563',
-  border: '#D1D5DB',
-  primary: '#1D4ED8',
-  onPrimary: '#FFFFFF',
-  success: '#047857',
-  danger: '#B91C1C',
-  warning: '#92400E',
-};
+export { motion, radius, size, space } from '@rounds/shared/theme';
 
-const dark: typeof light = {
-  background: '#0B0F17',
-  surface: '#161B26',
-  text: '#F3F4F6',
-  muted: '#9CA3AF',
-  border: '#2D3442',
-  primary: '#60A5FA',
-  onPrimary: '#0B0F17',
-  success: '#34D399',
-  danger: '#F87171',
-  warning: '#FBBF24',
-};
-
-export type Theme = typeof light;
-
-export function useTheme(): Theme {
-  return useColorScheme() === 'dark' ? dark : light;
+export interface Theme {
+  scheme: ColorScheme;
+  c: Palette;
 }
 
-export const space = { xs: 4, sm: 8, md: 16, lg: 24, xl: 32 } as const;
+type Preference = ColorScheme | 'system';
+
+function preference(): Preference {
+  const value = process.env.EXPO_PUBLIC_THEME;
+  return value === 'light' || value === 'system' ? value : 'dark';
+}
+
+export function useTheme(): Theme {
+  const system = useColorScheme();
+  const pref = preference();
+  const scheme: ColorScheme = pref === 'system' ? (system === 'light' ? 'light' : 'dark') : pref;
+  return { scheme, c: colors[scheme] };
+}
+
+/** Font family, size and line height for a type style. Numbers use tabular figures. */
+export function type(token: TypeToken, options: { tabular?: boolean | undefined } = {}): TextStyle {
+  const t = typeScale[token];
+  return {
+    fontFamily: fonts[t.family],
+    fontSize: t.size,
+    lineHeight: t.lineHeight,
+    ...(t.family === 'display' ? { letterSpacing: -0.2 } : null),
+    ...(options.tabular ? { fontVariant: ['tabular-nums'] } : null),
+  };
+}
+
+export { fonts };

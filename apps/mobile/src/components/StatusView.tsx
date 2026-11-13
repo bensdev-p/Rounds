@@ -1,32 +1,35 @@
-import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
-import { Button } from '@/components/Button';
+import { ActivityIndicator, StyleSheet, View } from 'react-native';
 import { space, useTheme } from '@/theme';
+import { Button } from '@/ui/controls';
+import { Txt } from '@/ui/Text';
 
 /** Full-screen loading spinner with a label screen readers announce. */
 export function Loading({ label }: { label: string }) {
-  const theme = useTheme();
+  const { c } = useTheme();
   return (
     <View
-      style={styles.center}
+      style={[styles.center, { backgroundColor: c.bg }]}
       accessible
       accessibilityLabel={label}
       accessibilityRole="progressbar"
     >
-      <ActivityIndicator color={theme.primary} />
-      <Text style={[styles.text, { color: theme.muted }]}>{label}</Text>
+      <ActivityIndicator color={c.text2} />
+      <Txt variant="meta" tone="text2" align="center">
+        {label}
+      </Txt>
     </View>
   );
 }
 
-/** Full-screen error with an optional retry. */
+/** Full-screen error that says what went wrong, with an optional retry. */
 export function ErrorView({ message, onRetry }: { message: string; onRetry?: () => void }) {
-  const theme = useTheme();
+  const { c } = useTheme();
   return (
-    <View style={styles.center}>
-      <Text accessibilityRole="alert" style={[styles.text, { color: theme.danger }]}>
+    <View style={[styles.center, { backgroundColor: c.bg }]}>
+      <Txt accessibilityRole="alert" align="center">
         {message}
-      </Text>
-      {onRetry && <Button label="Try again" onPress={onRetry} />}
+      </Txt>
+      {onRetry && <Button label="Try again" variant="quiet" onPress={onRetry} />}
     </View>
   );
 }
@@ -36,8 +39,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    padding: space.lg,
-    gap: space.md,
+    padding: space.xxl,
+    gap: space.lg,
   },
-  text: { fontSize: 16, textAlign: 'center' },
 });
