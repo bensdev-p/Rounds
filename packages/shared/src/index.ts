@@ -13,3 +13,6 @@ export { normalize, containsTerm } from './text.ts';
 export * from './db/rows.ts';
 export * from './db/seed.ts';
 export type { Database, Json } from './db/database.types.ts';
+export * from './progress/progression.ts';
+export * from './progress/missCard.ts';
+export * from './progress/personaLines.ts';
