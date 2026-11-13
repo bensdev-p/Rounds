@@ -1,0 +1,5 @@
+-- Local seed data. Runs after migrations on `supabase db reset`.
+--
+-- Intentionally empty: real illness scripts land here only after a human
+-- reviewer approves them. Fictional test fixtures live in
+-- packages/shared/src/fixtures and in supabase/tests.
