@@ -1,7 +1,7 @@
 import type { GradeResult } from '../schemas/attempt.ts';
 import type { IllnessScript } from '../schemas/illnessScript.ts';
 import type { AcceptedAnswer, Question } from '../schemas/question.ts';
-import { containsTerm } from '../text.ts';
+import { containsAffirmedTerm } from '../text.ts';
 import { listCredit } from './listCredit.ts';
 
 /** A script the student might mistake this one for: its id plus the names it goes by. */
@@ -22,7 +22,7 @@ export function confusablesFor(
 }
 
 function hits(text: string, accepted: AcceptedAnswer): boolean {
-  return [accepted.answer, ...accepted.synonyms].some((term) => containsTerm(text, term));
+  return [accepted.answer, ...accepted.synonyms].some((term) => containsAffirmedTerm(text, term));
 }
 
 /** Splits a list answer on commas, semicolons, newlines and "and"/"or". */
@@ -35,15 +35,17 @@ export function splitListAnswer(answer: string): string[] {
 
 function findConfusable(answer: string, confusables: readonly Confusable[]): string | null {
   for (const c of confusables) {
-    if (c.names.some((name) => containsTerm(answer, name))) return c.script_id;
+    if (c.names.some((name) => containsAffirmedTerm(answer, name))) return c.script_id;
   }
   return null;
 }
 
 /**
  * Deterministic grader: matches the answer against the question's accepted
- * answers and synonyms. Used as the test oracle and the offline fallback for
- * the LLM grader. It cannot judge reasoning or catch negation ("not X").
+ * answers and synonyms. Runs before the LLM grader (which only sees misses)
+ * and is the offline fallback. A term negated by a nearby word ("not X",
+ * "rule out X") doesn't count, so it reaches the model instead of passing.
+ * It cannot judge reasoning.
  */
 export function gradeLocally(
   question: Question,

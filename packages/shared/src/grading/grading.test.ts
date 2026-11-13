@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
 import type { ListQuestion } from '../schemas/question.ts';
-import { normalize } from '../text.ts';
+import { containsAffirmedTerm, normalize } from '../text.ts';
 import { LIST_PASS_THRESHOLD, listCredit } from './listCredit.ts';
 import { confusablesFor, gradeLocally, splitListAnswer } from './localGrader.ts';
 
@@ -60,6 +60,46 @@ describe('gradeLocally: single', () => {
 
   it('prefers the correct answer when both are named', () => {
     expect(gradeLocally(recall, 'Zorblax, not Quellan fever', confusables).grade).toBe('correct');
+  });
+});
+
+describe('containsAffirmedTerm', () => {
+  it.each([
+    ['CT angiogram', 'CT angiogram'],
+    ['get a CT angiogram', 'CT angiogram'],
+    ['there are no P waves', 'no P waves'],
+    ["not a V/Q scan, I'd get a CT angiogram", 'CT angiogram'],
+    ['anticoagulation, not thrombolysis', 'anticoagulation'],
+  ])('"%s" affirms "%s"', (text, term) => {
+    expect(containsAffirmedTerm(text, term)).toBe(true);
+  });
+
+  it.each([
+    ["not a CT angiogram, I'd get a V/Q scan", 'CT angiogram'],
+    ['no insulin', 'insulin'],
+    ["I wouldn't give tPA", 'tPA'],
+    ['rule out pneumonia', 'pneumonia'],
+    ['V/Q scan rather than CT angiogram', 'CT angiogram'],
+    ['without fluids', 'fluids'],
+  ])('"%s" does not affirm "%s"', (text, term) => {
+    expect(containsAffirmedTerm(text, term)).toBe(false);
+  });
+});
+
+describe('gradeLocally: negation', () => {
+  it('does not credit a negated answer', () => {
+    expect(gradeLocally(recall, 'not Zorblax syndrome').grade).toBe('incorrect');
+    expect(gradeLocally(recall, "it isn't ZBX").grade).toBe('incorrect');
+  });
+
+  it('does not tag a mix-up the student ruled out', () => {
+    expect(gradeLocally(recall, 'not Quellan fever', confusables).confused_with_script_id).toBeNull();
+  });
+
+  it('negation applies per list item', () => {
+    expect(gradeLocally(list, 'glimmer exposure, not night shift work').matched).toEqual([
+      'glimmer exposure',
+    ]);
   });
 });
 

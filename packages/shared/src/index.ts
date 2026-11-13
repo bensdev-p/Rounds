@@ -9,7 +9,7 @@ export * from './ladder/personas.ts';
 export * from './ladder/missTags.ts';
 export * from './ladder/engine.ts';
 export * from './phi/detectPhi.ts';
-export { normalize, containsTerm } from './text.ts';
+export { normalize, containsTerm, containsAffirmedTerm } from './text.ts';
 export * from './db/rows.ts';
 export * from './db/seed.ts';
 export type { Database, Json } from './db/database.types.ts';
