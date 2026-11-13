@@ -20,12 +20,15 @@ Do not build anything from later stages unless asked: voice, payments, Android r
 
 ## Commands
 
-(Fill in as they're created.)
+pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm install`
-- `pnpm dev`: run the mobile app in web mode
+- `pnpm dev`: run the mobile app in web mode (http://localhost:8081)
 - `pnpm test`: unit tests (Vitest)
 - `pnpm typecheck` and `pnpm lint`
-- `supabase start` / `supabase db reset`: local database
+- `pnpm format`: Prettier (code only; Markdown is left alone)
+- `pnpm db:start` / `pnpm db:reset`: local Supabase (needs Docker Desktop running)
+- `pnpm db:test`: pgTAP tests in `supabase/tests` (RLS)
+- Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
 
 ## Core domain rules
 

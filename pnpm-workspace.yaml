@@ -1,0 +1,6 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+
+# React Native / Metro is most reliable with a flat node_modules.
+nodeLinker: hoisted

@@ -1,0 +1,9 @@
+node_modules
+.expo
+dist
+.turbo
+supabase/.temp
+pnpm-lock.yaml
+*.md
+expo-env.d.ts
+.expo-types
