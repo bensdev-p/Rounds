@@ -82,6 +82,10 @@
       {
         "script_id": "community-acquired-pneumonia",
         "how_to_tell_apart": "Pneumonia usually brings fever, productive cough, focal crackles and a consolidation on chest X-ray; PE more often has clear lungs and a near-normal X-ray despite hypoxemia."
+      },
+      {
+        "script_id": "deep-vein-thrombosis",
+        "how_to_tell_apart": "DVT is the usual source of PE: look for unilateral leg swelling and calf pain, and confirm with compression ultrasound."
       }
     ],
     "pearls": [

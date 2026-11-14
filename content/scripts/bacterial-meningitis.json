@@ -1,0 +1,255 @@
+{
+  "script": {
+    "id": "bacterial-meningitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Bacterial meningitis",
+    "aliases": [
+      "meningitis"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "peds",
+      "neuro"
+    ],
+    "epidemiology": {
+      "who": "Infants, older adults and the immunocompromised; outbreaks in college dormitories",
+      "risk_factors": [
+        "age over 50",
+        "immunosuppression",
+        "asplenia",
+        "cochlear implant",
+        "CSF leak",
+        "crowded living such as dormitories"
+      ]
+    },
+    "pathophysiology": "Bacteria, most often Streptococcus pneumoniae or Neisseria meningitidis in adults, invade the subarachnoid space and inflame the meninges.",
+    "timeline": {
+      "onset": "Hours to a day",
+      "course": "Fatal without prompt antibiotics; survivors may have hearing loss or neurologic deficits"
+    },
+    "key_findings": {
+      "history": [
+        "fever",
+        "headache",
+        "neck stiffness",
+        "confusion"
+      ],
+      "exam": [
+        "nuchal rigidity",
+        "altered mental status",
+        "petechial or purpuric rash in meningococcal disease",
+        "Kernig and Brudzinski signs, which are insensitive"
+      ],
+      "labs": [
+        "CSF: high neutrophils, high protein, low glucose",
+        "CSF Gram stain and culture"
+      ],
+      "imaging": [
+        "CT head before lumbar puncture only with focal deficits, papilledema, seizures, reduced consciousness or immunocompromise"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "lumbar puncture with CSF analysis",
+        "blood cultures"
+      ],
+      "criteria": [
+        "CSF neutrophilic pleocytosis with low glucose and high protein"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "empiric ceftriaxone plus vancomycin",
+        "add ampicillin if over 50 or immunocompromised (to cover Listeria)",
+        "dexamethasone before or with the first antibiotic dose"
+      ],
+      "next_line": [
+        "droplet precautions and prophylaxis for close contacts in meningococcal disease",
+        "tailor antibiotics to culture"
+      ]
+    },
+    "complications": [
+      "hearing loss",
+      "seizures",
+      "cerebral edema",
+      "death"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Never delay antibiotics for a CT or lumbar puncture: take blood cultures and treat immediately."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2016 ESCMID guideline: diagnosis and treatment of acute bacterial meningitis"
+      },
+      {
+        "title": "IDSA Practice Guidelines for the Management of Bacterial Meningitis (2004)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "bacterial-meningitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A college student has fever, a severe headache, neck stiffness and a petechial rash on her legs. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Bacterial meningitis",
+          "synonyms": [
+            "meningitis",
+            "meningococcal meningitis",
+            "meningococcemia",
+            "Neisseria meningitidis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three findings in the CSF of classic bacterial meningitis.",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high neutrophils",
+          "synonyms": [
+            "neutrophils",
+            "neutrophilic pleocytosis",
+            "high white count",
+            "high WBC",
+            "PMNs"
+          ]
+        },
+        {
+          "answer": "high protein",
+          "synonyms": [
+            "raised protein",
+            "elevated protein"
+          ]
+        },
+        {
+          "answer": "low glucose",
+          "synonyms": [
+            "low sugar",
+            "hypoglycorrhachia",
+            "decreased glucose"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "bacterial-meningitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which CSF finding points to bacterial rather than viral meningitis?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "low glucose",
+          "synonyms": [
+            "low CSF glucose",
+            "hypoglycorrhachia"
+          ]
+        },
+        {
+          "answer": "neutrophilic pleocytosis",
+          "synonyms": [
+            "neutrophil predominance",
+            "PMN predominance",
+            "neutrophils"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms the diagnosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lumbar puncture",
+          "synonyms": [
+            "LP",
+            "spinal tap",
+            "CSF analysis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Empiric antibiotics for a 25-year-old?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ceftriaxone plus vancomycin",
+          "synonyms": [
+            "ceftriaxone and vancomycin",
+            "vancomycin and ceftriaxone",
+            "vanc and ceftriaxone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "She has a focal deficit, so she needs a CT first. What do you do before the scan?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "antibiotics",
+          "synonyms": [
+            "give antibiotics",
+            "start antibiotics",
+            "ceftriaxone"
+          ]
+        },
+        {
+          "answer": "blood cultures",
+          "synonyms": [
+            "cultures"
+          ]
+        }
+      ]
+    }
+  ]
+}

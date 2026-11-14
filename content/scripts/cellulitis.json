@@ -1,0 +1,257 @@
+{
+  "script": {
+    "id": "cellulitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Cellulitis",
+    "aliases": [],
+    "rotation": [
+      "IM",
+      "EM",
+      "FM"
+    ],
+    "epidemiology": {
+      "who": "Adults with breaks in the skin barrier, leg edema or obesity",
+      "risk_factors": [
+        "skin breaks such as cuts or tinea pedis",
+        "lymphedema",
+        "obesity",
+        "venous insufficiency",
+        "prior cellulitis",
+        "diabetes"
+      ]
+    },
+    "pathophysiology": "Bacterial infection of the dermis and subcutaneous tissue, most often from beta-hemolytic streptococci and less often from Staphylococcus aureus.",
+    "timeline": {
+      "onset": "Over 1 to 3 days",
+      "course": "Improves within 48 to 72 hours of antibiotics"
+    },
+    "key_findings": {
+      "history": [
+        "spreading redness",
+        "pain",
+        "fever in some"
+      ],
+      "exam": [
+        "warm, red, tender skin with poorly defined borders",
+        "usually one leg",
+        "no fluctuance unless there is an abscess"
+      ],
+      "labs": [
+        "blood cultures only if systemically unwell"
+      ],
+      "imaging": [
+        "ultrasound if an abscess is suspected"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical diagnosis"
+      ],
+      "criteria": [
+        "acute spreading erythema, warmth and tenderness, usually on one side"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "oral cephalexin for nonpurulent cellulitis",
+        "elevate the limb",
+        "treat tinea pedis or other entry points"
+      ],
+      "next_line": [
+        "add MRSA coverage (trimethoprim-sulfamethoxazole or doxycycline) for purulent infection",
+        "IV cefazolin if systemically ill",
+        "incision and drainage for an abscess"
+      ]
+    },
+    "complications": [
+      "abscess",
+      "bacteremia",
+      "necrotizing fasciitis",
+      "recurrence"
+    ],
+    "confused_with": [
+      {
+        "script_id": "deep-vein-thrombosis",
+        "how_to_tell_apart": "DVT causes swelling and calf pain without spreading redness or fever, and compression ultrasound shows a clot."
+      }
+    ],
+    "pearls": [
+      "Redness of both legs is rarely cellulitis; think of stasis dermatitis first."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 Update by the IDSA"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "cellulitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 60-year-old with athlete's foot has a hot, red, tender, spreading area on one shin and a low fever. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Cellulitis",
+          "synonyms": [
+            "skin infection",
+            "soft tissue infection",
+            "erysipelas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for cellulitis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "skin breaks",
+          "synonyms": [
+            "cuts",
+            "wounds",
+            "broken skin",
+            "tinea pedis",
+            "athlete's foot",
+            "insect bites"
+          ]
+        },
+        {
+          "answer": "lymphedema",
+          "synonyms": []
+        },
+        {
+          "answer": "obesity",
+          "synonyms": []
+        },
+        {
+          "answer": "venous insufficiency",
+          "synonyms": [
+            "venous stasis",
+            "chronic venous insufficiency"
+          ]
+        },
+        {
+          "answer": "prior cellulitis",
+          "synonyms": [
+            "previous cellulitis",
+            "recurrent cellulitis"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "cellulitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Swollen, painful calf. What points to cellulitis rather than DVT?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "spreading redness",
+          "synonyms": [
+            "redness",
+            "erythema",
+            "spreading erythema",
+            "red skin"
+          ]
+        },
+        {
+          "answer": "fever",
+          "synonyms": [
+            "febrile"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "You feel fluctuance. Which test do you order?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ultrasound",
+          "synonyms": [
+            "bedside ultrasound",
+            "POCUS",
+            "point-of-care ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Nonpurulent leg cellulitis in a well patient. Antibiotic?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cephalexin",
+          "synonyms": [
+            "Keflex",
+            "cefalexin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Both shins are red and warm, symmetrically, with no fever. What's more likely than cellulitis?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stasis dermatitis",
+          "synonyms": [
+            "venous stasis dermatitis",
+            "stasis eczema",
+            "venous eczema"
+          ]
+        }
+      ]
+    }
+  ]
+}

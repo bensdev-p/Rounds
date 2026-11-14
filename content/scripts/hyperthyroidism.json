@@ -1,0 +1,260 @@
+{
+  "script": {
+    "id": "hyperthyroidism",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Hyperthyroidism",
+    "aliases": [
+      "thyrotoxicosis",
+      "Graves disease"
+    ],
+    "rotation": [
+      "IM",
+      "FM"
+    ],
+    "epidemiology": {
+      "who": "Most often young to middle-aged women with Graves disease",
+      "risk_factors": [
+        "Graves disease",
+        "toxic multinodular goiter",
+        "toxic adenoma",
+        "thyroiditis",
+        "excess thyroid hormone intake",
+        "amiodarone"
+      ]
+    },
+    "pathophysiology": "Excess thyroid hormone, most often from TSH-receptor antibodies stimulating the gland in Graves disease, speeds metabolism and sympathetic activity.",
+    "timeline": {
+      "onset": "Weeks to months",
+      "course": "Graves disease may remit after 12 to 18 months of antithyroid drugs"
+    },
+    "key_findings": {
+      "history": [
+        "weight loss despite a good appetite",
+        "heat intolerance",
+        "palpitations",
+        "anxiety and tremor",
+        "frequent stools"
+      ],
+      "exam": [
+        "tachycardia or atrial fibrillation",
+        "fine tremor",
+        "goiter",
+        "exophthalmos and pretibial myxedema in Graves disease"
+      ],
+      "labs": [
+        "low TSH",
+        "high free T4 or T3",
+        "TSH-receptor antibodies in Graves disease"
+      ],
+      "imaging": [
+        "radioactive iodine uptake scan: diffuse high uptake in Graves disease, low uptake in thyroiditis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "TSH",
+        "free T4",
+        "TSH-receptor antibodies or a radioactive iodine uptake scan to find the cause"
+      ],
+      "criteria": [
+        "suppressed TSH with raised free T4 or T3"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "beta-blocker such as propranolol for symptoms",
+        "methimazole"
+      ],
+      "next_line": [
+        "propylthiouracil in the first trimester of pregnancy and in thyroid storm",
+        "radioactive iodine ablation",
+        "thyroidectomy"
+      ]
+    },
+    "complications": [
+      "atrial fibrillation",
+      "thyroid storm",
+      "osteoporosis",
+      "agranulocytosis from antithyroid drugs"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Methimazole and propylthiouracil can cause agranulocytosis: stop the drug and check a white count if fever or a sore throat develops."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hyperthyroidism.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 30-year-old woman has weight loss, heat intolerance, a fine tremor, a diffuse goiter and bulging eyes. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperthyroidism",
+          "synonyms": [
+            "Graves disease",
+            "Graves' disease",
+            "Graves",
+            "thyrotoxicosis",
+            "overactive thyroid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of hyperthyroidism.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Graves disease",
+          "synonyms": [
+            "Graves",
+            "Graves' disease"
+          ]
+        },
+        {
+          "answer": "toxic multinodular goiter",
+          "synonyms": [
+            "multinodular goiter",
+            "toxic MNG",
+            "Plummer disease"
+          ]
+        },
+        {
+          "answer": "toxic adenoma",
+          "synonyms": [
+            "hot nodule",
+            "toxic nodule"
+          ]
+        },
+        {
+          "answer": "thyroiditis",
+          "synonyms": [
+            "subacute thyroiditis",
+            "painless thyroiditis",
+            "postpartum thyroiditis"
+          ]
+        },
+        {
+          "answer": "excess thyroid hormone intake",
+          "synonyms": [
+            "too much levothyroxine",
+            "exogenous thyroid hormone",
+            "factitious thyrotoxicosis"
+          ]
+        },
+        {
+          "answer": "amiodarone",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hyperthyroidism.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which scan result separates Graves disease from thyroiditis?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diffuse high uptake",
+          "synonyms": [
+            "high uptake",
+            "increased uptake",
+            "diffuse uptake",
+            "high radioactive iodine uptake"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Best first test?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "TSH",
+          "synonyms": [
+            "thyroid stimulating hormone",
+            "thyrotropin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "What controls her symptoms while the methimazole starts working?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta-blocker",
+          "synonyms": [
+            "beta blocker",
+            "propranolol",
+            "atenolol",
+            "metoprolol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "On methimazole, she develops a fever and sore throat. What do you worry about?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "agranulocytosis",
+          "synonyms": [
+            "neutropenia",
+            "low white count",
+            "low neutrophils"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,267 @@
+{
+  "script": {
+    "id": "hyponatremia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Hyponatremia",
+    "aliases": [
+      "low sodium"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Older adults, hospitalized patients, and people on thiazides or SSRIs",
+      "risk_factors": [
+        "thiazide diuretics",
+        "SIADH",
+        "heart failure",
+        "cirrhosis",
+        "SSRIs",
+        "excess water intake"
+      ]
+    },
+    "pathophysiology": "Too much water relative to sodium, usually from ADH-driven water retention. After confirming low serum osmolality, it is classified by volume status.",
+    "timeline": {
+      "onset": "Acute (under 48 hours) or chronic",
+      "course": "Chronic hyponatremia must be corrected slowly"
+    },
+    "key_findings": {
+      "history": [
+        "nausea",
+        "headache",
+        "confusion",
+        "falls"
+      ],
+      "exam": [
+        "assess volume status: dry, euvolemic or edematous",
+        "seizures or reduced consciousness when severe"
+      ],
+      "labs": [
+        "serum sodium below 135 mEq/L",
+        "low serum osmolality in true (hypotonic) hyponatremia",
+        "urine osmolality above 100 mOsm/kg and urine sodium above 30 mEq/L in SIADH"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum osmolality",
+        "urine osmolality",
+        "urine sodium",
+        "volume status assessment"
+      ],
+      "criteria": [
+        "serum sodium below 135 mEq/L; severe below 120 mEq/L"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "hypertonic 3% saline bolus for severe symptoms such as seizures",
+        "fluid restriction for SIADH",
+        "isotonic saline for hypovolemic hyponatremia",
+        "stop the offending drug"
+      ],
+      "next_line": [
+        "limit correction to 8 mEq/L in 24 hours in chronic hyponatremia",
+        "urea or vaptans for refractory SIADH",
+        "treat heart failure or cirrhosis in hypervolemic hyponatremia"
+      ]
+    },
+    "complications": [
+      "seizures",
+      "cerebral edema",
+      "osmotic demyelination syndrome from overly rapid correction",
+      "falls and fractures"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Correcting chronic hyponatremia too fast causes osmotic demyelination syndrome; limit the rise to 8 mEq/L in 24 hours."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Clinical practice guideline on diagnosis and treatment of hyponatraemia (ESE, ERA-EDTA and ESICM, 2014)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hyponatremia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "An 80-year-old recently started on hydrochlorothiazide is confused. Serum sodium is 118 mEq/L. Which electrolyte problem?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyponatremia",
+          "synonyms": [
+            "low sodium",
+            "hyponatraemia",
+            "thiazide-induced hyponatremia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of hyponatremia.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thiazide diuretics",
+          "synonyms": [
+            "thiazides",
+            "hydrochlorothiazide",
+            "HCTZ",
+            "chlorthalidone"
+          ]
+        },
+        {
+          "answer": "SIADH",
+          "synonyms": [
+            "syndrome of inappropriate ADH",
+            "inappropriate ADH secretion"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "CHF"
+          ]
+        },
+        {
+          "answer": "cirrhosis",
+          "synonyms": [
+            "liver cirrhosis",
+            "liver disease"
+          ]
+        },
+        {
+          "answer": "SSRIs",
+          "synonyms": [
+            "SSRI",
+            "sertraline",
+            "fluoxetine",
+            "citalopram"
+          ]
+        },
+        {
+          "answer": "excess water intake",
+          "synonyms": [
+            "psychogenic polydipsia",
+            "primary polydipsia",
+            "water intoxication"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hyponatremia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Euvolemic hyponatremia. Which urine results point to SIADH?",
+      "source_fields": [
+        "key_findings.labs[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "urine osmolality above 100 mOsm/kg",
+          "synonyms": [
+            "high urine osmolality",
+            "concentrated urine",
+            "inappropriately concentrated urine",
+            "urine osmolality over 100",
+            "urine osm above 100"
+          ]
+        },
+        {
+          "answer": "urine sodium above 30 mEq/L",
+          "synonyms": [
+            "high urine sodium",
+            "urine sodium over 30",
+            "urine sodium above 30"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms true (hypotonic) hyponatremia?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum osmolality",
+          "synonyms": [
+            "serum osm",
+            "plasma osmolality"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Sodium 115 mEq/L and seizing. Treatment?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertonic 3% saline",
+          "synonyms": [
+            "hypertonic saline",
+            "3% saline",
+            "3 percent saline"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What's the danger of correcting chronic hyponatremia too fast?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "osmotic demyelination syndrome",
+          "synonyms": [
+            "osmotic demyelination",
+            "central pontine myelinolysis",
+            "ODS",
+            "CPM"
+          ]
+        }
+      ]
+    }
+  ]
+}

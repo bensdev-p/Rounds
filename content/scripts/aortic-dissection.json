@@ -1,0 +1,260 @@
+{
+  "script": {
+    "id": "aortic-dissection",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Aortic dissection",
+    "aliases": [
+      "dissecting aorta"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Older adults with hypertension; younger patients with connective tissue disease",
+      "risk_factors": [
+        "hypertension",
+        "Marfan syndrome",
+        "bicuspid aortic valve",
+        "cocaine use",
+        "prior aortic surgery",
+        "pregnancy"
+      ]
+    },
+    "pathophysiology": "A tear in the aortic intima lets blood split the media, creating a false lumen that can extend, block branch arteries or rupture.",
+    "timeline": {
+      "onset": "Sudden",
+      "course": "Type A (ascending aorta) is a surgical emergency with high early mortality"
+    },
+    "key_findings": {
+      "history": [
+        "sudden severe tearing chest pain radiating to the back",
+        "syncope",
+        "stroke-like symptoms"
+      ],
+      "exam": [
+        "blood pressure difference of more than 20 mmHg between arms",
+        "pulse deficit",
+        "new murmur of aortic regurgitation"
+      ],
+      "labs": [
+        "D-dimer usually raised"
+      ],
+      "imaging": [
+        "widened mediastinum on chest X-ray",
+        "CT angiography of the chest showing an intimal flap"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "CT angiography of the chest",
+        "transesophageal echocardiogram if unstable"
+      ],
+      "criteria": [
+        "Stanford type A involves the ascending aorta; type B does not"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "IV beta-blocker such as esmolol to lower heart rate and blood pressure",
+        "pain control",
+        "emergency surgery for type A"
+      ],
+      "next_line": [
+        "add a vasodilator such as nicardipine after beta-blockade",
+        "medical management for uncomplicated type B",
+        "endovascular repair for complicated type B"
+      ]
+    },
+    "complications": [
+      "aortic rupture",
+      "cardiac tamponade",
+      "acute aortic regurgitation",
+      "stroke",
+      "mesenteric or limb ischemia"
+    ],
+    "confused_with": [
+      {
+        "script_id": "acute-coronary-syndrome",
+        "how_to_tell_apart": "ACS gives pressure-like pain with ECG changes and a troponin rise; dissection gives tearing pain to the back, unequal arm pressures and a widened mediastinum, and anticoagulation can be fatal."
+      }
+    ],
+    "pearls": [
+      "Give the beta-blocker before any vasodilator: lowering blood pressure alone causes reflex tachycardia that increases shear on the aorta."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "aortic-dissection.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 65-year-old with uncontrolled hypertension has sudden tearing chest pain radiating between the shoulder blades. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic dissection",
+          "synonyms": [
+            "dissection",
+            "thoracic aortic dissection",
+            "dissecting aneurysm",
+            "type A dissection",
+            "type B dissection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for aortic dissection.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "Marfan syndrome",
+          "synonyms": [
+            "Marfan",
+            "Marfan's"
+          ]
+        },
+        {
+          "answer": "bicuspid aortic valve",
+          "synonyms": [
+            "bicuspid valve"
+          ]
+        },
+        {
+          "answer": "cocaine use",
+          "synonyms": [
+            "cocaine",
+            "methamphetamine"
+          ]
+        },
+        {
+          "answer": "prior aortic surgery",
+          "synonyms": [
+            "aortic surgery",
+            "aortic valve replacement"
+          ]
+        },
+        {
+          "answer": "pregnancy",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "aortic-dissection.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which exam finding points to dissection rather than ACS?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "unequal arm pressures",
+          "synonyms": [
+            "blood pressure difference between arms",
+            "arm blood pressure difference",
+            "different blood pressures in each arm",
+            "pulse deficit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Stable patient. Which test confirms it?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CT angiography of the chest",
+          "synonyms": [
+            "CT angiography",
+            "CTA",
+            "CT angiogram",
+            "CTA chest"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug do you give first in the ED?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV beta-blocker",
+          "synonyms": [
+            "beta-blocker",
+            "beta blocker",
+            "esmolol",
+            "labetalol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why does the beta-blocker go in before the nicardipine?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "reflex tachycardia",
+          "synonyms": [
+            "prevent reflex tachycardia",
+            "shear stress",
+            "increases shear"
+          ]
+        }
+      ]
+    }
+  ]
+}

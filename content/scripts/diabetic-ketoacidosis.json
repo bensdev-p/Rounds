@@ -83,6 +83,10 @@
       {
         "script_id": "acute-pancreatitis",
         "how_to_tell_apart": "DKA causes abdominal pain and can raise lipase, but the labs show an anion gap acidosis with high ketones, and the pain eases as the acidosis is corrected; in pancreatitis the pain persists and imaging shows an inflamed pancreas."
+      },
+      {
+        "script_id": "hyperosmolar-hyperglycemic-state",
+        "how_to_tell_apart": "HHS has much higher glucose and osmolality with little or no ketosis or acidosis, and develops over days rather than hours."
       }
     ],
     "pearls": [

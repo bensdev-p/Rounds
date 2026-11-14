@@ -1,0 +1,251 @@
+{
+  "script": {
+    "id": "iron-deficiency-anemia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Iron deficiency anemia",
+    "aliases": [
+      "IDA"
+    ],
+    "rotation": [
+      "IM",
+      "FM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Menstruating and pregnant women, infants, and older adults with GI blood loss",
+      "risk_factors": [
+        "heavy menstrual bleeding",
+        "gastrointestinal blood loss",
+        "pregnancy",
+        "low dietary iron",
+        "celiac disease",
+        "bariatric surgery"
+      ]
+    },
+    "pathophysiology": "Blood loss or poor absorption depletes iron stores, limiting hemoglobin synthesis and producing small, pale red cells.",
+    "timeline": {
+      "onset": "Weeks to months",
+      "course": "Hemoglobin rises about 1 to 2 g/dL over 2 to 3 weeks of replacement"
+    },
+    "key_findings": {
+      "history": [
+        "fatigue",
+        "exertional dyspnea",
+        "pica, especially craving ice",
+        "restless legs"
+      ],
+      "exam": [
+        "pallor",
+        "koilonychia (spoon nails)",
+        "angular cheilitis"
+      ],
+      "labs": [
+        "microcytic anemia (low MCV)",
+        "low ferritin",
+        "high RDW",
+        "low transferrin saturation",
+        "high total iron-binding capacity"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum ferritin",
+        "complete blood count"
+      ],
+      "criteria": [
+        "ferritin below 30 ng/mL confirms iron deficiency in most adults"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "oral iron, once daily or on alternate days",
+        "find and treat the cause of blood loss"
+      ],
+      "next_line": [
+        "IV iron if oral iron fails or isn't tolerated",
+        "colonoscopy and upper endoscopy in men and postmenopausal women"
+      ]
+    },
+    "complications": [
+      "heart failure from severe anemia",
+      "poor pregnancy outcomes"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Iron deficiency in a man or a postmenopausal woman is GI cancer until proven otherwise: scope both ends."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "AGA Clinical Practice Guidelines on the Gastrointestinal Evaluation of Iron Deficiency Anemia (2020)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "iron-deficiency-anemia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 28-year-old with heavy periods is tired, craves ice and has spoon-shaped nails. MCV is 72. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Iron deficiency anemia",
+          "synonyms": [
+            "iron deficiency",
+            "IDA",
+            "iron-deficiency anemia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of iron deficiency anemia.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heavy menstrual bleeding",
+          "synonyms": [
+            "menorrhagia",
+            "heavy periods"
+          ]
+        },
+        {
+          "answer": "gastrointestinal blood loss",
+          "synonyms": [
+            "GI bleeding",
+            "GI blood loss",
+            "colon cancer"
+          ]
+        },
+        {
+          "answer": "pregnancy",
+          "synonyms": []
+        },
+        {
+          "answer": "low dietary iron",
+          "synonyms": [
+            "poor diet",
+            "low iron intake",
+            "vegan diet",
+            "vegetarian diet"
+          ]
+        },
+        {
+          "answer": "celiac disease",
+          "synonyms": [
+            "celiac",
+            "coeliac disease",
+            "malabsorption"
+          ]
+        },
+        {
+          "answer": "bariatric surgery",
+          "synonyms": [
+            "gastric bypass"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "iron-deficiency-anemia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Ferritin is borderline. Which other iron study points to iron deficiency rather than anemia of chronic disease?",
+      "source_fields": [
+        "key_findings.labs[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high total iron-binding capacity",
+          "synonyms": [
+            "high TIBC",
+            "raised TIBC",
+            "elevated TIBC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Single best test to confirm iron deficiency?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum ferritin",
+          "synonyms": [
+            "ferritin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment for a well outpatient?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "oral iron",
+          "synonyms": [
+            "ferrous sulfate",
+            "iron tablets",
+            "iron supplements",
+            "ferrous gluconate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Iron deficiency in a 64-year-old man. Next step?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "scope both ends",
+          "synonyms": [
+            "colonoscopy and upper endoscopy",
+            "colonoscopy and EGD",
+            "bidirectional endoscopy",
+            "endoscopy and colonoscopy"
+          ]
+        }
+      ]
+    }
+  ]
+}

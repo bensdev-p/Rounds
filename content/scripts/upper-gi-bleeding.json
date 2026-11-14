@@ -1,0 +1,267 @@
+{
+  "script": {
+    "id": "upper-gi-bleeding",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Upper gastrointestinal bleeding",
+    "aliases": [
+      "upper GI bleed",
+      "UGIB"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Adults; peptic ulcer disease is the most common cause",
+      "risk_factors": [
+        "peptic ulcer disease",
+        "esophageal varices",
+        "NSAIDs",
+        "Helicobacter pylori",
+        "anticoagulants",
+        "Mallory-Weiss tear"
+      ]
+    },
+    "pathophysiology": "Bleeding above the ligament of Treitz, most often from a peptic ulcer eroding a vessel, or from varices in portal hypertension.",
+    "timeline": {
+      "onset": "Acute",
+      "course": "Most bleeds stop on their own; rebleeding raises mortality"
+    },
+    "key_findings": {
+      "history": [
+        "hematemesis or coffee-ground vomit",
+        "melena",
+        "lightheadedness or syncope",
+        "NSAID or alcohol use"
+      ],
+      "exam": [
+        "tachycardia and hypotension",
+        "signs of chronic liver disease in variceal bleeding"
+      ],
+      "labs": [
+        "falling hemoglobin",
+        "raised BUN-to-creatinine ratio from digested blood"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "upper endoscopy within 24 hours"
+      ],
+      "criteria": [
+        "the Glasgow-Blatchford score identifies low-risk patients for outpatient care"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "two large-bore IV lines and fluid resuscitation",
+        "transfuse to a hemoglobin of 7 g/dL (8 with cardiovascular disease)",
+        "IV proton pump inhibitor",
+        "upper endoscopy within 24 hours"
+      ],
+      "next_line": [
+        "for varices: octreotide and antibiotics (ceftriaxone) before endoscopy, then band ligation",
+        "test for and treat Helicobacter pylori"
+      ]
+    },
+    "complications": [
+      "hemorrhagic shock",
+      "rebleeding",
+      "death"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "In suspected variceal bleeding, give octreotide and antibiotics before endoscopy; antibiotics reduce infection and death."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding (2021)"
+      },
+      {
+        "title": "Baveno VII: Renewing consensus in portal hypertension (2022)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "upper-gi-bleeding.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man taking ibuprofen for back pain vomits coffee-ground material and has black, tarry stools. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Upper gastrointestinal bleeding",
+          "synonyms": [
+            "upper GI bleed",
+            "upper GI bleeding",
+            "UGIB",
+            "GI bleed",
+            "bleeding ulcer",
+            "peptic ulcer bleed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of upper GI bleeding.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "peptic ulcer disease",
+          "synonyms": [
+            "peptic ulcer",
+            "ulcer",
+            "gastric ulcer",
+            "duodenal ulcer",
+            "PUD"
+          ]
+        },
+        {
+          "answer": "esophageal varices",
+          "synonyms": [
+            "varices",
+            "variceal bleed"
+          ]
+        },
+        {
+          "answer": "NSAIDs",
+          "synonyms": [
+            "NSAID",
+            "ibuprofen",
+            "naproxen"
+          ]
+        },
+        {
+          "answer": "Helicobacter pylori",
+          "synonyms": [
+            "H. pylori",
+            "H pylori"
+          ]
+        },
+        {
+          "answer": "anticoagulants",
+          "synonyms": [
+            "warfarin",
+            "DOACs",
+            "blood thinners"
+          ]
+        },
+        {
+          "answer": "Mallory-Weiss tear",
+          "synonyms": [
+            "Mallory-Weiss",
+            "Mallory Weiss"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "upper-gi-bleeding.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which routine lab suggests the blood came from the upper rather than the lower GI tract?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "BUN-to-creatinine ratio",
+          "synonyms": [
+            "BUN to creatinine ratio",
+            "raised BUN",
+            "high BUN",
+            "elevated BUN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test both finds and treats the source?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "upper endoscopy",
+          "synonyms": [
+            "endoscopy",
+            "EGD",
+            "esophagogastroduodenoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "No heart disease. Below what hemoglobin do you transfuse?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "7 g/dL",
+          "synonyms": [
+            "7",
+            "hemoglobin of 7",
+            "hgb 7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Known cirrhosis, vomiting blood. Which drugs go in before endoscopy?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "octreotide",
+          "synonyms": [
+            "somatostatin analogue"
+          ]
+        },
+        {
+          "answer": "antibiotics",
+          "synonyms": [
+            "ceftriaxone",
+            "antibiotic prophylaxis"
+          ]
+        }
+      ]
+    }
+  ]
+}

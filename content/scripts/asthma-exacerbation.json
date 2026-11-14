@@ -1,0 +1,281 @@
+{
+  "script": {
+    "id": "asthma-exacerbation",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Asthma exacerbation",
+    "aliases": [
+      "acute asthma",
+      "asthma attack"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children and adults with asthma, especially with poor control or prior severe attacks",
+      "risk_factors": [
+        "viral respiratory infection",
+        "allergen exposure",
+        "poor adherence to inhaled steroids",
+        "smoke exposure",
+        "exercise",
+        "cold air"
+      ]
+    },
+    "pathophysiology": "Airway inflammation, bronchospasm and mucus plugging cause reversible airflow obstruction and air trapping.",
+    "timeline": {
+      "onset": "Over hours to days",
+      "course": "Usually responds to treatment; severe attacks can progress to respiratory failure"
+    },
+    "key_findings": {
+      "history": [
+        "dyspnea",
+        "wheeze",
+        "chest tightness",
+        "cough, often worse at night"
+      ],
+      "exam": [
+        "expiratory wheeze",
+        "tachypnea",
+        "accessory muscle use",
+        "silent chest in life-threatening attacks"
+      ],
+      "labs": [
+        "peak expiratory flow below 50% of predicted in a severe attack",
+        "a normal or rising PaCO2 is a warning sign of fatigue"
+      ],
+      "imaging": [
+        "chest X-ray only if pneumothorax or pneumonia is suspected"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "peak expiratory flow",
+        "pulse oximetry",
+        "arterial blood gas in severe attacks"
+      ],
+      "criteria": [
+        "acute worsening of symptoms and lung function from the patient's usual status"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "inhaled short-acting beta-agonist (albuterol), repeated",
+        "systemic corticosteroids",
+        "oxygen to keep saturation 93 to 95%",
+        "ipratropium in severe attacks"
+      ],
+      "next_line": [
+        "IV magnesium sulfate for severe attacks",
+        "ICU and intubation for respiratory failure"
+      ]
+    },
+    "complications": [
+      "respiratory failure",
+      "pneumothorax",
+      "death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "copd-exacerbation",
+        "how_to_tell_apart": "COPD affects older smokers, and its airflow limitation persists between exacerbations; in asthma it is largely reversible."
+      }
+    ],
+    "pearls": [
+      "A normal or rising PaCO2 during an asthma attack means the patient is tiring and may need intubation."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Global Strategy for Asthma Management and Prevention (GINA 2024)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "asthma-exacerbation.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 19-year-old has wheeze, chest tightness and a peak flow at 40% of predicted after a cold. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Asthma exacerbation",
+          "synonyms": [
+            "asthma attack",
+            "acute asthma",
+            "exacerbation of asthma",
+            "status asthmaticus",
+            "asthma flare"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three triggers of an asthma exacerbation.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "viral respiratory infection",
+          "synonyms": [
+            "viral infection",
+            "URI",
+            "upper respiratory infection",
+            "common cold",
+            "rhinovirus"
+          ]
+        },
+        {
+          "answer": "allergen exposure",
+          "synonyms": [
+            "allergens",
+            "pollen",
+            "dust mites",
+            "pet dander"
+          ]
+        },
+        {
+          "answer": "poor adherence to inhaled steroids",
+          "synonyms": [
+            "poor adherence",
+            "nonadherence",
+            "stopped inhaled steroids",
+            "not using inhaler"
+          ]
+        },
+        {
+          "answer": "smoke exposure",
+          "synonyms": [
+            "smoking",
+            "cigarette smoke",
+            "secondhand smoke"
+          ]
+        },
+        {
+          "answer": "exercise",
+          "synonyms": []
+        },
+        {
+          "answer": "cold air",
+          "synonyms": [
+            "cold weather"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "asthma-exacerbation.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "How does the airflow limitation in asthma differ from COPD?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "largely reversible",
+          "synonyms": [
+            "reversible",
+            "reversible obstruction",
+            "reversible airflow obstruction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which bedside test measures severity?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "peak expiratory flow",
+          "synonyms": [
+            "peak flow",
+            "PEF",
+            "PEFR",
+            "peak expiratory flow rate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "inhaled short-acting beta-agonist",
+          "synonyms": [
+            "albuterol",
+            "salbutamol",
+            "SABA",
+            "short-acting beta-agonist",
+            "nebulized albuterol"
+          ]
+        },
+        {
+          "answer": "systemic corticosteroids",
+          "synonyms": [
+            "steroids",
+            "prednisone",
+            "methylprednisolone",
+            "dexamethasone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Mid-attack, the PaCO2 climbs from 32 to 44 mmHg. What does that mean?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tiring",
+          "synonyms": [
+            "fatigue",
+            "fatiguing",
+            "respiratory fatigue",
+            "impending respiratory failure",
+            "needs intubation"
+          ]
+        }
+      ]
+    }
+  ]
+}

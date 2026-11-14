@@ -1,0 +1,255 @@
+{
+  "script": {
+    "id": "acute-pyelonephritis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Acute pyelonephritis",
+    "aliases": [
+      "pyelonephritis",
+      "kidney infection"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "FM"
+    ],
+    "epidemiology": {
+      "who": "Mostly women; also men with urinary obstruction",
+      "risk_factors": [
+        "female sex",
+        "recent sexual intercourse",
+        "urinary obstruction or stones",
+        "pregnancy",
+        "diabetes",
+        "urinary catheter"
+      ]
+    },
+    "pathophysiology": "Bacteria, most often Escherichia coli, ascend from the bladder and infect the kidney.",
+    "timeline": {
+      "onset": "Over 1 to 2 days",
+      "course": "Fever usually settles within 72 hours of antibiotics"
+    },
+    "key_findings": {
+      "history": [
+        "fever and chills",
+        "flank pain",
+        "dysuria and frequency",
+        "nausea and vomiting"
+      ],
+      "exam": [
+        "costovertebral angle tenderness",
+        "fever"
+      ],
+      "labs": [
+        "pyuria",
+        "white blood cell casts",
+        "positive urine culture"
+      ],
+      "imaging": [
+        "CT or ultrasound if there is no improvement after 48 to 72 hours, or obstruction is suspected"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "urinalysis",
+        "urine culture before antibiotics"
+      ],
+      "criteria": [
+        "flank pain or costovertebral angle tenderness with fever and pyuria"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "oral fluoroquinolone (ciprofloxacin) if local resistance is low and the patient is well",
+        "IV ceftriaxone if admitted"
+      ],
+      "next_line": [
+        "tailor to culture results",
+        "imaging and drainage for obstruction or abscess"
+      ]
+    },
+    "complications": [
+      "sepsis",
+      "renal abscess",
+      "emphysematous pyelonephritis"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "White blood cell casts in the urine point to the kidney (pyelonephritis) rather than the bladder."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women (IDSA and ESCMID, 2010)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "acute-pyelonephritis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 24-year-old woman has dysuria, then fever, chills and right flank pain with costovertebral angle tenderness. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pyelonephritis",
+          "synonyms": [
+            "pyelonephritis",
+            "pyelo",
+            "kidney infection",
+            "upper urinary tract infection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for pyelonephritis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "female sex",
+          "synonyms": [
+            "female",
+            "women",
+            "being a woman"
+          ]
+        },
+        {
+          "answer": "recent sexual intercourse",
+          "synonyms": [
+            "sexual intercourse",
+            "sexual activity"
+          ]
+        },
+        {
+          "answer": "urinary obstruction",
+          "synonyms": [
+            "obstruction",
+            "kidney stones",
+            "stones",
+            "BPH"
+          ]
+        },
+        {
+          "answer": "pregnancy",
+          "synonyms": []
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": []
+        },
+        {
+          "answer": "urinary catheter",
+          "synonyms": [
+            "Foley catheter",
+            "Foley",
+            "catheter"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "acute-pyelonephritis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which urine microscopy finding points to the kidney rather than the bladder?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "white blood cell casts",
+          "synonyms": [
+            "WBC casts",
+            "white cell casts",
+            "leukocyte casts"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What must you send before starting antibiotics?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "urine culture",
+          "synonyms": [
+            "urine cultures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Well enough to go home, and local resistance is low. Antibiotic?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ciprofloxacin",
+          "synonyms": [
+            "cipro",
+            "fluoroquinolone",
+            "levofloxacin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Still febrile after 72 hours of antibiotics. Next step?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CT",
+          "synonyms": [
+            "CT scan",
+            "CT abdomen",
+            "CT urogram"
+          ]
+        },
+        {
+          "answer": "ultrasound",
+          "synonyms": [
+            "renal ultrasound"
+          ]
+        }
+      ]
+    }
+  ]
+}

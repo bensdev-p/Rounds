@@ -1,0 +1,254 @@
+{
+  "script": {
+    "id": "infective-endocarditis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Infective endocarditis",
+    "aliases": [
+      "endocarditis"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "People who inject drugs, and those with prosthetic valves, prior endocarditis or structural heart disease",
+      "risk_factors": [
+        "injection drug use",
+        "prosthetic heart valve",
+        "prior endocarditis",
+        "structural or congenital heart disease",
+        "indwelling intravascular devices",
+        "hemodialysis"
+      ]
+    },
+    "pathophysiology": "Bacteria, most often Staphylococcus aureus, seed a heart valve and form vegetations that destroy the valve and shed septic emboli.",
+    "timeline": {
+      "onset": "Acute over days (S. aureus) or subacute over weeks (viridans streptococci)",
+      "course": "Fatal without treatment; many patients need surgery"
+    },
+    "key_findings": {
+      "history": [
+        "fever",
+        "fatigue and weight loss in subacute disease",
+        "new heart failure symptoms"
+      ],
+      "exam": [
+        "new regurgitant murmur",
+        "splinter hemorrhages",
+        "painless Janeway lesions on the palms and soles",
+        "painful Osler nodes on the fingers",
+        "Roth spots"
+      ],
+      "labs": [
+        "persistently positive blood cultures",
+        "raised inflammatory markers",
+        "hematuria from glomerulonephritis"
+      ],
+      "imaging": [
+        "echocardiogram showing a vegetation: transthoracic first, transesophageal if negative or with a prosthetic valve"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "three sets of blood cultures before antibiotics",
+        "echocardiogram"
+      ],
+      "criteria": [
+        "Duke criteria: typical organisms in blood cultures and evidence of endocardial involvement are the major criteria"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "empiric IV vancomycin after blood cultures",
+        "prolonged IV antibiotics (4 to 6 weeks) guided by culture results"
+      ],
+      "next_line": [
+        "surgery for heart failure, uncontrolled infection, abscess, or large vegetations with embolism"
+      ]
+    },
+    "complications": [
+      "heart failure from valve destruction",
+      "septic emboli to the brain, lungs, spleen or kidneys",
+      "perivalvular abscess",
+      "glomerulonephritis"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Endocarditis in people who inject drugs often affects the tricuspid valve and causes septic pulmonary emboli."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      },
+      {
+        "title": "The 2023 Duke-International Society for Cardiovascular Infectious Diseases Criteria for Infective Endocarditis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "infective-endocarditis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man who injects heroin has a fever, a new murmur and splinter hemorrhages. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Infective endocarditis",
+          "synonyms": [
+            "endocarditis",
+            "bacterial endocarditis",
+            "tricuspid endocarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for infective endocarditis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "injection drug use",
+          "synonyms": [
+            "IV drug use",
+            "IVDU",
+            "injecting drugs",
+            "PWID",
+            "heroin use"
+          ]
+        },
+        {
+          "answer": "prosthetic heart valve",
+          "synonyms": [
+            "prosthetic valve",
+            "valve replacement",
+            "mechanical valve"
+          ]
+        },
+        {
+          "answer": "prior endocarditis",
+          "synonyms": [
+            "previous endocarditis"
+          ]
+        },
+        {
+          "answer": "structural or congenital heart disease",
+          "synonyms": [
+            "congenital heart disease",
+            "structural heart disease",
+            "rheumatic heart disease"
+          ]
+        },
+        {
+          "answer": "indwelling intravascular devices",
+          "synonyms": [
+            "pacemaker",
+            "central line",
+            "intravascular catheter"
+          ]
+        },
+        {
+          "answer": "hemodialysis",
+          "synonyms": [
+            "dialysis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "infective-endocarditis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which skin lesion of endocarditis is painless: Janeway lesions or Osler nodes?",
+      "source_fields": [
+        "key_findings.exam[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Janeway lesions",
+          "synonyms": [
+            "Janeway"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What must happen before the first antibiotic dose?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "three sets of blood cultures",
+          "synonyms": [
+            "blood cultures",
+            "3 sets of blood cultures",
+            "cultures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Empiric antibiotic after cultures?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV vancomycin",
+          "synonyms": [
+            "vancomycin",
+            "vanc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which valve does endocarditis from injection drug use usually affect?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tricuspid valve",
+          "synonyms": [
+            "tricuspid",
+            "right-sided valve"
+          ]
+        }
+      ]
+    }
+  ]
+}

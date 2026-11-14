@@ -1,0 +1,253 @@
+{
+  "script": {
+    "id": "decompensated-cirrhosis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Decompensated cirrhosis",
+    "aliases": [
+      "cirrhosis",
+      "end-stage liver disease"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults with chronic liver disease",
+      "risk_factors": [
+        "alcohol-related liver disease",
+        "chronic hepatitis C",
+        "chronic hepatitis B",
+        "metabolic dysfunction-associated steatotic liver disease"
+      ]
+    },
+    "pathophysiology": "Chronic liver injury causes fibrosis and portal hypertension, leading to ascites, varices and loss of the liver's synthetic and detoxifying function.",
+    "timeline": {
+      "onset": "Develops over years; decompensation can be sudden",
+      "course": "Decompensation marks a sharp fall in survival; transplant is the cure"
+    },
+    "key_findings": {
+      "history": [
+        "abdominal swelling",
+        "jaundice",
+        "confusion",
+        "vomiting blood or black stools"
+      ],
+      "exam": [
+        "ascites",
+        "jaundice",
+        "spider angiomas",
+        "palmar erythema",
+        "asterixis"
+      ],
+      "labs": [
+        "low albumin",
+        "prolonged INR",
+        "raised bilirubin",
+        "low platelets"
+      ],
+      "imaging": [
+        "ultrasound: nodular liver, splenomegaly, ascites"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "diagnostic paracentesis for new ascites or any admission with ascites",
+        "serum-ascites albumin gradient"
+      ],
+      "criteria": [
+        "decompensation means ascites, variceal bleeding, hepatic encephalopathy or jaundice",
+        "a serum-ascites albumin gradient of 1.1 g/dL or more means portal hypertension"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "sodium restriction and diuretics (spironolactone with furosemide) for ascites",
+        "lactulose for hepatic encephalopathy",
+        "nonselective beta-blocker such as carvedilol to prevent variceal bleeding"
+      ],
+      "next_line": [
+        "large-volume paracentesis with albumin for tense ascites",
+        "add rifaximin to lactulose",
+        "refer for liver transplant evaluation"
+      ]
+    },
+    "complications": [
+      "spontaneous bacterial peritonitis",
+      "hepatorenal syndrome",
+      "variceal bleeding",
+      "hepatic encephalopathy",
+      "hepatocellular carcinoma"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Spontaneous bacterial peritonitis is diagnosed by an ascitic neutrophil count of 250 cells/mm3 or more."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "AASLD Practice Guidance: Diagnosis, Evaluation, and Management of Ascites, Spontaneous Bacterial Peritonitis and Hepatorenal Syndrome (2021)"
+      },
+      {
+        "title": "Baveno VII: Renewing consensus in portal hypertension (2022)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "decompensated-cirrhosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A heavy drinker has ascites, jaundice, spider angiomas and asterixis. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Decompensated cirrhosis",
+          "synonyms": [
+            "cirrhosis",
+            "alcoholic cirrhosis",
+            "alcohol-related cirrhosis",
+            "liver cirrhosis",
+            "end-stage liver disease",
+            "ESLD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of cirrhosis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "alcohol-related liver disease",
+          "synonyms": [
+            "alcohol",
+            "alcoholic liver disease",
+            "alcohol use"
+          ]
+        },
+        {
+          "answer": "chronic hepatitis C",
+          "synonyms": [
+            "hepatitis C",
+            "hep C",
+            "HCV"
+          ]
+        },
+        {
+          "answer": "chronic hepatitis B",
+          "synonyms": [
+            "hepatitis B",
+            "hep B",
+            "HBV"
+          ]
+        },
+        {
+          "answer": "metabolic dysfunction-associated steatotic liver disease",
+          "synonyms": [
+            "MASLD",
+            "MASH",
+            "NAFLD",
+            "NASH",
+            "fatty liver disease",
+            "nonalcoholic fatty liver disease"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "decompensated-cirrhosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "New ascites. Which calculation tells you it's from portal hypertension?",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum-ascites albumin gradient",
+          "synonyms": [
+            "SAAG",
+            "serum ascites albumin gradient",
+            "albumin gradient"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Admitted with ascites and a fever. Which procedure comes first?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diagnostic paracentesis",
+          "synonyms": [
+            "paracentesis",
+            "ascitic tap",
+            "tap the ascites"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Confused, with asterixis. First-line treatment?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lactulose",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What ascitic neutrophil count diagnoses spontaneous bacterial peritonitis?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "250 cells/mm3",
+          "synonyms": [
+            "250",
+            "250 neutrophils",
+            "250 cells",
+            "PMN 250"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,280 @@
+{
+  "script": {
+    "id": "copd-exacerbation",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "COPD exacerbation",
+    "aliases": [
+      "acute exacerbation of COPD",
+      "AECOPD"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Adults with COPD, usually with a long smoking history",
+      "risk_factors": [
+        "viral respiratory infection",
+        "bacterial infection",
+        "air pollution",
+        "stopping inhalers"
+      ]
+    },
+    "pathophysiology": "Airway inflammation, usually triggered by infection, worsens airflow limitation and air trapping, raising the work of breathing and causing hypoxemia and sometimes hypercapnia.",
+    "timeline": {
+      "onset": "Over days",
+      "course": "Most recover over 1 to 2 weeks; each exacerbation speeds the decline in lung function"
+    },
+    "key_findings": {
+      "history": [
+        "worsening dyspnea",
+        "increased sputum volume",
+        "increased sputum purulence",
+        "cough"
+      ],
+      "exam": [
+        "wheeze and prolonged expiration",
+        "accessory muscle use",
+        "pursed-lip breathing"
+      ],
+      "labs": [
+        "arterial blood gas: hypercapnia and respiratory acidosis in severe cases"
+      ],
+      "imaging": [
+        "chest X-ray to exclude pneumonia, pneumothorax or heart failure"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical diagnosis",
+        "arterial blood gas",
+        "chest X-ray"
+      ],
+      "criteria": [
+        "acute worsening of dyspnea, cough or sputum beyond day-to-day variation"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "short-acting bronchodilators (albuterol with ipratropium)",
+        "systemic corticosteroids for 5 days",
+        "antibiotics when sputum purulence increases",
+        "controlled oxygen targeting saturation 88 to 92%"
+      ],
+      "next_line": [
+        "noninvasive ventilation for hypercapnic respiratory acidosis",
+        "intubation if noninvasive ventilation fails"
+      ]
+    },
+    "complications": [
+      "hypercapnic respiratory failure",
+      "pneumothorax",
+      "death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "community-acquired-pneumonia",
+        "how_to_tell_apart": "Pneumonia adds fever and a new consolidation on chest X-ray; a COPD exacerbation has no new infiltrate."
+      },
+      {
+        "script_id": "heart-failure-exacerbation",
+        "how_to_tell_apart": "Heart failure gives a raised JVP, leg edema, a high BNP and pulmonary edema on chest X-ray."
+      },
+      {
+        "script_id": "asthma-exacerbation",
+        "how_to_tell_apart": "Asthma usually starts younger, often without a smoking history, and its airflow obstruction is largely reversible between attacks."
+      }
+    ],
+    "pearls": [
+      "Target oxygen saturation 88 to 92% in COPD; high-flow oxygen can worsen hypercapnia."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD (GOLD 2025 Report)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "copd-exacerbation.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 68-year-old with a 50 pack-year history has three days of worse dyspnea and more, greener sputum. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "COPD exacerbation",
+          "synonyms": [
+            "AECOPD",
+            "acute exacerbation of COPD",
+            "exacerbation of COPD",
+            "COPD flare"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copd-exacerbation.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name the three cardinal symptoms of a COPD exacerbation.",
+      "source_fields": [
+        "key_findings.history"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "worsening dyspnea",
+          "synonyms": [
+            "dyspnea",
+            "shortness of breath",
+            "breathlessness"
+          ]
+        },
+        {
+          "answer": "increased sputum volume",
+          "synonyms": [
+            "more sputum",
+            "sputum volume",
+            "increased sputum"
+          ]
+        },
+        {
+          "answer": "increased sputum purulence",
+          "synonyms": [
+            "purulent sputum",
+            "sputum purulence",
+            "green sputum",
+            "yellow sputum",
+            "change in sputum color"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "copd-exacerbation.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What on chest X-ray points to pneumonia rather than a COPD exacerbation?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "new consolidation",
+          "synonyms": [
+            "consolidation",
+            "new infiltrate",
+            "infiltrate",
+            "lobar consolidation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copd-exacerbation.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Drowsy, with a saturation of 84%. Which test shows whether he's retaining CO2?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "arterial blood gas",
+          "synonyms": [
+            "ABG",
+            "blood gas",
+            "venous blood gas",
+            "VBG"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copd-exacerbation.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name three parts of initial treatment.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "short-acting bronchodilators",
+          "synonyms": [
+            "bronchodilators",
+            "albuterol",
+            "ipratropium",
+            "DuoNeb",
+            "nebulizers",
+            "salbutamol"
+          ]
+        },
+        {
+          "answer": "systemic corticosteroids",
+          "synonyms": [
+            "steroids",
+            "prednisone",
+            "corticosteroids",
+            "methylprednisolone"
+          ]
+        },
+        {
+          "answer": "antibiotics",
+          "synonyms": [
+            "azithromycin",
+            "doxycycline",
+            "amoxicillin-clavulanate"
+          ]
+        },
+        {
+          "answer": "controlled oxygen",
+          "synonyms": [
+            "oxygen",
+            "supplemental oxygen",
+            "O2"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "copd-exacerbation.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What oxygen saturation do you target in a COPD exacerbation?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "88 to 92%",
+          "synonyms": [
+            "88-92%",
+            "88 to 92 percent",
+            "88-92"
+          ]
+        }
+      ]
+    }
+  ]
+}

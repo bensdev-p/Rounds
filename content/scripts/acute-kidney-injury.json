@@ -1,0 +1,302 @@
+{
+  "script": {
+    "id": "acute-kidney-injury",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Acute kidney injury",
+    "aliases": [
+      "AKI",
+      "acute renal failure"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Hospitalized adults, especially older patients and those with chronic kidney disease",
+      "risk_factors": [
+        "volume depletion",
+        "sepsis",
+        "nephrotoxic drugs",
+        "IV contrast",
+        "urinary obstruction",
+        "chronic kidney disease"
+      ]
+    },
+    "pathophysiology": "A sudden fall in glomerular filtration, classified as prerenal (low perfusion), intrinsic (most often acute tubular necrosis) or postrenal (obstruction).",
+    "timeline": {
+      "onset": "Hours to days",
+      "course": "Often recovers once the cause is fixed; can progress to dialysis or chronic kidney disease"
+    },
+    "key_findings": {
+      "history": [
+        "reduced urine output",
+        "recent vomiting, diarrhea or poor intake",
+        "new medications such as NSAIDs, ACE inhibitors or aminoglycosides"
+      ],
+      "exam": [
+        "signs of volume depletion or overload",
+        "palpable bladder in obstruction"
+      ],
+      "labs": [
+        "creatinine rise of 0.3 mg/dL or more within 48 hours",
+        "BUN-to-creatinine ratio above 20 in prerenal AKI",
+        "muddy brown granular casts in acute tubular necrosis",
+        "fractional excretion of sodium below 1% in prerenal AKI"
+      ],
+      "imaging": [
+        "renal ultrasound to look for hydronephrosis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum creatinine",
+        "urine output",
+        "urinalysis with microscopy",
+        "renal ultrasound"
+      ],
+      "criteria": [
+        "creatinine rise of 0.3 mg/dL or more within 48 hours",
+        "creatinine 1.5 times baseline or more within 7 days",
+        "urine output below 0.5 mL/kg/h for 6 hours"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "treat the cause",
+        "IV fluids if volume depleted",
+        "stop nephrotoxic drugs",
+        "relieve obstruction"
+      ],
+      "next_line": [
+        "dialysis for refractory hyperkalemia, acidosis, volume overload, uremic complications or toxins",
+        "adjust drug doses for kidney function"
+      ]
+    },
+    "complications": [
+      "hyperkalemia",
+      "metabolic acidosis",
+      "volume overload",
+      "uremic pericarditis",
+      "progression to chronic kidney disease"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Indications for urgent dialysis (AEIOU): acidosis, electrolytes (hyperkalemia), ingestions, overload and uremia."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "KDIGO Clinical Practice Guideline for Acute Kidney Injury (2012)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "acute-kidney-injury.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Day 3 after admission, creatinine has risen from 0.9 to 1.8 mg/dL and urine output has fallen. What's happening?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "acute renal failure",
+            "ARF",
+            "kidney injury"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes or risk factors for AKI in hospital.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "volume depletion",
+          "synonyms": [
+            "dehydration",
+            "hypovolemia",
+            "prerenal"
+          ]
+        },
+        {
+          "answer": "sepsis",
+          "synonyms": [
+            "septic shock"
+          ]
+        },
+        {
+          "answer": "nephrotoxic drugs",
+          "synonyms": [
+            "nephrotoxins",
+            "NSAIDs",
+            "aminoglycosides",
+            "vancomycin"
+          ]
+        },
+        {
+          "answer": "IV contrast",
+          "synonyms": [
+            "contrast",
+            "contrast nephropathy",
+            "contrast-induced nephropathy"
+          ]
+        },
+        {
+          "answer": "urinary obstruction",
+          "synonyms": [
+            "obstruction",
+            "BPH",
+            "urinary retention",
+            "postrenal"
+          ]
+        },
+        {
+          "answer": "chronic kidney disease",
+          "synonyms": [
+            "CKD"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "acute-kidney-injury.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which urine calculation helps tell prerenal AKI from acute tubular necrosis?",
+      "source_fields": [
+        "key_findings.labs[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fractional excretion of sodium",
+          "synonyms": [
+            "FENa",
+            "FE Na",
+            "fractional sodium excretion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test rules out obstruction?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renal ultrasound",
+          "synonyms": [
+            "kidney ultrasound",
+            "renal US",
+            "ultrasound of the kidneys",
+            "ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Prerenal AKI after two days of vomiting. First step?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV fluids",
+          "synonyms": [
+            "fluids",
+            "normal saline",
+            "isotonic fluids",
+            "crystalloid",
+            "hydration",
+            "fluid resuscitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.pearl.1",
+      "rung": "pearl",
+      "kind": "list",
+      "prompt": "Name three indications for urgent dialysis.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acidosis",
+          "synonyms": [
+            "metabolic acidosis",
+            "refractory acidosis"
+          ]
+        },
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "refractory hyperkalemia"
+          ]
+        },
+        {
+          "answer": "ingestions",
+          "synonyms": [
+            "toxins",
+            "poisoning",
+            "overdose",
+            "toxic ingestion",
+            "lithium",
+            "methanol",
+            "ethylene glycol"
+          ]
+        },
+        {
+          "answer": "overload",
+          "synonyms": [
+            "volume overload",
+            "fluid overload",
+            "pulmonary edema"
+          ]
+        },
+        {
+          "answer": "uremia",
+          "synonyms": [
+            "uremic pericarditis",
+            "uremic encephalopathy",
+            "uremic"
+          ]
+        }
+      ],
+      "required_count": 3
+    }
+  ]
+}

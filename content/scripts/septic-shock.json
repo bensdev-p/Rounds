@@ -1,0 +1,297 @@
+{
+  "script": {
+    "id": "septic-shock",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Sepsis and septic shock",
+    "aliases": [
+      "sepsis",
+      "septic shock"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Anyone with an infection; highest risk in older adults and the immunocompromised",
+      "risk_factors": [
+        "pneumonia",
+        "urinary tract infection",
+        "intra-abdominal infection",
+        "skin and soft tissue infection",
+        "indwelling lines or catheters"
+      ]
+    },
+    "pathophysiology": "A dysregulated host response to infection causes vasodilation, capillary leak and organ dysfunction.",
+    "timeline": {
+      "onset": "Hours",
+      "course": "Mortality rises with each hour of delayed antibiotics in septic shock"
+    },
+    "key_findings": {
+      "history": [
+        "fever or chills",
+        "confusion",
+        "symptoms of the source infection"
+      ],
+      "exam": [
+        "hypotension",
+        "tachycardia",
+        "tachypnea",
+        "altered mental status",
+        "warm or mottled skin"
+      ],
+      "labs": [
+        "lactate above 2 mmol/L",
+        "signs of organ dysfunction: rising creatinine or bilirubin, low platelets"
+      ],
+      "imaging": [
+        "imaging to find the source, guided by symptoms"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "blood cultures before antibiotics",
+        "serum lactate",
+        "SOFA score for organ dysfunction"
+      ],
+      "criteria": [
+        "sepsis: suspected infection with an acute rise of 2 or more SOFA points",
+        "septic shock: vasopressors needed to keep MAP at 65 mmHg or more, with lactate above 2 mmol/L despite fluids"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "broad-spectrum antibiotics within 1 hour",
+        "30 mL/kg IV crystalloid for hypotension or lactate of 4 mmol/L or more",
+        "norepinephrine if hypotension persists"
+      ],
+      "next_line": [
+        "source control",
+        "add vasopressin for rising norepinephrine needs",
+        "hydrocortisone for refractory shock"
+      ]
+    },
+    "complications": [
+      "multi-organ failure",
+      "ARDS",
+      "acute kidney injury",
+      "disseminated intravascular coagulation",
+      "death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "adrenal-insufficiency",
+        "how_to_tell_apart": "Adrenal crisis also causes shock that doesn't respond to fluids, often with hyponatremia, hyperkalemia and hypoglycemia; suspect it in anyone on long-term steroids."
+      }
+    ],
+    "pearls": [
+      "Target a mean arterial pressure of at least 65 mmHg; norepinephrine is the first-line vasopressor."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021"
+      },
+      {
+        "title": "The Third International Consensus Definitions for Sepsis and Septic Shock (Sepsis-3, 2016)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "septic-shock.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "After a UTI: fever, confusion, BP 82/45 despite 2 L of fluids, lactate 5. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "septic shock",
+          "synonyms": [
+            "shock from sepsis",
+            "urosepsis with shock",
+            "sepsis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three common sources of sepsis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pneumonia",
+          "synonyms": [
+            "lung infection",
+            "CAP"
+          ]
+        },
+        {
+          "answer": "urinary tract infection",
+          "synonyms": [
+            "UTI",
+            "pyelonephritis",
+            "urosepsis"
+          ]
+        },
+        {
+          "answer": "intra-abdominal infection",
+          "synonyms": [
+            "abdominal infection",
+            "peritonitis",
+            "cholangitis",
+            "appendicitis"
+          ]
+        },
+        {
+          "answer": "skin and soft tissue infection",
+          "synonyms": [
+            "soft tissue infection",
+            "cellulitis",
+            "skin infection",
+            "necrotizing fasciitis"
+          ]
+        },
+        {
+          "answer": "indwelling lines or catheters",
+          "synonyms": [
+            "indwelling lines",
+            "catheters",
+            "central line",
+            "line infection",
+            "catheter infection",
+            "CLABSI"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "septic-shock.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What turns sepsis into septic shock?",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vasopressors",
+          "synonyms": [
+            "pressors",
+            "needing pressors",
+            "norepinephrine",
+            "persistent hypotension"
+          ]
+        },
+        {
+          "answer": "lactate above 2 mmol/L",
+          "synonyms": [
+            "lactate above 2",
+            "high lactate",
+            "raised lactate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What must you send before the first antibiotic dose?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "blood cultures",
+          "synonyms": [
+            "cultures",
+            "blood culture"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Hypotensive sepsis. Name the first three steps.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "broad-spectrum antibiotics",
+          "synonyms": [
+            "antibiotics",
+            "IV antibiotics",
+            "piperacillin-tazobactam"
+          ]
+        },
+        {
+          "answer": "IV crystalloid",
+          "synonyms": [
+            "IV fluids",
+            "fluids",
+            "crystalloid",
+            "30 mL/kg",
+            "fluid bolus",
+            "lactated Ringer's",
+            "normal saline"
+          ]
+        },
+        {
+          "answer": "norepinephrine",
+          "synonyms": [
+            "vasopressors",
+            "pressors",
+            "Levophed"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "septic-shock.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What mean arterial pressure do you target?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "65 mmHg",
+          "synonyms": [
+            "65",
+            "MAP 65",
+            "65 mm Hg",
+            "at least 65"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,269 @@
+{
+  "script": {
+    "id": "clostridioides-difficile-infection",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Clostridioides difficile infection",
+    "aliases": [
+      "C. diff",
+      "CDI"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Hospitalized and older adults, especially after antibiotics",
+      "risk_factors": [
+        "recent antibiotics",
+        "hospitalization",
+        "older age",
+        "proton pump inhibitors",
+        "immunosuppression"
+      ]
+    },
+    "pathophysiology": "Antibiotics disrupt the gut flora, letting toxin-producing C. difficile colonize the colon and cause colitis.",
+    "timeline": {
+      "onset": "Days to weeks after antibiotics",
+      "course": "About 1 in 5 recur after treatment"
+    },
+    "key_findings": {
+      "history": [
+        "three or more watery stools in 24 hours",
+        "abdominal cramping",
+        "recent antibiotics, especially clindamycin, fluoroquinolones or cephalosporins"
+      ],
+      "exam": [
+        "abdominal tenderness",
+        "fever"
+      ],
+      "labs": [
+        "leukocytosis, sometimes very high",
+        "raised creatinine in severe disease"
+      ],
+      "imaging": [
+        "CT for suspected fulminant colitis or toxic megacolon"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "stool test for C. difficile toxin or toxin gene (PCR)"
+      ],
+      "criteria": [
+        "test only unformed stool, from patients with 3 or more unexplained loose stools in 24 hours",
+        "severe: white count of 15,000 or more, or creatinine above 1.5 mg/dL"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "oral fidaxomicin or oral vancomycin",
+        "stop the inciting antibiotic if possible",
+        "contact precautions and soap-and-water hand hygiene"
+      ],
+      "next_line": [
+        "fulminant disease: oral vancomycin plus IV metronidazole, and a surgical consult",
+        "recurrence: fidaxomicin, bezlotoxumab or fecal microbiota transplant"
+      ]
+    },
+    "complications": [
+      "toxic megacolon",
+      "colonic perforation",
+      "recurrence",
+      "death"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Alcohol hand rubs do not kill C. difficile spores; wash with soap and water."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Clinical Practice Guideline by IDSA and SHEA: 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "clostridioides-difficile-infection.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Ten days into clindamycin, an inpatient has six watery stools a day and a white count of 18,000. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Clostridioides difficile infection",
+          "synonyms": [
+            "C. diff",
+            "C diff",
+            "C. difficile",
+            "CDI",
+            "C diff colitis",
+            "pseudomembranous colitis",
+            "Clostridium difficile"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for C. difficile infection.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "recent antibiotics",
+          "synonyms": [
+            "antibiotics",
+            "antibiotic use",
+            "clindamycin",
+            "fluoroquinolones",
+            "cephalosporins"
+          ]
+        },
+        {
+          "answer": "hospitalization",
+          "synonyms": [
+            "hospital stay",
+            "nursing home"
+          ]
+        },
+        {
+          "answer": "older age",
+          "synonyms": [
+            "age",
+            "elderly"
+          ]
+        },
+        {
+          "answer": "proton pump inhibitors",
+          "synonyms": [
+            "PPIs",
+            "PPI",
+            "omeprazole",
+            "pantoprazole",
+            "acid suppression"
+          ]
+        },
+        {
+          "answer": "immunosuppression",
+          "synonyms": [
+            "immunocompromised",
+            "chemotherapy"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "clostridioides-difficile-infection.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What makes C. difficile infection severe rather than non-severe?",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "white count of 15,000 or more",
+          "synonyms": [
+            "WBC over 15,000",
+            "white count over 15,000",
+            "WBC above 15000",
+            "white count above 15,000"
+          ]
+        },
+        {
+          "answer": "creatinine above 1.5",
+          "synonyms": [
+            "creatinine over 1.5",
+            "raised creatinine",
+            "AKI"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms it?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stool test",
+          "synonyms": [
+            "stool PCR",
+            "stool toxin",
+            "C diff toxin",
+            "toxin assay",
+            "C diff PCR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment for a first episode?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "oral fidaxomicin",
+          "synonyms": [
+            "fidaxomicin"
+          ]
+        },
+        {
+          "answer": "oral vancomycin",
+          "synonyms": [
+            "PO vancomycin",
+            "vancomycin by mouth",
+            "oral vanc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why don't alcohol hand rubs work against C. difficile?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "spores",
+          "synonyms": [
+            "spore",
+            "it forms spores",
+            "spore-forming"
+          ]
+        }
+      ]
+    }
+  ]
+}

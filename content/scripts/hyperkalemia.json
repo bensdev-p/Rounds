@@ -1,0 +1,287 @@
+{
+  "script": {
+    "id": "hyperkalemia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Hyperkalemia",
+    "aliases": [
+      "high potassium"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "People with kidney disease or diabetes, or on drugs that raise potassium",
+      "risk_factors": [
+        "acute kidney injury",
+        "chronic kidney disease",
+        "ACE inhibitors or ARBs",
+        "potassium-sparing diuretics",
+        "rhabdomyolysis",
+        "adrenal insufficiency"
+      ]
+    },
+    "pathophysiology": "Reduced potassium excretion or a shift out of cells raises serum potassium, which depolarizes heart and muscle cells and slows cardiac conduction.",
+    "timeline": {
+      "onset": "Acute or chronic",
+      "course": "Can cause fatal arrhythmias once ECG changes appear"
+    },
+    "key_findings": {
+      "history": [
+        "often no symptoms",
+        "muscle weakness",
+        "palpitations"
+      ],
+      "exam": [
+        "weakness",
+        "bradycardia"
+      ],
+      "labs": [
+        "serum potassium above 5.5 mEq/L",
+        "pseudohyperkalemia from a hemolyzed sample",
+        "ECG: peaked T waves, then PR prolongation and a wide QRS, progressing to a sine wave"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "repeat serum potassium",
+        "12-lead ECG"
+      ],
+      "criteria": [
+        "serum potassium above 5.5 mEq/L; severe at 6.5 mEq/L or above, or with ECG changes"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "IV calcium gluconate to stabilize the heart",
+        "insulin with glucose to shift potassium into cells",
+        "beta-2 agonist such as nebulized albuterol"
+      ],
+      "next_line": [
+        "remove potassium: loop diuretics, potassium binders or dialysis",
+        "stop potassium-raising drugs"
+      ]
+    },
+    "complications": [
+      "ventricular fibrillation",
+      "asystole",
+      "bradyarrhythmias"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Calcium protects the heart within minutes but does not lower potassium; you still need to shift and remove it."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Clinical Practice Guidelines: Treatment of Acute Hyperkalaemia in Adults (UK Kidney Association, 2023)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hyperkalemia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A dialysis patient misses two sessions. The ECG shows peaked T waves. Which electrolyte problem?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "hyperkalaemia",
+            "high K"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of hyperkalemia.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "kidney failure",
+            "renal failure"
+          ]
+        },
+        {
+          "answer": "chronic kidney disease",
+          "synonyms": [
+            "CKD",
+            "ESRD",
+            "end-stage renal disease"
+          ]
+        },
+        {
+          "answer": "ACE inhibitors or ARBs",
+          "synonyms": [
+            "ACE inhibitors",
+            "ACE inhibitor",
+            "ARBs",
+            "ARB",
+            "lisinopril",
+            "losartan"
+          ]
+        },
+        {
+          "answer": "potassium-sparing diuretics",
+          "synonyms": [
+            "spironolactone",
+            "eplerenone",
+            "amiloride",
+            "triamterene"
+          ]
+        },
+        {
+          "answer": "rhabdomyolysis",
+          "synonyms": [
+            "rhabdo",
+            "crush injury"
+          ]
+        },
+        {
+          "answer": "adrenal insufficiency",
+          "synonyms": [
+            "Addison disease",
+            "Addison's disease",
+            "hypoaldosteronism"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hyperkalemia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Potassium 6.8 in a patient who feels well, with a normal ECG. Which sample problem should you exclude?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hemolyzed sample",
+          "synonyms": [
+            "hemolysis",
+            "hemolyzed",
+            "hemolysed sample",
+            "hemolysed",
+            "pseudohyperkalemia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which bedside test do you get immediately?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "12-lead ECG",
+          "synonyms": [
+            "ECG",
+            "EKG",
+            "electrocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Potassium 7.1 with peaked T waves. Name the first three treatments.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV calcium gluconate",
+          "synonyms": [
+            "calcium gluconate",
+            "calcium chloride",
+            "IV calcium",
+            "calcium"
+          ]
+        },
+        {
+          "answer": "insulin with glucose",
+          "synonyms": [
+            "insulin and glucose",
+            "insulin and dextrose",
+            "insulin"
+          ]
+        },
+        {
+          "answer": "beta-2 agonist",
+          "synonyms": [
+            "albuterol",
+            "nebulized albuterol",
+            "salbutamol",
+            "beta agonist"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hyperkalemia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What does IV calcium do in hyperkalemia, and what doesn't it do?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "protects the heart",
+          "synonyms": [
+            "stabilizes the heart",
+            "stabilizes the cardiac membrane",
+            "membrane stabilization",
+            "cardioprotection"
+          ]
+        },
+        {
+          "answer": "does not lower potassium",
+          "synonyms": [
+            "doesn't lower potassium",
+            "no effect on potassium",
+            "doesn't change potassium"
+          ]
+        }
+      ]
+    }
+  ]
+}

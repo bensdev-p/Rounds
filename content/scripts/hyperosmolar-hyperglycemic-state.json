@@ -1,0 +1,285 @@
+{
+  "script": {
+    "id": "hyperosmolar-hyperglycemic-state",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Hyperosmolar hyperglycemic state",
+    "aliases": [
+      "HHS"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Older adults with type 2 diabetes, often with limited access to water",
+      "risk_factors": [
+        "infection",
+        "insufficient insulin or missed medications",
+        "myocardial infarction",
+        "stroke",
+        "glucocorticoids",
+        "thiazide diuretics"
+      ]
+    },
+    "pathophysiology": "Relative insulin deficiency, with enough insulin to prevent ketogenesis, causes severe hyperglycemia, an osmotic diuresis, profound dehydration and hyperosmolality.",
+    "timeline": {
+      "onset": "Develops over days to weeks",
+      "course": "Slower to correct than DKA, with a higher mortality"
+    },
+    "key_findings": {
+      "history": [
+        "polyuria and polydipsia over days to weeks",
+        "weakness",
+        "confusion or drowsiness"
+      ],
+      "exam": [
+        "severe dehydration",
+        "altered mental status, from lethargy to coma",
+        "focal neurologic signs or seizures in some"
+      ],
+      "labs": [
+        "glucose usually above 600 mg/dL",
+        "effective serum osmolality above 300 mOsm/kg",
+        "pH 7.3 or higher and bicarbonate 15 mEq/L or higher",
+        "little or no ketonemia"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "serum glucose",
+        "calculated effective serum osmolality",
+        "serum beta-hydroxybutyrate to exclude significant ketosis"
+      ],
+      "criteria": [
+        "glucose of 600 mg/dL or more",
+        "effective serum osmolality above 300 mOsm/kg (or total above 320)",
+        "pH 7.3 or higher, bicarbonate 15 mEq/L or higher, and no significant ketonemia"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "aggressive IV isotonic fluids",
+        "IV insulin infusion once fluids are running and potassium is at least 3.5 mEq/L",
+        "potassium replacement"
+      ],
+      "next_line": [
+        "lower glucose, sodium and osmolality gradually to avoid cerebral edema",
+        "treat the precipitant",
+        "VTE prophylaxis"
+      ]
+    },
+    "complications": [
+      "cerebral edema from overly rapid correction",
+      "venous thromboembolism",
+      "rhabdomyolysis",
+      "acute kidney injury"
+    ],
+    "confused_with": [
+      {
+        "script_id": "diabetic-ketoacidosis",
+        "how_to_tell_apart": "DKA has ketones and an anion gap acidosis and develops over hours; HHS has much higher glucose and osmolality, little or no ketosis, and develops over days."
+      }
+    ],
+    "pearls": [
+      "In HHS, fluids come first: insulin before adequate fluid replacement shifts water into cells and can worsen hypotension."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (Diabetes Care, 2024)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hyperosmolar-hyperglycemic-state.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 78-year-old with type 2 diabetes is drowsy after a week of polyuria. Glucose is 1,050 mg/dL, pH 7.38, no ketones. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperosmolar hyperglycemic state",
+          "synonyms": [
+            "HHS",
+            "hyperosmolar hyperglycemic syndrome",
+            "hyperosmolar nonketotic state",
+            "HONK",
+            "HHNK"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three common precipitants of HHS.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "infection",
+          "synonyms": [
+            "pneumonia",
+            "UTI",
+            "urinary tract infection",
+            "sepsis"
+          ]
+        },
+        {
+          "answer": "missed medications",
+          "synonyms": [
+            "missed insulin",
+            "nonadherence",
+            "stopped diabetes medications"
+          ]
+        },
+        {
+          "answer": "myocardial infarction",
+          "synonyms": [
+            "MI",
+            "heart attack"
+          ]
+        },
+        {
+          "answer": "stroke",
+          "synonyms": [
+            "CVA",
+            "cerebrovascular accident"
+          ]
+        },
+        {
+          "answer": "glucocorticoids",
+          "synonyms": [
+            "steroids",
+            "corticosteroids",
+            "prednisone",
+            "dexamethasone"
+          ]
+        },
+        {
+          "answer": "thiazide diuretics",
+          "synonyms": [
+            "thiazides",
+            "hydrochlorothiazide",
+            "HCTZ"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which lab findings point to HHS rather than DKA?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "little or no ketosis",
+          "synonyms": [
+            "no ketones",
+            "no ketosis",
+            "minimal ketones",
+            "absent ketones",
+            "no ketonemia"
+          ]
+        },
+        {
+          "answer": "higher glucose and osmolality",
+          "synonyms": [
+            "higher osmolality",
+            "high osmolality",
+            "hyperosmolality",
+            "very high glucose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Along with the glucose, which calculated value defines HHS?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "effective serum osmolality",
+          "synonyms": [
+            "serum osmolality",
+            "effective osmolality",
+            "osmolality",
+            "serum osm",
+            "osmolarity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "What comes first in HHS management?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aggressive IV isotonic fluids",
+          "synonyms": [
+            "IV fluids",
+            "fluids",
+            "normal saline",
+            "isotonic fluids",
+            "fluid resuscitation",
+            "crystalloid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why can starting insulin before fluids be dangerous in HHS?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "worsen hypotension",
+          "synonyms": [
+            "hypotension",
+            "drops the blood pressure",
+            "circulatory collapse",
+            "shifts water into cells"
+          ]
+        }
+      ]
+    }
+  ]
+}

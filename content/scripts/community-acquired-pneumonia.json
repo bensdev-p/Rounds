@@ -84,6 +84,10 @@
       {
         "script_id": "heart-failure-exacerbation",
         "how_to_tell_apart": "Heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP, with bilateral interstitial edema and effusions on X-ray rather than a focal consolidation, and usually no fever."
+      },
+      {
+        "script_id": "copd-exacerbation",
+        "how_to_tell_apart": "A COPD exacerbation brings more dyspnea and sputum in a known smoker, without a new consolidation on chest X-ray."
       }
     ],
     "pearls": [

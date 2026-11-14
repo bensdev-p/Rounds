@@ -1,0 +1,248 @@
+{
+  "script": {
+    "id": "deep-vein-thrombosis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Deep vein thrombosis",
+    "aliases": [
+      "DVT"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Adults with risk factors for venous thromboembolism",
+      "risk_factors": [
+        "recent surgery",
+        "immobilization",
+        "active cancer",
+        "prior VTE",
+        "estrogen use or pregnancy",
+        "inherited thrombophilia"
+      ]
+    },
+    "pathophysiology": "Venous stasis, endothelial injury and hypercoagulability (Virchow's triad) lead to thrombus in the deep veins, usually of the leg.",
+    "timeline": {
+      "onset": "Over days",
+      "course": "Can embolize to the lungs; may leave post-thrombotic syndrome"
+    },
+    "key_findings": {
+      "history": [
+        "unilateral leg swelling",
+        "calf pain"
+      ],
+      "exam": [
+        "calf swelling more than 3 cm compared with the other leg",
+        "pitting edema of one leg",
+        "tenderness along the deep veins"
+      ],
+      "labs": [
+        "raised D-dimer, useful to rule out DVT when pretest probability is low"
+      ],
+      "imaging": [
+        "compression ultrasound showing a noncompressible vein"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "compression ultrasound",
+        "D-dimer to rule out DVT when the Wells score is low"
+      ],
+      "criteria": [
+        "the Wells score estimates pretest probability"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "anticoagulation with a direct oral anticoagulant such as apixaban or rivaroxaban for at least 3 months"
+      ],
+      "next_line": [
+        "low-molecular-weight heparin in pregnancy",
+        "IVC filter only if anticoagulation is contraindicated"
+      ]
+    },
+    "complications": [
+      "pulmonary embolism",
+      "post-thrombotic syndrome",
+      "phlegmasia cerulea dolens"
+    ],
+    "confused_with": [
+      {
+        "script_id": "cellulitis",
+        "how_to_tell_apart": "Cellulitis gives warm, red, tender skin with a spreading edge and often fever; DVT gives swelling and calf pain, and ultrasound shows a noncompressible vein."
+      },
+      {
+        "script_id": "pulmonary-embolism",
+        "how_to_tell_apart": "PE adds dyspnea, pleuritic pain and hypoxemia; they are the same disease, so look for both."
+      }
+    ],
+    "pearls": [
+      "Virchow's triad: venous stasis, endothelial injury and hypercoagulability."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline and Expert Panel Report (2021)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "deep-vein-thrombosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Five days after knee surgery, the left calf is swollen 4 cm more than the right and tender. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Deep vein thrombosis",
+          "synonyms": [
+            "DVT",
+            "deep venous thrombosis",
+            "venous thrombosis",
+            "blood clot in the leg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name the three parts of Virchow's triad.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "venous stasis",
+          "synonyms": [
+            "stasis",
+            "immobility"
+          ]
+        },
+        {
+          "answer": "endothelial injury",
+          "synonyms": [
+            "endothelial damage",
+            "vessel injury",
+            "vascular injury",
+            "endothelial dysfunction"
+          ]
+        },
+        {
+          "answer": "hypercoagulability",
+          "synonyms": [
+            "hypercoagulable state",
+            "hypercoagulable",
+            "thrombophilia"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "deep-vein-thrombosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Red, swollen leg. What on ultrasound means DVT rather than cellulitis?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "noncompressible vein",
+          "synonyms": [
+            "non-compressible vein",
+            "incompressible vein",
+            "vein doesn't compress",
+            "clot in the vein",
+            "thrombus in the vein"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "High pretest probability. Which test confirms it?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "compression ultrasound",
+          "synonyms": [
+            "ultrasound",
+            "duplex ultrasound",
+            "venous duplex",
+            "Doppler ultrasound",
+            "Doppler"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Treatment for an uncomplicated DVT?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "anticoagulation",
+          "synonyms": [
+            "anticoagulant",
+            "anticoagulate",
+            "blood thinner",
+            "DOAC",
+            "apixaban",
+            "rivaroxaban",
+            "heparin",
+            "LMWH",
+            "enoxaparin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "For a provoked DVT, what's the minimum length of anticoagulation?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "3 months",
+          "synonyms": [
+            "three months",
+            "12 weeks"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -88,6 +88,10 @@
       {
         "script_id": "community-acquired-pneumonia",
         "how_to_tell_apart": "Pneumonia usually brings fever, productive cough and a focal consolidation; heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP."
+      },
+      {
+        "script_id": "copd-exacerbation",
+        "how_to_tell_apart": "A COPD exacerbation gives wheeze and more sputum in a smoker, without a raised JVP, leg edema or a high BNP."
       }
     ],
     "pearls": [

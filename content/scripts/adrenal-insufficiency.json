@@ -1,0 +1,262 @@
+{
+  "script": {
+    "id": "adrenal-insufficiency",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Adrenal insufficiency",
+    "aliases": [
+      "Addison disease",
+      "adrenal crisis"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Primary disease is usually autoimmune; secondary disease most often follows stopping long-term glucocorticoids",
+      "risk_factors": [
+        "autoimmune adrenalitis",
+        "abrupt withdrawal of long-term steroids",
+        "tuberculosis",
+        "adrenal hemorrhage",
+        "pituitary disease"
+      ]
+    },
+    "pathophysiology": "Primary disease destroys the adrenal cortex, losing cortisol and aldosterone; secondary disease lacks ACTH, losing cortisol only.",
+    "timeline": {
+      "onset": "Insidious, or a sudden crisis during illness",
+      "course": "Needs lifelong replacement; a crisis is fatal without steroids"
+    },
+    "key_findings": {
+      "history": [
+        "fatigue and weakness",
+        "weight loss",
+        "nausea, vomiting and abdominal pain",
+        "salt craving"
+      ],
+      "exam": [
+        "hypotension",
+        "hyperpigmentation of skin and gums in primary disease"
+      ],
+      "labs": [
+        "hyponatremia",
+        "hyperkalemia in primary disease",
+        "low morning cortisol",
+        "hypoglycemia"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "morning serum cortisol",
+        "ACTH stimulation test (cosyntropin)",
+        "plasma ACTH to separate primary from secondary disease"
+      ],
+      "criteria": [
+        "a peak cortisol below 18 micrograms/dL after cosyntropin confirms adrenal insufficiency"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "adrenal crisis: IV hydrocortisone 100 mg and IV saline immediately",
+        "chronic: hydrocortisone replacement",
+        "fludrocortisone in primary disease"
+      ],
+      "next_line": [
+        "double the steroid dose during illness (sick-day rules)",
+        "medical alert identification and an emergency injection kit"
+      ]
+    },
+    "complications": [
+      "adrenal crisis",
+      "shock",
+      "death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "septic-shock",
+        "how_to_tell_apart": "Septic shock also causes fluid-resistant hypotension with fever; adrenal crisis adds hyponatremia, hyperkalemia and hypoglycemia, and responds to hydrocortisone."
+      }
+    ],
+    "pearls": [
+      "Hyperkalemia and hyperpigmentation point to primary disease; in secondary disease aldosterone is intact and ACTH is low."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline (2016)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "adrenal-insufficiency.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A woman with vitiligo has months of fatigue, weight loss, salt craving and darkening skin. Sodium 128, potassium 5.9. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Adrenal insufficiency",
+          "synonyms": [
+            "Addison disease",
+            "Addison's disease",
+            "Addison's",
+            "primary adrenal insufficiency",
+            "adrenal failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of adrenal insufficiency.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "autoimmune adrenalitis",
+          "synonyms": [
+            "autoimmune",
+            "autoimmune Addison's"
+          ]
+        },
+        {
+          "answer": "abrupt withdrawal of long-term steroids",
+          "synonyms": [
+            "steroid withdrawal",
+            "stopping steroids",
+            "stopping prednisone",
+            "exogenous steroids"
+          ]
+        },
+        {
+          "answer": "tuberculosis",
+          "synonyms": [
+            "TB"
+          ]
+        },
+        {
+          "answer": "adrenal hemorrhage",
+          "synonyms": [
+            "Waterhouse-Friderichsen",
+            "adrenal bleed"
+          ]
+        },
+        {
+          "answer": "pituitary disease",
+          "synonyms": [
+            "hypopituitarism",
+            "pituitary tumor",
+            "Sheehan syndrome"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "adrenal-insufficiency.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which findings point to primary rather than secondary adrenal insufficiency?",
+      "source_fields": [
+        "key_findings.labs[1]",
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        },
+        {
+          "answer": "hyperpigmentation",
+          "synonyms": [
+            "skin darkening",
+            "bronze skin",
+            "dark skin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which dynamic test confirms the diagnosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACTH stimulation test",
+          "synonyms": [
+            "cosyntropin stimulation test",
+            "cosyntropin test",
+            "Synacthen test",
+            "short Synacthen test",
+            "ACTH stim test"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Known Addison disease, vomiting, BP 72/40. Treatment right now?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV hydrocortisone",
+          "synonyms": [
+            "hydrocortisone",
+            "hydrocortisone 100 mg",
+            "stress-dose steroids",
+            "IV steroids"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why is potassium normal in secondary adrenal insufficiency?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aldosterone is intact",
+          "synonyms": [
+            "aldosterone intact",
+            "normal aldosterone",
+            "mineralocorticoid intact"
+          ]
+        }
+      ]
+    }
+  ]
+}

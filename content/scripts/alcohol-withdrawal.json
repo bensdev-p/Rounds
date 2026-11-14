@@ -1,0 +1,251 @@
+{
+  "script": {
+    "id": "alcohol-withdrawal",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "name": "Alcohol withdrawal",
+    "aliases": [
+      "alcohol withdrawal syndrome",
+      "delirium tremens"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "psych"
+    ],
+    "epidemiology": {
+      "who": "People who drink heavily every day and stop or cut down, often on hospital admission",
+      "risk_factors": [
+        "heavy daily drinking",
+        "prior withdrawal seizures or delirium tremens",
+        "sudden abstinence",
+        "older age",
+        "acute medical illness"
+      ]
+    },
+    "pathophysiology": "Chronic alcohol enhances GABA and suppresses glutamate signalling; stopping leaves unopposed excitation.",
+    "timeline": {
+      "onset": "Tremor from about 6 hours; seizures at 12 to 48 hours; delirium tremens at 48 to 96 hours",
+      "course": "Delirium tremens can be fatal"
+    },
+    "key_findings": {
+      "history": [
+        "time of the last drink",
+        "tremor",
+        "anxiety",
+        "sweating",
+        "hallucinations"
+      ],
+      "exam": [
+        "tremor",
+        "tachycardia",
+        "hypertension",
+        "diaphoresis",
+        "agitation or confusion in delirium tremens"
+      ],
+      "labs": [
+        "hypokalemia",
+        "hypomagnesemia",
+        "hypophosphatemia",
+        "raised GGT",
+        "macrocytosis"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical diagnosis",
+        "CIWA-Ar score to grade severity"
+      ],
+      "criteria": [
+        "withdrawal symptoms after stopping or reducing heavy, prolonged drinking"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "benzodiazepines such as lorazepam or chlordiazepoxide, symptom-triggered by CIWA-Ar",
+        "thiamine before glucose",
+        "correct magnesium and potassium"
+      ],
+      "next_line": [
+        "phenobarbital for benzodiazepine-resistant withdrawal",
+        "ICU for delirium tremens"
+      ]
+    },
+    "complications": [
+      "withdrawal seizures",
+      "delirium tremens",
+      "Wernicke encephalopathy",
+      "death"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Give thiamine before glucose in heavy drinkers to avoid precipitating Wernicke encephalopathy."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "The ASAM Clinical Practice Guideline on Alcohol Withdrawal Management (2020)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "alcohol-withdrawal.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Two days after admission for a hip fracture, a heavy drinker is tremulous, sweating, anxious and tachycardic. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Alcohol withdrawal",
+          "synonyms": [
+            "alcohol withdrawal syndrome",
+            "EtOH withdrawal",
+            "ethanol withdrawal",
+            "withdrawal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three lab abnormalities common in heavy drinkers.",
+      "source_fields": [
+        "key_findings.labs"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypokalemia",
+          "synonyms": [
+            "low potassium"
+          ]
+        },
+        {
+          "answer": "hypomagnesemia",
+          "synonyms": [
+            "low magnesium"
+          ]
+        },
+        {
+          "answer": "hypophosphatemia",
+          "synonyms": [
+            "low phosphate"
+          ]
+        },
+        {
+          "answer": "raised GGT",
+          "synonyms": [
+            "high GGT",
+            "elevated GGT"
+          ]
+        },
+        {
+          "answer": "macrocytosis",
+          "synonyms": [
+            "high MCV",
+            "raised MCV",
+            "macrocytic"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "alcohol-withdrawal.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "How long after the last drink does delirium tremens usually start?",
+      "source_fields": [
+        "timeline.onset"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "48 to 96 hours",
+          "synonyms": [
+            "2 to 4 days",
+            "two to four days",
+            "48-96 hours"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which score guides symptom-triggered treatment?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CIWA-Ar",
+          "synonyms": [
+            "CIWA",
+            "CIWA score",
+            "Clinical Institute Withdrawal Assessment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment?",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "benzodiazepines",
+          "synonyms": [
+            "benzos",
+            "lorazepam",
+            "chlordiazepoxide",
+            "diazepam",
+            "Ativan",
+            "Librium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A hypoglycemic heavy drinker. What goes in before the dextrose?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thiamine",
+          "synonyms": [
+            "vitamin B1",
+            "B1"
+          ]
+        }
+      ]
+    }
+  ]
+}
