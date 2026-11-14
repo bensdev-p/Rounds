@@ -136,6 +136,26 @@
       ]
     },
     {
+      "id": "community-acquired-pneumonia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 55-year-old has two days of fever, rigors, a cough with rusty sputum and right-sided pleuritic pain. X-ray shows a lobar infiltrate. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Community-acquired pneumonia",
+          "synonyms": [
+            "CAP",
+            "pneumonia",
+            "lobar pneumonia",
+            "bacterial pneumonia"
+          ]
+        }
+      ]
+    },
+    {
       "id": "community-acquired-pneumonia.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -190,6 +210,47 @@
       ]
     },
     {
+      "id": "community-acquired-pneumonia.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of pneumonia.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "parapneumonic effusion",
+          "synonyms": [
+            "pleural effusion",
+            "effusion"
+          ]
+        },
+        {
+          "answer": "empyema",
+          "synonyms": []
+        },
+        {
+          "answer": "sepsis",
+          "synonyms": [
+            "septic shock"
+          ]
+        },
+        {
+          "answer": "ARDS",
+          "synonyms": [
+            "acute respiratory distress syndrome"
+          ]
+        },
+        {
+          "answer": "lung abscess",
+          "synonyms": [
+            "abscess"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "community-acquired-pneumonia.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -211,6 +272,24 @@
       ]
     },
     {
+      "id": "community-acquired-pneumonia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Pleuritic pain, dyspnea and hypoxemia, but clear lungs and a near-normal chest X-ray. What must you think of?",
+      "source_fields": [
+        "confused_with[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary embolism",
+          "synonyms": [
+            "PE",
+            "pulmonary embolus"
+          ]
+        }
+      ]
+    },
+    {
       "id": "community-acquired-pneumonia.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -226,6 +305,25 @@
             "chest radiograph",
             "chest film",
             "chest x ray"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does the R in CURB-65 stand for?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "respiratory rate 30 or more",
+          "synonyms": [
+            "respiratory rate",
+            "resp rate",
+            "RR"
           ]
         }
       ]
@@ -254,6 +352,31 @@
       ]
     },
     {
+      "id": "community-acquired-pneumonia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Admitted to the ward, not severe. Empirical antibiotics?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ceftriaxone plus azithromycin",
+          "synonyms": [
+            "ceftriaxone and azithromycin",
+            "ceftriaxone azithromycin"
+          ]
+        },
+        {
+          "answer": "respiratory fluoroquinolone",
+          "synonyms": [
+            "levofloxacin",
+            "moxifloxacin"
+          ]
+        }
+      ]
+    },
+    {
       "id": "community-acquired-pneumonia.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -269,6 +392,24 @@
             "AMS",
             "delirium",
             "confused"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "community-acquired-pneumonia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which severity score does the ATS/IDSA guideline prefer over CURB-65?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Pneumonia Severity Index",
+          "synonyms": [
+            "PSI",
+            "PORT score"
           ]
         }
       ]

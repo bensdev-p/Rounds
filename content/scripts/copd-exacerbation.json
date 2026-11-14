@@ -132,6 +132,26 @@
       ]
     },
     {
+      "id": "copd-exacerbation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old ex-smoker on home inhalers has a cold, then three days of worse breathlessness, wheeze and more sputum. No fever, and the X-ray shows no infiltrate. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "COPD exacerbation",
+          "synonyms": [
+            "AECOPD",
+            "acute exacerbation of COPD",
+            "exacerbation of COPD",
+            "COPD flare"
+          ]
+        }
+      ]
+    },
+    {
       "id": "copd-exacerbation.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -170,6 +190,47 @@
       "required_count": 3
     },
     {
+      "id": "copd-exacerbation.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two common triggers of a COPD exacerbation.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "viral respiratory infection",
+          "synonyms": [
+            "viral infection",
+            "virus",
+            "cold",
+            "flu"
+          ]
+        },
+        {
+          "answer": "bacterial infection",
+          "synonyms": [
+            "bacteria"
+          ]
+        },
+        {
+          "answer": "air pollution",
+          "synonyms": [
+            "pollution"
+          ]
+        },
+        {
+          "answer": "stopping inhalers",
+          "synonyms": [
+            "nonadherence",
+            "not using inhalers",
+            "stopped inhalers"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "copd-exacerbation.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -190,6 +251,26 @@
       ]
     },
     {
+      "id": "copd-exacerbation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Breathless with a raised JVP, leg edema and a high BNP. Which diagnosis fits better than COPD?",
+      "source_fields": [
+        "confused_with[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "heart failure exacerbation",
+            "CHF",
+            "HF",
+            "congestive heart failure"
+          ]
+        }
+      ]
+    },
+    {
       "id": "copd-exacerbation.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -205,6 +286,31 @@
             "blood gas",
             "venous blood gas",
             "VBG"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copd-exacerbation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Why do you get a chest X-ray in a COPD exacerbation? Name one thing it excludes.",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pneumonia",
+          "synonyms": []
+        },
+        {
+          "answer": "pneumothorax",
+          "synonyms": []
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "pulmonary edema"
           ]
         }
       ]
@@ -258,6 +364,26 @@
       "required_count": 3
     },
     {
+      "id": "copd-exacerbation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "pH 7.28, PaCO2 70 mmHg despite nebulizers and steroids. Next step?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "noninvasive ventilation",
+          "synonyms": [
+            "NIV",
+            "BiPAP",
+            "bilevel positive airway pressure",
+            "non-invasive ventilation"
+          ]
+        }
+      ]
+    },
+    {
       "id": "copd-exacerbation.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -272,6 +398,23 @@
             "88-92%",
             "88 to 92 percent",
             "88-92"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "copd-exacerbation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How long do you give systemic corticosteroids for a COPD exacerbation?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "5 days",
+          "synonyms": [
+            "five days"
           ]
         }
       ]
