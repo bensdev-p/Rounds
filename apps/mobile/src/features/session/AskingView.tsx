@@ -8,7 +8,7 @@ import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
 import { radius, space, type, useTheme } from '@/theme';
 import { Button } from '@/ui/controls';
-import { Ladder, LadderStrip, type RungState } from '@/ui/Ladder';
+import { Ladder, LadderStrip, StepStrip, type RungState } from '@/ui/Ladder';
 import { PhiWarning } from '@/ui/PhiWarning';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
@@ -19,6 +19,8 @@ export function AskingView({
   personaLabel,
   clockMs,
   rungs,
+  steps,
+  dontKnowHint = 'Ends the session on this rung',
   scriptName,
   inReview,
   prompt,
@@ -34,7 +36,11 @@ export function AskingView({
 }: {
   personaLabel: string;
   clockMs: number;
+  /** The six-rung ladder. Ignored when `steps` is given. */
   rungs: RungState[];
+  /** A short run instead of the ladder (the mix-up drill): squares and their spoken label. */
+  steps?: { states: RungState[]; label: string };
+  dontKnowHint?: string;
   scriptName: string;
   /** In-review script (local preview): show "Not yet reviewed". */
   inReview: boolean;
@@ -101,7 +107,7 @@ export function AskingView({
           variant="quiet"
           onPress={onDontKnow}
           disabled={busy}
-          accessibilityHint="Ends the session on this rung"
+          accessibilityHint={dontKnowHint}
           style={styles.dontKnow}
         />
         <Button
@@ -118,7 +124,13 @@ export function AskingView({
     <Screen footer={footer}>
       <SessionHeader title={personaLabel} clockMs={clockMs} onClose={onClose} />
       <View style={styles.ladder}>
-        {keyboard ? <LadderStrip states={rungs} /> : <Ladder states={rungs} />}
+        {steps ? (
+          <StepStrip states={steps.states} label={steps.label} />
+        ) : keyboard ? (
+          <LadderStrip states={rungs} />
+        ) : (
+          <Ladder states={rungs} />
+        )}
       </View>
       <Txt variant="meta" tone="text2" style={styles.script}>
         {scriptName}

@@ -111,12 +111,23 @@ describe('missSubtitle', () => {
     expect(missSubtitle({ question: list, matched: [] })).toBe('Missed on next most common');
   });
 
-  it('keeps a long list short', () => {
-    const long: Question = {
+  it('keeps a long list to one line', () => {
+    const items = (answers: string[]): Question => ({
       ...list,
-      accepted_answers: ['a', 'b', 'c', 'd', 'e', 'f'].map((answer) => ({ answer, synonyms: [] })),
-    };
-    expect(missSubtitle({ question: long, matched: ['a'] })).toBe('Missed b, c, d and 2 more');
+      accepted_answers: answers.map((answer) => ({ answer, synonyms: [] })),
+    });
+    const long = items([
+      'pancreatic pseudocyst',
+      'walled-off necrosis',
+      'infected necrosis',
+      'ARDS',
+      'acute kidney injury',
+    ]);
+    expect(missSubtitle({ question: long, matched: ['pancreatic pseudocyst'] })).toBe(
+      'Missed walled-off necrosis and 3 more',
+    );
+    const short = items(['a', 'b', 'c', 'd', 'e', 'f']);
+    expect(missSubtitle({ question: short, matched: ['a'] })).toBe('Missed b, c, d, e, f');
   });
 });
 

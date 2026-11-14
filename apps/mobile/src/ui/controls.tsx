@@ -238,9 +238,17 @@ export function Chip({
 }
 
 /** A section heading with an optional value or link on the right ("Logged today   3 patients"). */
-export function SectionHead({ title, right }: { title: string; right?: ReactNode }) {
+export function SectionHead({
+  title,
+  right,
+  style,
+}: {
+  title: string;
+  right?: ReactNode;
+  style?: StyleProp<ViewStyle>;
+}) {
   return (
-    <View style={styles.sectionHead}>
+    <View style={[styles.sectionHead, style]}>
       <Txt variant="h3" accessibilityRole="header">
         {title}
       </Txt>
@@ -258,6 +266,7 @@ export function List({ children }: { children: ReactNode }) {
 export function Row({
   title,
   subtitle,
+  leading,
   trailing,
   first = false,
   onPress,
@@ -266,6 +275,8 @@ export function Row({
 }: {
   title: string;
   subtitle?: string;
+  /** Before the title, e.g. a status dot. */
+  leading?: ReactNode;
   trailing?: ReactNode;
   /** The first row has no divider above it. */
   first?: boolean;
@@ -276,6 +287,7 @@ export function Row({
   const { c } = useTheme();
   const body = (
     <>
+      {leading}
       <View style={styles.grow}>
         <Txt variant="body" weight="bodyMedium" fontSize={17} lineHeight={23}>
           {title}

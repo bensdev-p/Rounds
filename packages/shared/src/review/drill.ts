@@ -26,12 +26,11 @@ export interface DrillState {
 }
 
 function shuffled<T>(items: readonly T[], random: () => number): T[] {
-  const out = [...items];
-  for (let i = out.length - 1; i > 0; i -= 1) {
-    const j = Math.min(i, Math.floor(random() * (i + 1)));
-    [out[i], out[j]] = [out[j]!, out[i]!];
-  }
-  return out;
+  // Decorate-sort: a random key per item, no index juggling.
+  return items
+    .map((item) => ({ item, key: random() }))
+    .sort((a, b) => a.key - b.key)
+    .map(({ item }) => item);
 }
 
 /**
@@ -55,8 +54,10 @@ export function pickDrill(
   ).slice(0, per);
   const out: Question[] = [];
   for (let i = 0; i < Math.max(a.length, b.length); i += 1) {
-    if (a[i]) out.push(a[i]!);
-    if (b[i]) out.push(b[i]!);
+    const fromLeft = a[i];
+    const fromRight = b[i];
+    if (fromLeft) out.push(fromLeft);
+    if (fromRight) out.push(fromRight);
   }
   return out;
 }

@@ -90,12 +90,14 @@ export function missedRows(
   return { rows: open.slice(0, max), rolled: Math.max(0, open.length - max) };
 }
 
-const MAX_LISTED = 3;
+/** Longest line under a miss before items are cut ("and 2 more"), so it stays on one line. */
+export const MAX_SUBTITLE_CHARS = 40;
 
 /**
  * The line under a missed script. A list question that named some items says
- * which ones were left out ("Missed uremia, salicylates", review.png);
- * everything else uses the miss card's label ("Missed on management").
+ * which ones were left out ("Missed uremia, salicylates", review.png), cut
+ * short to fit one line; everything else uses the miss card's label
+ * ("Missed on management").
  */
 export function missSubtitle(miss: Pick<MissRecord, 'question' | 'matched'>): string {
   const { question, matched } = miss;
@@ -103,10 +105,14 @@ export function missSubtitle(miss: Pick<MissRecord, 'question' | 'matched'>): st
     const named = new Set(matched);
     const left = question.accepted_answers.map((a) => a.answer).filter((a) => !named.has(a));
     if (left.length > 0) {
-      const shown = left.slice(0, MAX_LISTED).join(', ');
-      return left.length > MAX_LISTED
-        ? `Missed ${shown} and ${left.length - MAX_LISTED} more`
-        : `Missed ${shown}`;
+      const line = (count: number) => {
+        const shown = `Missed ${left.slice(0, count).join(', ')}`;
+        return count < left.length ? `${shown} and ${left.length - count} more` : shown;
+      };
+      // At least one item; more while the line still fits.
+      let count = 1;
+      while (count < left.length && line(count + 1).length <= MAX_SUBTITLE_CHARS) count += 1;
+      return line(count);
     }
   }
   return missLabel(question.rung);

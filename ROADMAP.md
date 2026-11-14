@@ -30,9 +30,11 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.1 (Log):** the Log tab matches `log.png` and wireframe 08. Autocomplete against script names and aliases; the patient-detail guard runs on every keystroke (names, titles, dates, 6+ digit numbers, phone numbers and the rest), turns the field coral, says exactly what to remove and turns Save off. A diagnosis with no matching script is saved under what was typed ("No script yet"). "Logged today" shows a pass dot and "Pimped, rung N" once a session on that script is finished today, otherwise a signal dot and "Not yet". Home has "From today's patients" with one-tap Start rows, "Log one" and the empty state. New `patient_logs` table (label, optional script, rotation, time; own rows only) with pgTAP tests. Tried on the phone.
 
-**Gaps:** Review, onboarding and the real Settings.
+**M2.2 (Review):** the Review tab matches `review.png`, `review-light.png` and wireframe 09. "Missed today" lists up to five scripts, oldest first; the rest roll to tomorrow, and a miss clears once a later ladder gets past the missed rung (or after a week). The line under each uses the miss card's label ("Missed on management"), or names the list items left out ("Missed uremia, salicylates"), kept to one line. Each row opens the script, whose back link then says "Review" (`script.png`). "You keep mixing these up" appears when the same pair was confused 2+ times in 7 days, with the comparison columns sliding in (video scene 7) and "Drill this pair": both scripts' Tell it apart questions, taking turns (up to 4), ending on the first miss, saved as a drill that never counts toward best rung, rounds, rank or mastery. "From today's patients" lists logged scripts not yet pimped today, with Start. The Anki row stays hidden until M3.1. New: `attempts.matched`, `ladder_sessions.kind` and `partner_script_id` (pgTAP tests); comparison rows on every `confused_with` pair (13 pairs, still `in_review`). Not yet tried on the phone.
 
-**Next: M2.2 Review.**
+**Gaps:** onboarding and the real Settings.
+
+**Next: M2.3 Accounts, onboarding, settings.**
 
 ## Screen map
 
@@ -45,12 +47,12 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
-| Illness script | 10 | script | Matches (M1.2). Mic icon M2.5 | Done |
+| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon M2.5 | Done |
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
 | Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
-| Review + mix-up drill | 09 | review, review-light | Empty state (M1.3) | M2.2 |
+| Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.1 | Done |
 | Onboarding | 01 | — | Not built | M2.3 |
 | Settings | 12 | — | Placeholder (M1.3): daily goal and disclaimer | M2.3 (Anki part: M3.1) |
 | Live session, voice | 04 | session | Not built | M2.5 |
@@ -148,6 +150,10 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Deleting or editing a patient log. Not drawn; the table already allows deleting your own rows.
 - (14 Nov 2026) Use the Log's warning wording ('Remove "…" and keep only the diagnosis') on the topic picker search and the flag note too.
 - (14 Nov 2026) The Log's matching-script subtitle reads "Internal medicine, cardiology" in `log.png`; it needs the same "system" field as the filter chips.
+- (14 Nov 2026) Mix-up pairs on Profile (PRODUCT.md lists them there). M2.2 shows only the week's top pair, on Review.
+- (14 Nov 2026) More than one mix-up pair on Review at a time. Wireframe 09 draws one, and the review is meant to end.
+- (14 Nov 2026) A drawn screen for the mix-up drill and its result. M2.2 reuses the live session (four squares instead of the ladder) and the result screen's pieces.
+- (14 Nov 2026) Short column headers on the comparison ("Nephritic" in `review.png`). Scripts have only full names, so long ones wrap to two lines.
 - (14 Nov 2026) Where the daily goal lives for good. M1.3 moved it from Progress to the Settings placeholder, but wireframe 12 has no row for it; onboarding (wireframe 01) sets it. Decide when Settings is built in M2.3.
 
 ---

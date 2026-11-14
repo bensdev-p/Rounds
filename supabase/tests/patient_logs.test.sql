@@ -81,6 +81,10 @@ select is((select count(*)::int from public.patient_logs), 0, 'B cannot see A''s
 
 delete from public.patient_logs;
 reset role;
-select is((select count(*)::int from public.patient_logs), 2, 'B cannot delete A''s logs');
+select is(
+  (select count(*)::int from public.patient_logs where user_id = '11111111-1111-1111-1111-111111111111'),
+  2,
+  'B cannot delete A''s logs'
+);
 
 select * from finish();
