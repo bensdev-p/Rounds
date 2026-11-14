@@ -196,9 +196,10 @@ export function checkContent(
 }
 
 /**
- * Approved scripts and their questions, ready to seed. Drafts never leave the
- * repo. Links to scripts that aren't approved yet stay in place (questions may
- * cite them by index); the app only shows links to approved scripts.
+ * Scripts to seed: approved ones, plus `in_review` ones for the local preview
+ * (the database only shows those when `show_in_review` is on). Drafts never
+ * leave the repo. Links to unseeded scripts stay in place (questions may cite
+ * them by index); the app only shows links to scripts the student can see.
  */
 export function seedable(files: readonly ContentFile[]): {
   scripts: IllnessScript[];
@@ -206,10 +207,12 @@ export function seedable(files: readonly ContentFile[]): {
   /** Every script id in the repo: valid link targets even if not seeded yet. */
   linkTargets: Set<string>;
 } {
-  const approved = files.filter((f) => f.script.status === 'approved');
+  const seeded = files.filter(
+    (f) => f.script.status === 'approved' || f.script.status === 'in_review',
+  );
   return {
-    scripts: approved.map((f) => f.script),
-    questions: approved.flatMap((f) => f.questions),
+    scripts: seeded.map((f) => f.script),
+    questions: seeded.flatMap((f) => f.questions),
     linkTargets: new Set(files.map((f) => f.script.id)),
   };
 }

@@ -326,6 +326,7 @@ function Session({
       <>
         <ResultView
           scriptName={script.name}
+          inReview={script.status === 'in_review'}
           summary={summary}
           missCard={missCard}
           personaLine={
@@ -364,6 +365,7 @@ function Session({
         personaLabel={personaLabel}
         clockMs={clockMs}
         scriptName={script.name}
+        inReview={script.status === 'in_review'}
         rungNumber={rungIndex(last.question.rung) + 1}
         question={last.question}
         result={last.result}
@@ -388,6 +390,7 @@ function Session({
       clockMs={clockMs}
       rungs={rungs}
       scriptName={script.name}
+      inReview={script.status === 'in_review'}
       prompt={shownQuestion?.prompt ?? ''}
       isList={shownQuestion?.kind === 'list'}
       answer={answer}

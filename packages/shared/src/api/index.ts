@@ -58,13 +58,14 @@ export interface ScriptSummary {
   bestRung: number | null;
 }
 
-/** Approved scripts that have at least one question, with the student's best rung on each. */
+/** Visible scripts with at least one question, and the student's best rung on each. */
 export async function listPimpableScripts(
   client: RoundsClient,
   onReject: RejectHandler = warnRejected,
 ): Promise<ScriptSummary[]> {
   const [scripts, questions, progress] = await Promise.all([
-    client.from('illness_scripts').select('*').eq('status', 'approved').order('id'),
+    // RLS decides what's visible: approved, plus in-review when previewing.
+    client.from('illness_scripts').select('*').in('status', ['approved', 'in_review']).order('id'),
     client.from('questions').select('script_id'),
     client.from('script_progress').select('script_id, best_rung'),
   ]);

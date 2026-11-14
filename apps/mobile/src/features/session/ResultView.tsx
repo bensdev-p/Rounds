@@ -54,6 +54,7 @@ function roundsLine(r: ResultSummary): string {
 
 export function ResultView({
   scriptName,
+  inReview,
   summary,
   missCard,
   personaLine,
@@ -66,6 +67,8 @@ export function ResultView({
   primaryLabel,
 }: {
   scriptName: string;
+  /** In-review script (local preview): the miss card says it isn't reviewed yet. */
+  inReview: boolean;
   summary: ResultSummary;
   missCard: MissCard | null;
   personaLine: string | null;
@@ -144,6 +147,11 @@ export function ResultView({
             )}
             {missCard.correction}
           </Txt>
+          {inReview && (
+            <Txt variant="small" tone="text3">
+              {"This script hasn't been reviewed yet. If this looks off, flag it."}
+            </Txt>
+          )}
           <Link label="Review the script" onPress={onReviewScript} />
         </Panel>
       )}

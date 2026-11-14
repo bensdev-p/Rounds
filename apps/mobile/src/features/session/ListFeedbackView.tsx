@@ -12,6 +12,7 @@ export function ListFeedbackView({
   personaLabel,
   clockMs,
   scriptName,
+  inReview,
   rungNumber,
   question,
   result,
@@ -22,6 +23,7 @@ export function ListFeedbackView({
   personaLabel: string;
   clockMs: number;
   scriptName: string;
+  inReview: boolean;
   rungNumber: number;
   question: Extract<Question, { kind: 'list' }>;
   result: GradeResult;
@@ -36,12 +38,15 @@ export function ListFeedbackView({
   const full = got.length >= question.required_count;
 
   return (
-    <Screen
-      footer={<Button label={last ? 'See result' : 'Next question'} onPress={onNext} />}
-    >
+    <Screen footer={<Button label={last ? 'See result' : 'Next question'} onPress={onNext} />}>
       <SessionHeader title={personaLabel} clockMs={clockMs} onClose={onClose} />
       <Txt variant="meta" tone="text2" fontSize={16} style={styles.where}>
         {scriptName}, rung {rungNumber}
+        {inReview && (
+          <Txt variant="meta" tone="text3" fontSize={14}>
+            {'  ·  Not yet reviewed'}
+          </Txt>
+        )}
       </Txt>
       <Txt variant="question" accessibilityRole="header" style={styles.prompt}>
         {question.prompt}

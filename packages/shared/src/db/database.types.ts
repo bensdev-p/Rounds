@@ -3,6 +3,22 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      app_settings: {
+        Row: {
+          key: string;
+          value: boolean;
+        };
+        ComputedFields: never;
+        Insert: {
+          key: string;
+          value: boolean;
+        };
+        Update: {
+          key?: string;
+          value?: boolean;
+        };
+        Relationships: [];
+      };
       attempts: {
         Row: {
           answer: string;
@@ -292,6 +308,7 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      show_in_review: { Args: Record<PropertyKey, never>; Returns: boolean };
     };
     Enums: {
       flag_reason: 'marked_wrong' | 'unclear' | 'script_error' | 'other';

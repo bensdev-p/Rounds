@@ -70,6 +70,9 @@ function sections(s: IllnessScript): { title: string; body: string }[] {
 }
 
 function reviewedLine(s: IllnessScript): string | null {
+  if (s.status === 'in_review') {
+    return 'Not yet reviewed. Double-check anything that looks off, and flag it below.';
+  }
   if (!s.reviewed_by || !s.reviewed_at) return null;
   const date = new Date(s.reviewed_at).toLocaleDateString('en-US', {
     month: 'short',

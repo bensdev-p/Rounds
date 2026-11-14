@@ -20,6 +20,7 @@ export function AskingView({
   clockMs,
   rungs,
   scriptName,
+  inReview,
   prompt,
   isList,
   answer,
@@ -35,6 +36,8 @@ export function AskingView({
   clockMs: number;
   rungs: RungState[];
   scriptName: string;
+  /** In-review script (local preview): show "Not yet reviewed". */
+  inReview: boolean;
   prompt: string;
   isList: boolean;
   answer: string;
@@ -119,6 +122,11 @@ export function AskingView({
       </View>
       <Txt variant="meta" tone="text2" fontSize={16} style={styles.script}>
         {scriptName}
+        {inReview && (
+          <Txt variant="meta" tone="text3" fontSize={14}>
+            {'  ·  Not yet reviewed'}
+          </Txt>
+        )}
       </Txt>
       <Txt
         variant="question"

@@ -1,13 +1,20 @@
 {
   "script": {
     "id": "atrial-fibrillation",
-    "status": "draft",
+    "status": "in_review",
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
     "name": "Atrial fibrillation",
-    "aliases": ["AF", "AFib"],
-    "rotation": ["IM", "EM", "FM"],
+    "aliases": [
+      "AF",
+      "AFib"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "FM"
+    ],
     "epidemiology": {
       "who": "Mostly older adults; prevalence rises sharply with age",
       "risk_factors": [
@@ -27,14 +34,31 @@
       "course": "Often starts paroxysmal and becomes persistent or permanent over time"
     },
     "key_findings": {
-      "history": ["palpitations", "dyspnea", "fatigue", "lightheadedness", "sometimes no symptoms"],
-      "exam": ["irregularly irregular pulse", "variable intensity of S1"],
-      "labs": ["TSH to look for hyperthyroidism"],
-      "imaging": ["echocardiogram for chamber size, valves and ejection fraction"]
+      "history": [
+        "palpitations",
+        "dyspnea",
+        "fatigue",
+        "lightheadedness",
+        "sometimes no symptoms"
+      ],
+      "exam": [
+        "irregularly irregular pulse",
+        "variable intensity of S1"
+      ],
+      "labs": [
+        "TSH to look for hyperthyroidism"
+      ],
+      "imaging": [
+        "echocardiogram for chamber size, valves and ejection fraction"
+      ]
     },
     "diagnosis": {
-      "confirmatory_tests": ["12-lead ECG"],
-      "criteria": ["ECG: irregularly irregular rhythm with no discernible P waves"]
+      "confirmatory_tests": [
+        "12-lead ECG"
+      ],
+      "criteria": [
+        "ECG: irregularly irregular rhythm with no discernible P waves"
+      ]
     },
     "management": {
       "first_line": [
@@ -47,18 +71,35 @@
         "if AF has lasted 48 hours or more or the duration is unknown, anticoagulate for 3 weeks before elective cardioversion or exclude clot with a transesophageal echocardiogram"
       ]
     },
-    "complications": ["ischemic stroke", "systemic embolism", "tachycardia-induced cardiomyopathy", "heart failure"],
+    "complications": [
+      "ischemic stroke",
+      "systemic embolism",
+      "tachycardia-induced cardiomyopathy",
+      "heart failure"
+    ],
     "confused_with": [],
     "pearls": [
       "Direct oral anticoagulants are preferred over warfarin, except with a mechanical heart valve or moderate to severe mitral stenosis."
     ],
     "difficulty_tiers": {
-      "MS1-2": ["pathophysiology"],
-      "MS3": ["diagnosis.criteria[0]", "management.first_line"],
-      "MS4": ["pearls[0]", "management.next_line[1]"]
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.criteria[0]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line[1]"
+      ]
     },
     "anki_refs": [],
-    "sources": [{ "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation" }]
+    "sources": [
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      }
+    ]
   },
   "questions": [
     {
@@ -66,9 +107,20 @@
       "rung": "recall",
       "kind": "single",
       "prompt": "A 70-year-old with hypertension has two days of palpitations and an irregularly irregular pulse of 130. Most likely rhythm?",
-      "source_fields": ["name"],
+      "source_fields": [
+        "name"
+      ],
       "accepted_answers": [
-        { "answer": "Atrial fibrillation", "synonyms": ["AF", "AFib", "a fib", "afib with RVR", "AF with RVR"] }
+        {
+          "answer": "Atrial fibrillation",
+          "synonyms": [
+            "AF",
+            "AFib",
+            "a fib",
+            "afib with RVR",
+            "AF with RVR"
+          ]
+        }
       ]
     },
     {
@@ -77,19 +129,70 @@
       "kind": "list",
       "required_count": 3,
       "prompt": "Name three risk factors for atrial fibrillation.",
-      "source_fields": ["epidemiology.risk_factors"],
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
       "accepted_answers": [
-        { "answer": "older age", "synonyms": ["age", "elderly", "aging"] },
-        { "answer": "hypertension", "synonyms": ["high blood pressure", "HTN"] },
-        { "answer": "heart failure", "synonyms": ["CHF", "HF"] },
+        {
+          "answer": "older age",
+          "synonyms": [
+            "age",
+            "elderly",
+            "aging"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "CHF",
+            "HF"
+          ]
+        },
         {
           "answer": "valvular heart disease",
-          "synonyms": ["valve disease", "mitral stenosis", "mitral regurgitation", "mitral valve disease"]
+          "synonyms": [
+            "valve disease",
+            "mitral stenosis",
+            "mitral regurgitation",
+            "mitral valve disease"
+          ]
         },
-        { "answer": "obesity", "synonyms": ["obese"] },
-        { "answer": "obstructive sleep apnea", "synonyms": ["OSA", "sleep apnea"] },
-        { "answer": "alcohol", "synonyms": ["binge drinking", "holiday heart", "ethanol"] },
-        { "answer": "hyperthyroidism", "synonyms": ["thyrotoxicosis", "Graves disease", "overactive thyroid"] }
+        {
+          "answer": "obesity",
+          "synonyms": [
+            "obese"
+          ]
+        },
+        {
+          "answer": "obstructive sleep apnea",
+          "synonyms": [
+            "OSA",
+            "sleep apnea"
+          ]
+        },
+        {
+          "answer": "alcohol",
+          "synonyms": [
+            "binge drinking",
+            "holiday heart",
+            "ethanol"
+          ]
+        },
+        {
+          "answer": "hyperthyroidism",
+          "synonyms": [
+            "thyrotoxicosis",
+            "Graves disease",
+            "overactive thyroid"
+          ]
+        }
       ]
     },
     {
@@ -97,11 +200,19 @@
       "rung": "differentiate",
       "kind": "single",
       "prompt": "Irregular narrow-complex tachycardia. What on the ECG tells you it is AF rather than atrial flutter?",
-      "source_fields": ["diagnosis.criteria[0]"],
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
       "accepted_answers": [
         {
           "answer": "no discernible P waves",
-          "synonyms": ["no P waves", "absent P waves", "fibrillatory waves", "no flutter waves", "no organized atrial activity"]
+          "synonyms": [
+            "no P waves",
+            "absent P waves",
+            "fibrillatory waves",
+            "no flutter waves",
+            "no organized atrial activity"
+          ]
         }
       ]
     },
@@ -110,11 +221,19 @@
       "rung": "workup",
       "kind": "single",
       "prompt": "Which blood test looks for a reversible cause of new AF?",
-      "source_fields": ["key_findings.labs[0]"],
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
       "accepted_answers": [
         {
           "answer": "TSH",
-          "synonyms": ["thyroid function tests", "thyroid function", "TFTs", "thyroid stimulating hormone", "free T4"]
+          "synonyms": [
+            "thyroid function tests",
+            "thyroid function",
+            "TFTs",
+            "thyroid stimulating hormone",
+            "free T4"
+          ]
         }
       ]
     },
@@ -123,15 +242,28 @@
       "rung": "management",
       "kind": "single",
       "prompt": "Stable, heart rate 130. Which drug do you reach for to control the rate?",
-      "source_fields": ["management.first_line[0]"],
+      "source_fields": [
+        "management.first_line[0]"
+      ],
       "accepted_answers": [
         {
           "answer": "beta-blocker",
-          "synonyms": ["beta blocker", "metoprolol", "esmolol", "atenolol", "carvedilol"]
+          "synonyms": [
+            "beta blocker",
+            "metoprolol",
+            "esmolol",
+            "atenolol",
+            "carvedilol"
+          ]
         },
         {
           "answer": "nondihydropyridine calcium channel blocker",
-          "synonyms": ["diltiazem", "verapamil", "non-DHP calcium channel blocker", "calcium channel blocker"]
+          "synonyms": [
+            "diltiazem",
+            "verapamil",
+            "non-DHP calcium channel blocker",
+            "calcium channel blocker"
+          ]
         }
       ]
     },
@@ -140,11 +272,22 @@
       "rung": "pearl",
       "kind": "single",
       "prompt": "Which class of anticoagulant is preferred over warfarin for most patients with AF?",
-      "source_fields": ["pearls[0]"],
+      "source_fields": [
+        "pearls[0]"
+      ],
       "accepted_answers": [
         {
           "answer": "direct oral anticoagulants",
-          "synonyms": ["DOAC", "DOACs", "NOAC", "NOACs", "apixaban", "rivaroxaban", "edoxaban", "dabigatran"]
+          "synonyms": [
+            "DOAC",
+            "DOACs",
+            "NOAC",
+            "NOACs",
+            "apixaban",
+            "rivaroxaban",
+            "edoxaban",
+            "dabigatran"
+          ]
         }
       ]
     }

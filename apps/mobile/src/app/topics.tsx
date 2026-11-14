@@ -28,7 +28,10 @@ export default function Topics() {
   if (scripts.status === 'loading') return <Loading label="Loading topics" />;
   if (scripts.status === 'error') {
     return (
-      <ErrorView message={`Couldn't load topics. ${scripts.error.message}`} onRetry={scripts.reload} />
+      <ErrorView
+        message={`Couldn't load topics. ${scripts.error.message}`}
+        onRetry={scripts.reload}
+      />
     );
   }
 
@@ -52,10 +55,7 @@ export default function Topics() {
       </Txt>
 
       <View
-        style={[
-          styles.field,
-          { backgroundColor: c.surface, borderColor: phi ? c.miss : c.line },
-        ]}
+        style={[styles.field, { backgroundColor: c.surface, borderColor: phi ? c.miss : c.line }]}
       >
         <Search size={20} color={c.text2} />
         <TextInput
@@ -75,7 +75,9 @@ export default function Topics() {
       <View style={styles.list}>
         {shown.length === 0 ? (
           <Txt variant="meta" tone="text2">
-            {scripts.data.length === 0 ? 'No approved scripts yet.' : 'No topic matches that search.'}
+            {scripts.data.length === 0
+              ? 'No approved scripts yet.'
+              : 'No topic matches that search.'}
           </Txt>
         ) : (
           <List>
@@ -84,7 +86,12 @@ export default function Topics() {
                 key={script.id}
                 first={i === 0}
                 title={script.name}
-                subtitle={bestRung === null ? 'Not tried' : `Best rung ${bestRung}`}
+                subtitle={[
+                  bestRung === null ? 'Not tried' : `Best rung ${bestRung}`,
+                  script.status === 'in_review' ? 'Not yet reviewed' : null,
+                ]
+                  .filter(Boolean)
+                  .join('  ·  ')}
                 accessibilityHint="Starts a session on this topic"
                 onPress={() =>
                   router.push({

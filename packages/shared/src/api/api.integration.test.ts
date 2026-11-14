@@ -65,7 +65,7 @@ describe('Rounds API against local Supabase', () => {
     expect(zorblax?.bestRung).toBeNull();
     // quellan-fever is approved but has no questions, so it isn't pimpable.
     expect(scripts.map((s) => s.script.id)).not.toContain('quellan-fever');
-    expect(scripts.every((s) => s.script.status === 'approved')).toBe(true);
+    expect(scripts.every((s) => ['approved', 'in_review'].includes(s.script.status))).toBe(true);
   });
 
   it('loads a ladder with traced questions and confusables', () => {

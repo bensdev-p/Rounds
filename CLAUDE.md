@@ -50,6 +50,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 
 1. **The illness script is the source of truth.** Every question, every accepted answer and every grading rubric must trace to fields in an approved script. The AI never invents medical facts at runtime.
 2. **Script status:** `draft` → `in_review` → `approved` → `retired`. Only `approved` scripts are used for pimping. Every approved script records `reviewed_by` and `reviewed_at`.
+   - **Stage 1 local preview (developer's decision, 2026-11-13):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed turns it on; never set it on a hosted database. Drafts are never shown.
 3. **The pimp ladder** escalates until the student misses, then ends. Score = the rung reached. Partial credit applies to list questions ("name 5 causes").
 4. **Miss tagging is automatic:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`. The user never fills in a form.
 5. **No patient data (PHI), ever.** The patient log stores a diagnosis label, rotation and date only. Free-text inputs must warn on, and block, anything resembling names, dates of birth, medical record numbers, phone numbers or addresses. Do not add fields that could hold patient details.

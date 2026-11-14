@@ -124,6 +124,13 @@ describe('checkContent and seedable', () => {
     );
   });
 
+  it('seeds approved and in-review scripts, never drafts', () => {
+    const draft = draftFile();
+    const inReview: ContentFile = { ...draft, script: { ...draft.script, status: 'in_review' } };
+    expect(seedable([draft]).scripts).toEqual([]);
+    expect(seedable([inReview]).scripts.map((s) => s.id)).toEqual(['zorblax-syndrome']);
+  });
+
   it('seeds only approved scripts, keeping links to scripts still in review', () => {
     const quellanRaw = rawDraft('quellan-fever');
     // quellan-fever has one question in the fixtures; seedable doesn't need a full ladder.

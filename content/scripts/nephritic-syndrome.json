@@ -1,13 +1,18 @@
 {
   "script": {
     "id": "nephritic-syndrome",
-    "status": "draft",
+    "status": "in_review",
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
     "name": "Nephritic syndrome",
-    "aliases": ["acute glomerulonephritis"],
-    "rotation": ["IM", "peds"],
+    "aliases": [
+      "acute glomerulonephritis"
+    ],
+    "rotation": [
+      "IM",
+      "peds"
+    ],
     "epidemiology": {
       "who": "Children and adults; post-infectious glomerulonephritis is common in children, and IgA nephropathy is the most common glomerulonephritis worldwide",
       "risk_factors": [
@@ -25,8 +30,15 @@
       "course": "Post-streptococcal disease usually resolves in children; rapidly progressive forms can cause kidney failure within weeks"
     },
     "key_findings": {
-      "history": ["cola-colored urine", "reduced urine output", "recent sore throat or skin infection"],
-      "exam": ["hypertension", "periorbital or leg edema"],
+      "history": [
+        "cola-colored urine",
+        "reduced urine output",
+        "recent sore throat or skin infection"
+      ],
+      "exam": [
+        "hypertension",
+        "periorbital or leg edema"
+      ],
       "labs": [
         "hematuria with red blood cell casts and dysmorphic red cells",
         "rising creatinine",
@@ -42,7 +54,9 @@
         "serologies: ANCA, anti-GBM, ANA, ASO",
         "kidney biopsy"
       ],
-      "criteria": ["hematuria with red cell casts, hypertension, edema and reduced kidney function"]
+      "criteria": [
+        "hematuria with red cell casts, hypertension, edema and reduced kidney function"
+      ]
     },
     "management": {
       "first_line": [
@@ -73,12 +87,25 @@
       "IgA nephropathy causes hematuria within a few days of an upper respiratory infection, while post-streptococcal glomerulonephritis appears 1 to 3 weeks after a sore throat."
     ],
     "difficulty_tiers": {
-      "MS1-2": ["pathophysiology"],
-      "MS3": ["key_findings.labs[0]", "epidemiology.risk_factors", "management.first_line"],
-      "MS4": ["pearls[0]", "management.next_line[1]"]
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.labs[0]",
+        "epidemiology.risk_factors",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line[1]"
+      ]
     },
     "anki_refs": [],
-    "sources": [{ "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases" }]
+    "sources": [
+      {
+        "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases"
+      }
+    ]
   },
   "questions": [
     {
@@ -86,7 +113,9 @@
       "rung": "recall",
       "kind": "single",
       "prompt": "A 10-year-old has cola-colored urine and puffy eyes two weeks after strep throat. Blood pressure is 150/95. Which syndrome?",
-      "source_fields": ["name"],
+      "source_fields": [
+        "name"
+      ],
       "accepted_answers": [
         {
           "answer": "Nephritic syndrome",
@@ -107,23 +136,60 @@
       "kind": "list",
       "required_count": 3,
       "prompt": "Name three causes of nephritic syndrome.",
-      "source_fields": ["epidemiology.risk_factors"],
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
       "accepted_answers": [
         {
           "answer": "post-streptococcal glomerulonephritis",
-          "synonyms": ["PSGN", "post-strep", "post-infectious glomerulonephritis", "poststreptococcal"]
+          "synonyms": [
+            "PSGN",
+            "post-strep",
+            "post-infectious glomerulonephritis",
+            "poststreptococcal"
+          ]
         },
-        { "answer": "IgA nephropathy", "synonyms": ["IgAN", "Berger disease", "IgA"] },
-        { "answer": "lupus nephritis", "synonyms": ["lupus", "SLE"] },
+        {
+          "answer": "IgA nephropathy",
+          "synonyms": [
+            "IgAN",
+            "Berger disease",
+            "IgA"
+          ]
+        },
+        {
+          "answer": "lupus nephritis",
+          "synonyms": [
+            "lupus",
+            "SLE"
+          ]
+        },
         {
           "answer": "ANCA-associated vasculitis",
-          "synonyms": ["ANCA vasculitis", "granulomatosis with polyangiitis", "GPA", "microscopic polyangiitis", "MPA", "EGPA"]
+          "synonyms": [
+            "ANCA vasculitis",
+            "granulomatosis with polyangiitis",
+            "GPA",
+            "microscopic polyangiitis",
+            "MPA",
+            "EGPA"
+          ]
         },
         {
           "answer": "anti-GBM disease",
-          "synonyms": ["Goodpasture", "Goodpasture syndrome", "Goodpasture disease", "anti-glomerular basement membrane disease"]
+          "synonyms": [
+            "Goodpasture",
+            "Goodpasture syndrome",
+            "Goodpasture disease",
+            "anti-glomerular basement membrane disease"
+          ]
         },
-        { "answer": "infective endocarditis", "synonyms": ["endocarditis"] }
+        {
+          "answer": "infective endocarditis",
+          "synonyms": [
+            "endocarditis"
+          ]
+        }
       ]
     },
     {
@@ -131,11 +197,18 @@
       "rung": "differentiate",
       "kind": "single",
       "prompt": "Which urine microscopy finding marks a nephritic rather than a nephrotic picture?",
-      "source_fields": ["confused_with[0].how_to_tell_apart"],
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
       "accepted_answers": [
         {
           "answer": "red blood cell casts",
-          "synonyms": ["RBC casts", "red cell casts", "red cell cast", "RBC cast"]
+          "synonyms": [
+            "RBC casts",
+            "red cell casts",
+            "red cell cast",
+            "RBC cast"
+          ]
         }
       ]
     },
@@ -144,9 +217,19 @@
       "rung": "workup",
       "kind": "single",
       "prompt": "Which blood test is low in post-streptococcal glomerulonephritis but normal in IgA nephropathy?",
-      "source_fields": ["key_findings.labs[3]"],
+      "source_fields": [
+        "key_findings.labs[3]"
+      ],
       "accepted_answers": [
-        { "answer": "C3", "synonyms": ["complement C3", "complement", "complement levels", "low complement"] }
+        {
+          "answer": "C3",
+          "synonyms": [
+            "complement C3",
+            "complement",
+            "complement levels",
+            "low complement"
+          ]
+        }
       ]
     },
     {
@@ -154,14 +237,34 @@
       "rung": "management",
       "kind": "single",
       "prompt": "Post-streptococcal glomerulonephritis with edema and a blood pressure of 160/100. How do you manage it?",
-      "source_fields": ["management.first_line"],
+      "source_fields": [
+        "management.first_line"
+      ],
       "accepted_answers": [
-        { "answer": "supportive care", "synonyms": ["supportive"] },
+        {
+          "answer": "supportive care",
+          "synonyms": [
+            "supportive"
+          ]
+        },
         {
           "answer": "blood pressure control",
-          "synonyms": ["BP control", "antihypertensives", "lower the blood pressure"]
+          "synonyms": [
+            "BP control",
+            "antihypertensives",
+            "lower the blood pressure"
+          ]
         },
-        { "answer": "loop diuretics", "synonyms": ["loop diuretic", "diuretics", "diuretic", "furosemide", "Lasix"] }
+        {
+          "answer": "loop diuretics",
+          "synonyms": [
+            "loop diuretic",
+            "diuretics",
+            "diuretic",
+            "furosemide",
+            "Lasix"
+          ]
+        }
       ]
     },
     {
@@ -169,8 +272,19 @@
       "rung": "pearl",
       "kind": "single",
       "prompt": "Hematuria starts two days into a cold. Which glomerulonephritis is that?",
-      "source_fields": ["pearls[0]"],
-      "accepted_answers": [{ "answer": "IgA nephropathy", "synonyms": ["IgAN", "Berger disease", "IgA"] }]
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IgA nephropathy",
+          "synonyms": [
+            "IgAN",
+            "Berger disease",
+            "IgA"
+          ]
+        }
+      ]
     }
   ]
 }
