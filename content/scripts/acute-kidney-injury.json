@@ -126,6 +126,26 @@
       ]
     },
     {
+      "id": "acute-kidney-injury.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Two days after a contrast CT, an inpatient's creatinine has gone from 1.0 to 1.6 mg/dL. What is this?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "acute renal failure",
+            "ARF",
+            "kidney injury"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-kidney-injury.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -184,6 +204,51 @@
       "required_count": 3
     },
     {
+      "id": "acute-kidney-injury.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of AKI.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "raised potassium"
+          ]
+        },
+        {
+          "answer": "metabolic acidosis",
+          "synonyms": [
+            "acidosis"
+          ]
+        },
+        {
+          "answer": "volume overload",
+          "synonyms": [
+            "fluid overload",
+            "pulmonary edema"
+          ]
+        },
+        {
+          "answer": "uremic pericarditis",
+          "synonyms": [
+            "pericarditis"
+          ]
+        },
+        {
+          "answer": "progression to chronic kidney disease",
+          "synonyms": [
+            "chronic kidney disease",
+            "CKD"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "acute-kidney-injury.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -198,6 +263,24 @@
             "FENa",
             "FE Na",
             "fractional sodium excretion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "The urine shows muddy brown granular casts. Which kind of AKI?",
+      "source_fields": [
+        "key_findings.labs[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acute tubular necrosis",
+          "synonyms": [
+            "ATN",
+            "tubular necrosis"
           ]
         }
       ]
@@ -223,6 +306,24 @@
       ]
     },
     {
+      "id": "acute-kidney-injury.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "How much must creatinine rise within 48 hours to call it AKI?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "0.3 mg/dL",
+          "synonyms": [
+            "0.3",
+            "0.3 mg"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-kidney-injury.management.1",
       "rung": "management",
       "kind": "single",
@@ -240,6 +341,26 @@
             "crystalloid",
             "hydration",
             "fluid resuscitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-kidney-injury.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "An older man with AKI has a palpable bladder. First step?",
+      "source_fields": [
+        "management.first_line[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "relieve obstruction",
+          "synonyms": [
+            "bladder catheter",
+            "urinary catheter",
+            "Foley",
+            "catheterize"
           ]
         }
       ]
@@ -297,6 +418,25 @@
         }
       ],
       "required_count": 3
+    },
+    {
+      "id": "acute-kidney-injury.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which BUN-to-creatinine ratio suggests prerenal AKI?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "above 20",
+          "synonyms": [
+            "more than 20",
+            "over 20",
+            "greater than 20"
+          ]
+        }
+      ]
     }
   ]
 }

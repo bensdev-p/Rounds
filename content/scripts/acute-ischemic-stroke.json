@@ -121,6 +121,26 @@
       ]
     },
     {
+      "id": "acute-ischemic-stroke.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 64-year-old in atrial fibrillation suddenly can't lift her left arm, and her face droops on that side. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute ischemic stroke",
+          "synonyms": [
+            "stroke",
+            "ischemic stroke",
+            "CVA",
+            "cerebrovascular accident"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-ischemic-stroke.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -175,6 +195,46 @@
       "required_count": 3
     },
     {
+      "id": "acute-ischemic-stroke.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications in the first days after an ischemic stroke.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hemorrhagic transformation",
+          "synonyms": [
+            "hemorrhagic conversion",
+            "bleeding into the infarct"
+          ]
+        },
+        {
+          "answer": "cerebral edema",
+          "synonyms": [
+            "brain swelling",
+            "brain edema"
+          ]
+        },
+        {
+          "answer": "aspiration pneumonia",
+          "synonyms": [
+            "aspiration",
+            "pneumonia"
+          ]
+        },
+        {
+          "answer": "dysphagia",
+          "synonyms": [
+            "swallowing difficulty",
+            "trouble swallowing"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "acute-ischemic-stroke.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -190,6 +250,27 @@
             "blood glucose",
             "blood sugar",
             "point-of-care glucose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-ischemic-stroke.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Before giving a thrombolytic, what must the noncontrast CT exclude?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hemorrhage",
+          "synonyms": [
+            "bleed",
+            "bleeding",
+            "intracranial hemorrhage",
+            "hemorrhagic stroke",
+            "ICH"
           ]
         }
       ]
@@ -211,6 +292,24 @@
             "non-contrast CT",
             "CT brain",
             "CT scan of the head"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-ischemic-stroke.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "The CT shows no bleed. Which scan looks for a large vessel occlusion?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CT angiography",
+          "synonyms": [
+            "CTA",
+            "CT angiogram"
           ]
         }
       ]
@@ -244,6 +343,25 @@
       ]
     },
     {
+      "id": "acute-ischemic-stroke.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Left M1 occlusion on CTA, last known well 10 hours ago. Treatment?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mechanical thrombectomy",
+          "synonyms": [
+            "thrombectomy",
+            "endovascular thrombectomy",
+            "clot retrieval"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-ischemic-stroke.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -257,6 +375,25 @@
           "synonyms": [
             "185 over 110",
             "185/110 mmHg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-ischemic-stroke.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the time window for IV thrombolysis, counted from last known well?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "4.5 hours",
+          "synonyms": [
+            "4.5 h",
+            "four and a half hours",
+            "4 and a half hours"
           ]
         }
       ]
