@@ -23,7 +23,7 @@ export function SessionHeader({
   return (
     <View style={styles.row}>
       <IconButton icon={X} label={closeLabel} onPress={onClose} />
-      <Txt variant="meta" tone="text2" fontSize={16} numberOfLines={1} style={styles.title}>
+      <Txt variant="meta" tone="text2" numberOfLines={1} style={styles.title}>
         {title}
       </Txt>
       <View style={styles.side}>
@@ -31,7 +31,7 @@ export function SessionHeader({
           <Txt
             variant="h2"
             tone="text2"
-            fontSize={20}
+            fontSize={18}
             tabular
             accessibilityLabel={`Time ${formatClock(clockMs)}`}
           >
@@ -46,5 +46,5 @@ export function SessionHeader({
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   title: { flex: 1, textAlign: 'center' },
-  side: { width: 44, alignItems: 'flex-end' },
+  side: { width: 36, alignItems: 'flex-end' },
 });

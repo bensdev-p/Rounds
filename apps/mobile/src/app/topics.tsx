@@ -49,6 +49,7 @@ export default function Topics() {
       <Link
         label="Pimp"
         icon={ChevronLeft}
+        back
         onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
       />
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
@@ -116,7 +117,7 @@ export default function Topics() {
 }
 
 const styles = StyleSheet.create({
-  title: { marginTop: space.md, marginBottom: space.xl },
+  title: { marginTop: 14, marginBottom: space.xl },
   field: {
     flexDirection: 'row',
     alignItems: 'center',

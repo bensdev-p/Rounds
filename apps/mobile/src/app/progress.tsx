@@ -87,7 +87,8 @@ export default function Progress() {
 
   return (
     <Screen>
-      <Link label="Pimp" icon={ChevronLeft} onPress={goBack} />
+      <Link label="Pimp" icon={ChevronLeft}
+        back onPress={goBack} />
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         Progress
       </Txt>

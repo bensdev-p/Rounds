@@ -24,21 +24,23 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M1.1 (varied questions):** every script has two questions per rung (all `in_review`). A session asks one per rung at random and avoids the last session's questions. "Pimp me" picks from the rotation, weighted toward missed and unseen scripts.
 
+**M1.2 (mockup check):** every built screen matches its mockup in dark and light: type back to the DESIGN.md scale, spacing from the mockup CSS, persona order, "Change rotation" and long-press on Pimp me, the list feedback line, and the test fixtures hidden from students' screens.
+
 **Gaps:** there's no tab bar, Log, Review, onboarding or settings yet. Progress is a pushed screen and needs to become the Profile tab.
 
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Built; Pimp me weighted by history (M1.1) | M1.2 check |
-| Script picker | 03 | — | Built (`topics`) | M1.2 check |
-| Live session, text | 05 | session, session-light | Built; varied questions per rung (M1.1) | M1.2 check |
-| List feedback | 06 | list | Built | M1.2 check |
-| Result + miss card | 07 | result | Built | M1.2 check |
-| Clean run | 13 | win, win-light | Built | M1.2 check |
-| Promotion | 14 | promo | Built | M1.2 check |
-| Illness script | 10 | script | Built | M1.2 check |
-| Script collection | 15 | collection, collection-light | Built | M1.2 check |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). Week line M2.3, today's patients M2.1, mic icon M2.5 | Done |
+| Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
+| Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
+| List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
+| Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress | Done |
+| Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
+| Promotion | 14 | promo | Matches (M1.2) | Done |
+| Illness script | 10 | script | Matches (M1.2). Mic icon M2.5 | Done |
+| Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Partial (`progress`, not a tab) | M1.3 |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Not built | M1.3 |
 | Log | 08 | log | Not built | M2.1 |
@@ -80,6 +82,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ### M2.1 Log
 - Matches `log.png` and wireframe 08: diagnosis label, rotation and date only. The PHI guard blocks and explains, as in video scene 6.
 - Labels map to scripts where one exists. A log with no matching script is still saved.
+- **Home, "From today's patients"** (`home.png`, wireframe 02 note 3): today's logs as one-tap Start rows, a "Log one" link, and the empty state "Log a patient to practise on them tonight." Left out in M1.2 because there was no Log yet.
 
 ### M2.2 Review and learning from today's patients
 - Matches `review.png` and wireframe 09: "Missed today" uses the miss card's wording; there's a link to each script.
@@ -89,6 +92,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ### M2.3 Accounts, onboarding, settings
 - Supabase Auth (email magic link, Sign in with Apple) that carries over the anonymous history.
 - Onboarding (wireframe 01): year, rotation, persona and daily goal. Settings (wireframe 12) without the Anki part.
+- **Home, "Week 3 of 8"** (`home.png`): once onboarding records the rotation's start and length, show the week line before "Change rotation". Left out in M1.2 because there was no rotation date.
 
 ### M2.4 Voice spike (throwaway branch)
 - STT → grade → TTS on one script. Measure the time from the end of speech to the next question, and compare two vendors.
@@ -96,6 +100,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 ### M2.5 Voice session
 - Wireframe 04 and `session.png`: an idle dotted waveform while the attending asks, live once the question ends. Common questions use cached audio. Everything sits behind the `stt` and `tts` provider interfaces. Text mode stays available everywhere.
+- **Mic icon** on "Pimp me" (Home) and "Pimp me on this" (illness script), as in `home.png` and `script.png`. M1.2 kept the ladder icon because the app was text-only.
 
 ### M2.6 Hosting and TestFlight
 - A hosted Supabase project, Edge Functions with a spending cap on the API key, an EAS build and TestFlight. The developer has no Mac, so cloud builds only.
@@ -104,7 +109,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ---
 
 ## Stages 3–5 (detail added when Stage 2 is done)
-- **3. Anki bridge:** M3.1, the add-on and the Anki section of Settings (wireframe 12), prototyped against a real AnKing collection.
+- **3. Anki bridge:** M3.1, the add-on and the Anki section of Settings (wireframe 12), prototyped against a real AnKing collection. Includes the "Unsuspend 3 Anki cards" row on the result screen (`result.png`), left out until then.
 - **4. Launch:** public web portal, marketing site (copy follows DESIGN.md → Voice and copy), payments, Android.
 - **5. Expand:** all rotations, shadowing mode, Teams (mockups and wireframes 16–18 are ready), desktop decision, school licenses.
 
@@ -124,6 +129,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - Open the next session on the missed question.
 - When shared UI components exist, swap them into the video (VIDEO.md → Later).
 - (13 Nov 2026) A third question on rungs where a script has a third fact worth asking. M1.1 shipped two per rung; the content rules allow three.
+- (14 Nov 2026) Filter chips on the topic picker (All, Cardio, Renal, GI; wireframe 03). Scripts need a "system" field first, which is a content change.
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
 

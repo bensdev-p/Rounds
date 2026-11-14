@@ -123,17 +123,18 @@ export default function ScriptScreen() {
       <Link
         label="Back"
         icon={ChevronLeft}
+        back
         onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
       />
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {script.name}
       </Txt>
       {reviewed && (
-        <Txt variant="meta" tone="text2" fontSize={15} style={styles.reviewed}>
+        <Txt variant="small" tone="text2" style={styles.reviewed}>
           {reviewed}
         </Txt>
       )}
-      <View style={styles.chips}>
+      <View style={[styles.chips, styles.rotations]}>
         {script.rotation.map((r) => (
           <Chip key={r} label={ROTATION_NAMES[r]} />
         ))}
@@ -145,12 +146,11 @@ export default function ScriptScreen() {
             variant="small"
             weight="bodySemi"
             tone="ceil"
-            fontSize={14}
             accessibilityRole="header"
           >
             {section.title}
           </Txt>
-          <Txt variant="body" fontSize={16} lineHeight={24}>
+          <Txt variant="body" fontSize={15} lineHeight={22.5}>
             {section.body}
           </Txt>
         </View>
@@ -162,12 +162,11 @@ export default function ScriptScreen() {
             variant="small"
             weight="bodySemi"
             tone="ceil"
-            fontSize={14}
             accessibilityRole="header"
           >
             Confused with
           </Txt>
-          <View style={styles.chips}>
+          <View style={[styles.chips, styles.links]}>
             {approvedLinks.map((link) => {
               const name = confusables.find((x) => x.script_id === link.script_id)?.names[0];
               return (
@@ -215,9 +214,11 @@ export default function ScriptScreen() {
 }
 
 const styles = StyleSheet.create({
-  title: { marginTop: space.lg },
-  reviewed: { marginTop: space.sm },
-  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginVertical: space.lg },
-  block: { borderTopWidth: 1, paddingVertical: space.lg, gap: 6 },
+  title: { marginTop: 14 },
+  reviewed: { marginTop: 6 },
+  chips: { flexDirection: 'row', flexWrap: 'wrap', gap: 6 },
+  rotations: { marginTop: space.md, marginBottom: space.lg },
+  links: { marginTop: space.xs },
+  block: { borderTopWidth: 1, paddingVertical: space.lg, gap: space.xs },
   tell: { marginTop: 2 },
 });

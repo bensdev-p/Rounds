@@ -354,6 +354,16 @@ describe('personaLine', () => {
     expect(personaLine('surgeon', 'top', 7)).toBe(personaLine('surgeon', 'top', 7));
     expect(personaLine('teacher', 'top', -3)).toBeTruthy();
   });
+
+  it('has short list-feedback lines for every persona', () => {
+    for (const persona of ['teacher', 'internist', 'surgeon'] as const) {
+      for (const moment of ['list_partial', 'list_full'] as const) {
+        const line = personaLine(persona, moment, 1);
+        expect(line.length).toBeGreaterThan(0);
+        expect(line.length).toBeLessThanOrEqual(60);
+      }
+    }
+  });
 });
 
 describe('shiftGrid', () => {
