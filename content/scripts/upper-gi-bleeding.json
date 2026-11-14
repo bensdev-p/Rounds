@@ -123,6 +123,28 @@
       ]
     },
     {
+      "id": "upper-gi-bleeding.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man with alcoholic cirrhosis vomits a large amount of bright red blood and feels faint. What is happening?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Upper gastrointestinal bleeding",
+          "synonyms": [
+            "upper GI bleed",
+            "upper GI bleeding",
+            "UGIB",
+            "GI bleed",
+            "bleeding ulcer",
+            "peptic ulcer bleed"
+          ]
+        }
+      ]
+    },
+    {
       "id": "upper-gi-bleeding.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -182,6 +204,36 @@
       "required_count": 3
     },
     {
+      "id": "upper-gi-bleeding.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of upper GI bleeding.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hemorrhagic shock",
+          "synonyms": [
+            "shock",
+            "hypovolemic shock"
+          ]
+        },
+        {
+          "answer": "rebleeding",
+          "synonyms": [
+            "rebleed",
+            "recurrent bleeding"
+          ]
+        },
+        {
+          "answer": "death",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "upper-gi-bleeding.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -197,6 +249,26 @@
             "raised BUN",
             "high BUN",
             "elevated BUN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which score identifies upper GI bleed patients safe for outpatient care?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Glasgow-Blatchford score",
+          "synonyms": [
+            "Glasgow-Blatchford",
+            "Blatchford",
+            "GBS",
+            "Glasgow Blatchford"
           ]
         }
       ]
@@ -221,6 +293,25 @@
       ]
     },
     {
+      "id": "upper-gi-bleeding.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Within what time frame should the endoscopy happen?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "within 24 hours",
+          "synonyms": [
+            "24 hours",
+            "24 h",
+            "one day"
+          ]
+        }
+      ]
+    },
+    {
       "id": "upper-gi-bleeding.management.1",
       "rung": "management",
       "kind": "single",
@@ -235,6 +326,27 @@
             "7",
             "hemoglobin of 7",
             "hgb 7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Coffee-ground vomiting and melena, awaiting endoscopy. Which IV drug do you start?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV proton pump inhibitor",
+          "synonyms": [
+            "proton pump inhibitor",
+            "PPI",
+            "IV PPI",
+            "pantoprazole",
+            "esomeprazole"
           ]
         }
       ]
@@ -259,6 +371,24 @@
           "synonyms": [
             "ceftriaxone",
             "antibiotic prophylaxis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "upper-gi-bleeding.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A bleeding duodenal ulcer has been treated endoscopically. Which infection do you test for and treat?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Helicobacter pylori",
+          "synonyms": [
+            "H. pylori",
+            "H pylori"
           ]
         }
       ]

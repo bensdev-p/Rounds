@@ -132,6 +132,23 @@
       ]
     },
     {
+      "id": "diabetic-ketoacidosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 54-year-old with type 2 diabetes started empagliflozin last month. She has vomiting, deep breathing, an anion gap acidosis and ketones, with a glucose of only 210. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Diabetic ketoacidosis",
+          "synonyms": [
+            "DKA"
+          ]
+        }
+      ]
+    },
+    {
       "id": "diabetic-ketoacidosis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -198,6 +215,44 @@
       ]
     },
     {
+      "id": "diabetic-ketoacidosis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name the three lab criteria for diagnosing DKA.",
+      "source_fields": [
+        "diagnosis.criteria"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "glucose of 200 mg/dL or more",
+          "synonyms": [
+            "glucose",
+            "hyperglycemia",
+            "known diabetes",
+            "high glucose",
+            "high sugar"
+          ]
+        },
+        {
+          "answer": "ketosis",
+          "synonyms": [
+            "ketones",
+            "beta-hydroxybutyrate",
+            "ketonemia"
+          ]
+        },
+        {
+          "answer": "acidosis",
+          "synonyms": [
+            "low pH",
+            "low bicarbonate",
+            "metabolic acidosis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "diabetic-ketoacidosis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -228,6 +283,26 @@
       ]
     },
     {
+      "id": "diabetic-ketoacidosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Glucose 900, very high osmolality, little or no ketosis, developing over days. What is this instead of DKA?",
+      "source_fields": [
+        "confused_with[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperosmolar hyperglycemic state",
+          "synonyms": [
+            "HHS",
+            "hyperosmolar state",
+            "HONK",
+            "hyperosmolar nonketotic"
+          ]
+        }
+      ]
+    },
+    {
       "id": "diabetic-ketoacidosis.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -244,6 +319,25 @@
             "BHB",
             "serum ketones",
             "blood ketones"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which pH defines the acidosis in DKA?",
+      "source_fields": [
+        "diagnosis.criteria[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "below 7.3",
+          "synonyms": [
+            "under 7.3",
+            "less than 7.3",
+            "pH below 7.3"
           ]
         }
       ]
@@ -290,6 +384,26 @@
       ]
     },
     {
+      "id": "diabetic-ketoacidosis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Glucose falls to 230 mg/dL on the insulin infusion, but the gap is still open. What do you change?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "add dextrose to the fluids",
+          "synonyms": [
+            "add dextrose",
+            "dextrose",
+            "D5",
+            "add glucose"
+          ]
+        }
+      ]
+    },
+    {
       "id": "diabetic-ketoacidosis.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -303,6 +417,26 @@
           "synonyms": [
             "serum potassium",
             "potassium level"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "diabetic-ketoacidosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Before stopping the insulin infusion, what must you give first?",
+      "source_fields": [
+        "management.next_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "subcutaneous basal insulin",
+          "synonyms": [
+            "basal insulin",
+            "long-acting insulin",
+            "glargine",
+            "subcutaneous insulin"
           ]
         }
       ]

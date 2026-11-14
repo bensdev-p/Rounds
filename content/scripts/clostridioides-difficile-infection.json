@@ -120,6 +120,29 @@
       ]
     },
     {
+      "id": "clostridioides-difficile-infection.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "An 80-year-old nursing home resident on a PPI finished ciprofloxacin last week and now has profuse watery diarrhea and cramps. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Clostridioides difficile infection",
+          "synonyms": [
+            "C. diff",
+            "C diff",
+            "C. difficile",
+            "CDI",
+            "C diff colitis",
+            "pseudomembranous colitis",
+            "Clostridium difficile"
+          ]
+        }
+      ]
+    },
+    {
       "id": "clostridioides-difficile-infection.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -173,6 +196,41 @@
       "required_count": 3
     },
     {
+      "id": "clostridioides-difficile-infection.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of C. difficile colitis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "toxic megacolon",
+          "synonyms": [
+            "megacolon"
+          ]
+        },
+        {
+          "answer": "colonic perforation",
+          "synonyms": [
+            "perforation",
+            "bowel perforation"
+          ]
+        },
+        {
+          "answer": "recurrence",
+          "synonyms": [
+            "relapse"
+          ]
+        },
+        {
+          "answer": "death",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "clostridioides-difficile-infection.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -201,6 +259,37 @@
       ]
     },
     {
+      "id": "clostridioides-difficile-infection.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which three antibiotic classes are classically linked to C. difficile? Name one.",
+      "source_fields": [
+        "key_findings.history[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "clindamycin",
+          "synonyms": []
+        },
+        {
+          "answer": "fluoroquinolones",
+          "synonyms": [
+            "fluoroquinolone",
+            "ciprofloxacin",
+            "levofloxacin",
+            "quinolones"
+          ]
+        },
+        {
+          "answer": "cephalosporins",
+          "synonyms": [
+            "cephalosporin",
+            "ceftriaxone"
+          ]
+        }
+      ]
+    },
+    {
       "id": "clostridioides-difficile-infection.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -217,6 +306,26 @@
             "C diff toxin",
             "toxin assay",
             "C diff PCR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Whose stool should you test for C. difficile?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "unformed stool",
+          "synonyms": [
+            "loose stool",
+            "liquid stool",
+            "diarrhea",
+            "3 or more unexplained loose stools"
           ]
         }
       ]
@@ -247,6 +356,32 @@
       ]
     },
     {
+      "id": "clostridioides-difficile-infection.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Fulminant C. difficile with hypotension and ileus. Treatment?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "oral vancomycin plus IV metronidazole",
+          "synonyms": [
+            "oral vancomycin and IV metronidazole",
+            "vancomycin and metronidazole",
+            "vancomycin plus metronidazole"
+          ]
+        },
+        {
+          "answer": "surgical consult",
+          "synonyms": [
+            "surgery",
+            "colectomy"
+          ]
+        }
+      ]
+    },
+    {
       "id": "clostridioides-difficile-infection.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -261,6 +396,33 @@
             "spore",
             "it forms spores",
             "spore-forming"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "clostridioides-difficile-infection.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A third episode of C. difficile. Name one option to prevent more recurrences.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fidaxomicin",
+          "synonyms": []
+        },
+        {
+          "answer": "bezlotoxumab",
+          "synonyms": []
+        },
+        {
+          "answer": "fecal microbiota transplant",
+          "synonyms": [
+            "FMT",
+            "fecal transplant",
+            "stool transplant"
           ]
         }
       ]

@@ -123,6 +123,24 @@
       ]
     },
     {
+      "id": "nephrotic-syndrome.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 55-year-old has foamy urine and leg swelling. Proteinuria is 6 g/day, albumin 2.2 g/dL and the cholesterol is high. Which syndrome?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Nephrotic syndrome",
+          "synonyms": [
+            "nephrotic",
+            "nephrosis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephrotic-syndrome.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -175,6 +193,48 @@
       ]
     },
     {
+      "id": "nephrotic-syndrome.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of nephrotic syndrome.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renal vein thrombosis",
+          "synonyms": [
+            "renal vein clot"
+          ]
+        },
+        {
+          "answer": "deep vein thrombosis and pulmonary embolism",
+          "synonyms": [
+            "DVT",
+            "PE",
+            "pulmonary embolism",
+            "deep vein thrombosis",
+            "VTE",
+            "blood clots"
+          ]
+        },
+        {
+          "answer": "infection",
+          "synonyms": [
+            "infections",
+            "peritonitis"
+          ]
+        },
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "nephrotic-syndrome.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -196,6 +256,27 @@
       ]
     },
     {
+      "id": "nephrotic-syndrome.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What urine protein level separates nephrotic from nephritic syndrome?",
+      "source_fields": [
+        "key_findings.labs[0]",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "above 3.5 g/day",
+          "synonyms": [
+            "3.5 g/day",
+            "3.5 g",
+            "over 3.5",
+            "more than 3.5"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephrotic-syndrome.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -211,6 +292,24 @@
             "protein to creatinine ratio",
             "protein creatinine ratio",
             "spot protein to creatinine ratio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "An adult with nephrotic syndrome of unknown cause. Which test finds the cause?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "kidney biopsy",
+          "synonyms": [
+            "renal biopsy",
+            "biopsy"
           ]
         }
       ]
@@ -247,6 +346,25 @@
       ]
     },
     {
+      "id": "nephrotic-syndrome.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A child with minimal change disease. First-line treatment?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "corticosteroids",
+          "synonyms": [
+            "steroids",
+            "prednisone",
+            "prednisolone"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephrotic-syndrome.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -260,6 +378,26 @@
           "synonyms": [
             "RVT",
             "renal vein clot"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nephrotic-syndrome.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which lost protein makes nephrotic patients hypercoagulable?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "antithrombin III",
+          "synonyms": [
+            "antithrombin",
+            "AT3",
+            "ATIII",
+            "AT III"
           ]
         }
       ]

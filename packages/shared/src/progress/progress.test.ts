@@ -12,6 +12,7 @@ import {
   pickScript,
   rankFor,
   roundsToday,
+  scriptPickWeight,
   shiftStreak,
   summarizeResult,
   usageSummary,
@@ -182,29 +183,60 @@ describe('summarizeResult', () => {
   });
 });
 
-describe('pickScript', () => {
-  const candidates = [
-    { script_id: 'weak', bestRung: 1 },
-    { script_id: 'strong', bestRung: 6 },
-    { script_id: 'new', bestRung: null },
+describe('scriptPickWeight', () => {
+  const now = nov(20);
+  const history = [
+    session(10, 6, 'mastered'),
+    session(11, 6, 'mastered'),
+    session(12, 2, 'missed-last'),
+    session(12, 2, 'missed-then-done'),
+    session(13, 6, 'missed-then-done'),
+    session(13, 5, 'climbing'),
+    session(14, 6, 'climbing'),
+    session(15, 5, 'climbing'),
   ];
-  it('favours weak scripts', () => {
+  const w = (id: string, at = now) => scriptPickWeight(id, history, at);
+
+  it('weighs missed and unseen scripts above strong and mastered ones', () => {
+    expect(w('missed-last')).toBe(7); // 7 − 2 + 2
+    expect(w('unseen')).toBe(6);
+    expect(w('climbing')).toBe(3); // 7 − 6 + 2: best 6 once, last ended on a miss
+    expect(w('missed-then-done')).toBe(1); // best 6, last completed
+    expect(w('mastered')).toBe(1);
+  });
+
+  it('brings a mastered script back once a re-check is due', () => {
+    expect(w('mastered', nov(30, 9))).toBe(1);
+    expect(w('mastered', new Date(2026, 11, 20))).toBe(5); // 39 days after the last top run
+  });
+});
+
+describe('pickScript', () => {
+  const now = nov(20);
+  const history = [session(10, 1, 'weak'), session(10, 6, 'strong'), session(11, 6, 'strong')];
+  const ids = ['weak', 'strong', 'new'];
+
+  it('favours missed and unseen scripts, with some randomness', () => {
     const counts = new Map<string, number>();
     let seed = 1;
     const random = () => ((seed = (seed * 16807) % 2147483647) - 1) / 2147483646;
     for (let i = 0; i < 3_000; i++) {
-      const id = pickScript(candidates, { random })!;
+      const id = pickScript(ids, history, { random, now })!;
       counts.set(id, (counts.get(id) ?? 0) + 1);
     }
+    // Weights 8 : 1 : 6.
     expect(counts.get('weak')!).toBeGreaterThan(counts.get('new')!);
     expect(counts.get('new')!).toBeGreaterThan(counts.get('strong')!);
+    expect(counts.get('strong')!).toBeGreaterThan(0);
   });
   it('skips the script just played when there is another', () => {
-    expect(pickScript(candidates.slice(0, 2), { exclude: 'weak', random: () => 0 })).toBe('strong');
-    expect(pickScript(candidates.slice(0, 1), { exclude: 'weak' })).toBe('weak');
+    expect(pickScript(['weak', 'strong'], history, { exclude: 'weak', random: () => 0 })).toBe(
+      'strong',
+    );
+    expect(pickScript(['weak'], history, { exclude: 'weak' })).toBe('weak');
   });
   it('returns null with nothing to pick', () => {
-    expect(pickScript([])).toBeNull();
+    expect(pickScript([], history)).toBeNull();
   });
 });
 

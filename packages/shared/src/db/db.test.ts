@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import { TEST_QUESTION_VARIANTS, TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
 import type { Question } from '../schemas/question.ts';
 import type { Json } from './database.types.ts';
 import {
@@ -87,7 +87,9 @@ describe('parseRows', () => {
 
 describe('seed', () => {
   it('validates the fixtures', () => {
-    expect(validateContent(TEST_SCRIPTS, TEST_QUESTIONS)).toEqual([]);
+    expect(
+      validateContent(TEST_SCRIPTS, [...TEST_QUESTIONS, ...TEST_QUESTION_VARIANTS]),
+    ).toEqual([]);
   });
 
   it('refuses untraceable questions and dangling links', () => {

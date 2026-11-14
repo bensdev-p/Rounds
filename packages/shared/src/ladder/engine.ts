@@ -28,6 +28,31 @@ export class LadderError extends Error {
   override name = 'LadderError';
 }
 
+/**
+ * Picks one question per rung for a session. A script may hold 2–3 questions
+ * per rung so repeat sessions differ; questions in `avoid` (usually the ones
+ * asked last session) are skipped when the rung has another option.
+ * Returns the picks sorted by rung, ready for `startLadder`.
+ */
+export function pickLadder(
+  questions: readonly Question[],
+  options: { avoid?: Iterable<string>; random?: () => number } = {},
+): Question[] {
+  const avoid = new Set(options.avoid ?? []);
+  const random = options.random ?? Math.random;
+  const picks: Question[] = [];
+  for (const rung of RUNGS) {
+    const onRung = questions.filter((q) => q.rung === rung);
+    if (onRung.length === 0) continue;
+    const fresh = onRung.filter((q) => !avoid.has(q.id));
+    const pool = fresh.length > 0 ? fresh : onRung;
+    // `random()` is in [0, 1); the clamp guards a test stub that returns 1.
+    const pick = pool[Math.min(pool.length - 1, Math.floor(random() * pool.length))];
+    if (pick) picks.push(pick);
+  }
+  return picks;
+}
+
 export function startLadder(
   questions: readonly Question[],
   persona: PersonaId = DEFAULT_PERSONA,
@@ -37,7 +62,9 @@ export function startLadder(
   if (questions.some((q) => q.script_id !== first.script_id)) {
     throw new LadderError('All questions in a ladder must come from the same script');
   }
-  // Array.prototype.sort is stable, so questions within a rung keep their order.
+  if (new Set(questions.map((q) => q.rung)).size !== questions.length) {
+    throw new LadderError('A ladder asks one question per rung; use pickLadder first');
+  }
   const sorted = [...questions].sort((a, b) => rungIndex(a.rung) - rungIndex(b.rung));
   return {
     script_id: first.script_id,
@@ -90,7 +117,7 @@ export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): La
   return { ...state, index: nextIndex, attempts: [...state.attempts, attempt], status };
 }
 
-/** Rungs whose every question was passed, in ladder order. */
+/** Rungs whose question was passed, in ladder order. */
 export function clearedRungs(state: LadderState): Rung[] {
   const passedIds = new Set(state.attempts.filter((a) => a.passed).map((a) => a.question_id));
   return RUNGS.filter((rung) => {

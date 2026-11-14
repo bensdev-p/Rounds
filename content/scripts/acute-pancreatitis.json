@@ -128,6 +128,24 @@
       ]
     },
     {
+      "id": "acute-pancreatitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 45-year-old woman with known gallstones has sudden epigastric pain boring through to her back, with vomiting. Lipase is 5 times normal. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pancreatitis",
+          "synonyms": [
+            "pancreatitis",
+            "alcoholic pancreatitis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-pancreatitis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -171,6 +189,49 @@
       ]
     },
     {
+      "id": "acute-pancreatitis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of acute pancreatitis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pancreatic pseudocyst",
+          "synonyms": [
+            "pseudocyst"
+          ]
+        },
+        {
+          "answer": "walled-off necrosis",
+          "synonyms": [
+            "WON"
+          ]
+        },
+        {
+          "answer": "infected necrosis",
+          "synonyms": [
+            "infected pancreatic necrosis"
+          ]
+        },
+        {
+          "answer": "ARDS",
+          "synonyms": [
+            "acute respiratory distress syndrome"
+          ]
+        },
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "kidney injury"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "acute-pancreatitis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -192,6 +253,24 @@
       ]
     },
     {
+      "id": "acute-pancreatitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Abdominal pain, a mildly raised lipase, glucose 480 mg/dL and an anion gap acidosis. Which diagnosis explains it?",
+      "source_fields": [
+        "confused_with[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diabetic ketoacidosis",
+          "synonyms": [
+            "DKA",
+            "ketoacidosis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-pancreatitis.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -206,6 +285,29 @@
             "RUQ ultrasound",
             "abdominal ultrasound",
             "ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "How high must the lipase be to count toward the diagnosis?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "more than 3 times the upper limit of normal",
+          "synonyms": [
+            "3 times the upper limit of normal",
+            "3 times normal",
+            "three times normal",
+            "3x normal",
+            "3 times ULN",
+            "3x ULN",
+            "three times the upper limit of normal"
           ]
         }
       ]
@@ -231,6 +333,27 @@
       ]
     },
     {
+      "id": "acute-pancreatitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which IV fluid do you start?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lactated Ringer's",
+          "synonyms": [
+            "LR",
+            "Ringer's lactate",
+            "ringers lactate",
+            "lactated ringers",
+            "Hartmann's"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-pancreatitis.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -247,6 +370,23 @@
             "this admission",
             "index admission",
             "same hospitalization"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pancreatitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Gallstone pancreatitis with fever, jaundice and right upper quadrant pain. What do you need within 24 hours?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ERCP",
+          "synonyms": [
+            "endoscopic retrograde cholangiopancreatography"
           ]
         }
       ]

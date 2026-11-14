@@ -120,6 +120,26 @@
       ]
     },
     {
+      "id": "acute-pyelonephritis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "At 24 weeks of pregnancy, a woman has fever, rigors, left flank pain and vomiting. Her urine shows pyuria. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pyelonephritis",
+          "synonyms": [
+            "pyelonephritis",
+            "pyelo",
+            "kidney infection",
+            "upper urinary tract infection"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-pyelonephritis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -172,6 +192,38 @@
       "required_count": 3
     },
     {
+      "id": "acute-pyelonephritis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two serious complications of pyelonephritis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sepsis",
+          "synonyms": [
+            "urosepsis",
+            "septic shock"
+          ]
+        },
+        {
+          "answer": "renal abscess",
+          "synonyms": [
+            "kidney abscess",
+            "perinephric abscess"
+          ]
+        },
+        {
+          "answer": "emphysematous pyelonephritis",
+          "synonyms": [
+            "emphysematous"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "acute-pyelonephritis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -186,6 +238,32 @@
             "WBC casts",
             "white cell casts",
             "leukocyte casts"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which exam finding separates pyelonephritis from simple cystitis?",
+      "source_fields": [
+        "key_findings.exam"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "costovertebral angle tenderness",
+          "synonyms": [
+            "CVA tenderness",
+            "CVAT",
+            "flank tenderness",
+            "renal angle tenderness"
+          ]
+        },
+        {
+          "answer": "fever",
+          "synonyms": [
+            "febrile"
           ]
         }
       ]
@@ -208,6 +286,24 @@
       ]
     },
     {
+      "id": "acute-pyelonephritis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "The urine culture grows a gram-negative rod. Which organism is most likely?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Escherichia coli",
+          "synonyms": [
+            "E. coli",
+            "E coli"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-pyelonephritis.management.1",
       "rung": "management",
       "kind": "single",
@@ -222,6 +318,23 @@
             "cipro",
             "fluoroquinolone",
             "levofloxacin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "She is admitted, too unwell for oral antibiotics. Empirical IV antibiotic?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ceftriaxone",
+          "synonyms": [
+            "Rocephin"
           ]
         }
       ]
@@ -247,6 +360,25 @@
           "answer": "ultrasound",
           "synonyms": [
             "renal ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pyelonephritis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Once antibiotics start, by when should the fever settle?",
+      "source_fields": [
+        "timeline.course"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "within 72 hours",
+          "synonyms": [
+            "72 hours",
+            "3 days",
+            "three days"
           ]
         }
       ]

@@ -138,6 +138,29 @@
       ]
     },
     {
+      "id": "acute-coronary-syndrome.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 66-year-old with diabetes has an hour of jaw pain, breathlessness and nausea. The troponin is rising. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute coronary syndrome",
+          "synonyms": [
+            "ACS",
+            "myocardial infarction",
+            "MI",
+            "heart attack",
+            "STEMI",
+            "NSTEMI",
+            "unstable angina"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-coronary-syndrome.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -194,6 +217,56 @@
       "required_count": 3
     },
     {
+      "id": "acute-coronary-syndrome.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of a large myocardial infarction.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "arrhythmias",
+          "synonyms": [
+            "arrhythmia",
+            "ventricular tachycardia",
+            "ventricular fibrillation",
+            "VT",
+            "VF",
+            "heart block"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HF",
+            "CHF",
+            "pulmonary edema"
+          ]
+        },
+        {
+          "answer": "cardiogenic shock",
+          "synonyms": [
+            "shock"
+          ]
+        },
+        {
+          "answer": "papillary muscle rupture",
+          "synonyms": [
+            "papillary muscle"
+          ]
+        },
+        {
+          "answer": "ventricular free wall rupture",
+          "synonyms": [
+            "free wall rupture",
+            "myocardial rupture"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "acute-coronary-syndrome.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -213,6 +286,24 @@
       ]
     },
     {
+      "id": "acute-coronary-syndrome.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Pleuritic chest pain, hypoxemia and tachycardia, with no ST elevation. Which diagnosis fits better than ACS?",
+      "source_fields": [
+        "confused_with[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary embolism",
+          "synonyms": [
+            "PE",
+            "pulmonary embolus"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-coronary-syndrome.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -227,6 +318,26 @@
             "ECG",
             "EKG",
             "electrocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-coronary-syndrome.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "The first ECG shows no ST elevation. Which blood test do you send, and repeat?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high-sensitivity troponin",
+          "synonyms": [
+            "troponin",
+            "hs troponin",
+            "trop",
+            "hs-cTn"
           ]
         }
       ]
@@ -254,6 +365,28 @@
       ]
     },
     {
+      "id": "acute-coronary-syndrome.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "STEMI, and the nearest cath lab is 3 hours away. How do you reperfuse?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fibrinolysis",
+          "synonyms": [
+            "thrombolysis",
+            "thrombolytics",
+            "tenecteplase",
+            "alteplase",
+            "tPA",
+            "lytics"
+          ]
+        }
+      ]
+    },
+    {
       "id": "acute-coronary-syndrome.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -268,6 +401,23 @@
             "nitroglycerin",
             "nitro",
             "GTN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-coronary-syndrome.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Typical ischemic chest pain, but serial troponins stay normal. What do you call it?",
+      "source_fields": [
+        "diagnosis.criteria[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "unstable angina",
+          "synonyms": [
+            "UA"
           ]
         }
       ]

@@ -143,6 +143,29 @@
       ]
     },
     {
+      "id": "heart-failure-exacerbation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A woman with heart failure ate a salty holiday dinner and stopped her furosemide. Now she sleeps on four pillows, wakes gasping and has swollen legs. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute decompensated heart failure",
+          "synonyms": [
+            "ADHF",
+            "heart failure exacerbation",
+            "CHF exacerbation",
+            "decompensated heart failure",
+            "acute heart failure",
+            "heart failure",
+            "CHF"
+          ]
+        }
+      ]
+    },
+    {
       "id": "heart-failure-exacerbation.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -216,6 +239,51 @@
       ]
     },
     {
+      "id": "heart-failure-exacerbation.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three signs of congestion on exam.",
+      "source_fields": [
+        "key_findings.exam"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raised JVP",
+          "synonyms": [
+            "elevated JVP",
+            "JVD",
+            "jugular venous distension",
+            "raised jugular venous pressure"
+          ]
+        },
+        {
+          "answer": "bibasilar crackles",
+          "synonyms": [
+            "crackles",
+            "rales",
+            "basal crackles"
+          ]
+        },
+        {
+          "answer": "S3 gallop",
+          "synonyms": [
+            "S3",
+            "third heart sound"
+          ]
+        },
+        {
+          "answer": "pitting edema",
+          "synonyms": [
+            "leg edema",
+            "peripheral edema",
+            "ankle edema",
+            "edema"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "heart-failure-exacerbation.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -237,6 +305,38 @@
       ]
     },
     {
+      "id": "heart-failure-exacerbation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Breathless and wheezy. What three findings point to heart failure rather than COPD? Name one.",
+      "source_fields": [
+        "confused_with[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raised JVP",
+          "synonyms": [
+            "elevated JVP",
+            "JVD"
+          ]
+        },
+        {
+          "answer": "leg edema",
+          "synonyms": [
+            "edema",
+            "swollen legs"
+          ]
+        },
+        {
+          "answer": "high BNP",
+          "synonyms": [
+            "BNP",
+            "raised BNP"
+          ]
+        }
+      ]
+    },
+    {
       "id": "heart-failure-exacerbation.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -252,6 +352,43 @@
             "TTE",
             "transthoracic echocardiogram",
             "cardiac ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Name one chest X-ray sign of pulmonary edema.",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kerley B lines",
+          "synonyms": [
+            "Kerley lines",
+            "Kerley B"
+          ]
+        },
+        {
+          "answer": "pulmonary vascular congestion",
+          "synonyms": [
+            "vascular congestion",
+            "upper lobe diversion",
+            "cephalization"
+          ]
+        },
+        {
+          "answer": "interstitial edema",
+          "synonyms": []
+        },
+        {
+          "answer": "pleural effusions",
+          "synonyms": [
+            "effusions",
+            "pleural effusion"
           ]
         }
       ]
@@ -282,6 +419,26 @@
       ]
     },
     {
+      "id": "heart-failure-exacerbation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Poor urine output despite high-dose IV furosemide. What do you add?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "metolazone",
+          "synonyms": [
+            "thiazide",
+            "thiazide-type diuretic",
+            "chlorthalidone",
+            "hydrochlorothiazide"
+          ]
+        }
+      ]
+    },
+    {
       "id": "heart-failure-exacerbation.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -301,6 +458,23 @@
             "higher",
             "at least the oral dose",
             "double"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure-exacerbation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which electrolyte problem do you watch for during aggressive diuresis?",
+      "source_fields": [
+        "complications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypokalemia",
+          "synonyms": [
+            "low potassium"
           ]
         }
       ]

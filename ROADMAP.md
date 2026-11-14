@@ -22,15 +22,17 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **Built:** the text pimp ladder; grading (a local matcher with Claude as a fallback, plus an eval set); personas; progression (rounds, shifts, rank, mastery); Home, the script picker, live session (text), list feedback, the result screen with the miss card, the clean run, Promotion, the illness script, the script collection and Progress; the "This is wrong" flag and its review queue; the PHI guard; the content pipeline; RLS with pgTAP tests. All 30 IM scripts are drafted and `in_review`, shown locally as "Not yet reviewed".
 
-**Gaps:** every script has exactly six fixed questions, so repeat sessions are identical. There's no tab bar, Log, Review, onboarding or settings yet. Progress is a pushed screen and needs to become the Profile tab.
+**M1.1 (varied questions):** every script has two questions per rung (all `in_review`). A session asks one per rung at random and avoids the last session's questions. "Pimp me" picks from the rotation, weighted toward missed and unseen scripts.
+
+**Gaps:** there's no tab bar, Log, Review, onboarding or settings yet. Progress is a pushed screen and needs to become the Profile tab.
 
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Built | M1.2 check |
+| Home (Pimp) | 02 | home, home-light | Built; Pimp me weighted by history (M1.1) | M1.2 check |
 | Script picker | 03 | — | Built (`topics`) | M1.2 check |
-| Live session, text | 05 | session, session-light | Built | M1.2 check |
+| Live session, text | 05 | session, session-light | Built; varied questions per rung (M1.1) | M1.2 check |
 | List feedback | 06 | list | Built | M1.2 check |
 | Result + miss card | 07 | result | Built | M1.2 check |
 | Clean run | 13 | win, win-light | Built | M1.2 check |
@@ -121,6 +123,9 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - Morning warm-up on yesterday's logged patients (PRODUCT.md → Recommendations; fits M2.2).
 - Open the next session on the missed question.
 - When shared UI components exist, swap them into the video (VIDEO.md → Later).
+- (13 Nov 2026) A third question on rungs where a script has a third fact worth asking. M1.1 shipped two per rung; the content rules allow three.
+- (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
+- (13 Nov 2026) Show a rung's question versions on the illness script screen.
 
 ---
 

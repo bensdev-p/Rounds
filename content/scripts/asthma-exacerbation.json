@@ -130,6 +130,27 @@
       ]
     },
     {
+      "id": "asthma-exacerbation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 30-year-old who stopped her inhaled steroid has two days of night cough, wheeze and chest tightness. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Asthma exacerbation",
+          "synonyms": [
+            "asthma attack",
+            "acute asthma",
+            "exacerbation of asthma",
+            "status asthmaticus",
+            "asthma flare"
+          ]
+        }
+      ]
+    },
+    {
       "id": "asthma-exacerbation.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -188,6 +209,39 @@
       "required_count": 3
     },
     {
+      "id": "asthma-exacerbation.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two exam signs of a severe or life-threatening attack.",
+      "source_fields": [
+        "key_findings.exam"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "accessory muscle use",
+          "synonyms": [
+            "accessory muscles",
+            "using accessory muscles"
+          ]
+        },
+        {
+          "answer": "silent chest",
+          "synonyms": [
+            "quiet chest",
+            "no wheeze"
+          ]
+        },
+        {
+          "answer": "tachypnea",
+          "synonyms": [
+            "fast breathing",
+            "high respiratory rate"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "asthma-exacerbation.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -202,6 +256,25 @@
             "reversible",
             "reversible obstruction",
             "reversible airflow obstruction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which diagnosis in an older smoker leaves airflow limitation that persists between attacks?",
+      "source_fields": [
+        "confused_with[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "COPD",
+          "synonyms": [
+            "chronic obstructive pulmonary disease",
+            "COPD exacerbation",
+            "emphysema"
           ]
         }
       ]
@@ -222,6 +295,24 @@
             "PEF",
             "PEFR",
             "peak expiratory flow rate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which peak flow, as a percent of predicted, marks a severe attack?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "below 50%",
+          "synonyms": [
+            "less than 50%",
+            "under 50%"
           ]
         }
       ]
@@ -257,6 +348,25 @@
       ]
     },
     {
+      "id": "asthma-exacerbation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Still tight after three nebulizers and steroids. Which IV drug do you add?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "magnesium sulfate",
+          "synonyms": [
+            "magnesium",
+            "IV magnesium",
+            "Mg"
+          ]
+        }
+      ]
+    },
+    {
       "id": "asthma-exacerbation.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -273,6 +383,24 @@
             "respiratory fatigue",
             "impending respiratory failure",
             "needs intubation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "asthma-exacerbation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What oxygen saturation do you aim for?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "93 to 95%",
+          "synonyms": [
+            "93-95%",
+            "93 to 95"
           ]
         }
       ]

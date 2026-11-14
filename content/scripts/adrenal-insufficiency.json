@@ -124,6 +124,27 @@
       ]
     },
     {
+      "id": "adrenal-insufficiency.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man stopped years of prednisone abruptly a week ago. Now he is weak, nauseated and hypotensive, with a glucose of 58. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Adrenal insufficiency",
+          "synonyms": [
+            "Addison disease",
+            "Addison's disease",
+            "Addison's",
+            "primary adrenal insufficiency",
+            "adrenal failure"
+          ]
+        }
+      ]
+    },
+    {
       "id": "adrenal-insufficiency.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -173,6 +194,44 @@
       "required_count": 3
     },
     {
+      "id": "adrenal-insufficiency.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three lab findings in primary adrenal insufficiency.",
+      "source_fields": [
+        "key_findings.labs"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyponatremia",
+          "synonyms": [
+            "low sodium"
+          ]
+        },
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "raised potassium"
+          ]
+        },
+        {
+          "answer": "low morning cortisol",
+          "synonyms": [
+            "low cortisol"
+          ]
+        },
+        {
+          "answer": "hypoglycemia",
+          "synonyms": [
+            "low glucose",
+            "low blood sugar"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "adrenal-insufficiency.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -199,6 +258,23 @@
       ]
     },
     {
+      "id": "adrenal-insufficiency.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Fluid-resistant hypotension with fever. Which condition is it easy to mistake adrenal crisis for?",
+      "source_fields": [
+        "confused_with[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "septic shock",
+          "synonyms": [
+            "sepsis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "adrenal-insufficiency.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -215,6 +291,24 @@
             "Synacthen test",
             "short Synacthen test",
             "ACTH stim test"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Adrenal insufficiency is confirmed. Which blood test separates primary from secondary disease?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "plasma ACTH",
+          "synonyms": [
+            "ACTH",
+            "corticotropin"
           ]
         }
       ]
@@ -240,6 +334,23 @@
       ]
     },
     {
+      "id": "adrenal-insufficiency.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Primary adrenal insufficiency, already on hydrocortisone. Which second drug replaces aldosterone?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fludrocortisone",
+          "synonyms": [
+            "Florinef"
+          ]
+        }
+      ]
+    },
+    {
       "id": "adrenal-insufficiency.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -254,6 +365,26 @@
             "aldosterone intact",
             "normal aldosterone",
             "mineralocorticoid intact"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adrenal-insufficiency.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "She has the flu with a fever. What should she do with her hydrocortisone?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "double the steroid dose",
+          "synonyms": [
+            "double the dose",
+            "double it",
+            "sick-day rules",
+            "sick day rules"
           ]
         }
       ]

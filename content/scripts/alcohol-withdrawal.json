@@ -125,6 +125,26 @@
       ]
     },
     {
+      "id": "alcohol-withdrawal.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Three days after admission, a man who drank a bottle of vodka a day is confused, agitated, febrile and hallucinating. What is this?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Alcohol withdrawal",
+          "synonyms": [
+            "alcohol withdrawal syndrome",
+            "EtOH withdrawal",
+            "ethanol withdrawal",
+            "withdrawal"
+          ]
+        }
+      ]
+    },
+    {
       "id": "alcohol-withdrawal.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -170,6 +190,43 @@
       "required_count": 3
     },
     {
+      "id": "alcohol-withdrawal.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of alcohol withdrawal.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "withdrawal seizures",
+          "synonyms": [
+            "seizures",
+            "seizure"
+          ]
+        },
+        {
+          "answer": "delirium tremens",
+          "synonyms": [
+            "DTs",
+            "DT"
+          ]
+        },
+        {
+          "answer": "Wernicke encephalopathy",
+          "synonyms": [
+            "Wernicke",
+            "Wernicke's"
+          ]
+        },
+        {
+          "answer": "death",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "alcohol-withdrawal.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -189,6 +246,24 @@
       ]
     },
     {
+      "id": "alcohol-withdrawal.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "When after the last drink are withdrawal seizures most likely?",
+      "source_fields": [
+        "timeline.onset"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "12 to 48 hours",
+          "synonyms": [
+            "12-48 hours",
+            "12 to 48 h"
+          ]
+        }
+      ]
+    },
+    {
       "id": "alcohol-withdrawal.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -203,6 +278,38 @@
             "CIWA",
             "CIWA score",
             "Clinical Institute Withdrawal Assessment"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which three electrolytes do you check and replace?",
+      "source_fields": [
+        "key_findings.labs",
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "magnesium",
+          "synonyms": [
+            "Mg",
+            "hypomagnesemia"
+          ]
+        },
+        {
+          "answer": "potassium",
+          "synonyms": [
+            "hypokalemia"
+          ]
+        },
+        {
+          "answer": "hypophosphatemia",
+          "synonyms": [
+            "phosphate",
+            "phosphorus"
           ]
         }
       ]
@@ -230,6 +337,24 @@
       ]
     },
     {
+      "id": "alcohol-withdrawal.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "He is still agitated despite large doses of benzodiazepines. Which drug do you add?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "phenobarbital",
+          "synonyms": [
+            "phenobarb",
+            "barbiturate"
+          ]
+        }
+      ]
+    },
+    {
       "id": "alcohol-withdrawal.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -243,6 +368,25 @@
           "synonyms": [
             "vitamin B1",
             "B1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alcohol-withdrawal.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Thiamine before glucose prevents which complication?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Wernicke encephalopathy",
+          "synonyms": [
+            "Wernicke",
+            "Wernicke's",
+            "Wernicke's encephalopathy"
           ]
         }
       ]

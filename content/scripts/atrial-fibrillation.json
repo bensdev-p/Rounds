@@ -124,6 +124,27 @@
       ]
     },
     {
+      "id": "atrial-fibrillation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "An ECG shows an irregularly irregular narrow-complex rhythm with no P waves. Name the rhythm.",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Atrial fibrillation",
+          "synonyms": [
+            "AF",
+            "AFib",
+            "a fib",
+            "afib with RVR",
+            "AF with RVR"
+          ]
+        }
+      ]
+    },
+    {
       "id": "atrial-fibrillation.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -196,6 +217,46 @@
       ]
     },
     {
+      "id": "atrial-fibrillation.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of atrial fibrillation.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ischemic stroke",
+          "synonyms": [
+            "stroke",
+            "CVA"
+          ]
+        },
+        {
+          "answer": "systemic embolism",
+          "synonyms": [
+            "embolism",
+            "arterial embolism"
+          ]
+        },
+        {
+          "answer": "tachycardia-induced cardiomyopathy",
+          "synonyms": [
+            "tachycardiomyopathy",
+            "cardiomyopathy"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HF",
+            "CHF"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "atrial-fibrillation.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -217,6 +278,26 @@
       ]
     },
     {
+      "id": "atrial-fibrillation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "New AF at 140, BP 75/40 and confused. What do you do?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "synchronized cardioversion",
+          "synonyms": [
+            "cardioversion",
+            "DC cardioversion",
+            "electrical cardioversion",
+            "shock"
+          ]
+        }
+      ]
+    },
+    {
       "id": "atrial-fibrillation.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -233,6 +314,25 @@
             "TFTs",
             "thyroid stimulating hormone",
             "free T4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-fibrillation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test do you get for chamber size, valves and ejection fraction?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "TTE",
+            "transthoracic echo"
           ]
         }
       ]
@@ -268,6 +368,26 @@
       ]
     },
     {
+      "id": "atrial-fibrillation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which score guides the decision to anticoagulate?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CHA2DS2-VASc",
+          "synonyms": [
+            "CHADS-VASc",
+            "CHA2DS2VASc",
+            "CHADSVASc",
+            "CHADS2-VASc"
+          ]
+        }
+      ]
+    },
+    {
       "id": "atrial-fibrillation.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -287,6 +407,31 @@
             "rivaroxaban",
             "edoxaban",
             "dabigatran"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-fibrillation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "AF of unknown duration. Before elective cardioversion, how long do you anticoagulate?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "3 weeks",
+          "synonyms": [
+            "three weeks",
+            "21 days"
+          ]
+        },
+        {
+          "answer": "transesophageal echocardiogram",
+          "synonyms": [
+            "TEE",
+            "TOE"
           ]
         }
       ]

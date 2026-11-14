@@ -126,6 +126,26 @@
       ]
     },
     {
+      "id": "bacterial-meningitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old has had fever and headache since this morning and is now confused, with neck stiffness. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Bacterial meningitis",
+          "synonyms": [
+            "meningitis",
+            "meningococcal meningitis",
+            "meningococcemia",
+            "Neisseria meningitidis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "bacterial-meningitis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -163,6 +183,42 @@
       "required_count": 3
     },
     {
+      "id": "bacterial-meningitis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of bacterial meningitis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hearing loss",
+          "synonyms": [
+            "deafness",
+            "sensorineural hearing loss"
+          ]
+        },
+        {
+          "answer": "seizures",
+          "synonyms": [
+            "seizure"
+          ]
+        },
+        {
+          "answer": "cerebral edema",
+          "synonyms": [
+            "brain swelling",
+            "raised intracranial pressure"
+          ]
+        },
+        {
+          "answer": "death",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "bacterial-meningitis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -189,6 +245,27 @@
       ]
     },
     {
+      "id": "bacterial-meningitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Fever, headache and a purpuric rash on the legs. Which organism do you fear most?",
+      "source_fields": [
+        "pathophysiology",
+        "key_findings.exam[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Neisseria meningitidis",
+          "synonyms": [
+            "meningococcus",
+            "meningococcal",
+            "N. meningitidis",
+            "N meningitidis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "bacterial-meningitis.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -208,6 +285,49 @@
       ]
     },
     {
+      "id": "bacterial-meningitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which findings mean you need a CT head before the lumbar puncture? Name one.",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "focal deficits",
+          "synonyms": [
+            "focal deficit",
+            "focal neurology",
+            "focal neurologic deficit"
+          ]
+        },
+        {
+          "answer": "papilledema",
+          "synonyms": []
+        },
+        {
+          "answer": "seizures",
+          "synonyms": [
+            "seizure"
+          ]
+        },
+        {
+          "answer": "reduced consciousness",
+          "synonyms": [
+            "altered consciousness",
+            "low GCS"
+          ]
+        },
+        {
+          "answer": "immunocompromise",
+          "synonyms": [
+            "immunocompromised",
+            "immunosuppression"
+          ]
+        }
+      ]
+    },
+    {
       "id": "bacterial-meningitis.management.1",
       "rung": "management",
       "kind": "single",
@@ -222,6 +342,23 @@
             "ceftriaxone and vancomycin",
             "vancomycin and ceftriaxone",
             "vanc and ceftriaxone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A 68-year-old with suspected meningitis. Which antibiotic do you add to cover Listeria?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ampicillin",
+          "synonyms": [
+            "amoxicillin"
           ]
         }
       ]
@@ -247,6 +384,25 @@
           "answer": "blood cultures",
           "synonyms": [
             "cultures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bacterial-meningitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which adjunct goes in before or with the first antibiotic dose?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dexamethasone",
+          "synonyms": [
+            "steroids",
+            "corticosteroids",
+            "dex"
           ]
         }
       ]

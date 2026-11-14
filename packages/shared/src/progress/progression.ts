@@ -269,28 +269,51 @@ export function summarizeResult(input: {
 
 // ─── Choosing a script for "Pimp me" ────────────────────────────────────────
 
-export interface PickCandidate {
-  script_id: string;
-  bestRung: number | null;
+/** Extra weight when the student's last session on a script ended on a miss. */
+const LAST_MISSED_BONUS = 2;
+const UNSEEN_WEIGHT = 6;
+const RECHECK_WEIGHT = 5;
+const MASTERED_WEIGHT = 1;
+
+/**
+ * How strongly "Pimp me" leans toward a script (wireframe 02, note 2: weighted
+ * toward weak spots). Missed and unseen scripts weigh most; mastered ones
+ * least. Weights are relative; `pickScript` adds the randomness.
+ *
+ *   not tried       6
+ *   re-check due    5
+ *   mastered        1
+ *   otherwise       7 − best rung (1–7), +2 if the last session ended on a miss
+ */
+export function scriptPickWeight(
+  scriptId: string,
+  sessions: readonly SessionRecord[],
+  now: Date,
+): number {
+  const mastery = masteryFor(scriptId, sessions, now);
+  if (mastery === 'not_tried') return UNSEEN_WEIGHT;
+  if (mastery === 'recheck_due') return RECHECK_WEIGHT;
+  if (mastery === 'mastered') return MASTERED_WEIGHT;
+  const best = bestRungOn(scriptId, sessions) ?? 0;
+  const last = sessions.filter((s) => s.script_id === scriptId).at(-1);
+  return TOP_RUNG + 1 - best + (last?.status === 'missed' ? LAST_MISSED_BONUS : 0);
 }
 
 /**
- * Picks a script for one-tap "Pimp me", weighted toward weak spots: the lower
- * the best rung, the likelier. Untried scripts sit in the middle. The script
- * just played is skipped when there is another choice.
+ * Picks a script for one-tap "Pimp me" from `scriptIds` (the rotation's
+ * scripts), weighted by `scriptPickWeight` with some randomness. The script
+ * just played is skipped when there is another choice. `sessions` are oldest
+ * first, as `listFinishedSessions` returns them.
  */
 export function pickScript(
-  candidates: readonly PickCandidate[],
-  options: { exclude?: string | undefined; random?: () => number } = {},
+  scriptIds: readonly string[],
+  sessions: readonly SessionRecord[],
+  options: { exclude?: string | undefined; random?: () => number; now?: Date } = {},
 ): string | null {
-  const { exclude, random = Math.random } = options;
-  const pool =
-    candidates.length > 1 ? candidates.filter((c) => c.script_id !== exclude) : candidates;
+  const { exclude, random = Math.random, now = new Date() } = options;
+  const pool = scriptIds.length > 1 ? scriptIds.filter((id) => id !== exclude) : scriptIds;
   if (pool.length === 0) return null;
-  const weighted = pool.map((c) => ({
-    id: c.script_id,
-    weight: c.bestRung === null ? 4 : TOP_RUNG + 1 - c.bestRung,
-  }));
+  const weighted = pool.map((id) => ({ id, weight: scriptPickWeight(id, sessions, now) }));
   const total = weighted.reduce((sum, w) => sum + w.weight, 0);
   let roll = random() * total;
   for (const { id, weight } of weighted) {

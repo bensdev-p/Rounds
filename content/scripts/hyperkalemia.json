@@ -115,6 +115,25 @@
       ]
     },
     {
+      "id": "hyperkalemia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man on lisinopril and spironolactone has new AKI and muscle weakness. His ECG shows tall, tented T waves. Which electrolyte problem?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "hyperkalaemia",
+            "high K"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperkalemia.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -178,6 +197,46 @@
       "required_count": 3
     },
     {
+      "id": "hyperkalemia.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three ECG changes of hyperkalemia, in the order they appear.",
+      "source_fields": [
+        "key_findings.labs[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "peaked T waves",
+          "synonyms": [
+            "peaked T",
+            "tented T waves",
+            "tall T waves"
+          ]
+        },
+        {
+          "answer": "PR prolongation",
+          "synonyms": [
+            "long PR",
+            "prolonged PR"
+          ]
+        },
+        {
+          "answer": "wide QRS",
+          "synonyms": [
+            "widened QRS",
+            "broad QRS"
+          ]
+        },
+        {
+          "answer": "sine wave",
+          "synonyms": [
+            "sinusoidal"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "hyperkalemia.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -199,6 +258,25 @@
       ]
     },
     {
+      "id": "hyperkalemia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "At what potassium level is hyperkalemia severe, even with a normal ECG?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "6.5 mEq/L or above",
+          "synonyms": [
+            "6.5",
+            "6.5 mEq/L",
+            "above 6.5"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperkalemia.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -213,6 +291,27 @@
             "ECG",
             "EKG",
             "electrocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Potassium 6.2 from a sample that took three attempts. What do you do before treating?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]",
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "repeat serum potassium",
+          "synonyms": [
+            "repeat potassium",
+            "repeat the sample",
+            "repeat it",
+            "recheck potassium"
           ]
         }
       ]
@@ -256,6 +355,40 @@
       "required_count": 3
     },
     {
+      "id": "hyperkalemia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "The heart is stabilized and potassium shifted. Name one way to remove potassium from the body.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "loop diuretics",
+          "synonyms": [
+            "furosemide",
+            "loop diuretic"
+          ]
+        },
+        {
+          "answer": "potassium binders",
+          "synonyms": [
+            "patiromer",
+            "sodium zirconium cyclosilicate",
+            "Lokelma",
+            "kayexalate",
+            "binder"
+          ]
+        },
+        {
+          "answer": "dialysis",
+          "synonyms": [
+            "hemodialysis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperkalemia.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -279,6 +412,25 @@
             "doesn't lower potassium",
             "no effect on potassium",
             "doesn't change potassium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperkalemia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which nebulized drug also shifts potassium into cells?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "albuterol",
+          "synonyms": [
+            "salbutamol",
+            "beta-2 agonist",
+            "beta agonist"
           ]
         }
       ]

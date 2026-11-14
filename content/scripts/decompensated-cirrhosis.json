@@ -130,6 +130,28 @@
       ]
     },
     {
+      "id": "decompensated-cirrhosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man with chronic hepatitis C has a tense, swollen abdomen, jaundice, palmar erythema and an INR of 2.1. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Decompensated cirrhosis",
+          "synonyms": [
+            "cirrhosis",
+            "alcoholic cirrhosis",
+            "alcohol-related cirrhosis",
+            "liver cirrhosis",
+            "end-stage liver disease",
+            "ESLD"
+          ]
+        }
+      ]
+    },
+    {
       "id": "decompensated-cirrhosis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -177,6 +199,52 @@
       "required_count": 3
     },
     {
+      "id": "decompensated-cirrhosis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of cirrhosis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "spontaneous bacterial peritonitis",
+          "synonyms": [
+            "SBP"
+          ]
+        },
+        {
+          "answer": "hepatorenal syndrome",
+          "synonyms": [
+            "HRS"
+          ]
+        },
+        {
+          "answer": "variceal bleeding",
+          "synonyms": [
+            "variceal bleed",
+            "varices",
+            "esophageal varices"
+          ]
+        },
+        {
+          "answer": "hepatic encephalopathy",
+          "synonyms": [
+            "encephalopathy",
+            "HE"
+          ]
+        },
+        {
+          "answer": "hepatocellular carcinoma",
+          "synonyms": [
+            "HCC",
+            "liver cancer"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "decompensated-cirrhosis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -192,6 +260,38 @@
             "serum ascites albumin gradient",
             "albumin gradient"
           ]
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What four events mark the switch from compensated to decompensated cirrhosis? Name one.",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ascites",
+          "synonyms": []
+        },
+        {
+          "answer": "variceal bleeding",
+          "synonyms": [
+            "variceal bleed",
+            "GI bleed"
+          ]
+        },
+        {
+          "answer": "hepatic encephalopathy",
+          "synonyms": [
+            "encephalopathy"
+          ]
+        },
+        {
+          "answer": "jaundice",
+          "synonyms": []
         }
       ]
     },
@@ -215,6 +315,25 @@
       ]
     },
     {
+      "id": "decompensated-cirrhosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What serum-ascites albumin gradient means the ascites is from portal hypertension?",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1.1 g/dL or more",
+          "synonyms": [
+            "1.1 g/dL",
+            "at least 1.1",
+            "above 1.1"
+          ]
+        }
+      ]
+    },
+    {
       "id": "decompensated-cirrhosis.management.1",
       "rung": "management",
       "kind": "single",
@@ -226,6 +345,25 @@
         {
           "answer": "lactulose",
           "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "New ascites. First-line diuretics, with sodium restriction?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "spironolactone with furosemide",
+          "synonyms": [
+            "spironolactone and furosemide",
+            "spironolactone",
+            "spironolactone plus furosemide"
+          ]
         }
       ]
     },
@@ -245,6 +383,23 @@
             "250 neutrophils",
             "250 cells",
             "PMN 250"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "decompensated-cirrhosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Tense ascites drained by large-volume paracentesis. What do you give with it?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "albumin",
+          "synonyms": [
+            "IV albumin"
           ]
         }
       ]

@@ -4,7 +4,6 @@
  * The result replaces the session in place, so the run's state stays here.
  */
 import {
-  bestRungOn,
   buildMissCard,
   currentQuestion,
   detectPhi,
@@ -14,6 +13,7 @@ import {
   PERSONAS,
   personaLine,
   phiWarning,
+  pickLadder,
   pickScript,
   RUNGS,
   rungIndex,
@@ -34,6 +34,7 @@ import {
   getLadderContent,
   GradeRejectedError,
   gradeAnswer,
+  lastAskedQuestionIds,
   listFinishedSessions,
   listPimpableScripts,
   type ScriptSummary,
@@ -69,12 +70,13 @@ export default function SessionRoute() {
   const params = useLocalSearchParams<{ scriptId: string; persona?: string }>();
   const persona = parsePersona(params.persona) ?? 'teacher';
   const data = useAsync(async () => {
-    const [content, sessions, scripts] = await Promise.all([
+    const [content, sessions, scripts, lastAsked] = await Promise.all([
       getLadderContent(client, params.scriptId),
       listFinishedSessions(client),
       listPimpableScripts(client),
+      lastAskedQuestionIds(client, params.scriptId),
     ]);
-    return { content, sessions, scripts };
+    return { content, sessions, scripts, lastAsked };
   }, params.scriptId);
 
   if (data.status === 'loading') return <Loading label="Getting the attending" />;
@@ -86,7 +88,7 @@ export default function SessionRoute() {
       />
     );
   }
-  const { content, sessions, scripts } = data.data;
+  const { content, sessions, scripts, lastAsked } = data.data;
   if (!content || content.questions.length === 0) {
     return <ErrorView message="That topic isn't available." onRetry={goHome} />;
   }
@@ -97,6 +99,7 @@ export default function SessionRoute() {
       confusables={content.confusables}
       sessionsBefore={sessions}
       scripts={scripts}
+      lastAsked={lastAsked}
       persona={persona}
     />
   );
@@ -116,17 +119,23 @@ function Session({
   confusables,
   sessionsBefore,
   scripts,
+  lastAsked,
   persona,
 }: {
   script: IllnessScript;
+  /** Every question on the script; each run asks one per rung. */
   questions: Question[];
   confusables: Confusable[];
   sessionsBefore: SessionRecord[];
   scripts: ScriptSummary[];
+  /** Questions from the last finished session on this script, to avoid repeating. */
+  lastAsked: string[];
   persona: PersonaId;
 }) {
   const client = useClient();
-  const [state, setState] = useState<LadderState>(() => startLadder(questions, persona));
+  const [state, setState] = useState<LadderState>(() =>
+    startLadder(pickLadder(questions, { avoid: lastAsked }), persona),
+  );
   const recorder = useLadderRecorder(client, script, persona);
   const [phase, setPhase] = useState<Phase>('asking');
   const [answer, setAnswer] = useState('');
@@ -249,7 +258,9 @@ function Session({
   function goAgain() {
     run.current += 1;
     recorder.reset();
-    setState(startLadder(questions, persona));
+    // Ask different questions from the run that just ended, where the script has them.
+    const justAsked = state.attempts.map((a) => a.question_id);
+    setState(startLadder(pickLadder(questions, { avoid: justAsked }), persona));
     setPhase('asking');
     setAnswer('');
     setWarning(null);
@@ -261,11 +272,13 @@ function Session({
   }
 
   function nextTopic() {
+    // Stay in this script's rotation.
+    const rotation = script.rotation[0];
     const scriptId = pickScript(
-      scripts.map((s) => ({
-        script_id: s.script.id,
-        bestRung: bestRungOn(s.script.id, history),
-      })),
+      scripts
+        .filter((s) => rotation === undefined || s.script.rotation.includes(rotation))
+        .map((s) => s.script.id),
+      history,
       { exclude: script.id },
     );
     if (!scriptId || scriptId === script.id) {

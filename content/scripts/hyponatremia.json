@@ -120,6 +120,25 @@
       ]
     },
     {
+      "id": "hyponatremia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 70-year-old started on sertraline a month ago has nausea, headache and has fallen twice. Serum sodium is 124. Which electrolyte problem?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyponatremia",
+          "synonyms": [
+            "low sodium",
+            "hyponatraemia",
+            "thiazide-induced hyponatremia"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyponatremia.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -178,6 +197,37 @@
       "required_count": 3
     },
     {
+      "id": "hyponatremia.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three urine or blood tests in the hyponatremia workup.",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum osmolality",
+          "synonyms": [
+            "plasma osmolality",
+            "serum osm"
+          ]
+        },
+        {
+          "answer": "urine osmolality",
+          "synonyms": [
+            "urine osm"
+          ]
+        },
+        {
+          "answer": "urine sodium",
+          "synonyms": [
+            "urine Na"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "hyponatremia.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -207,6 +257,26 @@
       ]
     },
     {
+      "id": "hyponatremia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Hyponatremia with ascites and leg edema. Which volume status is it, and what do you treat?",
+      "source_fields": [
+        "management.next_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "treat heart failure or cirrhosis",
+          "synonyms": [
+            "treat the cirrhosis",
+            "treat the heart failure",
+            "hypervolemic",
+            "hypervolemia"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyponatremia.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -220,6 +290,25 @@
           "synonyms": [
             "serum osm",
             "plasma osmolality"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Below what serum sodium is hyponatremia severe?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "120 mEq/L",
+          "synonyms": [
+            "120",
+            "below 120",
+            "under 120"
           ]
         }
       ]
@@ -244,6 +333,24 @@
       ]
     },
     {
+      "id": "hyponatremia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Euvolemic, asymptomatic SIADH with sodium 128. First-line treatment?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fluid restriction",
+          "synonyms": [
+            "restrict fluids",
+            "water restriction"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyponatremia.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -259,6 +366,26 @@
             "central pontine myelinolysis",
             "ODS",
             "CPM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyponatremia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Chronic hyponatremia. What is the most you raise sodium in 24 hours?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "8 mEq/L",
+          "synonyms": [
+            "8",
+            "8 mmol",
+            "8 mEq",
+            "eight"
           ]
         }
       ]

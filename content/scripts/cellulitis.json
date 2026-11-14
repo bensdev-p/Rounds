@@ -121,6 +121,25 @@
       ]
     },
     {
+      "id": "cellulitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A man with leg lymphedema has two days of a warm, red, tender patch with fuzzy borders spreading up one calf. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Cellulitis",
+          "synonyms": [
+            "skin infection",
+            "soft tissue infection",
+            "erysipelas"
+          ]
+        }
+      ]
+    },
+    {
       "id": "cellulitis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -172,6 +191,41 @@
       "required_count": 3
     },
     {
+      "id": "cellulitis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of cellulitis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "abscess",
+          "synonyms": []
+        },
+        {
+          "answer": "bacteremia",
+          "synonyms": [
+            "sepsis",
+            "bloodstream infection"
+          ]
+        },
+        {
+          "answer": "necrotizing fasciitis",
+          "synonyms": [
+            "nec fasc"
+          ]
+        },
+        {
+          "answer": "recurrence",
+          "synonyms": [
+            "recurrent cellulitis"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "cellulitis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -198,6 +252,24 @@
       ]
     },
     {
+      "id": "cellulitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "A red, warm shin with a fluctuant centre. What does the fluctuance tell you it is, beyond cellulitis?",
+      "source_fields": [
+        "key_findings.exam[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "abscess",
+          "synonyms": [
+            "collection",
+            "pus collection"
+          ]
+        }
+      ]
+    },
+    {
       "id": "cellulitis.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -212,6 +284,27 @@
             "bedside ultrasound",
             "POCUS",
             "point-of-care ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "When do you send blood cultures in cellulitis?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "only if systemically unwell",
+          "synonyms": [
+            "systemically unwell",
+            "septic",
+            "sepsis",
+            "systemic illness",
+            "systemically ill"
           ]
         }
       ]
@@ -235,6 +328,27 @@
       ]
     },
     {
+      "id": "cellulitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Purulent cellulitis draining pus. Which coverage do you add?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "MRSA coverage",
+          "synonyms": [
+            "MRSA",
+            "trimethoprim-sulfamethoxazole",
+            "TMP-SMX",
+            "Bactrim",
+            "doxycycline"
+          ]
+        }
+      ]
+    },
+    {
       "id": "cellulitis.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -249,6 +363,26 @@
             "venous stasis dermatitis",
             "stasis eczema",
             "venous eczema"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cellulitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Besides antibiotics, what simple measure helps leg cellulitis settle?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "elevate the limb",
+          "synonyms": [
+            "elevation",
+            "elevate",
+            "leg elevation",
+            "raise the leg"
           ]
         }
       ]
