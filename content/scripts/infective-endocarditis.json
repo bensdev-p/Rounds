@@ -121,6 +121,25 @@
       ]
     },
     {
+      "id": "infective-endocarditis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A woman with a prosthetic aortic valve has six weeks of low fevers, weight loss and new splinter hemorrhages. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Infective endocarditis",
+          "synonyms": [
+            "endocarditis",
+            "bacterial endocarditis",
+            "tricuspid endocarditis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "infective-endocarditis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -179,6 +198,43 @@
       "required_count": 3
     },
     {
+      "id": "infective-endocarditis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three peripheral signs of endocarditis.",
+      "source_fields": [
+        "key_findings.exam"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "splinter hemorrhages",
+          "synonyms": [
+            "splinters"
+          ]
+        },
+        {
+          "answer": "Janeway lesions",
+          "synonyms": [
+            "Janeway"
+          ]
+        },
+        {
+          "answer": "Osler nodes",
+          "synonyms": [
+            "Osler",
+            "Osler's nodes"
+          ]
+        },
+        {
+          "answer": "Roth spots",
+          "synonyms": [
+            "Roth"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "infective-endocarditis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -191,6 +247,27 @@
           "answer": "Janeway lesions",
           "synonyms": [
             "Janeway"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which organism causes acute endocarditis over days, rather than a subacute course over weeks?",
+      "source_fields": [
+        "timeline.onset"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "S. aureus",
+          "synonyms": [
+            "Staphylococcus aureus",
+            "Staph aureus",
+            "S aureus",
+            "MRSA",
+            "MSSA"
           ]
         }
       ]
@@ -215,6 +292,26 @@
       ]
     },
     {
+      "id": "infective-endocarditis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Transthoracic echo is negative but suspicion stays high. Next test?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transesophageal",
+          "synonyms": [
+            "TEE",
+            "TOE",
+            "transesophageal echocardiogram",
+            "transesophageal echo"
+          ]
+        }
+      ]
+    },
+    {
       "id": "infective-endocarditis.management.1",
       "rung": "management",
       "kind": "single",
@@ -233,6 +330,26 @@
       ]
     },
     {
+      "id": "infective-endocarditis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How long is the course of IV antibiotics for endocarditis?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "4 to 6 weeks",
+          "synonyms": [
+            "4-6 weeks",
+            "four to six weeks",
+            "6 weeks",
+            "4 weeks"
+          ]
+        }
+      ]
+    },
+    {
       "id": "infective-endocarditis.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -246,6 +363,45 @@
           "synonyms": [
             "tricuspid",
             "right-sided valve"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "infective-endocarditis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name one indication for valve surgery in endocarditis.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HF"
+          ]
+        },
+        {
+          "answer": "uncontrolled infection",
+          "synonyms": [
+            "persistent bacteremia",
+            "persistent infection"
+          ]
+        },
+        {
+          "answer": "abscess",
+          "synonyms": [
+            "perivalvular abscess",
+            "root abscess"
+          ]
+        },
+        {
+          "answer": "large vegetations with embolism",
+          "synonyms": [
+            "large vegetation",
+            "embolism",
+            "emboli"
           ]
         }
       ]

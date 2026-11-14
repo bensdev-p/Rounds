@@ -118,6 +118,25 @@
       ]
     },
     {
+      "id": "iron-deficiency-anemia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old man is short of breath on stairs and pale. Hemoglobin 9.1, MCV 70, ferritin 8. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Iron deficiency anemia",
+          "synonyms": [
+            "iron deficiency",
+            "IDA",
+            "iron-deficiency anemia"
+          ]
+        }
+      ]
+    },
+    {
       "id": "iron-deficiency-anemia.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -172,6 +191,54 @@
       "required_count": 3
     },
     {
+      "id": "iron-deficiency-anemia.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three lab findings in iron deficiency besides a low hemoglobin.",
+      "source_fields": [
+        "key_findings.labs"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "microcytic anemia",
+          "synonyms": [
+            "low MCV",
+            "microcytosis",
+            "microcytic"
+          ]
+        },
+        {
+          "answer": "low ferritin",
+          "synonyms": [
+            "ferritin"
+          ]
+        },
+        {
+          "answer": "high RDW",
+          "synonyms": [
+            "raised RDW",
+            "RDW"
+          ]
+        },
+        {
+          "answer": "low transferrin saturation",
+          "synonyms": [
+            "low TSAT",
+            "low iron saturation"
+          ]
+        },
+        {
+          "answer": "high total iron-binding capacity",
+          "synonyms": [
+            "high TIBC",
+            "raised TIBC",
+            "TIBC"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "iron-deficiency-anemia.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -191,6 +258,25 @@
       ]
     },
     {
+      "id": "iron-deficiency-anemia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ferritin level confirms iron deficiency in most adults?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "below 30 ng/mL",
+          "synonyms": [
+            "below 30",
+            "under 30",
+            "less than 30"
+          ]
+        }
+      ]
+    },
+    {
       "id": "iron-deficiency-anemia.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -203,6 +289,27 @@
           "answer": "serum ferritin",
           "synonyms": [
             "ferritin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Iron deficiency in a postmenopausal woman. Which two procedures?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "colonoscopy and upper endoscopy",
+          "synonyms": [
+            "colonoscopy and endoscopy",
+            "EGD and colonoscopy",
+            "colonoscopy and EGD",
+            "upper and lower endoscopy",
+            "bidirectional endoscopy"
           ]
         }
       ]
@@ -228,6 +335,26 @@
       ]
     },
     {
+      "id": "iron-deficiency-anemia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Oral iron for three months, but the hemoglobin hasn't moved and she can't tolerate it. Next step?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV iron",
+          "synonyms": [
+            "intravenous iron",
+            "iron infusion",
+            "ferric carboxymaltose",
+            "iron sucrose"
+          ]
+        }
+      ]
+    },
+    {
       "id": "iron-deficiency-anemia.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -243,6 +370,26 @@
             "colonoscopy and EGD",
             "bidirectional endoscopy",
             "endoscopy and colonoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iron-deficiency-anemia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How much should hemoglobin rise after 2 to 3 weeks of replacement?",
+      "source_fields": [
+        "timeline.course"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1 to 2 g/dL",
+          "synonyms": [
+            "1-2 g/dL",
+            "1 to 2",
+            "1-2",
+            "one to two"
           ]
         }
       ]

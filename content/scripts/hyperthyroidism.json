@@ -126,6 +126,27 @@
       ]
     },
     {
+      "id": "hyperthyroidism.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 45-year-old woman has lost 6 kg while eating more, feels hot all the time and has palpitations. TSH is undetectable and free T4 high. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperthyroidism",
+          "synonyms": [
+            "Graves disease",
+            "Graves' disease",
+            "Graves",
+            "thyrotoxicosis",
+            "overactive thyroid"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperthyroidism.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -180,6 +201,43 @@
       "required_count": 3
     },
     {
+      "id": "hyperthyroidism.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of hyperthyroidism or its treatment.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial fibrillation",
+          "synonyms": [
+            "AF",
+            "AFib"
+          ]
+        },
+        {
+          "answer": "thyroid storm",
+          "synonyms": [
+            "thyrotoxic crisis"
+          ]
+        },
+        {
+          "answer": "osteoporosis",
+          "synonyms": [
+            "bone loss"
+          ]
+        },
+        {
+          "answer": "agranulocytosis",
+          "synonyms": [
+            "neutropenia"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "hyperthyroidism.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -200,6 +258,32 @@
       ]
     },
     {
+      "id": "hyperthyroidism.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which exam findings are specific to Graves disease? Name one.",
+      "source_fields": [
+        "key_findings.exam[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "exophthalmos",
+          "synonyms": [
+            "proptosis",
+            "bulging eyes",
+            "Graves ophthalmopathy",
+            "eye disease"
+          ]
+        },
+        {
+          "answer": "pretibial myxedema",
+          "synonyms": [
+            "myxedema"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperthyroidism.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -213,6 +297,26 @@
           "synonyms": [
             "thyroid stimulating hormone",
             "thyrotropin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Low TSH, high free T4. Which blood test confirms Graves disease as the cause?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "TSH-receptor antibodies",
+          "synonyms": [
+            "TRAb",
+            "TSI",
+            "thyroid stimulating immunoglobulin",
+            "TSH receptor antibody"
           ]
         }
       ]
@@ -238,6 +342,23 @@
       ]
     },
     {
+      "id": "hyperthyroidism.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Graves disease in the first trimester of pregnancy. Which antithyroid drug?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "propylthiouracil",
+          "synonyms": [
+            "PTU"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperthyroidism.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -252,6 +373,32 @@
             "neutropenia",
             "low white count",
             "low neutrophils"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperthyroidism.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Antithyroid drugs fail or aren't tolerated. Name one definitive treatment.",
+      "source_fields": [
+        "management.next_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "radioactive iodine ablation",
+          "synonyms": [
+            "radioactive iodine",
+            "RAI",
+            "radioiodine",
+            "I-131"
+          ]
+        },
+        {
+          "answer": "thyroidectomy",
+          "synonyms": [
+            "surgery"
           ]
         }
       ]

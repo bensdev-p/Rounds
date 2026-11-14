@@ -129,6 +129,27 @@
       ]
     },
     {
+      "id": "hyperosmolar-hyperglycemic-state.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A nursing home resident with type 2 diabetes and a UTI is barely rousable and very dry. Glucose 880 mg/dL, osmolality 360, bicarbonate 22, ketones trace. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hyperosmolar hyperglycemic state",
+          "synonyms": [
+            "HHS",
+            "hyperosmolar hyperglycemic syndrome",
+            "hyperosmolar nonketotic state",
+            "HONK",
+            "HHNK"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperosmolar-hyperglycemic-state.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -189,6 +210,46 @@
       "required_count": 3
     },
     {
+      "id": "hyperosmolar-hyperglycemic-state.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of HHS or its treatment.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cerebral edema",
+          "synonyms": [
+            "brain swelling"
+          ]
+        },
+        {
+          "answer": "venous thromboembolism",
+          "synonyms": [
+            "VTE",
+            "DVT",
+            "PE",
+            "blood clots"
+          ]
+        },
+        {
+          "answer": "rhabdomyolysis",
+          "synonyms": [
+            "rhabdo"
+          ]
+        },
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "kidney injury"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "hyperosmolar-hyperglycemic-state.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -219,6 +280,26 @@
       ]
     },
     {
+      "id": "hyperosmolar-hyperglycemic-state.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Over what time course does HHS develop, compared with DKA?",
+      "source_fields": [
+        "timeline.onset",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "days to weeks",
+          "synonyms": [
+            "days",
+            "over days",
+            "weeks"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperosmolar-hyperglycemic-state.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -235,6 +316,26 @@
             "osmolality",
             "serum osm",
             "osmolarity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test excludes significant ketosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum beta-hydroxybutyrate",
+          "synonyms": [
+            "beta-hydroxybutyrate",
+            "BHB",
+            "beta hydroxybutyrate",
+            "serum ketones"
           ]
         }
       ]
@@ -262,6 +363,25 @@
       ]
     },
     {
+      "id": "hyperosmolar-hyperglycemic-state.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Fluids are running. What potassium level do you need before starting insulin?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "at least 3.5 mEq/L",
+          "synonyms": [
+            "at least 3.5",
+            "3.5 or more",
+            "above 3.5"
+          ]
+        }
+      ]
+    },
+    {
       "id": "hyperosmolar-hyperglycemic-state.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -277,6 +397,25 @@
             "drops the blood pressure",
             "circulatory collapse",
             "shifts water into cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hyperosmolar-hyperglycemic-state.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why lower glucose, sodium and osmolality gradually in HHS?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "to avoid cerebral edema",
+          "synonyms": [
+            "cerebral edema",
+            "brain swelling",
+            "avoid cerebral edema"
           ]
         }
       ]
