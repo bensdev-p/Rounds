@@ -131,6 +131,28 @@
       ]
     },
     {
+      "id": "nephritic-syndrome.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 35-year-old has dark urine, new hypertension and a creatinine that rose from 0.9 to 2.4 over two weeks. Urine shows red cell casts. Which syndrome?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Nephritic syndrome",
+          "synonyms": [
+            "nephritic",
+            "acute glomerulonephritis",
+            "glomerulonephritis",
+            "post-streptococcal glomerulonephritis",
+            "poststreptococcal glomerulonephritis",
+            "PSGN"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephritic-syndrome.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -193,6 +215,45 @@
       ]
     },
     {
+      "id": "nephritic-syndrome.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of nephritic syndrome.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI",
+            "kidney injury"
+          ]
+        },
+        {
+          "answer": "hypertensive emergency",
+          "synonyms": [
+            "hypertensive crisis",
+            "malignant hypertension"
+          ]
+        },
+        {
+          "answer": "pulmonary edema",
+          "synonyms": [
+            "fluid overload"
+          ]
+        },
+        {
+          "answer": "progression to chronic kidney disease",
+          "synonyms": [
+            "chronic kidney disease",
+            "CKD"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "nephritic-syndrome.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -213,6 +274,26 @@
       ]
     },
     {
+      "id": "nephritic-syndrome.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "IgA nephropathy follows an infection within days. How long after a sore throat does post-streptococcal glomerulonephritis appear?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1 to 3 weeks",
+          "synonyms": [
+            "1-3 weeks",
+            "one to three weeks",
+            "2 weeks",
+            "two weeks"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephritic-syndrome.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -228,6 +309,41 @@
             "complement",
             "complement levels",
             "low complement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Nephritic picture of unclear cause. Name one serology you send.",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ANCA",
+          "synonyms": []
+        },
+        {
+          "answer": "anti-GBM",
+          "synonyms": [
+            "anti GBM",
+            "anti-glomerular basement membrane"
+          ]
+        },
+        {
+          "answer": "ANA",
+          "synonyms": [
+            "antinuclear antibody"
+          ]
+        },
+        {
+          "answer": "ASO",
+          "synonyms": [
+            "antistreptolysin O",
+            "anti-streptolysin O"
           ]
         }
       ]
@@ -268,6 +384,24 @@
       ]
     },
     {
+      "id": "nephritic-syndrome.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Anti-GBM disease with hemoptysis and a rising creatinine. Which treatment removes the antibody?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "plasma exchange",
+          "synonyms": [
+            "plasmapheresis",
+            "PLEX"
+          ]
+        }
+      ]
+    },
+    {
       "id": "nephritic-syndrome.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -282,6 +416,28 @@
             "IgAN",
             "Berger disease",
             "IgA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nephritic-syndrome.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Rapidly progressive ANCA vasculitis. Which treatment?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "immunosuppression",
+          "synonyms": [
+            "steroids with cyclophosphamide",
+            "steroids and cyclophosphamide",
+            "steroids with rituximab",
+            "steroids and rituximab",
+            "cyclophosphamide",
+            "rituximab"
           ]
         }
       ]

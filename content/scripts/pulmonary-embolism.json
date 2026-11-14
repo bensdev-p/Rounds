@@ -137,6 +137,25 @@
       ]
     },
     {
+      "id": "pulmonary-embolism.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A woman with metastatic breast cancer has sudden breathlessness, a heart rate of 125 and a saturation of 88%. Her lungs are clear. Most likely diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Pulmonary embolism",
+          "synonyms": [
+            "PE",
+            "pulmonary embolus",
+            "pulmonary thromboembolism"
+          ]
+        }
+      ]
+    },
+    {
       "id": "pulmonary-embolism.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -211,6 +230,45 @@
       ]
     },
     {
+      "id": "pulmonary-embolism.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of pulmonary embolism.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right heart failure",
+          "synonyms": [
+            "right ventricular failure",
+            "RV failure",
+            "cor pulmonale"
+          ]
+        },
+        {
+          "answer": "obstructive shock",
+          "synonyms": [
+            "shock"
+          ]
+        },
+        {
+          "answer": "pulmonary infarction",
+          "synonyms": [
+            "lung infarction"
+          ]
+        },
+        {
+          "answer": "chronic thromboembolic pulmonary hypertension",
+          "synonyms": [
+            "CTEPH",
+            "pulmonary hypertension"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
       "id": "pulmonary-embolism.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -240,6 +298,24 @@
       ]
     },
     {
+      "id": "pulmonary-embolism.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Low pretest probability for PE. Which blood test, if negative, rules it out?",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "D-dimer",
+          "synonyms": [
+            "D dimer",
+            "dimer"
+          ]
+        }
+      ]
+    },
+    {
       "id": "pulmonary-embolism.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -257,6 +333,26 @@
             "CT PE protocol",
             "PE protocol CT",
             "CTA chest"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Suspected PE, but she has a contrast allergy. Which scan instead of CT?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "V/Q scan",
+          "synonyms": [
+            "VQ scan",
+            "ventilation-perfusion scan",
+            "ventilation perfusion scan",
+            "V/Q"
           ]
         }
       ]
@@ -304,6 +400,27 @@
       ]
     },
     {
+      "id": "pulmonary-embolism.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Confirmed PE with a blood pressure of 78/40. Treatment?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "systemic thrombolysis",
+          "synonyms": [
+            "thrombolysis",
+            "thrombolytics",
+            "alteplase",
+            "tPA",
+            "lytics"
+          ]
+        }
+      ]
+    },
+    {
       "id": "pulmonary-embolism.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -316,6 +433,24 @@
           "answer": "sinus tachycardia",
           "synonyms": [
             "sinus tach"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pulmonary-embolism.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which classic ECG pattern of PE is actually uncommon?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "S1Q3T3",
+          "synonyms": [
+            "S1 Q3 T3",
+            "S1Q3T3 pattern"
           ]
         }
       ]

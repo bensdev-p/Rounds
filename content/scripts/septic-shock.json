@@ -132,6 +132,25 @@
       ]
     },
     {
+      "id": "septic-shock.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 75-year-old with pneumonia becomes confused and mottled. MAP 58 after 30 mL/kg of fluid, now on norepinephrine, lactate 4.5. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "septic shock",
+          "synonyms": [
+            "shock from sepsis",
+            "urosepsis with shock",
+            "sepsis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "septic-shock.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -188,6 +207,48 @@
       "required_count": 3
     },
     {
+      "id": "septic-shock.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of septic shock.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "multi-organ failure",
+          "synonyms": [
+            "multiorgan failure",
+            "multiple organ failure",
+            "MODS"
+          ]
+        },
+        {
+          "answer": "ARDS",
+          "synonyms": [
+            "acute respiratory distress syndrome"
+          ]
+        },
+        {
+          "answer": "acute kidney injury",
+          "synonyms": [
+            "AKI"
+          ]
+        },
+        {
+          "answer": "disseminated intravascular coagulation",
+          "synonyms": [
+            "DIC"
+          ]
+        },
+        {
+          "answer": "death",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "septic-shock.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -216,6 +277,24 @@
       ]
     },
     {
+      "id": "septic-shock.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Shock that ignores fluids, with low sodium, high potassium and low glucose in a patient on long-term steroids. What else must you consider?",
+      "source_fields": [
+        "confused_with[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "adrenal insufficiency",
+          "synonyms": [
+            "adrenal crisis",
+            "Addisonian crisis"
+          ]
+        }
+      ]
+    },
+    {
       "id": "septic-shock.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -229,6 +308,24 @@
           "synonyms": [
             "cultures",
             "blood culture"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which score measures the organ dysfunction that defines sepsis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "SOFA score",
+          "synonyms": [
+            "SOFA",
+            "sequential organ failure assessment"
           ]
         }
       ]
@@ -274,6 +371,26 @@
       "required_count": 3
     },
     {
+      "id": "septic-shock.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Antibiotics and pressors are running for an infected obstructed kidney. What else is essential?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "source control",
+          "synonyms": [
+            "drain the kidney",
+            "nephrostomy",
+            "drainage",
+            "relieve the obstruction"
+          ]
+        }
+      ]
+    },
+    {
       "id": "septic-shock.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -289,6 +406,23 @@
             "MAP 65",
             "65 mm Hg",
             "at least 65"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Norepinephrine needs keep rising. Which vasopressor do you add?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vasopressin",
+          "synonyms": [
+            "ADH"
           ]
         }
       ]
