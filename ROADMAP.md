@@ -32,19 +32,21 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.2 (Review):** the Review tab matches `review.png`, `review-light.png` and wireframe 09. "Missed today" lists up to five scripts, oldest first; the rest roll to tomorrow, and a miss clears once a later ladder gets past the missed rung (or after a week). The line under each uses the miss card's label ("Missed on management"), or names the list items left out ("Missed uremia, salicylates"), kept to one line. Each row opens the script, whose back link then says "Review" (`script.png`). "You keep mixing these up" appears when the same pair was confused 2+ times in 7 days, with the comparison columns sliding in (video scene 7) and "Drill this pair": both scripts' Tell it apart questions, taking turns (up to 4), ending on the first miss, saved as a drill that never counts toward best rung, rounds, rank or mastery. "From today's patients" lists logged scripts not yet pimped today, with Start. The Anki row stays hidden until M3.1. New: `attempts.matched`, `ladder_sessions.kind` and `partner_script_id` (pgTAP tests); comparison rows on every `confused_with` pair (13 pairs, still `in_review`). Tried on the phone.
 
-**Gaps:** onboarding and the real Settings.
+**M2.3 (accounts, onboarding, settings):** every student still starts without an account. Onboarding (wireframe 01) asks year and rotation, plus an optional "Week 3 of 8" row (not drawn), and shows whenever there's no profile yet, keeping the persona and goal a device already had. Home shows "Week 3 of 8" before "Change rotation", which now opens the same questions; the script picker is a link from there and still a long press on Pimp me. A rotation with no scripts yet (OB/GYN) says so and asks from the others. Settings (wireframe 12, no Anki): Daily goal above Voice (developer's call), Answer timeout (Persona default, 10 s, 30 s, 60 s, No limit), Appearance (Light, Dark, System, per device; replaces `EXPO_PUBLIC_THEME`), Account. Account (not drawn): sign in with a 6-digit email code (works from the phone on the home Wi-Fi; codes land in Mailpit locally), Sign in with Apple in the iPhone build only, sign out, delete account (`delete-account` Edge Function). Signing in adds the email or Apple ID to the same anonymous user, so history carries over; an email that already has an account signs in to it, after a warning if this phone has practice that stays behind. "Keep your progress" shows once on the result screen after the first session. New `profiles` table (pgTAP tests); persona and goal moved there from the device. Local auth now confirms emails, as a hosted project does. Tried on the phone.
 
-**Next: M2.3 Accounts, onboarding, settings.**
+**Gaps:** none in Stage 2 before voice.
+
+**Next: M2.4 Voice spike.**
 
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line M2.3, mic icon M2.5 | Done |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon M2.5 | Done |
 | Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
-| Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress | Done |
+| Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
 | Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon M2.5 | Done |
@@ -53,8 +55,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
 | Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.1 | Done |
-| Onboarding | 01 | — | Not built | M2.3 |
-| Settings | 12 | — | Placeholder (M1.3): daily goal and disclaimer | M2.3 (Anki part: M3.1) |
+| Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
+| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Voice speed M2.5, Anki part M3.1 | Done |
+| Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete | Done |
 | Live session, voice | 04 | session | Not built | M2.5 |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
@@ -116,9 +119,12 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ### M2.5 Voice session
 - Wireframe 04 and `session.png`: an idle dotted waveform while the attending asks, live once the question ends. Common questions use cached audio. Everything sits behind the `stt` and `tts` provider interfaces. Text mode stays available everywhere.
 - **Mic icon** on "Pimp me" (Home) and "Pimp me on this" (illness script), as in `home.png` and `script.png`. M1.2 kept the ladder icon because the app was text-only.
+- **Voice speed** row in Settings → Voice (wireframe 12), left out in M2.3 because there was no voice yet.
 
 ### M2.6 Hosting and TestFlight
 - A hosted Supabase project, Edge Functions with a spending cap on the API key, an EAS build and TestFlight. The developer has no Mac, so cloud builds only.
+- **Accounts on the hosted project (from M2.3):** keep "Confirm email" on, turn on anonymous sign-ins and manual linking, use code email templates like `supabase/templates/`, deploy `delete-account`, and set up real email sending (SMTP).
+- **Sign in with Apple (developer setup):** Apple Developer Program membership; bundle id `com.ben.rounds` (in `app.json`, with `usesAppleSignIn`); EAS switches on the capability during the cloud build; in the hosted Supabase project, Authentication → Providers → Apple with `com.ben.rounds` as a client id (no secret needed for the native flow). Try it on the first TestFlight build: the web app doesn't offer Apple.
 - **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. Before M2.6, decide how the developer tests on a hosted backend while scripts are still in review. One option is a separate private dev project that's allowed to use the preview. That would change domain rule 2, which today says the preview flag is never set on a hosted database, so it needs the developer's explicit OK.
 
 ---
@@ -126,7 +132,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ## Stages 3–5 (detail added when Stage 2 is done)
 - **3. Anki bridge:** M3.1, the add-on and the Anki section of Settings (wireframe 12), prototyped against a real AnKing collection. Includes the "Unsuspend 3 Anki cards" row on the result screen (`result.png`), left out until then.
 - **4. Launch:** public web portal, marketing site (copy follows DESIGN.md → Voice and copy), payments, Android.
-- **5. Expand:** all rotations, shadowing mode, Teams (mockups and wireframes 16–18 are ready), desktop decision, school licenses.
+- **5. Expand:** all rotations, shadowing mode (including organ systems instead of rotations for MS1–2 in onboarding, wireframe 01 note 1; scripts need a "system" field first), Teams (mockups and wireframes 16–18 are ready), desktop decision, school licenses.
 
 ## Decisions for the developer (not Code)
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
@@ -154,7 +160,9 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) More than one mix-up pair on Review at a time. Wireframe 09 draws one, and the review is meant to end.
 - (14 Nov 2026) A drawn screen for the mix-up drill and its result. M2.2 reuses the live session (four squares instead of the ladder) and the result screen's pieces.
 - (14 Nov 2026) Short column headers on the comparison ("Nephritic" in `review.png`). Scripts have only full names, so long ones wrap to two lines.
-- (14 Nov 2026) Where the daily goal lives for good. M1.3 moved it from Progress to the Settings placeholder, but wireframe 12 has no row for it; onboarding (wireframe 01) sets it. Decide when Settings is built in M2.3.
+- (14 Nov 2026) Merging two accounts' history when a student who practised without an account signs in to an existing one. M2.3 warns and leaves the anonymous practice behind.
+- (14 Nov 2026) A daily ladder on the public web (Stage 4, alongside the marketing site): one script a day, the same for everyone, playable without an account and kept with it when signed in. A shareable result could be the ladder itself as squares (passed, missed, not reached), with no answers in it. Constraints: approved scripts only (release rule), no "pimp" in public copy (DESIGN.md → Voice and copy), and no-guilt streaks (DESIGN.md → Progression).
+- (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 
 ---
 

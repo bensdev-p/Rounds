@@ -149,6 +149,13 @@ describe('ladder engine', () => {
     expect(endingMiss(s)?.miss_tag).toBe('slow');
   });
 
+  it("lets the answer timeout setting replace the persona's limit", () => {
+    const untimed = startLadder(TEST_QUESTIONS, 'surgeon', { time_limit_ms: null });
+    expect(answer(untimed, 'Zorblax syndrome', 60_000).status).toBe('in_progress');
+    const timed = startLadder(TEST_QUESTIONS, 'teacher', { time_limit_ms: 10_000 });
+    expect(endingMiss(answer(timed, 'Zorblax syndrome', 11_000))?.miss_tag).toBe('slow');
+  });
+
   it('rejects a ladder with two questions on one rung', () => {
     const second = { ...recall, id: 'zorblax-syndrome.recall.2' };
     expect(() => startLadder([recall, second])).toThrow(LadderError);
@@ -163,7 +170,10 @@ describe('ladder engine', () => {
 });
 
 describe('pickLadder', () => {
-  const variant = (q: Question, n: number): Question => ({ ...q, id: q.id.replace(/\.1$/, `.${n}`) });
+  const variant = (q: Question, n: number): Question => ({
+    ...q,
+    id: q.id.replace(/\.1$/, `.${n}`),
+  });
   const pool = TEST_QUESTIONS.flatMap((q) => [q, variant(q, 2), variant(q, 3)]);
 
   it('picks one question per rung, in rung order', () => {

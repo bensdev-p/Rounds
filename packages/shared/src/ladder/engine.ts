@@ -8,6 +8,8 @@ export type LadderStatus = 'in_progress' | 'missed' | 'completed';
 export interface LadderState {
   readonly script_id: string;
   readonly persona: PersonaId;
+  /** Over this, a right answer is tagged `slow`. The persona's, unless Settings overrides it. */
+  readonly time_limit_ms: number | null;
   /** Sorted by rung, lowest first. */
   readonly questions: readonly Question[];
   readonly index: number;
@@ -56,6 +58,7 @@ export function pickLadder(
 export function startLadder(
   questions: readonly Question[],
   persona: PersonaId = DEFAULT_PERSONA,
+  options: { time_limit_ms?: number | null } = {},
 ): LadderState {
   const first = questions[0];
   if (!first) throw new LadderError('A ladder needs at least one question');
@@ -69,6 +72,8 @@ export function startLadder(
   return {
     script_id: first.script_id,
     persona,
+    time_limit_ms:
+      options.time_limit_ms !== undefined ? options.time_limit_ms : PERSONAS[persona].time_limit_ms,
     questions: sorted,
     index: 0,
     attempts: [],
@@ -87,14 +92,14 @@ export function currentQuestion(state: LadderState): Question | null {
  */
 export function makeAttempt(
   question: Question,
-  persona: PersonaId,
+  time_limit_ms: number | null,
   submitted: SubmittedAnswer,
 ): Attempt {
   const miss_tag = classifyMiss({
     question,
     result: submitted.result,
     elapsed_ms: submitted.elapsed_ms,
-    time_limit_ms: PERSONAS[persona].time_limit_ms,
+    time_limit_ms,
   });
   return {
     question_id: question.id,
@@ -116,7 +121,7 @@ export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): La
   const question = currentQuestion(state);
   if (!question) throw new LadderError(`Ladder is ${state.status}; no question to answer`);
 
-  const attempt = makeAttempt(question, state.persona, submitted);
+  const attempt = makeAttempt(question, state.time_limit_ms, submitted);
   const nextIndex = state.index + 1;
   const status: LadderStatus = !attempt.passed
     ? 'missed'

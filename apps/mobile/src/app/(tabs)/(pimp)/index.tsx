@@ -3,10 +3,12 @@ import {
   PERSONAS,
   pickScript,
   rankFor,
+  rotationPool,
   roundsToday,
   shiftStreak,
   startOfToday,
   totalRungs,
+  weekOfRotation,
   type PersonaId,
 } from '@rounds/shared';
 import { listFinishedSessions, listLogsSince, listPimpableScripts } from '@rounds/shared/api';
@@ -18,8 +20,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { TodaysPatients } from '@/features/log/TodaysPatients';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES, streakLine, todayLabel } from '@/lib/copy';
-import { usePersona, useRoundsGoal } from '@/lib/prefs';
-import { currentRotation } from '@/lib/rotation';
+import { usePersona, useProfile, useRoundsGoal } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { radius, space, useTheme } from '@/theme';
 import { Button, Link, Panel, Segmented } from '@/ui/controls';
@@ -39,6 +40,7 @@ const PERSONA_OPTIONS = PERSONA_ORDER.map((value) => ({
 export default function PimpHome() {
   const { c } = useTheme();
   const client = useClient();
+  const { profile } = useProfile();
   const [persona, setPersona] = usePersona();
   const [goal] = useRoundsGoal();
   const data = useAsync(async () => {
@@ -75,20 +77,26 @@ export default function PimpHome() {
   const rounds = roundsToday(sessions, now, goal);
   const streak = shiftStreak(sessions, now, goal);
   const rank = rankFor(totalRungs(sessions));
-  const rotationId = currentRotation(scripts);
-  const rotation = ROTATION_NAMES[rotationId];
+  const rotation = ROTATION_NAMES[profile.rotation];
+  const week = weekOfRotation(profile, now);
+  const pool = rotationPool(
+    profile.rotation,
+    scripts.map((s) => s.script),
+  );
 
   function chooseTopic() {
     router.push({ pathname: '/topics', params: { persona } });
   }
 
+  function changeRotation() {
+    router.push({ pathname: '/rotation', params: { persona } });
+  }
+
   function pimpMe() {
     // "Pimp me on <rotation>": a script from the rotation, weighted toward misses and unseen ones.
-    const scriptId = pickScript(
-      scripts.filter((s) => s.script.rotation.includes(rotationId)).map((s) => s.script.id),
-      sessions,
-      { exclude: sessions.at(-1)?.script_id },
-    );
+    const scriptId = pickScript(pool.scriptIds, sessions, {
+      exclude: sessions.at(-1)?.script_id,
+    });
     if (!scriptId) return;
     router.push({ pathname: '/session/[scriptId]', params: { scriptId, persona } });
   }
@@ -108,12 +116,16 @@ export default function PimpHome() {
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}
       </Txt>
-      {/* "Week 3 of 8" joins this line once onboarding records rotation dates (M2.3). */}
       <View style={styles.sub}>
+        {week && (
+          <Txt variant="meta" tone="text2" tabular>
+            Week {week.week} of {week.of}
+          </Txt>
+        )}
         <Link
           label="Change rotation"
-          accessibilityHint="Lists every script with your best rung"
-          onPress={chooseTopic}
+          accessibilityHint="Your year, rotation and week"
+          onPress={changeRotation}
         />
       </View>
 
@@ -156,6 +168,11 @@ export default function PimpHome() {
           longPress={{ label: 'Choose a topic', onPress: chooseTopic }}
           style={styles.pimp}
         />
+        {pool.fallback && (
+          <Txt variant="small" tone="text2" style={styles.empty}>
+            No scripts for {rotation} yet, so Pimp me asks from the others.
+          </Txt>
+        )}
         {scripts.length === 0 && (
           <Txt variant="small" tone="text2" style={styles.empty}>
             No approved scripts yet. Run `pnpm content:seed && pnpm db:reset` locally.
@@ -178,7 +195,8 @@ const styles = StyleSheet.create({
     marginTop: space.sm,
   },
   title: { marginTop: 6 },
-  sub: { flexDirection: 'row', marginTop: 6 },
+  // Mockup: "Week 3 of 8 " then the link 10 px further on, about 14 in all.
+  sub: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
   hero: {
     marginTop: 22,
     borderRadius: radius.hero,

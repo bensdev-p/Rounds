@@ -21,3 +21,4 @@ export * from './progress/personaLines.ts';
 export * from './log/patientLog.ts';
 export * from './review/review.ts';
 export * from './review/drill.ts';
+export * from './profile/profile.ts';

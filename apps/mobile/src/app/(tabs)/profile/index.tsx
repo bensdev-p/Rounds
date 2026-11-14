@@ -21,7 +21,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { useClient } from '@/lib/auth';
 import { plural, ROTATION_SHORT_NAMES } from '@/lib/copy';
 import { loadErrorMessage } from '@/lib/errors';
-import { useRoundsGoal } from '@/lib/prefs';
+import { useRoundsGoal } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { space, useTheme } from '@/theme';
 import { Link, List, Panel, Row } from '@/ui/controls';

@@ -13,7 +13,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { loadErrorMessage } from '@/lib/errors';
-import { usePersona } from '@/lib/prefs';
+import { usePersona } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { radius, space, useTheme } from '@/theme';
 import { Link, Segmented } from '@/ui/controls';

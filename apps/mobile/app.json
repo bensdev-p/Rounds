@@ -7,7 +7,9 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ben.rounds",
+      "usesAppleSignIn": true
     },
     "android": {
       "adaptiveIcon": {
@@ -23,10 +25,7 @@
       "output": "single"
     },
     "scheme": "rounds",
-    "plugins": [
-      "expo-router",
-      "expo-font"
-    ],
+    "plugins": ["expo-router", "expo-font", "expo-apple-authentication"],
     "experiments": {
       "typedRoutes": true
     }

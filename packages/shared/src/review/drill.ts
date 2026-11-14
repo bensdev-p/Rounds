@@ -5,7 +5,7 @@
  * toward best rung, rank, rounds or mastery.
  */
 import { makeAttempt, type LadderStatus, type SubmittedAnswer } from '../ladder/engine.ts';
-import type { PersonaId } from '../ladder/personas.ts';
+import { PERSONAS, type PersonaId } from '../ladder/personas.ts';
 import type { Attempt } from '../schemas/attempt.ts';
 import type { Question } from '../schemas/question.ts';
 
@@ -19,6 +19,8 @@ export interface DrillState {
   /** [left, right]: the order the pair is shown in Review. */
   readonly script_ids: readonly [string, string];
   readonly persona: PersonaId;
+  /** Over this, a right answer is tagged `slow`. The persona's, unless Settings overrides it. */
+  readonly time_limit_ms: number | null;
   readonly questions: readonly Question[];
   readonly index: number;
   readonly attempts: readonly Attempt[];
@@ -66,6 +68,7 @@ export function startDrill(
   scriptIds: readonly [string, string],
   questions: readonly Question[],
   persona: PersonaId,
+  options: { time_limit_ms?: number | null } = {},
 ): DrillState {
   if (questions.length === 0) throw new DrillError('A drill needs at least one question');
   if (questions.some((q) => !scriptIds.includes(q.script_id))) {
@@ -74,6 +77,8 @@ export function startDrill(
   return {
     script_ids: scriptIds,
     persona,
+    time_limit_ms:
+      options.time_limit_ms !== undefined ? options.time_limit_ms : PERSONAS[persona].time_limit_ms,
     questions,
     index: 0,
     attempts: [],
@@ -90,7 +95,7 @@ export function drillQuestion(state: DrillState): Question | null {
 export function submitDrillAnswer(state: DrillState, submitted: SubmittedAnswer): DrillState {
   const question = drillQuestion(state);
   if (!question) throw new DrillError(`Drill is ${state.status}; no question to answer`);
-  const attempt = makeAttempt(question, state.persona, submitted);
+  const attempt = makeAttempt(question, state.time_limit_ms, submitted);
   const next = state.index + 1;
   const status: LadderStatus = !attempt.passed
     ? 'missed'

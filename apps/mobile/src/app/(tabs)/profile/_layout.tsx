@@ -1,4 +1,4 @@
-/** Profile tab: Progress, the script collection and Settings, all under the tab bar. */
+/** Profile tab: Progress, the script collection, Settings and Account, all under the tab bar. */
 import { Stack } from 'expo-router';
 import { useTheme } from '@/theme';
 
@@ -9,6 +9,7 @@ export default function ProfileLayout() {
       <Stack.Screen name="index" options={{ title: 'Progress' }} />
       <Stack.Screen name="collection" options={{ title: 'All scripts' }} />
       <Stack.Screen name="settings" options={{ title: 'Settings' }} />
+      <Stack.Screen name="account" options={{ title: 'Account' }} />
     </Stack>
   );
 }

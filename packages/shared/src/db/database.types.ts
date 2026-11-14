@@ -217,6 +217,46 @@ export type Database = {
           },
         ];
       };
+      profiles: {
+        Row: {
+          answer_timeout: string;
+          created_at: string;
+          daily_goal: number;
+          persona: string;
+          rotation: string;
+          rotation_started_on: string | null;
+          rotation_weeks: number | null;
+          updated_at: string;
+          user_id: string;
+          year: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          answer_timeout?: string;
+          created_at?: string;
+          daily_goal?: number;
+          persona?: string;
+          rotation: string;
+          rotation_started_on?: string | null;
+          rotation_weeks?: number | null;
+          updated_at?: string;
+          user_id?: string;
+          year: string;
+        };
+        Update: {
+          answer_timeout?: string;
+          created_at?: string;
+          daily_goal?: number;
+          persona?: string;
+          rotation?: string;
+          rotation_started_on?: string | null;
+          rotation_weeks?: number | null;
+          updated_at?: string;
+          user_id?: string;
+          year?: string;
+        };
+        Relationships: [];
+      };
       question_flags: {
         Row: {
           created_at: string;
