@@ -23,6 +23,7 @@ Do not build anything from later stages unless asked: voice, payments, Android r
 pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm install`
 - `pnpm dev`: run the mobile app in web mode (http://localhost:8081)
+- `pnpm phone`: same, and prints the address to open on a phone on the home Wi-Fi (needs `pnpm db:start`; `pnpm functions:serve` for Claude grading)
 - `pnpm test`: unit tests (Vitest)
 - `pnpm typecheck` and `pnpm lint`
 - `pnpm format`: Prettier (code only; Markdown is left alone)
