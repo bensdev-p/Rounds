@@ -50,7 +50,9 @@ import { ResultView } from '@/features/session/ResultView';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { rungPassHaptic } from '@/lib/haptics';
-import { parsePersona, useRoundsGoal } from '@/lib/prefs';
+import { SignInPrompt } from '@/features/session/SignInPrompt';
+import { parsePersona } from '@/lib/prefs';
+import { useRoundsGoal, useTimeLimit } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { useLadderRecorder } from '@/lib/useLadderRecorder';
 import { rungStates } from '@/ui/Ladder';
@@ -135,8 +137,9 @@ function Session({
   persona: PersonaId;
 }) {
   const client = useClient();
+  const timeLimit = useTimeLimit(persona);
   const [state, setState] = useState<LadderState>(() =>
-    startLadder(pickLadder(questions, { avoid: lastAsked }), persona),
+    startLadder(pickLadder(questions, { avoid: lastAsked }), persona, { time_limit_ms: timeLimit }),
   );
   const recorder = useLadderRecorder(client, script, persona);
   const [phase, setPhase] = useState<Phase>('asking');
@@ -262,7 +265,11 @@ function Session({
     recorder.reset();
     // Ask different questions from the run that just ended, where the script has them.
     const justAsked = state.attempts.map((a) => a.question_id);
-    setState(startLadder(pickLadder(questions, { avoid: justAsked }), persona));
+    setState(
+      startLadder(pickLadder(questions, { avoid: justAsked }), persona, {
+        time_limit_ms: timeLimit,
+      }),
+    );
     setPhase('asking');
     setAnswer('');
     setWarning(null);
@@ -362,6 +369,7 @@ function Session({
               : null
           }
           saveFailed={recorder.save.status === 'error'}
+          extra={<SignInPrompt finishedLadders={history.length} />}
           onReviewScript={reviewScript}
           onReportProblem={reportProblem}
           onDone={summary.promoted ? () => setPhase('promotion') : goHome}

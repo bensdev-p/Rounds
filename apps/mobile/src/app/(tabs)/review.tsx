@@ -31,7 +31,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { Comparison } from '@/features/review/Comparison';
 import { useClient } from '@/lib/auth';
 import { loadErrorMessage } from '@/lib/errors';
-import { usePersona } from '@/lib/prefs';
+import { usePersona } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { space, useTheme } from '@/theme';
 import { Button, Chip, List, Row, SectionHead } from '@/ui/controls';

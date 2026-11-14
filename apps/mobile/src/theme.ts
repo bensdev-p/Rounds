@@ -1,7 +1,7 @@
 /**
  * App theme. Values come only from the shared tokens (docs/design/tokens.json),
  * never raw hex. Dark is the default (DESIGN.md); light uses the same layouts.
- * Until Settings exists, EXPO_PUBLIC_THEME=light|system overrides the default.
+ * Settings → Appearance switches it per device (Light, Dark, System).
  */
 import {
   colors,
@@ -12,6 +12,7 @@ import {
   type TypeToken,
 } from '@rounds/shared/theme';
 import { useColorScheme, type TextStyle } from 'react-native';
+import { useAppearance } from '@/lib/prefs';
 
 export { motion, radius, size, space } from '@rounds/shared/theme';
 
@@ -20,16 +21,9 @@ export interface Theme {
   c: Palette;
 }
 
-type Preference = ColorScheme | 'system';
-
-function preference(): Preference {
-  const value = process.env.EXPO_PUBLIC_THEME;
-  return value === 'light' || value === 'system' ? value : 'dark';
-}
-
 export function useTheme(): Theme {
   const system = useColorScheme();
-  const pref = preference();
+  const [pref] = useAppearance();
   const scheme: ColorScheme = pref === 'system' ? (system === 'light' ? 'light' : 'dark') : pref;
   return { scheme, c: colors[scheme] };
 }

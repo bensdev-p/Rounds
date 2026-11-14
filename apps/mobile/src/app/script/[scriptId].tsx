@@ -13,7 +13,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { FlagSheet, type FlagTarget } from '@/features/flag/FlagSheet';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
-import { usePersona } from '@/lib/prefs';
+import { usePersona } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { space, useTheme } from '@/theme';
 import { Button, Chip, Link } from '@/ui/controls';

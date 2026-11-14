@@ -1,11 +1,19 @@
-import { DEFAULT_PERSONA, DEFAULT_ROUNDS_GOAL, PERSONAS, type PersonaId } from '@rounds/shared';
+import {
+  DEFAULT_PERSONA,
+  DEFAULT_ROUNDS_GOAL,
+  MAX_ROUNDS_GOAL,
+  MIN_ROUNDS_GOAL,
+  PERSONAS,
+  type PersonaId,
+} from '@rounds/shared';
 import { useSyncExternalStore } from 'react';
 import { authStorage } from './authStorage';
 
 /**
  * Small per-device preferences, kept in local storage. Each one is a shared
- * store, so a change on one screen (e.g. the goal on Progress) shows at once
- * on screens still mounted underneath (Home).
+ * store, so a change on one screen (Appearance in Settings) shows at once on
+ * screens still mounted underneath. Anything that should follow the student
+ * to another phone lives in their profile instead (lib/profile.tsx).
  */
 function createPref<T>(key: string, parse: (raw: string | null) => T) {
   let value: T | undefined;
@@ -42,24 +50,39 @@ function isPersona(value: unknown): value is PersonaId {
   return typeof value === 'string' && value in PERSONAS;
 }
 
-/** Reads a stored persona id, ignoring anything unexpected. */
+/** Reads a persona id (a route param), ignoring anything unexpected. */
 export function parsePersona(value: unknown): PersonaId | null {
   return isPersona(value) ? value : null;
 }
 
-/** The persona picker remembers the last choice on this device. */
-export const usePersona = createPref<PersonaId>(
-  'rounds.persona',
-  (raw) => parsePersona(raw) ?? DEFAULT_PERSONA,
+export type Appearance = 'light' | 'dark' | 'system';
+
+/** Settings → Appearance. Dark by default (DESIGN.md). Per device. */
+export const useAppearance = createPref<Appearance>('rounds.appearance', (raw) =>
+  raw === 'light' || raw === 'system' ? raw : 'dark',
 );
 
-export const MIN_ROUNDS_GOAL = 1;
-export const MAX_ROUNDS_GOAL = 5;
+/** Whether the "Keep your progress" sign-in panel has been shown (once, wireframe 01 note 2). */
+export const useSignInAsked = createPref<boolean>('rounds.signInAsked', (raw) => raw === 'true');
 
-/** Sessions per day that finish rounds (DESIGN.md: 3 by default, adjustable 1 to 5). */
-export const useRoundsGoal = createPref<number>('rounds.goal', (raw) => {
-  const n = Number(raw);
-  return Number.isInteger(n) && n >= MIN_ROUNDS_GOAL && n <= MAX_ROUNDS_GOAL
-    ? n
-    : DEFAULT_ROUNDS_GOAL;
-});
+/**
+ * The persona and goal this device remembered before profiles existed
+ * (Stage 1), so onboarding keeps them for students who already practised.
+ */
+export function earlierDeviceChoices(): { persona: PersonaId; daily_goal: number } {
+  let persona: string | null = null;
+  let goal = NaN;
+  try {
+    persona = authStorage.getItem('rounds.persona');
+    goal = Number(authStorage.getItem('rounds.goal'));
+  } catch {
+    // Nothing remembered.
+  }
+  return {
+    persona: parsePersona(persona) ?? DEFAULT_PERSONA,
+    daily_goal:
+      Number.isInteger(goal) && goal >= MIN_ROUNDS_GOAL && goal <= MAX_ROUNDS_GOAL
+        ? goal
+        : DEFAULT_ROUNDS_GOAL,
+  };
+}

@@ -1,4 +1,5 @@
 import type { ColorToken } from '@rounds/shared/theme';
+import { Check, Minus, Plus } from 'lucide-react-native';
 import type { ComponentType, ReactNode } from 'react';
 import { Pressable, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
 import { radius, size, space, useTheme } from '@/theme';
@@ -343,6 +344,99 @@ export function Panel({
   );
 }
 
+/**
+ * A number with − and + (onboarding's "Week 3 of 8"). Screen readers adjust
+ * it by swiping up and down.
+ */
+export function Stepper({
+  label,
+  value,
+  min,
+  max,
+  onChange,
+}: {
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  onChange: (value: number) => void;
+}) {
+  const { c } = useTheme();
+  const step = (by: number) => onChange(Math.min(max, Math.max(min, value + by)));
+  const stepButton = (by: number, Icon: IconComponent, name: string) => {
+    const disabled = by < 0 ? value <= min : value >= max;
+    return (
+      <Pressable
+        accessibilityRole="button"
+        accessibilityLabel={`${name} ${label.toLowerCase()}`}
+        accessibilityState={{ disabled }}
+        importantForAccessibility="no-hide-descendants"
+        accessibilityElementsHidden
+        disabled={disabled}
+        onPress={() => step(by)}
+        hitSlop={4}
+        style={({ pressed }) => [
+          styles.stepButton,
+          { backgroundColor: c.surface2, opacity: disabled ? 0.35 : pressed ? 0.8 : 1 },
+        ]}
+      >
+        <Icon size={18} color={c.text} />
+      </Pressable>
+    );
+  };
+  return (
+    <View
+      accessible
+      accessibilityRole="adjustable"
+      accessibilityLabel={label}
+      accessibilityValue={{ min, max, now: value, text: String(value) }}
+      accessibilityActions={[{ name: 'increment' }, { name: 'decrement' }]}
+      onAccessibilityAction={(e) => step(e.nativeEvent.actionName === 'increment' ? 1 : -1)}
+      style={styles.stepper}
+    >
+      {stepButton(-1, Minus, 'Fewer')}
+      <Txt variant="h2" tabular align="center" style={styles.stepValue}>
+        {value}
+      </Txt>
+      {stepButton(1, Plus, 'More')}
+    </View>
+  );
+}
+
+/** One choice in a list of fields (onboarding's rotations): a 52 pt row, checked when chosen. */
+export function ChoiceRow({
+  label,
+  selected,
+  onPress,
+}: {
+  label: string;
+  selected: boolean;
+  onPress: () => void;
+}) {
+  const { c } = useTheme();
+  return (
+    <Pressable
+      accessibilityRole="radio"
+      accessibilityLabel={label}
+      accessibilityState={{ checked: selected }}
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.choice,
+        {
+          backgroundColor: c.surface,
+          borderColor: selected ? c.text : c.line,
+          opacity: pressed ? 0.85 : 1,
+        },
+      ]}
+    >
+      <Txt variant="body" weight={selected ? 'bodyMedium' : 'body'} style={styles.grow}>
+        {label}
+      </Txt>
+      {selected && <Check size={20} color={c.text} />}
+    </Pressable>
+  );
+}
+
 const styles = StyleSheet.create({
   button: {
     borderRadius: radius.button,
@@ -395,4 +489,22 @@ const styles = StyleSheet.create({
     minHeight: 64,
   },
   grow: { flex: 1, minWidth: 0, gap: 2 },
+  stepper: { flexDirection: 'row', alignItems: 'center', gap: space.sm },
+  stepButton: {
+    width: 36,
+    height: 36,
+    borderRadius: radius.chip,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  stepValue: { minWidth: 30 },
+  choice: {
+    height: size.fieldHeight,
+    borderRadius: radius.field,
+    borderWidth: 1.5,
+    paddingHorizontal: space.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.md,
+  },
 });

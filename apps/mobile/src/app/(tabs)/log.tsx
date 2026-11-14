@@ -26,7 +26,7 @@ import { LoggedToday } from '@/features/log/LoggedToday';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { loadErrorMessage } from '@/lib/errors';
-import { currentRotation } from '@/lib/rotation';
+import { useProfile } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { useReduceMotion } from '@/lib/useReduceMotion';
 import { radius, size, space, type, useTheme } from '@/theme';
@@ -39,6 +39,7 @@ import { noWebOutline } from '@/ui/webStyles';
 export default function Log() {
   const { c } = useTheme();
   const client = useClient();
+  const { profile } = useProfile();
   const reduceMotion = useReduceMotion();
   const [query, setQuery] = useState('');
   const [saving, setSaving] = useState(false);
@@ -87,7 +88,7 @@ export default function Log() {
 
   const { scripts, logs, sessions } = data.data;
   const now = new Date();
-  const rotation = currentRotation(scripts);
+  const rotation = profile.rotation;
   const label = query.trim();
   const matches = matchScripts(
     query,

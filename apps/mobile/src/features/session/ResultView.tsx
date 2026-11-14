@@ -2,6 +2,7 @@
  * Session result. Wireframes 07 and 13, mockups result.png and win.png. The
  * rung reached is the only score. Progress shows here, never mid-session.
  */
+import type { ReactNode } from 'react';
 import type { MissCard, ResultSummary } from '@rounds/shared';
 import { Flag } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
@@ -65,6 +66,7 @@ export function ResultView({
   onDone,
   onPrimary,
   primaryLabel,
+  extra,
 }: {
   scriptName: string;
   /** In-review script (local preview): the miss card says it isn't reviewed yet. */
@@ -81,6 +83,8 @@ export function ResultView({
   onDone: () => void;
   onPrimary: () => void;
   primaryLabel: string;
+  /** Shown after progress: the one-time sign-in panel. */
+  extra?: ReactNode;
 }) {
   const { c } = useTheme();
   const shown = useCountUp(summary.score);
@@ -192,6 +196,8 @@ export function ResultView({
           </Txt>
         </Panel>
       )}
+
+      {extra}
 
       <View style={styles.flag}>
         <Link

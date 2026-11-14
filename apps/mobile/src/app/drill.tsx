@@ -38,6 +38,7 @@ import { useClient } from '@/lib/auth';
 import { loadErrorMessage } from '@/lib/errors';
 import { rungPassHaptic } from '@/lib/haptics';
 import { parsePersona } from '@/lib/prefs';
+import { useTimeLimit } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { useDrillRecorder } from '@/lib/useLadderRecorder';
 import type { RungState } from '@/ui/Ladder';
@@ -106,11 +107,13 @@ function Drill({
   persona: PersonaId;
 }) {
   const client = useClient();
+  const timeLimit = useTimeLimit(persona);
   const pick = () =>
     startDrill(
       [left.script.id, right.script.id],
       pickDrill(left.questions, right.questions),
       persona,
+      { time_limit_ms: timeLimit },
     );
   const [state, setState] = useState<DrillState>(pick);
   const recorder = useDrillRecorder(client, left.script, right.script.id, persona);
