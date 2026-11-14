@@ -22,3 +22,7 @@ export * from './log/patientLog.ts';
 export * from './review/review.ts';
 export * from './review/drill.ts';
 export * from './profile/profile.ts';
+export * from './voice/endOfTurn.ts';
+export * from './voice/keyterms.ts';
+export * from './voice/voice.ts';
+export * from './voice/pcm.ts';

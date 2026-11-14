@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { PERSONAS, type PersonaId } from '../ladder/personas.ts';
 import { DEFAULT_ROUNDS_GOAL } from '../progress/progression.ts';
 import { RotationSchema, type Rotation } from '../schemas/illnessScript.ts';
+import { DEFAULT_VOICE_SPEED, VoiceSpeedSchema } from '../voice/voice.ts';
 
 export const YEARS = ['MS1', 'MS2', 'MS3', 'MS4'] as const;
 export const YearSchema = z.enum(YEARS);
@@ -40,6 +41,8 @@ export const ProfileSchema = z
     daily_goal: z.number().int().min(MIN_ROUNDS_GOAL).max(MAX_ROUNDS_GOAL),
     persona: PersonaSchema,
     answer_timeout: AnswerTimeoutSchema,
+    /** Settings → Voice → Attending voice speed (wireframe 12). */
+    voice_speed: VoiceSpeedSchema,
   })
   .refine((p) => (p.rotation_started_on === null) === (p.rotation_weeks === null), {
     message: 'The rotation start and length are set together',
@@ -54,6 +57,7 @@ export function newProfile(fields: Pick<Profile, 'year' | 'rotation'> & Partial<
     daily_goal: DEFAULT_ROUNDS_GOAL,
     persona: 'teacher',
     answer_timeout: 'persona',
+    voice_speed: DEFAULT_VOICE_SPEED,
     ...fields,
   });
 }

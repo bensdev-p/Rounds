@@ -86,6 +86,26 @@ describe('containsAffirmedTerm', () => {
   });
 });
 
+describe('spoken answers (M2.5)', () => {
+  it.each([
+    ['lipase over three times normal', 'lipase over 3 times normal'],
+    ['lipase over 3 times normal', 'lipase over three times normal'],
+    ['um, I would get a, uh, CT angiogram', 'CT angiogram'],
+    ['give lactated um Ringers', 'lactated Ringers'],
+  ])('"%s" affirms "%s"', (text, term) => {
+    expect(containsAffirmedTerm(text, term)).toBe(true);
+  });
+
+  it('keeps negation working through fillers', () => {
+    expect(containsAffirmedTerm('uh no, um, insulin', 'insulin')).toBe(false);
+  });
+
+  it('grades a spoken correct answer like a typed one', () => {
+    const typed = recall.accepted_answers[0]!.answer;
+    expect(gradeLocally(recall, `um, ${typed}`, confusables).grade).toBe('correct');
+  });
+});
+
 describe('gradeLocally: negation', () => {
   it('does not credit a negated answer', () => {
     expect(gradeLocally(recall, 'not Zorblax syndrome').grade).toBe('incorrect');

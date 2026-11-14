@@ -12,11 +12,32 @@ export function normalize(text: string): string {
     .replace(/^(?:a|an|the) /, '');
 }
 
+// prettier-ignore
+const NUMBER_WORDS: Record<string, string> = {
+  zero: '0', one: '1', two: '2', three: '3', four: '4', five: '5', six: '6', seven: '7',
+  eight: '8', nine: '9', ten: '10', eleven: '11', twelve: '12', thirteen: '13', fourteen: '14',
+  fifteen: '15', sixteen: '16', seventeen: '17', eighteen: '18', nineteen: '19', twenty: '20',
+  thirty: '30', forty: '40', fifty: '50', sixty: '60', seventy: '70', eighty: '80', ninety: '90',
+  hundred: '100',
+};
+/** Spoken fillers the speech-to-text writes down ("um, the ALT"). */
+const FILLERS = new Set(['um', 'umm', 'uh', 'uhh', 'uhm', 'er', 'erm', 'hmm', 'mm']);
+
+/**
+ * Normalized words for matching. Both sides of every match go through this,
+ * so spoken answers compare like typed ones: number words read as digits
+ * ("three times" = "3 times") and fillers drop out.
+ */
+function matchWords(text: string): string[] {
+  const words = normalize(text).split(' ');
+  return words.filter((w) => w !== '' && !FILLERS.has(w)).map((w) => NUMBER_WORDS[w] ?? w);
+}
+
 /** True if `term` appears in `text` as a whole-word sequence (both normalized). */
 export function containsTerm(text: string, term: string): boolean {
-  const t = normalize(term);
+  const t = matchWords(term).join(' ');
   if (!t) return false;
-  return ` ${normalize(text)} `.includes(` ${t} `);
+  return ` ${matchWords(text).join(' ')} `.includes(` ${t} `);
 }
 
 /** Words that negate what follows ("not", "no", "without"…). Apostrophes normalize away. */
@@ -47,9 +68,9 @@ export type Span = readonly [number, number];
  * are checked.
  */
 export function affirmedSpans(text: string, term: string): Span[] {
-  const t = normalize(term).split(' ');
-  if (t[0] === '') return [];
-  const words = normalize(text).split(' ');
+  const t = matchWords(term);
+  if (t.length === 0) return [];
+  const words = matchWords(text);
   const spans: Span[] = [];
   for (let i = 0; i + t.length <= words.length; i++) {
     if (t.every((w, j) => words[i + j] === w)) {
