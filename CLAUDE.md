@@ -48,7 +48,8 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
 - `pnpm --filter video studio`: preview the vision video. `pnpm --filter video render`: export both MP4s and posters to `apps/video/out` (gitignored)
 - `apps/mobile/.env.local` holds the local Supabase URL and publishable key (see `.env.example`)
-- The app is dark by default. To check light mode, set `EXPO_PUBLIC_THEME=light` (or `system`) in `apps/mobile/.env.local` and restart `pnpm dev`.
+- The app is dark by default. To check light mode, switch Profile → Settings → Appearance (per device).
+- Local emails (sign-in codes) land in Mailpit: http://127.0.0.1:54324. Sign in with Apple works only in the iPhone build.
 - Add Expo packages with `pnpm expo install <pkg>` from `apps/mobile`, so versions match the SDK.
 - `packages/shared` uses explicit `.ts` extensions on relative imports, so Edge Functions (Deno) can import it directly.
 
