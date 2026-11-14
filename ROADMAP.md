@@ -34,9 +34,11 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.3 (accounts, onboarding, settings):** every student still starts without an account. Onboarding (wireframe 01) asks year and rotation, plus an optional "Week 3 of 8" row (not drawn), and shows whenever there's no profile yet, keeping the persona and goal a device already had. Home shows "Week 3 of 8" before "Change rotation", which now opens the same questions; the script picker is a link from there and still a long press on Pimp me. A rotation with no scripts yet (OB/GYN) says so and asks from the others. Settings (wireframe 12, no Anki): Daily goal above Voice (developer's call), Answer timeout (Persona default, 10 s, 30 s, 60 s, No limit), Appearance (Light, Dark, System, per device; replaces `EXPO_PUBLIC_THEME`), Account. Account (not drawn): sign in with a 6-digit email code (works from the phone on the home Wi-Fi; codes land in Mailpit locally), Sign in with Apple in the iPhone build only, sign out, delete account (`delete-account` Edge Function). Signing in adds the email or Apple ID to the same anonymous user, so history carries over; an email that already has an account signs in to it, after a warning if this phone has practice that stays behind. "Keep your progress" shows once on the result screen after the first session. New `profiles` table (pgTAP tests); persona and goal moved there from the device. Local auth now confirms emails, as a hosted project does. Tried on the phone.
 
+**M2.4 (voice spike):** measured on a throwaway branch (`m2.4-voice-spike`, not merged). About 0.5 s from the end of speech to the next question is reachable when the local matcher grades. A Claude fallback adds 1.5–2.6 s, so M2.5 plays a short "thinking" cue on a matcher miss. Speech-to-text: Deepgram. Voice: ElevenLabs. Findings under M2.4 below.
+
 **Gaps:** none in Stage 2 before voice.
 
-**Next: M2.4 Voice spike.**
+**Next: M2.5 Voice session.**
 
 ## Screen map
 
@@ -116,6 +118,28 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 - STT → grade → TTS on one script. Measure the time from the end of speech to the next question, and compare two vendors.
 - What you get from it is a number and a recommendation, not code to keep. If ~1 s isn't reachable, choose a fallback (push to talk, a short "thinking" cue) before M2.5.
 
+**Findings (14 Nov 2026).** Spike code on branch `m2.4-voice-spike` (a hidden `/spike` web page and a local-only `voice-spike` Edge Function; not merged). Script: acute pancreatitis, rungs 1–5. Answers were recorded speech played into the mic pipeline (so runs repeat), in Chrome on the PC; the phone wasn't tested, since Safari blocks the mic on the http LAN address. Times are from the end of the student's speech to the next question starting to play, median / worst, about 10 turns per row.
+
+| Speech-to-text, next question | Vendor decides "done" (300 ms) | Our silence check (300 ms) |
+|---|---|---|
+| Deepgram Nova-3, cached audio | 0.73 / 0.76 s | **0.54** / 0.97 s |
+| ElevenLabs Scribe v2, cached audio | 0.75 / 1.07 s | **0.50** / 0.88 s |
+| Deepgram Aura-2, voiced live | 2.2–3.1 / 3.3 s | 2.0–2.9 / 3.3 s |
+| ElevenLabs Flash v2.5, voiced live | 0.92 / 1.63 s | 0.69 / 0.73 s |
+
+- **Grading decides it.** The matcher's round trip is about 65 ms. When it misses, the Claude fallback brings the whole turn to 2.0 s with Haiku 5.5 (worst 2.5 s) and 2.5 s with Opus 5.5 (worst 3.1 s), whichever speech vendor is used. So ~1 s holds only for answers the matcher grades.
+- **Fallback for M2.5:** on a matcher miss, play a short cached "thinking" cue at once (the attending's "mm-hm"), then the next question when the grade arrives. Push to talk only saves the 0.3–0.6 s of waiting for silence, so it doesn't fix this.
+- **Recommendation:** Deepgram for speech-to-text (steadier worst case, and it cut off fewer answers), ElevenLabs for the voice (live follow-ups start in about 0.25 s; Deepgram's mp3 took 1.4–3.3 s to start in the browser). Both sit behind the `stt` and `tts` interfaces, so this can change.
+- **Spending caps (developer, 14 Nov):** $10 per speech vendor. The spike's speech cost was well under that.
+
+**Notes for the M2.5 plan (from M2.4):**
+- End the turn with our own silence check, not the vendor's: it saved about 0.2 s. 300 ms of silence is too short for list questions and for anyone who pauses mid-answer: it cut answers off ("I'd say the pancreas is inflamed" lost "from the alcohol"). Try a longer wait on list questions, and only end the turn once the speech has really stopped.
+- Both vendors misheard "ALT" (as "A" and "LT"), which sent the answer to Claude and once graded it wrong. Pass the question's accepted answers to the vendor as expected words (both support this).
+- Before switching the grader to Haiku for speed, check its grading with `pnpm eval:grading --model claude-haiku-5-5` (billed: the developer's OK first).
+- Deepgram needs an API key with the Member role to issue the browser's short-lived tokens.
+- Trying voice on the phone needs HTTPS for both the app and Supabase (Safari's mic rule), or an EAS development build. Decide which before M2.5's phone check.
+- Keep the streaming connection open and the next question's audio ready before the student speaks; the spike measured with both ready.
+
 ### M2.5 Voice session
 - Wireframe 04 and `session.png`: an idle dotted waveform while the attending asks, live once the question ends. Common questions use cached audio. Everything sits behind the `stt` and `tts` provider interfaces. Text mode stays available everywhere.
 - **Mic icon** on "Pimp me" (Home) and "Pimp me on this" (illness script), as in `home.png` and `script.png`. M1.2 kept the ladder icon because the app was text-only.
@@ -137,7 +161,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 ## Decisions for the developer (not Code)
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
 - **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
-- **Spending caps** for grading, speech and hosting: needed by M2.4.
+- **Spending caps** for grading, speech and hosting: speech set at $10 per vendor (14 Nov 2026). Grading and hosting caps still needed by M2.6.
 - **Hosted dev preview** (see M2.6).
 
 ## Frozen unless the developer reopens them
