@@ -124,6 +124,26 @@
       ]
     },
     {
+      "id": "deep-vein-thrombosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A woman on the combined pill flew 14 hours and now has a swollen, aching right calf with pitting edema. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Deep vein thrombosis",
+          "synonyms": [
+            "DVT",
+            "deep venous thrombosis",
+            "venous thrombosis",
+            "blood clot in the leg"
+          ]
+        }
+      ]
+    },
+    {
       "id": "deep-vein-thrombosis.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -160,6 +180,66 @@
       "required_count": 3
     },
     {
+      "id": "deep-vein-thrombosis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for DVT.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "recent surgery",
+          "synonyms": [
+            "surgery",
+            "post-op"
+          ]
+        },
+        {
+          "answer": "immobilization",
+          "synonyms": [
+            "immobility",
+            "long flight",
+            "bed rest"
+          ]
+        },
+        {
+          "answer": "active cancer",
+          "synonyms": [
+            "cancer",
+            "malignancy"
+          ]
+        },
+        {
+          "answer": "prior VTE",
+          "synonyms": [
+            "previous DVT",
+            "previous clot",
+            "prior DVT",
+            "history of DVT"
+          ]
+        },
+        {
+          "answer": "estrogen use or pregnancy",
+          "synonyms": [
+            "estrogen",
+            "oral contraceptive pill",
+            "OCP",
+            "pregnancy",
+            "HRT"
+          ]
+        },
+        {
+          "answer": "inherited thrombophilia",
+          "synonyms": [
+            "thrombophilia",
+            "factor V Leiden"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "deep-vein-thrombosis.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -181,6 +261,25 @@
       ]
     },
     {
+      "id": "deep-vein-thrombosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Calf DVT, and now sudden pleuritic pain, breathlessness and hypoxemia. What has happened?",
+      "source_fields": [
+        "confused_with[1]",
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary embolism",
+          "synonyms": [
+            "PE",
+            "pulmonary embolus"
+          ]
+        }
+      ]
+    },
+    {
       "id": "deep-vein-thrombosis.workup.1",
       "rung": "workup",
       "kind": "single",
@@ -197,6 +296,24 @@
             "venous duplex",
             "Doppler ultrasound",
             "Doppler"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Low Wells score. Which blood test can rule out DVT?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "D-dimer",
+          "synonyms": [
+            "D dimer",
+            "dimer"
           ]
         }
       ]
@@ -227,6 +344,26 @@
       ]
     },
     {
+      "id": "deep-vein-thrombosis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "DVT at 28 weeks of pregnancy. Which anticoagulant?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "low-molecular-weight heparin",
+          "synonyms": [
+            "LMWH",
+            "enoxaparin",
+            "Lovenox",
+            "dalteparin"
+          ]
+        }
+      ]
+    },
+    {
       "id": "deep-vein-thrombosis.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -240,6 +377,24 @@
           "synonyms": [
             "three months",
             "12 weeks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "deep-vein-thrombosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Acute DVT, but he bled from an ulcer yesterday and can't be anticoagulated. Option?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IVC filter",
+          "synonyms": [
+            "inferior vena cava filter",
+            "vena cava filter"
           ]
         }
       ]
