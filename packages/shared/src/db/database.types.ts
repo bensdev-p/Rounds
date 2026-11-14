@@ -228,6 +228,7 @@ export type Database = {
           rotation_weeks: number | null;
           updated_at: string;
           user_id: string;
+          voice_speed: number;
           year: string;
         };
         ComputedFields: never;
@@ -241,6 +242,7 @@ export type Database = {
           rotation_weeks?: number | null;
           updated_at?: string;
           user_id?: string;
+          voice_speed?: number;
           year: string;
         };
         Update: {
@@ -253,6 +255,7 @@ export type Database = {
           rotation_weeks?: number | null;
           updated_at?: string;
           user_id?: string;
+          voice_speed?: number;
           year?: string;
         };
         Relationships: [];
