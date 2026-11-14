@@ -76,16 +76,22 @@ export default function Collection() {
       <Link
         label="Progress"
         icon={ChevronLeft}
+        back
         onPress={() => (router.canGoBack() ? router.back() : router.replace('/progress'))}
       />
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}
       </Txt>
-      <Txt variant="meta" tone="text2" fontSize={16} style={styles.sub}>
-        {mastered} of {tiles.length} mastered
+      <Txt variant="meta" tone="text2" style={styles.sub}>
+        <Txt variant="h2" fontSize={17} lineHeight={20} tabular>
+          {mastered}
+        </Txt>{' '}
+        of {tiles.length} mastered
       </Txt>
 
-      <Segmented label="Show" options={FILTERS} value={filter} onChange={setFilter} />
+      <View style={styles.filters}>
+        <Segmented label="Show" options={FILTERS} value={filter} onChange={setFilter} />
+      </View>
 
       <View style={styles.tiles}>
         {shown.length === 0 && (
@@ -118,16 +124,21 @@ export default function Collection() {
                 t.status === 'recheck_due' && { borderColor: c.line, borderStyle: 'dashed' },
               ]}
             >
-              <Txt
-                variant="meta"
-                weight="bodyMedium"
-                fontSize={15}
-                lineHeight={19}
-                tone={t.status === 'not_tried' ? 'text3' : 'text'}
-                style={styles.tileName}
-              >
-                {script.name}
-              </Txt>
+              <View style={styles.tileName}>
+                <Txt
+                  variant="meta"
+                  weight="bodyMedium"
+                  lineHeight={17.5}
+                  tone={t.status === 'not_tried' ? 'text3' : 'text'}
+                >
+                  {script.name}
+                </Txt>
+                {t.status === 'recheck_due' && (
+                  <Txt variant="small" tone="ceil" style={styles.due}>
+                    Re-check due
+                  </Txt>
+                )}
+              </View>
               <MiniLadder best={t.best} mastered={t.status === 'mastered'} />
             </Pressable>
           );
@@ -138,12 +149,14 @@ export default function Collection() {
 }
 
 const styles = StyleSheet.create({
-  title: { marginTop: space.md },
-  sub: { marginTop: space.xs, marginBottom: space.xl },
-  tiles: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm, marginTop: space.xl },
+  title: { marginTop: 14 },
+  sub: { marginTop: 6 },
+  filters: { marginTop: space.lg },
+  tiles: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm, marginTop: 14 },
+  due: { marginTop: space.xs },
   tile: {
     width: '48.5%',
-    minHeight: 84,
+    minHeight: 76,
     flexDirection: 'row',
     alignItems: 'flex-end',
     gap: 10,

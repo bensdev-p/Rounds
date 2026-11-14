@@ -99,7 +99,7 @@ export function ResultView({
       <SessionHeader title={scriptName} onClose={onDone} closeLabel="Done" />
 
       <View style={styles.top}>
-        <Ladder states={rungStates(summary.score, clean ? 'none' : 'miss')} width={170} />
+        <Ladder states={rungStates(summary.score, clean ? 'none' : 'miss')} width={150} />
         <View
           accessible
           accessibilityLabel={`${clean ? 'Top of the ladder' : `${plural(summary.score, 'rung')} climbed`}. ${bestLine(summary)}`}
@@ -108,10 +108,10 @@ export function ResultView({
           <Txt variant="scoreHero" tone={clean ? 'pass' : 'text'} tabular>
             {shown}
           </Txt>
-          <Txt variant="body" tone="text2" fontSize={17} style={styles.scoreLine}>
+          <Txt variant="meta" tone="text2" style={styles.scoreLine}>
             {clean ? 'Top of the ladder' : 'rungs climbed'}
           </Txt>
-          <Txt variant="meta" tone="text2" fontSize={15}>
+          <Txt variant="small" tone="text2" style={styles.bestLine}>
             {bestLine(summary)}
           </Txt>
         </View>
@@ -126,21 +126,21 @@ export function ResultView({
       )}
 
       {personaLine && (
-        <Txt variant="body" tone="text2" fontSize={17} lineHeight={24} style={styles.line}>
+        <Txt variant="body" tone="text2" fontSize={15} lineHeight={21} style={styles.line}>
           {`"${personaLine}"`}
         </Txt>
       )}
 
       {missCard && (
         <Panel style={styles.card}>
-          <Txt variant="meta" tone="text2">
+          <Txt variant="small" tone="text2">
             {missCard.label}
           </Txt>
-          <Txt variant="body" fontSize={17} lineHeight={24} style={styles.cardText}>
+          <Txt variant="body" fontSize={15} lineHeight={21} style={styles.cardText}>
             {missCard.quote ? (
               <>
                 You said{' '}
-                <Txt tone="miss" fontSize={17} lineHeight={24}>{`"${missCard.quote}."`}</Txt>{' '}
+                <Txt tone="miss" fontSize={15} lineHeight={21}>{`"${missCard.quote}."`}</Txt>{' '}
               </>
             ) : (
               "You didn't answer. "
@@ -156,34 +156,25 @@ export function ResultView({
         </Panel>
       )}
 
-      <View style={styles.flag}>
-        <Link
-          label="Something wrong with a question?"
-          icon={Flag}
-          accessibilityHint="Report a question or answer that looks wrong"
-          onPress={onReportProblem}
-        />
-      </View>
-
-      <Panel style={styles.progress}>
+      <Panel style={[styles.progress, clean && styles.progressAfterLine]}>
         <View style={styles.half}>
-          <Txt variant="meta" tone="text2" fontSize={15}>
+          <Txt variant="small" tone="text2">
             {"Today's rounds"}
           </Txt>
           <Segments filled={summary.rounds.done} total={summary.rounds.goal} />
-          <Txt variant="meta" fontSize={15} tabular>
+          <Txt variant="small" tabular>
             {roundsLine(summary)}
           </Txt>
         </View>
         <View style={styles.half}>
-          <Txt variant="meta" tone="text2" fontSize={15} numberOfLines={1}>
+          <Txt variant="small" tone="text2" numberOfLines={1}>
             {nextRank ? `Toward ${nextRank}` : 'Rank'}
           </Txt>
           <Bar
             value={summary.promoted ? 1 : summary.rankAfter.progress}
             label={nextRank ? `Progress toward ${nextRank}` : 'Top rank reached'}
           />
-          <Txt variant="meta" fontSize={15} tabular>
+          <Txt variant="small" tabular>
             {rankLine(summary)}
           </Txt>
         </View>
@@ -192,15 +183,24 @@ export function ResultView({
       {mastery && (
         <Panel style={styles.mastery}>
           <MiniLadder best={6} />
-          <Txt variant="body" fontSize={17} style={styles.grow}>
+          <Txt variant="meta" style={styles.grow}>
             {mastery.rotation}:{' '}
-            <Txt weight="bodySemi" fontSize={17} tabular>
+            <Txt variant="meta" weight="bodySemi" tabular>
               {mastery.mastered} of {mastery.total}
             </Txt>{' '}
             mastered
           </Txt>
         </Panel>
       )}
+
+      <View style={styles.flag}>
+        <Link
+          label="Something wrong with a question?"
+          icon={Flag}
+          accessibilityHint="Report a question or answer that looks wrong"
+          onPress={onReportProblem}
+        />
+      </View>
 
       {saveFailed && (
         <Txt variant="small" tone="text2" style={[styles.saveNote, { color: c.text3 }]}>
@@ -212,17 +212,33 @@ export function ResultView({
 }
 
 const styles = StyleSheet.create({
-  top: { flexDirection: 'row', alignItems: 'flex-end', marginTop: space.xxl, gap: space.lg },
+  top: { flexDirection: 'row', alignItems: 'flex-end', marginTop: space.xxl, gap: 22 },
   score: { flex: 1, paddingBottom: 4 },
-  scoreLine: { marginTop: 4 },
-  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: space.md, marginTop: space.xxl },
-  line: { marginTop: space.lg },
-  card: { marginTop: space.xxl, gap: space.sm },
+  scoreLine: { marginTop: 6 },
+  bestLine: { marginTop: 2 },
+  badges: { flexDirection: 'row', flexWrap: 'wrap', gap: space.sm, marginTop: 22 },
+  line: { marginTop: 14 },
+  card: { marginTop: space.xxl, gap: 6 },
   cardText: { marginBottom: space.xs },
+  progress: {
+    marginTop: space.md,
+    paddingVertical: 14,
+    paddingHorizontal: space.lg,
+    flexDirection: 'row',
+    gap: space.lg,
+  },
+  progressAfterLine: { marginTop: space.xl },
+  half: { flex: 1, gap: 6 },
+  mastery: {
+    marginTop: space.md,
+    paddingVertical: space.md,
+    paddingHorizontal: space.lg,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.md,
+  },
+  // Not in the mockup: the "This is wrong" flag is a product requirement, kept small and last.
   flag: { flexDirection: 'row', marginTop: space.lg },
-  progress: { marginTop: space.lg, flexDirection: 'row', gap: space.xxl },
-  half: { flex: 1, gap: 10 },
-  mastery: { marginTop: space.lg, flexDirection: 'row', alignItems: 'center', gap: space.lg },
   grow: { flex: 1 },
   saveNote: { marginTop: space.lg },
   buttons: { flexDirection: 'row', gap: space.md },

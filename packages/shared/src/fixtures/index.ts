@@ -84,6 +84,13 @@ const quellan = IllnessScriptSchema.parse({
 
 export const TEST_SCRIPTS: readonly IllnessScript[] = [zorblax, quellan];
 
+const FIXTURE_IDS: ReadonlySet<string> = new Set(TEST_SCRIPTS.map((s) => s.id));
+
+/** The fictional fixtures are seeded for tests; students' screens leave them out. */
+export function isFixtureScript(scriptId: string): boolean {
+  return FIXTURE_IDS.has(scriptId);
+}
+
 const q = (raw: unknown): Question => QuestionSchema.parse(raw);
 
 export const TEST_QUESTIONS: readonly Question[] = [

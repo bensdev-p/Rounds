@@ -378,6 +378,7 @@ function Session({
   if (phase === 'list' && last && last.question.kind === 'list') {
     return (
       <ListFeedbackView
+        persona={persona}
         personaLabel={personaLabel}
         clockMs={clockMs}
         scriptName={script.name}

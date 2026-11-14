@@ -26,7 +26,9 @@ import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
 import { loadErrorMessage } from '@/lib/errors';
 
-const PERSONA_OPTIONS = (Object.keys(PERSONAS) as PersonaId[]).map((value) => ({
+/** In the mockup's order: patient, rapid-fire, Socratic. */
+const PERSONA_ORDER: readonly PersonaId[] = ['teacher', 'surgeon', 'internist'];
+const PERSONA_OPTIONS = PERSONA_ORDER.map((value) => ({
   value,
   label: PERSONAS[value].label,
 }));
@@ -73,6 +75,10 @@ export default function PimpHome() {
   const rotationId = scripts[0]?.script.rotation[0] ?? 'IM';
   const rotation = ROTATION_NAMES[rotationId];
 
+  function chooseTopic() {
+    router.push({ pathname: '/topics', params: { persona } });
+  }
+
   function pimpMe() {
     // "Pimp me on <rotation>": a script from the rotation, weighted toward misses and unseen ones.
     const scriptId = pickScript(
@@ -87,7 +93,7 @@ export default function PimpHome() {
   return (
     <Screen>
       <View style={styles.top}>
-        <Txt variant="meta" tone="text2" fontSize={16}>
+        <Txt variant="meta" tone="text2">
           {todayLabel(now)}
         </Txt>
         <RankChip title={rank.title} onPress={() => router.push('/progress')} />
@@ -95,36 +101,36 @@ export default function PimpHome() {
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}
       </Txt>
+      {/* "Week 3 of 8" joins this line once onboarding records rotation dates (M2.3). */}
       <View style={styles.sub}>
         <Link
-          label="Choose a topic"
+          label="Change rotation"
           accessibilityHint="Lists every script with your best rung"
-          onPress={() => router.push({ pathname: '/topics', params: { persona } })}
+          onPress={chooseTopic}
         />
       </View>
 
       <Panel level="hero" style={styles.hero}>
         <View style={styles.roundsHead}>
-          <Txt variant="h3" fontSize={18}>
-            {"Today's rounds"}
-          </Txt>
-          <Txt variant="meta" tone="text2" fontSize={15}>
-            <Txt variant="meta" weight="bodySemi" fontSize={15} tabular>
+          <Txt variant="h3">{"Today's rounds"}</Txt>
+          <Txt variant="small" tone="text2">
+            <Txt variant="h2" fontSize={16} lineHeight={18} tabular>
               {Math.min(rounds.done, rounds.goal)}
             </Txt>{' '}
             of {rounds.goal} {rounds.goal === 1 ? 'session' : 'sessions'}
           </Txt>
         </View>
         <Segments filled={rounds.done} total={rounds.goal} />
-        <Txt variant="meta" tone="text2" fontSize={15} style={styles.streak}>
+        <Txt variant="small" tone="text2" style={styles.streak}>
           {streakLine(rounds, streak)}
         </Txt>
         <View style={[styles.divider, { backgroundColor: c.line }]} />
-        <Txt variant="h3" fontSize={18} style={styles.askHead}>
+        <Txt variant="h3" style={styles.askHead}>
           {"Who's asking?"}
         </Txt>
         <Segmented
           label="Attending persona"
+          onPanel
           options={PERSONA_OPTIONS}
           value={persona}
           onChange={setPersona}
@@ -140,6 +146,7 @@ export default function PimpHome() {
           }
           disabled={scripts.length === 0}
           onPress={pimpMe}
+          longPress={{ label: 'Choose a topic', onPress: chooseTopic }}
           style={styles.pimp}
         />
         {scripts.length === 0 && (
@@ -161,17 +168,23 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginTop: space.sm,
   },
-  title: { marginTop: space.md },
-  sub: { flexDirection: 'row', marginTop: space.sm },
-  hero: { marginTop: space.section, borderRadius: radius.hero },
+  title: { marginTop: 6 },
+  sub: { flexDirection: 'row', marginTop: 6 },
+  hero: {
+    marginTop: 22,
+    borderRadius: radius.hero,
+    paddingTop: 18,
+    paddingHorizontal: space.xl,
+    paddingBottom: space.xl,
+  },
   roundsHead: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'baseline',
-    marginBottom: space.md,
+    marginBottom: 10,
   },
-  streak: { marginTop: space.md },
-  divider: { height: 1, marginVertical: space.xl },
+  streak: { marginTop: space.sm },
+  divider: { height: 1, marginVertical: 14 },
   askHead: { marginBottom: space.md },
   pimp: { marginTop: space.lg },
   empty: { marginTop: space.md },

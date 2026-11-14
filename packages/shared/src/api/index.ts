@@ -8,6 +8,7 @@ import { z } from 'zod';
 import type { Database } from '../db/database.types.ts';
 import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../db/rows.ts';
 import type { Confusable } from '../grading/localGrader.ts';
+import { isFixtureScript } from '../fixtures/index.ts';
 import { ladderScore, type LadderState } from '../ladder/engine.ts';
 import type { PersonaId } from '../ladder/personas.ts';
 import {
@@ -58,10 +59,14 @@ export interface ScriptSummary {
   bestRung: number | null;
 }
 
-/** Visible scripts with at least one question, and the student's best rung on each. */
+/**
+ * Visible scripts with at least one question, and the student's best rung on
+ * each. The fictional test fixtures are left out unless `includeFixtures`.
+ */
 export async function listPimpableScripts(
   client: RoundsClient,
   onReject: RejectHandler = warnRejected,
+  { includeFixtures = false }: { includeFixtures?: boolean } = {},
 ): Promise<ScriptSummary[]> {
   const [scripts, questions, progress] = await Promise.all([
     // RLS decides what's visible: approved, plus in-review when previewing.
@@ -85,7 +90,7 @@ export async function listPimpableScripts(
       questionCount: counts.get(script.id) ?? 0,
       bestRung: best.get(script.id) ?? null,
     }))
-    .filter((s) => s.questionCount > 0);
+    .filter((s) => s.questionCount > 0 && (includeFixtures || !isFixtureScript(s.script.id)));
 }
 
 export interface LadderContent {
