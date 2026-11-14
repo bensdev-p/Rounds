@@ -67,7 +67,7 @@ describe('Rounds API against local Supabase', () => {
 
   it('lists approved scripts that have questions', async () => {
     // Approved real scripts from content/ may be seeded too; the fixtures are always there.
-    const scripts = await listPimpableScripts(await newStudent());
+    const scripts = await listPimpableScripts(await newStudent(), undefined, { includeFixtures: true });
     const zorblax = scripts.find((s) => s.script.id === 'zorblax-syndrome');
     // Six rungs, one with a second question (TEST_QUESTION_VARIANTS).
     expect(zorblax?.questionCount).toBe(7);
@@ -106,7 +106,7 @@ describe('Rounds API against local Supabase', () => {
       { passed: false, miss_tag: 'unknown' },
     ]);
 
-    const summary = (await listPimpableScripts(student)).find(
+    const summary = (await listPimpableScripts(student, undefined, { includeFixtures: true })).find(
       (s) => s.script.id === 'zorblax-syndrome',
     );
     expect(summary!.bestRung).toBe(2);
@@ -181,7 +181,7 @@ describe('Rounds API against local Supabase', () => {
     const { data: attempts } = await b.from('attempts').select('id');
     expect(sessions).toEqual([]);
     expect(attempts).toEqual([]);
-    expect((await listPimpableScripts(b)).every((s) => s.bestRung === null)).toBe(true);
+    expect((await listPimpableScripts(b, undefined, { includeFixtures: true })).every((s) => s.bestRung === null)).toBe(true);
 
     const finishAsB = await b.rpc('finish_ladder_session', {
       p_session_id: sessionId,

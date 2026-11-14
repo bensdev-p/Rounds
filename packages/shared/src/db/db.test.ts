@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { TEST_QUESTION_VARIANTS, TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
+import {
+  isFixtureScript,
+  TEST_QUESTION_VARIANTS,
+  TEST_QUESTIONS,
+  TEST_SCRIPTS,
+} from '../fixtures/index.ts';
 import type { Question } from '../schemas/question.ts';
 import type { Json } from './database.types.ts';
 import {
@@ -82,6 +87,13 @@ describe('parseRows', () => {
     expect(result.items.map((q) => q.id)).toEqual([good.id]);
     expect(result.rejected).toHaveLength(1);
     expect(result.rejected[0]!.id).toBe('broken.1');
+  });
+});
+
+describe('isFixtureScript', () => {
+  it('knows the fictional fixtures and nothing else', () => {
+    expect(TEST_SCRIPTS.every((s) => isFixtureScript(s.id))).toBe(true);
+    expect(isFixtureScript('acute-pancreatitis')).toBe(false);
   });
 });
 
