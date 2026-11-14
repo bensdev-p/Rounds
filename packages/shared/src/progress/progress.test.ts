@@ -4,7 +4,10 @@ import { gradeLocally } from '../grading/localGrader.ts';
 import { buildMissCard, RUNG_LABELS } from './missCard.ts';
 import { personaLine } from './personaLines.ts';
 import {
+  collectionTiles,
   dayKey,
+  masteryByRotation,
+  shiftGrid,
   masteryFor,
   pickScript,
   rankFor,
@@ -317,5 +320,56 @@ describe('personaLine', () => {
     );
     expect(personaLine('surgeon', 'top', 7)).toBe(personaLine('surgeon', 'top', 7));
     expect(personaLine('teacher', 'top', -3)).toBeTruthy();
+  });
+});
+
+describe('shiftGrid', () => {
+  it('covers the last 28 days, oldest first, with levels against the goal', () => {
+    const grid = shiftGrid([...shifts([12]), session(13), ...shifts([11], 4)], nov(13, 20));
+    expect(grid).toHaveLength(28);
+    expect(grid.at(-1)).toMatchObject({ day: '2026-11-13', sessions: 1, level: 1 });
+    expect(grid.at(-2)).toMatchObject({ day: '2026-11-12', sessions: 3, level: 2 });
+    expect(grid.at(-3)).toMatchObject({ day: '2026-11-11', sessions: 4, level: 3 });
+    expect(grid[0]).toMatchObject({ day: '2026-10-17', level: 0 });
+  });
+
+  it('marks post-call days inside the streak', () => {
+    const grid = shiftGrid(shifts([9, 10, 12, 13]), nov(13, 20));
+    expect(grid.find((d) => d.day === '2026-11-11')).toMatchObject({ postCall: true, level: 0 });
+    expect(grid.filter((d) => d.postCall)).toHaveLength(1);
+  });
+
+  it('uses the chosen goal', () => {
+    expect(shiftGrid([session(13)], nov(13, 20), 1).at(-1)!.level).toBe(2);
+  });
+});
+
+describe('masteryByRotation', () => {
+  it('counts mastered scripts per rotation', () => {
+    const scripts = [
+      { id: 'a', rotation: ['IM'] },
+      { id: 'b', rotation: ['IM', 'surgery'] },
+    ];
+    const sessions = [session(12, 6, 'b'), session(13, 6, 'b')];
+    expect(masteryByRotation(scripts, sessions, nov(13))).toEqual([
+      { rotation: 'IM', mastered: 1, total: 2 },
+      { rotation: 'surgery', mastered: 1, total: 1 },
+    ]);
+  });
+});
+
+describe('collectionTiles', () => {
+  it('sorts re-check due, in progress, new, then mastered', () => {
+    const sessions = [
+      session(12, 6, 'mastered'),
+      session(13, 6, 'mastered'),
+      session(13, 2, 'started'),
+    ];
+    const tiles = collectionTiles(['mastered', 'new', 'started'], sessions, nov(13));
+    expect(tiles.map((t) => [t.script_id, t.status, t.best])).toEqual([
+      ['started', 'in_progress', 2],
+      ['new', 'not_tried', 0],
+      ['mastered', 'mastered', 6],
+    ]);
   });
 });

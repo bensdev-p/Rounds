@@ -299,3 +299,86 @@ export function pickScript(
   }
   return weighted.at(-1)?.id ?? null;
 }
+
+// ─── Progress screen ────────────────────────────────────────────────────────
+
+export interface ShiftDay {
+  day: string;
+  sessions: number;
+  /** 0 nothing, 1 some sessions, 2 rounds finished, 3 more than the goal. */
+  level: 0 | 1 | 2 | 3;
+  /** A forgiven day inside the current streak. */
+  postCall: boolean;
+}
+
+/** The last `days` days, oldest first, for the shifts grid. */
+export function shiftGrid(
+  sessions: readonly SessionRecord[],
+  now: Date,
+  goal: number = DEFAULT_ROUNDS_GOAL,
+  days = 28,
+): ShiftDay[] {
+  const perDay = new Map<string, number>();
+  for (const s of sessions) perDay.set(endedDay(s), (perDay.get(endedDay(s)) ?? 0) + 1);
+  const postCall = new Set(shiftStreak(sessions, now, goal).postCall);
+  const today = dayKey(now);
+  return Array.from({ length: days }, (_, i) => {
+    const day = addDays(today, i - days + 1);
+    const n = perDay.get(day) ?? 0;
+    const level = n === 0 ? 0 : n < goal ? 1 : n === goal ? 2 : 3;
+    return { day, sessions: n, level, postCall: postCall.has(day) };
+  });
+}
+
+export interface RotationMastery<R extends string = string> {
+  rotation: R;
+  mastered: number;
+  total: number;
+}
+
+/** Mastered scripts per rotation, in order of first appearance. A script can count in several rotations. */
+export function masteryByRotation<R extends string>(
+  scripts: readonly { id: string; rotation: readonly R[] }[],
+  sessions: readonly SessionRecord[],
+  now: Date,
+): RotationMastery<R>[] {
+  const rows = new Map<R, RotationMastery<R>>();
+  for (const script of scripts) {
+    const mastered = masteryFor(script.id, sessions, now) === 'mastered';
+    for (const rotation of script.rotation) {
+      const row = rows.get(rotation) ?? { rotation, mastered: 0, total: 0 };
+      row.total += 1;
+      if (mastered) row.mastered += 1;
+      rows.set(rotation, row);
+    }
+  }
+  return [...rows.values()];
+}
+
+export interface CollectionTile {
+  script_id: string;
+  status: MasteryStatus;
+  best: number;
+}
+
+const COLLECTION_ORDER: Record<MasteryStatus, number> = {
+  recheck_due: 0,
+  in_progress: 1,
+  not_tried: 2,
+  mastered: 3,
+};
+
+/** Script collection tiles: re-check due first, then in progress, new, mastered. */
+export function collectionTiles(
+  scriptIds: readonly string[],
+  sessions: readonly SessionRecord[],
+  now: Date,
+): CollectionTile[] {
+  return scriptIds
+    .map((script_id) => ({
+      script_id,
+      status: masteryFor(script_id, sessions, now),
+      best: bestRungOn(script_id, sessions) ?? 0,
+    }))
+    .sort((a, b) => COLLECTION_ORDER[a.status] - COLLECTION_ORDER[b.status]);
+}

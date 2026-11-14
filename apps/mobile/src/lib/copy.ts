@@ -12,6 +12,18 @@ export const ROTATION_NAMES: Record<Rotation, string> = {
   EM: 'Emergency medicine',
 };
 
+/** Short names where space is tight (the rotation bars). */
+export const ROTATION_SHORT_NAMES: Record<Rotation, string> = {
+  IM: 'Internal med',
+  surgery: 'Surgery',
+  peds: 'Pediatrics',
+  obgyn: 'OB/GYN',
+  psych: 'Psychiatry',
+  neuro: 'Neurology',
+  FM: 'Family med',
+  EM: 'Emergency med',
+};
+
 export const plural = (n: number, one: string, many = `${one}s`): string =>
   `${n.toLocaleString('en-US')} ${n === 1 ? one : many}`;
 

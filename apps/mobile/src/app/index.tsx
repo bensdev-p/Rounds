@@ -16,7 +16,7 @@ import { Disclaimer } from '@/components/Disclaimer';
 import { ErrorView, Loading } from '@/components/StatusView';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES, streakLine, todayLabel } from '@/lib/copy';
-import { usePersona } from '@/lib/prefs';
+import { usePersona, useRoundsGoal } from '@/lib/prefs';
 import { useAsync } from '@/lib/useAsync';
 import { radius, space, useTheme } from '@/theme';
 import { Button, Link, Panel, Segmented } from '@/ui/controls';
@@ -35,6 +35,7 @@ export default function PimpHome() {
   const { c } = useTheme();
   const client = useClient();
   const [persona, setPersona] = usePersona();
+  const [goal] = useRoundsGoal();
   const data = useAsync(async () => {
     const [scripts, sessions] = await Promise.all([
       listPimpableScripts(client),
@@ -65,8 +66,8 @@ export default function PimpHome() {
 
   const { scripts, sessions } = data.data;
   const now = new Date();
-  const rounds = roundsToday(sessions, now);
-  const streak = shiftStreak(sessions, now);
+  const rounds = roundsToday(sessions, now, goal);
+  const streak = shiftStreak(sessions, now, goal);
   const rank = rankFor(totalRungs(sessions));
   // Stage 1 content is internal medicine only.
   const rotation = ROTATION_NAMES[scripts[0]?.script.rotation[0] ?? 'IM'];
@@ -86,7 +87,7 @@ export default function PimpHome() {
         <Txt variant="meta" tone="text2" fontSize={16}>
           {todayLabel(now)}
         </Txt>
-        <RankChip title={rank.title} />
+        <RankChip title={rank.title} onPress={() => router.push('/progress')} />
       </View>
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}
@@ -108,7 +109,7 @@ export default function PimpHome() {
             <Txt variant="meta" weight="bodySemi" fontSize={15} tabular>
               {Math.min(rounds.done, rounds.goal)}
             </Txt>{' '}
-            of {rounds.goal} sessions
+            of {rounds.goal} {rounds.goal === 1 ? 'session' : 'sessions'}
           </Txt>
         </View>
         <Segments filled={rounds.done} total={rounds.goal} />

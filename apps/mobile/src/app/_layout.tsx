@@ -3,7 +3,10 @@ import {
   Archivo_500Medium,
   Archivo_600SemiBold,
 } from '@expo-google-fonts/archivo';
-import { ArchivoNarrow_600SemiBold, ArchivoNarrow_700Bold } from '@expo-google-fonts/archivo-narrow';
+import {
+  ArchivoNarrow_600SemiBold,
+  ArchivoNarrow_700Bold,
+} from '@expo-google-fonts/archivo-narrow';
 import { useFonts } from 'expo-font';
 import { Stack } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
@@ -30,6 +33,8 @@ export default function RootLayout() {
           <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }}>
             <Stack.Screen name="index" options={{ title: 'Rounds' }} />
             <Stack.Screen name="topics" options={{ title: 'Choose a topic' }} />
+            <Stack.Screen name="progress" options={{ title: 'Progress' }} />
+            <Stack.Screen name="collection" options={{ title: 'All scripts' }} />
             <Stack.Screen
               name="session/[scriptId]"
               options={{ title: 'Session', gestureEnabled: false }}

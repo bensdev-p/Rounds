@@ -1,8 +1,8 @@
 /** Progression pieces (DESIGN.md → Components). Amber = progress, green = passed, coral = missed. */
-import { RANKS, type Badge as BadgeId } from '@rounds/shared';
+import { RANKS, type Badge as BadgeId, type ShiftDay } from '@rounds/shared';
 import { Check, CircleMinus } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
-import { Animated, Easing, StyleSheet, View } from 'react-native';
+import { Animated, Easing, Pressable, StyleSheet, View } from 'react-native';
 import { radius, space, useTheme } from '@/theme';
 import { useReduceMotion } from '@/lib/useReduceMotion';
 import { LadderIcon } from './icons';
@@ -14,7 +14,7 @@ export function Segments({ filled, total }: { filled: number; total: number }) {
   return (
     <View
       accessible
-      accessibilityLabel={`${Math.min(filled, total)} of ${total} sessions done today`}
+      accessibilityLabel={`${Math.min(filled, total)} of ${total} ${total === 1 ? 'session' : 'sessions'} done today`}
       style={styles.segments}
     >
       {Array.from({ length: total }, (_, i) => (
@@ -45,15 +45,99 @@ export function Bar({ value, label }: { value: number; label: string }) {
 }
 
 /** Mini ladder: six stacked 3 pt bars, best rung filled green. */
-export function MiniLadder({ best }: { best: number }) {
+export function MiniLadder({ best, mastered = false }: { best: number; mastered?: boolean }) {
   const { c } = useTheme();
+  const fill = mastered ? c.signal : c.pass;
   return (
     <View style={styles.mini}>
       {Array.from({ length: 6 }, (_, i) => (
+        <View key={i} style={[styles.miniBar, { backgroundColor: i < best ? fill : c.surface2 }]} />
+      ))}
+    </View>
+  );
+}
+
+/** A token colour at a lower opacity, e.g. the shifts grid's lighter blues. */
+function withAlpha(hex: string, alpha: number): string {
+  const [r, g, b] = [1, 3, 5].map((i) => parseInt(hex.slice(i, i + 2), 16));
+  return `rgba(${r},${g},${b},${alpha})`;
+}
+
+/**
+ * The shifts grid (Profile): one square per day, oldest first, 14 per row.
+ * Ceil blue is history; darker means more sessions. Post-call days are outlined.
+ */
+export function ShiftGrid({
+  days,
+  label,
+}: {
+  days: readonly ShiftDay[];
+  /** Spoken summary, e.g. "Shifts, last 28 days: 12 in a row". */
+  label: string;
+}) {
+  const { c } = useTheme();
+  const fills = [c.surface2, withAlpha(c.ceil, 0.28), withAlpha(c.ceil, 0.55), c.ceil];
+  const rows: ShiftDay[][] = [];
+  for (let i = 0; i < days.length; i += 14) rows.push(days.slice(i, i + 14));
+  return (
+    <View accessible accessibilityLabel={label} style={styles.grid}>
+      {rows.map((row) => (
+        <View key={row[0]?.day} style={styles.gridRow}>
+          {row.map((d) => (
+            <View
+              key={d.day}
+              style={[
+                styles.gridCell,
+                d.postCall
+                  ? { borderWidth: 1.5, borderColor: c.text3 }
+                  : { backgroundColor: fills[d.level] },
+              ]}
+            />
+          ))}
+        </View>
+      ))}
+    </View>
+  );
+}
+
+/** Mastered-by-rotation bars. The weakest rotation is coral when there's more than one. */
+export function RotationBars({
+  rows,
+}: {
+  rows: readonly { name: string; mastered: number; total: number }[];
+}) {
+  const { c } = useTheme();
+  const share = (r: { mastered: number; total: number }) => (r.total ? r.mastered / r.total : 0);
+  const weakest =
+    rows.length > 1 ? rows.reduce((low, r) => (share(r) < share(low) ? r : low)) : null;
+  return (
+    <View style={styles.rotations}>
+      {rows.map((r) => (
         <View
-          key={i}
-          style={[styles.miniBar, { backgroundColor: i < best ? c.pass : c.surface2 }]}
-        />
+          key={r.name}
+          accessible
+          accessibilityLabel={`${r.name}: ${r.mastered} of ${r.total} mastered`}
+          style={styles.rotationRow}
+        >
+          <Txt variant="body" fontSize={17} style={styles.rotationName} numberOfLines={1}>
+            {r.name}
+          </Txt>
+          <View style={[styles.rotationBar, { backgroundColor: c.surface2 }]}>
+            <View
+              style={[
+                styles.barFill,
+                {
+                  width: `${share(r) * 100}%`,
+                  minWidth: r.mastered > 0 ? 8 : 0,
+                  backgroundColor: r === weakest ? c.miss : c.signal,
+                },
+              ]}
+            />
+          </View>
+          <Txt variant="h2" fontSize={20} tabular style={styles.rotationCount}>
+            {r.mastered}/{r.total}
+          </Txt>
+        </View>
       ))}
     </View>
   );
@@ -88,19 +172,41 @@ export function Badge({ id }: { id: BadgeId }) {
 }
 
 /** Rank chip on Home: title only, no number. */
-export function RankChip({ title }: { title: string }) {
+export function RankChip({ title, onPress }: { title: string; onPress?: () => void }) {
   const { c } = useTheme();
-  return (
-    <View
-      accessible
-      accessibilityLabel={`Rank: ${title}`}
-      style={[styles.rankChip, { backgroundColor: c.surface }]}
-    >
+  const body = (
+    <>
       <LadderIcon size={18} color={c.signal} />
       <Txt variant="meta" weight="bodySemi" fontSize={15}>
         {title}
       </Txt>
-    </View>
+    </>
+  );
+  if (!onPress) {
+    return (
+      <View
+        accessible
+        accessibilityLabel={`Rank: ${title}`}
+        style={[styles.rankChip, { backgroundColor: c.surface }]}
+      >
+        {body}
+      </View>
+    );
+  }
+  return (
+    <Pressable
+      accessibilityRole="button"
+      accessibilityLabel={`Rank: ${title}`}
+      accessibilityHint="Opens your progress"
+      onPress={onPress}
+      hitSlop={4}
+      style={({ pressed }) => [
+        styles.rankChip,
+        { backgroundColor: c.surface, opacity: pressed ? 0.8 : 1 },
+      ]}
+    >
+      {body}
+    </Pressable>
   );
 }
 
@@ -166,10 +272,7 @@ export function RankTrack({
 
   const min = height * 0.15;
   return (
-    <View
-      accessible
-      accessibilityLabel={`Rank ${index + 1} of 6: ${RANKS[index]?.title ?? ''}`}
-    >
+    <View accessible accessibilityLabel={`Rank ${index + 1} of 6: ${RANKS[index]?.title ?? ''}`}>
       <View style={[styles.track, { height }]}>
         {RANKS.map((r, i) => {
           const h = min + ((height - min) * i) / (RANKS.length - 1);
@@ -215,6 +318,14 @@ export function RankTrack({
 }
 
 const styles = StyleSheet.create({
+  grid: { gap: 6 },
+  gridRow: { flexDirection: 'row', gap: 6 },
+  gridCell: { flex: 1, aspectRatio: 1, borderRadius: 6 },
+  rotations: { gap: space.xl },
+  rotationRow: { flexDirection: 'row', alignItems: 'center', gap: space.lg },
+  rotationName: { width: 128 },
+  rotationBar: { flex: 1, height: 8, borderRadius: 4, overflow: 'hidden' },
+  rotationCount: { minWidth: 48, textAlign: 'right' },
   segments: { flexDirection: 'row', gap: 6 },
   segment: { flex: 1, height: 6, borderRadius: 3 },
   bar: { height: 8, borderRadius: 4, overflow: 'hidden' },

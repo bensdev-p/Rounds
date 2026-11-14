@@ -49,7 +49,7 @@ import { ResultView } from '@/features/session/ResultView';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { rungPassHaptic } from '@/lib/haptics';
-import { parsePersona } from '@/lib/prefs';
+import { parsePersona, useRoundsGoal } from '@/lib/prefs';
 import { useAsync } from '@/lib/useAsync';
 import { useLadderRecorder } from '@/lib/useLadderRecorder';
 import { rungStates } from '@/ui/Ladder';
@@ -135,6 +135,7 @@ function Session({
   const [last, setLast] = useState<LastAnswer | null>(null);
   const [summary, setSummary] = useState<ResultSummary | null>(null);
   const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
+  const [goal] = useRoundsGoal();
   // Finished sessions so far, including runs in this screen ("Go again").
   const [history, setHistory] = useState<SessionRecord[]>(sessionsBefore);
 
@@ -171,6 +172,7 @@ function Session({
       session: record,
       anyPartial: final.attempts.some((a) => a.grade === 'partial'),
       now: endedAt,
+      goal,
     });
     setHistory([...history, record]);
     setSummary(result);
