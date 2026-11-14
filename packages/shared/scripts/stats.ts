@@ -12,7 +12,7 @@ import { localAdminClient } from './localDb.ts';
 const showAll = process.argv.includes('--all');
 const db = localAdminClient();
 const [sessions, flags] = await Promise.all([
-  db.from('ladder_sessions').select('user_id, script_id, score, status, ended_at').neq('status', 'in_progress'),
+  db.from('ladder_sessions').select('user_id, script_id, score, status, ended_at').eq('kind', 'ladder').neq('status', 'in_progress'),
   db.from('question_flags').select('user_id'),
 ]);
 if (sessions.error || flags.error) {

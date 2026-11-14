@@ -10,10 +10,13 @@ import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../
 import type { Confusable } from '../grading/localGrader.ts';
 import { isFixtureScript } from '../fixtures/index.ts';
 import { ladderScore, type LadderState } from '../ladder/engine.ts';
+import { drillScore, type DrillState } from '../review/drill.ts';
+import type { MissRecord } from '../review/review.ts';
 import type { PersonaId } from '../ladder/personas.ts';
 import {
   AnswerTextSchema,
   AttemptSchema,
+  MissTagSchema,
   GradeResponseSchema,
   type Attempt,
   type GradeResponse,
@@ -168,6 +171,51 @@ export async function startSession(
   return data.id;
 }
 
+/**
+ * Starts a mix-up drill session on a pair. It is stored as a session of kind
+ * 'drill' on the first script, naming the second; finishing it never changes
+ * the best rung, and progression ignores it. Returns the session id.
+ */
+export async function startDrillSession(
+  client: RoundsClient,
+  script: Pick<IllnessScript, 'id' | 'version'>,
+  partnerId: string,
+  persona: PersonaId,
+): Promise<string> {
+  const { data, error } = await client
+    .from('ladder_sessions')
+    .insert({
+      script_id: script.id,
+      script_version: script.version,
+      persona,
+      kind: 'drill',
+      partner_script_id: partnerId,
+    })
+    .select('id')
+    .single();
+  if (error) throw new RoundsApiError(`Starting drill: ${error.message}`);
+  return data.id;
+}
+
+/** Closes a drill. Its score is the number of questions answered before the miss. */
+export async function finishDrill(
+  client: RoundsClient,
+  sessionId: string,
+  state: DrillState,
+): Promise<void> {
+  if (state.status === 'in_progress') {
+    throw new RoundsApiError('Cannot finish a drill that is still in progress');
+  }
+  unwrap(
+    await client.rpc('finish_ladder_session', {
+      p_session_id: sessionId,
+      p_status: state.status,
+      p_score: drillScore(state),
+    }),
+    'Finishing drill',
+  );
+}
+
 /** Saves one attempt. Validated first, including the patient-detail check. */
 export async function recordAttempt(
   client: RoundsClient,
@@ -269,6 +317,7 @@ export async function lastAskedQuestionIds(
       .from('ladder_sessions')
       .select('id')
       .eq('script_id', scriptId)
+      .eq('kind', 'ladder')
       .neq('status', 'in_progress')
       .order('ended_at', { ascending: false })
       .limit(1),
@@ -283,6 +332,70 @@ export async function lastAskedQuestionIds(
   const parsed = QuestionIdsSchema.safeParse(rows);
   if (!parsed.success) throw new RoundsApiError(`Loading last questions: ${parsed.error.message}`);
   return parsed.data.map((r) => r.question_id);
+}
+
+const MissRowSchema = z.object({
+  id: z.string().min(1),
+  question_id: QuestionIdSchema,
+  miss_tag: MissTagSchema,
+  matched: z.array(z.string()),
+  created_at: z.string().min(1),
+  ladder_sessions: z.object({ kind: z.enum(['ladder', 'drill']) }),
+});
+
+/**
+ * The student's missed attempts since `since` (ISO), oldest first, each with
+ * the question it was on, for Review. Misses on questions the student can no
+ * longer see (or that no longer trace to their script) are left out.
+ */
+export async function listMissesSince(
+  client: RoundsClient,
+  since: string,
+  onReject: RejectHandler = warnRejected,
+): Promise<MissRecord[]> {
+  const rows = unwrap(
+    await client
+      .from('attempts')
+      .select('id, question_id, miss_tag, matched, created_at, ladder_sessions!inner(kind)')
+      .eq('passed', false)
+      .gte('created_at', since)
+      .order('created_at'),
+    'Loading misses',
+  );
+  const misses: z.infer<typeof MissRowSchema>[] = [];
+  const rejected: ParseResult<unknown>['rejected'] = [];
+  for (const row of rows) {
+    const parsed = MissRowSchema.safeParse(row);
+    if (parsed.success) misses.push(parsed.data);
+    else rejected.push({ id: row.id, error: parsed.error.message });
+  }
+  onReject('attempts', rejected);
+  if (misses.length === 0) return [];
+
+  const ids = [...new Set(misses.map((m) => m.question_id))];
+  const questionRows = unwrap(
+    await client.from('questions').select('*').in('id', ids),
+    'Loading missed questions',
+  );
+  const questions = parseRows(questionRows, questionFromRow);
+  onReject('questions', questions.rejected);
+  const byId = new Map(questions.items.map((q) => [q.id, q]));
+
+  return misses.flatMap((m) => {
+    const question = byId.get(m.question_id);
+    if (!question) return [];
+    return [
+      {
+        attempt_id: m.id,
+        script_id: question.script_id,
+        question,
+        miss_tag: m.miss_tag,
+        matched: m.matched,
+        created_at: new Date(m.created_at).toISOString(),
+        session_kind: m.ladder_sessions.kind,
+      },
+    ];
+  });
 }
 
 const FinishedSessionSchema = z.strictObject({
@@ -304,6 +417,7 @@ export async function listFinishedSessions(
     await client
       .from('ladder_sessions')
       .select('id, script_id, score, status, ended_at')
+      .eq('kind', 'ladder')
       .neq('status', 'in_progress')
       .order('ended_at'),
     'Loading progress',

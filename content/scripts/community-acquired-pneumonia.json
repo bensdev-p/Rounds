@@ -79,15 +79,66 @@
     "confused_with": [
       {
         "script_id": "pulmonary-embolism",
-        "how_to_tell_apart": "Pulmonary embolism also causes pleuritic pain, dyspnea and tachycardia, but usually has clear lungs and a near-normal chest X-ray despite hypoxemia; suspect it when there are risk factors for clots."
+        "how_to_tell_apart": "Pulmonary embolism also causes pleuritic pain, dyspnea and tachycardia, but usually has clear lungs and a near-normal chest X-ray despite hypoxemia; suspect it when there are risk factors for clots.",
+        "compare": [
+          {
+            "label": "Lungs",
+            "text": "Focal crackles",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Imaging",
+            "text": "New focal infiltrate",
+            "source_field": "key_findings.imaging[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Antibiotics",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "heart-failure-exacerbation",
-        "how_to_tell_apart": "Heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP, with bilateral interstitial edema and effusions on X-ray rather than a focal consolidation, and usually no fever."
+        "how_to_tell_apart": "Heart failure gives bilateral crackles, a raised JVP, leg edema and a high BNP, with bilateral interstitial edema and effusions on X-ray rather than a focal consolidation, and usually no fever.",
+        "compare": [
+          {
+            "label": "Lungs",
+            "text": "Focal crackles",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Key lab",
+            "text": "Leukocytosis",
+            "source_field": "key_findings.labs[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Antibiotics",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "copd-exacerbation",
-        "how_to_tell_apart": "A COPD exacerbation brings more dyspnea and sputum in a known smoker, without a new consolidation on chest X-ray."
+        "how_to_tell_apart": "A COPD exacerbation brings more dyspnea and sputum in a known smoker, without a new consolidation on chest X-ray.",
+        "compare": [
+          {
+            "label": "Exam",
+            "text": "Focal crackles",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Chest X-ray",
+            "text": "New focal infiltrate",
+            "source_field": "key_findings.imaging[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Antibiotics",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

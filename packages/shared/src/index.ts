@@ -19,3 +19,5 @@ export * from './progress/progression.ts';
 export * from './progress/missCard.ts';
 export * from './progress/personaLines.ts';
 export * from './log/patientLog.ts';
+export * from './review/review.ts';
+export * from './review/drill.ts';

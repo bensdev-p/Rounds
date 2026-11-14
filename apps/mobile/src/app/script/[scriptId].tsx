@@ -86,7 +86,9 @@ export default function ScriptScreen() {
   const { c } = useTheme();
   const client = useClient();
   const [persona] = usePersona();
-  const { scriptId } = useLocalSearchParams<{ scriptId: string }>();
+  // `from` names the screen to go back to ("Review" in script.png).
+  const { scriptId, from } = useLocalSearchParams<{ scriptId: string; from?: string }>();
+  const backLabel = from === 'Review' ? 'Review' : 'Back';
   const content = useAsync(() => getLadderContent(client, scriptId), scriptId);
   const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
 
@@ -121,7 +123,7 @@ export default function ScriptScreen() {
       }
     >
       <Link
-        label="Back"
+        label={backLabel}
         icon={ChevronLeft}
         back
         onPress={() => (router.canGoBack() ? router.back() : router.replace('/'))}
@@ -142,12 +144,7 @@ export default function ScriptScreen() {
 
       {sections(script).map((section) => (
         <View key={section.title} style={[styles.block, { borderTopColor: c.line }]}>
-          <Txt
-            variant="small"
-            weight="bodySemi"
-            tone="ceil"
-            accessibilityRole="header"
-          >
+          <Txt variant="small" weight="bodySemi" tone="ceil" accessibilityRole="header">
             {section.title}
           </Txt>
           <Txt variant="body" fontSize={15} lineHeight={22.5}>
@@ -158,12 +155,7 @@ export default function ScriptScreen() {
 
       {approvedLinks.length > 0 && (
         <View style={[styles.block, { borderTopColor: c.line }]}>
-          <Txt
-            variant="small"
-            weight="bodySemi"
-            tone="ceil"
-            accessibilityRole="header"
-          >
+          <Txt variant="small" weight="bodySemi" tone="ceil" accessibilityRole="header">
             Confused with
           </Txt>
           <View style={[styles.chips, styles.links]}>

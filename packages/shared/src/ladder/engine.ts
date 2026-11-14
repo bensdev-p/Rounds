@@ -81,34 +81,44 @@ export function currentQuestion(state: LadderState): Question | null {
   return state.questions[state.index] ?? null;
 }
 
-/** Records an answer and advances the ladder. The ladder ends on the first miss. */
-export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): LadderState {
-  const question = currentQuestion(state);
-  if (!question) throw new LadderError(`Ladder is ${state.status}; no question to answer`);
-
+/**
+ * Grades one answer into an attempt: the automatic miss tag (domain rule 4),
+ * credit and the answers it matched. Shared by the ladder and the mix-up drill.
+ */
+export function makeAttempt(
+  question: Question,
+  persona: PersonaId,
+  submitted: SubmittedAnswer,
+): Attempt {
   const miss_tag = classifyMiss({
     question,
     result: submitted.result,
     elapsed_ms: submitted.elapsed_ms,
-    time_limit_ms: PERSONAS[state.persona].time_limit_ms,
+    time_limit_ms: PERSONAS[persona].time_limit_ms,
   });
-  const passed = miss_tag === null;
-
-  const attempt: Attempt = {
+  return {
     question_id: question.id,
     answer: submitted.answer,
     elapsed_ms: submitted.elapsed_ms,
     grade: submitted.result.grade,
     reason: submitted.result.reason,
     credit: answerCredit(question, submitted.result),
-    passed,
+    passed: miss_tag === null,
     miss_tag,
+    matched: submitted.result.matched.slice(0, 20),
     grader: submitted.grader ?? 'local',
     grader_version: submitted.grader_version ?? null,
   };
+}
 
+/** Records an answer and advances the ladder. The ladder ends on the first miss. */
+export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): LadderState {
+  const question = currentQuestion(state);
+  if (!question) throw new LadderError(`Ladder is ${state.status}; no question to answer`);
+
+  const attempt = makeAttempt(question, state.persona, submitted);
   const nextIndex = state.index + 1;
-  const status: LadderStatus = !passed
+  const status: LadderStatus = !attempt.passed
     ? 'missed'
     : nextIndex >= state.questions.length
       ? 'completed'

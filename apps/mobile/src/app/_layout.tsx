@@ -38,6 +38,7 @@ export default function RootLayout() {
               options={{ title: 'Session', gestureEnabled: false }}
             />
             <Stack.Screen name="script/[scriptId]" options={{ title: 'Illness script' }} />
+            <Stack.Screen name="drill" options={{ title: 'Mix-up drill', gestureEnabled: false }} />
           </Stack>
         </AuthProvider>
       ) : null}

@@ -81,11 +81,66 @@
     "confused_with": [
       {
         "script_id": "community-acquired-pneumonia",
-        "how_to_tell_apart": "Pneumonia usually brings fever, productive cough, focal crackles and a consolidation on chest X-ray; PE more often has clear lungs and a near-normal X-ray despite hypoxemia."
+        "how_to_tell_apart": "Pneumonia usually brings fever, productive cough, focal crackles and a consolidation on chest X-ray; PE more often has clear lungs and a near-normal X-ray despite hypoxemia.",
+        "compare": [
+          {
+            "label": "Lungs",
+            "text": "Clear",
+            "source_field": "key_findings.exam[3]"
+          },
+          {
+            "label": "Imaging",
+            "text": "Filling defect on CTPA",
+            "source_field": "key_findings.imaging[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Anticoagulation",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "deep-vein-thrombosis",
-        "how_to_tell_apart": "DVT is the usual source of PE: look for unilateral leg swelling and calf pain, and confirm with compression ultrasound."
+        "how_to_tell_apart": "DVT is the usual source of PE: look for unilateral leg swelling and calf pain, and confirm with compression ultrasound.",
+        "compare": [
+          {
+            "label": "Symptom",
+            "text": "Sudden dyspnea",
+            "source_field": "key_findings.history[0]"
+          },
+          {
+            "label": "Test",
+            "text": "CT pulmonary angiogram",
+            "source_field": "diagnosis.confirmatory_tests[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "DOAC",
+            "source_field": "management.first_line[0]"
+          }
+        ]
+      },
+      {
+        "script_id": "acute-coronary-syndrome",
+        "how_to_tell_apart": "Acute coronary syndrome causes pressure-like chest pain with ST changes on the ECG and a rise and fall of troponin; pulmonary embolism causes sudden dyspnea, pleuritic pain and hypoxemia.",
+        "compare": [
+          {
+            "label": "Pain",
+            "text": "Pleuritic",
+            "source_field": "key_findings.history[1]"
+          },
+          {
+            "label": "First test",
+            "text": "CT pulmonary angiogram",
+            "source_field": "diagnosis.confirmatory_tests[0]"
+          },
+          {
+            "label": "First drug",
+            "text": "Anticoagulation",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

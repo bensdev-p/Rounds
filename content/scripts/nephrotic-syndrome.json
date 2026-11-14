@@ -77,7 +77,24 @@
     "confused_with": [
       {
         "script_id": "nephritic-syndrome",
-        "how_to_tell_apart": "Nephritic syndrome has hematuria with red blood cell casts, hypertension and a rising creatinine, with proteinuria usually below 3.5 g/day; nephrotic syndrome has heavy proteinuria above 3.5 g/day with a bland sediment."
+        "how_to_tell_apart": "Nephritic syndrome has hematuria with red blood cell casts, hypertension and a rising creatinine, with proteinuria usually below 3.5 g/day; nephrotic syndrome has heavy proteinuria above 3.5 g/day with a bland sediment.",
+        "compare": [
+          {
+            "label": "Urine",
+            "text": "Fatty casts",
+            "source_field": "key_findings.labs[3]"
+          },
+          {
+            "label": "Protein",
+            "text": "Over 3.5 g/day",
+            "source_field": "key_findings.labs[0]"
+          },
+          {
+            "label": "Classic",
+            "text": "Minimal change",
+            "source_field": "epidemiology.who"
+          }
+        ]
       }
     ],
     "pearls": [

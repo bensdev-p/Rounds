@@ -18,16 +18,15 @@ const LABELS = RUNGS.map((r) => RUNG_LABELS[r]);
 
 /** Rung states for a ladder `score` rungs up, with the next rung current or missed. */
 export function rungStates(score: number, next: 'now' | 'miss' | 'none'): RungState[] {
-  return LABELS.map((_, i) =>
-    i < score ? 'done' : i === score && next !== 'none' ? next : 'dim',
-  );
+  return LABELS.map((_, i) => (i < score ? 'done' : i === score && next !== 'none' ? next : 'dim'));
 }
 
 function describe(states: readonly RungState[]): string {
   const passed = states.filter((s) => s === 'done').length;
   const now = states.indexOf('now');
   const miss = states.indexOf('miss');
-  if (miss >= 0) return `Ladder: ${passed} rungs climbed, missed on rung ${miss + 1}, ${LABELS[miss]}`;
+  if (miss >= 0)
+    return `Ladder: ${passed} rungs climbed, missed on rung ${miss + 1}, ${LABELS[miss]}`;
   if (now >= 0) return `Ladder: rung ${now + 1} of 6, ${LABELS[now]}. ${passed} passed`;
   return `Ladder: ${passed} of 6 rungs climbed`;
 }
@@ -74,16 +73,12 @@ function Rung({ n, state }: { n: number; state: RungState }) {
   );
 
   return (
-    <Animated.View
-      style={[styles.square, { backgroundColor: c.surface, transform: [{ scale }] }]}
-    >
+    <Animated.View style={[styles.square, { backgroundColor: c.surface, transform: [{ scale }] }]}>
       {face(c.text3)}
       {state === 'now' && face(c.onSignal, c.signal)}
       {state === 'done' && (
         <Animated.View style={[styles.fill, { height: fillHeight, backgroundColor: c.bg }]}>
-          <View style={[styles.fillInner, { backgroundColor: c.passSoft }]}>
-            {face(c.pass)}
-          </View>
+          <View style={[styles.fillInner, { backgroundColor: c.passSoft }]}>{face(c.pass)}</View>
         </Animated.View>
       )}
       {state === 'miss' && (
@@ -130,6 +125,20 @@ export function LadderStrip({ states }: { states: readonly RungState[] }) {
     <View accessible accessibilityLabel={describe(states)} style={styles.strip}>
       {LABELS.map((label, i) => (
         <Rung key={label} n={i + 1} state={states[i] ?? 'dim'} />
+      ))}
+    </View>
+  );
+}
+
+/**
+ * A row of numbered squares for a run that isn't the six-rung ladder (the
+ * mix-up drill). Same states and motion as the ladder's rungs.
+ */
+export function StepStrip({ states, label }: { states: readonly RungState[]; label: string }) {
+  return (
+    <View accessible accessibilityLabel={label} style={styles.strip}>
+      {states.map((state, i) => (
+        <Rung key={i} n={i + 1} state={state} />
       ))}
     </View>
   );

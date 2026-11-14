@@ -288,7 +288,16 @@ export function renderReviewSheet(file: ContentFile, names: ReadonlyMap<string, 
     '## Confused with',
     bullets(
       s.confused_with.map(
-        (c) => `**${names.get(c.script_id) ?? c.script_id}**: ${c.how_to_tell_apart}`,
+        (c) =>
+          `**${names.get(c.script_id) ?? c.script_id}**: ${c.how_to_tell_apart}` +
+          (c.compare
+            ? `<br>Comparison (Review): ${c.compare
+                .map(
+                  (r) =>
+                    `${r.label}: "${r.text}" (from \`${r.source_field}\`: ${collectStrings(resolveFieldPath(s, r.source_field)).join('; ')})`,
+                )
+                .join('; ')}`
+            : ''),
       ),
     ),
     '',

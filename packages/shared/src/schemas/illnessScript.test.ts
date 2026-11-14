@@ -37,6 +37,21 @@ describe('IllnessScriptSchema', () => {
     expect(issues({ ...base(), anki_refs: [{ kind: 'card', id: 'abc' }] })).not.toEqual([]);
   });
 
+  it('checks comparison rows trace to a field and stay short', () => {
+    const withRows = (compare: unknown) => ({
+      ...base(),
+      confused_with: [{ script_id: 'quellan-fever', how_to_tell_apart: 'x', compare }],
+    });
+    const row = { label: 'Nails', text: 'Blue nail beds', source_field: 'key_findings.exam[0]' };
+    expect(issues(withRows([row]))).toEqual([]);
+    expect(issues(withRows([{ ...row, source_field: 'key_findings.exam[9]' }]))).toEqual([
+      'Field path "key_findings.exam[9]" does not exist in this script',
+    ]);
+    expect(issues(withRows([{ ...row, text: 'x'.repeat(37) }]))).not.toEqual([]);
+    expect(issues(withRows([row, row, row, row]))).not.toEqual([]);
+    expect(issues(withRows([]))).not.toEqual([]);
+  });
+
   it('rejects self and duplicate confused_with links', () => {
     const self = { script_id: 'zorblax-syndrome', how_to_tell_apart: 'x' };
     expect(issues({ ...base(), confused_with: [self] })).toContain(

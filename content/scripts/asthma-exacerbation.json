@@ -82,7 +82,24 @@
     "confused_with": [
       {
         "script_id": "copd-exacerbation",
-        "how_to_tell_apart": "COPD affects older smokers, and its airflow limitation persists between exacerbations; in asthma it is largely reversible."
+        "how_to_tell_apart": "COPD affects older smokers, and its airflow limitation persists between exacerbations; in asthma it is largely reversible.",
+        "compare": [
+          {
+            "label": "Who",
+            "text": "Any age, with asthma",
+            "source_field": "epidemiology.who"
+          },
+          {
+            "label": "Clue",
+            "text": "Cough worse at night",
+            "source_field": "key_findings.history[3]"
+          },
+          {
+            "label": "Oxygen target",
+            "text": "93 to 95%",
+            "source_field": "management.first_line[2]"
+          }
+        ]
       }
     ],
     "pearls": [

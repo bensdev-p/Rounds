@@ -81,7 +81,24 @@
     "confused_with": [
       {
         "script_id": "diabetic-ketoacidosis",
-        "how_to_tell_apart": "DKA has ketones and an anion gap acidosis and develops over hours; HHS has much higher glucose and osmolality, little or no ketosis, and develops over days."
+        "how_to_tell_apart": "DKA has ketones and an anion gap acidosis and develops over hours; HHS has much higher glucose and osmolality, little or no ketosis, and develops over days.",
+        "compare": [
+          {
+            "label": "Glucose",
+            "text": "Usually over 600 mg/dL",
+            "source_field": "key_findings.labs[0]"
+          },
+          {
+            "label": "Acidosis",
+            "text": "pH 7.3 or higher",
+            "source_field": "key_findings.labs[2]"
+          },
+          {
+            "label": "Ketones",
+            "text": "Little or none",
+            "source_field": "key_findings.labs[3]"
+          }
+        ]
       }
     ],
     "pearls": [

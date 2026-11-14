@@ -80,7 +80,24 @@
     "confused_with": [
       {
         "script_id": "nephrotic-syndrome",
-        "how_to_tell_apart": "Nephrotic syndrome has heavy proteinuria above 3.5 g/day, low albumin and a bland urine sediment; nephritic syndrome has red blood cell casts, hypertension and a rising creatinine."
+        "how_to_tell_apart": "Nephrotic syndrome has heavy proteinuria above 3.5 g/day, low albumin and a bland urine sediment; nephritic syndrome has red blood cell casts, hypertension and a rising creatinine.",
+        "compare": [
+          {
+            "label": "Urine",
+            "text": "Hematuria, RBC casts",
+            "source_field": "key_findings.labs[0]"
+          },
+          {
+            "label": "Protein",
+            "text": "Under 3.5 g/day",
+            "source_field": "key_findings.labs[2]"
+          },
+          {
+            "label": "Classic",
+            "text": "Post-strep GN",
+            "source_field": "epidemiology.risk_factors[0]"
+          }
+        ]
       }
     ],
     "pearls": [
