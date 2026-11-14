@@ -4,8 +4,11 @@ Rounds is a voice-first "pimping" trainer for medical students. It quizzes stude
 
 ## Current stage
 
-**Stage 1: Prototype (local).** A text-only pimp ladder, with ~30 internal medicine illness scripts, tested by one med student.
+**Read `ROADMAP.md` first.** It sets the order of work and the current milestone. Work on one milestone at a time; anything outside it goes in ROADMAP.md → Parking lot, not in code.
+
+**Stage 1: Prototype (local).** A text-only pimp ladder on ~30 internal medicine illness scripts, running locally, with every built screen matching its mockup.
 Do not build anything from later stages unless asked: voice, payments, Android release, Anki bridge, marketing site.
+Content review and user testing are not gates: development doesn't wait for scripts to be approved or for a testing period. The developer tests as he goes.
 
 ## Stack
 
@@ -35,7 +38,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm content:check`: validate every script in `content/scripts` (drafts included; also part of `pnpm test`)
 - `pnpm content:review`: write review sheets for unapproved scripts to `content/review/` (gitignored)
 - `pnpm content:approve <id> --by "Name, role"`: record a medical reviewer's approval. Only on the reviewer's explicit sign-off; never run it yourself. See `content/README.md`
-- `pnpm stats`: is Stage 1 working? Per student on the local database: days used, days in a row toward the 5-day goal, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
+- `pnpm stats`: usage report per student on the local database: days used, days in a row, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
@@ -62,6 +65,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 ## Design
 
 Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before building any UI.
+- **The mockups, wireframes and vision video are finished, and they are the target.** The app must match them. Don't edit `docs/design/` or `apps/video` unless the developer asks. If the app and a mockup disagree, change the app. If a mockup seems wrong or can't be built as drawn, stop and ask rather than diverging.
 - Structure and behaviour: `docs/design/png/wireframes/` (18 screens with numbered notes; 16–18 are the later-stage Teams feature).
 - Look and feel: `docs/design/png/mockups/` (14 in dark mode, 7 in light).
 - Gamification rules (rounds, shifts, rank, mastery) are in DESIGN.md → Progression. Don't add mechanics beyond those. Teams is Stage 5: don't build it before then.
@@ -75,7 +79,7 @@ Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before bui
 
 ## Planned and proposed
 
-- **Planned feature, the miss card:** specified in `docs/PRODUCT.md` → "Planned: the miss card". Build it with or after the result screen, not before.
+- **The miss card** is built (result screen); its rules are in `docs/PRODUCT.md` → "The miss card".
 - **Recommendations:** `docs/PRODUCT.md` → "Recommendations (not decided)" lists ideas that are not requirements. Don't build toward them unless asked.
 
 ## Code conventions

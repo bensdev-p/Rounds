@@ -42,8 +42,8 @@ Scripts are drafted by AI and approved by a human medical reviewer. Each questio
 - **Automatic miss tags:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`.
 - **Grading:** the AI compares the student's answer to the script's accepted answers and synonyms, and returns `correct | partial | incorrect` plus a one-line reason. It never grades against facts outside the script.
 
-### Planned: the miss card
-**Status: planned, not built.** Build it when the result screen is built, or as a follow-up to it. It is not a reason to pull later-stage work forward.
+### The miss card
+**Status: built** (result screen).
 
 When a session ends on a miss, the result screen explains that miss in one card, as on `docs/design/png/mockups/result.png` and in the vision video (scene 4):
 - A label naming the rung: "Missed on management".
@@ -92,11 +92,14 @@ Speech-to-text (streaming) → Edge Function grades the answer and sends the pre
 - Never store or redistribute AnKing card text or Qbank questions.
 
 ## Build stages
-1. **Prototype (local):** text pimp ladder; ~30 approved internal medicine scripts; local Supabase; web dev build. Success = the design partner uses it 5 days in a row unprompted.
-2. **iPhone beta:** voice pimp, log, review; accounts; TestFlight with ~20–50 classmates.
+Stages are defined by what's built, not by testing windows or content approval. The developer tests as he goes. The milestones and their order are in `ROADMAP.md`.
+1. **Prototype (local):** text pimp ladder with varied questions; ~30 internal medicine scripts (drafted; review can come later); local Supabase; web dev build; every built screen matches its mockup.
+2. **iPhone beta:** the tab shell, Log, Review, accounts and onboarding, voice pimp; EAS build on TestFlight.
 3. **Anki bridge:** add-on and automatic miss tagging.
 4. **Launch:** public web portal, marketing site, payments (Stripe on web, RevenueCat in-app), Android when ready.
-5. **Expand:** all rotations, shadowing mode, desktop decision, school licenses.
+5. **Expand:** all rotations, shadowing mode, Teams, desktop decision, school licenses.
+
+Content review runs alongside development and never blocks it. It is a release requirement only: anyone other than the developer and the reviewer sees only `approved` scripts (domain rule 2).
 
 ## Later / maybe
 Oral presentation coach · virtual patients · crowdsourced rotation guides · polished Anki review tab.
@@ -110,4 +113,3 @@ Suggestions that came out of making the vision video (November 2026). **None of 
 - **Sell the morning.** The moment students dread is being asked on morning rounds. A three-minute warm-up on yesterday's logged patients, before rounds, may be a stronger habit than the evening review. The video's line for this is "Get asked here first."
 - **Show the reviewer in the session.** "Reviewed by Dr. J. Patel, PGY-3" currently appears only on the script page. Showing it with the question is the reason to trust Rounds over a general chatbot.
 - **Revisit the word "pimp".** The Name section keeps it on the button only, and VIDEO.md bans it from marketing. Some schools treat the practice as mistreatment, so the button label may matter for school licenses (Stage 5). "Ask me" is the neutral option.
-- **Sharpen the Stage 1 success test.** "5 days in a row unprompted" could be narrowed to "opens it before rounds, unprompted", which tests the morning habit directly.

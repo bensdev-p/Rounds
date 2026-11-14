@@ -1,6 +1,6 @@
 # Rounds design language
 
-Visual guidance for building the app. If a screen isn't covered here, follow the closest mockup and these rules rather than inventing a new pattern.
+Visual guidance for building the app. The mockups, wireframes and vision video are finished: they are the target the app must match, not drafts to revise. If a screen isn't covered here, follow the closest mockup and these rules rather than inventing a new pattern.
 
 ## What's in this folder
 
@@ -149,7 +149,7 @@ Rules:
 - **List row:** title, optional `small` subtitle, trailing chip, chevron or value.
 - **Rung:** 44×44 square, numeral centred, label to the right.
 - **Answer pill:** `got` (green tint, check icon) or `missed` (dashed coral outline, minus icon). Missed items read as gaps, not errors.
-- **Miss card:** a `surface` panel (radius 18, padding 16) on the result screen. A `small` label ("Missed on management"), one 15 pt sentence that quotes the student's words in `miss` and then states what the script says in `text`, and a "Review the script" link in `ceil`. One card per session, never on a clean run. It is planned, not built: see PRODUCT.md → Planned: the miss card.
+- **Miss card:** a `surface` panel (radius 18, padding 16) on the result screen. A `small` label ("Missed on management"), one 15 pt sentence that quotes the student's words in `miss` and then states what the script says in `text`, and a "Review the script" link in `ceil`. One card per session, never on a clean run. Built; rules in PRODUCT.md → The miss card.
 - **Rank progress line** (result screen): "+4 rungs, 6 to go". On the session that earns a rank it reads "+6 rungs. Resident", the bar is full, and the Promotion screen follows.
 - **Field:** 52 high. Error state = coral border plus a warning block underneath that says exactly what to remove.
 - **Comparison:** two columns, same keys on both sides (mix-up drill).
