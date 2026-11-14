@@ -93,8 +93,8 @@ Speech-to-text (streaming) → Edge Function grades the answer and sends the pre
 
 ## Build stages
 Stages are defined by what's built, not by testing windows or content approval. The developer tests as he goes. The milestones and their order are in `ROADMAP.md`.
-1. **Prototype (local):** text pimp ladder with varied questions; ~30 internal medicine scripts (drafted; review can come later); local Supabase; web dev build; every built screen matches its mockup.
-2. **iPhone beta:** the tab shell, Log, Review, accounts and onboarding, voice pimp; EAS build on TestFlight.
+1. **Prototype (local):** text pimp ladder with varied questions; ~30 internal medicine scripts (drafted; review can come later); local Supabase; web dev build; every built screen matches its mockup; the tab shell (Pimp, Log, Review, Profile).
+2. **iPhone beta:** Log, Review, accounts and onboarding, voice pimp; EAS build on TestFlight.
 3. **Anki bridge:** add-on and automatic miss tagging.
 4. **Launch:** public web portal, marketing site, payments (Stripe on web, RevenueCat in-app), Android when ready.
 5. **Expand:** all rotations, shadowing mode, Teams, desktop decision, school licenses.

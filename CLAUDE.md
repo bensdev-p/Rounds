@@ -6,8 +6,8 @@ Rounds is a voice-first "pimping" trainer for medical students. It quizzes stude
 
 **Read `ROADMAP.md` first.** It sets the order of work and the current milestone. Work on one milestone at a time; anything outside it goes in ROADMAP.md → Parking lot, not in code.
 
-**Stage 1: Prototype (local).** A text-only pimp ladder on ~30 internal medicine illness scripts, running locally, with every built screen matching its mockup.
-Do not build anything from later stages unless asked: voice, payments, Android release, Anki bridge, marketing site.
+**Stage 2: iPhone beta.** Stage 1 (the local text prototype and the tab shell) was completed on 14 Nov 2026. Stage 2 adds Log, Review, accounts and onboarding, voice, then hosting and TestFlight, in the milestone order in ROADMAP.md.
+Do not build anything from later stages unless asked: payments, Android release, Anki bridge, marketing site, Teams. Voice is in scope only from M2.4 (spike) and M2.5; text mode stays available everywhere.
 Content review and user testing are not gates: development doesn't wait for scripts to be approved or for a testing period. The developer tests as he goes.
 
 ## Stack

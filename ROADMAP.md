@@ -30,6 +30,8 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **Gaps:** Log, Review, onboarding and the real Settings.
 
+**Next: M2.1 Log.**
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
@@ -75,7 +77,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 - Tab bar with Pimp, Log, Review and Profile. Session screens hide it. Log and Review get honest empty states until their milestones land.
 - Progress becomes the Profile tab, matching `profile.png` and wireframe 11, including the entries that open settings (placeholder) and, later, Teams (hidden until Stage 5).
 
-**Stage 1 is complete when M1.3 is done.**
+**Stage 1 was completed on 14 Nov 2026.**
 
 ---
 
@@ -85,6 +87,13 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 - Matches `log.png` and wireframe 08: diagnosis label, rotation and date only. The PHI guard blocks and explains, as in video scene 6.
 - Labels map to scripts where one exists. A log with no matching script is still saved.
 - **Home, "From today's patients"** (`home.png`, wireframe 02 note 3): today's logs as one-tap Start rows, a "Log one" link, and the empty state "Log a patient to practise on them tonight." Left out in M1.2 because there was no Log yet.
+- **Notes for the plan (from M1.3):**
+  - The Log tab is an empty state in `apps/mobile/src/app/(tabs)/log.tsx`; replace it. Tab screens use `<Screen tab>`.
+  - There's no table for logs yet. It needs a migration with RLS (own rows only), pgTAP tests, `pnpm db:types` and a Zod schema in `packages/shared`. Columns: label, matching script (optional), rotation and when it was logged. Nothing that could hold patient details (domain rule 5).
+  - The PHI guard exists (`detectPhi` in `packages/shared`, already used by the topic picker). Wireframe 08 note 1 lists what it must catch on every keystroke.
+  - "Logged today" status ("Pimped, rung 5" or "Not yet", wireframe 08 note 2) comes from today's finished sessions on the matching script.
+  - **Ask the developer:** wireframe 08 and `log.png` draw Save only on matching-script rows, but a log with no matching script must still be saved. How that save looks isn't drawn.
+  - Leave Review's empty state alone until M2.2.
 
 ### M2.2 Review and learning from today's patients
 - Matches `review.png` and wireframe 09: "Missed today" uses the miss card's wording; there's a link to each script.
@@ -145,4 +154,6 @@ We're on milestone <M1.1>. Open the wireframes and mockups for every screen
 it touches. Plan only this milestone: the changes, files and tests, and how
 you'll meet the Definition of done. Show me the plan before editing.
 Anything outside this milestone goes in ROADMAP.md → Parking lot.
+Before branching, check the last milestone's PR is merged and pull main.
+Use one branch per milestone, off main.
 ```
