@@ -38,29 +38,29 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **Gaps:** none in Stage 2 before voice.
 
-**Next: M2.5 Voice session.**
+**M2.5 (voice session), built, waiting for the phone try:** sessions open in voice. The attending asks in the persona's Deepgram Aura-2 voice (question audio made once per persona and speed, cached in a private `voice-cache` bucket, and fetched for the whole run when it starts). The mic goes live when the question ends: Deepgram Nova-3, streamed straight from the device with a 60 s token from `speech-token` and the question's accepted answers as expected words. Our own silence check ends the answer (0.8 s, 1.5 s on list questions) or a tap on the mic does. The transcript is graded like typed text; when the matcher misses, the attending says "Mm-hm." while Claude grades. Nothing plays on a miss. "Type instead" switches to text for the rest of the session; a session opens in text mode with one line saying why when the mic is refused or voice isn't available (Safari over http, no `DEEPGRAM_API_KEY`). The matcher reads number words as digits and skips "um" and "uh". Mic icon on Pimp me and Pimp me on this; Settings → Voice → Attending voice speed (0.8×, 1.0×, 1.2×, 1.4×, in the profile). Speech sits behind the `stt` and `tts` provider interfaces (`supabase/functions/_shared/speech`), with fakes for `functions:serve:fake`. The iPhone runs an EAS development build (`docs/PHONE.md`). New: `profiles.voice_speed` and the bucket (pgTAP tests).
 
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon M2.5 | Done |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5) | Done |
 | Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
 | Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
-| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon M2.5 | Done |
+| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5) | Done |
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
 | Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.1 | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
-| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Voice speed M2.5, Anki part M3.1 | Done |
+| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki part M3.1 | Done |
 | Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete | Done |
-| Live session, voice | 04 | session | Not built | M2.5 |
+| Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Long questions (over ~3 lines, about a quarter) scroll under the panel: open question for the developer. Phone try pending | M2.5 |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
 ---
@@ -200,6 +200,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Short column headers on the comparison ("Nephritic" in `review.png`). Scripts have only full names, so long ones wrap to two lines.
 - (14 Nov 2026) Merging two accounts' history when a student who practised without an account signs in to an existing one. M2.3 warns and leaves the anonymous practice behind.
 - (14 Nov 2026) A daily ladder on the public web (Stage 4, alongside the marketing site): one script a day, the same for everyone, playable without an account and kept with it when signed in. A shareable result could be the ladder itself as squares (passed, missed, not reached), with no answers in it. Constraints: approved scripts only (release rule), no "pimp" in public copy (DESIGN.md → Voice and copy), and no-guilt streaks (DESIGN.md → Progression).
+- (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 
 ---

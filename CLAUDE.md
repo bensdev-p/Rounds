@@ -42,7 +42,8 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
-- `pnpm functions:serve:fake`: the same, with a fake model that spends nothing
+- `pnpm functions:serve:fake`: the same, with a fake model and fake speech that spend nothing
+- Voice on the iPhone runs in an EAS development build (cloud build, no Mac): see `docs/PHONE.md`. `DEEPGRAM_API_KEY` in `supabase/functions/.env` turns voice on; speech is billed, so get the developer's OK before paid runs
 - `pnpm functions:check`: Deno type-check of the Edge Functions (also run by `pnpm typecheck`)
 - `pnpm eval:grading --dry-run`: validate the grading eval cases for free. Without `--dry-run` it calls Claude and is billed: get the developer's OK first. `--model claude-haiku-5-5` compares models
 - `pnpm test:integration`: API client and `grade-answer` tests against the local stack (needs `pnpm db:start` and `pnpm functions:serve:fake`)
