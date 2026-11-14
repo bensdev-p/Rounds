@@ -91,12 +91,12 @@ export default function PimpHome() {
   }
 
   return (
-    <Screen>
+    <Screen tab>
       <View style={styles.top}>
         <Txt variant="meta" tone="text2">
           {todayLabel(now)}
         </Txt>
-        <RankChip title={rank.title} onPress={() => router.push('/progress')} />
+        <RankChip title={rank.title} onPress={() => router.navigate('/profile')} />
       </View>
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}

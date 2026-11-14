@@ -61,8 +61,10 @@ const MISS_HOLD_MS = 1_000;
 /** After the last rung passes, long enough to see it fill. */
 const TOP_HOLD_MS = 700;
 
+/** Back to the tab the session was started from (Pimp, or Profile → collection). */
 function goHome() {
-  router.dismissTo('/');
+  if (router.canDismiss()) router.dismissAll();
+  else router.replace('/');
 }
 
 export default function SessionRoute() {

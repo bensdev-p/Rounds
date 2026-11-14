@@ -45,7 +45,7 @@ export default function Topics() {
   );
 
   return (
-    <Screen>
+    <Screen tab>
       <Link
         label="Pimp"
         icon={ChevronLeft}

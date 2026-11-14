@@ -12,15 +12,21 @@ export function Screen({
   footer,
   scroll = true,
   contentStyle,
+  tab = false,
 }: {
   children: ReactNode;
   footer?: ReactNode;
   scroll?: boolean;
   contentStyle?: StyleProp<ViewStyle>;
+  /** A screen under the tab bar: the bar owns the bottom safe area. */
+  tab?: boolean;
 }) {
   const { c } = useTheme();
   return (
-    <SafeAreaView edges={['top', 'bottom']} style={[styles.flex, { backgroundColor: c.bg }]}>
+    <SafeAreaView
+      edges={tab ? ['top'] : ['top', 'bottom']}
+      style={[styles.flex, { backgroundColor: c.bg }]}
+    >
       <View style={styles.column}>
         {scroll ? (
           <ScrollView
