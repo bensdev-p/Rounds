@@ -128,6 +128,27 @@
       ]
     },
     {
+      "id": "aortic-dissection.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A tall 28-year-old with Marfan syndrome collapses with sudden chest pain going through to his back. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic dissection",
+          "synonyms": [
+            "dissection",
+            "thoracic aortic dissection",
+            "dissecting aneurysm",
+            "type A dissection",
+            "type B dissection"
+          ]
+        }
+      ]
+    },
+    {
       "id": "aortic-dissection.second-order.1",
       "rung": "second_order",
       "kind": "list",
@@ -178,6 +199,52 @@
       "required_count": 3
     },
     {
+      "id": "aortic-dissection.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of aortic dissection.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic rupture",
+          "synonyms": [
+            "rupture"
+          ]
+        },
+        {
+          "answer": "cardiac tamponade",
+          "synonyms": [
+            "tamponade",
+            "pericardial tamponade"
+          ]
+        },
+        {
+          "answer": "acute aortic regurgitation",
+          "synonyms": [
+            "aortic regurgitation",
+            "AR"
+          ]
+        },
+        {
+          "answer": "stroke",
+          "synonyms": [
+            "CVA"
+          ]
+        },
+        {
+          "answer": "mesenteric or limb ischemia",
+          "synonyms": [
+            "mesenteric ischemia",
+            "limb ischemia",
+            "bowel ischemia"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
       "id": "aortic-dissection.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
@@ -193,6 +260,24 @@
             "arm blood pressure difference",
             "different blood pressures in each arm",
             "pulse deficit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What separates a Stanford type A dissection from type B?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ascending aorta",
+          "synonyms": [
+            "involves the ascending aorta",
+            "ascending"
           ]
         }
       ]
@@ -218,6 +303,25 @@
       ]
     },
     {
+      "id": "aortic-dissection.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Too unstable to go to CT. Which test confirms it at the bedside?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transesophageal echocardiogram",
+          "synonyms": [
+            "TEE",
+            "TOE",
+            "transesophageal echo"
+          ]
+        }
+      ]
+    },
+    {
       "id": "aortic-dissection.management.1",
       "rung": "management",
       "kind": "single",
@@ -238,6 +342,25 @@
       ]
     },
     {
+      "id": "aortic-dissection.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "CT shows a type A dissection. Definitive treatment?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "emergency surgery",
+          "synonyms": [
+            "surgery",
+            "surgical repair",
+            "cardiothoracic surgery"
+          ]
+        }
+      ]
+    },
+    {
       "id": "aortic-dissection.pearl.1",
       "rung": "pearl",
       "kind": "single",
@@ -252,6 +375,25 @@
             "prevent reflex tachycardia",
             "shear stress",
             "increases shear"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-dissection.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Uncomplicated type B dissection. How is it managed?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "medical management",
+          "synonyms": [
+            "medically",
+            "medical therapy",
+            "blood pressure control"
           ]
         }
       ]
