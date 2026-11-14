@@ -160,11 +160,11 @@ export function Badge({ id }: { id: BadgeId }) {
       style={[styles.badge, { backgroundColor: tone === 'pass' ? c.passSoft : c.signalSoft }]}
     >
       {id === 'script_mastered' ? (
-        <LadderIcon size={16} color={color} />
+        <LadderIcon size={15} color={color} />
       ) : (
-        <Check size={16} color={color} strokeWidth={2.5} />
+        <Check size={15} color={color} strokeWidth={2.5} />
       )}
-      <Txt variant="small" weight="bodySemi" style={{ color }} fontSize={14}>
+      <Txt variant="small" weight="bodySemi" style={{ color }}>
         {label}
       </Txt>
     </View>
@@ -176,8 +176,8 @@ export function RankChip({ title, onPress }: { title: string; onPress?: () => vo
   const { c } = useTheme();
   const body = (
     <>
-      <LadderIcon size={18} color={c.signal} />
-      <Txt variant="meta" weight="bodySemi" fontSize={15}>
+      <LadderIcon size={16} color={c.signal} />
+      <Txt variant="meta" weight="bodySemi">
         {title}
       </Txt>
     </>
@@ -199,7 +199,7 @@ export function RankChip({ title, onPress }: { title: string; onPress?: () => vo
       accessibilityLabel={`Rank: ${title}`}
       accessibilityHint="Opens your progress"
       onPress={onPress}
-      hitSlop={4}
+      hitSlop={6}
       style={({ pressed }) => [
         styles.rankChip,
         { backgroundColor: c.surface, opacity: pressed ? 0.8 : 1 },
@@ -225,11 +225,11 @@ export function AnswerPill({ text, got }: { text: string; got: boolean }) {
       ]}
     >
       {got ? (
-        <Check size={20} color={c.pass} strokeWidth={2.5} />
+        <Check size={18} color={c.pass} strokeWidth={2.5} />
       ) : (
-        <CircleMinus size={20} color={c.miss} />
+        <CircleMinus size={18} color={c.miss} />
       )}
-      <Txt variant="body" weight="bodyMedium" fontSize={17} style={styles.grow}>
+      <Txt variant="body" weight="bodyMedium" fontSize={15} style={styles.grow}>
         {text}
       </Txt>
     </View>
@@ -244,11 +244,14 @@ export function AnswerPill({ text, got }: { text: string; got: boolean }) {
 export function RankTrack({
   index,
   height = 160,
+  min: minProp,
   rise = false,
   labels = true,
 }: {
   index: number;
   height?: number;
+  /** Height of the first step. Defaults to 15% of `height`. */
+  min?: number;
   rise?: boolean;
   labels?: boolean;
 }) {
@@ -270,7 +273,7 @@ export function RankTrack({
     }).start();
   }, [rise, reduceMotion, grow]);
 
-  const min = height * 0.15;
+  const min = minProp ?? height * 0.15;
   return (
     <View accessible accessibilityLabel={`Rank ${index + 1} of 6: ${RANKS[index]?.title ?? ''}`}>
       <View style={[styles.track, { height }]}>
@@ -280,18 +283,32 @@ export function RankTrack({
           const animated = here && rise;
           return (
             <View key={r.title} style={styles.trackCol}>
-              <Animated.View
-                style={[
-                  styles.step,
-                  {
-                    height: animated
-                      ? grow.interpolate({ inputRange: [0, 1], outputRange: [min * 0.5, h] })
-                      : h,
-                    backgroundColor: i <= index ? c.signal : c.surface2,
-                  },
-                  here && { borderWidth: 2, borderColor: c.text },
-                ]}
-              />
+              {here ? (
+                // The current step: amber with a 2 pt outline 2 pt outside it, as drawn.
+                <Animated.View
+                  style={[
+                    styles.here,
+                    {
+                      height: Animated.add(
+                        animated
+                          ? grow.interpolate({ inputRange: [0, 1], outputRange: [min * 0.5, h] })
+                          : h,
+                        OUTLINE * 2,
+                      ),
+                      borderColor: c.text,
+                    },
+                  ]}
+                >
+                  <View style={[styles.hereFill, { backgroundColor: c.signal }]} />
+                </Animated.View>
+              ) : (
+                <View
+                  style={[
+                    styles.step,
+                    { height: h, backgroundColor: i < index ? c.signal : c.surface2 },
+                  ]}
+                />
+              )}
             </View>
           );
         })}
@@ -304,8 +321,8 @@ export function RankTrack({
               variant="small"
               tone={i === index ? 'text' : 'text3'}
               weight={i === index ? 'bodySemi' : 'bodyMedium'}
-              fontSize={11.5}
-              lineHeight={15}
+              fontSize={10.5}
+              lineHeight={13}
               style={styles.trackLabel}
             >
               {r.title}
@@ -316,6 +333,9 @@ export function RankTrack({
     </View>
   );
 }
+
+/** Outline width plus gap around the current rank step (2 pt each). */
+const OUTLINE = 4;
 
 const styles = StyleSheet.create({
   grid: { gap: 6 },
@@ -336,31 +356,38 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 6,
-    height: 30,
+    height: 28,
     paddingHorizontal: 11,
     borderRadius: 8,
   },
   rankChip: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
-    minHeight: 36,
-    paddingLeft: 12,
-    paddingRight: 14,
+    gap: 7,
+    height: 32,
+    paddingLeft: 10,
+    paddingRight: 12,
     borderRadius: radius.chip,
   },
   pill: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: space.md,
-    minHeight: 48,
-    paddingHorizontal: space.lg,
+    gap: 10,
+    paddingVertical: 12,
+    paddingHorizontal: 14,
     borderRadius: radius.row,
   },
   grow: { flex: 1 },
-  track: { flexDirection: 'row', alignItems: 'flex-end', gap: 6 },
+  track: { flexDirection: 'row', alignItems: 'flex-end', gap: 8 },
   trackCol: { flex: 1, justifyContent: 'flex-end' },
-  step: { borderRadius: 6 },
-  trackLabels: { flexDirection: 'row', gap: 6, marginTop: 10 },
+  step: { borderRadius: 4 },
+  here: {
+    margin: -OUTLINE,
+    padding: OUTLINE / 2,
+    borderWidth: OUTLINE / 2,
+    borderRadius: 4 + OUTLINE,
+  },
+  hereFill: { flex: 1, borderRadius: 4 },
+  trackLabels: { flexDirection: 'row', gap: 8, marginTop: 8 },
   trackLabel: { flex: 1 },
 });

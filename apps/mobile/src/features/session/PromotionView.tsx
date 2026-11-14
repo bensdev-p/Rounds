@@ -41,32 +41,37 @@ export function PromotionView({
       <View style={styles.close}>
         <IconButton icon={X} label="Back to rounds" onPress={onDone} />
       </View>
-      <View style={styles.track}>
-        <RankTrack index={rank.index} rise height={150} />
+      <View style={styles.body}>
+        <View style={styles.track}>
+          <RankTrack index={rank.index} rise height={78} min={18} />
+        </View>
+        <Txt variant="meta" tone="text2" style={styles.promoted}>
+          Promoted
+        </Txt>
+        <Txt variant="h1" fontSize={64} lineHeight={61} accessibilityRole="header" style={styles.title}>
+          {rank.title}
+        </Txt>
+        <Txt variant="body" tone="text2" lineHeight={22} style={styles.detail}>
+          {total} rungs climbed since {since}.{next}
+        </Txt>
+        <Txt variant="body" lineHeight={22} style={styles.quote}>
+          {`"${personaLine}"`}
+        </Txt>
+        <Txt variant="small" tone="text2">
+          The {personaName}
+        </Txt>
       </View>
-      <Txt variant="meta" tone="text2" fontSize={17} style={styles.promoted}>
-        Promoted
-      </Txt>
-      <Txt variant="h1" fontSize={64} lineHeight={66} accessibilityRole="header">
-        {rank.title}
-      </Txt>
-      <Txt variant="body" tone="text2" fontSize={18} lineHeight={26} style={styles.detail}>
-        {total} rungs climbed since {since}.{next}
-      </Txt>
-      <Txt variant="body" fontSize={18} lineHeight={26} style={styles.quote}>
-        {`"${personaLine}"`}
-      </Txt>
-      <Txt variant="meta" tone="text2" fontSize={15}>
-        The {personaName}
-      </Txt>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   close: { alignItems: 'flex-end' },
-  track: { marginTop: space.section * 3 },
-  promoted: { marginTop: space.section * 2 },
-  detail: { marginTop: space.lg },
-  quote: { marginTop: space.xxl, marginBottom: 4 },
+  // The mockup's side margin is 28; Screen gives 20.
+  body: { marginHorizontal: space.sm },
+  track: { marginTop: 150 },
+  promoted: { marginTop: 34 },
+  title: { marginTop: 6 },
+  detail: { marginTop: 18 },
+  quote: { marginTop: 22, marginBottom: 4 },
 });

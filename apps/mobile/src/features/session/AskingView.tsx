@@ -6,7 +6,7 @@
 import { useState } from 'react';
 import { Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
-import { radius, size, space, type, useTheme } from '@/theme';
+import { radius, space, type, useTheme } from '@/theme';
 import { Button } from '@/ui/controls';
 import { Ladder, LadderStrip, type RungState } from '@/ui/Ladder';
 import { PhiWarning } from '@/ui/PhiWarning';
@@ -120,10 +120,10 @@ export function AskingView({
       <View style={styles.ladder}>
         {keyboard ? <LadderStrip states={rungs} /> : <Ladder states={rungs} />}
       </View>
-      <Txt variant="meta" tone="text2" fontSize={16} style={styles.script}>
+      <Txt variant="meta" tone="text2" style={styles.script}>
         {scriptName}
         {inReview && (
-          <Txt variant="meta" tone="text3" fontSize={14}>
+          <Txt variant="meta" tone="text3">
             {'  ·  Not yet reviewed'}
           </Txt>
         )}
@@ -141,8 +141,8 @@ export function AskingView({
 }
 
 const styles = StyleSheet.create({
-  ladder: { marginTop: space.xxl },
-  script: { marginTop: space.section + 14 },
+  ladder: { marginTop: space.section },
+  script: { marginTop: 30 },
   question: { marginTop: space.sm },
   footer: { gap: space.md },
   input: {
@@ -156,6 +156,6 @@ const styles = StyleSheet.create({
     textAlignVertical: 'top',
   },
   buttons: { flexDirection: 'row', gap: space.md },
-  dontKnow: { flex: 1, minHeight: size.buttonHeight },
+  dontKnow: { flex: 1 },
   submit: { flex: 1.25 },
 });

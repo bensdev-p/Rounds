@@ -19,6 +19,8 @@ interface ButtonProps {
   accessibilityLabel?: string;
   accessibilityHint?: string | undefined;
   style?: StyleProp<ViewStyle>;
+  /** A secondary action on long press, also offered to screen readers under this label. */
+  longPress?: { label: string; onPress: () => void };
 }
 
 /** Button. Labels are plain verbs ("Go again"), icon on the left, never an arrow. */
@@ -32,6 +34,7 @@ export function Button({
   accessibilityLabel,
   accessibilityHint,
   style,
+  longPress,
 }: ButtonProps) {
   const { c } = useTheme();
   const fg: ColorToken = variant === 'primary' ? 'onSignal' : 'text';
@@ -43,6 +46,11 @@ export function Button({
       accessibilityState={{ disabled }}
       disabled={disabled}
       onPress={onPress}
+      onLongPress={longPress?.onPress}
+      accessibilityActions={longPress ? [{ name: 'longpress', label: longPress.label }] : undefined}
+      onAccessibilityAction={(e) => {
+        if (e.nativeEvent.actionName === 'longpress') longPress?.onPress();
+      }}
       style={({ pressed }) => [
         styles.button,
         { height: hero ? size.heroButtonHeight : size.buttonHeight },
@@ -84,13 +92,14 @@ export function IconButton({
       accessibilityRole="button"
       accessibilityLabel={label}
       onPress={onPress}
+      // 36 pt circle as drawn; the hit slop brings the touch target to 44 pt.
       hitSlop={4}
       style={({ pressed }) => [
         styles.iconButton,
         { backgroundColor: c.surface, opacity: pressed ? 0.8 : 1 },
       ]}
     >
-      <Icon size={20} color={c.text} />
+      <Icon size={18} color={c.text} />
     </Pressable>
   );
 }
@@ -101,11 +110,14 @@ export function Link({
   onPress,
   accessibilityHint,
   icon: Icon,
+  back = false,
 }: {
   label: string;
   onPress: () => void;
   accessibilityHint?: string | undefined;
   icon?: IconComponent;
+  /** The "‹ Previous screen" link at the top of pushed screens: 15 pt with a 20 pt icon. */
+  back?: boolean;
 }) {
   const { c } = useTheme();
   return (
@@ -115,10 +127,15 @@ export function Link({
       accessibilityHint={accessibilityHint}
       onPress={onPress}
       hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
-      style={({ pressed }) => [styles.link, { opacity: pressed ? 0.7 : 1 }]}
+      style={({ pressed }) => [styles.link, back && styles.backLink, { opacity: pressed ? 0.7 : 1 }]}
     >
-      {Icon && <Icon size={18} color={c.ceil} />}
-      <Txt variant="meta" weight="bodyMedium" tone="ceil">
+      {Icon && <Icon size={back ? 20 : 18} color={c.ceil} />}
+      <Txt
+        variant="meta"
+        weight={back ? 'body' : 'bodyMedium'}
+        tone="ceil"
+        {...(back ? { fontSize: 15 } : null)}
+      >
         {label}
       </Txt>
     </Pressable>
@@ -131,19 +148,22 @@ export function Segmented<T extends string>({
   value,
   onChange,
   label,
+  onPanel = false,
 }: {
   options: readonly { value: T; label: string }[];
   value: T;
   onChange: (value: T) => void;
   /** What the group chooses, for screen readers. */
   label: string;
+  /** Inside a surface panel (Home hero): the track uses bg instead of surface. */
+  onPanel?: boolean;
 }) {
   const { c } = useTheme();
   return (
     <View
       accessibilityRole="radiogroup"
       accessibilityLabel={label}
-      style={[styles.segmented, { backgroundColor: c.bg }]}
+      style={[styles.segmented, { backgroundColor: onPanel ? c.bg : c.surface }]}
     >
       {options.map((o) => {
         const on = o.value === value;
@@ -154,9 +174,10 @@ export function Segmented<T extends string>({
             accessibilityLabel={o.label}
             accessibilityState={{ checked: on }}
             onPress={() => onChange(o.value)}
+            hitSlop={{ top: 4, bottom: 4 }}
             style={[styles.segment, on && { backgroundColor: c.surface2 }]}
           >
-            <Txt variant="meta" weight="bodyMedium" tone={on ? 'text' : 'text2'} fontSize={15}>
+            <Txt variant="meta" weight="bodyMedium" tone={on ? 'text' : 'text2'}>
               {o.label}
             </Txt>
           </Pressable>
@@ -180,7 +201,7 @@ export function Chip({
 }) {
   const { c } = useTheme();
   const content = (
-    <Txt variant="meta" weight="bodyMedium" fontSize={15}>
+    <Txt variant="small" weight="bodyMedium">
       {label}
     </Txt>
   );
@@ -192,6 +213,8 @@ export function Chip({
       accessibilityLabel={label}
       accessibilityHint={accessibilityHint}
       onPress={onPress}
+      // 30 pt chip, 44 pt touch target.
+      hitSlop={{ top: 7, bottom: 7 }}
       style={({ pressed }) => [style, { opacity: pressed ? 0.8 : 1 }]}
     >
       {content}
@@ -230,7 +253,7 @@ export function Row({
         <Txt variant="body" weight="bodyMedium" fontSize={17} lineHeight={23}>
           {title}
         </Txt>
-        {subtitle ? <Txt variant="meta" tone="text2">{subtitle}</Txt> : null}
+        {subtitle ? <Txt variant="small" tone="text2">{subtitle}</Txt> : null}
       </View>
       {trailing}
     </>
@@ -285,24 +308,26 @@ const styles = StyleSheet.create({
   },
   label: { flexShrink: 1 },
   iconButton: {
-    width: size.minTouch,
-    height: size.minTouch,
+    width: 36,
+    height: 36,
     borderRadius: radius.chip,
     alignItems: 'center',
     justifyContent: 'center',
   },
   link: { flexDirection: 'row', alignItems: 'center', gap: 4, minHeight: 24 },
+  backLink: { gap: 6 },
   segmented: { flexDirection: 'row', borderRadius: radius.row, padding: 4 },
   segment: {
     flex: 1,
-    minHeight: size.minTouch,
+    // 37 pt as drawn; the hit slop brings the touch target to 44 pt.
+    minHeight: 37,
     borderRadius: 10,
     alignItems: 'center',
     justifyContent: 'center',
   },
   chip: {
-    minHeight: 36,
-    paddingHorizontal: 14,
+    height: 30,
+    paddingHorizontal: 12,
     borderRadius: radius.chip,
     justifyContent: 'center',
   },
