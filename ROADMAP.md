@@ -18,7 +18,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 ---
 
-## Where things stand (13 Nov 2026)
+## Where things stand (14 Nov 2026)
 
 **Built:** the text pimp ladder; grading (a local matcher with Claude as a fallback, plus an eval set); personas; progression (rounds, shifts, rank, mastery); Home, the script picker, live session (text), list feedback, the result screen with the miss card, the clean run, Promotion, the illness script, the script collection and Progress; the "This is wrong" flag and its review queue; the PHI guard; the content pipeline; RLS with pgTAP tests. All 30 IM scripts are drafted and `in_review`, shown locally as "Not yet reviewed".
 
@@ -26,7 +26,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M1.2 (mockup check):** every built screen matches its mockup in dark and light: type back to the DESIGN.md scale, spacing from the mockup CSS, persona order, "Change rotation" and long-press on Pimp me, the list feedback line, and the test fixtures hidden from students' screens.
 
-**M1.3 (tab shell and Profile):** a tab bar with Pimp, Log, Review and Profile, hidden on session screens and the illness script. Progress is the Profile tab, matching `profile.png` (dark and light), with a Settings entry. Settings is a placeholder holding the daily goal. Log and Review show honest empty states. Waiting on the developer's phone check.
+**M1.3 (tab shell and Profile):** a tab bar with Pimp, Log, Review and Profile, hidden on session screens and the illness script. Progress is the Profile tab, matching `profile.png` (dark and light), with a Settings entry. Settings is a placeholder holding the daily goal. Log and Review show honest empty states. Tried on the phone. **Stage 1 is complete.**
 
 **Gaps:** Log, Review, onboarding and the real Settings.
 
