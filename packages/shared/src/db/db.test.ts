@@ -5,6 +5,7 @@ import {
   TEST_QUESTIONS,
   TEST_SCRIPTS,
 } from '../fixtures/index.ts';
+import type { IllnessScript } from '../schemas/illnessScript.ts';
 import type { Question } from '../schemas/question.ts';
 import type { Json } from './database.types.ts';
 import {
@@ -112,6 +113,21 @@ describe('seed', () => {
     expect(() => buildSeedSql(TEST_SCRIPTS, [invented], 'x')).toThrow(SeedError);
     expect(validateContent([TEST_SCRIPTS[0]!], [])).toEqual([
       'zorblax-syndrome: confused_with links to unknown script quellan-fever',
+    ]);
+  });
+
+  it('needs the same comparison labels on both sides of a pair', () => {
+    const [zorblax, quellan] = TEST_SCRIPTS as [IllnessScript, IllnessScript];
+    const link = quellan.confused_with[0]!;
+    const relabelled: IllnessScript = {
+      ...quellan,
+      confused_with: [
+        { ...link, compare: link.compare!.map((r, i) => (i === 0 ? { ...r, label: 'Nail' } : r)) },
+      ],
+    };
+    expect(validateContent([zorblax, relabelled], [])).toEqual([
+      'zorblax-syndrome: compare rows with quellan-fever need the same labels on quellan-fever\'s link back (Nails | Blorp vs Nail | Blorp)',
+      'quellan-fever: compare rows with zorblax-syndrome need the same labels on zorblax-syndrome\'s link back (Nail | Blorp vs Nails | Blorp)',
     ]);
   });
 

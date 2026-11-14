@@ -84,11 +84,45 @@
     "confused_with": [
       {
         "script_id": "aortic-dissection",
-        "how_to_tell_apart": "Aortic dissection gives sudden tearing pain radiating to the back, a blood pressure difference between arms and a widened mediastinum; exclude it before giving anticoagulants."
+        "how_to_tell_apart": "Aortic dissection gives sudden tearing pain radiating to the back, a blood pressure difference between arms and a widened mediastinum; exclude it before giving anticoagulants.",
+        "compare": [
+          {
+            "label": "Pain",
+            "text": "Pressure, to arm or jaw",
+            "source_field": "key_findings.history[0]"
+          },
+          {
+            "label": "Exam",
+            "text": "Often normal",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "First drug",
+            "text": "Aspirin",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "pulmonary-embolism",
-        "how_to_tell_apart": "PE causes pleuritic pain, hypoxemia and tachycardia, usually without ST elevation."
+        "how_to_tell_apart": "PE causes pleuritic pain, hypoxemia and tachycardia, usually without ST elevation.",
+        "compare": [
+          {
+            "label": "Pain",
+            "text": "Pressure, to arm or jaw",
+            "source_field": "key_findings.history[0]"
+          },
+          {
+            "label": "First test",
+            "text": "ECG within 10 minutes",
+            "source_field": "diagnosis.confirmatory_tests[0]"
+          },
+          {
+            "label": "First drug",
+            "text": "Aspirin",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

@@ -29,6 +29,7 @@ export type Database = {
           grader: Database['public']['Enums']['grader'];
           grader_version: string | null;
           id: string;
+          matched: string[];
           miss_tag: string | null;
           passed: boolean;
           question_id: string;
@@ -46,6 +47,7 @@ export type Database = {
           grader?: Database['public']['Enums']['grader'];
           grader_version?: string | null;
           id?: string;
+          matched?: string[];
           miss_tag?: string | null;
           passed: boolean;
           question_id: string;
@@ -62,6 +64,7 @@ export type Database = {
           grader?: Database['public']['Enums']['grader'];
           grader_version?: string | null;
           id?: string;
+          matched?: string[];
           miss_tag?: string | null;
           passed?: boolean;
           question_id?: string;
@@ -124,6 +127,8 @@ export type Database = {
         Row: {
           ended_at: string | null;
           id: string;
+          kind: Database['public']['Enums']['session_kind'];
+          partner_script_id: string | null;
           persona: Database['public']['Enums']['persona'];
           score: number;
           script_id: string;
@@ -136,6 +141,8 @@ export type Database = {
         Insert: {
           ended_at?: string | null;
           id?: string;
+          kind?: Database['public']['Enums']['session_kind'];
+          partner_script_id?: string | null;
           persona?: Database['public']['Enums']['persona'];
           score?: number;
           script_id: string;
@@ -147,6 +154,8 @@ export type Database = {
         Update: {
           ended_at?: string | null;
           id?: string;
+          kind?: Database['public']['Enums']['session_kind'];
+          partner_script_id?: string | null;
           persona?: Database['public']['Enums']['persona'];
           score?: number;
           script_id?: string;
@@ -156,6 +165,13 @@ export type Database = {
           user_id?: string;
         };
         Relationships: [
+          {
+            foreignKeyName: 'ladder_sessions_partner_script_id_fkey';
+            columns: ['partner_script_id'];
+            isOneToOne: false;
+            referencedRelation: 'illness_scripts';
+            referencedColumns: ['id'];
+          },
           {
             foreignKeyName: 'ladder_sessions_script_id_fkey';
             columns: ['script_id'];
@@ -354,6 +370,7 @@ export type Database = {
       ladder_status: 'in_progress' | 'missed' | 'completed';
       persona: 'teacher' | 'internist' | 'surgeon';
       script_status: 'draft' | 'in_review' | 'approved' | 'retired';
+      session_kind: 'ladder' | 'drill';
     };
     CompositeTypes: {
       [_ in never]: never;
@@ -472,6 +489,7 @@ export const Constants = {
       ladder_status: ['in_progress', 'missed', 'completed'],
       persona: ['teacher', 'internist', 'surgeon'],
       script_status: ['draft', 'in_review', 'approved', 'retired'],
+      session_kind: ['ladder', 'drill'],
     },
   },
 } as const;

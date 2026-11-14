@@ -76,7 +76,24 @@
     "confused_with": [
       {
         "script_id": "septic-shock",
-        "how_to_tell_apart": "Septic shock also causes fluid-resistant hypotension with fever; adrenal crisis adds hyponatremia, hyperkalemia and hypoglycemia, and responds to hydrocortisone."
+        "how_to_tell_apart": "Septic shock also causes fluid-resistant hypotension with fever; adrenal crisis adds hyponatremia, hyperkalemia and hypoglycemia, and responds to hydrocortisone.",
+        "compare": [
+          {
+            "label": "Key lab",
+            "text": "Low morning cortisol",
+            "source_field": "key_findings.labs[2]"
+          },
+          {
+            "label": "Clue",
+            "text": "Hyperpigmentation",
+            "source_field": "key_findings.exam[1]"
+          },
+          {
+            "label": "Treat",
+            "text": "IV hydrocortisone",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

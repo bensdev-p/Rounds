@@ -77,15 +77,66 @@
     "confused_with": [
       {
         "script_id": "community-acquired-pneumonia",
-        "how_to_tell_apart": "Pneumonia adds fever and a new consolidation on chest X-ray; a COPD exacerbation has no new infiltrate."
+        "how_to_tell_apart": "Pneumonia adds fever and a new consolidation on chest X-ray; a COPD exacerbation has no new infiltrate.",
+        "compare": [
+          {
+            "label": "Exam",
+            "text": "Wheeze, long expiration",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Chest X-ray",
+            "text": "To exclude pneumonia",
+            "source_field": "key_findings.imaging[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Albuterol with ipratropium",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "heart-failure-exacerbation",
-        "how_to_tell_apart": "Heart failure gives a raised JVP, leg edema, a high BNP and pulmonary edema on chest X-ray."
+        "how_to_tell_apart": "Heart failure gives a raised JVP, leg edema, a high BNP and pulmonary edema on chest X-ray.",
+        "compare": [
+          {
+            "label": "Exam",
+            "text": "Wheeze, long expiration",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Key test",
+            "text": "Blood gas: high CO2",
+            "source_field": "key_findings.labs[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "Albuterol with ipratropium",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "asthma-exacerbation",
-        "how_to_tell_apart": "Asthma usually starts younger, often without a smoking history, and its airflow obstruction is largely reversible between attacks."
+        "how_to_tell_apart": "Asthma usually starts younger, often without a smoking history, and its airflow obstruction is largely reversible between attacks.",
+        "compare": [
+          {
+            "label": "Who",
+            "text": "Long smoking history",
+            "source_field": "epidemiology.who"
+          },
+          {
+            "label": "Clue",
+            "text": "More purulent sputum",
+            "source_field": "key_findings.history[2]"
+          },
+          {
+            "label": "Oxygen target",
+            "text": "88 to 92%",
+            "source_field": "management.first_line[3]"
+          }
+        ]
       }
     ],
     "pearls": [

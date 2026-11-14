@@ -80,7 +80,24 @@
     "confused_with": [
       {
         "script_id": "acute-coronary-syndrome",
-        "how_to_tell_apart": "ACS gives pressure-like pain with ECG changes and a troponin rise; dissection gives tearing pain to the back, unequal arm pressures and a widened mediastinum, and anticoagulation can be fatal."
+        "how_to_tell_apart": "ACS gives pressure-like pain with ECG changes and a troponin rise; dissection gives tearing pain to the back, unequal arm pressures and a widened mediastinum, and anticoagulation can be fatal.",
+        "compare": [
+          {
+            "label": "Pain",
+            "text": "Tearing, to the back",
+            "source_field": "key_findings.history[0]"
+          },
+          {
+            "label": "Exam",
+            "text": "Arm BP gap over 20 mmHg",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "First drug",
+            "text": "IV beta-blocker",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

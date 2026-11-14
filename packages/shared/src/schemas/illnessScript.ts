@@ -37,9 +37,25 @@ export const SourceSchema = z.strictObject({
   url: z.url().optional(),
 });
 
+/**
+ * One row of the mix-up comparison (Review → "You keep mixing these up"): a
+ * short label, this script's side in a few words, and the field it comes from
+ * (domain rule 1). The other script's link back carries the same labels in the
+ * same order, so the two columns line up.
+ */
+export const CompareRowSchema = z.strictObject({
+  label: Text.max(16),
+  text: Text.max(36),
+  source_field: FieldPathSchema,
+});
+export type CompareRow = z.infer<typeof CompareRowSchema>;
+
+export const MAX_COMPARE_ROWS = 3;
+
 export const ConfusedWithSchema = z.strictObject({
   script_id: ScriptIdSchema,
   how_to_tell_apart: Text,
+  compare: z.array(CompareRowSchema).min(1).max(MAX_COMPARE_ROWS).optional(),
 });
 
 /** The clinical content of a script: stored as `content jsonb` in Postgres. */
@@ -122,6 +138,15 @@ export const IllnessScriptSchema = IllnessScriptMetaSchema.extend(
       });
     }
     seen.add(link.script_id);
+    link.compare?.forEach((row, r) => {
+      if (resolveFieldPath(script, row.source_field) === undefined) {
+        ctx.addIssue({
+          code: 'custom',
+          path: ['confused_with', i, 'compare', r, 'source_field'],
+          message: `Field path "${row.source_field}" does not exist in this script`,
+        });
+      }
+    });
   });
 
   for (const level of DIFFICULTY_LEVELS) {

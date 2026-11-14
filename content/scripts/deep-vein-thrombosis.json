@@ -73,11 +73,45 @@
     "confused_with": [
       {
         "script_id": "cellulitis",
-        "how_to_tell_apart": "Cellulitis gives warm, red, tender skin with a spreading edge and often fever; DVT gives swelling and calf pain, and ultrasound shows a noncompressible vein."
+        "how_to_tell_apart": "Cellulitis gives warm, red, tender skin with a spreading edge and often fever; DVT gives swelling and calf pain, and ultrasound shows a noncompressible vein.",
+        "compare": [
+          {
+            "label": "Leg",
+            "text": "Pitting edema",
+            "source_field": "key_findings.exam[1]"
+          },
+          {
+            "label": "Test",
+            "text": "Compression ultrasound",
+            "source_field": "diagnosis.confirmatory_tests[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "DOAC for 3+ months",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       },
       {
         "script_id": "pulmonary-embolism",
-        "how_to_tell_apart": "PE adds dyspnea, pleuritic pain and hypoxemia; they are the same disease, so look for both."
+        "how_to_tell_apart": "PE adds dyspnea, pleuritic pain and hypoxemia; they are the same disease, so look for both.",
+        "compare": [
+          {
+            "label": "Symptom",
+            "text": "One swollen leg",
+            "source_field": "key_findings.history[0]"
+          },
+          {
+            "label": "Test",
+            "text": "Compression ultrasound",
+            "source_field": "diagnosis.confirmatory_tests[0]"
+          },
+          {
+            "label": "Treat",
+            "text": "DOAC for 3+ months",
+            "source_field": "management.first_line[0]"
+          }
+        ]
       }
     ],
     "pearls": [

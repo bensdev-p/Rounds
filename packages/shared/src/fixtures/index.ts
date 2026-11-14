@@ -37,6 +37,10 @@ const zorblax = IllnessScriptSchema.parse({
     {
       script_id: 'quellan-fever',
       how_to_tell_apart: 'Quellan fever causes green nail beds and a normal blorp.',
+      compare: [
+        { label: 'Nails', text: 'Blue nail beds', source_field: 'key_findings.exam[0]' },
+        { label: 'Blorp', text: 'High', source_field: 'key_findings.labs[0]' },
+      ],
     },
   ],
   pearls: ['Zorblax syndrome never causes fever.'],
@@ -74,6 +78,10 @@ const quellan = IllnessScriptSchema.parse({
     {
       script_id: 'zorblax-syndrome',
       how_to_tell_apart: 'Zorblax syndrome causes blue nail beds, high blorp and no fever.',
+      compare: [
+        { label: 'Nails', text: 'Green nail beds', source_field: 'key_findings.exam[0]' },
+        { label: 'Blorp', text: 'Normal', source_field: 'key_findings.labs[0]' },
+      ],
     },
   ],
   pearls: [],

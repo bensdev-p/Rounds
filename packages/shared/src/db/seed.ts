@@ -36,6 +36,17 @@ export function validateContent(
       if (!linkTargets.has(link.script_id)) {
         problems.push(`${script.id}: confused_with links to unknown script ${link.script_id}`);
       }
+      // Comparison rows line up only if the link back has the same labels.
+      const other = byId.get(link.script_id);
+      if (!link.compare || !other) continue;
+      const back = other.confused_with.find((l) => l.script_id === script.id);
+      const mine = link.compare.map((r) => r.label).join(' | ');
+      const theirs = back?.compare?.map((r) => r.label).join(' | ');
+      if (mine !== theirs) {
+        problems.push(
+          `${script.id}: compare rows with ${other.id} need the same labels on ${other.id}'s link back (${mine} vs ${theirs ?? 'none'})`,
+        );
+      }
     }
   }
 
