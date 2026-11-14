@@ -5,40 +5,10 @@
  * Local only: reads the local Supabase with its service key from
  * `supabase status`, which never leaves this machine or ships in the app.
  */
-import { execSync } from 'node:child_process';
-import { fileURLToPath } from 'node:url';
-import { createClient } from '@supabase/supabase-js';
-import type { Database } from '../src/db/database.types.ts';
 import { FLAG_REASON_LABELS } from '../src/schemas/flag.ts';
+import { localAdminClient } from './localDb.ts';
 
-const repo = fileURLToPath(new URL('../../../', import.meta.url));
-
-function localSupabase(): { url: string; key: string } {
-  let out: string;
-  try {
-    out = execSync('pnpm exec supabase status -o env', { cwd: repo, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
-  } catch {
-    console.error('Local Supabase is not running. Start it with `pnpm db:start`.');
-    process.exit(1);
-  }
-  const env = Object.fromEntries(
-    out
-      .split(/\r?\n/)
-      .map((line) => /^([A-Z_]+)="?(.*?)"?$/.exec(line))
-      .filter((m): m is RegExpExecArray => m !== null)
-      .map((m) => [m[1], m[2]]),
-  );
-  const url = env.API_URL;
-  const key = env.SERVICE_ROLE_KEY ?? env.SECRET_KEY;
-  if (!url || !key) {
-    console.error('Could not read the local Supabase URL and service key from `supabase status`.');
-    process.exit(1);
-  }
-  return { url, key };
-}
-
-const { url, key } = localSupabase();
-const db = createClient<Database>(url, key, { auth: { persistSession: false } });
+const db = localAdminClient();
 
 const [flags, questions, scripts] = await Promise.all([
   db.from('question_flags').select('*').order('created_at', { ascending: false }),

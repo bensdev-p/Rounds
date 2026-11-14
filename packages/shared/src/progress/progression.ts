@@ -382,3 +382,70 @@ export function collectionTiles(
     }))
     .sort((a, b) => COLLECTION_ORDER[a.status] - COLLECTION_ORDER[b.status]);
 }
+
+// ─── Usage (pnpm stats) ─────────────────────────────────────────────────────
+
+/** Stage 1 succeeds when the tester uses Rounds this many days in a row (PRODUCT.md). */
+export const STAGE1_DAYS_IN_A_ROW = 5;
+
+export interface UsageSummary {
+  sessions: number;
+  activeDays: number;
+  firstDay: string | null;
+  lastDay: string | null;
+  /** Consecutive days with at least one session, ending today or yesterday. */
+  currentRun: number;
+  longestRun: number;
+  meanRung: number;
+  bestRung: number;
+  /** Most recent days first: [day, sessions, best rung that day]. */
+  recent: { day: string; sessions: number; best: number }[];
+}
+
+/** How a student has used Rounds: any session counts as using it that day. */
+export function usageSummary(
+  sessions: readonly SessionRecord[],
+  now: Date,
+  recentDays = 14,
+): UsageSummary {
+  const perDay = new Map<string, { sessions: number; best: number }>();
+  for (const s of sessions) {
+    const d = perDay.get(endedDay(s)) ?? { sessions: 0, best: 0 };
+    perDay.set(endedDay(s), { sessions: d.sessions + 1, best: Math.max(d.best, s.score) });
+  }
+  const days = [...perDay.keys()].sort();
+
+  let longestRun = 0;
+  let run = 0;
+  let previous: string | null = null;
+  for (const day of days) {
+    run = previous !== null && addDays(previous, 1) === day ? run + 1 : 1;
+    longestRun = Math.max(longestRun, run);
+    previous = day;
+  }
+
+  const today = dayKey(now);
+  let currentRun = 0;
+  let cursor = perDay.has(today) ? today : addDays(today, -1);
+  while (perDay.has(cursor)) {
+    currentRun += 1;
+    cursor = addDays(cursor, -1);
+  }
+
+  const recent = Array.from({ length: recentDays }, (_, i) => {
+    const day = addDays(today, -i);
+    return { day, ...(perDay.get(day) ?? { sessions: 0, best: 0 }) };
+  });
+
+  return {
+    sessions: sessions.length,
+    activeDays: days.length,
+    firstDay: days[0] ?? null,
+    lastDay: days.at(-1) ?? null,
+    currentRun,
+    longestRun,
+    meanRung: sessions.length ? totalRungs(sessions) / sessions.length : 0,
+    bestRung: sessions.reduce((m, s) => Math.max(m, s.score), 0),
+    recent,
+  };
+}

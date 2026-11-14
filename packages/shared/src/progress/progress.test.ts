@@ -14,6 +14,7 @@ import {
   roundsToday,
   shiftStreak,
   summarizeResult,
+  usageSummary,
   type SessionRecord,
 } from './progression.ts';
 
@@ -371,5 +372,25 @@ describe('collectionTiles', () => {
       ['new', 'not_tried', 0],
       ['mastered', 'mastered', 6],
     ]);
+  });
+});
+
+describe('usageSummary', () => {
+  it('counts active days and runs of consecutive days', () => {
+    const sessions = [session(5, 2), session(6, 4), session(6, 6), session(7, 1), session(11), session(12), session(13)];
+    const u = usageSummary(sessions, nov(13, 20));
+    expect(u).toMatchObject({ sessions: 7, activeDays: 6, currentRun: 3, longestRun: 3, bestRung: 6 });
+    expect(u.firstDay).toBe('2026-11-05');
+    expect(u.recent[0]).toEqual({ day: '2026-11-13', sessions: 1, best: 3 });
+    expect(u.recent[7]).toEqual({ day: '2026-11-06', sessions: 2, best: 6 });
+  });
+
+  it("keeps the run alive until today's over", () => {
+    expect(usageSummary([session(11), session(12)], nov(13, 9)).currentRun).toBe(2);
+    expect(usageSummary([session(10), session(11)], nov(13, 9)).currentRun).toBe(0);
+  });
+
+  it('handles no sessions', () => {
+    expect(usageSummary([], nov(13))).toMatchObject({ sessions: 0, activeDays: 0, meanRung: 0, firstDay: null });
   });
 });
