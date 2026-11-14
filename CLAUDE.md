@@ -33,6 +33,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm content:check`: validate every script in `content/scripts` (drafts included; also part of `pnpm test`)
 - `pnpm content:review`: write review sheets for unapproved scripts to `content/review/` (gitignored)
 - `pnpm content:approve <id> --by "Name, role"`: record a medical reviewer's approval. Only on the reviewer's explicit sign-off; never run it yourself. See `content/README.md`
+- `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
 - `pnpm functions:serve:fake`: the same, with a fake model that spends nothing

@@ -3,6 +3,7 @@
  * rung reached is the only score. Progress shows here, never mid-session.
  */
 import type { MissCard, ResultSummary } from '@rounds/shared';
+import { Flag } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { plural } from '@/lib/copy';
@@ -59,6 +60,7 @@ export function ResultView({
   mastery,
   saveFailed,
   onReviewScript,
+  onReportProblem,
   onDone,
   onPrimary,
   primaryLabel,
@@ -71,6 +73,8 @@ export function ResultView({
   mastery: { rotation: string; mastered: number; total: number } | null;
   saveFailed: boolean;
   onReviewScript: () => void;
+  /** Opens the "This is wrong" sheet. */
+  onReportProblem: () => void;
   onDone: () => void;
   onPrimary: () => void;
   primaryLabel: string;
@@ -92,10 +96,7 @@ export function ResultView({
       <SessionHeader title={scriptName} onClose={onDone} closeLabel="Done" />
 
       <View style={styles.top}>
-        <Ladder
-          states={rungStates(summary.score, clean ? 'none' : 'miss')}
-          width={170}
-        />
+        <Ladder states={rungStates(summary.score, clean ? 'none' : 'miss')} width={170} />
         <View
           accessible
           accessibilityLabel={`${clean ? 'Top of the ladder' : `${plural(summary.score, 'rung')} climbed`}. ${bestLine(summary)}`}
@@ -135,7 +136,8 @@ export function ResultView({
           <Txt variant="body" fontSize={17} lineHeight={24} style={styles.cardText}>
             {missCard.quote ? (
               <>
-                You said <Txt tone="miss" fontSize={17} lineHeight={24}>{`"${missCard.quote}."`}</Txt>{' '}
+                You said{' '}
+                <Txt tone="miss" fontSize={17} lineHeight={24}>{`"${missCard.quote}."`}</Txt>{' '}
               </>
             ) : (
               "You didn't answer. "
@@ -145,6 +147,15 @@ export function ResultView({
           <Link label="Review the script" onPress={onReviewScript} />
         </Panel>
       )}
+
+      <View style={styles.flag}>
+        <Link
+          label="Something wrong with a question?"
+          icon={Flag}
+          accessibilityHint="Report a question or answer that looks wrong"
+          onPress={onReportProblem}
+        />
+      </View>
 
       <Panel style={styles.progress}>
         <View style={styles.half}>
@@ -200,6 +211,7 @@ const styles = StyleSheet.create({
   line: { marginTop: space.lg },
   card: { marginTop: space.xxl, gap: space.sm },
   cardText: { marginBottom: space.xs },
+  flag: { flexDirection: 'row', marginTop: space.lg },
   progress: { marginTop: space.lg, flexDirection: 'row', gap: space.xxl },
   half: { flex: 1, gap: 10 },
   mastery: { marginTop: space.lg, flexDirection: 'row', alignItems: 'center', gap: space.lg },

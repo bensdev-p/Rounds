@@ -41,6 +41,7 @@ import {
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useRef, useState } from 'react';
 import { ErrorView, Loading } from '@/components/StatusView';
+import { FlagSheet, type FlagTarget } from '@/features/flag/FlagSheet';
 import { AskingView } from '@/features/session/AskingView';
 import { ListFeedbackView } from '@/features/session/ListFeedbackView';
 import { PromotionView } from '@/features/session/PromotionView';
@@ -132,6 +133,7 @@ function Session({
   const [grading, setGrading] = useState(false);
   const [last, setLast] = useState<LastAnswer | null>(null);
   const [summary, setSummary] = useState<ResultSummary | null>(null);
+  const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
   // Finished sessions so far, including runs in this screen ("Go again").
   const [history, setHistory] = useState<SessionRecord[]>(sessionsBefore);
 
@@ -270,6 +272,19 @@ function Session({
     router.replace({ pathname: '/session/[scriptId]', params: { scriptId, persona } });
   }
 
+  /** "This is wrong": choose among the questions asked in this run, the last one first. */
+  function reportProblem() {
+    const asked = state.attempts
+      .map((a) => questions.find((q) => q.id === a.question_id))
+      .filter((q): q is Question => q !== undefined);
+    setFlagTarget({
+      script: { id: script.id, version: script.version, name: script.name },
+      questions: asked.map((q) => ({ id: q.id, prompt: q.prompt })),
+      initialQuestionId: asked.at(-1)?.id,
+      reasons: ['marked_wrong', 'unclear', 'script_error', 'other'],
+    });
+  }
+
   function reviewScript() {
     router.push({ pathname: '/script/[scriptId]', params: { scriptId: script.id, persona } });
   }
@@ -308,34 +323,38 @@ function Session({
     const inRotation = scripts.filter((s) => s.script.rotation.includes(rotation));
     const endedAt = new Date(history.at(-1)?.ended_at ?? '');
     return (
-      <ResultView
-        scriptName={script.name}
-        summary={summary}
-        missCard={missCard}
-        personaLine={
-          summary.completed
-            ? personaLine(persona, 'top', summary.rankAfter.totalRungs)
-            : null
-        }
-        mastery={
-          summary.completed
-            ? {
-                rotation: ROTATION_NAMES[rotation],
-                mastered: inRotation.filter(
-                  (s) => masteryFor(s.script.id, history, endedAt) === 'mastered',
-                ).length,
-                total: inRotation.length,
-              }
-            : null
-        }
-        saveFailed={recorder.save.status === 'error'}
-        onReviewScript={reviewScript}
-        onDone={summary.promoted ? () => setPhase('promotion') : goHome}
-        onPrimary={
-          summary.promoted ? () => setPhase('promotion') : summary.completed ? nextTopic : goAgain
-        }
-        primaryLabel={summary.promoted ? 'Continue' : summary.completed ? 'Next topic' : 'Go again'}
-      />
+      <>
+        <ResultView
+          scriptName={script.name}
+          summary={summary}
+          missCard={missCard}
+          personaLine={
+            summary.completed ? personaLine(persona, 'top', summary.rankAfter.totalRungs) : null
+          }
+          mastery={
+            summary.completed
+              ? {
+                  rotation: ROTATION_NAMES[rotation],
+                  mastered: inRotation.filter(
+                    (s) => masteryFor(s.script.id, history, endedAt) === 'mastered',
+                  ).length,
+                  total: inRotation.length,
+                }
+              : null
+          }
+          saveFailed={recorder.save.status === 'error'}
+          onReviewScript={reviewScript}
+          onReportProblem={reportProblem}
+          onDone={summary.promoted ? () => setPhase('promotion') : goHome}
+          onPrimary={
+            summary.promoted ? () => setPhase('promotion') : summary.completed ? nextTopic : goAgain
+          }
+          primaryLabel={
+            summary.promoted ? 'Continue' : summary.completed ? 'Next topic' : 'Go again'
+          }
+        />
+        <FlagSheet target={flagTarget} onClose={() => setFlagTarget(null)} />
+      </>
     );
   }
 

@@ -2,6 +2,7 @@ export * from './schemas/fieldPath.ts';
 export * from './schemas/illnessScript.ts';
 export * from './schemas/question.ts';
 export * from './schemas/attempt.ts';
+export * from './schemas/flag.ts';
 export * from './grading/listCredit.ts';
 export * from './grading/localGrader.ts';
 export * from './grading/llmGrade.ts';

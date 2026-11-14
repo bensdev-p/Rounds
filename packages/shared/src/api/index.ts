@@ -19,6 +19,7 @@ import {
 } from '../schemas/attempt.ts';
 import { ScriptIdSchema, type IllnessScript } from '../schemas/illnessScript.ts';
 import type { SessionRecord } from '../progress/progression.ts';
+import { NewFlagSchema, type NewFlag } from '../schemas/flag.ts';
 import { traceQuestionToScript, type Question } from '../schemas/question.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
@@ -184,6 +185,19 @@ export async function finishSession(
     'Finishing session',
   );
   return progress.best_rung;
+}
+
+/**
+ * Records a "This is wrong" flag. Validated first, including the
+ * patient-detail check on the note, so a bad note never leaves the device.
+ */
+export async function flagContent(client: RoundsClient, flag: NewFlag): Promise<void> {
+  const parsed = NewFlagSchema.safeParse(flag);
+  if (!parsed.success) {
+    throw new RoundsApiError(`Flag not sent: ${parsed.error.issues[0]?.message ?? 'invalid'}`);
+  }
+  const { error } = await client.from('question_flags').insert(parsed.data);
+  if (error) throw new RoundsApiError(`Sending flag: ${error.message}`);
 }
 
 const FinishedSessionSchema = z.strictObject({

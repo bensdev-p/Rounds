@@ -10,6 +10,7 @@ import { gradeLocally } from '../grading/localGrader.ts';
 import { currentQuestion, startLadder, submitAnswer, type LadderState } from '../ladder/engine.ts';
 import {
   finishSession,
+  flagContent,
   getLadderContent,
   listFinishedSessions,
   listPimpableScripts,
@@ -114,6 +115,40 @@ describe('Rounds API against local Supabase', () => {
     expect(sessions[0]).toMatchObject({ script_id: 'zorblax-syndrome', score: 2, status: 'missed' });
     expect(Date.parse(sessions[0]!.ended_at)).toBeLessThanOrEqual(Date.parse(sessions[1]!.ended_at));
     expect(await listFinishedSessions(await newStudent())).toEqual([]);
+  });
+
+  it('sends "This is wrong" flags, visible only to their author', async () => {
+    const student = await newStudent();
+    const question = content.questions[0]!;
+    await flagContent(student, {
+      script_id: content.script.id,
+      question_id: question.id,
+      script_version: content.script.version,
+      reason: 'marked_wrong',
+      note: 'I said ZBX and it was marked wrong',
+    });
+    await flagContent(student, {
+      script_id: content.script.id,
+      question_id: null,
+      script_version: content.script.version,
+      reason: 'script_error',
+      note: null,
+    });
+    const { data } = await student.from('question_flags').select('reason, question_id');
+    expect(data).toHaveLength(2);
+
+    const other = await newStudent();
+    expect((await other.from('question_flags').select('id')).data).toEqual([]);
+
+    await expect(
+      flagContent(student, {
+        script_id: content.script.id,
+        question_id: null,
+        script_version: content.script.version,
+        reason: 'other',
+        note: 'Mr. Alvarez had this',
+      }),
+    ).rejects.toThrow(/patient details/);
   });
 
   it('keeps each student to their own data', async () => {

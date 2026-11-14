@@ -25,7 +25,8 @@
     "content:review": "pnpm --filter @rounds/shared content:review",
     "content:approve": "pnpm --filter @rounds/shared content:approve",
     "eval:grading": "deno run --config supabase/functions/grade-answer/deno.json --allow-read --allow-env --allow-net=api.anthropic.com --allow-write=supabase/functions/grade-answer/eval/results supabase/functions/grade-answer/eval/run.ts",
-    "phone": "node scripts/phone.mjs"
+    "phone": "node scripts/phone.mjs",
+    "content:flags": "pnpm --filter @rounds/shared content:flags"
   },
   "devDependencies": {
     "prettier": "^3.10.1",

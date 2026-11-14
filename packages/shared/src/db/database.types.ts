@@ -149,6 +149,55 @@ export type Database = {
           },
         ];
       };
+      question_flags: {
+        Row: {
+          created_at: string;
+          id: string;
+          note: string | null;
+          question_id: string | null;
+          reason: Database['public']['Enums']['flag_reason'];
+          script_id: string;
+          script_version: number;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          created_at?: string;
+          id?: string;
+          note?: string | null;
+          question_id?: string | null;
+          reason: Database['public']['Enums']['flag_reason'];
+          script_id: string;
+          script_version: number;
+          user_id?: string;
+        };
+        Update: {
+          created_at?: string;
+          id?: string;
+          note?: string | null;
+          question_id?: string | null;
+          reason?: Database['public']['Enums']['flag_reason'];
+          script_id?: string;
+          script_version?: number;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'question_flags_question_id_fkey';
+            columns: ['question_id'];
+            isOneToOne: false;
+            referencedRelation: 'questions';
+            referencedColumns: ['id'];
+          },
+          {
+            foreignKeyName: 'question_flags_script_id_fkey';
+            columns: ['script_id'];
+            isOneToOne: false;
+            referencedRelation: 'illness_scripts';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       questions: {
         Row: {
           content: NonNullable<Json>;
@@ -245,6 +294,7 @@ export type Database = {
       };
     };
     Enums: {
+      flag_reason: 'marked_wrong' | 'unclear' | 'script_error' | 'other';
       grade: 'correct' | 'partial' | 'incorrect';
       grader: 'local' | 'llm';
       ladder_rung: 'recall' | 'second_order' | 'differentiate' | 'workup' | 'management' | 'pearl';
@@ -362,6 +412,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
+      flag_reason: ['marked_wrong', 'unclear', 'script_error', 'other'],
       grade: ['correct', 'partial', 'incorrect'],
       grader: ['local', 'llm'],
       ladder_rung: ['recall', 'second_order', 'differentiate', 'workup', 'management', 'pearl'],

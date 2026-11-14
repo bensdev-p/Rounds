@@ -5,10 +5,12 @@
 import type { IllnessScript } from '@rounds/shared';
 import { getLadderContent } from '@rounds/shared/api';
 import { router, useLocalSearchParams } from 'expo-router';
-import { ChevronLeft } from 'lucide-react-native';
+import { ChevronLeft, Flag } from 'lucide-react-native';
+import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Disclaimer } from '@/components/Disclaimer';
 import { ErrorView, Loading } from '@/components/StatusView';
+import { FlagSheet, type FlagTarget } from '@/features/flag/FlagSheet';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { usePersona } from '@/lib/prefs';
@@ -82,6 +84,7 @@ export default function ScriptScreen() {
   const [persona] = usePersona();
   const { scriptId } = useLocalSearchParams<{ scriptId: string }>();
   const content = useAsync(() => getLadderContent(client, scriptId), scriptId);
+  const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
 
   if (content.status === 'loading') return <Loading label="Loading the script" />;
   if (content.status === 'error') {
@@ -134,7 +137,13 @@ export default function ScriptScreen() {
 
       {sections(script).map((section) => (
         <View key={section.title} style={[styles.block, { borderTopColor: c.line }]}>
-          <Txt variant="small" weight="bodySemi" tone="ceil" fontSize={14} accessibilityRole="header">
+          <Txt
+            variant="small"
+            weight="bodySemi"
+            tone="ceil"
+            fontSize={14}
+            accessibilityRole="header"
+          >
             {section.title}
           </Txt>
           <Txt variant="body" fontSize={16} lineHeight={24}>
@@ -145,7 +154,13 @@ export default function ScriptScreen() {
 
       {approvedLinks.length > 0 && (
         <View style={[styles.block, { borderTopColor: c.line }]}>
-          <Txt variant="small" weight="bodySemi" tone="ceil" fontSize={14} accessibilityRole="header">
+          <Txt
+            variant="small"
+            weight="bodySemi"
+            tone="ceil"
+            fontSize={14}
+            accessibilityRole="header"
+          >
             Confused with
           </Txt>
           <View style={styles.chips}>
@@ -157,7 +172,10 @@ export default function ScriptScreen() {
                   label={name ?? link.script_id}
                   accessibilityHint="Opens that script"
                   onPress={() =>
-                    router.push({ pathname: '/script/[scriptId]', params: { scriptId: link.script_id } })
+                    router.push({
+                      pathname: '/script/[scriptId]',
+                      params: { scriptId: link.script_id },
+                    })
                   }
                 />
               );
@@ -171,7 +189,23 @@ export default function ScriptScreen() {
         </View>
       )}
 
+      <View style={[styles.block, { borderTopColor: c.line }]}>
+        <Link
+          label="This is wrong"
+          icon={Flag}
+          accessibilityHint="Report a mistake in this script"
+          onPress={() =>
+            setFlagTarget({
+              script: { id: script.id, version: script.version, name: script.name },
+              questions: [],
+              reasons: ['script_error', 'other'],
+            })
+          }
+        />
+      </View>
+
       <Disclaimer />
+      <FlagSheet target={flagTarget} onClose={() => setFlagTarget(null)} />
     </Screen>
   );
 }

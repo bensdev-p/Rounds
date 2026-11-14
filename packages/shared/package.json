@@ -18,7 +18,8 @@
     "content:seed": "tsx scripts/build-seed.ts",
     "content:check": "tsx scripts/content-check.ts",
     "content:review": "tsx scripts/content-review.ts",
-    "content:approve": "tsx scripts/content-approve.ts"
+    "content:approve": "tsx scripts/content-approve.ts",
+    "content:flags": "tsx scripts/content-flags.ts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.119.0",
