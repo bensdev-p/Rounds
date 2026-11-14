@@ -9,7 +9,11 @@ import { writeFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { checkContent, seedable } from '../src/content/contentFile.ts';
 import { buildSeedSql, SeedError } from '../src/db/seed.ts';
-import { TEST_QUESTIONS, TEST_SCRIPTS } from '../src/fixtures/index.ts';
+import {
+  TEST_QUESTION_VARIANTS,
+  TEST_QUESTIONS,
+  TEST_SCRIPTS,
+} from '../src/fixtures/index.ts';
 import { fail, loadContent, sha256 } from './content.ts';
 
 const target = fileURLToPath(new URL('../../../supabase/seed.sql', import.meta.url));
@@ -20,7 +24,7 @@ if (all.length > 0) fail(all);
 
 const real = seedable(files);
 const scripts = [...TEST_SCRIPTS, ...real.scripts];
-const questions = [...TEST_QUESTIONS, ...real.questions];
+const questions = [...TEST_QUESTIONS, ...TEST_QUESTION_VARIANTS, ...real.questions];
 const linkTargets = new Set([...TEST_SCRIPTS.map((s) => s.id), ...real.linkTargets]);
 
 const describe = (s: (typeof real.scripts)[number]) =>

@@ -160,6 +160,24 @@ export const TEST_QUESTIONS: readonly Question[] = [
   }),
 ];
 
+/**
+ * Extra questions on rungs that already have one, so the seed and the
+ * integration tests cover a script with more than one question per rung.
+ * Kept apart from TEST_QUESTIONS, which is exactly one ladder.
+ */
+export const TEST_QUESTION_VARIANTS: readonly Question[] = [
+  q({
+    id: 'zorblax-syndrome.management.2',
+    script_id: 'zorblax-syndrome',
+    script_version: 1,
+    rung: 'management',
+    kind: 'single',
+    prompt: 'Zorbicillin has failed. What next?',
+    source_fields: ['management.next_line'],
+    accepted_answers: [{ answer: 'plasma swap', synonyms: ['plasma exchange'] }],
+  }),
+];
+
 export function testQuestionsFor(scriptId: string): Question[] {
   return TEST_QUESTIONS.filter((question) => question.script_id === scriptId);
 }

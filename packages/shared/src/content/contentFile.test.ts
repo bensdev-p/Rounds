@@ -48,11 +48,22 @@ describe('parseContentFile', () => {
     );
   });
 
-  it('requires exactly one question per rung', () => {
+  it('requires one to three questions per rung', () => {
     const raw = rawDraft();
     raw.questions = raw.questions.filter((q) => q.rung !== 'pearl');
     expect(parseContentFile(raw, 'zorblax-syndrome').problems).toContain(
-      'zorblax-syndrome: needs exactly one pearl question (has 0)',
+      'zorblax-syndrome: needs 1–3 pearl questions (has 0)',
+    );
+
+    const recall = rawDraft().questions[0]!;
+    const withVariants = rawDraft();
+    withVariants.questions.push({ ...recall, id: 'zorblax-syndrome.recall.2' });
+    withVariants.questions.push({ ...recall, id: 'zorblax-syndrome.recall.3' });
+    expect(parseContentFile(withVariants, 'zorblax-syndrome').problems).toEqual([]);
+
+    withVariants.questions.push({ ...recall, id: 'zorblax-syndrome.recall.4' });
+    expect(parseContentFile(withVariants, 'zorblax-syndrome').problems).toContain(
+      'zorblax-syndrome: needs 1–3 recall questions (has 4)',
     );
   });
 
@@ -157,9 +168,20 @@ describe('renderReviewSheet', () => {
     expect(sheet).toContain('# Zorblax syndrome');
     expect(sheet).toContain('Status: **draft**, version 1');
     expect(sheet).toContain('**Quellan fever**: Quellan fever causes green nail beds');
-    expect(sheet).toContain('### 2. second order (list: name 3)');
+    expect(sheet).toContain('### 2. second order\n\n#### 2a (list: name 3)');
     expect(sheet).toContain('| night shift work | night shift, shift work |');
     expect(sheet).toContain('`management.first_line`: zorbicillin');
     expect(sheet).toContain('pnpm content:approve zorblax-syndrome --by "Your name, role"');
+  });
+
+  it('groups a rung with several questions under one heading', () => {
+    const file = draftFile();
+    const variant = { ...file.questions[4]!, id: 'zorblax-syndrome.management.2', prompt: 'Next?' };
+    const sheet = renderReviewSheet({ ...file, questions: [...file.questions, variant] }, new Map());
+    expect(sheet).toContain(
+      '### 5. management\n\n_2 versions; each session asks one._\n\n#### 5a\n\n**Q:** First-line treatment?',
+    );
+    expect(sheet).toContain('#### 5b\n\n**Q:** Next?');
+    expect(sheet.indexOf('#### 5b')).toBeLessThan(sheet.indexOf('### 6. pearl'));
   });
 });

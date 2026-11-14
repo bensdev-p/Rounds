@@ -69,12 +69,15 @@ export default function PimpHome() {
   const rounds = roundsToday(sessions, now, goal);
   const streak = shiftStreak(sessions, now, goal);
   const rank = rankFor(totalRungs(sessions));
-  // Stage 1 content is internal medicine only.
-  const rotation = ROTATION_NAMES[scripts[0]?.script.rotation[0] ?? 'IM'];
+  // Until rotations can be chosen (Settings, M2.3), the first script's rotation is the current one.
+  const rotationId = scripts[0]?.script.rotation[0] ?? 'IM';
+  const rotation = ROTATION_NAMES[rotationId];
 
   function pimpMe() {
+    // "Pimp me on <rotation>": a script from the rotation, weighted toward misses and unseen ones.
     const scriptId = pickScript(
-      scripts.map((s) => ({ script_id: s.script.id, bestRung: s.bestRung })),
+      scripts.filter((s) => s.script.rotation.includes(rotationId)).map((s) => s.script.id),
+      sessions,
       { exclude: sessions.at(-1)?.script_id },
     );
     if (!scriptId) return;

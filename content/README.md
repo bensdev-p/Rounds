@@ -1,6 +1,6 @@
 # Content
 
-Real illness scripts for Rounds. Each file in `scripts/` is one script plus its six ladder questions (one per rung). Every question and accepted answer must trace to a field of its script (CLAUDE.md, domain rule 1), and only scripts a medical reviewer has approved reach students (domain rule 2).
+Real illness scripts for Rounds. Each file in `scripts/` is one script plus its ladder questions: one to three per rung, six rungs. Every question and accepted answer must trace to a field of its script (CLAUDE.md, domain rule 1), and only scripts a medical reviewer has approved reach students (domain rule 2).
 
 ## Workflow
 
@@ -42,7 +42,8 @@ Attempts record the script version they were graded against.
 
 ## Writing good questions
 
-- **One question per rung,** in ladder order: recall, second order, differentiate, workup, management, pearl.
+- **One to three questions per rung,** in ladder order: recall, second order, differentiate, workup, management, pearl. A session asks one question per rung, picked at random and avoiding the previous session's question, so repeat sessions differ. Score and mastery still count rungs, not questions.
+- **Versions of a rung must test different facts** at the same level, not reword one question. Ids run `<script>.<rung>.1`, `.2`, `.3`. Add a third only when the script has a third fact worth asking at that rung.
 - **Quote accepted answers from the source field.** The canonical `answer` must appear word for word in a `source_fields` field. Synonyms don't need to.
 - **Keep synonyms specific.** The local matcher matches whole words, so a short or common synonym can credit wrong answers. For example, "calcium" would credit "low calcium", and "US" would credit "tell us". A test checks that every synonym earns credit; only a reviewer can check that none credits too much.
 - **List questions** (`"kind": "list"`) pass at 60% of `required_count`. Don't accept anything the prompt excludes; for example, "name three more" shouldn't accept the two causes it already gave.

@@ -10,6 +10,7 @@ import {
   endingMiss,
   ladderScore,
   LadderError,
+  pickLadder,
   startLadder,
   submitAnswer,
   type LadderState,
@@ -148,13 +149,9 @@ describe('ladder engine', () => {
     expect(endingMiss(s)?.miss_tag).toBe('slow');
   });
 
-  it('needs every question on a rung to clear it', () => {
+  it('rejects a ladder with two questions on one rung', () => {
     const second = { ...recall, id: 'zorblax-syndrome.recall.2' };
-    let s = startLadder([recall, second]);
-    s = answer(s, 'Zorblax syndrome');
-    expect(ladderScore(s)).toBe(0);
-    s = answer(s, 'Zorblax syndrome');
-    expect(ladderScore(s)).toBe(1);
+    expect(() => startLadder([recall, second])).toThrow(LadderError);
   });
 
   it('does not mutate the previous state', () => {
@@ -162,6 +159,44 @@ describe('ladder engine', () => {
     answer(start, 'Zorblax syndrome');
     expect(start.attempts).toHaveLength(0);
     expect(start.index).toBe(0);
+  });
+});
+
+describe('pickLadder', () => {
+  const variant = (q: Question, n: number): Question => ({ ...q, id: q.id.replace(/\.1$/, `.${n}`) });
+  const pool = TEST_QUESTIONS.flatMap((q) => [q, variant(q, 2), variant(q, 3)]);
+
+  it('picks one question per rung, in rung order', () => {
+    const picks = pickLadder(pool, { random: () => 0.5 });
+    expect(picks.map((q) => q.rung)).toEqual([...RUNGS]);
+    expect(picks.every((q) => q.id.endsWith('.2'))).toBe(true);
+    expect(startLadder(picks).questions).toHaveLength(RUNGS.length);
+  });
+
+  it('follows the random source', () => {
+    expect(pickLadder(pool, { random: () => 0 })[0]!.id).toBe('zorblax-syndrome.recall.1');
+    expect(pickLadder(pool, { random: () => 0.99 })[0]!.id).toBe('zorblax-syndrome.recall.3');
+    expect(pickLadder(pool, { random: () => 1 })[0]!.id).toBe('zorblax-syndrome.recall.3');
+  });
+
+  it("avoids last session's questions when the rung has another", () => {
+    const last = pickLadder(pool, { random: () => 0 }).map((q) => q.id);
+    for (let i = 0; i < 20; i++) {
+      const picks = pickLadder(pool, { avoid: last, random: Math.random });
+      expect(picks.some((q) => last.includes(q.id))).toBe(false);
+    }
+  });
+
+  it('reuses a question when it is the only one on its rung', () => {
+    const recallOnly = [recall];
+    expect(pickLadder(recallOnly, { avoid: [recall.id] })).toEqual([recall]);
+    // A one-question-per-rung script still gives a full ladder.
+    expect(pickLadder(TEST_QUESTIONS, { avoid: TEST_QUESTIONS.map((q) => q.id) })).toHaveLength(6);
+  });
+
+  it('scores rungs, not questions', () => {
+    const picks = pickLadder(pool, { random: () => 0 });
+    expect(ladderScore(answerCorrectly(startLadder(picks), RUNGS.length))).toBe(6);
   });
 });
 

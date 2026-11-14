@@ -34,10 +34,15 @@ const RawFileSchema = z.strictObject({
 const issues = (error: z.ZodError, prefix: string): string[] =>
   error.issues.map((i) => `${prefix}${i.path.length ? `.${i.path.join('.')}` : ''}: ${i.message}`);
 
+/** Questions a rung may hold. A session asks one of them (`pickLadder`). */
+export const MIN_PER_RUNG = 1;
+export const MAX_PER_RUNG = 3;
+
 /**
  * Parses one content file. Questions omit `script_id` and `script_version`;
- * they come from the script. Each rung needs exactly one question, because the
- * score is the rung reached.
+ * they come from the script. Each rung needs 1–3 questions: a session asks one
+ * per rung, picked at random, so repeat sessions differ. The score is still
+ * the rung reached.
  */
 export function parseContentFile(
   raw: unknown,
@@ -73,7 +78,11 @@ export function parseContentFile(
 
   for (const rung of RUNGS) {
     const count = questions.filter((q) => q.rung === rung).length;
-    if (count !== 1) problems.push(`${fileId}: needs exactly one ${rung} question (has ${count})`);
+    if (count < MIN_PER_RUNG || count > MAX_PER_RUNG) {
+      problems.push(
+        `${fileId}: needs ${MIN_PER_RUNG}–${MAX_PER_RUNG} ${rung} questions (has ${count})`,
+      );
+    }
   }
 
   return { file: { script: script.data, questions }, problems };
@@ -292,13 +301,13 @@ export function renderReviewSheet(file: ContentFile, names: ReadonlyMap<string, 
     '## Questions (the ladder, bottom to top)',
   ];
 
-  file.questions.forEach((q, i) => {
+  const renderQuestion = (q: Question, label: string) => {
     const source = q.source_fields
       .map((path) => `\`${path}\`: ${collectStrings(resolveFieldPath(s, path)).join('; ')}`)
       .join('<br>');
     lines.push(
       '',
-      `### ${i + 1}. ${q.rung.replace('_', ' ')}${q.kind === 'list' ? ` (list: name ${q.required_count})` : ''}`,
+      `#### ${label}${q.kind === 'list' ? ` (list: name ${q.required_count})` : ''}`,
       '',
       `**Q:** ${q.prompt}`,
       '',
@@ -310,6 +319,17 @@ export function renderReviewSheet(file: ContentFile, names: ReadonlyMap<string, 
       '',
       `Comes from: ${source}`,
     );
+  };
+
+  // Grouped by rung, so the reviewer sees a rung's variants side by side.
+  // A session asks one question per rung, picked at random.
+  RUNGS.forEach((rung, r) => {
+    const onRung = file.questions.filter((q) => q.rung === rung);
+    lines.push('', `### ${r + 1}. ${rung.replace('_', ' ')}`);
+    if (onRung.length > 1) {
+      lines.push('', `_${onRung.length} versions; each session asks one._`);
+    }
+    onRung.forEach((q, i) => renderQuestion(q, `${r + 1}${String.fromCharCode(97 + i)}`));
   });
 
   lines.push(

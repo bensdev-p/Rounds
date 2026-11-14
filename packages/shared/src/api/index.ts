@@ -20,7 +20,7 @@ import {
 import { ScriptIdSchema, type IllnessScript } from '../schemas/illnessScript.ts';
 import type { SessionRecord } from '../progress/progression.ts';
 import { NewFlagSchema, type NewFlag } from '../schemas/flag.ts';
-import { traceQuestionToScript, type Question } from '../schemas/question.ts';
+import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schemas/question.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
 
@@ -199,6 +199,38 @@ export async function flagContent(client: RoundsClient, flag: NewFlag): Promise<
   }
   const { error } = await client.from('question_flags').insert(parsed.data);
   if (error) throw new RoundsApiError(`Sending flag: ${error.message}`);
+}
+
+const QuestionIdsSchema = z.array(z.strictObject({ question_id: QuestionIdSchema }));
+
+/**
+ * The questions asked in the student's most recent finished session on a
+ * script, so the next session can pick different ones (`pickLadder`'s
+ * `avoid`). Empty if the student has never finished a session on it.
+ */
+export async function lastAskedQuestionIds(
+  client: RoundsClient,
+  scriptId: string,
+): Promise<string[]> {
+  const sessions = unwrap(
+    await client
+      .from('ladder_sessions')
+      .select('id')
+      .eq('script_id', scriptId)
+      .neq('status', 'in_progress')
+      .order('ended_at', { ascending: false })
+      .limit(1),
+    'Loading last session',
+  );
+  const last = sessions[0];
+  if (!last) return [];
+  const rows = unwrap(
+    await client.from('attempts').select('question_id').eq('session_id', last.id),
+    'Loading last questions',
+  );
+  const parsed = QuestionIdsSchema.safeParse(rows);
+  if (!parsed.success) throw new RoundsApiError(`Loading last questions: ${parsed.error.message}`);
+  return parsed.data.map((r) => r.question_id);
 }
 
 const FinishedSessionSchema = z.strictObject({

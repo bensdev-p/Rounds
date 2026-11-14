@@ -7,11 +7,18 @@ import { createClient } from '@supabase/supabase-js';
 import { beforeAll, describe, expect, inject, it } from 'vitest';
 import type { Database } from '../db/database.types.ts';
 import { gradeLocally } from '../grading/localGrader.ts';
-import { currentQuestion, startLadder, submitAnswer, type LadderState } from '../ladder/engine.ts';
+import {
+  currentQuestion,
+  pickLadder,
+  startLadder,
+  submitAnswer,
+  type LadderState,
+} from '../ladder/engine.ts';
 import {
   finishSession,
   flagContent,
   getLadderContent,
+  lastAskedQuestionIds,
   listFinishedSessions,
   listPimpableScripts,
   recordAttempt,
@@ -34,7 +41,8 @@ const ANSWERS = ['Zorblax syndrome', 'glimmer, night shift, family hx', 'no idea
 /** Plays the fixture ladder: two rungs right, then a miss. Records every attempt. */
 async function playToMiss(client: RoundsClient, content: LadderContent) {
   const sessionId = await startSession(client, content.script, 'teacher');
-  let state: LadderState = startLadder(content.questions);
+  // First question on each rung: the answers above fit those.
+  let state: LadderState = startLadder(pickLadder(content.questions, { random: () => 0 }));
   for (const answer of ANSWERS) {
     const question = currentQuestion(state);
     if (!question) break;
@@ -61,7 +69,8 @@ describe('Rounds API against local Supabase', () => {
     // Approved real scripts from content/ may be seeded too; the fixtures are always there.
     const scripts = await listPimpableScripts(await newStudent());
     const zorblax = scripts.find((s) => s.script.id === 'zorblax-syndrome');
-    expect(zorblax?.questionCount).toBe(6);
+    // Six rungs, one with a second question (TEST_QUESTION_VARIANTS).
+    expect(zorblax?.questionCount).toBe(7);
     expect(zorblax?.bestRung).toBeNull();
     // quellan-fever is approved but has no questions, so it isn't pimpable.
     expect(scripts.map((s) => s.script.id)).not.toContain('quellan-fever');
@@ -69,7 +78,8 @@ describe('Rounds API against local Supabase', () => {
   });
 
   it('loads a ladder with traced questions and confusables', () => {
-    expect(content.questions).toHaveLength(6);
+    expect(content.questions).toHaveLength(7);
+    expect(content.questions.filter((q) => q.rung === 'management')).toHaveLength(2);
     expect(content.confusables).toEqual([
       { script_id: 'quellan-fever', names: ['Quellan fever', 'QF'] },
     ]);
@@ -115,6 +125,17 @@ describe('Rounds API against local Supabase', () => {
     expect(sessions[0]).toMatchObject({ script_id: 'zorblax-syndrome', score: 2, status: 'missed' });
     expect(Date.parse(sessions[0]!.ended_at)).toBeLessThanOrEqual(Date.parse(sessions[1]!.ended_at));
     expect(await listFinishedSessions(await newStudent())).toEqual([]);
+  });
+
+  it("returns the questions from the student's last finished session on a script", async () => {
+    const student = await newStudent();
+    expect(await lastAskedQuestionIds(student, 'zorblax-syndrome')).toEqual([]);
+    const { state } = await playToMiss(student, content);
+    // Unfinished sessions don't count.
+    await startSession(student, content.script, 'teacher');
+    const ids = await lastAskedQuestionIds(student, 'zorblax-syndrome');
+    expect([...ids].sort()).toEqual(state.attempts.map((a) => a.question_id).sort());
+    expect(await lastAskedQuestionIds(await newStudent(), 'zorblax-syndrome')).toEqual([]);
   });
 
   it('sends "This is wrong" flags, visible only to their author', async () => {
