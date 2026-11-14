@@ -70,6 +70,8 @@ export const AttemptSchema = z.strictObject({
   credit: z.number().min(0).max(1),
   passed: z.boolean(),
   miss_tag: MissTagSchema.nullable(),
+  /** Canonical accepted answers the answer hit (list questions: the items named). */
+  matched: z.array(z.string()).max(20),
   grader: GraderSchema,
   grader_version: GraderVersionSchema,
 });

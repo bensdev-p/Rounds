@@ -21,6 +21,11 @@ export const RUNG_LABELS: Record<Rung, string> = {
   pearl: 'Pearl',
 };
 
+/** "Missed on management": the miss card's label, also used in Review (DESIGN.md, step 6). */
+export function missLabel(rung: Rung): string {
+  return `Missed on ${RUNG_LABELS[rung].toLowerCase()}`;
+}
+
 export interface MissCard {
   /** "Missed on management" */
   label: string;
@@ -62,7 +67,7 @@ export function buildMissCard(input: {
   persona: PersonaId;
 }): MissCard {
   const { answer, result, missTag, question, script, confusables, persona } = input;
-  const label = `Missed on ${RUNG_LABELS[question.rung].toLowerCase()}`;
+  const label = missLabel(question.rung);
 
   let correction: string;
   if (missTag === 'slow') {

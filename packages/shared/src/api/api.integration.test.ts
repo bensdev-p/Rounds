@@ -14,16 +14,20 @@ import {
   submitAnswer,
   type LadderState,
 } from '../ladder/engine.ts';
+import { drillScore, startDrill, submitDrillAnswer } from '../review/drill.ts';
 import {
+  finishDrill,
   finishSession,
   flagContent,
   getLadderContent,
   lastAskedQuestionIds,
   listFinishedSessions,
   listLogsSince,
+  listMissesSince,
   listPimpableScripts,
   logPatient,
   recordAttempt,
+  startDrillSession,
   startSession,
   type LadderContent,
   type RoundsClient,
@@ -114,6 +118,55 @@ describe('Rounds API against local Supabase', () => {
       (s) => s.script.id === 'zorblax-syndrome',
     );
     expect(summary!.bestRung).toBe(2);
+  });
+
+  it('lists misses with their question, and keeps drills out of progression', async () => {
+    const student = await newStudent();
+    await playToMiss(student, content);
+
+    const drillId = await startDrillSession(student, content.script, 'quellan-fever', 'teacher');
+    const question = content.questions.find((q) => q.rung === 'differentiate')!;
+    let drill = startDrill(['zorblax-syndrome', 'quellan-fever'], [question], 'teacher');
+    drill = submitDrillAnswer(drill, {
+      answer: 'green nail beds',
+      elapsed_ms: 500,
+      result: gradeLocally(question, 'green nail beds', content.confusables),
+    });
+    await recordAttempt(student, drillId, drill.attempts[0]!);
+    await finishDrill(student, drillId, drill);
+    expect(drillScore(drill)).toBe(1);
+
+    const misses = await listMissesSince(student, new Date(0).toISOString());
+    expect(misses).toHaveLength(1);
+    expect(misses[0]).toMatchObject({
+      script_id: 'zorblax-syndrome',
+      miss_tag: 'unknown',
+      matched: [],
+      session_kind: 'ladder',
+    });
+    expect(misses[0]!.question.rung).toBe('differentiate');
+
+    // The drill doesn't count: one finished ladder, best rung still 2.
+    expect(await listFinishedSessions(student)).toHaveLength(1);
+    const summary = (await listPimpableScripts(student, undefined, { includeFixtures: true })).find(
+      (s) => s.script.id === 'zorblax-syndrome',
+    );
+    expect(summary!.bestRung).toBe(2);
+    expect(await lastAskedQuestionIds(student, 'zorblax-syndrome')).toHaveLength(3);
+
+    // A missed drill answer is listed as a drill miss.
+    const drill2Id = await startDrillSession(student, content.script, 'quellan-fever', 'teacher');
+    let drill2 = startDrill(['zorblax-syndrome', 'quellan-fever'], [question], 'teacher');
+    drill2 = submitDrillAnswer(drill2, {
+      answer: 'no idea',
+      elapsed_ms: 500,
+      result: gradeLocally(question, 'no idea', content.confusables),
+    });
+    await recordAttempt(student, drill2Id, drill2.attempts[0]!);
+    await finishDrill(student, drill2Id, drill2);
+    const after = await listMissesSince(student, new Date(0).toISOString());
+    expect(after.map((m) => m.session_kind)).toEqual(['ladder', 'drill']);
+    expect(await listMissesSince(await newStudent(), new Date(0).toISOString())).toEqual([]);
   });
 
   it('lists finished sessions for progression, oldest first', async () => {
@@ -248,6 +301,7 @@ describe('Rounds API against local Supabase', () => {
         credit: 0,
         passed: false,
         miss_tag: 'unknown',
+        matched: [],
         grader: 'local',
         grader_version: null,
       }),
