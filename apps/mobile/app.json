@@ -9,7 +9,10 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.ben.rounds",
-      "usesAppleSignIn": true
+      "usesAppleSignIn": true,
+      "infoPlist": {
+        "NSLocalNetworkUsageDescription": "Rounds connects to the computer running the app during development."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -25,7 +28,20 @@
       "output": "single"
     },
     "scheme": "rounds",
-    "plugins": ["expo-router", "expo-font", "expo-apple-authentication"],
+    "plugins": [
+      "expo-router",
+      "expo-font",
+      "expo-apple-authentication",
+      [
+        "react-native-audio-api",
+        {
+          "iosMicrophonePermission": "Rounds listens to your answers when the attending asks.",
+          "iosBackgroundMode": false,
+          "androidPermissions": ["android.permission.RECORD_AUDIO"],
+          "androidForegroundService": false
+        }
+      ]
+    ],
     "experiments": {
       "typedRoutes": true
     }

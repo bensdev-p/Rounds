@@ -15,6 +15,8 @@ interface ButtonProps {
   variant?: 'primary' | 'quiet' | 'line';
   /** The 60 pt Home hero button. */
   hero?: boolean;
+  /** 46 pt, 15 pt label: the pair under the voice panel (session.png). */
+  compact?: boolean;
   icon?: IconComponent;
   disabled?: boolean;
   accessibilityLabel?: string;
@@ -30,6 +32,7 @@ export function Button({
   onPress,
   variant = 'primary',
   hero = false,
+  compact = false,
   icon: Icon,
   disabled = false,
   accessibilityLabel,
@@ -54,7 +57,7 @@ export function Button({
       }}
       style={({ pressed }) => [
         styles.button,
-        { height: hero ? size.heroButtonHeight : size.buttonHeight },
+        { height: hero ? size.heroButtonHeight : compact ? 46 : size.buttonHeight },
         variant === 'primary' && { backgroundColor: c.signal },
         variant === 'quiet' && { backgroundColor: c.surface2 },
         variant === 'line' && { borderWidth: 1.5, borderColor: c.line },
@@ -62,12 +65,12 @@ export function Button({
         style,
       ]}
     >
-      {Icon && <Icon size={hero ? 22 : 20} color={c[fg]} />}
+      {Icon && <Icon size={hero ? 22 : compact ? 18 : 20} color={c[fg]} />}
       <Txt
         variant="body"
         weight="bodySemi"
         tone={fg}
-        fontSize={hero ? 18 : 16}
+        fontSize={hero ? 18 : compact ? 15 : 16}
         numberOfLines={1}
         style={styles.label}
       >

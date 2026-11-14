@@ -10,6 +10,7 @@ import {
   gradeLocally,
   ladderScore,
   masteryFor,
+  needsThinkingCue,
   PERSONAS,
   personaLine,
   phiWarning,
@@ -47,12 +48,16 @@ import { AskingView } from '@/features/session/AskingView';
 import { ListFeedbackView } from '@/features/session/ListFeedbackView';
 import { PromotionView } from '@/features/session/PromotionView';
 import { ResultView } from '@/features/session/ResultView';
+import { VoicePanel, type VoicePhase } from '@/features/session/VoicePanel';
+import type { Listening } from '@/voice/engine';
+import { useMicLevel } from '@/voice/useMicLevel';
+import { useVoiceEngine, voiceOffNotice } from '@/voice/useVoiceEngine';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { rungPassHaptic } from '@/lib/haptics';
 import { SignInPrompt } from '@/features/session/SignInPrompt';
 import { parsePersona } from '@/lib/prefs';
-import { useRoundsGoal, useTimeLimit } from '@/lib/profile';
+import { useRoundsGoal, useTimeLimit, useVoiceSpeed } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { useLadderRecorder } from '@/lib/useLadderRecorder';
 import { rungStates } from '@/ui/Ladder';
@@ -62,6 +67,10 @@ import { loadErrorMessage } from '@/lib/errors';
 const MISS_HOLD_MS = 1_000;
 /** After the last rung passes, long enough to see it fill. */
 const TOP_HOLD_MS = 700;
+const DONT_KNOW_HINT = 'Ends the session on this rung';
+/** When speech-to-text stops working mid-session. */
+const VOICE_FAILED = "Voice isn't available here, so type your answers.";
+const NOT_HEARD = "I didn't catch that. Say it again, or tap I don't know.";
 
 /** Back to the tab the session was started from (Pimp, or Profile → collection). */
 function goHome() {
@@ -153,6 +162,24 @@ function Session({
   // Finished sessions so far, including runs in this screen ("Go again").
   const [history, setHistory] = useState<SessionRecord[]>(sessionsBefore);
 
+  // Voice (wireframe 04). Text mode stays a tap away ("Type instead").
+  const [speed] = useVoiceSpeed();
+  const [mode, setMode] = useState<'voice' | 'text'>('voice');
+  const voice = useVoiceEngine(client, mode === 'voice', persona, speed);
+  const engine = voice.status === 'on' ? voice.engine : null;
+  const voiceShown = mode === 'voice' && voice.status !== 'off';
+  const [textNotice, setTextNotice] = useState<string | null>(null);
+  const notice = textNotice ?? (voice.status === 'off' ? voiceOffNotice(voice.reason) : null);
+  const [voicePhase, setVoicePhase] = useState<VoicePhase>('asking');
+  const [transcript, setTranscript] = useState('');
+  const [hint, setHint] = useState<string | null>(null);
+  const [level, pushLevel] = useMicLevel(voicePhase === 'listening');
+  // Bumped to listen again on the same question (after a patient-details warning).
+  const [listenAgain, setListenAgain] = useState(0);
+  const listening = useRef<Listening | null>(null);
+  // The question already spoken, so listening again doesn't ask it twice.
+  const spoken = useRef<string | null>(null);
+
   // Bumped on restart so a grade or timer that arrives late is ignored.
   const run = useRef(0);
   // When the current question appeared, for the persona time limit.
@@ -199,13 +226,14 @@ function Session({
     );
   }
 
-  async function submit(dontKnow = false) {
+  async function submit(dontKnow = false, said?: string) {
     if (!question || grading || phase !== 'asking') return;
-    const text = dontKnow ? '' : answer;
+    const text = dontKnow ? '' : (said ?? answer);
     if (!dontKnow && !text.trim()) return;
     const phi = phiWarning(detectPhi(text));
     if (phi) {
       setWarning(phi);
+      if (said !== undefined) setListenAgain((n) => n + 1);
       return;
     }
     // Time to answer stops at submit; grading time doesn't count against the student.
@@ -216,6 +244,8 @@ function Session({
       graded = { result: gradeLocally(question, '', confusables), grader: 'local' };
     } else {
       setGrading(true);
+      // A matcher miss goes to Claude (1.5–2.6 s): the attending says "mm-hm" meanwhile (M2.4).
+      if (said !== undefined && needsThinkingCue(question, text, confusables)) engine?.playCue();
       try {
         graded = await gradeAnswer(client, question.id, text);
       } catch (error) {
@@ -225,6 +255,7 @@ function Session({
           setWarning(
             'That answer looks like it contains patient details. Remove them and try again.',
           );
+          if (said !== undefined) setListenAgain((n) => n + 1);
           return;
         }
         // Server unreachable: grade on the device so the ladder keeps moving.
@@ -255,6 +286,84 @@ function Session({
     if (next.status !== 'in_progress') finish(next, runAtSubmit);
   }
 
+  // The voice turn effect below calls the latest submit, not the one from its first render.
+  const submitRef = useRef(submit);
+  submitRef.current = submit;
+
+  // Fetch the run's question audio up front, so each is ready before it's asked.
+  useEffect(() => {
+    engine?.prefetch(state.questions.map((q) => q.id));
+  }, [engine, state.questions]);
+
+  // One voice turn per question: the attending asks, the mic goes live, the
+  // answer ends on silence or a tap, and the transcript is graded like typed text.
+  const turnKey =
+    engine && mode === 'voice' && phase === 'asking' && state.status === 'in_progress' && question
+      ? `${run.current}|${question.id}|${listenAgain}`
+      : null;
+  useEffect(() => {
+    if (!turnKey || !engine || !question) return;
+    let cancelled = false;
+    const askedKey = `${run.current}|${question.id}`;
+    engine.prepare(question);
+    void (async () => {
+      setTranscript('');
+      setVoicePhase('asking');
+      if (spoken.current !== askedKey) {
+        setHint(null);
+        await engine.speak(question.id);
+        if (cancelled) return;
+        spoken.current = askedKey;
+      }
+      for (;;) {
+        // Time to answer runs from the end of the question.
+        shownAt.current = Date.now();
+        setVoicePhase('listening');
+        const turn = engine.listen(question, { onText: setTranscript, onLevel: pushLevel });
+        listening.current = turn;
+        let said: string;
+        try {
+          const result = await turn.result;
+          if (cancelled || result.endedBy === 'cancel') return;
+          said = result.transcript;
+        } catch {
+          if (cancelled) return;
+          setTextNotice(VOICE_FAILED);
+          setMode('text');
+          return;
+        }
+        if (said) {
+          setHint(null);
+          setVoicePhase('grading');
+          void submitRef.current(false, said);
+          return;
+        }
+        setHint(NOT_HEARD);
+      }
+    })();
+    return () => {
+      cancelled = true;
+      listening.current?.cancel();
+      listening.current = null;
+      engine.stopSpeaking();
+    };
+    // `question` follows turnKey; everything else is stable or read through refs.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [turnKey]);
+
+  function typeInstead() {
+    listening.current?.cancel();
+    engine?.stopSpeaking();
+    setTextNotice(null);
+    setMode('text');
+  }
+
+  function dontKnowByVoice() {
+    listening.current?.cancel();
+    engine?.stopSpeaking();
+    void submit(true);
+  }
+
   function nextFromList() {
     shownAt.current = Date.now();
     setPhase(state.status === 'in_progress' ? 'asking' : 'result');
@@ -274,6 +383,8 @@ function Session({
     setAnswer('');
     setWarning(null);
     setGrading(false);
+    setTranscript('');
+    setHint(null);
     setLast(null);
     setSummary(null);
     shownAt.current = Date.now();
@@ -431,6 +542,29 @@ function Session({
       grading={grading}
       locked={phase === 'missed' || state.status !== 'in_progress'}
       warning={warning}
+      notice={notice}
+      voice={
+        voiceShown ? (
+          <VoicePanel
+            phase={
+              phase === 'missed' || state.status !== 'in_progress'
+                ? 'stopped'
+                : grading
+                  ? 'grading'
+                  : voicePhase
+            }
+            level={level}
+            transcript={phase === 'missed' && last ? last.answer : transcript}
+            hint={hint}
+            warning={warning}
+            onEndAnswer={() => listening.current?.endNow()}
+            onTypeInstead={typeInstead}
+            onDontKnow={dontKnowByVoice}
+            dontKnowHint={DONT_KNOW_HINT}
+            disabled={grading || phase === 'missed' || state.status !== 'in_progress'}
+          />
+        ) : undefined
+      }
     />
   );
 }

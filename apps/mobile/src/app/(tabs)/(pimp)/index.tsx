@@ -24,7 +24,7 @@ import { usePersona, useProfile, useRoundsGoal } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { radius, space, useTheme } from '@/theme';
 import { Button, Link, Panel, Segmented } from '@/ui/controls';
-import { LadderIcon } from '@/ui/icons';
+import { Mic } from 'lucide-react-native';
 import { RankChip, Segments } from '@/ui/progress';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
@@ -157,7 +157,7 @@ export default function PimpHome() {
         <Button
           hero
           label="Pimp me"
-          icon={LadderIcon}
+          icon={Mic}
           accessibilityHint={
             scripts.length > 0
               ? `Starts a ${PERSONAS[persona].label} session on a topic chosen for you`

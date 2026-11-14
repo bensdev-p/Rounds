@@ -1,4 +1,4 @@
-import { answerTimeLimit, type PersonaId, type Profile } from '@rounds/shared';
+import { answerTimeLimit, type PersonaId, type Profile, type VoiceSpeed } from '@rounds/shared';
 import { getProfile, saveProfile } from '@rounds/shared/api';
 import { createContext, useCallback, useContext, useMemo, useState, type ReactNode } from 'react';
 import { ErrorView, Loading } from '@/components/StatusView';
@@ -86,4 +86,10 @@ export function useRoundsGoal(): [number, (next: number) => void] {
 export function useTimeLimit(persona: PersonaId): number | null {
   const { profile } = useProfile();
   return answerTimeLimit(persona, profile.answer_timeout);
+}
+
+/** How fast the attending speaks (Settings → Voice → Attending voice speed). */
+export function useVoiceSpeed(): [VoiceSpeed, (next: VoiceSpeed) => void] {
+  const { profile, update } = useProfile();
+  return [profile.voice_speed, (voice_speed) => void update({ voice_speed })];
 }

@@ -43,6 +43,11 @@ step(
     ? 'Starting the grading server (Claude grades answers the matcher misses)'
     : 'Starting the grading server (no API key in supabase/functions/.env: answers are graded on the device only)',
 );
+const hasVoiceKey =
+  existsSync(envFile) && /^\s*DEEPGRAM_API_KEY\s*=\s*\S+/m.test(readFileSync(envFile, 'utf8'));
+if (!hasVoiceKey) {
+  step('No DEEPGRAM_API_KEY in supabase/functions/.env: sessions open in text mode (no voice)');
+}
 const grading = spawn('pnpm -s functions:serve', { cwd: repo, shell: true });
 const prefix = (stream) => {
   let rest = '';

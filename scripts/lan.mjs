@@ -35,6 +35,8 @@ export function phoneBanner() {
       out.push(`   or http://${other.address}:${APP_PORT}  (${other.name})`);
     }
     out.push(' First time? Use Share > Add to Home Screen for the Rounds icon.');
+    out.push(' Voice: Safari blocks the mic over http, so open the Rounds development');
+    out.push(' build instead and enter the same address (docs/PHONE.md).');
     out.push(' Keep this window open while she uses it.');
   }
   out.push(`${line}\n`);
