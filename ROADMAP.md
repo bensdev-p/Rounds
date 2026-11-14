@@ -34,7 +34,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.3 (accounts, onboarding, settings):** every student still starts without an account. Onboarding (wireframe 01) asks year and rotation, plus an optional "Week 3 of 8" row (not drawn), and shows whenever there's no profile yet, keeping the persona and goal a device already had. Home shows "Week 3 of 8" before "Change rotation", which now opens the same questions; the script picker is a link from there and still a long press on Pimp me. A rotation with no scripts yet (OB/GYN) says so and asks from the others. Settings (wireframe 12, no Anki): Daily goal above Voice (developer's call), Answer timeout (Persona default, 10 s, 30 s, 60 s, No limit), Appearance (Light, Dark, System, per device; replaces `EXPO_PUBLIC_THEME`), Account. Account (not drawn): sign in with a 6-digit email code (works from the phone on the home Wi-Fi; codes land in Mailpit locally), Sign in with Apple in the iPhone build only, sign out, delete account (`delete-account` Edge Function). Signing in adds the email or Apple ID to the same anonymous user, so history carries over; an email that already has an account signs in to it, after a warning if this phone has practice that stays behind. "Keep your progress" shows once on the result screen after the first session. New `profiles` table (pgTAP tests); persona and goal moved there from the device. Local auth now confirms emails, as a hosted project does. Tried on the phone.
 
-**M2.4 (voice spike):** measured on a throwaway branch (`m2.4-voice-spike`, not merged). About 0.5 s from the end of speech to the next question is reachable when the local matcher grades. A Claude fallback adds 1.5–2.6 s, so M2.5 plays a short "thinking" cue on a matcher miss. Speech-to-text: Deepgram. Voice: ElevenLabs. Findings under M2.4 below.
+**M2.4 (voice spike):** measured on a throwaway branch (`m2.4-voice-spike`, not merged). About 0.5 s from the end of speech to the next question is reachable when the local matcher grades. A Claude fallback adds 1.5–2.6 s, so M2.5 plays a short "thinking" cue on a matcher miss. Speech-to-text: Deepgram Nova-3 with the question's accepted answers as expected words. Voice: Deepgram or ElevenLabs, equally fast; the developer picks by ear. Findings under M2.4 below.
 
 **Gaps:** none in Stage 2 before voice.
 
@@ -124,20 +124,33 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 |---|---|---|
 | Deepgram Nova-3, cached audio | 0.73 / 0.76 s | **0.54** / 0.97 s |
 | ElevenLabs Scribe v2, cached audio | 0.75 / 1.07 s | **0.50** / 0.88 s |
-| Deepgram Aura-2, voiced live | 2.2–3.1 / 3.3 s | 2.0–2.9 / 3.3 s |
-| ElevenLabs Flash v2.5, voiced live | 0.92 / 1.63 s | 0.69 / 0.73 s |
+| ElevenLabs Flash v2.5, voiced live (`<audio>` player) | 0.92 / 1.63 s | 0.69 / 0.73 s |
+
+Voiced live, measured on its own (time to first sound, 24 clips each): with a player that streams raw audio and starts on the first piece, **Deepgram Aura-2 0.22 s** (worst 0.52) and **ElevenLabs Flash 0.24 s** (worst 0.31). Through the browser's `<audio>` mp3 player Deepgram took 1.1 s (worst 2.2): it sends its mp3 in many small pieces, and the player waits for a buffer first. M2.5 should stream raw audio, as a native app would anyway.
+
+Accuracy on the script's hard terms (12 answers × 2 voices, 38 terms; a few misses were network errors or cut-off answers, not mishearing):
+
+| Speech-to-text | Alone | With expected words |
+|---|---|---|
+| Deepgram Nova-3 | 32 | **38** |
+| Deepgram Nova-3 Medical | 33 | 34 |
+| ElevenLabs Scribe v2 realtime | 35 | not finished (token errors) |
+| ElevenLabs Scribe v3 live | 35 | **38** |
+
+Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazidase", "Write up a quadrant", and "ALT" as "out". The medical model fixed some of these alone, but gained nothing from expected words (Deepgram's docs list keyterm support for Nova-3, not the medical model). Nova-3 Medical's launch price matches Nova-3's ($0.0077/min streaming), so it isn't ruled out on cost, only on results.
 
 - **Grading decides it.** The matcher's round trip is about 65 ms. When it misses, the Claude fallback brings the whole turn to 2.0 s with Haiku 5.5 (worst 2.5 s) and 2.5 s with Opus 5.5 (worst 3.1 s), whichever speech vendor is used. So ~1 s holds only for answers the matcher grades.
 - **Fallback for M2.5:** on a matcher miss, play a short cached "thinking" cue at once (the attending's "mm-hm"), then the next question when the grade arrives. Push to talk only saves the 0.3–0.6 s of waiting for silence, so it doesn't fix this.
-- **Recommendation:** Deepgram for speech-to-text (steadier worst case, and it cut off fewer answers), ElevenLabs for the voice (live follow-ups start in about 0.25 s; Deepgram's mp3 took 1.4–3.3 s to start in the browser). Both sit behind the `stt` and `tts` interfaces, so this can change.
+- **Recommendation:** Deepgram Nova-3 with expected words for speech-to-text: as accurate as ElevenLabs' newest model, with a steadier worst case and fewer cut-off answers in the timing runs. ElevenLabs caps each expected word at 20 characters. For the voice, both start in about 0.2 s with a streaming player, so it comes down to how they sound. Deepgram alone means one key and one bill. Both sit behind the `stt` and `tts` interfaces, so this can change.
 - **Spending caps (developer, 14 Nov):** $10 per speech vendor. The spike's speech cost was well under that.
 
 **Notes for the M2.5 plan (from M2.4):**
 - End the turn with our own silence check, not the vendor's: it saved about 0.2 s. 300 ms of silence is too short for list questions and for anyone who pauses mid-answer: it cut answers off ("I'd say the pancreas is inflamed" lost "from the alcohol"). Try a longer wait on list questions, and only end the turn once the speech has really stopped.
-- Both vendors misheard "ALT" (as "A" and "LT"), which sent the answer to Claude and once graded it wrong. Pass the question's accepted answers to the vendor as expected words (both support this).
+- Both vendors misheard "ALT" (as "A", "LT" and "out"), which sent the answer to Claude and once graded it wrong. Pass the question's accepted answers and synonyms to the vendor as expected words: it took both Nova-3 and Scribe v3 to 38/38.
 - Before switching the grader to Haiku for speed, check its grading with `pnpm eval:grading --model claude-haiku-5-5` (billed: the developer's OK first).
 - Deepgram needs an API key with the Member role to issue the browser's short-lived tokens.
-- Trying voice on the phone needs HTTPS for both the app and Supabase (Safari's mic rule), or an EAS development build. Decide which before M2.5's phone check.
+- Trying voice on the phone: the developer has an Apple Developer account, so use an EAS development build (cloud build, installed on his registered iPhone). Safari would need HTTPS for both the app and Supabase. Streaming the mic natively needs a native audio module, which a development build allows and Expo Go doesn't.
+- Play voiced audio by streaming raw audio into the player, not through an mp3 element.
 - Keep the streaming connection open and the next question's audio ready before the student speaks; the spike measured with both ready.
 
 ### M2.5 Voice session
