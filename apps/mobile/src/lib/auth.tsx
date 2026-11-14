@@ -3,6 +3,7 @@ import { createContext, useContext, type ReactNode } from 'react';
 import { ErrorView, Loading } from '@/components/StatusView';
 import { getSupabase } from './supabase';
 import { useAsync } from './useAsync';
+import { loadErrorMessage } from './errors';
 
 const ClientContext = createContext<RoundsClient | null>(null);
 
@@ -27,7 +28,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   if (auth.status === 'loading') return <Loading label="Signing in" />;
   if (auth.status === 'error') {
-    return <ErrorView message={`Couldn't sign in. ${auth.error.message}`} onRetry={auth.reload} />;
+    return (
+      <ErrorView
+        message={loadErrorMessage("Couldn't sign in.", auth.error)}
+        onRetry={auth.reload}
+      />
+    );
   }
   return <ClientContext.Provider value={auth.data}>{children}</ClientContext.Provider>;
 }

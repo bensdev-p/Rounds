@@ -24,6 +24,7 @@ import { LadderIcon } from '@/ui/icons';
 import { RankChip, Segments } from '@/ui/progress';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
+import { loadErrorMessage } from '@/lib/errors';
 
 const PERSONA_OPTIONS = (Object.keys(PERSONAS) as PersonaId[]).map((value) => ({
   value,
@@ -34,16 +35,13 @@ export default function PimpHome() {
   const { c } = useTheme();
   const client = useClient();
   const [persona, setPersona] = usePersona();
-  const data = useAsync(
-    async () => {
-      const [scripts, sessions] = await Promise.all([
-        listPimpableScripts(client),
-        listFinishedSessions(client),
-      ]);
-      return { scripts, sessions };
-    },
-    'home',
-  );
+  const data = useAsync(async () => {
+    const [scripts, sessions] = await Promise.all([
+      listPimpableScripts(client),
+      listFinishedSessions(client),
+    ]);
+    return { scripts, sessions };
+  }, 'home');
   const { reload } = data;
 
   // Refresh progress when coming back from a session (not on first mount).
@@ -57,7 +55,12 @@ export default function PimpHome() {
 
   if (data.status === 'loading') return <Loading label="Loading your rounds" />;
   if (data.status === 'error') {
-    return <ErrorView message={`Couldn't load your rounds. ${data.error.message}`} onRetry={reload} />;
+    return (
+      <ErrorView
+        message={loadErrorMessage("Couldn't load your rounds.", data.error)}
+        onRetry={reload}
+      />
+    );
   }
 
   const { scripts, sessions } = data.data;

@@ -20,6 +20,7 @@ import { Button, Chip, Link } from '@/ui/controls';
 import { LadderIcon } from '@/ui/icons';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
+import { loadErrorMessage } from '@/lib/errors';
 
 const join = (items: readonly string[]) => items.join(', ');
 const sentence = (text: string) => {
@@ -93,7 +94,7 @@ export default function ScriptScreen() {
   if (content.status === 'error') {
     return (
       <ErrorView
-        message={`Couldn't load this script. ${content.error.message}`}
+        message={loadErrorMessage("Couldn't load this script.", content.error)}
         onRetry={content.reload}
       />
     );

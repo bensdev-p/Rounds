@@ -23,9 +23,11 @@ Do not build anything from later stages unless asked: voice, payments, Android r
 pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm install`
 - `pnpm dev`: run the mobile app in web mode (http://localhost:8081)
+- `pnpm start`: the everyday command. Checks Docker, starts the database, the grading server and the web app, and prints the address for a phone on the home Wi-Fi
 - `pnpm phone`: same, and prints the address to open on a phone on the home Wi-Fi (needs `pnpm db:start`; `pnpm functions:serve` for Claude grading)
 - `pnpm test`: unit tests (Vitest)
 - `pnpm typecheck` and `pnpm lint`
+- `node apps/mobile/scripts/make-icons.mjs`: redraw the app icon (home-screen, favicon) from the tokens
 - `pnpm format`: Prettier (code only; Markdown is left alone)
 - `pnpm db:start` / `pnpm db:reset`: local Supabase (needs Docker Desktop running)
 - `pnpm db:test`: pgTAP tests in `supabase/tests` (RLS)

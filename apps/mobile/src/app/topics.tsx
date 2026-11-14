@@ -16,6 +16,7 @@ import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
 import { PhiWarning } from '@/ui/PhiWarning';
 import { noWebOutline } from '@/ui/webStyles';
+import { loadErrorMessage } from '@/lib/errors';
 
 export default function Topics() {
   const { c } = useTheme();
@@ -29,7 +30,7 @@ export default function Topics() {
   if (scripts.status === 'error') {
     return (
       <ErrorView
-        message={`Couldn't load topics. ${scripts.error.message}`}
+        message={loadErrorMessage("Couldn't load topics.", scripts.error)}
         onRetry={scripts.reload}
       />
     );

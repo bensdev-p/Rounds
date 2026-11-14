@@ -53,6 +53,7 @@ import { parsePersona } from '@/lib/prefs';
 import { useAsync } from '@/lib/useAsync';
 import { useLadderRecorder } from '@/lib/useLadderRecorder';
 import { rungStates } from '@/ui/Ladder';
+import { loadErrorMessage } from '@/lib/errors';
 
 /** How long the missed rung shows before the result replaces the session. */
 const MISS_HOLD_MS = 1_000;
@@ -80,7 +81,7 @@ export default function SessionRoute() {
   if (data.status === 'error') {
     return (
       <ErrorView
-        message={`Couldn't load this topic. ${data.error.message}`}
+        message={loadErrorMessage("Couldn't load this topic.", data.error)}
         onRetry={data.reload}
       />
     );
