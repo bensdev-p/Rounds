@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { detectPhi, phiWarning, type PhiKind } from './detectPhi.ts';
+import { detectPhi, diagnosisPhiWarning, phiWarning, type PhiKind } from './detectPhi.ts';
 
 const kinds = (text: string, checkNames = false): PhiKind[] => [
   ...new Set(detectPhi(text, { checkNames }).findings.map((f) => f.kind)),
@@ -55,11 +55,73 @@ describe('detectPhi', () => {
   });
 });
 
+describe('diagnosis-only fields (patient log)', () => {
+  const log = (text: string): PhiKind[] => [
+    ...new Set(
+      detectPhi(text, { checkNames: true, diagnosisOnly: true }).findings.map((f) => f.kind),
+    ),
+  ];
+
+  it.each<[string, PhiKind]>([
+    ['DKA seen 3/14', 'date'],
+    ['CHF 11-13', 'date'],
+    ['pneumonia Nov 13', 'date'],
+    ['pneumonia 13th November', 'date'],
+    ['sepsis 123456', 'mrn'],
+    ['Mr. Alvarez CHF exacerbation', 'name'],
+  ])('flags %j as %s', (text, kind) => {
+    expect(log(text)).toContain(kind);
+  });
+
+  it.each([
+    'Diabetic ketoacidosis',
+    'Type 2 diabetes',
+    'Sepsis 3 criteria',
+    'COPD exacerbation',
+    'Stage 4 CKD',
+    'Heart failure with reduced EF',
+  ])('allows %j', (text) => {
+    expect(log(text)).toEqual([]);
+  });
+
+  it('is off by default, so lab values and short numbers still pass elsewhere', () => {
+    expect(detectPhi('platelets 150000 on 3/14').blocked).toBe(false);
+  });
+
+  it('reports a date of birth once, not also as a short date', () => {
+    expect(detectPhi('DKA 3/14/62', { diagnosisOnly: true }).findings).toEqual([
+      { kind: 'dob', match: '3/14/62', index: 4 },
+    ]);
+  });
+});
+
+describe('diagnosisPhiWarning', () => {
+  it("uses the mockup's wording and names what to remove", () => {
+    expect(diagnosisPhiWarning('Mr. Alvarez CHF exacerbation')).toBe(
+      'This looks like a patient\'s name. Remove "Mr. Alvarez" and keep only the diagnosis.',
+    );
+    expect(diagnosisPhiWarning('DKA MRN 1234567')).toBe(
+      'This looks like a medical record number. Remove "MRN 1234567" and keep only the diagnosis.',
+    );
+  });
+
+  it('names the first problem in the text', () => {
+    expect(diagnosisPhiWarning('3/14 Mrs. Lee pneumonia')).toBe(
+      'This looks like a date. Remove "3/14" and keep only the diagnosis.',
+    );
+  });
+
+  it('is null for a clean label', () => {
+    expect(diagnosisPhiWarning('Heart failure exacerbation')).toBeNull();
+    expect(diagnosisPhiWarning('')).toBeNull();
+  });
+});
+
 describe('phiWarning', () => {
   it('describes what was found', () => {
     expect(phiWarning(detectPhi('DKA'))).toBeNull();
     expect(phiWarning(detectPhi('MRN 1234567, DOB 1/2/1990'))).toBe(
-      'This looks like it contains a date of birth, a medical record number. Rounds never stores patient details. Remove it and try again.',
+      'This looks like it contains a medical record number, a date of birth. Rounds never stores patient details. Remove it and try again.',
     );
   });
 });

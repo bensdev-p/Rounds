@@ -165,6 +165,42 @@ export type Database = {
           },
         ];
       };
+      patient_logs: {
+        Row: {
+          id: string;
+          label: string;
+          logged_at: string;
+          rotation: string;
+          script_id: string | null;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          id?: string;
+          label: string;
+          logged_at?: string;
+          rotation: string;
+          script_id?: string | null;
+          user_id?: string;
+        };
+        Update: {
+          id?: string;
+          label?: string;
+          logged_at?: string;
+          rotation?: string;
+          script_id?: string | null;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'patient_logs_script_id_fkey';
+            columns: ['script_id'];
+            isOneToOne: false;
+            referencedRelation: 'illness_scripts';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
       question_flags: {
         Row: {
           created_at: string;

@@ -28,15 +28,17 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M1.3 (tab shell and Profile):** a tab bar with Pimp, Log, Review and Profile, hidden on session screens and the illness script. Progress is the Profile tab, matching `profile.png` (dark and light), with a Settings entry. Settings is a placeholder holding the daily goal. Log and Review show honest empty states. Tried on the phone. **Stage 1 is complete.**
 
-**Gaps:** Log, Review, onboarding and the real Settings.
+**M2.1 (Log):** the Log tab matches `log.png` and wireframe 08. Autocomplete against script names and aliases; the patient-detail guard runs on every keystroke (names, titles, dates, 6+ digit numbers, phone numbers and the rest), turns the field coral, says exactly what to remove and turns Save off. A diagnosis with no matching script is saved under what was typed ("No script yet"). "Logged today" shows a pass dot and "Pimped, rung N" once a session on that script is finished today, otherwise a signal dot and "Not yet". Home has "From today's patients" with one-tap Start rows, "Log one" and the empty state. New `patient_logs` table (label, optional script, rotation, time; own rows only) with pgTAP tests. Not yet tried on the phone.
 
-**Next: M2.1 Log.**
+**Gaps:** Review, onboarding and the real Settings.
+
+**Next: M2.2 Review.**
 
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Matches (M1.2). Week line M2.3, today's patients M2.1, mic icon M2.5 | Done |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line M2.3, mic icon M2.5 | Done |
 | Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
@@ -47,7 +49,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
-| Log | 08 | log | Empty state (M1.3) | M2.1 |
+| Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
 | Review + mix-up drill | 09 | review, review-light | Empty state (M1.3) | M2.2 |
 | Onboarding | 01 | — | Not built | M2.3 |
 | Settings | 12 | — | Placeholder (M1.3): daily goal and disclaimer | M2.3 (Anki part: M3.1) |
@@ -143,6 +145,9 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Filter chips on the topic picker (All, Cardio, Renal, GI; wireframe 03). Scripts need a "system" field first, which is a content change.
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
+- (14 Nov 2026) Deleting or editing a patient log. Not drawn; the table already allows deleting your own rows.
+- (14 Nov 2026) Use the Log's warning wording ('Remove "…" and keep only the diagnosis') on the topic picker search and the flag note too.
+- (14 Nov 2026) The Log's matching-script subtitle reads "Internal medicine, cardiology" in `log.png`; it needs the same "system" field as the filter chips.
 - (14 Nov 2026) Where the daily goal lives for good. M1.3 moved it from Progress to the Settings placeholder, but wireframe 12 has no row for it; onboarding (wireframe 01) sets it. Decide when Settings is built in M2.3.
 
 ---
