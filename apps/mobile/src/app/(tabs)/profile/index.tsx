@@ -1,7 +1,8 @@
 /**
- * Progress. Wireframe 11, mockup profile.png. Opened from the rank chip on
- * Home. Rank, the shifts grid and mastery, plus the daily goal. Everything is
- * derived from finished sessions; no new data is stored except the goal.
+ * Profile tab, titled "Progress". Wireframe 11, mockups profile.png and
+ * profile-light.png. Rank, the shifts grid, mastery by rotation and the entry
+ * to Settings. Everything is derived from finished sessions.
+ * The Teams row (mockup) joins above Settings in Stage 5.
  */
 import {
   masteryByRotation,
@@ -13,35 +14,25 @@ import {
 } from '@rounds/shared';
 import { listFinishedSessions, listPimpableScripts } from '@rounds/shared/api';
 import { router, useFocusEffect } from 'expo-router';
-import { ChevronLeft } from 'lucide-react-native';
+import { ChevronRight } from 'lucide-react-native';
 import { useCallback, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import { Disclaimer } from '@/components/Disclaimer';
 import { ErrorView, Loading } from '@/components/StatusView';
 import { useClient } from '@/lib/auth';
 import { plural, ROTATION_SHORT_NAMES } from '@/lib/copy';
 import { loadErrorMessage } from '@/lib/errors';
-import { MAX_ROUNDS_GOAL, MIN_ROUNDS_GOAL, useRoundsGoal } from '@/lib/prefs';
+import { useRoundsGoal } from '@/lib/prefs';
 import { useAsync } from '@/lib/useAsync';
-import { space } from '@/theme';
-import { Link, Panel, Segmented } from '@/ui/controls';
+import { space, useTheme } from '@/theme';
+import { Link, List, Panel, Row } from '@/ui/controls';
 import { RankTrack, RotationBars, ShiftGrid } from '@/ui/progress';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
 
-const GOALS = Array.from({ length: MAX_ROUNDS_GOAL - MIN_ROUNDS_GOAL + 1 }, (_, i) => {
-  const n = String(MIN_ROUNDS_GOAL + i);
-  return { value: n, label: n };
-});
-
-function goBack() {
-  if (router.canGoBack()) router.back();
-  else router.replace('/');
-}
-
 export default function Progress() {
+  const { c } = useTheme();
   const client = useClient();
-  const [goal, setGoal] = useRoundsGoal();
+  const [goal] = useRoundsGoal();
   const data = useAsync(async () => {
     const [scripts, sessions] = await Promise.all([
       listPimpableScripts(client),
@@ -86,9 +77,7 @@ export default function Progress() {
     streak.count > 0 ? `${streak.count} in a row` : `${plural(totalShifts, 'shift')} so far`;
 
   return (
-    <Screen>
-      <Link label="Pimp" icon={ChevronLeft}
-        back onPress={goBack} />
+    <Screen tab>
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         Progress
       </Txt>
@@ -123,14 +112,14 @@ export default function Progress() {
       </View>
       <ShiftGrid days={grid} label={`Shifts, last 28 days. ${streakText}.`} />
       <Txt variant="meta" tone="text2" fontSize={15} style={styles.caption}>
-        {`A shift is a day you finish rounds. Outlined days were post-call. You get one a week.`}
+        Outlined days were post-call. You get one a week.
       </Txt>
 
       <View style={styles.sectionHead}>
         <Txt variant="h3" fontSize={19} accessibilityRole="header">
           Mastered by rotation
         </Txt>
-        <Link label="All scripts" onPress={() => router.push('/collection')} />
+        <Link label="All scripts" onPress={() => router.push('/profile/collection')} />
       </View>
       <Panel>
         {rotations.length > 0 ? (
@@ -147,31 +136,18 @@ export default function Progress() {
           </Txt>
         )}
       </Panel>
-      <Txt variant="small" tone="text2" style={styles.caption}>
-        A script is mastered when you reach rung 6 on two different days.
-      </Txt>
 
-      <View style={styles.sectionHead}>
-        <Txt variant="h3" fontSize={19} accessibilityRole="header">
-          Daily goal
-        </Txt>
-        <Txt variant="meta" tone="text2" fontSize={16}>
-          {plural(goal, 'session')}
-        </Txt>
+      <View style={styles.entries}>
+        <List>
+          <Row
+            first
+            title="Settings"
+            accessibilityHint="Daily goal, and more settings later"
+            onPress={() => router.push('/profile/settings')}
+            trailing={<ChevronRight size={20} color={c.text3} />}
+          />
+        </List>
       </View>
-      <Panel style={styles.goalPanel}>
-        <Segmented
-          label="Sessions per day to finish rounds"
-          options={GOALS}
-          value={String(goal)}
-          onChange={(v) => setGoal(Number(v))}
-        />
-      </Panel>
-      <Txt variant="small" tone="text2" style={styles.caption}>
-        Finish this many sessions in a day and it counts as a shift.
-      </Txt>
-
-      <Disclaimer />
     </Screen>
   );
 }
@@ -188,5 +164,5 @@ const styles = StyleSheet.create({
     marginBottom: space.md,
   },
   caption: { marginTop: space.md },
-  goalPanel: { padding: space.sm },
+  entries: { marginTop: space.lg },
 });

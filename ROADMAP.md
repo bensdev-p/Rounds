@@ -26,7 +26,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M1.2 (mockup check):** every built screen matches its mockup in dark and light: type back to the DESIGN.md scale, spacing from the mockup CSS, persona order, "Change rotation" and long-press on Pimp me, the list feedback line, and the test fixtures hidden from students' screens.
 
-**Gaps:** there's no tab bar, Log, Review, onboarding or settings yet. Progress is a pushed screen and needs to become the Profile tab.
+**M1.3 (tab shell and Profile):** a tab bar with Pimp, Log, Review and Profile, hidden on session screens and the illness script. Progress is the Profile tab, matching `profile.png` (dark and light), with a Settings entry. Settings is a placeholder holding the daily goal. Log and Review show honest empty states. Waiting on the developer's phone check.
+
+**Gaps:** Log, Review, onboarding and the real Settings.
 
 ## Screen map
 
@@ -41,12 +43,12 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Promotion | 14 | promo | Matches (M1.2) | Done |
 | Illness script | 10 | script | Matches (M1.2). Mic icon M2.5 | Done |
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
-| Profile | 11 | profile, profile-light | Partial (`progress`, not a tab) | M1.3 |
-| Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Not built | M1.3 |
-| Log | 08 | log | Not built | M2.1 |
-| Review + mix-up drill | 09 | review, review-light | Not built | M2.2 |
+| Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
+| Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
+| Log | 08 | log | Empty state (M1.3) | M2.1 |
+| Review + mix-up drill | 09 | review, review-light | Empty state (M1.3) | M2.2 |
 | Onboarding | 01 | — | Not built | M2.3 |
-| Settings | 12 | — | Not built | M2.3 (Anki part: M3.1) |
+| Settings | 12 | — | Placeholder (M1.3): daily goal and disclaimer | M2.3 (Anki part: M3.1) |
 | Live session, voice | 04 | session | Not built | M2.5 |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
@@ -132,6 +134,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Filter chips on the topic picker (All, Cardio, Renal, GI; wireframe 03). Scripts need a "system" field first, which is a content change.
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
+- (14 Nov 2026) Where the daily goal lives for good. M1.3 moved it from Progress to the Settings placeholder, but wireframe 12 has no row for it; onboarding (wireframe 01) sets it. Decide when Settings is built in M2.3.
 
 ---
 

@@ -72,12 +72,12 @@ export default function Collection() {
   const rotation = ROTATION_NAMES[scripts[0]?.script.rotation[0] ?? 'IM'];
 
   return (
-    <Screen>
+    <Screen tab>
       <Link
         label="Progress"
         icon={ChevronLeft}
         back
-        onPress={() => (router.canGoBack() ? router.back() : router.replace('/progress'))}
+        onPress={() => (router.canGoBack() ? router.back() : router.replace('/profile'))}
       />
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
         {rotation}

@@ -31,10 +31,8 @@ export default function RootLayout() {
       {fontsLoaded || fontError ? (
         <AuthProvider>
           <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }}>
-            <Stack.Screen name="index" options={{ title: 'Rounds' }} />
-            <Stack.Screen name="topics" options={{ title: 'Choose a topic' }} />
-            <Stack.Screen name="progress" options={{ title: 'Progress' }} />
-            <Stack.Screen name="collection" options={{ title: 'All scripts' }} />
+            {/* The four tabs. Screens below cover the tab bar (session screens hide it). */}
+            <Stack.Screen name="(tabs)" options={{ title: 'Rounds' }} />
             <Stack.Screen
               name="session/[scriptId]"
               options={{ title: 'Session', gestureEnabled: false }}
