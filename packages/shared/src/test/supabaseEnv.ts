@@ -10,6 +10,8 @@ declare module 'vitest' {
   export interface ProvidedContext {
     supabaseUrl: string;
     supabaseKey: string;
+    /** Mailpit, which catches the local stack's emails (sign-in codes). */
+    mailpitUrl: string;
   }
 }
 
@@ -35,4 +37,8 @@ export default function setup(project: TestProject) {
 
   project.provide('supabaseUrl', url);
   project.provide('supabaseKey', key);
+  project.provide(
+    'mailpitUrl',
+    status.MAILPIT_URL ?? status.INBUCKET_URL ?? 'http://127.0.0.1:54324',
+  );
 }

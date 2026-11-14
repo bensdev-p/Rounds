@@ -31,6 +31,7 @@ import {
   type PatientLog,
 } from '../schemas/patientLog.ts';
 import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schemas/question.ts';
+import { ProfileSchema, type Profile } from '../profile/profile.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
 
@@ -475,4 +476,99 @@ export async function gradeAnswer(
   const parsed = GradeResponseSchema.safeParse(data);
   if (!parsed.success) throw new RoundsApiError('Grading: unexpected response');
   return parsed.data;
+}
+
+// ─── Profile ────────────────────────────────────────────────────────────────
+
+const PROFILE_COLUMNS =
+  'year, rotation, rotation_started_on, rotation_weeks, daily_goal, persona, answer_timeout';
+
+/** The student's profile, or null before onboarding. */
+export async function getProfile(client: RoundsClient): Promise<Profile | null> {
+  const { data, error } = await client.from('profiles').select(PROFILE_COLUMNS).maybeSingle();
+  if (error) throw new RoundsApiError(`Loading profile: ${error.message}`);
+  if (data === null) return null;
+  const parsed = ProfileSchema.safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Loading profile: unexpected row');
+  return parsed.data;
+}
+
+/** Creates or replaces the student's profile (onboarding, Settings). */
+export async function saveProfile(client: RoundsClient, profile: Profile): Promise<Profile> {
+  const parsed = ProfileSchema.safeParse(profile);
+  if (!parsed.success) {
+    throw new RoundsApiError(`Profile not saved: ${parsed.error.issues[0]?.message ?? 'invalid'}`);
+  }
+  const { error } = await client.from('profiles').upsert(parsed.data, { onConflict: 'user_id' });
+  if (error) throw new RoundsApiError(`Saving profile: ${error.message}`);
+  return parsed.data;
+}
+
+// ─── Accounts ───────────────────────────────────────────────────────────────
+// Every student starts as an anonymous user (no account wall, wireframe 01
+// note 2). Signing in adds an email or Apple ID to that same user, so the id,
+// and every row the student owns, stays. If the email already has an account,
+// it's a sign-in to that account instead, and this device's anonymous history
+// stays behind.
+
+export const EmailSchema = z.email();
+
+/** Which code the student was sent: one that adds the email to this user, or a sign-in code. */
+export type EmailCodeKind = 'add_email' | 'sign_in';
+
+/**
+ * Adds an email to the anonymous student and sends a 6-digit code to confirm
+ * it. Returns 'exists' (nothing sent) when the email already has an account:
+ * the screen warns, then calls `sendSignInCode`.
+ */
+export async function sendAddEmailCode(
+  client: RoundsClient,
+  email: string,
+): Promise<'sent' | 'exists'> {
+  const address = EmailSchema.parse(email.trim());
+  const { error } = await client.auth.updateUser({ email: address });
+  if (!error) return 'sent';
+  if (error.code === 'email_exists') return 'exists';
+  throw new RoundsApiError(`Sending code: ${error.message}`);
+}
+
+/** Sends a 6-digit sign-in code to an email that already has an account. Never creates one. */
+export async function sendSignInCode(client: RoundsClient, email: string): Promise<void> {
+  const address = EmailSchema.parse(email.trim());
+  const { error } = await client.auth.signInWithOtp({
+    email: address,
+    options: { shouldCreateUser: false },
+  });
+  if (error) throw new RoundsApiError(`Sending code: ${error.message}`);
+}
+
+export class WrongCodeError extends RoundsApiError {
+  override name = 'WrongCodeError';
+}
+
+/** Checks the 6-digit code. On success the client is signed in to the account. */
+export async function verifyEmailCode(
+  client: RoundsClient,
+  email: string,
+  code: string,
+  kind: EmailCodeKind,
+): Promise<void> {
+  const { error } = await client.auth.verifyOtp({
+    email: email.trim(),
+    token: code.replace(/\s/g, ''),
+    type: kind === 'add_email' ? 'email_change' : 'email',
+  });
+  if (!error) return;
+  if (error.code === 'otp_expired' || error.status === 403) throw new WrongCodeError(error.message);
+  throw new RoundsApiError(`Checking code: ${error.message}`);
+}
+
+/**
+ * Deletes the student's account and everything they own (App Store rule
+ * 5.1.1(v)). Runs in the `delete-account` Edge Function, which deletes only
+ * the caller. Sign out locally afterwards.
+ */
+export async function deleteAccount(client: RoundsClient): Promise<void> {
+  const { error } = await client.functions.invoke('delete-account', { method: 'POST' });
+  if (error) throw new RoundsApiError(`Deleting account: ${error.message}`);
 }
