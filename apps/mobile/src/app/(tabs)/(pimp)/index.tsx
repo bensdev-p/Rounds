@@ -5,18 +5,21 @@ import {
   rankFor,
   roundsToday,
   shiftStreak,
+  startOfToday,
   totalRungs,
   type PersonaId,
 } from '@rounds/shared';
-import { listFinishedSessions, listPimpableScripts } from '@rounds/shared/api';
+import { listFinishedSessions, listLogsSince, listPimpableScripts } from '@rounds/shared/api';
 import { router, useFocusEffect } from 'expo-router';
 import { useCallback, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Disclaimer } from '@/components/Disclaimer';
 import { ErrorView, Loading } from '@/components/StatusView';
+import { TodaysPatients } from '@/features/log/TodaysPatients';
 import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES, streakLine, todayLabel } from '@/lib/copy';
 import { usePersona, useRoundsGoal } from '@/lib/prefs';
+import { currentRotation } from '@/lib/rotation';
 import { useAsync } from '@/lib/useAsync';
 import { radius, space, useTheme } from '@/theme';
 import { Button, Link, Panel, Segmented } from '@/ui/controls';
@@ -39,11 +42,12 @@ export default function PimpHome() {
   const [persona, setPersona] = usePersona();
   const [goal] = useRoundsGoal();
   const data = useAsync(async () => {
-    const [scripts, sessions] = await Promise.all([
+    const [scripts, sessions, logs] = await Promise.all([
       listPimpableScripts(client),
       listFinishedSessions(client),
+      listLogsSince(client, startOfToday(new Date())),
     ]);
-    return { scripts, sessions };
+    return { scripts, sessions, logs };
   }, 'home');
   const { reload } = data;
 
@@ -66,13 +70,12 @@ export default function PimpHome() {
     );
   }
 
-  const { scripts, sessions } = data.data;
+  const { scripts, sessions, logs } = data.data;
   const now = new Date();
   const rounds = roundsToday(sessions, now, goal);
   const streak = shiftStreak(sessions, now, goal);
   const rank = rankFor(totalRungs(sessions));
-  // Until rotations can be chosen (Settings, M2.3), the first script's rotation is the current one.
-  const rotationId = scripts[0]?.script.rotation[0] ?? 'IM';
+  const rotationId = currentRotation(scripts);
   const rotation = ROTATION_NAMES[rotationId];
 
   function chooseTopic() {
@@ -87,6 +90,10 @@ export default function PimpHome() {
       { exclude: sessions.at(-1)?.script_id },
     );
     if (!scriptId) return;
+    router.push({ pathname: '/session/[scriptId]', params: { scriptId, persona } });
+  }
+
+  function startOn(scriptId: string) {
     router.push({ pathname: '/session/[scriptId]', params: { scriptId, persona } });
   }
 
@@ -155,6 +162,8 @@ export default function PimpHome() {
           </Txt>
         )}
       </Panel>
+
+      <TodaysPatients logs={logs} onStart={startOn} />
 
       <Disclaimer />
     </Screen>

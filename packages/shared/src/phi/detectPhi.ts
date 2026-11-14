@@ -3,11 +3,13 @@
  * Any finding blocks the input. This is a guard against slips, not a
  * de-identification tool: it errs toward blocking.
  */
-export type PhiKind = 'dob' | 'mrn' | 'phone' | 'ssn' | 'email' | 'address' | 'name';
+export type PhiKind = 'dob' | 'date' | 'mrn' | 'phone' | 'ssn' | 'email' | 'address' | 'name';
 
 export interface PhiFinding {
   kind: PhiKind;
   match: string;
+  /** Where the match starts in the text. Findings are sorted by it. */
+  index: number;
 }
 
 export interface PhiResult {
@@ -22,6 +24,13 @@ export interface DetectPhiOptions {
    * patient log.
    */
   checkNames?: boolean;
+  /**
+   * Diagnosis-only fields (the patient log, wireframe 08 note 1). A diagnosis
+   * label has no reason to hold numbers or dates, so this also flags any date
+   * ("3/14", "Nov 13") and digit runs of 6 or more. Off elsewhere, where lab
+   * values and blood pressures would trigger it.
+   */
+  diagnosisOnly?: boolean;
 }
 
 const MONTH =
@@ -60,28 +69,40 @@ const NAME_PATTERNS: RegExp[] = [
   /\b(?:[Pp]atient(?:'s)? name|[Pp]t name|[Nn]ame is|[Nn]amed|[Pp]t is)\b\s*:?\s*[A-Z][a-z'-]+/g,
 ];
 
+const DIAGNOSIS_ONLY_PATTERNS: { kind: PhiKind; re: RegExp }[] = [
+  // 3/14, 03-14 (month first or day first; two parts)
+  { kind: 'date', re: /\b\d{1,2}[/-]\d{1,2}\b/g },
+  // Nov 13, 13 November
+  { kind: 'date', re: new RegExp(`\\b${MONTH}\\.?\\s+\\d{1,2}(?:st|nd|rd|th)?\\b`, 'gi') },
+  { kind: 'date', re: new RegExp(`\\b\\d{1,2}(?:st|nd|rd|th)?\\s+${MONTH}\\b`, 'gi') },
+  { kind: 'mrn', re: /\b\d{6,}\b/g },
+];
+
 export function detectPhi(text: string, options: DetectPhiOptions = {}): PhiResult {
   const findings: PhiFinding[] = [];
 
-  for (const { kind, re } of PATTERNS) {
+  const patterns = [
+    ...PATTERNS,
+    ...(options.diagnosisOnly ? DIAGNOSIS_ONLY_PATTERNS : []),
+    ...(options.checkNames ? NAME_PATTERNS.map((re) => ({ kind: 'name' as const, re })) : []),
+  ];
+  for (const { kind, re } of patterns) {
     for (const match of text.matchAll(re)) {
-      findings.push({ kind, match: match[0].trim() });
-    }
-  }
-
-  if (options.checkNames) {
-    for (const re of NAME_PATTERNS) {
-      for (const match of text.matchAll(re)) {
-        findings.push({ kind: 'name', match: match[0].trim() });
+      // A span already reported (a DOB that is also a short date) is reported once.
+      if (findings.some((f) => f.index <= match.index && match.index < f.index + f.match.length)) {
+        continue;
       }
+      findings.push({ kind, match: match[0].trim(), index: match.index });
     }
   }
+  findings.sort((a, b) => a.index - b.index);
 
   return { blocked: findings.length > 0, findings };
 }
 
 const KIND_LABEL: Record<PhiKind, string> = {
   dob: 'a date of birth',
+  date: 'a date',
   mrn: 'a medical record number',
   phone: 'a phone number',
   ssn: 'a Social Security number',
@@ -95,4 +116,16 @@ export function phiWarning(result: PhiResult): string | null {
   if (!result.blocked) return null;
   const kinds = [...new Set(result.findings.map((f) => KIND_LABEL[f.kind]))];
   return `This looks like it contains ${kinds.join(', ')}. Rounds never stores patient details. Remove it and try again.`;
+}
+
+/**
+ * The patient log's check (wireframe 08 note 1): names, dates, record numbers
+ * and the rest, with a warning that says exactly what to remove, in the
+ * mockup's words: 'This looks like a patient's name. Remove "Mr. Alvarez" and
+ * keep only the diagnosis.' Null when the label is fine.
+ */
+export function diagnosisPhiWarning(label: string): string | null {
+  const [first] = detectPhi(label, { checkNames: true, diagnosisOnly: true }).findings;
+  if (!first) return null;
+  return `This looks like ${KIND_LABEL[first.kind]}. Remove "${first.match}" and keep only the diagnosis.`;
 }

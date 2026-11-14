@@ -127,7 +127,11 @@ export function Link({
       accessibilityHint={accessibilityHint}
       onPress={onPress}
       hitSlop={{ top: 12, bottom: 12, left: 8, right: 8 }}
-      style={({ pressed }) => [styles.link, back && styles.backLink, { opacity: pressed ? 0.7 : 1 }]}
+      style={({ pressed }) => [
+        styles.link,
+        back && styles.backLink,
+        { opacity: pressed ? 0.7 : 1 },
+      ]}
     >
       {Icon && <Icon size={back ? 20 : 18} color={c.ceil} />}
       <Txt
@@ -187,16 +191,25 @@ export function Segmented<T extends string>({
   );
 }
 
-/** Small round chip (rotations, confused-with links). */
+/**
+ * Small round chip: rotations and confused-with links, and the small quiet
+ * buttons on list rows ("Save" on Log, "Start" on Home) with `role="button"`.
+ */
 export function Chip({
   label,
   onPress,
   tone = 'neutral',
+  role = 'link',
+  disabled = false,
+  accessibilityLabel,
   accessibilityHint,
 }: {
   label: string;
   onPress?: () => void;
   tone?: 'neutral' | 'miss';
+  role?: 'link' | 'button';
+  disabled?: boolean;
+  accessibilityLabel?: string;
   accessibilityHint?: string | undefined;
 }) {
   const { c } = useTheme();
@@ -209,16 +222,30 @@ export function Chip({
   if (!onPress) return <View style={style}>{content}</View>;
   return (
     <Pressable
-      accessibilityRole="link"
-      accessibilityLabel={label}
+      accessibilityRole={role}
+      accessibilityLabel={accessibilityLabel ?? label}
       accessibilityHint={accessibilityHint}
+      accessibilityState={{ disabled }}
+      disabled={disabled}
       onPress={onPress}
       // 30 pt chip, 44 pt touch target.
-      hitSlop={{ top: 7, bottom: 7 }}
-      style={({ pressed }) => [style, { opacity: pressed ? 0.8 : 1 }]}
+      hitSlop={{ top: 7, bottom: 7, left: 4, right: 4 }}
+      style={({ pressed }) => [style, { opacity: disabled ? 0.45 : pressed ? 0.8 : 1 }]}
     >
       {content}
     </Pressable>
+  );
+}
+
+/** A section heading with an optional value or link on the right ("Logged today   3 patients"). */
+export function SectionHead({ title, right }: { title: string; right?: ReactNode }) {
+  return (
+    <View style={styles.sectionHead}>
+      <Txt variant="h3" accessibilityRole="header">
+        {title}
+      </Txt>
+      {right}
+    </View>
   );
 }
 
@@ -253,7 +280,11 @@ export function Row({
         <Txt variant="body" weight="bodyMedium" fontSize={17} lineHeight={23}>
           {title}
         </Txt>
-        {subtitle ? <Txt variant="small" tone="text2">{subtitle}</Txt> : null}
+        {subtitle ? (
+          <Txt variant="small" tone="text2">
+            {subtitle}
+          </Txt>
+        ) : null}
       </View>
       {trailing}
     </>
@@ -287,7 +318,11 @@ export function Panel({
   return (
     <View
       style={[
-        { backgroundColor: c.surface, borderRadius: radius[level], padding: level === 'hero' ? space.xl : space.lg },
+        {
+          backgroundColor: c.surface,
+          borderRadius: radius[level],
+          padding: level === 'hero' ? space.xl : space.lg,
+        },
         style,
       ]}
     >
@@ -330,6 +365,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     borderRadius: radius.chip,
     justifyContent: 'center',
+  },
+  sectionHead: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'baseline',
+    marginTop: space.section,
+    marginBottom: 10,
   },
   list: { borderRadius: radius.list, overflow: 'hidden' },
   row: {

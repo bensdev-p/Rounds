@@ -21,6 +21,12 @@ import {
 import { ScriptIdSchema, type IllnessScript } from '../schemas/illnessScript.ts';
 import type { SessionRecord } from '../progress/progression.ts';
 import { NewFlagSchema, type NewFlag } from '../schemas/flag.ts';
+import {
+  NewPatientLogSchema,
+  PatientLogSchema,
+  type NewPatientLog,
+  type PatientLog,
+} from '../schemas/patientLog.ts';
 import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schemas/question.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
@@ -204,6 +210,47 @@ export async function flagContent(client: RoundsClient, flag: NewFlag): Promise<
   }
   const { error } = await client.from('question_flags').insert(parsed.data);
   if (error) throw new RoundsApiError(`Sending flag: ${error.message}`);
+}
+
+/**
+ * Logs a patient: diagnosis label, matching script (or null) and rotation.
+ * Validated first, including the patient log's patient-detail check, so a
+ * bad label never leaves the device.
+ */
+export async function logPatient(client: RoundsClient, log: NewPatientLog): Promise<PatientLog> {
+  const parsed = NewPatientLogSchema.safeParse(log);
+  if (!parsed.success) {
+    throw new RoundsApiError(`Log not saved: ${parsed.error.issues[0]?.message ?? 'invalid'}`);
+  }
+  const { label, script_id, rotation } = parsed.data;
+  const { data, error } = await client
+    .from('patient_logs')
+    .insert({ label, script_id, rotation })
+    .select('id, label, script_id, rotation, logged_at')
+    .single();
+  if (error) throw new RoundsApiError(`Saving log: ${error.message}`);
+  return PatientLogSchema.parse({ ...data, logged_at: new Date(data.logged_at).toISOString() });
+}
+
+/** The student's logs since `since` (an ISO timestamp, e.g. local midnight), oldest first. */
+export async function listLogsSince(
+  client: RoundsClient,
+  since: string,
+  onReject: RejectHandler = warnRejected,
+): Promise<PatientLog[]> {
+  const rows = unwrap(
+    await client
+      .from('patient_logs')
+      .select('id, label, script_id, rotation, logged_at')
+      .gte('logged_at', since)
+      .order('logged_at'),
+    'Loading logs',
+  );
+  const parsed = parseRows(rows, (row) =>
+    PatientLogSchema.parse({ ...row, logged_at: new Date(row.logged_at).toISOString() }),
+  );
+  onReject('patient_logs', parsed.rejected);
+  return parsed.items;
 }
 
 const QuestionIdsSchema = z.array(z.strictObject({ question_id: QuestionIdSchema }));

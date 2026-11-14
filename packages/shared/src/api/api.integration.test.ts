@@ -20,7 +20,9 @@ import {
   getLadderContent,
   lastAskedQuestionIds,
   listFinishedSessions,
+  listLogsSince,
   listPimpableScripts,
+  logPatient,
   recordAttempt,
   startSession,
   type LadderContent,
@@ -67,7 +69,9 @@ describe('Rounds API against local Supabase', () => {
 
   it('lists approved scripts that have questions', async () => {
     // Approved real scripts from content/ may be seeded too; the fixtures are always there.
-    const scripts = await listPimpableScripts(await newStudent(), undefined, { includeFixtures: true });
+    const scripts = await listPimpableScripts(await newStudent(), undefined, {
+      includeFixtures: true,
+    });
     const zorblax = scripts.find((s) => s.script.id === 'zorblax-syndrome');
     // Six rungs, one with a second question (TEST_QUESTION_VARIANTS).
     expect(zorblax?.questionCount).toBe(7);
@@ -122,8 +126,14 @@ describe('Rounds API against local Supabase', () => {
 
     const sessions = await listFinishedSessions(student);
     expect(sessions).toHaveLength(2);
-    expect(sessions[0]).toMatchObject({ script_id: 'zorblax-syndrome', score: 2, status: 'missed' });
-    expect(Date.parse(sessions[0]!.ended_at)).toBeLessThanOrEqual(Date.parse(sessions[1]!.ended_at));
+    expect(sessions[0]).toMatchObject({
+      script_id: 'zorblax-syndrome',
+      score: 2,
+      status: 'missed',
+    });
+    expect(Date.parse(sessions[0]!.ended_at)).toBeLessThanOrEqual(
+      Date.parse(sessions[1]!.ended_at),
+    );
     expect(await listFinishedSessions(await newStudent())).toEqual([]);
   });
 
@@ -172,6 +182,36 @@ describe('Rounds API against local Supabase', () => {
     ).rejects.toThrow(/patient details/);
   });
 
+  it('logs patients by diagnosis label, with or without a script', async () => {
+    const student = await newStudent();
+    const before = new Date(Date.now() - 1000).toISOString();
+    const matched = await logPatient(student, {
+      label: 'Zorblax syndrome',
+      script_id: 'zorblax-syndrome',
+      rotation: 'IM',
+    });
+    expect(matched).toMatchObject({ label: 'Zorblax syndrome', script_id: 'zorblax-syndrome' });
+    await logPatient(student, { label: 'Quellan fever', script_id: null, rotation: 'IM' });
+
+    const logs = await listLogsSince(student, before);
+    expect(logs.map((l) => [l.label, l.script_id])).toEqual([
+      ['Zorblax syndrome', 'zorblax-syndrome'],
+      ['Quellan fever', null],
+    ]);
+    expect(await listLogsSince(student, new Date(Date.now() + 60_000).toISOString())).toEqual([]);
+    expect(await listLogsSince(await newStudent(), before)).toEqual([]);
+  });
+
+  it('refuses logs that look like patient details before sending them', async () => {
+    await expect(
+      logPatient(await newStudent(), {
+        label: 'Mr. Alvarez CHF',
+        script_id: null,
+        rotation: 'IM',
+      }),
+    ).rejects.toThrow('Log not saved');
+  });
+
   it('keeps each student to their own data', async () => {
     const a = await newStudent();
     const { sessionId } = await playToMiss(a, content);
@@ -181,7 +221,11 @@ describe('Rounds API against local Supabase', () => {
     const { data: attempts } = await b.from('attempts').select('id');
     expect(sessions).toEqual([]);
     expect(attempts).toEqual([]);
-    expect((await listPimpableScripts(b, undefined, { includeFixtures: true })).every((s) => s.bestRung === null)).toBe(true);
+    expect(
+      (await listPimpableScripts(b, undefined, { includeFixtures: true })).every(
+        (s) => s.bestRung === null,
+      ),
+    ).toBe(true);
 
     const finishAsB = await b.rpc('finish_ladder_session', {
       p_session_id: sessionId,
