@@ -75,6 +75,7 @@ A Python Anki add-on that:
 |---|---|---|
 | iPhone | Expo + EAS cloud build, TestFlight → App Store | Stage 2 |
 | Web app | Expo web | Stage 1 (dev), public at Stage 4 |
+| Anki add-on | Python, runs in Anki on a computer (not AnkiMobile) | Stage 3 |
 | Android | Same Expo codebase | Stage 4 or later |
 | Marketing site | Next.js | Stage 4 |
 | Desktop | Browser / PWA for now; decide later | Later |

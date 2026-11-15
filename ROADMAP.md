@@ -13,7 +13,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 1. Each screen it touches matches its mockup (dark, and light where a light mockup exists) and its wireframe's numbered notes. Flow and motion match DESIGN.md → "The session, start to finish" and the video where it shows that screen.
 2. Pure logic is in `packages/shared` with unit tests. `pnpm typecheck && pnpm lint && pnpm test` pass, and so do `pnpm db:test` after any migration.
 3. Code only adds questions as `in_review`, each tracing to a field of its script (domain rule 1).
-4. The developer has tried it on his phone via `pnpm start`.
+4. The developer has tried it: on his phone via `pnpm start` or a TestFlight build, and for the Anki add-on in Anki on his PC.
 5. The screen map below is updated.
 
 ---
@@ -36,13 +36,13 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.4 (voice spike):** measured on a throwaway branch (`m2.4-voice-spike`, not merged). About 0.5 s from the end of speech to the next question is reachable when the local matcher grades. A Claude fallback adds 1.5–2.6 s, so M2.5 plays a short "thinking" cue on a matcher miss. Speech-to-text: Deepgram Nova-3 with the question's accepted answers as expected words. Voice: Deepgram Aura-2, one voice per persona (developer's pick). Findings under M2.4 below.
 
-**Gaps:** none in Stage 2 before voice.
+**Gaps:** none in Stage 2.
 
 **M2.5 (voice session):** sessions open in voice. The attending asks in the persona's Deepgram Aura-2 voice (question audio made once per persona and speed, cached in a private `voice-cache` bucket, and fetched for the whole run when it starts). The mic goes live when the question ends: Deepgram Nova-3, streamed straight from the device with a 60 s token from `speech-token` and the question's accepted answers as expected words. Our own silence check ends the answer (0.8 s, 1.5 s on list questions) or a tap on the mic does; holding the mic keeps it listening through a long pause, and letting go ends the answer (developer's call). The transcript is graded like typed text; when the matcher misses, the attending says "Mm-hm." while Claude grades. Nothing plays on a miss. "Type instead" switches to text for the rest of the session; a session opens in text mode with one line saying why when the mic is refused or voice isn't available (Safari over http, no `DEEPGRAM_API_KEY`). The matcher reads number words as digits and skips "um" and "uh". Mic icon on Pimp me and Pimp me on this; Settings → Voice → Attending voice speed (0.8×, 1.0×, 1.2×, 1.4×, in the profile). Speech sits behind the `stt` and `tts` provider interfaces (`supabase/functions/_shared/speech`), with fakes for `functions:serve:fake`. The iPhone runs an EAS development build (`docs/PHONE.md`), which also brought two native fixes: the voice is converted to the phone's audio rate (it played fast and high), and screens rise with the iOS keyboard. The result screen's big score numeral no longer clips on iOS. In voice mode a question over three lines collapses the ladder to its strip (developer's call). New: `profiles.voice_speed` and the bucket (pgTAP tests). Tried on the phone.
 
 **M2.6 (hosting and TestFlight):** a private hosted Supabase project, `rounds-dev` (Free plan), with every migration, the auth settings from M2.3 (anonymous sign-ins, manual linking, 6-digit codes, Sign in with Apple with `com.ben.rounds`), the four Edge Functions and their secrets. Release rule (developer, 14 Nov): `rounds-dev` shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing; domain rule 2 now says so, and `supabase/hosting.json` lists the projects allowed the preview. New `pnpm content:push` sends approved and in-review scripts (never drafts or test fixtures) to the linked project in one all-or-nothing statement and retires scripts the repo drops. `eas.json` has a `production` profile and `eas submit`; store builds read the hosted URL and key from EAS environment variables and leave out the local-network permission. Email sign-in waits for SMTP: the Free plan's built-in email can't send the code template (developer's call to ship without it). Setup and each release: `docs/HOSTING.md`. Build 2 is on TestFlight and was tried on the phone: text and voice sessions, Claude grading, Sign in with Apple, delete account. **Stage 2 is complete.**
 
-**Next: Stage 3 (Anki bridge), once the developer adds its detail.**
+**Next: M3.1 Anki spike.**
 
 ## Screen map
 
@@ -179,15 +179,44 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 
 ---
 
-## Stages 3–5 (detail added when Stage 2 is done)
-- **3. Anki bridge:** M3.1, the add-on and the Anki section of Settings (wireframe 12), prototyped against a real AnKing collection. Includes the "Unsuspend 3 Anki cards" row on the result screen (`result.png`), left out until then.
+## Stage 3 — Anki bridge
+
+**Goal:** what a student misses on rounds shows up in their Anki. A Python add-on (`packages/anki-addon`) pairs with their Rounds account, uploads review statistics for cards linked to scripts, and applies the actions Rounds sends back: unsuspend cards, tag `#Rounds::missed` (PRODUCT.md → Anki bridge). It never reads or uploads card text (domain rule 6).
+
+Facts to plan around:
+- **No script has `anki_refs` yet** (0 of 30). The schema exists: `{ kind: 'note' | 'card', id }`, numeric ids only. Linking scripts to AnKing notes is real work and needs the developer's AnKing collection.
+- **Add-ons run only in Anki on a computer.** AnkiMobile on the iPhone has none, so sync happens when the student opens Anki on their PC or Mac; the phone sees results once synced.
+- **The add-on reaches Rounds through Edge Functions** on the hosted project (`rounds-dev` today), signed in with the pairing code, never with a secret key.
+- Screens: Settings → Anki (wireframe 12, note 1: one-time code, no password typed into Anki), "Anki sync status" on Review (wireframe 09, note 3: hidden until connected), "Unsuspend 3 Anki cards" on the result screen (`result.png`, `review.png`).
+
+### M3.1 Anki spike (throwaway branch)
+- A minimal add-on loaded into the developer's Anki desktop with his AnKing deck. Find out: whether AnKing note ids are stable across installs and updates (AnkiHub); how to find a script's notes without storing card text (AnKing tags, search); which review statistics the add-on can read (revlog) and how cheaply; how to unsuspend and tag safely (undo, sync with AnkiWeb).
+- Try one-time-code pairing end to end against the local stack.
+- What you get from it is findings and a recommendation (how scripts link to cards, the sync shape, how the add-on is installed: an AnkiWeb listing or a `.ankiaddon` file), not code to keep.
+
+### M3.2 Link scripts to Anki cards
+- `anki_refs` for the IM scripts, ids only, as a content change (`pnpm content:check` and `content:push`), using the approach M3.1 picks. Tooling that proposes refs from the developer's collection; the developer confirms.
+- The illness script screen may show how many cards are linked only if a mockup draws it; otherwise ask.
+
+### M3.3 Pairing and sync
+- Settings → Anki (wireframe 12): Connect Anki, a short one-time code, connected state, disconnect.
+- Tables with RLS (own rows only) and pgTAP tests: pairings, uploaded review statistics per linked card (ids and numbers only), pending actions. Edge Functions for pairing and sync. Zod schemas in `packages/shared`.
+- The add-on: pairing dialog, sync on profile open and close, applies unsuspend and tag actions, Python tests with a fake collection.
+
+### M3.4 Anki in the app
+- Result screen: "Unsuspend 3 Anki cards" (`result.png`) after a miss on a script with linked cards; tapping it queues the actions for the next sync.
+- Review: "Anki sync status" row (wireframe 09 note 3, `review.png`), hidden until connected.
+- Misses tag their script's cards `#Rounds::missed` on the next sync.
+
+## Stages 4–5 (detail added when Stage 3 is done)
 - **4. Launch:** public web portal, marketing site (copy follows DESIGN.md → Voice and copy), payments, Android.
 - **5. Expand:** all rotations, shadowing mode (including organ systems instead of rotations for MS1–2 in onboarding, wireframe 01 note 1; scripts need a "system" field first), Teams (mockups and wireframes 16–18 are ready), desktop decision, school licenses.
 
 ## Decisions for the developer (not Code)
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
 - **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
-- **Spending caps** for grading, speech and hosting: speech set at $10 per vendor (14 Nov 2026). Grading and hosting caps still needed by M2.6.
+- **Spending caps:** speech $10 per vendor (14 Nov 2026); hosting $0 (Supabase Free plan, M2.6). Grading: set a monthly spend limit on the Anthropic workspace whose key `rounds-dev` uses (not yet set).
+- **For Stage 3 (before M3.1):** which AnKing deck and version is in your Anki (and whether through AnkiHub), and that the spike may read your collection on your PC. Later: whether the add-on is listed on AnkiWeb or shared as a file.
 - **Hosted dev preview:** decided 14 Nov 2026. One private hosted project (`rounds-dev`) shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing. A production project with approved scripts only comes before anyone else gets a build (`docs/HOSTING.md`).
 
 ## Frozen unless the developer reopens them
