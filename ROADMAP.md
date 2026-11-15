@@ -214,7 +214,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) A haptic when holding the mic starts keeping it open (developer, M2.5). Holding works; it only has the button's pressed look.
 - (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
 - (14 Nov 2026) A production Supabase project and an approved-only store build, before anyone beyond the developer and the reviewer gets the app (M2.6 release rule).
-- (14 Nov 2026) Real email sending (SMTP, e.g. Resend with an owned domain). M2.6 uses Supabase's built-in email, which only reaches the project's team.
+- (14 Nov 2026) Email sign-in on the hosted project: needs SMTP (e.g. Gmail app password, or Resend with an owned domain), since the Free plan's built-in email can't send the 6-digit code template. M2.6 ships with anonymous use and Sign in with Apple only (developer's call).
 - (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
 - (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.

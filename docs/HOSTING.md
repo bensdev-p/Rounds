@@ -49,8 +49,14 @@ Deploys `grade-answer`, `delete-account`, `speak` and `speech-token`. Supabase p
 - **Deepgram** (speech): $10. Each question is voiced once per persona and speed, then cached; speech-to-text is about $0.008 a minute.
 - **Supabase**: Free plan, $0.
 
-### 4. Email
-Sign-in codes are sent by Supabase's built-in email for now. It only delivers to people in the Supabase project's team (add the reviewer under Organization → Team) and a few emails an hour. Real email sending (SMTP) comes with the production project.
+### 4. Email (not set up yet)
+On the Free plan, Supabase's built-in email can't use custom templates, and its default sign-in email has a link, not the 6-digit code the app asks for. So `config push` is refused while `config.toml` declares the code templates. **Email sign-in doesn't work on `rounds-dev` yet** (developer's call, 14 Nov 2026); use the app without an account or with Sign in with Apple.
+
+Until then, push the auth settings from a copy of `config.toml` without the `[auth.email.template.*]` sections:
+```bash
+pnpm supabase config push --workdir <folder holding supabase/config.toml without the template sections> --remote=qugvfidjzmtkrnfdokhf
+```
+To turn email on: set up SMTP (Supabase → Authentication → Emails → SMTP Settings; for example Gmail with an app password, or Resend with a domain you own), then run the normal `pnpm supabase config push`.
 
 ### 5. Content
 ```bash
