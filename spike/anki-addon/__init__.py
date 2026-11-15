@@ -148,6 +148,43 @@ def probe_find_notes(col: Collection) -> dict[str, Any]:
     return out
 
 
+def probe_branches(col: Collection) -> dict[str, Any]:
+    """One SQL pass over notes.tags (ids and tags only) instead of Anki search.
+
+    Counts notes per tag branch for each script, and the narrower sets a
+    clinical student would care about (Step 2 #Subjects, Step 2 B&B).
+    """
+    cfg = config()
+    t0 = time.perf_counter()
+    rows = col.db.all("select id, tags from notes where tags like '%#AK_%'")
+    t1 = time.perf_counter()
+    out: dict[str, Any] = {"notes_scanned": len(rows), "scan_ms": round((t1 - t0) * 1000), "scripts": {}}
+    for script_id, keywords in cfg.get("scripts", {}).items():
+        kws = [k.lower() for k in keywords]
+        sets: dict[str, set[int]] = {}
+        subject_tags: set[str] = set()
+        for nid, tags in rows:
+            for t in tags.split():
+                parts = t.split("::")
+                # Match on the topic parts, not on resource ids like #AMBOSS::Dka1Jk.
+                if parts[1:2] == ["#AMBOSS"]:
+                    continue
+                if not any(k in p.lower() for p in parts[2:] for k in kws):
+                    continue
+                sets.setdefault("all", set()).add(nid)
+                sets.setdefault("::".join(parts[:2]), set()).add(nid)
+                if parts[:2] == ["#AK_Step2_v12", "#Subjects"]:
+                    subject_tags.add(t)
+        out["scripts"][script_id] = {
+            "counts": dict(sorted(((k, len(v)) for k, v in sets.items()), key=lambda kv: -kv[1])),
+            "step2_subject_tags": sorted(subject_tags),
+        }
+    out["match_ms"] = round((time.perf_counter() - t1) * 1000)
+    out["card_id_range"] = col.db.first("select min(id), max(id) from cards")
+    out["note_id_range"] = col.db.first("select min(id), max(id) from notes")
+    return out
+
+
 # ---------------------------------------------------------------- probe 3
 
 
@@ -454,6 +491,7 @@ def setup_menu() -> None:
     items = [
         ("1. Environment", lambda: run_probe("Environment", probe_environment)),
         ("2. Find script notes by tag", lambda: run_probe("Find notes", probe_find_notes)),
+        ("2b. Tag branches (SQL pass)", lambda: run_probe("Branches", probe_branches)),
         ("3. Review stats timing", lambda: run_probe("Stats", probe_stats)),
         ("4. Write test (spike profile only)", probe_write),
         ("4b. Sync test: tag one note", lambda: sync_test_tag(True)),
