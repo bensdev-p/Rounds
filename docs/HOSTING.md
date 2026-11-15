@@ -42,7 +42,7 @@ Type the keys yourself; never paste them into a chat. `DEEPGRAM_API_KEY` needs t
 ```bash
 pnpm supabase functions deploy
 ```
-Deploys `grade-answer`, `delete-account`, `speak` and `speech-token`. Supabase provides `SUPABASE_URL` and the keys they read.
+Deploys `grade-answer`, `delete-account`, `speak`, `speech-token`, `anki-pair` and `anki-sync`. Supabase provides `SUPABASE_URL` and the keys they read. The two Anki functions run with the gateway's JWT check off (`supabase/config.toml`), because the add-on sends a pairing code or device token instead; they check callers themselves.
 
 ### 3. Spending caps
 - **Anthropic** (grading): in the Anthropic Console, set a monthly spend limit on the workspace that owns the key.

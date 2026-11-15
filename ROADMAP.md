@@ -46,7 +46,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M3.2 (Anki links):** `anki_refs` hold AnKing note ids only, each with an optional rung (`{ kind: 'note', id, rung? }`); `content:check` allows at most 3 notes per rung and 5 core notes (no rung) per script, and no note twice (developer's call). Links are left out of the approval hash, so relinking doesn't send a script back to the reviewer. A developer-only Anki add-on, `packages/anki-linker` (Tools → Rounds: link scripts), proposes notes from AnKing's Step 2 `#Subjects` tags, reading ids and tags only; notes under a sub-topic are listed but not ticked, and Browse topics… and Search words… cover scripts AnKing names differently (COPD is "Obstructive lung disease"). The developer confirms per script and saves `links.json`, which `pnpm content:link-anki` writes into the scripts. **All 30 scripts are linked: 222 notes** (105 core, 57 recall, 6 workup, 54 management), from the developer's collection; testers will double-check them. No linked-card count on the illness script screen (not drawn). Local database reset with the links. Pushed to `rounds-dev` (30 scripts, 222 notes, checked there). **M3.2 is complete.**
 
-**Next: M3.3 Pairing and sync.**
+**M3.3 (pairing and sync):** Settings → Anki comes first, as wireframe 12 draws it: two lines, **Connect Anki**, and the code in the drawn caption ("Install the Rounds add-on, then enter this code: ABCD-2345", 10 minutes, once); tapping again makes a new code. The panel checks every 3 s and turns into "Anki connected", "Last synced today, 8:14 pm" and **Disconnect** (asks first) once the add-on claims it (not drawn). Students without an account can connect, and one Anki connection per account; connecting again replaces it (developer, 15 Nov). New tables `anki_pairings` (code and token hashed, not readable by the app), `anki_card_stats` (ids and numbers only, replaced each sync, forgotten on disconnect), `anki_actions` (queued only through `queue_anki_action`, which takes the note ids from the script: the missed rung's notes, else the core notes) and a wrong-code limit (10 per 10 minutes per caller), with pgTAP tests. Edge Functions `anki-pair` (start, claim) and `anki-sync` (pull, push, disconnect), strict Zod shapes in `packages/shared` that refuse card text. The student add-on `packages/anki-addon`: Tools → Rounds (Connect, Sync now, Disconnect), the token kept per Anki profile, sync on profile open, after Anki's sync and (upload only) on close, unsuspend and tag in one undo step ("Rounds: apply changes") with a tooltip naming the counts, `#Rounds::missed` put back every sync; Python tests with a fake collection. `pnpm anki:queue` queues an action locally until M3.4's row exists. Deployed to `rounds-dev` (migration, `anki-pair`, `anki-sync`); `pnpm anki:addon:build --hosted` makes the add-on file for it. Tried by the developer on the phone and in Anki on his PC. **M3.3 is complete.**
+
+**Next: M3.4 Anki in the app.**
 
 ## Screen map
 
@@ -66,7 +68,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.4 | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
-| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki part M3.3 | Done |
+| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki first, as drawn: Connect Anki, one-time code, connected state and Disconnect (M3.3, connected state not drawn) | Done |
 | Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code waits for SMTP on the hosted project | Done |
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
@@ -284,6 +286,9 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (15 Nov 2026) An animated ladder icon while the app loads (launch/splash), like openGym's (developer; reference video to come). Not drawn yet; would follow DESIGN.md → Motion (rung fill, Reduce Motion).
 - (15 Nov 2026) In a voice session, type the question out word by word in time with the attending's voice, as the vision video does, instead of showing it all at once (developer). Check `apps/video` and DESIGN.md → Motion (Reduce Motion shows it whole); the question still never pushes the ladder or panel.
 - (15 Nov 2026) Protecting `#Rounds::missed` in AnkiHub (its protected tags) as an alternative to re-applying it every sync (M3.1).
+- (15 Nov 2026) Taking `#Rounds::missed` off a note once its miss clears (M2.2's rule: a later ladder passes the rung, or a week). M3.3 only adds and re-adds the tag.
+- (15 Nov 2026) More than one Anki connection per account (two profiles or two computers). M3.3 keeps one; connecting again replaces it.
+- (15 Nov 2026) The wrong-code limit counts by the first `X-Forwarded-For` address, which a caller can set. The code's size (31⁸, 10 minutes, once) is the real protection; revisit before launch.
 
 ---
 

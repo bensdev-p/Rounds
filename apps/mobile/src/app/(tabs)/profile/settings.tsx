@@ -1,5 +1,5 @@
 /**
- * Settings, wireframe 12 without the Anki part (M3.1). The daily goal isn't
+ * Settings, wireframe 12. Anki first, as drawn (M3.3). The daily goal isn't
  * drawn; it lives here above Voice (developer's call, M2.3). Voice: the
  * attending's speed (M2.5) and the answer timeout.
  */
@@ -15,6 +15,7 @@ import { router } from 'expo-router';
 import { Check, ChevronLeft, ChevronRight } from 'lucide-react-native';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
+import { AnkiSettings } from '@/components/AnkiSettings';
 import { Disclaimer } from '@/components/Disclaimer';
 import { useAccount } from '@/lib/auth';
 import { plural } from '@/lib/copy';
@@ -57,9 +58,11 @@ export default function Settings() {
         Settings
       </Txt>
 
+      <SectionHead title="Anki" style={styles.firstSection} />
+      <AnkiSettings />
+
       <SectionHead
         title="Daily goal"
-        style={styles.firstSection}
         right={
           <Txt variant="meta" tone="text2">
             {plural(goal, 'session')}

@@ -33,6 +33,14 @@ import {
 import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schemas/question.ts';
 import { ProfileSchema, type Profile } from '../profile/profile.ts';
 import type { CueId, VoiceSpeed } from '../voice/voice.ts';
+import {
+  AnkiPairingCodeSchema,
+  AnkiPairingSchema,
+  QueueAnkiActionSchema,
+  type AnkiPairing,
+  type AnkiPairingCode,
+  type QueueAnkiAction,
+} from '../anki/anki.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
 
@@ -630,4 +638,57 @@ export async function fetchSpeech(
   });
   if (!response.ok) throw new RoundsApiError(`Voice: HTTP ${response.status}`);
   return response;
+}
+
+// ─── Anki (M3.3) ────────────────────────────────────────────────────────────
+
+/** A one-time code for the Anki add-on (`anki-pair`, Settings → Anki). */
+export async function startAnkiPairing(client: RoundsClient): Promise<AnkiPairingCode> {
+  const { data, error } = await client.functions.invoke<unknown>('anki-pair', {
+    method: 'POST',
+    body: { op: 'start' },
+  });
+  if (error) throw new RoundsApiError(`Anki code: ${error.message}`);
+  const parsed = AnkiPairingCodeSchema.safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Anki code: unexpected response');
+  return parsed.data;
+}
+
+/** The student's Anki pairing (pending code or connection), or null. */
+export async function getAnkiPairing(client: RoundsClient): Promise<AnkiPairing | null> {
+  const result = await client
+    .from('anki_pairings')
+    .select('code_expires_at, claimed_at, last_sync_at')
+    .maybeSingle();
+  if (result.error) throw new RoundsApiError(`Anki connection: ${result.error.message}`);
+  if (!result.data) return null;
+  const parsed = AnkiPairingSchema.safeParse(result.data);
+  if (!parsed.success) throw new RoundsApiError('Anki connection: unexpected row');
+  return parsed.data;
+}
+
+/** Disconnects Anki: the add-on's token stops working and uploaded stats are forgotten. */
+export async function disconnectAnki(client: RoundsClient): Promise<void> {
+  const { data } = await client.auth.getUser();
+  if (!data.user) throw new RoundsApiError('Disconnecting Anki: not signed in');
+  const { error } = await client.from('anki_pairings').delete().eq('user_id', data.user.id);
+  if (error) throw new RoundsApiError(`Disconnecting Anki: ${error.message}`);
+}
+
+/**
+ * Queues an Anki action for a miss: the rung's linked notes, or the script's
+ * core notes. Returns the action id, or null when the script has no linked notes.
+ */
+export async function queueAnkiAction(
+  client: RoundsClient,
+  action: QueueAnkiAction,
+): Promise<string | null> {
+  const input = QueueAnkiActionSchema.parse(action);
+  const { data, error } = await client.rpc('queue_anki_action', {
+    p_script_id: input.script_id,
+    p_rung: input.rung ?? '',
+    p_kind: input.kind,
+  });
+  if (error) throw new RoundsApiError(`Queueing Anki action: ${error.message}`);
+  return data ?? null;
 }

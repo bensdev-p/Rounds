@@ -26,3 +26,4 @@ export * from './voice/endOfTurn.ts';
 export * from './voice/keyterms.ts';
 export * from './voice/voice.ts';
 export * from './voice/pcm.ts';
+export * from './anki/anki.ts';

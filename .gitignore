@@ -26,3 +26,4 @@ supabase/functions/grade-answer/eval/results/
 __pycache__/
 packages/anki-linker/rounds_linker/user_files/
 packages/anki-linker/rounds_linker/meta.json
+packages/anki-addon/rounds_anki/meta.json
