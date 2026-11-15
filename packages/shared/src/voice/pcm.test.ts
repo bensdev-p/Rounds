@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { concatBytes, MIC_FRAME_SAMPLES, MicResampler, PcmDecoder } from './pcm.ts';
+import { concatBytes, MIC_FRAME_SAMPLES, MicResampler, PcmDecoder, resample } from './pcm.ts';
 
 describe('MicResampler', () => {
   it('makes 20 ms frames at 16 kHz from 48 kHz input, across chunk boundaries', () => {
@@ -34,6 +34,24 @@ describe('PcmDecoder', () => {
     const second = decoder.push(bytes.subarray(3));
     expect(Array.from(first)).toEqual([0.5]);
     expect(Array.from(second)).toEqual([-0.5, 0]);
+  });
+});
+
+describe('resample', () => {
+  it('doubles the samples from 24 kHz to 48 kHz, keeping the duration', () => {
+    const out = resample(new Float32Array([0, 1, 0, -1]), 24_000, 48_000);
+    expect(out).toHaveLength(8);
+    expect(Array.from(out.slice(0, 4))).toEqual([0, 0.5, 1, 0.5]);
+  });
+
+  it('keeps the length in time for 44.1 kHz devices', () => {
+    const second = new Float32Array(24_000);
+    expect(resample(second, 24_000, 44_100)).toHaveLength(44_100);
+  });
+
+  it('leaves matching rates alone', () => {
+    const same = new Float32Array([0.25]);
+    expect(resample(same, 24_000, 24_000)).toBe(same);
   });
 });
 

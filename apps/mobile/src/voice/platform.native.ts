@@ -4,7 +4,7 @@
  * context for playback and a recorder that hands back raw samples.
  * The audio session plays through the speaker while the mic is open.
  */
-import { MicResampler } from '@rounds/shared';
+import { MicResampler, resample } from '@rounds/shared';
 import { fetch as expoFetch } from 'expo/fetch';
 import { AudioContext, AudioManager, AudioRecorder } from 'react-native-audio-api';
 import type { AudioOut, Mic, MicFrame, MicPermission, VoicePlatform } from './types';
@@ -23,14 +23,17 @@ const out: AudioOut = {
   latency: 0,
   schedule(samples, sampleRate, when) {
     const c = context();
-    const buffer = c.createBuffer(1, samples.length, sampleRate);
-    buffer.copyToChannel(new Float32Array(samples), 0);
+    // The library plays buffers at the device's rate whatever rate they were
+    // made with, so convert first (else the voice is fast and high-pitched).
+    const atDeviceRate = resample(samples, sampleRate, c.sampleRate);
+    const buffer = c.createBuffer(1, atDeviceRate.length, c.sampleRate);
+    buffer.copyToChannel(new Float32Array(atDeviceRate), 0);
     const source = c.createBufferSource();
     source.buffer = buffer;
     source.connect(c.destination);
     source.start(when);
     return {
-      duration: buffer.duration,
+      duration: atDeviceRate.length / c.sampleRate,
       stop: () => {
         try {
           source.stop();

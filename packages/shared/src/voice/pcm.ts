@@ -87,6 +87,29 @@ export class PcmDecoder {
   }
 }
 
+/**
+ * Converts samples from one rate to another (linear interpolation). The
+ * iPhone's audio library plays a buffer at the device's own rate (48 kHz)
+ * whatever rate it was made with, so the attending's 24 kHz voice is
+ * converted first; otherwise it plays twice as fast and an octave high.
+ */
+export function resample(samples: Float32Array, fromRate: number, toRate: number): Float32Array {
+  if (fromRate === toRate || samples.length === 0) return samples;
+  const length = Math.max(1, Math.round((samples.length * toRate) / fromRate));
+  const out = new Float32Array(length);
+  const step = fromRate / toRate;
+  for (let i = 0; i < length; i++) {
+    const position = i * step;
+    const index = Math.floor(position);
+    const next = Math.min(index + 1, samples.length - 1);
+    const fraction = position - index;
+    const a = samples[Math.min(index, samples.length - 1)] ?? 0;
+    const b = samples[next] ?? 0;
+    out[i] = a + (b - a) * fraction;
+  }
+  return out;
+}
+
 /** Joins byte pieces into one array. */
 export function concatBytes(parts: readonly Uint8Array[]): Uint8Array {
   const total = parts.reduce((n, p) => n + p.length, 0);
