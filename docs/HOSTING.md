@@ -34,7 +34,7 @@ pnpm supabase config diff
 ```bash
 pnpm supabase config push
 ```
-Sends the auth settings from `supabase/config.toml`: "Confirm email" on, anonymous sign-ins, manual linking (for Apple), the 6-digit code email templates, and Sign in with Apple with `com.ben.rounds` as the client id. Read the diff before saying yes.
+Sends the auth settings from `supabase/config.toml`: "Confirm email" on, anonymous sign-ins, manual linking (for Apple), the 6-digit code email templates, and Sign in with Apple with `com.ben.rounds` as the client id. The `[remotes.rounds-dev]` block at the end of `config.toml` keeps the hosted project's own pooler and storage settings, a 60 s gap between code emails, and no localhost redirect. Read the diff before saying yes.
 ```bash
 pnpm supabase secrets set ANTHROPIC_API_KEY=... DEEPGRAM_API_KEY=... GRADER_MODEL=claude-opus-5-5
 ```
