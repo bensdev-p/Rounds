@@ -88,7 +88,42 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1578670876178"
+      },
+      {
+        "kind": "note",
+        "id": "1543274938312",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1555757715051",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1581107333267",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1495753784346",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1523551767770",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1543275630756",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Clinical Practice Guideline by IDSA and SHEA: 2021 Focused Update Guidelines on Management of Clostridioides difficile Infection in Adults"

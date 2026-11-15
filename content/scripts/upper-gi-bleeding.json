@@ -89,7 +89,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1531907221280"
+      },
+      {
+        "kind": "note",
+        "id": "1535752586086"
+      },
+      {
+        "kind": "note",
+        "id": "1543178936469"
+      },
+      {
+        "kind": "note",
+        "id": "1543191124336"
+      },
+      {
+        "kind": "note",
+        "id": "1550842808822"
+      }
+    ],
     "sources": [
       {
         "title": "ACG Clinical Guideline: Upper Gastrointestinal and Ulcer Bleeding (2021)"

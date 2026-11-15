@@ -90,7 +90,38 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1482959756657",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1482959769125",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1539943644042",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1495729518859",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1554630354556",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1578616580406",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "AGA Clinical Practice Guidelines on the Gastrointestinal Evaluation of Iron Deficiency Anemia (2020)"

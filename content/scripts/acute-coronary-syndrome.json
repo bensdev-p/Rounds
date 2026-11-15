@@ -140,7 +140,73 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1471899395392"
+      },
+      {
+        "kind": "note",
+        "id": "1472320389702"
+      },
+      {
+        "kind": "note",
+        "id": "1496961116835"
+      },
+      {
+        "kind": "note",
+        "id": "1497314069507"
+      },
+      {
+        "kind": "note",
+        "id": "1550527900362"
+      },
+      {
+        "kind": "note",
+        "id": "1497804272202",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1543516065507",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550522074335",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1471899090660",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1497804636687",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1550522074056",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1472747857568",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1522940134564",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555271601101",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes"

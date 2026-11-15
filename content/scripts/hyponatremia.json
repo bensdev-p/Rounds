@@ -92,7 +92,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1496783896138"
+      },
+      {
+        "kind": "note",
+        "id": "1497567515289"
+      },
+      {
+        "kind": "note",
+        "id": "1535224314327"
+      },
+      {
+        "kind": "note",
+        "id": "1550658787885"
+      },
+      {
+        "kind": "note",
+        "id": "1555494262417"
+      }
+    ],
     "sources": [
       {
         "title": "Clinical practice guideline on diagnosis and treatment of hyponatraemia (ESE, ERA-EDTA and ESICM, 2014)"
