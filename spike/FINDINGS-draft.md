@@ -33,6 +33,13 @@ Tags: #AK_Step1_v12, #AK_Step2_v12, #AK_Step3_v12, #AK_Other (44,969 tags).
 - Reading stats for 933 linked cards: 6 ms. All 35,097 cards: 127 ms.
 - Payload: 186 KB for 933 cards (with GUIDs); 7 MB for every card. Upload linked cards only.
 
+## Writing (probe 4, "Rounds spike" profile restored from a backup)
+- Unsuspend 3 cards + tag their notes `#Rounds::missed` in one `CollectionOp`, wrapped with
+  `add_custom_undo_entry` / `merge_undo_entries`: Edit → Undo shows "Rounds: apply changes" and
+  undoes both in one step (developer checked).
+- After: queue -1 → 0 (new), usn → -1, mod updated: Anki marks them for the next AnkiWeb sync
+  exactly like hand edits.
+
 ## AnkiHub and tags
 - An AnkiHub update replaces a note's tags except protected, internal and `AnkiHub_Optional::`
   ones (`importing.py:998-1014`), so `#Rounds::missed` is wiped on update. The add-on should
