@@ -165,7 +165,7 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 - A hosted Supabase project, Edge Functions with a spending cap on the API key, an EAS build and TestFlight. The developer has no Mac, so cloud builds only.
 - **Accounts on the hosted project (from M2.3):** keep "Confirm email" on, turn on anonymous sign-ins and manual linking, use code email templates like `supabase/templates/`, deploy `delete-account`, and set up real email sending (SMTP).
 - **Sign in with Apple (developer setup):** Apple Developer Program membership; bundle id `com.ben.rounds` (in `app.json`, with `usesAppleSignIn`); EAS switches on the capability during the cloud build; in the hosted Supabase project, Authentication → Providers → Apple with `com.ben.rounds` as a client id (no secret needed for the native flow). Try it on the first TestFlight build: the web app doesn't offer Apple.
-- **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. Before M2.6, decide how the developer tests on a hosted backend while scripts are still in review. One option is a separate private dev project that's allowed to use the preview. That would change domain rule 2, which today says the preview flag is never set on a hosted database, so it needs the developer's explicit OK.
+- **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. **Decided (developer, 14 Nov 2026):** a private hosted dev project may show the preview; only the developer and the reviewer use it, through TestFlight internal testing. Domain rule 2 updated; `pnpm content:push --preview` only works for projects in `supabase/hosting.json` → `previewProjects`.
 - **Notes for the M2.6 plan (from M2.5):**
   - Deploy all four Edge Functions: `grade-answer`, `delete-account`, `speak`, `speech-token`. Set the secrets `ANTHROPIC_API_KEY` and `DEEPGRAM_API_KEY` (Member role, needed to grant streaming tokens). Pushing the migrations creates the private `voice-cache` bucket, which only the functions use.
   - The EAS project is linked (`app.json` → `extra.eas.projectId`, owner `benfb03`). `eas.json` has only a `development` profile; TestFlight needs a store profile (for example `production`) and `eas submit`.
@@ -186,7 +186,7 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
 - **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
 - **Spending caps** for grading, speech and hosting: speech set at $10 per vendor (14 Nov 2026). Grading and hosting caps still needed by M2.6.
-- **Hosted dev preview** (see M2.6).
+- **Hosted dev preview:** decided 14 Nov 2026. One private hosted project (`rounds-dev`) shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing. A production project with approved scripts only comes before anyone else gets a build (`docs/HOSTING.md`).
 
 ## Frozen unless the developer reopens them
 Mockups, wireframes and the vision video (finished) · new progression mechanics · Teams before Stage 5 · marketing site · Android · desktop · payments.
@@ -213,6 +213,10 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Tidy the text-mode session with the iPhone keyboard up (developer, M2.5): the answer box now stays above the keyboard, but the layout needs a cleanup pass.
 - (14 Nov 2026) A haptic when holding the mic starts keeping it open (developer, M2.5). Holding works; it only has the button's pressed look.
 - (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
+- (14 Nov 2026) A production Supabase project and an approved-only store build, before anyone beyond the developer and the reviewer gets the app (M2.6 release rule).
+- (14 Nov 2026) Real email sending (SMTP, e.g. Resend with an owned domain). M2.6 uses Supabase's built-in email, which only reaches the project's team.
+- (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
+- (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 
 ---
