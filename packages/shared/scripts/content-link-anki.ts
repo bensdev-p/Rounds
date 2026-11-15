@@ -8,7 +8,7 @@ import { readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { AnkiLinksFileSchema, applyAnkiLinks } from '../src/content/ankiLinks.ts';
 import { checkContent } from '../src/content/contentFile.ts';
-import { fail, loadContent, sha256, writeContentFile } from './content.ts';
+import { fail, loadContent, sha256, writeAnkiRefs } from './content.ts';
 
 const args = process.argv.slice(2);
 const path = args.find((a) => !a.startsWith('--'));
@@ -43,7 +43,7 @@ for (const s of result.summary) {
 if (dryRun) {
   console.log(`Dry run: ${result.changed.length} script(s) would change. Nothing written.`);
 } else {
-  for (const f of result.changed) writeContentFile(f);
+  for (const f of result.changed) writeAnkiRefs(f.script.id, f.script.anki_refs);
   console.log(
     `${result.changed.length} script(s) updated. Next: pnpm content:check, pnpm content:seed, pnpm db:reset.`,
   );
