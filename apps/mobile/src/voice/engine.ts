@@ -9,9 +9,11 @@ import {
   CUES,
   endNow,
   endOfTurnConfig,
+  hold,
   initialTurn,
   keytermsFor,
   onFrame,
+  release,
   type CueId,
   type PersonaId,
   type Question,
@@ -36,14 +38,18 @@ export type VoiceUnavailable = 'unsupported' | 'denied' | 'server';
 
 export interface ListenResult {
   transcript: string;
-  /** Tapped: the student ended it. */
-  endedBy: 'silence' | 'tap' | 'cancel';
+  /** Tapped or let go: the student ended it. */
+  endedBy: 'silence' | 'tap' | 'release' | 'cancel';
 }
 
 export interface Listening {
   result: Promise<ListenResult>;
   /** The mic was tapped: end the answer now (wireframe 04 note 3). */
   endNow(): void;
+  /** The mic is being held: keep listening through any pause. */
+  hold(): void;
+  /** The held mic was let go: end the answer now. */
+  release(): void;
   /** Leave without an answer ("Type instead", "I don't know", closing). */
   cancel(): void;
 }
@@ -253,6 +259,14 @@ export class VoiceEngine {
       endNow: () => {
         turn = endNow(turn);
         finishUp('tap');
+      },
+      hold: () => {
+        turn = hold(turn);
+      },
+      release: () => {
+        if (!turn.held) return;
+        turn = release(turn);
+        finishUp('release');
       },
       cancel: () => finishUp('cancel'),
     };

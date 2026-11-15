@@ -4,8 +4,10 @@ import { gradeLocally } from '../grading/localGrader.ts';
 import {
   endNow,
   endOfTurnConfig,
+  hold,
   initialTurn,
   onFrame,
+  release,
   SILENCE_MS,
   type TurnState,
 } from './endOfTurn.ts';
@@ -77,6 +79,21 @@ describe('end of turn', () => {
       [QUIET, frames(2_000)],
     ]);
     expect(state.phase).toBe('waiting');
+  });
+
+  it('holding the mic keeps listening through a long pause; letting go ends it', () => {
+    const talking = feed('single', [[LOUD, frames(500)]]).state;
+    const held = feed('single', [[QUIET, frames(5_000)]], hold(talking)).state;
+    expect(held.phase).toBe('speaking');
+    // Still listening while held, even before any speech.
+    expect(feed('single', [[QUIET, frames(5_000)]], hold(initialTurn)).state.phase).toBe('waiting');
+    expect(release(held)).toMatchObject({ phase: 'ended', endedBy: 'release', held: false });
+  });
+
+  it('letting go without holding, or after the end, changes nothing', () => {
+    expect(release(initialTurn)).toBe(initialTurn);
+    const ended = endNow(initialTurn);
+    expect(hold(ended)).toBe(ended);
   });
 
   it('a tap ends it at once, even before speech', () => {

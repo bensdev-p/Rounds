@@ -3,9 +3,11 @@
  * the waveform (a flat row of dots while the attending asks; live bars once
  * the question ends; still on the miss) and the live transcript, which always
  * reserves three lines so the panel never changes height. Tapping the mic ends
- * the answer. Below it: "Type instead" and "I don't know".
+ * the answer; holding it keeps listening through a long pause, and letting go
+ * ends it (developer's call, M2.5). Below it: "Type instead" and "I don't know".
  */
 import { Keyboard, Mic } from 'lucide-react-native';
+import { useRef } from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { useReduceMotion } from '@/lib/useReduceMotion';
 import { radius, space, useTheme } from '@/theme';
@@ -29,6 +31,8 @@ export function VoicePanel({
   hint,
   warning,
   onEndAnswer,
+  onHold,
+  onRelease,
   onTypeInstead,
   onDontKnow,
   dontKnowHint,
@@ -42,6 +46,10 @@ export function VoicePanel({
   hint: string | null;
   warning: string | null;
   onEndAnswer: () => void;
+  /** Long press on the mic: keep listening through any pause. */
+  onHold: () => void;
+  /** The held mic was let go: end the answer. */
+  onRelease: () => void;
   onTypeInstead: () => void;
   onDontKnow: () => void;
   dontKnowHint: string;
@@ -51,6 +59,7 @@ export function VoicePanel({
   const { c } = useTheme();
   const reduceMotion = useReduceMotion();
   const live = phase === 'listening';
+  const holding = useRef(false);
   // Reduce Motion: the bars show as drawn instead of moving.
   const amount = reduceMotion ? 1 : 0.25 + 0.75 * level;
 
@@ -61,10 +70,24 @@ export function VoicePanel({
           <Pressable
             accessibilityRole="button"
             accessibilityLabel={live ? 'Done answering' : 'Microphone'}
-            accessibilityHint={live ? 'Ends your answer now' : 'Live once the question ends'}
+            accessibilityHint={
+              live
+                ? 'Tap to finish. Hold while you think, and let go when you are done'
+                : 'Live once the question ends'
+            }
             accessibilityState={{ disabled: !live }}
             disabled={!live}
             onPress={onEndAnswer}
+            delayLongPress={300}
+            onLongPress={() => {
+              holding.current = true;
+              onHold();
+            }}
+            onPressOut={() => {
+              if (!holding.current) return;
+              holding.current = false;
+              onRelease();
+            }}
             hitSlop={8}
             style={({ pressed }) => [
               styles.mic,

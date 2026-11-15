@@ -4,6 +4,8 @@
  * and then stopped speaking. A pause mid-answer doesn't end the turn, and list
  * questions wait longer, since students pause between items.
  * Wireframe 04 note 3: the answer also ends on a tap (`endNow`).
+ * Holding the mic keeps it listening through any pause; letting go ends the
+ * answer (developer's call, M2.5).
  */
 import type { Question } from '../schemas/question.ts';
 
@@ -34,14 +36,17 @@ export interface TurnState {
   voicedRunMs: number;
   /** When the last loud frame ended (ms), once speaking. The end of speech, for timing. */
   lastVoiceAt: number | null;
-  /** 'tap' when the student ended it, 'silence' when the check did. */
-  endedBy: 'silence' | 'tap' | null;
+  /** The student is holding the mic: silence doesn't end the answer. */
+  held: boolean;
+  /** 'tap' or 'release' when the student ended it, 'silence' when the check did. */
+  endedBy: 'silence' | 'tap' | 'release' | null;
 }
 
 export const initialTurn: TurnState = {
   phase: 'waiting',
   voicedRunMs: 0,
   lastVoiceAt: null,
+  held: false,
   endedBy: null,
 };
 
@@ -63,6 +68,7 @@ export function onFrame(state: TurnState, config: EndOfTurnConfig, frame: Frame)
       : { ...state, voicedRunMs: run };
   }
   if (loud) return { ...state, lastVoiceAt: frame.at };
+  if (state.held) return state;
   const quietFor = frame.at - (state.lastVoiceAt ?? frame.at);
   return quietFor >= config.silenceMs ? { ...state, phase: 'ended', endedBy: 'silence' } : state;
 }
@@ -70,4 +76,15 @@ export function onFrame(state: TurnState, config: EndOfTurnConfig, frame: Frame)
 /** The student tapped the mic: the answer ends now. */
 export function endNow(state: TurnState): TurnState {
   return state.phase === 'ended' ? state : { ...state, phase: 'ended', endedBy: 'tap' };
+}
+
+/** The student is holding the mic: keep listening however long they pause. */
+export function hold(state: TurnState): TurnState {
+  return state.phase === 'ended' || state.held ? state : { ...state, held: true };
+}
+
+/** The student let go of the mic: the answer ends now. */
+export function release(state: TurnState): TurnState {
+  if (state.phase === 'ended' || !state.held) return state;
+  return { ...state, held: false, phase: 'ended', endedBy: 'release' };
 }

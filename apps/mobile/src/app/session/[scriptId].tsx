@@ -558,6 +558,8 @@ function Session({
             hint={hint}
             warning={warning}
             onEndAnswer={() => listening.current?.endNow()}
+            onHold={() => listening.current?.hold()}
+            onRelease={() => listening.current?.release()}
             onTypeInstead={typeInstead}
             onDontKnow={dontKnowByVoice}
             dontKnowHint={DONT_KNOW_HINT}
