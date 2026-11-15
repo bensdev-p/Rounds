@@ -249,6 +249,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
 - (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
+- (15 Nov 2026) When opening the app, have some sort of animated ladder icon, like openGym has the animated barbell icon (show Claude video)
 
 ---
 

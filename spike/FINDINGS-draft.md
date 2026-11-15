@@ -20,6 +20,15 @@ Tags: #AK_Step1_v12, #AK_Step2_v12, #AK_Step3_v12, #AK_Other (44,969 tags).
   Searching must not happen at sync time: store note ids in the script (M3.2 tooling proposes,
   developer confirms), so the add-on only reads ids.
 
+- Probe 2b (one SQL pass over tags): scan 214 ms, matching five scripts 2.7 s in Python.
+  Still too slow to repeat every sync; fine for M3.2 tooling.
+- **Step 2 #Subjects narrows to the topic, and its leaves follow rungs:** e.g.
+  `#AK_Step2_v12::#Subjects::Gastroenterology::11_Pancreas::Pancreatitis::Acute_Pancreatitis::Management`
+  and `::Pathophysiology`; DKA and PE have the same `::Management` / `::Pathophysiology` leaves.
+  So a miss on the Management rung could unsuspend just that leaf's notes, close to the
+  "3 cards" result.png draws. Linking per rung looks possible for rungs that have a leaf.
+- `#PANCE::RENAL` (not AnKing) matched nephritic/nephrotic: restrict to `#AK_` tags.
+
 ## Review stats
 - Reading stats for 933 linked cards: 6 ms. All 35,097 cards: 127 ms.
 - Payload: 186 KB for 933 cards (with GUIDs); 7 MB for every card. Upload linked cards only.
