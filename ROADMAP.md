@@ -200,6 +200,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Short column headers on the comparison ("Nephritic" in `review.png`). Scripts have only full names, so long ones wrap to two lines.
 - (14 Nov 2026) Merging two accounts' history when a student who practised without an account signs in to an existing one. M2.3 warns and leaves the anonymous practice behind.
 - (14 Nov 2026) A daily ladder on the public web (Stage 4, alongside the marketing site): one script a day, the same for everyone, playable without an account and kept with it when signed in. A shareable result could be the ladder itself as squares (passed, missed, not reached), with no answers in it. Constraints: approved scripts only (release rule), no "pimp" in public copy (DESIGN.md → Voice and copy), and no-guilt streaks (DESIGN.md → Progression).
+- (14 Nov 2026) A haptic when holding the mic starts keeping it open (developer, M2.5). Holding works; it only has the button's pressed look.
 - (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 
