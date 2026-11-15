@@ -44,7 +44,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M3.1 (Anki spike):** findings under M3.1 below. Link scripts by AnKing note id (card ids differ per student), with an optional rung from AnKing's Step 2 `#Subjects` leaves; never search the collection at sync time; pair per Anki profile; re-apply `#Rounds::missed` after AnkiHub updates; a `.ankiaddon` file for Stage 3.
 
-**Next: M3.2 Link scripts to Anki cards.**
+**M3.2 (Anki links, in progress):** `anki_refs` now hold AnKing note ids only, each with an optional rung (`{ kind: 'note', id, rung? }`); `content:check` allows at most 3 notes per rung and 5 core notes (no rung) per script, and no note twice (developer's call). Links are left out of the approval hash, so relinking doesn't send a script back to the reviewer. A developer-only Anki add-on, `packages/anki-linker` (Tools → Rounds: link scripts), proposes notes from AnKing's Step 2 `#Subjects` tags, reading ids and tags only; the developer confirms per script and saves `links.json`, which `pnpm content:link-anki` writes into the scripts. No linked-card count on the illness script screen (not drawn). **Left:** the developer runs the linker on his collection and confirms the 30 scripts; then `content:seed`, and `content:push --preview` with his OK.
+
+**Next: finish M3.2, then M3.3 Pairing and sync.**
 
 ## Screen map
 
@@ -57,7 +59,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Result + miss card | 07 | result | Matches (M1.2). Anki row M3.4; flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
-| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5) | Done |
+| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5). No linked-card count: not drawn (M3.2) | Done |
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
@@ -186,7 +188,7 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 **Goal:** what a student misses on rounds shows up in their Anki. A Python add-on (`packages/anki-addon`) pairs with their Rounds account, uploads review statistics for cards linked to scripts, and applies the actions Rounds sends back: unsuspend cards, tag `#Rounds::missed` (PRODUCT.md → Anki bridge). It never reads or uploads card text (domain rule 6).
 
 Facts to plan around:
-- **No script has `anki_refs` yet** (0 of 30). The schema exists: `{ kind: 'note' | 'card', id }`, numeric ids only. Linking scripts to AnKing notes is real work and needs the developer's AnKing collection.
+- **Scripts link AnKing notes** through `anki_refs`: `{ kind: 'note', id, rung? }`, numeric ids only (M3.2). Linking needs the developer's AnKing collection (`packages/anki-linker`).
 - **Add-ons run only in Anki on a computer.** AnkiMobile on the iPhone has none, so sync happens when the student opens Anki on their PC or Mac; the phone sees results once synced.
 - **The add-on reaches Rounds through Edge Functions** on the hosted project (`rounds-dev` today), signed in with the pairing code, never with a secret key.
 - Screens: Settings → Anki (wireframe 12, note 1: one-time code, no password typed into Anki), "Anki sync status" on Review (wireframe 09, note 3: hidden until connected), "Unsuspend 3 Anki cards" on the result screen (`result.png`, `review.png`).
@@ -224,6 +226,7 @@ Facts to plan around:
 - `anki_refs` for the IM scripts, ids only, as a content change (`pnpm content:check` and `content:push`), using the approach M3.1 picks. Tooling that proposes refs from the developer's collection; the developer confirms.
 - The `anki_refs` schema may change with the approach (M3.1 recommends AnKing note ids with an optional rung).
 - The illness script screen may show how many cards are linked only if a mockup draws it; otherwise ask.
+- **Decided (developer, 15 Nov 2026):** at most 3 notes per rung and 5 core notes per script; no linked-card count on the illness script (not drawn); `anki_refs` left out of the approval hash; the linker's code may hold AnKing's tag layout (prefix and leaf words), while content holds ids and rungs only; the linker is its own developer-only add-on, `packages/anki-linker`.
 
 ### M3.3 Pairing and sync
 - Settings → Anki (wireframe 12): Connect Anki, a short one-time code, connected state, disconnect.
