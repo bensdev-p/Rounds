@@ -55,6 +55,12 @@ LEAF_RUNGS = {
 RUNG_PRIORITY = {CORE: 0, "recall": 1, "workup": 2, "management": 3}
 
 
+# Trailing words in script names that AnKing's topic names usually leave out
+# ("COPD exacerbation" -> "COPD"). Only safe suffixes: dropping "acute" would
+# let "pancreatitis" match chronic pancreatitis.
+GENERIC_SUFFIXES = ("exacerbation", "infection")
+
+
 def normalize(text: str) -> str:
     """'11_Acute_Pancreatitis' -> 'acute pancreatitis'."""
     text = re.sub(r"^\d+[_\s.-]*", "", text)
@@ -73,6 +79,8 @@ class Script:
     name: str
     aliases: list[str]
     links: list[dict[str, str]] = field(default_factory=list)
+    # The developer's own search words (kept in the add-on's user_files, never the repo).
+    extra: list[str] = field(default_factory=list)
 
     @staticmethod
     def from_content(data: dict[str, Any]) -> "Script":
@@ -85,7 +93,12 @@ class Script:
         )
 
     def terms(self) -> set[str]:
-        return {t for t in (normalize(x) for x in [self.name, *self.aliases]) if len(t) >= 2}
+        terms = {normalize(x) for x in [self.name, *self.aliases, *self.extra]}
+        for t in list(terms):
+            words = t.split()
+            if len(words) > 1 and words[-1] in GENERIC_SUFFIXES:
+                terms.add(" ".join(words[:-1]))
+        return {t for t in terms if len(t) >= 2}
 
 
 @dataclass
@@ -156,6 +169,24 @@ def find_candidates(
         sid: sorted(c.values(), key=lambda c: (_rung_order(c.rung), -c.score, c.note_id))
         for sid, c in by_script.items()
     }
+
+
+def topics_containing(rows: Iterable[tuple[int, str]], word: str, limit: int = 40) -> list[tuple[str, int]]:
+    """Subjects topic paths with a segment containing `word`, and how many notes
+    sit under each: helps the developer find the name AnKing uses for a topic."""
+    needle = normalize(word)
+    found: dict[str, set[int]] = {}
+    for nid, tags in rows:
+        for tag in tags.split():
+            parts = tag.split("::")
+            if len(parts) < 3 or not SUBJECTS_ROOT.match(parts[0]) or parts[1].lower() != SUBJECTS_BRANCH:
+                continue
+            for depth in range(2, len(parts)):
+                if needle and needle in normalize(parts[depth]):
+                    found.setdefault("::".join(parts[2 : depth + 1]), set()).add(nid)
+                    break
+    ranked = sorted(found.items(), key=lambda kv: (-len(kv[1]), kv[0]))
+    return [(topic, len(nids)) for topic, nids in ranked[:limit]]
 
 
 def _rung_order(rung: str) -> int:

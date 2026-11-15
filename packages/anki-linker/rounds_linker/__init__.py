@@ -26,6 +26,7 @@ from aqt.qt import (
     QDialog,
     QDialogButtonBox,
     QHBoxLayout,
+    QInputDialog,
     QLabel,
     QListWidget,
     QListWidgetItem,
@@ -37,13 +38,14 @@ from aqt.qt import (
     QVBoxLayout,
     QWidget,
 )
-from aqt.utils import showInfo, showWarning, tooltip
+from aqt.utils import showInfo, showText, showWarning, tooltip
 
 from . import linking as L
 
 ADDON_DIR = os.path.dirname(__file__)
 USER_FILES = os.path.join(ADDON_DIR, "user_files")
 LINKS_FILE = os.path.join(USER_FILES, "links.json")
+WORDS_FILE = os.path.join(USER_FILES, "search_words.json")
 RUNG_CHOICES = [L.CORE, *L.RUNGS]
 RUNG_LABELS = {
     L.CORE: "Core",
@@ -84,11 +86,28 @@ def load_saved() -> dict[str, list[dict[str, str]]]:
         return json.load(f).get("scripts", {})
 
 
+def load_words() -> dict[str, list[str]]:
+    if not os.path.exists(WORDS_FILE):
+        return {}
+    with open(WORDS_FILE, encoding="utf-8") as f:
+        return json.load(f)
+
+
+def save_words(words: dict[str, list[str]]) -> None:
+    os.makedirs(USER_FILES, exist_ok=True)
+    with open(WORDS_FILE, "w", encoding="utf-8") as f:
+        json.dump(dict(sorted(words.items())), f, indent=2)
+        f.write("\n")
+
+
 def gather(col: Collection) -> dict[str, Any]:
     """Background: one SQL pass over note ids and tags (never fields)."""
     scripts = load_scripts()
+    words = load_words()
+    for s in scripts:
+        s.extra = words.get(s.id, [])
     rows = col.db.all("select id, tags from notes where tags like '%#AK_Step2_v%'")
-    return {"scripts": scripts, "candidates": L.find_candidates(rows, scripts), "notes": len(rows)}
+    return {"scripts": scripts, "candidates": L.find_candidates(rows, scripts), "notes": len(rows), "rows": rows}
 
 
 class LinkDialog(QDialog):
@@ -97,6 +116,8 @@ class LinkDialog(QDialog):
         self.setWindowTitle("Rounds: link scripts")
         self.resize(1100, 680)
         self.scripts: list[L.Script] = data["scripts"]
+        self.rows: list[tuple[int, str]] = data["rows"]
+        self.words = load_words()
         saved = load_saved()
         self.confirmed: set[str] = set(saved)
         self.cands: dict[str, list[L.Candidate]] = {}
@@ -122,9 +143,15 @@ class LinkDialog(QDialog):
 
         open_btn = QPushButton("Open in browser")
         open_btn.clicked.connect(lambda: self.open_note(self.tree.currentItem()))
+        words_btn = QPushButton("Search words…")
+        words_btn.clicked.connect(self.edit_words)
+        topics_btn = QPushButton("Browse topics…")
+        topics_btn.clicked.connect(self.browse_topics)
         hint = QLabel("Double-click a row to read the note in Anki's browser. Links save ids and rungs only.")
         row = QHBoxLayout()
         row.addWidget(open_btn)
+        row.addWidget(words_btn)
+        row.addWidget(topics_btn)
         row.addWidget(hint, 1)
 
         right = QWidget()
@@ -169,6 +196,11 @@ class LinkDialog(QDialog):
         n = L.counts(self.cands[self.current])
         parts = [f"{RUNG_LABELS[r]} {n.get(r, 0)}/{L.cap_for(r)}" for r in RUNG_CHOICES]
         problems = L.problems_for(self.current, self.cands[self.current])
+        if not self.cands[self.current]:
+            problems.append(
+                "No proposals: AnKing may name this topic differently. "
+                "Use Browse topics… to find its name, then add it with Search words…"
+            )
         self.summary.setText(" · ".join(parts) + ("\n" + "; ".join(problems) if problems else ""))
 
     def show_script(self, row: int) -> None:
@@ -218,6 +250,38 @@ class LinkDialog(QDialog):
             return
         (self.confirmed.add if on else self.confirmed.discard)(self.current)
         self.refresh_labels()
+
+    def edit_words(self) -> None:
+        if self.current is None:
+            return
+        script = next(s for s in self.scripts if s.id == self.current)
+        text, ok = QInputDialog.getText(
+            self,
+            "Search words",
+            f"Extra words for {script.name}, comma-separated (for example the topic name AnKing uses):",
+            text=", ".join(script.extra),
+        )
+        if not ok:
+            return
+        script.extra = [w.strip() for w in text.split(",") if w.strip()]
+        if script.extra:
+            self.words[script.id] = script.extra
+        else:
+            self.words.pop(script.id, None)
+        save_words(self.words)
+        found = L.find_candidates(self.rows, [script])[script.id]
+        keep = [L.Candidate(c.note_id, c.rung, c.topic, c.score, True) for c in self.cands[script.id] if c.selected]
+        self.cands[script.id] = L.preselect(found, L.refs_for(keep) or None)
+        self.show_script(self.list.currentRow())
+        tooltip(f"{len(found)} proposal(s) for {script.name}", parent=self)
+
+    def browse_topics(self) -> None:
+        word, ok = QInputDialog.getText(self, "Browse topics", "Find AnKing Step 2 topics containing:")
+        if not ok or not word.strip():
+            return
+        topics = L.topics_containing(self.rows, word)
+        lines = [f"{n:5} notes  {t}" for t, n in topics] or ["No Step 2 subject topics contain that word."]
+        showText("\n".join(lines), parent=self, title=f"Topics containing “{word.strip()}”")
 
     def open_note(self, item: QTreeWidgetItem | None) -> None:
         if item is None:

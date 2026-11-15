@@ -61,6 +61,39 @@ class MatchTagTest(unittest.TestCase):
         self.assertEqual(L.match_tag(tag, self.index), {"diabetic-ketoacidosis": ("management", tag)})
 
 
+class TermsTest(unittest.TestCase):
+    def test_drops_generic_suffixes(self):
+        s = L.Script("copd-exacerbation", "COPD exacerbation", [])
+        self.assertEqual(s.terms(), {"copd exacerbation", "copd"})
+        tag = "#AK_Step2_v12::#Subjects::Pulm::Obstructive::COPD::Management"
+        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {"copd-exacerbation": ("management", tag)})
+
+    def test_keeps_acute(self):
+        self.assertEqual(L.Script("a", "Acute pancreatitis", []).terms(), {"acute pancreatitis"})
+
+    def test_extra_words_match(self):
+        s = L.Script("clostridioides-difficile-infection", "Clostridioides difficile infection", [], extra=["C diff"])
+        tag = "#AK_Step2_v12::#Subjects::GI::Infections::C_Diff"
+        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {s.id: ("core", tag)})
+
+
+class TopicsContainingTest(unittest.TestCase):
+    def test_lists_subject_topics_with_note_counts(self):
+        rows = [
+            (1, "#AK_Step2_v12::#Subjects::Renal::Electrolytes::Potassium::High_Potassium::Management"),
+            (2, "#AK_Step2_v12::#Subjects::Renal::Electrolytes::Potassium::High_Potassium"),
+            (3, "#AK_Step2_v12::#Subjects::Renal::Electrolytes::Potassium::Low_Potassium #AK_Step2_v12::#AMBOSS::Potassium"),
+        ]
+        self.assertEqual(
+            L.topics_containing(rows, "potassium"),
+            [("Renal::Electrolytes::Potassium", 3)],
+        )
+        self.assertEqual(
+            L.topics_containing(rows, "high potassium"),
+            [("Renal::Electrolytes::Potassium::High_Potassium", 2)],
+        )
+
+
 class FindCandidatesTest(unittest.TestCase):
     def test_ignores_non_anking_tags_and_ranks_by_other_tags(self):
         rows = [
