@@ -6,8 +6,9 @@ Rounds is a voice-first "pimping" trainer for medical students. It quizzes stude
 
 **Read `ROADMAP.md` first.** It sets the order of work and the current milestone. Work on one milestone at a time; anything outside it goes in ROADMAP.md → Parking lot, not in code.
 
-**Stage 2: iPhone beta.** Stage 1 (the local text prototype and the tab shell) was completed on 14 Nov 2026. Stage 2 adds Log, Review, accounts and onboarding, voice, then hosting and TestFlight, in the milestone order in ROADMAP.md.
-Do not build anything from later stages unless asked: payments, Android release, Anki bridge, marketing site, Teams. Voice is in scope only from M2.4 (spike) and M2.5; text mode stays available everywhere.
+**Stage 3: Anki bridge.** Stage 1 (local text prototype, tab shell) was completed on 14 Nov 2026 and Stage 2 (Log, Review, accounts, voice, hosting and TestFlight) on 15 Nov 2026. Stage 3 connects Rounds to the student's Anki through a desktop add-on, in the milestone order in ROADMAP.md.
+Do not build anything from later stages unless asked: payments, Android release, marketing site, public web portal, Teams. Text mode stays available everywhere.
+The app runs against the private hosted project `rounds-dev` on TestFlight (`docs/HOSTING.md`) and against the local stack via `pnpm start`. Anki add-ons run only in Anki on a computer (Windows, macOS, Linux), not in AnkiMobile on the iPhone.
 Content review and user testing are not gates: development doesn't wait for scripts to be approved or for a testing period. The developer tests as he goes.
 
 ## Stack
@@ -16,7 +17,7 @@ Content review and user testing are not gates: development doesn't wait for scri
 - **apps/mobile:** Expo (React Native) + Expo Router + TypeScript. Also serves the web app (Expo web). iPhone first; Android ships later from the same code.
 - **apps/site:** Next.js marketing site (Stage 4, not yet)
 - **packages/shared:** TypeScript types, Zod schemas (illness script, question, attempt), API client, pure grading/ladder logic
-- **packages/anki-addon:** Python Anki add-on, the "bridge" (Stage 3, not yet)
+- **packages/anki-addon:** Python Anki add-on, the "bridge" (Stage 3; not created yet). It talks to Supabase only through Edge Functions, never with a secret key, and never reads or uploads card text.
 - **supabase/:** Postgres migrations, Row Level Security policies, Edge Functions (Deno/TypeScript) for all AI calls
 - **AI:** Claude API, called only from Supabase Edge Functions. Never ship API keys to the client.
 - **Builds:** EAS cloud builds. The developer has no Mac, so never suggest local Xcode steps.
