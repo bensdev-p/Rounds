@@ -21,6 +21,7 @@
     "content:review": "tsx scripts/content-review.ts",
     "content:approve": "tsx scripts/content-approve.ts",
     "content:flags": "tsx scripts/content-flags.ts",
+    "content:link-anki": "tsx scripts/content-link-anki.ts",
     "stats": "tsx scripts/stats.ts"
   },
   "dependencies": {

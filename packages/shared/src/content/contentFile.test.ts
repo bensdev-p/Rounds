@@ -116,6 +116,15 @@ describe('approval', () => {
     ]);
   });
 
+  it('keeps the approval when only the Anki links change', () => {
+    const { file, approvals } = approve(draftFile(), {}, 'Reviewer', NOW, sha256);
+    const relinked: ContentFile = {
+      ...file,
+      script: { ...file.script, anki_refs: [{ kind: 'note', id: '42', rung: 'workup' }] },
+    };
+    expect(checkApprovals([relinked], approvals, sha256)).toEqual([]);
+  });
+
   it('fails when a script says approved without a recorded approval', () => {
     const { file } = approve(draftFile(), {}, 'Reviewer', NOW, sha256);
     expect(checkApprovals([file], {}, sha256)[0]).toMatch(/no approval is recorded/);

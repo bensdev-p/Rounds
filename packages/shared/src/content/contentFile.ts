@@ -113,10 +113,14 @@ export function canonicalJson(value: unknown): string {
   return JSON.stringify(value);
 }
 
-/** The reviewed text: everything except the review metadata itself. */
+/**
+ * The reviewed text: everything except the review metadata itself and the
+ * Anki links. Links are ids, not medical facts, so relinking a script's notes
+ * doesn't send it back to the reviewer (developer's decision, M3.2).
+ */
 export function approvalHash(file: ContentFile, hash: HashFn): string {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- dropping review fields
-  const { status, reviewed_by, reviewed_at, ...content } = file.script;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars -- dropping review fields and links
+  const { status, reviewed_by, reviewed_at, anki_refs, ...content } = file.script;
   return hash(canonicalJson({ script: content, questions: file.questions }));
 }
 

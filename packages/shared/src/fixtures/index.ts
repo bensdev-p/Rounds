@@ -49,7 +49,10 @@ const zorblax = IllnessScriptSchema.parse({
     MS3: ['key_findings.exam[0]', 'management.first_line'],
     MS4: ['pearls[0]'],
   },
-  anki_refs: [{ kind: 'note', id: '1000000001' }],
+  anki_refs: [
+    { kind: 'note', id: '1000000001' },
+    { kind: 'note', id: '1000000002', rung: 'management' },
+  ],
   sources: [{ title: 'Rounds test fixture (fictional)' }],
 });
 

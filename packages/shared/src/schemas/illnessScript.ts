@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { FieldPathSchema, resolveFieldPath } from './fieldPath.ts';
+import { RungSchema } from './rung.ts';
 
 export const ROTATIONS = ['IM', 'surgery', 'peds', 'obgyn', 'psych', 'neuro', 'FM', 'EM'] as const;
 export const RotationSchema = z.enum(ROTATIONS);
@@ -23,14 +24,25 @@ const Text = z.string().trim().min(1);
 const TextList = z.array(Text);
 
 /**
- * External AnKing reference. IDs only: there is deliberately no field that
- * could hold card text (CLAUDE.md domain rule 6).
+ * A link to one AnKing note. IDs only: there is deliberately no field that
+ * could hold card text or tag names (CLAUDE.md domain rule 6).
+ *
+ * Note ids, not card ids: AnkiHub gives every subscriber AnKing's own note ids,
+ * while card ids differ per student (M3.1 findings). `rung` says which rung's
+ * miss the note answers; a note without one is a core note for the script,
+ * used when the missed rung has no notes of its own.
  */
 export const AnkiRefSchema = z.strictObject({
-  kind: z.enum(['note', 'card']),
+  kind: z.literal('note'),
   id: z.string().regex(/^\d{1,20}$/, 'Anki ids are numeric'),
+  rung: RungSchema.optional(),
 });
 export type AnkiRef = z.infer<typeof AnkiRefSchema>;
+
+/** At most this many linked notes per rung ("Unsuspend 3 Anki cards", result.png). */
+export const MAX_ANKI_NOTES_PER_RUNG = 3;
+/** At most this many core notes (no rung) per script. */
+export const MAX_ANKI_CORE_NOTES = 5;
 
 export const SourceSchema = z.strictObject({
   title: Text,
@@ -147,6 +159,32 @@ export const IllnessScriptSchema = IllnessScriptMetaSchema.extend(
         });
       }
     });
+  });
+
+  const ankiIds = new Set<string>();
+  const perGroup = new Map<string, number>();
+  script.anki_refs.forEach((ref, i) => {
+    if (ankiIds.has(ref.id)) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['anki_refs', i, 'id'],
+        message: `Duplicate Anki note ${ref.id}`,
+      });
+    }
+    ankiIds.add(ref.id);
+    const group = ref.rung ?? 'core';
+    const count = (perGroup.get(group) ?? 0) + 1;
+    perGroup.set(group, count);
+    const max = ref.rung ? MAX_ANKI_NOTES_PER_RUNG : MAX_ANKI_CORE_NOTES;
+    if (count === max + 1) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['anki_refs', i],
+        message: ref.rung
+          ? `More than ${max} Anki notes on the ${ref.rung} rung`
+          : `More than ${max} core Anki notes (no rung)`,
+      });
+    }
   });
 
   for (const level of DIFFICULTY_LEVELS) {
