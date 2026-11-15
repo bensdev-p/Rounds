@@ -45,6 +45,21 @@ Tags: #AK_Step1_v12, #AK_Step2_v12, #AK_Step3_v12, #AK_Other (44,969 tags).
   ones (`importing.py:998-1014`), so `#Rounds::missed` is wiped on update. The add-on should
   re-apply it on every sync from the server's list (or the student protects "Rounds" in AnkiHub).
 
+## AnkiWeb sync test (real profile)
+- Tagging one note `#Rounds::sync_test`, syncing, then removing it and syncing again worked like
+  any hand edit (developer checked).
+
+## Pairing and sync in Anki (ran on the real profile "User 1", not the spike profile)
+- Code typed into the add-on, connected, synced: 933 linked cards uploaded (927 suspended).
+- Page queued unsuspend + tag for 3 cards; next sync applied both (3 and 3) and reported back.
+- Timings: gathering 33–35 s (Anki search for the linked notes, every sync), uploading
+  186 KB 60–70 ms, second upload 58 ms. Confirms: store note ids, never search at sync time.
+- Add-on config is per install, not per profile: the device token pairs every profile on that
+  computer to the same Rounds account, and the token ended up on the real profile. Pairing
+  must be stored per profile (e.g. in the collection's config, which also syncs: decide).
+- Syncing on profile open applies pending actions without asking. The real add-on should
+  show what it changed (a tooltip and one undo step) the first times.
+
 ## Pairing (local stack)
 - Code single use, accepts lowercase and spaces; wrong code 404, bad token 401, extra fields
   (card text) refused. Claim 20 ms. Sync of 1,500 fake cards (270 KB): 178 ms.
