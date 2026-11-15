@@ -18,7 +18,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 ---
 
-## Where things stand (14 Nov 2026)
+## Where things stand (15 Nov 2026)
 
 **Built:** the text pimp ladder; grading (a local matcher with Claude as a fallback, plus an eval set); personas; progression (rounds, shifts, rank, mastery); Home, the script picker, live session (text), list feedback, the result screen with the miss card, the clean run, Promotion, the illness script, the script collection and Progress; the "This is wrong" flag and its review queue; the PHI guard; the content pipeline; RLS with pgTAP tests. All 30 IM scripts are drafted and `in_review`, shown locally as "Not yet reviewed".
 
@@ -40,7 +40,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.5 (voice session):** sessions open in voice. The attending asks in the persona's Deepgram Aura-2 voice (question audio made once per persona and speed, cached in a private `voice-cache` bucket, and fetched for the whole run when it starts). The mic goes live when the question ends: Deepgram Nova-3, streamed straight from the device with a 60 s token from `speech-token` and the question's accepted answers as expected words. Our own silence check ends the answer (0.8 s, 1.5 s on list questions) or a tap on the mic does; holding the mic keeps it listening through a long pause, and letting go ends the answer (developer's call). The transcript is graded like typed text; when the matcher misses, the attending says "Mm-hm." while Claude grades. Nothing plays on a miss. "Type instead" switches to text for the rest of the session; a session opens in text mode with one line saying why when the mic is refused or voice isn't available (Safari over http, no `DEEPGRAM_API_KEY`). The matcher reads number words as digits and skips "um" and "uh". Mic icon on Pimp me and Pimp me on this; Settings → Voice → Attending voice speed (0.8×, 1.0×, 1.2×, 1.4×, in the profile). Speech sits behind the `stt` and `tts` provider interfaces (`supabase/functions/_shared/speech`), with fakes for `functions:serve:fake`. The iPhone runs an EAS development build (`docs/PHONE.md`), which also brought two native fixes: the voice is converted to the phone's audio rate (it played fast and high), and screens rise with the iOS keyboard. The result screen's big score numeral no longer clips on iOS. In voice mode a question over three lines collapses the ladder to its strip (developer's call). New: `profiles.voice_speed` and the bucket (pgTAP tests). Tried on the phone.
 
-**Next: M2.6 Hosting and TestFlight.**
+**M2.6 (hosting and TestFlight):** a private hosted Supabase project, `rounds-dev` (Free plan), with every migration, the auth settings from M2.3 (anonymous sign-ins, manual linking, 6-digit codes, Sign in with Apple with `com.ben.rounds`), the four Edge Functions and their secrets. Release rule (developer, 14 Nov): `rounds-dev` shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing; domain rule 2 now says so, and `supabase/hosting.json` lists the projects allowed the preview. New `pnpm content:push` sends approved and in-review scripts (never drafts or test fixtures) to the linked project in one all-or-nothing statement and retires scripts the repo drops. `eas.json` has a `production` profile and `eas submit`; store builds read the hosted URL and key from EAS environment variables and leave out the local-network permission. Email sign-in waits for SMTP: the Free plan's built-in email can't send the code template (developer's call to ship without it). Setup and each release: `docs/HOSTING.md`. Build 2 is on TestFlight and was tried on the phone: text and voice sessions, Claude grading, Sign in with Apple, delete account. **Stage 2 is complete.**
+
+**Next: Stage 3 (Anki bridge), once the developer adds its detail.**
 
 ## Screen map
 
@@ -61,7 +63,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.1 | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
 | Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki part M3.1 | Done |
-| Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete | Done |
+| Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code waits for SMTP on the hosted project | Done |
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
@@ -165,7 +167,7 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 - A hosted Supabase project, Edge Functions with a spending cap on the API key, an EAS build and TestFlight. The developer has no Mac, so cloud builds only.
 - **Accounts on the hosted project (from M2.3):** keep "Confirm email" on, turn on anonymous sign-ins and manual linking, use code email templates like `supabase/templates/`, deploy `delete-account`, and set up real email sending (SMTP).
 - **Sign in with Apple (developer setup):** Apple Developer Program membership; bundle id `com.ben.rounds` (in `app.json`, with `usesAppleSignIn`); EAS switches on the capability during the cloud build; in the hosted Supabase project, Authentication → Providers → Apple with `com.ben.rounds` as a client id (no secret needed for the native flow). Try it on the first TestFlight build: the web app doesn't offer Apple.
-- **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. Before M2.6, decide how the developer tests on a hosted backend while scripts are still in review. One option is a separate private dev project that's allowed to use the preview. That would change domain rule 2, which today says the preview flag is never set on a hosted database, so it needs the developer's explicit OK.
+- **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. **Decided (developer, 14 Nov 2026):** a private hosted dev project may show the preview; only the developer and the reviewer use it, through TestFlight internal testing. Domain rule 2 updated; `pnpm content:push --preview` only works for projects in `supabase/hosting.json` → `previewProjects`.
 - **Notes for the M2.6 plan (from M2.5):**
   - Deploy all four Edge Functions: `grade-answer`, `delete-account`, `speak`, `speech-token`. Set the secrets `ANTHROPIC_API_KEY` and `DEEPGRAM_API_KEY` (Member role, needed to grant streaming tokens). Pushing the migrations creates the private `voice-cache` bucket, which only the functions use.
   - The EAS project is linked (`app.json` → `extra.eas.projectId`, owner `benfb03`). `eas.json` has only a `development` profile; TestFlight needs a store profile (for example `production`) and `eas submit`.
@@ -186,7 +188,7 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
 - **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
 - **Spending caps** for grading, speech and hosting: speech set at $10 per vendor (14 Nov 2026). Grading and hosting caps still needed by M2.6.
-- **Hosted dev preview** (see M2.6).
+- **Hosted dev preview:** decided 14 Nov 2026. One private hosted project (`rounds-dev`) shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing. A production project with approved scripts only comes before anyone else gets a build (`docs/HOSTING.md`).
 
 ## Frozen unless the developer reopens them
 Mockups, wireframes and the vision video (finished) · new progression mechanics · Teams before Stage 5 · marketing site · Android · desktop · payments.
@@ -213,6 +215,10 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Tidy the text-mode session with the iPhone keyboard up (developer, M2.5): the answer box now stays above the keyboard, but the layout needs a cleanup pass.
 - (14 Nov 2026) A haptic when holding the mic starts keeping it open (developer, M2.5). Holding works; it only has the button's pressed look.
 - (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
+- (14 Nov 2026) A production Supabase project and an approved-only store build, before anyone beyond the developer and the reviewer gets the app (M2.6 release rule).
+- (14 Nov 2026) Email sign-in on the hosted project: needs SMTP (e.g. Gmail app password, or Resend with an owned domain), since the Free plan's built-in email can't send the 6-digit code template. M2.6 ships with anonymous use and Sign in with Apple only (developer's call).
+- (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
+- (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 
 ---

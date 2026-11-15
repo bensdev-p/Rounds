@@ -20,6 +20,7 @@
     "functions:serve:fake": "supabase functions serve --env-file supabase/functions/.env.test",
     "functions:check": "deno check --config supabase/functions/grade-answer/deno.json supabase/functions/grade-answer/index.ts supabase/functions/grade-answer/eval/run.ts && deno check --config supabase/functions/delete-account/deno.json supabase/functions/delete-account/index.ts && deno check --config supabase/functions/speak/deno.json supabase/functions/speak/index.ts && deno check --config supabase/functions/speech-token/deno.json supabase/functions/speech-token/index.ts",
     "content:seed": "pnpm --filter @rounds/shared content:seed",
+    "content:push": "pnpm --filter @rounds/shared content:push",
     "test:integration": "pnpm --filter @rounds/shared test:integration",
     "content:check": "pnpm --filter @rounds/shared content:check",
     "content:review": "pnpm --filter @rounds/shared content:review",

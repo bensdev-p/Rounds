@@ -1,0 +1,4 @@
+{
+  "$comment": "Hosted Supabase projects (see docs/HOSTING.md). previewProjects: project refs allowed to show in_review scripts, labelled 'Not yet reviewed' (domain rule 2: the private dev project only, used by the developer and the reviewer). Project refs are public (they are in the URL).",
+  "previewProjects": ["qugvfidjzmtkrnfdokhf"]
+}

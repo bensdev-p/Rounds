@@ -99,7 +99,7 @@ Stages are defined by what's built, not by testing windows or content approval. 
 4. **Launch:** public web portal, marketing site, payments (Stripe on web, RevenueCat in-app), Android when ready.
 5. **Expand:** all rotations, shadowing mode, Teams, desktop decision, school licenses.
 
-Content review runs alongside development and never blocks it. It is a release requirement only: anyone other than the developer and the reviewer sees only `approved` scripts (domain rule 2).
+Content review runs alongside development and never blocks it. It is a release requirement only: anyone other than the developer and the reviewer sees only `approved` scripts (domain rule 2). Until then the developer and the reviewer use a private hosted dev project that also shows `in_review` scripts, labelled "Not yet reviewed" (`docs/HOSTING.md`).
 
 ## Later / maybe
 Oral presentation coach · virtual patients · crowdsourced rotation guides · polished Anki review tab.

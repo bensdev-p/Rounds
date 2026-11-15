@@ -41,6 +41,8 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm stats`: usage report per student on the local database: days used, days in a row, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
+- `pnpm content:push [--preview] [--dry-run]`: send approved and in-review scripts (never fixtures or drafts) to the linked hosted project. Changes hosted data: get the developer's OK first
+- Hosting and TestFlight (hosted Supabase, deploying functions, store builds, `eas submit`): see `docs/HOSTING.md`. Deploys, pushes and builds change hosted services: get the developer's OK first
 - `pnpm functions:serve`: run Edge Functions locally. Reads `supabase/functions/.env` (gitignored; copy `.env.example` and add `ANTHROPIC_API_KEY`). Without a key, grading is local only.
 - `pnpm functions:serve:fake`: the same, with a fake model and fake speech that spend nothing
 - Voice on the iPhone runs in an EAS development build (cloud build, no Mac): see `docs/PHONE.md`. `DEEPGRAM_API_KEY` in `supabase/functions/.env` turns voice on; speech is billed, so get the developer's OK before paid runs
@@ -58,7 +60,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 
 1. **The illness script is the source of truth.** Every question, every accepted answer and every grading rubric must trace to fields in an approved script. The AI never invents medical facts at runtime.
 2. **Script status:** `draft` → `in_review` → `approved` → `retired`. Only `approved` scripts are used for pimping. Every approved script records `reviewed_by` and `reviewed_at`.
-   - **Stage 1 local preview (developer's decision, 2026-11-13):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed turns it on; never set it on a hosted database. Drafts are never shown.
+   - **Preview (developer's decisions, 2026-11-13 and 2026-11-14):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed and `pnpm content:push --preview` turn it on, and the push allows it only for projects in `supabase/hosting.json` → `previewProjects`: the private dev project that only the developer and the reviewer use (TestFlight internal testing). Never turn it on for a project anyone else's build points at. Drafts are never shown.
 3. **The pimp ladder** escalates until the student misses, then ends. Score = the rung reached. Partial credit applies to list questions ("name 5 causes").
 4. **Miss tagging is automatic:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`. The user never fills in a form.
 5. **No patient data (PHI), ever.** The patient log stores a diagnosis label, rotation and date only. Free-text inputs must warn on, and block, anything resembling names, dates of birth, medical record numbers, phone numbers or addresses. Do not add fields that could hold patient details.
