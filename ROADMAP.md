@@ -42,7 +42,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M2.6 (hosting and TestFlight):** a private hosted Supabase project, `rounds-dev` (Free plan), with every migration, the auth settings from M2.3 (anonymous sign-ins, manual linking, 6-digit codes, Sign in with Apple with `com.ben.rounds`), the four Edge Functions and their secrets. Release rule (developer, 14 Nov): `rounds-dev` shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing; domain rule 2 now says so, and `supabase/hosting.json` lists the projects allowed the preview. New `pnpm content:push` sends approved and in-review scripts (never drafts or test fixtures) to the linked project in one all-or-nothing statement and retires scripts the repo drops. `eas.json` has a `production` profile and `eas submit`; store builds read the hosted URL and key from EAS environment variables and leave out the local-network permission. Email sign-in waits for SMTP: the Free plan's built-in email can't send the code template (developer's call to ship without it). Setup and each release: `docs/HOSTING.md`. Build 2 is on TestFlight and was tried on the phone: text and voice sessions, Claude grading, Sign in with Apple, delete account. **Stage 2 is complete.**
 
-**Next: M3.1 Anki spike.**
+**M3.1 (Anki spike):** findings under M3.1 below. Link scripts by AnKing note id (card ids differ per student), with an optional rung from AnKing's Step 2 `#Subjects` leaves; never search the collection at sync time; pair per Anki profile; re-apply `#Rounds::missed` after AnkiHub updates; a `.ankiaddon` file for Stage 3.
+
+**Next: M3.2 Link scripts to Anki cards.**
 
 ## Screen map
 
@@ -52,7 +54,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
-| Result + miss card | 07 | result | Matches (M1.2). Anki row M3.1; flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
+| Result + miss card | 07 | result | Matches (M1.2). Anki row M3.4; flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
 | Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5) | Done |
@@ -60,9 +62,9 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
 | Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
-| Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.1 | Done |
+| Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki row M3.4 | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
-| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki part M3.1 | Done |
+| Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki part M3.3 | Done |
 | Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code waits for SMTP on the hosted project | Done |
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
@@ -194,8 +196,33 @@ Facts to plan around:
 - Try one-time-code pairing end to end against the local stack.
 - What you get from it is findings and a recommendation (how scripts link to cards, the sync shape, how the add-on is installed: an AnkiWeb listing or a `.ankiaddon` file), not code to keep.
 
+**Findings (15 Nov 2026).** Spike code on branch `m3.1-anki-spike` (an add-on with a Tools → Rounds spike menu of probes, a local-only `anki-spike` Edge Function and table, a hidden `/spike-anki` page; not merged). Setup: Anki 26.9.4 (Python 3.13) on the developer's PC, AnKing Step Deck through AnkiHub (2026-10-08.1) on his real profile: 28,676 notes, 35,097 cards, all but 52 suspended, FSRS on. Writes ran in a "Rounds spike" profile restored from a backup, with no AnkiWeb or AnkiHub sign-in. The probes read ids, tags and scheduling numbers only, never note fields.
+
+| Question | Answer |
+|---|---|
+| Stable ids | **Note ids, yes; card ids, no.** AnkiHub rewrites every subscriber's note ids to AnKing's own (its `main/importing.py`), and the notes carry AnKing's 2016-era ids. Card ids were made at import (timestamps from that day), so they differ per student. Not tested: students on the free AnKing `.apkg` without AnkiHub. |
+| Finding a script's notes | Matching AnKing tag topics finds 83–324 notes (117–307 cards) per script: far more than "Unsuspend 3 Anki cards". Noise: "dka" matched AMBOSS article ids, `#PANCE::` tags (not AnKing) matched nephritic/nephrotic, and those two scripts share 170 notes. **Step 2 `#Subjects` narrows to the topic, and its leaves follow rungs:** `…::Acute_Pancreatitis::Management`, `::Pathophysiology` (DKA and PE have the same). |
+| Cost of searching | Anki search: 2–7 s per script, 33–37 s for five. One SQL pass over tags: 0.2 s scan plus 2.7 s matching. Too slow for every sync either way. |
+| Review statistics | Suspended, queue, due, interval, reps, lapses (cards table) and last review (revlog): 6 ms for 933 linked cards, 127 ms for all 35,097. 186 KB of JSON for 933 cards; 7 MB for every card. |
+| Unsuspend and tag | One `CollectionOp` with a custom undo entry: Edit → Undo shows "Rounds: apply changes" and undoes both in one step. Changed cards get `usn -1`, so they go up on the next AnkiWeb sync like hand edits; the one-note AnkiWeb test confirmed it. |
+| AnkiHub and our tag | An AnkiHub update replaces a note's tags except protected, internal and `AnkiHub_Optional::` ones, so `#Rounds::missed` is wiped when AnKing updates that note. |
+| Pairing | Code (8 characters, no 0/O/1/I/L, 10 minutes, single use, stored hashed) typed into the add-on, traded for a device token (stored hashed). The function runs with gateway JWT checks off and checks the token itself; extra fields such as card text are refused. Claim 20 ms; upload of 186 KB 60–70 ms; actions queued on the page were applied on the next sync and reported back (3 and 3). |
+| Install | A `.ankiaddon` is a zip of the add-on's files with no top-level folder and no `__pycache__`, plus `manifest.json` (`package`, `name`) when shared outside AnkiWeb: built (7 KB), installed by double-clicking, and the menu appeared after a restart. AnkiWeb's docs don't cover review, updates or network rules. |
+
+- **Recommendation, linking:** `anki_refs` stores AnKing **note ids** (the existing `kind: 'note'`; drop `card` for AnKing), chosen once per script in M3.2, never searched at sync time. Add an optional **rung** to each ref so a miss on Management unsuspends that rung's notes (from the Step 2 `#Subjects` leaves where they exist), falling back to the script's core notes. That is a schema change in M3.2. Restrict proposals to `#AK_` tags and skip resource-id branches (`#AMBOSS`).
+- **Recommendation, sync shape:** the server sends the add-on the note ids linked to scripts; the add-on finds their cards locally and uploads per-card numbers (ids and numbers only, no GUIDs needed), about 1k cards and under 200 KB for 30 scripts. Actions name note ids. Sync when a profile opens and after Anki's own sync. The add-on re-applies `#Rounds::missed` on every sync from the server's list, since AnkiHub wipes it.
+- **Recommendation, pairing:** as tried, plus a limit on claim attempts. Store the pairing **per Anki profile**: the add-on config is shared by every profile on the computer, so pairing in one profile connects them all. The developer paired from his real profile, and the test unsuspended and tagged 3 cards there (put back by hand).
+- **Recommendation, install:** a `.ankiaddon` file for the developer and the reviewer during Stage 3; an AnkiWeb listing (one-click install by code, updates) for launch, after reading AnkiWeb's add-on terms.
+
+**Notes for the M3.2–M3.4 plans (from M3.1):**
+- M3.2 tooling can run as an add-on menu item that writes proposed note ids per script and rung to a file the developer confirms; the repo gets ids only. Tag names are AnKing metadata: keep them out of the repo too, unless the developer decides otherwise.
+- M3.3: sync applies changes without asking, so show what changed (a tooltip naming the count) and keep the single undo step. Python tests can use a real empty `Collection` from the `anki` package.
+- M3.3: decide whether students without an account can connect Anki (the device token is tied to the anonymous user, as everything else is).
+- M3.4: "Unsuspend 3 Anki cards" needs the suspended count among the missed rung's linked notes, from the last upload; Review's "7 Anki cards unsuspended today" needs the applied counts the add-on reports back.
+
 ### M3.2 Link scripts to Anki cards
 - `anki_refs` for the IM scripts, ids only, as a content change (`pnpm content:check` and `content:push`), using the approach M3.1 picks. Tooling that proposes refs from the developer's collection; the developer confirms.
+- The `anki_refs` schema may change with the approach (M3.1 recommends AnKing note ids with an optional rung).
 - The illness script screen may show how many cards are linked only if a mockup draws it; otherwise ask.
 
 ### M3.3 Pairing and sync
@@ -204,7 +231,7 @@ Facts to plan around:
 - The add-on: pairing dialog, sync on profile open and close, applies unsuspend and tag actions, Python tests with a fake collection.
 
 ### M3.4 Anki in the app
-- Result screen: "Unsuspend 3 Anki cards" (`result.png`) after a miss on a script with linked cards; tapping it queues the actions for the next sync.
+- Result screen: "Unsuspend 3 Anki cards" (`result.png`) after a miss on a script with linked cards; tapping it queues the actions for the next sync. When Anki isn't connected, the row says "Connect Anki" instead (wireframe 07 note 3).
 - Review: "Anki sync status" row (wireframe 09 note 3, `review.png`), hidden until connected.
 - Misses tag their script's cards `#Rounds::missed` on the next sync.
 
@@ -216,7 +243,7 @@ Facts to plan around:
 - **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
 - **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
 - **Spending caps:** speech $10 per vendor (14 Nov 2026); hosting $0 (Supabase Free plan, M2.6). Grading: set a monthly spend limit on the Anthropic workspace whose key `rounds-dev` uses (not yet set).
-- **For Stage 3 (before M3.1):** which AnKing deck and version is in your Anki (and whether through AnkiHub), and that the spike may read your collection on your PC. Later: whether the add-on is listed on AnkiWeb or shared as a file.
+- **For Stage 3:** answered 15 Nov 2026. AnKing Step Deck through AnkiHub (paid, on the developer's own profile only); the spike read the real collection; the write test ran on a restored copy, and the sync tag test and pairing ran on the real profile (changes undone). Later: whether the add-on is listed on AnkiWeb or shared as a file (M3.1 recommends a file for Stage 3, AnkiWeb at launch).
 - **Hosted dev preview:** decided 14 Nov 2026. One private hosted project (`rounds-dev`) shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing. A production project with approved scripts only comes before anyone else gets a build (`docs/HOSTING.md`).
 
 ## Frozen unless the developer reopens them
@@ -249,6 +276,9 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
 - (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
+- (15 Nov 2026) A Rounds deck in Anki (developer, M3.1): the add-on creates its own deck from Rounds' content, for example one card per missed question with its accepted answers, so a miss on rounds becomes an Anki review even for students without AnKing. Possible: the add-on can create a note type, deck and notes, and a stable GUID per question lets updates replace cards in place. Constraints: approved scripts only (release rule), cards trace to script fields (domain rule 1), our own text only, never AnKing's (domain rule 6), and retired scripts' cards are suspended or removed. Best kept to missed questions so it doesn't pile reviews on top of AnKing. Not part of Stage 3 as planned.
+- (15 Nov 2026) Linking for students without AnkiHub (free AnKing `.apkg`) and for decks other than AnKing (students' own cards). M3.1 tested AnkiHub only; a second id dump from an `.apkg` import would settle the first.
+- (15 Nov 2026) Protecting `#Rounds::missed` in AnkiHub (its protected tags) as an alternative to re-applying it every sync (M3.1).
 
 ---
 
