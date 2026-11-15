@@ -166,6 +166,14 @@ Mishearings without expected words: "Waldorf necrosis", "Chetoacidosis", "thiazi
 - **Accounts on the hosted project (from M2.3):** keep "Confirm email" on, turn on anonymous sign-ins and manual linking, use code email templates like `supabase/templates/`, deploy `delete-account`, and set up real email sending (SMTP).
 - **Sign in with Apple (developer setup):** Apple Developer Program membership; bundle id `com.ben.rounds` (in `app.json`, with `usesAppleSignIn`); EAS switches on the capability during the cloud build; in the hosted Supabase project, Authentication → Providers → Apple with `com.ben.rounds` as a client id (no secret needed for the native flow). Try it on the first TestFlight build: the web app doesn't offer Apple.
 - **Release rule:** a build that people other than the developer and the reviewer can use shows only `approved` scripts. Before M2.6, decide how the developer tests on a hosted backend while scripts are still in review. One option is a separate private dev project that's allowed to use the preview. That would change domain rule 2, which today says the preview flag is never set on a hosted database, so it needs the developer's explicit OK.
+- **Notes for the M2.6 plan (from M2.5):**
+  - Deploy all four Edge Functions: `grade-answer`, `delete-account`, `speak`, `speech-token`. Set the secrets `ANTHROPIC_API_KEY` and `DEEPGRAM_API_KEY` (Member role, needed to grant streaming tokens). Pushing the migrations creates the private `voice-cache` bucket, which only the functions use.
+  - The EAS project is linked (`app.json` → `extra.eas.projectId`, owner `benfb03`). `eas.json` has only a `development` profile; TestFlight needs a store profile (for example `production`) and `eas submit`.
+  - Today the development build reads `EXPO_PUBLIC_SUPABASE_URL` and the key from `.env.local` through Metro. A TestFlight build bundles them at build time, so they need setting as EAS environment variables pointing at the hosted project.
+  - `ITSAppUsesNonExemptEncryption: false` is already set. The local-network permission text is only for development; decide whether release builds keep it.
+  - Voice audio is made the first time a question is asked, then cached. On the hosted project that first ask costs a little speech credit per question, persona and speed (cap $10 per speech vendor).
+  - After `pnpm test:integration`, restart `pnpm functions:serve` (or use `pnpm start`): the fake server stays running in Docker otherwise, and the app hears tones.
+  - Phone testing so far uses the development build (`docs/PHONE.md`); Developer Mode appears only after it's installed.
 
 ---
 
