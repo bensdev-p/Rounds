@@ -118,7 +118,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1494892379716"
+      },
+      {
+        "kind": "note",
+        "id": "1530550150741"
+      },
+      {
+        "kind": "note",
+        "id": "1536437425019"
+      },
+      {
+        "kind": "note",
+        "id": "1539537920733"
+      },
+      {
+        "kind": "note",
+        "id": "1557739493988"
+      }
+    ],
     "sources": [
       {
         "title": "Surviving Sepsis Campaign: International Guidelines for Management of Sepsis and Septic Shock 2021"

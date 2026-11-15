@@ -116,7 +116,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1502845294644"
+      },
+      {
+        "kind": "note",
+        "id": "1502846424371"
+      },
+      {
+        "kind": "note",
+        "id": "1550626495694"
+      },
+      {
+        "kind": "note",
+        "id": "1555720980431"
+      },
+      {
+        "kind": "note",
+        "id": "1585334906873"
+      }
+    ],
     "sources": [
       {
         "title": "Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (Diabetes Care, 2024)"

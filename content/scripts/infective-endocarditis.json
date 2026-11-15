@@ -90,7 +90,58 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1497045640067"
+      },
+      {
+        "kind": "note",
+        "id": "1550787795139"
+      },
+      {
+        "kind": "note",
+        "id": "1551617026447"
+      },
+      {
+        "kind": "note",
+        "id": "1579382616920"
+      },
+      {
+        "kind": "note",
+        "id": "1579382907963"
+      },
+      {
+        "kind": "note",
+        "id": "1504743646378",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1539379437968",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1553162828660",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550694289942",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555458022589",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1590016185294",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2023 ESC Guidelines for the management of endocarditis"

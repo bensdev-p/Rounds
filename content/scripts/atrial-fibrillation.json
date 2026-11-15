@@ -94,7 +94,42 @@
         "management.next_line[1]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1578765152246"
+      },
+      {
+        "kind": "note",
+        "id": "1472147549163",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550409526747",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1557341643876",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1497748713929",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1532380404222",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555275580254",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"

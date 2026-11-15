@@ -161,7 +161,38 @@
         "diagnosis.criteria[1]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1495883335732",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1495883587351",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550710294654",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1474426264636",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1550710228646",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1557155284271",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2019 ESC Guidelines for the diagnosis and management of acute pulmonary embolism"

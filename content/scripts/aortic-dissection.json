@@ -115,7 +115,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1532186604247"
+      },
+      {
+        "kind": "note",
+        "id": "1532189052771"
+      },
+      {
+        "kind": "note",
+        "id": "1532189236664"
+      },
+      {
+        "kind": "note",
+        "id": "1556206626632"
+      },
+      {
+        "kind": "note",
+        "id": "1557012534276"
+      }
+    ],
     "sources": [
       {
         "title": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"

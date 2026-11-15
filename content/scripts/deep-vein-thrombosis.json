@@ -129,7 +129,54 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1511025803136"
+      },
+      {
+        "kind": "note",
+        "id": "1511025895605"
+      },
+      {
+        "kind": "note",
+        "id": "1511025928050"
+      },
+      {
+        "kind": "note",
+        "id": "1511028541153"
+      },
+      {
+        "kind": "note",
+        "id": "1549586054765",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550708813822",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1557843697920",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1474340749040",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1511028698049",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1532736174421",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Antithrombotic Therapy for VTE Disease: Second Update of the CHEST Guideline and Expert Panel Report (2021)"

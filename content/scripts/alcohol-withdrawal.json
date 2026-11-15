@@ -96,7 +96,20 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1485313510624"
+      },
+      {
+        "kind": "note",
+        "id": "1505859856287"
+      },
+      {
+        "kind": "note",
+        "id": "1557061576009"
+      }
+    ],
     "sources": [
       {
         "title": "The ASAM Clinical Practice Guideline on Alcohol Withdrawal Management (2020)"

@@ -113,7 +113,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1475363774930"
+      },
+      {
+        "kind": "note",
+        "id": "1475364023607"
+      },
+      {
+        "kind": "note",
+        "id": "1497562168496"
+      },
+      {
+        "kind": "note",
+        "id": "1539282631413"
+      },
+      {
+        "kind": "note",
+        "id": "1555542582278"
+      }
+    ],
     "sources": [
       {
         "title": "KDIGO 2021 Clinical Practice Guideline for the Management of Glomerular Diseases"

@@ -140,7 +140,38 @@
         "management.next_line"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1462327211125",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1502564341435",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1502845294644",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1462327382493",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1552260881200",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1568856424118",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Hyperglycemic Crises in Adults With Diabetes: A Consensus Report (Diabetes Care, 2024)"
