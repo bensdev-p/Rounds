@@ -459,3 +459,11 @@ max_client_conn = 200
 
 [remotes.rounds-dev.storage.vector]
 enabled = false
+
+# Anki bridge (M3.3): the add-on calls with a pairing code or device token,
+# never a Supabase JWT, so these functions check their callers themselves.
+[functions.anki-pair]
+verify_jwt = false
+
+[functions.anki-sync]
+verify_jwt = false

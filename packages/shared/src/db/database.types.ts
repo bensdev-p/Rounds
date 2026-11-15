@@ -3,6 +3,147 @@ export type Json = string | number | boolean | null | { [key: string]: Json | un
 export type Database = {
   public: {
     Tables: {
+      anki_actions: {
+        Row: {
+          applied_at: string | null;
+          applied_count: number | null;
+          created_at: string;
+          id: string;
+          kind: string;
+          note_ids: number[];
+          rung: string | null;
+          script_id: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          applied_at?: string | null;
+          applied_count?: number | null;
+          created_at?: string;
+          id?: string;
+          kind: string;
+          note_ids: number[];
+          rung?: string | null;
+          script_id: string;
+          user_id?: string;
+        };
+        Update: {
+          applied_at?: string | null;
+          applied_count?: number | null;
+          created_at?: string;
+          id?: string;
+          kind?: string;
+          note_ids?: number[];
+          rung?: string | null;
+          script_id?: string;
+          user_id?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: 'anki_actions_script_id_fkey';
+            columns: ['script_id'];
+            isOneToOne: false;
+            referencedRelation: 'illness_scripts';
+            referencedColumns: ['id'];
+          },
+        ];
+      };
+      anki_card_stats: {
+        Row: {
+          card_id: number;
+          due_days: number | null;
+          interval_days: number;
+          lapses: number;
+          last_review_at: string | null;
+          note_id: number;
+          queue: number;
+          reps: number;
+          suspended: boolean;
+          uploaded_at: string;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          card_id: number;
+          due_days?: number | null;
+          interval_days: number;
+          lapses: number;
+          last_review_at?: string | null;
+          note_id: number;
+          queue: number;
+          reps: number;
+          suspended: boolean;
+          uploaded_at?: string;
+          user_id: string;
+        };
+        Update: {
+          card_id?: number;
+          due_days?: number | null;
+          interval_days?: number;
+          lapses?: number;
+          last_review_at?: string | null;
+          note_id?: number;
+          queue?: number;
+          reps?: number;
+          suspended?: boolean;
+          uploaded_at?: string;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
+      anki_claim_failures: {
+        Row: {
+          at: string;
+          id: number;
+          ip_hash: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          at?: string;
+          id?: never;
+          ip_hash: string;
+        };
+        Update: {
+          at?: string;
+          id?: never;
+          ip_hash?: string;
+        };
+        Relationships: [];
+      };
+      anki_pairings: {
+        Row: {
+          claimed_at: string | null;
+          code_expires_at: string | null;
+          code_hash: string | null;
+          created_at: string;
+          id: string;
+          last_sync_at: string | null;
+          token_hash: string | null;
+          user_id: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          claimed_at?: string | null;
+          code_expires_at?: string | null;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          last_sync_at?: string | null;
+          token_hash?: string | null;
+          user_id: string;
+        };
+        Update: {
+          claimed_at?: string | null;
+          code_expires_at?: string | null;
+          code_hash?: string | null;
+          created_at?: string;
+          id?: string;
+          last_sync_at?: string | null;
+          token_hash?: string | null;
+          user_id?: string;
+        };
+        Relationships: [];
+      };
       app_settings: {
         Row: {
           key: string;
@@ -383,6 +524,18 @@ export type Database = {
       [_ in never]: never;
     };
     Functions: {
+      anki_linked_notes: {
+        Args: Record<PropertyKey, never>;
+        Returns: {
+          note_id: number;
+          rung: string;
+          script_id: string;
+        }[];
+      };
+      anki_record_sync: {
+        Args: { p_applied: Json; p_cards: Json; p_user: string };
+        Returns: undefined;
+      };
       finish_ladder_session: {
         Args: {
           p_score: number;
@@ -402,6 +555,10 @@ export type Database = {
           isOneToOne: true;
           isSetofReturn: false;
         };
+      };
+      queue_anki_action: {
+        Args: { p_kind: string; p_rung: string; p_script_id: string };
+        Returns: string;
       };
       show_in_review: { Args: Record<PropertyKey, never>; Returns: boolean };
     };
