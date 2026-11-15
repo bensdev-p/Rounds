@@ -4,7 +4,7 @@
  * no progress. The question is replaced in place; it never pushes the ladder.
  */
 import { useState, type ReactNode } from 'react';
-import { Platform, StyleSheet, TextInput, View } from 'react-native';
+import { PixelRatio, Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
 import { radius, space, type, useTheme } from '@/theme';
 import { Button } from '@/ui/controls';
@@ -66,6 +66,11 @@ export function AskingView({
   const keyboard = useKeyboardVisible();
   const busy = grading || locked;
   const [focused, setFocused] = useState(false);
+  // Voice mode: a question over three lines would run under the voice panel,
+  // so the ladder collapses to its strip, as it does for the keyboard
+  // (wireframe 05 note 1; developer's call, M2.5). Measured per question.
+  const [longPrompt, setLongPrompt] = useState<string | null>(null);
+  const collapsed = voice ? longPrompt === prompt : keyboard;
 
   const footer = (
     <View style={styles.footer}>
@@ -137,7 +142,7 @@ export function AskingView({
       <View style={styles.ladder}>
         {steps ? (
           <StepStrip states={steps.states} label={steps.label} />
-        ) : keyboard && !voice ? (
+        ) : collapsed ? (
           <LadderStrip states={rungs} />
         ) : (
           <Ladder states={rungs} />
@@ -156,6 +161,13 @@ export function AskingView({
         accessibilityRole="header"
         accessibilityLiveRegion="polite"
         style={styles.question}
+        onLayout={(e) => {
+          if (!voice) return;
+          // The question's line height, scaled with Dynamic Type.
+          const line = type('question').lineHeight! * PixelRatio.getFontScale();
+          const long = e.nativeEvent.layout.height > line * 3.5;
+          setLongPrompt((current) => (long ? prompt : current === prompt ? null : current));
+        }}
       >
         {prompt}
       </Txt>

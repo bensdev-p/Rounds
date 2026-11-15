@@ -7,8 +7,7 @@ No Mac or Xcode is needed.
 ## Once
 
 1. **Voice key.** In `supabase/functions/.env`, set `DEEPGRAM_API_KEY` (Member role). Without it, sessions open in text mode.
-2. **Developer Mode on the iPhone.** Settings → Privacy & Security → Developer Mode → on (the phone restarts).
-3. **Build.** In a terminal on the PC, from `apps/mobile`:
+2. **Build.** In a terminal on the PC, from `apps/mobile`:
    ```bash
    npx eas-cli@latest login
    ```
@@ -24,6 +23,7 @@ No Mac or Xcode is needed.
    npx eas-cli@latest build --profile development --platform ios
    ```
    The first build asks for the Apple ID and makes the certificates. It takes 15–25 minutes in the cloud. When it's done, open the build page link on the iPhone and install.
+3. **Developer Mode.** iPhones hide this switch until an app like this is installed, so it comes after the install. Tap the Rounds icon once: iOS says Developer Mode is required. Then Settings → Privacy & Security, scroll to the bottom, Developer Mode → on. The phone restarts and asks you to confirm with your passcode.
 
 ## Every day
 
