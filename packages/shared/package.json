@@ -16,6 +16,7 @@
     "lint": "eslint .",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "content:seed": "tsx scripts/build-seed.ts",
+    "content:push": "tsx scripts/push-content.ts",
     "content:check": "tsx scripts/content-check.ts",
     "content:review": "tsx scripts/content-review.ts",
     "content:approve": "tsx scripts/content-approve.ts",
