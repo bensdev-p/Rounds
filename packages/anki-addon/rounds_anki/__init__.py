@@ -30,6 +30,8 @@ OPEN_DELAY_MS = 3000
 CLOSE_TIMEOUT_S = 5.0
 
 _busy = False
+# Set while a profile closes: Anki's own sync on close shouldn't start ours.
+_closing = False
 
 
 # ---------------------------------------------------------------- settings
@@ -138,7 +140,7 @@ def sync(quiet: bool = True) -> None:
     """Pull, apply in one undo step, push. Quiet syncs report only changes and problems."""
     global _busy
     token = _token()
-    if _busy or not token or not mw.col:
+    if _busy or _closing or not token or not mw.col:
         if not quiet and not token:
             showInfo("Connect to Rounds first: Tools → Rounds → Connect to Rounds.")
         return
@@ -204,6 +206,8 @@ def sync(quiet: bool = True) -> None:
 
 def upload_on_close() -> None:
     """Upload only, with a short timeout, so closing Anki isn't held up for long."""
+    global _closing
+    _closing = True
     token = _token()
     server = _server()
     if not token or not server or not mw.col or _busy:
@@ -243,6 +247,12 @@ def _setup_menu() -> None:
 
 
 gui_hooks.main_window_did_init.append(_setup_menu)
-gui_hooks.profile_did_open.append(lambda: mw.progress.single_shot(OPEN_DELAY_MS, sync))
+def _on_profile_open() -> None:
+    global _closing
+    _closing = False
+    mw.progress.single_shot(OPEN_DELAY_MS, sync)
+
+
+gui_hooks.profile_did_open.append(_on_profile_open)
 gui_hooks.sync_did_finish.append(lambda: sync())
 gui_hooks.profile_will_close.append(upload_on_close)
