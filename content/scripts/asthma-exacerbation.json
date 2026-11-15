@@ -117,7 +117,43 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1473536778562"
+      },
+      {
+        "kind": "note",
+        "id": "1474580971787"
+      },
+      {
+        "kind": "note",
+        "id": "1495911001468"
+      },
+      {
+        "kind": "note",
+        "id": "1539204159804"
+      },
+      {
+        "kind": "note",
+        "id": "1550662680256"
+      },
+      {
+        "kind": "note",
+        "id": "1495894152946",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1537631653103",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550662682692",
+        "rung": "recall"
+      }
+    ],
     "sources": [
       {
         "title": "Global Strategy for Asthma Management and Prevention (GINA 2024)"
