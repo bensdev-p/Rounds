@@ -249,6 +249,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
 - (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
+- (15 Nov 2026) A Rounds deck in Anki (developer, M3.1): the add-on creates its own deck from Rounds' content, for example one card per missed question with its accepted answers, so a miss on rounds becomes an Anki review even for students without AnKing. Possible: the add-on can create a note type, deck and notes, and a stable GUID per question lets updates replace cards in place. Constraints: approved scripts only (release rule), cards trace to script fields (domain rule 1), our own text only, never AnKing's (domain rule 6), and retired scripts' cards are suspended or removed. Best kept to missed questions so it doesn't pile reviews on top of AnKing. Not part of Stage 3 as planned.
 
 ---
 
