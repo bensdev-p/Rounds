@@ -3,8 +3,8 @@
  * screen shows the ladder and the question and nothing else: no feedback text,
  * no progress. The question is replaced in place; it never pushes the ladder.
  */
-import { useState } from 'react';
-import { Platform, StyleSheet, TextInput, View } from 'react-native';
+import { useState, type ReactNode } from 'react';
+import { PixelRatio, Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
 import { radius, space, type, useTheme } from '@/theme';
 import { Button } from '@/ui/controls';
@@ -33,6 +33,8 @@ export function AskingView({
   grading,
   locked,
   warning,
+  notice = null,
+  voice,
 }: {
   personaLabel: string;
   clockMs: number;
@@ -55,14 +57,28 @@ export function AskingView({
   /** After a miss: everything stops while the ladder shows it. */
   locked: boolean;
   warning: string | null;
+  /** One line above the answer box, e.g. why the session is in text mode. */
+  notice?: string | null;
+  /** Voice mode (wireframe 04): the voice panel replaces the answer box. */
+  voice?: ReactNode;
 }) {
   const { c } = useTheme();
   const keyboard = useKeyboardVisible();
   const busy = grading || locked;
   const [focused, setFocused] = useState(false);
+  // Voice mode: a question over three lines would run under the voice panel,
+  // so the ladder collapses to its strip, as it does for the keyboard
+  // (wireframe 05 note 1; developer's call, M2.5). Measured per question.
+  const [longPrompt, setLongPrompt] = useState<string | null>(null);
+  const collapsed = voice ? longPrompt === prompt : keyboard;
 
   const footer = (
     <View style={styles.footer}>
+      {notice && (
+        <Txt variant="small" tone="text2">
+          {notice}
+        </Txt>
+      )}
       <TextInput
         accessibilityLabel="Your answer"
         accessibilityHint={isList ? 'Separate items with commas' : 'Type your answer, then submit'}
@@ -121,12 +137,12 @@ export function AskingView({
   );
 
   return (
-    <Screen footer={footer}>
+    <Screen footer={voice ?? footer}>
       <SessionHeader title={personaLabel} clockMs={clockMs} onClose={onClose} />
       <View style={styles.ladder}>
         {steps ? (
           <StepStrip states={steps.states} label={steps.label} />
-        ) : keyboard ? (
+        ) : collapsed ? (
           <LadderStrip states={rungs} />
         ) : (
           <Ladder states={rungs} />
@@ -145,6 +161,13 @@ export function AskingView({
         accessibilityRole="header"
         accessibilityLiveRegion="polite"
         style={styles.question}
+        onLayout={(e) => {
+          if (!voice) return;
+          // The question's line height, scaled with Dynamic Type.
+          const line = type('question').lineHeight! * PixelRatio.getFontScale();
+          const long = e.nativeEvent.layout.height > line * 3.5;
+          setLongPrompt((current) => (long ? prompt : current === prompt ? null : current));
+        }}
       >
         {prompt}
       </Txt>

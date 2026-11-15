@@ -32,6 +32,7 @@ import {
 } from '../schemas/patientLog.ts';
 import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schemas/question.ts';
 import { ProfileSchema, type Profile } from '../profile/profile.ts';
+import type { CueId, VoiceSpeed } from '../voice/voice.ts';
 
 export type RoundsClient = SupabaseClient<Database>;
 
@@ -481,7 +482,7 @@ export async function gradeAnswer(
 // ─── Profile ────────────────────────────────────────────────────────────────
 
 const PROFILE_COLUMNS =
-  'year, rotation, rotation_started_on, rotation_weeks, daily_goal, persona, answer_timeout';
+  'year, rotation, rotation_started_on, rotation_weeks, daily_goal, persona, answer_timeout, voice_speed';
 
 /** The student's profile, or null before onboarding. */
 export async function getProfile(client: RoundsClient): Promise<Profile | null> {
@@ -571,4 +572,62 @@ export async function verifyEmailCode(
 export async function deleteAccount(client: RoundsClient): Promise<void> {
   const { error } = await client.functions.invoke('delete-account', { method: 'POST' });
   if (error) throw new RoundsApiError(`Deleting account: ${error.message}`);
+}
+
+// ─── Voice (M2.5) ───────────────────────────────────────────────────────────
+
+export const SpeechTokenSchema = z.object({
+  vendor: z.enum(['deepgram', 'fake']),
+  token: z.string().min(1),
+  expires_in: z.number().positive(),
+  model: z.string().min(1),
+});
+export type SpeechToken = z.infer<typeof SpeechTokenSchema>;
+
+/** A short-lived token to stream the mic straight to the speech-to-text vendor (`speech-token`). */
+export async function getSpeechToken(client: RoundsClient): Promise<SpeechToken> {
+  const { data, error } = await client.functions.invoke<unknown>('speech-token', {
+    method: 'POST',
+  });
+  if (error) throw new RoundsApiError(`Speech token: ${error.message}`);
+  const parsed = SpeechTokenSchema.safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Speech token: unexpected response');
+  return parsed.data;
+}
+
+/** What the attending says: a question, or a fixed cue ("Mm-hm."). */
+export type SpeechRequest =
+  | { question_id: string; persona: PersonaId; speed: VoiceSpeed }
+  | { cue: CueId; persona: PersonaId; speed: VoiceSpeed };
+
+/** Raw 16-bit little-endian mono PCM from `speak`, at this rate. */
+export const SPEECH_SAMPLE_RATE = 24_000;
+
+/**
+ * Fetches the attending's voice from the `speak` Edge Function. Returns the
+ * Response so callers can stream it (native passes expo/fetch, whose body
+ * streams; React Native's own fetch doesn't).
+ */
+export async function fetchSpeech(
+  client: RoundsClient,
+  functionsUrl: string,
+  publishableKey: string,
+  request: SpeechRequest,
+  fetchImpl: typeof fetch = fetch,
+  signal?: AbortSignal,
+): Promise<Response> {
+  const { data } = await client.auth.getSession();
+  const token = data.session?.access_token;
+  if (!token) throw new RoundsApiError('Voice: not signed in');
+  const params = new URLSearchParams({
+    ...('question_id' in request ? { question_id: request.question_id } : { cue: request.cue }),
+    persona: request.persona,
+    speed: String(request.speed),
+  });
+  const response = await fetchImpl(`${functionsUrl}/speak?${params}`, {
+    headers: { Authorization: `Bearer ${token}`, apikey: publishableKey },
+    signal: signal ?? null,
+  });
+  if (!response.ok) throw new RoundsApiError(`Voice: HTTP ${response.status}`);
+  return response;
 }

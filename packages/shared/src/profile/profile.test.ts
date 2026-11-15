@@ -23,6 +23,7 @@ describe('newProfile', () => {
       daily_goal: 3,
       persona: 'teacher',
       answer_timeout: 'persona',
+      voice_speed: 1,
     });
   });
 

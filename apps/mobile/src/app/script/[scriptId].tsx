@@ -5,7 +5,7 @@
 import type { IllnessScript } from '@rounds/shared';
 import { getLadderContent } from '@rounds/shared/api';
 import { router, useLocalSearchParams } from 'expo-router';
-import { ChevronLeft, Flag } from 'lucide-react-native';
+import { ChevronLeft, Flag, Mic } from 'lucide-react-native';
 import { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { Disclaimer } from '@/components/Disclaimer';
@@ -17,7 +17,6 @@ import { usePersona } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
 import { space, useTheme } from '@/theme';
 import { Button, Chip, Link } from '@/ui/controls';
-import { LadderIcon } from '@/ui/icons';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
 import { loadErrorMessage } from '@/lib/errors';
@@ -114,7 +113,7 @@ export default function ScriptScreen() {
         content.data.questions.length > 0 ? (
           <Button
             label="Pimp me on this"
-            icon={LadderIcon}
+            icon={Mic}
             onPress={() =>
               router.replace({ pathname: '/session/[scriptId]', params: { scriptId, persona } })
             }

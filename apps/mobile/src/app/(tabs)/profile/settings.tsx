@@ -1,13 +1,15 @@
 /**
  * Settings, wireframe 12 without the Anki part (M3.1). The daily goal isn't
- * drawn; it lives here above Voice (developer's call, M2.3). The voice speed
- * row joins Voice with the voice session (M2.5).
+ * drawn; it lives here above Voice (developer's call, M2.3). Voice: the
+ * attending's speed (M2.5) and the answer timeout.
  */
 import {
   ANSWER_TIMEOUTS,
   MAX_ROUNDS_GOAL,
   MIN_ROUNDS_GOAL,
+  VOICE_SPEEDS,
   answerTimeoutLabel,
+  voiceSpeedLabel,
 } from '@rounds/shared';
 import { router } from 'expo-router';
 import { Check, ChevronLeft, ChevronRight } from 'lucide-react-native';
@@ -40,6 +42,7 @@ export default function Settings() {
   const { account } = useAccount();
   const [appearance, setAppearance] = useAppearance();
   const [choosingTimeout, setChoosingTimeout] = useState(false);
+  const [choosingSpeed, setChoosingSpeed] = useState(false);
   const goal = profile.daily_goal;
 
   return (
@@ -79,6 +82,36 @@ export default function Settings() {
       <List>
         <Row
           first
+          title="Attending voice speed"
+          onPress={() => setChoosingSpeed((open) => !open)}
+          accessibilityLabel={`Attending voice speed, ${voiceSpeedLabel(profile.voice_speed)}`}
+          accessibilityHint="How fast the attending asks"
+          trailing={
+            <Txt variant="meta" tone="text2" tabular>
+              {voiceSpeedLabel(profile.voice_speed)}
+            </Txt>
+          }
+        />
+        {choosingSpeed && (
+          <View accessibilityRole="radiogroup" accessibilityLabel="Attending voice speed">
+            {VOICE_SPEEDS.map((speed) => {
+              const on = speed === profile.voice_speed;
+              return (
+                <Row
+                  key={speed}
+                  title={voiceSpeedLabel(speed)}
+                  accessibilityLabel={`${voiceSpeedLabel(speed)}${on ? ', selected' : ''}`}
+                  onPress={() => {
+                    void update({ voice_speed: speed });
+                    setChoosingSpeed(false);
+                  }}
+                  trailing={on ? <Check size={20} color={c.text} /> : undefined}
+                />
+              );
+            })}
+          </View>
+        )}
+        <Row
           title="Answer timeout"
           onPress={() => setChoosingTimeout((open) => !open)}
           accessibilityLabel={`Answer timeout, ${answerTimeoutLabel(profile.answer_timeout)}`}

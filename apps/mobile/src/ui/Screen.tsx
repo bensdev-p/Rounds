@@ -1,11 +1,21 @@
 import type { ReactNode } from 'react';
-import { ScrollView, StyleSheet, View, type StyleProp, type ViewStyle } from 'react-native';
+import {
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  View,
+  type StyleProp,
+  type ViewStyle,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { space, useTheme } from '@/theme';
 
 /**
  * A full screen on `bg` with the 20 pt margin. `footer` stays pinned in the
  * thumb zone (session screens); `scroll` lets the body scroll above it.
+ * On iOS the column rises with the keyboard, so the answer box and its
+ * buttons stay in view (Android and the web resize the window themselves).
  */
 export function Screen({
   children,
@@ -27,7 +37,10 @@ export function Screen({
       edges={tab ? ['top'] : ['top', 'bottom']}
       style={[styles.flex, { backgroundColor: c.bg }]}
     >
-      <View style={styles.column}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+        style={styles.column}
+      >
         {scroll ? (
           <ScrollView
             style={styles.flex}
@@ -40,7 +53,7 @@ export function Screen({
           <View style={[styles.flex, styles.content, contentStyle]}>{children}</View>
         )}
         {footer ? <View style={styles.footer}>{footer}</View> : null}
-      </View>
+      </KeyboardAvoidingView>
     </SafeAreaView>
   );
 }
