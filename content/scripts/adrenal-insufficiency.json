@@ -111,7 +111,46 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1502236479001"
+      },
+      {
+        "kind": "note",
+        "id": "1555720529080"
+      },
+      {
+        "kind": "note",
+        "id": "1496623452372",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1502236802283",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1502560818022",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1532693062576",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1552216700593",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555720467958",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Diagnosis and Treatment of Primary Adrenal Insufficiency: An Endocrine Society Clinical Practice Guideline (2016)"

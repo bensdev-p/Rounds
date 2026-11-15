@@ -91,7 +91,38 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1520885217485",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1547916133337",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1553043297138",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1543683644900",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1547564850214",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1553043297393",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "International Clinical Practice Guidelines for the Treatment of Acute Uncomplicated Cystitis and Pyelonephritis in Women (IDSA and ESCMID, 2010)"

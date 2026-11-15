@@ -158,7 +158,58 @@
         "management.next_line[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1539882094287"
+      },
+      {
+        "kind": "note",
+        "id": "1556196826608"
+      },
+      {
+        "kind": "note",
+        "id": "1556924270114"
+      },
+      {
+        "kind": "note",
+        "id": "1569457354070"
+      },
+      {
+        "kind": "note",
+        "id": "1569458111557"
+      },
+      {
+        "kind": "note",
+        "id": "1474503849368",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1504659390894",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550712326734",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1495908532054",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1496497550431",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1496498154874",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Diagnosis and Treatment of Adults with Community-acquired Pneumonia: An Official Clinical Practice Guideline of the ATS and IDSA (2019)"

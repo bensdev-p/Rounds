@@ -17,6 +17,7 @@ Content review and user testing are not gates: development doesn't wait for scri
 - **apps/mobile:** Expo (React Native) + Expo Router + TypeScript. Also serves the web app (Expo web). iPhone first; Android ships later from the same code.
 - **apps/site:** Next.js marketing site (Stage 4, not yet)
 - **packages/shared:** TypeScript types, Zod schemas (illness script, question, attempt), API client, pure grading/ladder logic
+- **packages/anki-linker:** developer-only Anki add-on that proposes AnKing note links per script and rung (M3.2). Never shipped to students.
 - **packages/anki-addon:** Python Anki add-on, the "bridge" (Stage 3; not created yet). It talks to Supabase only through Edge Functions, never with a secret key, and never reads or uploads card text.
 - **supabase/:** Postgres migrations, Row Level Security policies, Edge Functions (Deno/TypeScript) for all AI calls
 - **AI:** Claude API, called only from Supabase Edge Functions. Never ship API keys to the client.
@@ -40,6 +41,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm content:review`: write review sheets for unapproved scripts to `content/review/` (gitignored)
 - `pnpm content:approve <id> --by "Name, role"`: record a medical reviewer's approval. Only on the reviewer's explicit sign-off; never run it yourself. See `content/README.md`
 - `pnpm stats`: usage report per student on the local database: days used, days in a row, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
+- `pnpm anki:linker:install`: copy the Rounds linker add-on into Anki on this computer (restart Anki; Tools → Rounds: link scripts). `pnpm content:link-anki <links.json> [--dry-run]`: write the links it saved into `content/scripts` as `anki_refs` (ids and rungs only). `pnpm anki:test`: its Python tests
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm content:push [--preview] [--dry-run]`: send approved and in-review scripts (never fixtures or drafts) to the linked hosted project. Changes hosted data: get the developer's OK first

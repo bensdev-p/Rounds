@@ -145,7 +145,61 @@
         "management.next_line[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1557777121517"
+      },
+      {
+        "kind": "note",
+        "id": "1570070676637"
+      },
+      {
+        "kind": "note",
+        "id": "1471547618307",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1497722931967",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1539463025075",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1497308773697",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1550690801047",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1579476253074",
+        "rung": "workup"
+      },
+      {
+        "kind": "note",
+        "id": "1477447145086",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1497732761695",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555286309380",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"

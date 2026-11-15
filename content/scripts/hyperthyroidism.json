@@ -96,7 +96,58 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1502847845332"
+      },
+      {
+        "kind": "note",
+        "id": "1547916081745"
+      },
+      {
+        "kind": "note",
+        "id": "1548274605064"
+      },
+      {
+        "kind": "note",
+        "id": "1557341643876"
+      },
+      {
+        "kind": "note",
+        "id": "1580516060026"
+      },
+      {
+        "kind": "note",
+        "id": "1552147637583",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1552158235283",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1585078817088",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1493675300258",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1502563194507",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1502929712391",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2016 American Thyroid Association Guidelines for Diagnosis and Management of Hyperthyroidism and Other Causes of Thyrotoxicosis"

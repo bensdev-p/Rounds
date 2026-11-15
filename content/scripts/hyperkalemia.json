@@ -87,7 +87,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1495911001468"
+      },
+      {
+        "kind": "note",
+        "id": "1496783778319"
+      },
+      {
+        "kind": "note",
+        "id": "1496795383464"
+      },
+      {
+        "kind": "note",
+        "id": "1535225879303"
+      },
+      {
+        "kind": "note",
+        "id": "1555494970633"
+      }
+    ],
     "sources": [
       {
         "title": "Clinical Practice Guidelines: Treatment of Acute Hyperkalaemia in Adults (UK Kidney Association, 2023)"

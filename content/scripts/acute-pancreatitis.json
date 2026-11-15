@@ -115,7 +115,58 @@
         "management.next_line[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1495239550899"
+      },
+      {
+        "kind": "note",
+        "id": "1495239811994"
+      },
+      {
+        "kind": "note",
+        "id": "1511219527044"
+      },
+      {
+        "kind": "note",
+        "id": "1511219634492"
+      },
+      {
+        "kind": "note",
+        "id": "1535921440931"
+      },
+      {
+        "kind": "note",
+        "id": "1482971305143",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1482971320837",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1482971441031",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1495670579999",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1532131804405",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1535304077148",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "American College of Gastroenterology Guideline: Management of Acute Pancreatitis (2024)"

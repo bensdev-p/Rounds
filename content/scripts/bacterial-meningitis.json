@@ -94,7 +94,46 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1515891636007"
+      },
+      {
+        "kind": "note",
+        "id": "1517169728142"
+      },
+      {
+        "kind": "note",
+        "id": "1537556677772",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550409495760",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1575344364515",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1537557489214",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555451147551",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1556473561662",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "2016 ESCMID guideline: diagnosis and treatment of acute bacterial meningitis"

@@ -110,7 +110,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1517003863108"
+      },
+      {
+        "kind": "note",
+        "id": "1517003902640"
+      },
+      {
+        "kind": "note",
+        "id": "1517087494979"
+      },
+      {
+        "kind": "note",
+        "id": "1517087779618"
+      },
+      {
+        "kind": "note",
+        "id": "1578854051059"
+      }
+    ],
     "sources": [
       {
         "title": "Practice Guidelines for the Diagnosis and Management of Skin and Soft Tissue Infections: 2014 Update by the IDSA"

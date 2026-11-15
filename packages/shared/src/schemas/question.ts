@@ -2,22 +2,9 @@ import { z } from 'zod';
 import { collectStrings, FieldPathSchema, resolveFieldPath } from './fieldPath.ts';
 import { ScriptIdSchema, type IllnessScript } from './illnessScript.ts';
 import { containsTerm } from '../text.ts';
+import { RungSchema } from './rung.ts';
 
-/** Ladder rungs, lowest to highest. Order matters: the ladder climbs this list. */
-export const RUNGS = [
-  'recall',
-  'second_order',
-  'differentiate',
-  'workup',
-  'management',
-  'pearl',
-] as const;
-export const RungSchema = z.enum(RUNGS);
-export type Rung = z.infer<typeof RungSchema>;
-
-export function rungIndex(rung: Rung): number {
-  return RUNGS.indexOf(rung);
-}
+export { RUNGS, RungSchema, rungIndex, type Rung } from './rung.ts';
 
 export const QuestionIdSchema = z
   .string()

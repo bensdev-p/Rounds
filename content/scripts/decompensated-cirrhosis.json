@@ -96,7 +96,58 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1486522758122"
+      },
+      {
+        "kind": "note",
+        "id": "1486522767302"
+      },
+      {
+        "kind": "note",
+        "id": "1486591126064"
+      },
+      {
+        "kind": "note",
+        "id": "1495561175263"
+      },
+      {
+        "kind": "note",
+        "id": "1531956908372"
+      },
+      {
+        "kind": "note",
+        "id": "1495497512091",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1567452654959",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1567452654960",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1557251726524",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1580013594763",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1580014252557",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "AASLD Practice Guidance: Diagnosis, Evaluation, and Management of Ascites, Spontaneous Bacterial Peritonitis and Hepatorenal Syndrome (2021)"

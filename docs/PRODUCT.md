@@ -28,7 +28,7 @@ A disease's structured summary. Fields:
 - `confused_with[]`: links to other scripts, each with a "how to tell apart" note
 - `pearls[]`: high-yield facts attendings like to ask
 - `difficulty_tiers`: which facts are MS1–2 / MS3 / MS4 level
-- `anki_refs[]`: external AnKing card/note IDs (IDs only, never card text)
+- `anki_refs[]`: AnKing note IDs, each with an optional rung (IDs only, never card text)
 - `status`, `version`, `reviewed_by`, `reviewed_at`, `sources[]`
 
 Scripts are drafted by AI and approved by a human medical reviewer. Each question has a "This is wrong" flag that feeds a review queue.

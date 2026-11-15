@@ -28,6 +28,9 @@
     "eval:grading": "deno run --config supabase/functions/grade-answer/deno.json --allow-read --allow-env --allow-net=api.anthropic.com --allow-write=supabase/functions/grade-answer/eval/results supabase/functions/grade-answer/eval/run.ts",
     "phone": "node scripts/phone.mjs",
     "content:flags": "pnpm --filter @rounds/shared content:flags",
+    "content:link-anki": "pnpm --filter @rounds/shared content:link-anki",
+    "anki:test": "python -m unittest discover -s packages/anki-linker/tests",
+    "anki:linker:install": "node packages/anki-linker/install.mjs",
     "start": "node scripts/start.mjs",
     "stats": "pnpm --filter @rounds/shared stats"
   },

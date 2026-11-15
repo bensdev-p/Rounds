@@ -154,7 +154,38 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1473623659476",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1496356970450",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1556994133668",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1545942903602",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1550662680256",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1555373219232",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Global Strategy for the Diagnosis, Management, and Prevention of COPD (GOLD 2025 Report)"

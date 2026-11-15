@@ -21,3 +21,8 @@ content/review/
 
 # grading eval output (pnpm eval:grading)
 supabase/functions/grade-answer/eval/results/
+
+# Anki add-ons: Python caches and per-install files (links.json holds the developer's picks until imported)
+__pycache__/
+packages/anki-linker/rounds_linker/user_files/
+packages/anki-linker/rounds_linker/meta.json

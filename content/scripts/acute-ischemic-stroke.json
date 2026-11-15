@@ -92,7 +92,58 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1512752683399"
+      },
+      {
+        "kind": "note",
+        "id": "1512955668550"
+      },
+      {
+        "kind": "note",
+        "id": "1550409526747"
+      },
+      {
+        "kind": "note",
+        "id": "1550450202537"
+      },
+      {
+        "kind": "note",
+        "id": "1555754474939"
+      },
+      {
+        "kind": "note",
+        "id": "1481771759221",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1512595785795",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1550694286485",
+        "rung": "recall"
+      },
+      {
+        "kind": "note",
+        "id": "1472668510022",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1481771888224",
+        "rung": "management"
+      },
+      {
+        "kind": "note",
+        "id": "1481771899132",
+        "rung": "management"
+      }
+    ],
     "sources": [
       {
         "title": "Guidelines for the Early Management of Patients With Acute Ischemic Stroke: 2019 Update (AHA/ASA)"

@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 import { TEST_SCRIPTS } from '../fixtures/index.ts';
-import { IllnessScriptSchema, isPimpable } from './illnessScript.ts';
+import {
+  IllnessScriptSchema,
+  isPimpable,
+  MAX_ANKI_CORE_NOTES,
+  MAX_ANKI_NOTES_PER_RUNG,
+} from './illnessScript.ts';
 
 const base = (): Record<string, unknown> => structuredClone(TEST_SCRIPTS[0]!);
 
@@ -34,7 +39,41 @@ describe('IllnessScriptSchema', () => {
   });
 
   it('rejects non-numeric Anki ids', () => {
-    expect(issues({ ...base(), anki_refs: [{ kind: 'card', id: 'abc' }] })).not.toEqual([]);
+    expect(issues({ ...base(), anki_refs: [{ kind: 'note', id: 'abc' }] })).not.toEqual([]);
+  });
+
+  it('links notes only, not cards (card ids differ per student)', () => {
+    expect(issues({ ...base(), anki_refs: [{ kind: 'card', id: '1' }] })).not.toEqual([]);
+  });
+
+  it('accepts an optional rung on a note and rejects unknown rungs', () => {
+    const refs = (rung?: string) => ({ ...base(), anki_refs: [{ kind: 'note', id: '1', rung }] });
+    expect(issues(refs('management'))).toEqual([]);
+    expect(issues(refs())).toEqual([]);
+    expect(issues(refs('anatomy'))).not.toEqual([]);
+  });
+
+  it('rejects the same note twice in a script', () => {
+    const dup = [
+      { kind: 'note', id: '7' },
+      { kind: 'note', id: '7', rung: 'workup' },
+    ];
+    expect(issues({ ...base(), anki_refs: dup })).toEqual(['Duplicate Anki note 7']);
+  });
+
+  it('caps notes per rung and core notes', () => {
+    const notes = (n: number, rung?: string) =>
+      Array.from({ length: n }, (_, i) => ({ kind: 'note', id: String(100 + i), rung }));
+    expect(
+      issues({ ...base(), anki_refs: notes(MAX_ANKI_NOTES_PER_RUNG, 'management') }),
+    ).toEqual([]);
+    expect(
+      issues({ ...base(), anki_refs: notes(MAX_ANKI_NOTES_PER_RUNG + 1, 'management') }),
+    ).toEqual([`More than ${MAX_ANKI_NOTES_PER_RUNG} Anki notes on the management rung`]);
+    expect(issues({ ...base(), anki_refs: notes(MAX_ANKI_CORE_NOTES) })).toEqual([]);
+    expect(issues({ ...base(), anki_refs: notes(MAX_ANKI_CORE_NOTES + 1) })).toEqual([
+      `More than ${MAX_ANKI_CORE_NOTES} core Anki notes (no rung)`,
+    ]);
   });
 
   it('checks comparison rows trace to a field and stay short', () => {

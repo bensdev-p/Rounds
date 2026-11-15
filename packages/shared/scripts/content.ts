@@ -14,6 +14,7 @@ import {
   type ContentFile,
   type HashFn,
 } from '../src/content/contentFile.ts';
+import type { AnkiRef } from '../src/schemas/illnessScript.ts';
 
 export const CONTENT_DIR = fileURLToPath(new URL('../../../content/', import.meta.url));
 export const SCRIPTS_DIR = join(CONTENT_DIR, 'scripts');
@@ -69,6 +70,17 @@ export function writeContentFile(file: ContentFile): void {
     join(SCRIPTS_DIR, `${file.script.id}.json`),
     `${JSON.stringify({ script: file.script, questions }, null, 2)}\n`,
   );
+}
+
+/**
+ * Replaces only `script.anki_refs` in a content file, leaving every other key
+ * and its order as written, so a relink diff shows just the links.
+ */
+export function writeAnkiRefs(scriptId: string, refs: readonly AnkiRef[]): void {
+  const path = join(SCRIPTS_DIR, `${scriptId}.json`);
+  const raw = JSON.parse(readFileSync(path, 'utf8')) as { script: Record<string, unknown> };
+  raw.script.anki_refs = refs;
+  writeFileSync(path, `${JSON.stringify(raw, null, 2)}\n`);
 }
 
 export function writeApprovals(approvals: Approvals): void {

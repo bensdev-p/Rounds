@@ -47,5 +47,13 @@ Attempts record the script version they were graded against.
 - **Quote accepted answers from the source field.** The canonical `answer` must appear word for word in a `source_fields` field. Synonyms don't need to.
 - **Keep synonyms specific.** The local matcher matches whole words, so a short or common synonym can credit wrong answers. For example, "calcium" would credit "low calcium", and "US" would credit "tell us". A test checks that every synonym earns credit; only a reviewer can check that none credits too much.
 - **List questions** (`"kind": "list"`) pass at 60% of `required_count`. Don't accept anything the prompt excludes; for example, "name three more" shouldn't accept the two causes it already gave.
-- **No AnKing or Qbank text.** Reference cards by numeric ID only, in `anki_refs`.
+- **No AnKing or Qbank text.** Reference AnKing notes by numeric id only, in `anki_refs`.
 - **No patient details,** even in made-up vignettes: no names, dates of birth or record numbers.
+
+## Anki links
+
+`anki_refs` links a script to AnKing notes: `{ "kind": "note", "id": "…", "rung": "management" }`. Ids only, never card text or tag names (domain rule 6). Note ids, not card ids: card ids differ per student.
+- `rung` is optional. A miss on that rung points to its notes; notes without a rung are the script's **core** notes, used when the missed rung has none.
+- At most 3 notes per rung and 5 core notes; no note twice. `pnpm content:check` enforces this.
+- Links aren't medical content, so changing them doesn't undo an approval.
+- Don't edit them by hand: pick them in the Rounds linker add-on (`packages/anki-linker/README.md`), then run `pnpm content:link-anki <links.json>` (`--dry-run` to preview).
