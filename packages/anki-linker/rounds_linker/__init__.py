@@ -212,7 +212,8 @@ class LinkDialog(QDialog):
         self.confirm.setChecked(s.id in self.confirmed)
         self.tree.clear()
         for c in self.cands[s.id]:
-            item = QTreeWidgetItem(["", "", str(c.note_id), str(c.score), c.topic])
+            topic = c.topic if c.direct else f"{c.topic}  (sub-topic)"
+            item = QTreeWidgetItem(["", "", str(c.note_id), str(c.score), topic])
             item.setFlags(item.flags() | Qt.ItemFlag.ItemIsUserCheckable)
             item.setCheckState(0, Qt.CheckState.Checked if c.selected else Qt.CheckState.Unchecked)
             item.setData(0, Qt.ItemDataRole.UserRole, c.note_id)

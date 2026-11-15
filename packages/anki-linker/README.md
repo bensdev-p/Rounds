@@ -21,6 +21,7 @@ Saving again later overwrites `links.json` with the scripts marked Confirmed; re
 
 - Only AnKing's Step 2 subject tags count: `#AK_Step2_v<n>::#Subjects::…`. Resource branches (`#AMBOSS`, `#UWorld`, …), other versions and non-AnKing tags are ignored.
 - A script matches the deepest tag segment that contains its name or one of its aliases. A trailing "exacerbation" or "infection" is dropped too ("COPD exacerbation" also matches "COPD").
+- Notes that sit only under a sub-topic of the match (asthma notes under "Obstructive lung disease" for COPD) are listed after the others, marked "(sub-topic)", and not ticked to start. Leaves marked `_Redo` keep their rung.
 - **No proposals?** AnKing names the topic differently. **Browse topics…** lists the Step 2 topics containing a word, with note counts; add the name you find with **Search words…** for that script. Search words are kept in the add-on's `user_files/search_words.json`, not in the repo.
 - The segment after the topic picks the rung: Management or Treatment → management, Diagnosis or Workup → workup, Etiology, Risk factors, Pathophysiology or Presentation → recall. Other segments, and the topic itself, are **core**: the notes used when the missed rung has none of its own.
 - Notes are ordered by how many other AnKing tags they carry (a rough high-yield signal), and the top ones per rung are ticked to start.

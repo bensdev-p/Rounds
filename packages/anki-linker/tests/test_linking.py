@@ -39,7 +39,7 @@ class MatchTagTest(unittest.TestCase):
     def test_leaf_picks_the_rung(self):
         self.assertEqual(
             L.match_tag(PANC + "::Management", self.index),
-            {"acute-pancreatitis": ("management", PANC + "::Management")},
+            {"acute-pancreatitis": ("management", PANC + "::Management", True)},
         )
         self.assertEqual(L.match_tag(PANC + "::Diagnosis", self.index)["acute-pancreatitis"][0], "workup")
         self.assertEqual(L.match_tag(PANC + "::Pathophysiology", self.index)["acute-pancreatitis"][0], "recall")
@@ -58,7 +58,38 @@ class MatchTagTest(unittest.TestCase):
 
     def test_aliases_match(self):
         tag = "#AK_Step2_v12::#Subjects::Endo::DKA::Management"
-        self.assertEqual(L.match_tag(tag, self.index), {"diabetic-ketoacidosis": ("management", tag)})
+        self.assertEqual(L.match_tag(tag, self.index), {"diabetic-ketoacidosis": ("management", tag, True)})
+
+
+class LeafAndSubtopicTest(unittest.TestCase):
+    OLD = "#AK_Step2_v12::#Subjects::Pulm::Lungs::Obstructive_Lung_Disease"
+
+    def setUp(self):
+        self.copd = L.Script("copd-exacerbation", "COPD exacerbation", [], extra=["Obstructive lung disease"])
+        self.index = L.build_term_index([self.copd])
+
+    def test_redo_and_starred_leaves_keep_their_rung(self):
+        self.assertEqual(L.leaf_rung("Management_Redo"), "management")
+        self.assertEqual(L.leaf_rung("*Pathophysiology"), "recall")
+        self.assertEqual(L.match_tag(self.OLD + "::*Management", self.index)[self.copd.id][::2], ("management", True))
+
+    def test_subtopic_notes_are_core_and_not_direct(self):
+        self.assertEqual(L.match_tag(self.OLD + "::Asthma::Management_Redo", self.index)[self.copd.id][::2], ("core", False))
+
+    def test_subtopic_notes_are_listed_last_and_not_ticked(self):
+        rows = [
+            (1, self.OLD + "::*Management"),
+            (2, self.OLD),
+            (3, self.OLD + "::Asthma #AK_Step2_v12::#UWorld::1 #AK_Step2_v12::#UWorld::2"),
+        ]
+        out = L.preselect(L.find_candidates(rows, [self.copd])[self.copd.id], None)
+        self.assertEqual([(c.note_id, c.rung, c.direct, c.selected) for c in out],
+                         [(2, "core", True, True), (3, "core", False, False), (1, "management", True, True)])
+
+    def test_a_direct_tag_wins_over_a_subtopic_tag(self):
+        rows = [(1, f"{self.OLD}::Asthma {self.OLD}::*Management")]
+        (c,) = L.find_candidates(rows, [self.copd])[self.copd.id]
+        self.assertEqual((c.rung, c.direct), ("management", True))
 
 
 class TermsTest(unittest.TestCase):
@@ -66,7 +97,7 @@ class TermsTest(unittest.TestCase):
         s = L.Script("copd-exacerbation", "COPD exacerbation", [])
         self.assertEqual(s.terms(), {"copd exacerbation", "copd"})
         tag = "#AK_Step2_v12::#Subjects::Pulm::Obstructive::COPD::Management"
-        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {"copd-exacerbation": ("management", tag)})
+        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {"copd-exacerbation": ("management", tag, True)})
 
     def test_keeps_acute(self):
         self.assertEqual(L.Script("a", "Acute pancreatitis", []).terms(), {"acute pancreatitis"})
@@ -74,7 +105,7 @@ class TermsTest(unittest.TestCase):
     def test_extra_words_match(self):
         s = L.Script("clostridioides-difficile-infection", "Clostridioides difficile infection", [], extra=["C diff"])
         tag = "#AK_Step2_v12::#Subjects::GI::Infections::C_Diff"
-        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {s.id: ("core", tag)})
+        self.assertEqual(L.match_tag(tag, L.build_term_index([s])), {s.id: ("core", tag, True)})
 
 
 class TopicsContainingTest(unittest.TestCase):
