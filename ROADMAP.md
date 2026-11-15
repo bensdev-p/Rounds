@@ -281,6 +281,7 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 - (15 Nov 2026) A Rounds deck in Anki (developer, M3.1): the add-on creates its own deck from Rounds' content, for example one card per missed question with its accepted answers, so a miss on rounds becomes an Anki review even for students without AnKing. Possible: the add-on can create a note type, deck and notes, and a stable GUID per question lets updates replace cards in place. Constraints: approved scripts only (release rule), cards trace to script fields (domain rule 1), our own text only, never AnKing's (domain rule 6), and retired scripts' cards are suspended or removed. Best kept to missed questions so it doesn't pile reviews on top of AnKing. Not part of Stage 3 as planned.
 - (15 Nov 2026) Linking for students without AnkiHub (free AnKing `.apkg`) and for decks other than AnKing (students' own cards). M3.1 tested AnkiHub only; a second id dump from an `.apkg` import would settle the first.
+- (15 Nov 2026) An animated ladder icon while the app loads (launch/splash), like openGym's (developer; reference video to come). Not drawn yet; would follow DESIGN.md → Motion (rung fill, Reduce Motion).
 - (15 Nov 2026) Protecting `#Rounds::missed` in AnkiHub (its protected tags) as an alternative to re-applying it every sync (M3.1).
 
 ---
