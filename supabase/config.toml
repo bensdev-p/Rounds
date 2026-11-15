@@ -459,3 +459,7 @@ max_client_conn = 200
 
 [remotes.rounds-dev.storage.vector]
 enabled = false
+
+# M3.1 spike only: the add-on calls with a device token, not a Supabase JWT.
+[functions.anki-spike]
+verify_jwt = false

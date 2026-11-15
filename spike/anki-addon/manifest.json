@@ -1,0 +1,6 @@
+{
+  "package": "rounds_spike",
+  "name": "Rounds (M3.1 spike)",
+  "min_point_version": 250900,
+  "conflicts": []
+}

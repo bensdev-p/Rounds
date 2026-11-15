@@ -1,0 +1,12 @@
+{
+  "server": "http://127.0.0.1:54321/functions/v1/anki-spike",
+  "device_token": null,
+  "tag_prefix": "#AK_",
+  "scripts": {
+    "acute-pancreatitis": ["pancreatitis"],
+    "diabetic-ketoacidosis": ["diabetic_ketoacidosis", "dka"],
+    "nephritic-syndrome": ["nephritic"],
+    "nephrotic-syndrome": ["nephrotic"],
+    "pulmonary-embolism": ["pulmonary_embol"]
+  }
+}
