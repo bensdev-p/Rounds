@@ -97,7 +97,28 @@
         "pearls[0]"
       ]
     },
-    "anki_refs": [],
+    "anki_refs": [
+      {
+        "kind": "note",
+        "id": "1475353385337"
+      },
+      {
+        "kind": "note",
+        "id": "1475353595370"
+      },
+      {
+        "kind": "note",
+        "id": "1475353706251"
+      },
+      {
+        "kind": "note",
+        "id": "1475353706252"
+      },
+      {
+        "kind": "note",
+        "id": "1556663045381"
+      }
+    ],
     "sources": [
       {
         "title": "KDIGO Clinical Practice Guideline for Acute Kidney Injury (2012)"
