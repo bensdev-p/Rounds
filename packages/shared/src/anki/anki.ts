@@ -220,3 +220,145 @@ export function noteIdsForMiss(
     noteIds: chosen.map((l) => l.note_id).sort((a, b) => a - b),
   };
 }
+
+/** A script's linked notes, from its `anki_refs` (the same rows `anki_linked_notes()` gives). */
+export function linkedNotesOf(script: {
+  id: string;
+  anki_refs: readonly { id: string; rung?: string | undefined }[];
+}): LinkedNote[] {
+  return script.anki_refs.map((ref) => ({
+    script_id: script.id,
+    note_id: Number(ref.id),
+    rung: ref.rung ?? null,
+  }));
+}
+
+// ─── Anki in the app (M3.4) ─────────────────────────────────────────────────
+
+/** One uploaded card, as the app reads it from `anki_card_stats`. */
+export const AnkiCardStateSchema = z.object({
+  card_id: AnkiIdSchema,
+  note_id: AnkiIdSchema,
+  suspended: z.boolean(),
+});
+export type AnkiCardState = z.infer<typeof AnkiCardStateSchema>;
+
+/** One queued or applied action, as the app reads it from `anki_actions`. */
+export const AnkiActionRowSchema = z.object({
+  id: z.uuid(),
+  kind: AnkiActionKindSchema,
+  script_id: ScriptIdSchema,
+  rung: RungSchema.nullable(),
+  note_ids: z.array(AnkiIdSchema),
+  created_at: z.iso.datetime({ offset: true }),
+  applied_at: z.iso.datetime({ offset: true }).nullable(),
+  applied_count: z.number().int().min(0).nullable(),
+});
+export type AnkiActionRow = z.infer<typeof AnkiActionRowSchema>;
+
+/** Suspended cards among these notes, in the last upload. */
+export function suspendedCards(cards: readonly AnkiCardState[], noteIds: Iterable<number>): number {
+  const notes = new Set(noteIds);
+  return cards.filter((c) => c.suspended && notes.has(c.note_id)).length;
+}
+
+/** "3 Anki cards", "1 Anki card", or "Anki cards" when the count isn't known yet. */
+export function ankiCards(count: number | null): string {
+  if (count === null) return 'Anki cards';
+  return count === 1 ? '1 Anki card' : `${count} Anki cards`;
+}
+
+/**
+ * The Anki row on the result screen (wireframe 07 note 3, result.png):
+ * - hidden after a clean run, for a script with no linked notes, or when
+ *   none of the miss's cards are suspended in the last upload;
+ * - "Connect Anki" when Anki isn't connected;
+ * - "Unsuspend 3 Anki cards" (count null until the first upload);
+ * - queued, once tapped (or already queued and not yet applied).
+ */
+export type ResultAnkiRow =
+  | { kind: 'hidden' }
+  | { kind: 'connect' }
+  | { kind: 'unsuspend'; cards: number | null }
+  | { kind: 'queued'; cards: number | null };
+
+export function resultAnkiRow({
+  connection,
+  linked,
+  scriptId,
+  missedRung,
+  cards,
+  actions,
+}: {
+  connection: AnkiConnection;
+  linked: readonly LinkedNote[];
+  scriptId: string;
+  /** The rung the session ended on; null after a clean run. */
+  missedRung: string | null;
+  /** The last upload for the miss's notes. */
+  cards: readonly AnkiCardState[];
+  /** The student's actions not yet applied. */
+  actions: readonly AnkiActionRow[];
+}): ResultAnkiRow {
+  if (missedRung === null) return { kind: 'hidden' };
+  const { rung, noteIds } = noteIdsForMiss(linked, scriptId, missedRung);
+  if (noteIds.length === 0) return { kind: 'hidden' };
+  if (connection.state !== 'connected') return { kind: 'connect' };
+  const count = connection.lastSyncAt === null ? null : suspendedCards(cards, noteIds);
+  const queued = actions.some(
+    (a) =>
+      a.kind === 'unsuspend' &&
+      a.applied_at === null &&
+      a.script_id === scriptId &&
+      a.rung === rung,
+  );
+  if (queued) return { kind: 'queued', cards: count };
+  if (count === 0) return { kind: 'hidden' };
+  return { kind: 'unsuspend', cards: count };
+}
+
+/**
+ * Review's Anki sync status (wireframe 09 note 3, review.png), first that applies:
+ * cards unsuspended today (as drawn), cards waiting for the next sync, or when
+ * Anki last synced. Null (hidden) until Anki is connected.
+ */
+export function reviewAnkiLine({
+  connection,
+  actions,
+  cards,
+  todayStart,
+  now,
+}: {
+  connection: AnkiConnection;
+  /** Actions applied today or not yet applied. */
+  actions: readonly AnkiActionRow[];
+  /** The last upload. */
+  cards: readonly AnkiCardState[];
+  todayStart: Date;
+  now: Date;
+}): string | null {
+  if (connection.state !== 'connected') return null;
+  const unsuspends = actions.filter((a) => a.kind === 'unsuspend');
+  const appliedToday = unsuspends
+    .filter((a) => a.applied_at !== null && new Date(a.applied_at) >= todayStart)
+    .reduce((sum, a) => sum + (a.applied_count ?? 0), 0);
+  if (appliedToday > 0) {
+    const they = appliedToday === 1 ? "It'll" : "They'll";
+    return `${ankiCards(appliedToday)} unsuspended today. ${they} show up next time you open Anki.`;
+  }
+  const pending = unsuspends.filter((a) => a.applied_at === null);
+  if (pending.length > 0) {
+    const count =
+      connection.lastSyncAt === null
+        ? null
+        : suspendedCards(
+            cards,
+            pending.flatMap((a) => a.note_ids),
+          );
+    if (count !== 0) {
+      return `${ankiCards(count)} will be unsuspended next time Anki opens.`;
+    }
+  }
+  const synced = lastSyncedLabel(connection.lastSyncAt, now);
+  return `Anki connected. ${synced}.`;
+}

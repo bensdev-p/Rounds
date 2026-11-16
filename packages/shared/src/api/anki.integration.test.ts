@@ -16,7 +16,10 @@ import type { Database } from '../db/database.types.ts';
 import {
   disconnectAnki,
   getAnkiPairing,
+  listAnkiActions,
+  listAnkiCardStates,
   queueAnkiAction,
+  startSession,
   startAnkiPairing,
   type RoundsClient,
 } from './index.ts';
@@ -196,5 +199,59 @@ describe('Anki pairing and sync', () => {
   it('needs a signed-in student to make a code', async () => {
     const response = await addOn('anki-pair', { op: 'start' });
     expect(response.status).toBe(401);
+  });
+
+  it("a miss tags the rung's notes, and the app reads actions and cards (M3.4)", async () => {
+    const student = await newStudent();
+    const { data: script } = await student
+      .from('illness_scripts')
+      .select('id, version')
+      .eq('id', 'acute-pancreatitis')
+      .single();
+    if (!script) throw new Error('acute-pancreatitis is not seeded');
+    const finishMissed = async () => {
+      const id = await startSession(student, script, 'teacher');
+      const { error } = await student.rpc('finish_ladder_session', {
+        p_session_id: id,
+        p_status: 'missed',
+        p_score: 4,
+      });
+      expect(error).toBeNull();
+    };
+
+    // Not connected: nothing is queued.
+    await finishMissed();
+    expect(await listAnkiActions(student, new Date())).toEqual([]);
+
+    const token = await pair(student);
+    await finishMissed();
+    const unsuspend = await queueAnkiAction(student, {
+      script_id: script.id,
+      rung: 'management',
+      kind: 'unsuspend',
+    });
+    const actions = await listAnkiActions(student, new Date());
+    expect(actions.map((a) => [a.kind, a.rung, a.applied_at])).toEqual([
+      ['tag_missed', 'management', null],
+      ['unsuspend', 'management', null],
+    ]);
+    const tag = actions[0]!;
+
+    const device = { 'x-rounds-device': token };
+    const note = tag.note_ids[0]!;
+    await addOn(
+      'anki-sync',
+      { op: 'push', cards: [card(note, 7)], applied: [{ id: unsuspend!, count: 1 }] },
+      device,
+    );
+    expect(await listAnkiCardStates(student, [note])).toEqual([
+      { card_id: 7, note_id: note, suspended: true },
+    ]);
+    expect(await listAnkiCardStates(student, [1])).toEqual([]);
+    const after = await listAnkiActions(student, new Date(Date.now() - 60_000));
+    expect(after.find((a) => a.id === unsuspend)?.applied_count).toBe(1);
+    // Applied before `since`: left out.
+    const later = await listAnkiActions(student, new Date(Date.now() + 60_000));
+    expect(later.map((a) => a.kind)).toEqual(['tag_missed']);
   });
 });

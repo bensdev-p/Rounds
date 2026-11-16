@@ -47,6 +47,7 @@ import { FlagSheet, type FlagTarget } from '@/features/flag/FlagSheet';
 import { AskingView } from '@/features/session/AskingView';
 import { ListFeedbackView } from '@/features/session/ListFeedbackView';
 import { PromotionView } from '@/features/session/PromotionView';
+import { AnkiRow } from '@/features/session/AnkiRow';
 import { ResultView } from '@/features/session/ResultView';
 import { VoicePanel, type VoicePhase } from '@/features/session/VoicePanel';
 import type { Listening } from '@/voice/engine';
@@ -480,6 +481,9 @@ function Session({
               : null
           }
           saveFailed={recorder.save.status === 'error'}
+          anki={
+            missAttempt && last ? <AnkiRow script={script} missedRung={last.question.rung} /> : null
+          }
           extra={<SignInPrompt finishedLadders={history.length} />}
           onReviewScript={reviewScript}
           onReportProblem={reportProblem}

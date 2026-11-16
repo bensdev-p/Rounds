@@ -2,15 +2,17 @@
  * Tonight's review (wireframe 09, mockups review.png and review-light.png).
  * Three things, and it ends: the misses (at most five; the rest roll to
  * tomorrow), one mix-up to sort out, and today's patients not yet practised.
- * The Anki row stays hidden until the add-on exists (note 3, Stage 3).
+ * Last, the Anki sync status (note 3, M3.4): hidden until Anki is connected.
  */
 import {
+  ankiConnection,
   comparisonRows,
   clockLabel,
   missedRows,
   missSubtitle,
   mixUpPair,
   patientsToPractise,
+  reviewAnkiLine,
   reviewMinutes,
   startOfToday,
   timesThisWeek,
@@ -18,13 +20,16 @@ import {
   type IllnessScript,
 } from '@rounds/shared';
 import {
+  getAnkiPairing,
+  listAnkiActions,
+  listAnkiCardStates,
   listFinishedSessions,
   listLogsSince,
   listMissesSince,
   listPimpableScripts,
 } from '@rounds/shared/api';
 import { router, useFocusEffect } from 'expo-router';
-import { ChevronRight } from 'lucide-react-native';
+import { ChevronRight, RefreshCw } from 'lucide-react-native';
 import { useCallback, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import { ErrorView, Loading } from '@/components/StatusView';
@@ -43,15 +48,31 @@ export default function Review() {
   const client = useClient();
   const [persona] = usePersona();
 
+  async function loadAnki(now: Date) {
+    const connection = ankiConnection(await getAnkiPairing(client));
+    if (connection.state !== 'connected') return null;
+    const todayStart = new Date(startOfToday(now));
+    const [actions, cards] = await Promise.all([
+      listAnkiActions(client, todayStart),
+      listAnkiCardStates(client),
+    ]);
+    return reviewAnkiLine({ connection, actions, cards, todayStart, now });
+  }
+
   const data = useAsync(async () => {
     const now = new Date();
-    const [scripts, misses, sessions, logs] = await Promise.all([
+    const [scripts, misses, sessions, logs, anki] = await Promise.all([
       listPimpableScripts(client),
       listMissesSince(client, windowStart(now)),
       listFinishedSessions(client),
       listLogsSince(client, startOfToday(now)),
+      loadAnki(now).catch((e: unknown) => {
+        // The Anki row is a side note: without it, the review still shows.
+        console.warn('[rounds] Anki status failed to load', e);
+        return null;
+      }),
     ]);
-    return { scripts, misses, sessions, logs };
+    return { scripts, misses, sessions, logs, anki };
   }, 'review');
   const { reload } = data;
 
@@ -75,7 +96,7 @@ export default function Review() {
   }
 
   const now = new Date();
-  const { scripts, misses, sessions, logs } = data.data;
+  const { scripts, misses, sessions, logs, anki } = data.data;
   const byId = new Map<string, IllnessScript>(scripts.map((s) => [s.script.id, s.script]));
   // Only scripts the student can see (this also leaves out the test fixtures).
   const visible = misses.filter((m) => byId.has(m.script_id));
@@ -188,6 +209,19 @@ export default function Review() {
           </List>
         </>
       )}
+
+      {anki && (
+        <View
+          accessible
+          accessibilityLabel={anki}
+          style={[styles.anki, { backgroundColor: c.ceilSoft }]}
+        >
+          <RefreshCw size={20} color={c.ceil} />
+          <Txt variant="body" fontSize={14} lineHeight={20} style={styles.grow}>
+            {anki}
+          </Txt>
+        </View>
+      )}
     </Screen>
   );
 }
@@ -199,4 +233,14 @@ const styles = StyleSheet.create({
   mark: { width: 8, height: 8, borderRadius: 4 },
   rolled: { marginTop: space.sm },
   drill: { marginTop: space.md, height: 46 },
+  anki: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: space.md,
+    marginTop: 18,
+    paddingVertical: 14,
+    paddingHorizontal: space.lg,
+    borderRadius: 18,
+  },
+  grow: { flex: 1 },
 });
