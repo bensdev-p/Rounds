@@ -34,9 +34,13 @@ import { QuestionIdSchema, traceQuestionToScript, type Question } from '../schem
 import { ProfileSchema, type Profile } from '../profile/profile.ts';
 import type { CueId, VoiceSpeed } from '../voice/voice.ts';
 import {
+  AnkiActionRowSchema,
+  AnkiCardStateSchema,
   AnkiPairingCodeSchema,
   AnkiPairingSchema,
   QueueAnkiActionSchema,
+  type AnkiActionRow,
+  type AnkiCardState,
   type AnkiPairing,
   type AnkiPairingCode,
   type QueueAnkiAction,
@@ -691,4 +695,33 @@ export async function queueAnkiAction(
   });
   if (error) throw new RoundsApiError(`Queueing Anki action: ${error.message}`);
   return data ?? null;
+}
+
+// ─── Anki in the app (M3.4) ─────────────────────────────────────────────────
+
+/** The last upload's cards (ids and suspended only), for these notes or all of them. */
+export async function listAnkiCardStates(
+  client: RoundsClient,
+  noteIds?: readonly number[],
+): Promise<AnkiCardState[]> {
+  let query = client.from('anki_card_stats').select('card_id, note_id, suspended');
+  if (noteIds) query = query.in('note_id', [...noteIds]);
+  const { data, error } = await query;
+  if (error) throw new RoundsApiError(`Anki cards: ${error.message}`);
+  const parsed = AnkiCardStateSchema.array().safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Anki cards: unexpected rows');
+  return parsed.data;
+}
+
+/** The student's Anki actions not yet applied, plus those applied since `since`. */
+export async function listAnkiActions(client: RoundsClient, since: Date): Promise<AnkiActionRow[]> {
+  const { data, error } = await client
+    .from('anki_actions')
+    .select('id, kind, script_id, rung, note_ids, created_at, applied_at, applied_count')
+    .or(`applied_at.is.null,applied_at.gte."${since.toISOString()}"`)
+    .order('created_at');
+  if (error) throw new RoundsApiError(`Anki actions: ${error.message}`);
+  const parsed = AnkiActionRowSchema.array().safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Anki actions: unexpected rows');
+  return parsed.data;
 }

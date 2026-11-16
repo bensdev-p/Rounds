@@ -66,6 +66,7 @@ export function ResultView({
   onDone,
   onPrimary,
   primaryLabel,
+  anki,
   extra,
 }: {
   scriptName: string;
@@ -83,6 +84,8 @@ export function ResultView({
   onDone: () => void;
   onPrimary: () => void;
   primaryLabel: string;
+  /** Under the miss card: the Anki row (wireframe 07 note 3). */
+  anki?: ReactNode;
   /** Shown after progress: the one-time sign-in panel. */
   extra?: ReactNode;
 }) {
@@ -159,6 +162,8 @@ export function ResultView({
           <Link label="Review the script" onPress={onReviewScript} />
         </Panel>
       )}
+
+      {anki}
 
       <Panel style={[styles.progress, clean && styles.progressAfterLine]}>
         <View style={styles.half}>

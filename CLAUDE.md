@@ -43,7 +43,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm stats`: usage report per student on the local database: days used, days in a row, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
 - `pnpm anki:linker:install`: copy the Rounds linker add-on into Anki on this computer (restart Anki; Tools → Rounds: link scripts). `pnpm content:link-anki <links.json> [--dry-run]`: write the links it saved into `content/scripts` as `anki_refs` (ids and rungs only)
 - `pnpm anki:addon:install`: copy the student add-on into Anki on this computer, pointed at the local stack (restart Anki; Tools → Rounds). `pnpm anki:addon:build [--hosted]`: pack it as a `.ankiaddon` in `packages/anki-addon/dist` (local stack, or `rounds-dev` with `--hosted`). `pnpm anki:test` runs both add-ons' Python tests
-- `pnpm anki:queue <script-id> [rung] [--tag]`: queue an unsuspend (or `#Rounds::missed` tag) action on the local database for the most recently connected Anki, until the result screen's row exists (M3.4)
+- `pnpm anki:queue <script-id> [rung] [--tag]`: queue an unsuspend (or `#Rounds::missed` tag) action on the local database for the most recently connected Anki, without playing a session (the result screen's row and automatic miss tags do the same, M3.4)
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm content:push [--preview] [--dry-run]`: send approved and in-review scripts (never fixtures or drafts) to the linked hosted project. Changes hosted data: get the developer's OK first
