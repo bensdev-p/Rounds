@@ -442,7 +442,8 @@ enabled = true
 
 # The private hosted dev project (docs/HOSTING.md). `supabase config push` sends
 # the settings above with these overrides: keep Supabase's own pooler sizes and
-# storage features, a 60 s gap between code emails, and no localhost redirect.
+# storage features, a 60 s gap between code emails, no localhost redirect, and
+# sign-in codes sent by Resend from support@pimpme.app (M4.2).
 [remotes.rounds-dev]
 project_id = "qugvfidjzmtkrnfdokhf"
 
@@ -452,6 +453,21 @@ additional_redirect_urls = []
 
 [remotes.rounds-dev.auth.email]
 max_frequency = "1m0s"
+
+# Resend over SMTP (docs/HOSTING.md → Email). The password is the Resend API
+# key, read from supabase/.env (gitignored) when you run `config push`.
+[remotes.rounds-dev.auth.email.smtp]
+enabled = true
+host = "smtp.resend.com"
+port = 465
+user = "resend"
+pass = "env(RESEND_SMTP_PASS)"
+admin_email = "support@pimpme.app"
+sender_name = "PimpMe"
+
+# The base value (2 an hour) suits the local stack; testers need more.
+[remotes.rounds-dev.auth.rate_limit]
+email_sent = 30
 
 [remotes.rounds-dev.db.pooler]
 default_pool_size = 15

@@ -256,7 +256,7 @@ Facts to plan around:
 
 **Decided (developer, 24 Nov 2026):**
 - **Rebrand to PimpMe**, aimed at students rather than school admin. The brand, the site and the store copy use the word "pimp" openly. This replaces the old rule that kept it inside the app. The guide is the brand-and-site mockup (`pimpme.html`, dark), which goes into `docs/design/site/` in M4.1.
-- **Domain:** pimpme.app (bought at Squarespace). DNS and hosting on Cloudflare (Pages, free); sign-in codes sent through Resend over SMTP; incoming mail to the domain forwarded by Cloudflare Email Routing.
+- **Domain:** pimpme.app (bought through Cloudflare Registrar). DNS and hosting on Cloudflare (Pages, free); sign-in codes sent through Resend over SMTP; incoming mail to the domain forwarded by Cloudflare Email Routing.
 - **Testers see the preview:** the named tester group (medical students) uses `rounds-dev` and sees `in_review` scripts labelled "Not yet reviewed", like the developer and the reviewer (domain rule 2 updated). Anyone outside that group still sees `approved` scripts only.
 - **Light mode** for the site is derived from the tokens; there are no light site mockups.
 - **The daily pimp** is in (M4.3).
@@ -276,7 +276,7 @@ Facts to plan around:
 - **Done when:** the phone shows PimpMe with the new icon and copy, and every changed screen still matches its mockup, dark and light.
 
 ### M4.2 Domain and email
-- **DNS:** pimpme.app on Cloudflare (nameservers moved from Squarespace).
+- **DNS:** pimpme.app on Cloudflare (bought through Cloudflare Registrar, so DNS is there already).
 - **Sign-in codes:** Resend sends them from an address on pimpme.app, through SMTP on `rounds-dev`. Then the normal `config push` with the code templates (HOSTING.md → Email).
 - **Incoming mail:** support@pimpme.app forwards to the developer.
 - **Done when:** email sign-in works on the TestFlight build, and a code lands in the inbox (not spam) at Gmail and at a school `.edu` address.
