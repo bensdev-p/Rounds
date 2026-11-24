@@ -1,5 +1,5 @@
 /**
- * `pnpm anki:addon:install`: copies the Rounds add-on into Anki's add-ons
+ * `pnpm anki:addon:install`: copies the PimpMe add-on into Anki's add-ons
  * folder on this computer, pointed at the local stack. Restart Anki afterwards.
  * Keeps the installed copy's meta.json (Anki's saved config).
  */
@@ -33,5 +33,5 @@ cpSync(source, target, {
   filter: (src) => !/[\/](__pycache__|meta\.json)([\/]|$)/.test(src),
 });
 console.log(
-  `Installed the Rounds add-on to ${target} (server: the local stack). Restart Anki, then Tools → Rounds → Connect to Rounds.`,
+  `Installed the PimpMe add-on to ${target} (server: the local stack). Restart Anki, then Tools → PimpMe → Connect to PimpMe.`,
 );

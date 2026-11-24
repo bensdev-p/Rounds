@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Rounds",
+    "name": "PimpMe",
     "slug": "rounds",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -11,7 +11,7 @@
       "bundleIdentifier": "com.ben.rounds",
       "usesAppleSignIn": true,
       "infoPlist": {
-        "NSLocalNetworkUsageDescription": "Rounds connects to the computer running the app during development.",
+        "NSLocalNetworkUsageDescription": "PimpMe connects to the computer running the app during development.",
         "ITSAppUsesNonExemptEncryption": false
       }
     },
@@ -23,9 +23,7 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "permissions": [
-        "android.permission.RECORD_AUDIO"
-      ]
+      "permissions": ["android.permission.RECORD_AUDIO"]
     },
     "web": {
       "favicon": "./assets/favicon.png",
@@ -39,11 +37,9 @@
       [
         "react-native-audio-api",
         {
-          "iosMicrophonePermission": "Rounds listens to your answers when the attending asks.",
+          "iosMicrophonePermission": "PimpMe listens to your answers when the attending asks.",
           "iosBackgroundMode": false,
-          "androidPermissions": [
-            "android.permission.RECORD_AUDIO"
-          ],
+          "androidPermissions": ["android.permission.RECORD_AUDIO"],
           "androidForegroundService": false
         }
       ]

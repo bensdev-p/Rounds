@@ -11,7 +11,7 @@ export function isUnreachable(error: Error): boolean {
 
 export function loadErrorMessage(what: string, error: Error): string {
   if (isUnreachable(error)) {
-    return "Can't reach Rounds. It runs on the computer at home: check that it's on with Rounds running, and that this phone is on the home Wi-Fi.";
+    return "Can't reach PimpMe. It runs on the computer at home: check that it's on with PimpMe running, and that this phone is on the home Wi-Fi.";
   }
   return `${what} ${error.message}`;
 }

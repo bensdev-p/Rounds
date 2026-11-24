@@ -1,0 +1,1389 @@
+<!doctype html><html><head><meta charset="utf-8"><title>PimpMe brand and site mockups (dark)</title>
+<!-- PimpMe: a rebrand proposal for the Rounds site. One self-contained file; fonts load from ../fonts. -->
+<style>
+/* Rounds — web mockups (marketing site, web app frame, small in-app pieces).
+   Tokens mirror docs/design/tokens.json; component values follow ../mockups/rounds.css.
+   Pages are written once and respond to their own width with container queries,
+   so the same markup is shown at 1440 and at 390. The real site would use
+   media queries and prefers-color-scheme; here .light swaps the tokens. */
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-400-normal.woff2); font-weight: 400; }
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-600-normal.woff2); font-weight: 600; }
+@font-face { font-family: "Archivo"; src: url(../fonts/archivo-latin-700-normal.woff2); font-weight: 700; }
+@font-face { font-family: "Archivo Narrow"; src: url(../fonts/archivo-narrow-latin-500-normal.woff2); font-weight: 500; }
+@font-face { font-family: "Archivo Narrow"; src: url(../fonts/archivo-narrow-latin-600-normal.woff2); font-weight: 600; }
+@font-face { font-family: "Archivo Narrow"; src: url(../fonts/archivo-narrow-latin-700-normal.woff2); font-weight: 700; }
+
+:root {
+  --bg: #0E1A2E; --surface: #16243C; --surface-2: #1E2F4C; --line: #2A3D5E;
+  --text: #EEF2F8; --text-2: #9BAAC2; --text-3: #6B7D99;
+  --ceil: #8FB3E0; --signal: #FFB547; --on-signal: #0E1A2E;
+  --pass: #5CCB8F; --miss: #F2766B;
+  --pass-soft: rgba(92,203,143,.14); --miss-soft: rgba(242,118,107,.14); --signal-soft: rgba(255,181,71,.14); --ceil-soft: rgba(143,179,224,.12);
+  --shift-1: rgba(143,179,224,.28); --shift-2: rgba(143,179,224,.55);
+}
+.light {
+  --bg: #F2F5F9; --surface: #FFFFFF; --surface-2: #E7ECF3; --line: #D3DBE6;
+  --text: #0E1A2E; --text-2: #4F5E76; --text-3: #7D8BA1;
+  --ceil: #2F5E99; --signal: #F5A623; --on-signal: #0E1A2E;
+  --pass: #1F8F55; --miss: #CC4437;
+  --pass-soft: rgba(31,143,85,.12); --miss-soft: rgba(204,68,55,.10); --signal-soft: rgba(245,166,35,.16); --ceil-soft: rgba(47,94,153,.10);
+  --shift-1: rgba(47,94,153,.22); --shift-2: rgba(47,94,153,.5);
+}
+
+/* ---------- Review canvas (not part of the design) ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: "Archivo", system-ui, sans-serif; background: #CBD3DE; padding: 48px; }
+.group { margin-bottom: 96px; }
+.group-title { font: 700 34px/1.05 "Archivo Narrow"; color: #1B2740; }
+.group-note { font: 500 15px/1.45 "Archivo"; color: #2A3550; max-width: 820px; margin-top: 8px; }
+.row-of-frames { display: flex; gap: 48px; align-items: flex-start; margin-top: 28px; flex-wrap: wrap; }
+.frame { display: flex; flex-direction: column; gap: 14px; }
+.caption { font: 500 15px/1.4 "Archivo"; color: #2A3550; max-width: 390px; }
+.caption b { font-weight: 700; }
+
+/* ---------- Site shell ---------- */
+.site { container: site / inline-size; background: var(--bg); color: var(--text); font-size: 16px; line-height: 22px; border-radius: 12px; overflow: hidden; }
+.site.phone-w { border-radius: 28px; }
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 40px; }
+.section { padding: 104px 0; }
+.section + .section { border-top: 1px solid var(--line); }
+.section.tight { padding-top: 0; border-top: 0; }
+
+.top { height: 76px; display: flex; align-items: center; gap: 40px; border-bottom: 1px solid var(--line); }
+.logo { display: flex; align-items: center; gap: 8px; font: 700 26px/1 "Archivo Narrow"; letter-spacing: -0.01em; color: var(--text); }
+.logo svg { width: 26px; height: 26px; }
+.nav { display: flex; gap: 28px; flex: 1; }
+.nav a { font: 500 15px "Archivo"; color: var(--text-2); text-decoration: none; }
+.nav a.on { color: var(--text); }
+.top .menu { display: none; }
+
+.foot { padding: 56px 0 40px; border-top: 1px solid var(--line); }
+.foot-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 24px; }
+.foot h4 { font: 600 14px "Archivo"; color: var(--text); margin-bottom: 12px; }
+.foot ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.foot li { font-size: 14px; color: var(--text-2); }
+.foot-base { display: flex; justify-content: space-between; gap: 16px; margin-top: 48px; padding-top: 20px; border-top: 1px solid var(--line); font-size: 13px; color: var(--text-3); }
+.foot-base b { font-weight: 500; color: var(--text-2); }
+
+/* ---------- Type ---------- */
+.t-hero { font: 700 88px/80px "Archivo Narrow"; letter-spacing: -0.01em; }
+.t-page { font: 700 64px/60px "Archivo Narrow"; letter-spacing: -0.01em; }
+.h1 { font: 700 34px/36px "Archivo Narrow"; letter-spacing: -0.01em; }
+.h2 { font: 700 22px/25px "Archivo Narrow"; }
+.h3 { font: 600 17px/22px "Archivo"; }
+.q { font: 700 31px/35px "Archivo Narrow"; letter-spacing: -0.01em; }
+.body { font: 400 16px/22px "Archivo"; }
+.meta { font-size: 14px; line-height: 20px; color: var(--text-2); }
+.small { font-size: 13px; line-height: 18px; color: var(--text-2); }
+.num { font-family: "Archivo Narrow"; font-weight: 700; font-variant-numeric: tabular-nums; }
+.t2 { color: var(--text-2); } .t3 { color: var(--text-3); } .tmiss { color: var(--miss); } .tpass { color: var(--pass); }
+.lede { font: 700 22px/25px "Archivo Narrow"; color: var(--text-2); }
+.link { color: var(--ceil); font: 500 15px "Archivo"; display: inline-flex; align-items: center; gap: 4px; }
+.link svg { width: 16px; height: 16px; }
+.measure { max-width: 520px; }
+
+/* ---------- Layout helpers ---------- */
+.split { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
+.split.top-align { align-items: start; }
+.split.wide-right { grid-template-columns: 5fr 7fr; }
+.stack > * + * { margin-top: 12px; }
+.stack-lg > * + * { margin-top: 20px; }
+.btns { display: flex; gap: 12px; flex-wrap: wrap; }
+.mt8 { margin-top: 8px; } .mt12 { margin-top: 12px; } .mt16 { margin-top: 16px; } .mt20 { margin-top: 20px; } .mt26 { margin-top: 26px; } .mt40 { margin-top: 40px; } .mt52 { margin-top: 52px; }
+.center { text-align: center; }
+.center .btns { justify-content: center; }
+
+/* ---------- Components (from rounds.css) ---------- */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; height: 52px; padding: 0 24px; border-radius: 999px; font: 600 16px "Archivo"; border: 0; white-space: nowrap; }
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn-primary { background: var(--signal); color: var(--on-signal); }
+.btn-quiet { background: var(--surface-2); color: var(--text); }
+.btn-line { background: transparent; color: var(--text); border: 1.5px solid var(--line); }
+.btn-sm { height: 44px; padding: 0 18px; font-size: 15px; }
+.btn-block { display: flex; width: 100%; }
+.btn[disabled], .btn.off { opacity: .45; }
+.chip { display: inline-flex; align-items: center; gap: 6px; height: 30px; padding: 0 12px; border-radius: 999px; font: 500 13px "Archivo"; background: var(--surface-2); color: var(--text); white-space: nowrap; flex: none; }
+.seg { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--bg); border-radius: 14px; padding: 4px; }
+.seg span { text-align: center; padding: 9px 0; border-radius: 10px; font: 500 14px "Archivo"; color: var(--text-2); }
+.seg span.on { background: var(--surface-2); color: var(--text); }
+.panel { background: var(--surface); border-radius: 28px; padding: 28px; }
+.card { background: var(--surface); border-radius: 18px; padding: 16px; }
+.list { background: var(--surface); border-radius: 18px; overflow: hidden; }
+.lrow { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-top: 1px solid var(--line); }
+.lrow:first-child { border-top: 0; }
+.lrow .grow { flex: 1; min-width: 0; }
+.lrow > svg { width: 18px; height: 18px; color: var(--text-3); flex: none; }
+.mark { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.info { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 18px; background: var(--ceil-soft); font-size: 14px; line-height: 20px; }
+.info svg { width: 20px; height: 20px; color: var(--ceil); flex: none; }
+.warn { display: flex; gap: 10px; padding: 12px 14px; border-radius: 14px; background: var(--miss-soft); color: var(--text); font-size: 14px; line-height: 20px; }
+.warn svg { width: 18px; height: 18px; color: var(--miss); flex: none; margin-top: 1px; }
+.field { display: flex; align-items: center; gap: 10px; min-height: 52px; padding: 0 16px; border-radius: 14px; background: var(--surface); border: 1.5px solid var(--line); font-size: 16px; }
+.field.on-surface { background: var(--bg); }
+.field.area { align-items: flex-start; padding: 14px 16px; min-height: 148px; line-height: 22px; }
+.field.error { border-color: var(--miss); }
+.field.focus { border-color: var(--ceil); }
+.field .ph { color: var(--text-3); }
+.field > svg { width: 20px; height: 20px; color: var(--text-3); flex: none; }
+.caret { display: inline-block; width: 2px; height: 20px; background: var(--signal); vertical-align: middle; margin-left: 1px; }
+.label { font: 600 14px "Archivo"; margin-bottom: 8px; display: block; }
+
+/* Ladder: the signature */
+.ladder { display: flex; flex-direction: column-reverse; gap: 6px; }
+.rung { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+.rung .n { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font: 700 22px "Archivo Narrow"; background: var(--surface-2); color: var(--text-3); flex: none; }
+.panel .rung .n, .on-bg .rung .n { background: var(--surface-2); }
+.on-bg .rung .n { background: var(--surface); }
+.rung .label { font: 500 13px "Archivo"; color: var(--text-3); margin: 0; }
+.rung.done .n { background: var(--pass-soft); color: var(--pass); }
+.rung.done .label { color: var(--text-2); }
+.rung.now .n { background: var(--signal); color: var(--on-signal); }
+.rung.now .label { color: var(--text); font-weight: 600; }
+.rung.miss .n { background: var(--miss-soft); color: var(--miss); }
+.rung.miss .label { color: var(--miss); font-weight: 600; }
+.strip { display: flex; gap: 6px; }
+.strip i { width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center; font: 700 18px "Archivo Narrow"; font-style: normal; background: var(--surface-2); color: var(--text-3); }
+.strip i.done { background: var(--pass-soft); color: var(--pass); }
+.strip i.now { background: var(--signal); color: var(--on-signal); }
+.strip i.miss { background: var(--miss-soft); color: var(--miss); }
+
+/* Ladder explainer: one row per rung, rung 6 on top */
+.climb { display: flex; flex-direction: column-reverse; background: var(--surface); border-radius: 18px; overflow: hidden; }
+.climb .step { display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding: 16px; border-top: 1px solid var(--line); align-items: start; }
+.climb .step:first-child { border-top: 0; }
+.climb .step .n { width: 44px; height: 44px; border-radius: 12px; display: grid; place-items: center; font: 700 22px "Archivo Narrow"; background: var(--surface-2); color: var(--text-3); }
+.climb .step.done .n { background: var(--pass-soft); color: var(--pass); }
+.climb .step.miss .n { background: var(--miss-soft); color: var(--miss); }
+.climb .rl { font: 600 13px "Archivo"; color: var(--text-2); }
+.climb .step.miss .rl { color: var(--miss); }
+.climb .qq { font: 700 19px/23px "Archivo Narrow"; margin-top: 4px; }
+.climb .ans { font-size: 14px; line-height: 20px; color: var(--text-2); margin-top: 6px; }
+
+.wave { display: flex; align-items: center; gap: 4px; height: 44px; }
+.wave i { width: 4px; border-radius: 2px; background: var(--signal); display: block; }
+.mic { width: 52px; height: 52px; border-radius: 50%; background: var(--signal); color: var(--on-signal); display: grid; place-items: center; flex: none; }
+.mic svg { width: 24px; height: 24px; }
+
+.answer { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-radius: 14px; font: 500 15px "Archivo"; }
+.answer.got { background: var(--pass-soft); }
+.answer.got svg { color: var(--pass); }
+.answer.missed { border: 1.5px dashed var(--miss); }
+.answer.missed svg { color: var(--miss); }
+.answer svg { width: 18px; height: 18px; flex: none; }
+
+.compare { display: grid; grid-template-columns: 1fr 1fr; background: var(--surface); border-radius: 18px; overflow: hidden; }
+.compare > div { padding: 14px 16px; }
+.compare > div + div { border-left: 1px solid var(--line); }
+.compare .k { font-size: 12px; color: var(--text-3); margin-top: 10px; }
+.compare .v { font: 500 14px/1.35 "Archivo"; }
+
+.script-block { padding: 14px 0; border-top: 1px solid var(--line); }
+.script-block .k { font: 600 13px "Archivo"; color: var(--ceil); margin-bottom: 4px; }
+.script-block p { font-size: 15px; line-height: 1.5; }
+
+.segs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.segs i { height: 6px; border-radius: 3px; background: var(--surface-2); display: block; }
+.segs i.on { background: var(--signal); }
+.cal { display: grid; grid-template-columns: repeat(14, 1fr); gap: 4px; }
+.cal i { aspect-ratio: 1; border-radius: 4px; background: var(--surface-2); display: block; }
+.cal i.l1 { background: var(--shift-1); } .cal i.l2 { background: var(--shift-2); } .cal i.l3 { background: var(--ceil); }
+.cal i.off { background: transparent; box-shadow: inset 0 0 0 1.5px var(--text-3); }
+.track { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; align-items: end; }
+.track i { display: block; border-radius: 4px; background: var(--surface-2); }
+.track i.on { background: var(--signal); }
+.track i.here { background: var(--signal); outline: 2px solid var(--text); outline-offset: 2px; }
+.trackl { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; font: 500 11px/1.2 "Archivo"; color: var(--text-3); margin-top: 8px; }
+.trackl span.here { color: var(--text); font-weight: 600; }
+.mini { display: flex; flex-direction: column-reverse; gap: 2px; width: 22px; flex: none; }
+.mini i { height: 3px; border-radius: 1.5px; background: var(--surface-2); display: block; }
+.mini i.on { background: var(--pass); }
+.mini.mastered i { background: var(--signal); }
+.tiles { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.tile { background: var(--bg); border-radius: 14px; padding: 12px 12px 12px 14px; display: flex; gap: 10px; align-items: flex-end; min-height: 64px; border: 1.5px solid transparent; }
+.tile p { font: 500 14px/1.25 "Archivo"; flex: 1; }
+.tile.mastered { border-color: var(--signal); }
+.tile.due { border-color: var(--line); border-style: dashed; }
+.badge { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 11px; border-radius: 8px; font: 600 13px "Archivo"; }
+.badge svg { width: 15px; height: 15px; }
+.badge.signal { background: var(--signal-soft); color: var(--signal); }
+.badge.pass { background: var(--pass-soft); color: var(--pass); }
+.light .badge.signal { color: #9A5B00; }
+
+/* Grouped columns: one surface block divided by hairlines, never separate floating cards */
+.cols { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--surface); border-radius: 18px; overflow: hidden; }
+.cols.two { grid-template-columns: 1fr 1fr; }
+.cols > div { padding: 24px; }
+.cols > div + div { border-left: 1px solid var(--line); }
+.cols.grid2 { grid-template-columns: 1fr 1fr; }
+.cols.grid2 > div { border-left: 0; border-top: 1px solid var(--line); }
+.cols.grid2 > div:nth-child(even) { border-left: 1px solid var(--line); }
+.cols.grid2 > div:nth-child(-n+2) { border-top: 0; }
+.stepno { font: 700 22px/22px "Archivo Narrow"; color: var(--text-3); font-variant-numeric: tabular-nums; }
+.ticks { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+.ticks li { display: flex; gap: 10px; font-size: 15px; line-height: 21px; }
+.ticks svg { width: 18px; height: 18px; flex: none; margin-top: 2px; }
+.ticks.yes svg { color: var(--pass); }
+.ticks.no svg { color: var(--text-3); }
+
+/* Numbered how-to steps */
+.howto { list-style: none; display: flex; flex-direction: column; }
+.howto li { display: grid; grid-template-columns: 44px 1fr; gap: 16px; padding: 20px 0; border-top: 1px solid var(--line); }
+.howto li:first-child { border-top: 0; padding-top: 0; }
+.howto .stepn { width: 44px; height: 44px; border-radius: 12px; background: var(--surface); display: grid; place-items: center; font: 700 22px "Archivo Narrow"; color: var(--text-2); }
+.kbd { font: 600 14px "Archivo"; background: var(--surface-2); border-radius: 6px; padding: 1px 7px; white-space: nowrap; }
+.code { font: 700 22px "Archivo Narrow"; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+.ids { font: 500 13px/20px "Archivo"; font-variant-numeric: tabular-nums; color: var(--text-3); }
+
+/* FAQ */
+.faq { background: var(--surface); border-radius: 18px; overflow: hidden; }
+.faq .qrow { padding: 18px 20px; border-top: 1px solid var(--line); }
+.faq .qrow:first-child { border-top: 0; }
+.faq .qh { display: flex; justify-content: space-between; gap: 16px; align-items: center; font: 600 17px/22px "Archivo"; }
+.faq .qh svg { width: 20px; height: 20px; color: var(--text-3); flex: none; }
+.faq .qa { margin-top: 10px; font-size: 15px; line-height: 22px; color: var(--text-2); max-width: 620px; }
+
+/* Long-form text (Privacy, Terms) */
+.doc { display: grid; grid-template-columns: 240px 1fr; gap: 72px; align-items: start; }
+.toc { list-style: none; display: flex; flex-direction: column; gap: 2px; position: sticky; top: 24px; }
+.toc li { font-size: 14px; line-height: 20px; color: var(--text-2); padding: 6px 12px; border-radius: 10px; }
+.toc li.on { background: var(--surface); color: var(--text); font-weight: 500; }
+.prose { max-width: 680px; }
+.prose h2 { font: 700 22px/25px "Archivo Narrow"; margin-top: 40px; }
+.prose h2:first-child { margin-top: 0; }
+.prose p, .prose li { font-size: 16px; line-height: 26px; color: var(--text); margin-top: 12px; }
+.prose ul { padding-left: 20px; }
+.prose li { margin-top: 6px; }
+.ph-text { color: var(--text-2); }
+.placeholder-note { display: flex; gap: 12px; padding: 14px 16px; border-radius: 18px; background: var(--ceil-soft); font-size: 14px; line-height: 20px; }
+.placeholder-note svg { width: 20px; height: 20px; color: var(--ceil); flex: none; }
+
+/* Share card (daily ladder) */
+.sharecard { width: 280px; background: var(--surface); border-radius: 28px; padding: 24px; }
+.sq { display: flex; flex-direction: column-reverse; gap: 6px; width: 44px; }
+.sq i { height: 44px; border-radius: 12px; background: var(--surface-2); display: block; }
+.sq i.done { background: var(--pass); }
+.sq i.miss { background: var(--miss); }
+
+/* ---------- Phone width ---------- */
+@container site (max-width: 700px) {
+  .wrap { padding: 0 20px; }
+  .section { padding: 52px 0; }
+  .top { height: 64px; gap: 12px; justify-content: space-between; }
+  .nav, .top .btn-open { display: none; }
+  .top .menu { display: inline-flex; }
+  .t-hero { font-size: 64px; line-height: 60px; }
+  .t-page { font-size: 34px; line-height: 36px; }
+  .split, .split.wide-right { grid-template-columns: 1fr; gap: 32px; }
+  .split .first-on-phone { order: -1; }
+  .cols, .cols.two, .cols.grid2 { grid-template-columns: 1fr; }
+  .cols > div { padding: 18px 16px; }
+  .cols > div + div, .cols.grid2 > div, .cols.grid2 > div:nth-child(even) { border-left: 0; border-top: 1px solid var(--line); }
+  .cols.grid2 > div:first-child { border-top: 0; }
+  .panel { padding: 20px; border-radius: 24px; }
+  .btns { flex-direction: column; align-items: stretch; }
+  .btns .btn { width: 100%; }
+  .foot-grid { grid-template-columns: 1fr 1fr; gap: 28px 16px; }
+  .foot-grid > div:first-child { grid-column: 1 / -1; }
+  .foot-base { flex-direction: column; margin-top: 32px; }
+  .doc { grid-template-columns: 1fr; gap: 26px; }
+  .toc { position: static; }
+  .hide-phone { display: none !important; }
+  .compare .v { font-size: 13px; }
+}
+@container site (min-width: 701px) { .hide-desk { display: none !important; } }
+
+/* ---------- Web app in a desktop browser ---------- */
+.browser { width: 1440px; border-radius: 12px; overflow: hidden; background: var(--bg); color: var(--text); }
+.chrome { height: 44px; display: flex; align-items: center; gap: 16px; padding: 0 16px; background: var(--surface); border-bottom: 1px solid var(--line); }
+.chrome .lights { display: flex; gap: 8px; }
+.chrome .lights i { width: 12px; height: 12px; border-radius: 50%; background: var(--line); display: block; }
+.chrome .url { flex: 0 1 520px; margin: 0 auto; height: 28px; border-radius: 8px; background: var(--bg); display: flex; align-items: center; justify-content: center; gap: 6px; font: 500 13px "Archivo"; color: var(--text-2); }
+.chrome .url svg { width: 13px; height: 13px; }
+.viewport { height: 856px; display: flex; justify-content: center; background: var(--bg); }
+.column { width: 430px; height: 100%; display: flex; flex-direction: column; border-left: 1px solid var(--line); border-right: 1px solid var(--line); background: var(--bg); }
+
+/* ---------- Phone screens (same as ../mockups/rounds.css) ---------- */
+.phone { width: 390px; height: 844px; border-radius: 44px; overflow: hidden; background: var(--bg); color: var(--text); position: relative; display: flex; flex-direction: column; font-size: 16px; line-height: 1.4; }
+.status { height: 50px; flex: none; display: flex; justify-content: space-between; align-items: flex-end; padding: 0 30px 8px; font: 600 15px "Archivo"; }
+.status .dots { display: flex; gap: 5px; align-items: center; }
+.status .dots i { width: 17px; height: 10px; border-radius: 2px; background: var(--text); display: block; }
+.status .dots i:first-child { width: 15px; height: 9px; border-radius: 1px; clip-path: polygon(0 100%, 25% 100%, 25% 70%, 50% 70%, 50% 40%, 75% 40%, 75% 0, 100% 0, 100% 100%); }
+.scroll { flex: 1; overflow: hidden; padding: 8px 20px 0; }
+.column .scroll { padding-top: 28px; }
+.tabs { flex: none; height: 84px; border-top: 1px solid var(--line); display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px 8px 26px; background: var(--bg); }
+.column .tabs { height: 64px; padding: 8px 8px 6px; }
+.tab { display: flex; flex-direction: column; align-items: center; gap: 4px; font: 500 11px "Archivo"; color: var(--text-3); }
+.tab svg { width: 24px; height: 24px; }
+.tab.on { color: var(--text); }
+.tab.on svg { color: var(--signal); }
+.section-title { display: flex; justify-content: space-between; align-items: baseline; margin: 26px 0 10px; }
+.rank { display: inline-flex; align-items: center; gap: 7px; height: 32px; padding: 0 12px 0 10px; border-radius: 999px; background: var(--surface); font: 600 14px "Archivo"; }
+.rank svg { width: 16px; height: 16px; color: var(--signal); }
+.back { display: flex; align-items: center; gap: 6px; color: var(--ceil); font-size: 15px; }
+.back svg { width: 20px; height: 20px; }
+.iconbtn { width: 36px; height: 36px; border-radius: 50%; background: var(--surface); display: grid; place-items: center; }
+.iconbtn svg { width: 18px; height: 18px; }
+
+/* ---------- PimpMe ---------- */
+.logo { gap: 10px; font-size: 28px; }
+.logo .mk svg { width: 66%; height: 66%; }
+.mk { display: inline-grid; place-items: center; background: var(--signal); color: var(--on-signal); flex: none; }
+.wm { font: 700 28px/1 "Archivo Narrow"; letter-spacing: -0.02em; }
+.wm i { font-style: normal; color: var(--signal); }
+.eyebrow { font: 700 14px/1 "Archivo Narrow"; letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); }
+.band { background: var(--signal); color: var(--on-signal); border-top: 0 !important; }
+.band .btn-primary { background: var(--bg); color: var(--text); }
+.band .btn-quiet { background: rgba(14,26,46,.12); color: var(--on-signal); }
+.band .small { color: var(--on-signal); opacity: .8; }
+.btn-primary svg { width: 20px; height: 20px; }
+/* brand board */
+.board { width: 1440px; background: var(--bg); color: var(--text); border-radius: 12px; overflow: hidden; padding: 80px; box-sizing: border-box; font-family: Archivo, sans-serif; }
+.board h3 { font: 700 14px/1 "Archivo Narrow"; letter-spacing: .14em; text-transform: uppercase; color: var(--text-2); margin-bottom: 18px; }
+.bgrid { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 24px; }
+.bcard { background: var(--surface); border-radius: 18px; padding: 28px; }
+.swatch { border: 1px solid var(--line); height: 96px; border-radius: 14px; display: flex; align-items: flex-end; padding: 12px; font: 600 13px Archivo; box-sizing: border-box; }
+.dos li, .donts li { display: flex; gap: 10px; font-size: 15px; line-height: 21px; margin-top: 12px; list-style: none; }
+.dos svg { color: var(--pass); flex: none; width: 18px; height: 18px; margin-top: 2px; }
+.donts svg { color: var(--miss); flex: none; width: 18px; height: 18px; margin-top: 2px; }
+.map { width: 100%; border-collapse: collapse; font-size: 15px; }
+.map td, .map th { text-align: left; padding: 12px 0; border-top: 1px solid var(--line); vertical-align: top; }
+.map th { font: 600 13px Archivo; color: var(--text-2); border-top: 0; }
+.map td:first-child { color: var(--text-2); width: 50%; padding-right: 24px; }
+
+</style></head><body>
+<div class="group"><p class="group-title">PimpMe brand and site mockups (dark)</p><p class="group-note">A rebrand proposal, not a decision: Rounds renamed PimpMe, leaning into the word students already use. The design system, ladder and medical content are unchanged; the voice changes. Pages at desktop (1440) and phone (390) width. Domain still &lt;domain&gt;.</p></div>
+<div class="group"><p class="group-title">Brand board</p><div class="row-of-frames"><div class="frame"><div class="board" id="brand">
+  <div class="bgrid" style="align-items:end">
+    <div style="grid-column:span 7">
+      <p class="eyebrow">Brand direction · PimpMe</p>
+      <p style="font:700 120px/0.9 'Archivo Narrow';letter-spacing:-0.02em;margin-top:20px">pimp me<span style="color:var(--signal)">.</span></p>
+    </div>
+    <div style="grid-column:span 5">
+      <p style="font:700 22px/27px 'Archivo Narrow'">You raise your hand. The attending pimps you. You walk onto rounds ready.</p>
+      <p class="body t2 mt12">Medicine's own word, used on the student's side. The name is the button: asking to be pimped is the whole product. Pimping without the humiliation.</p>
+    </div>
+  </div>
+
+  <div class="bgrid" style="margin-top:64px">
+    <div style="grid-column:span 7"><h3>Lockups</h3>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px"><div class="bcard" style="background:var(--surface);display:flex;align-items:center;gap:12px;padding:40px 28px;color:var(--text)"><span class="mk" style="width:52px;height:52px;border-radius:15px"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm" style="font-size:54px">pimp me<i>.</i></span></div><div class="bcard light" style="background:var(--bg);display:flex;align-items:center;gap:12px;padding:40px 28px;color:var(--text)"><span class="mk" style="width:52px;height:52px;border-radius:15px"><svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm" style="font-size:54px">pimp me<i>.</i></span></div></div>
+      <p class="small mt12">The mark is a raised hand: volunteering to be asked. Amber tile, navy hand. The amber period is the pager light: you're up.</p>
+    </div>
+    <div style="grid-column:span 5"><h3>App icon</h3>
+      <div style="display:flex;gap:20px;align-items:center"><div style="width:168px;height:168px;border-radius:38px;background:var(--signal);display:grid;place-items:center;color:var(--on-signal)"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div><div style="width:168px;height:168px;border-radius:38px;background:var(--bg);border:1px solid var(--line);box-sizing:border-box;display:grid;place-items:center;color:var(--signal)"><svg width="104" height="104" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></div></div>
+      <p class="small mt12">Amber is the primary icon: the loudest thing on a home screen, like a page. Navy is the alternate.</p>
+    </div>
+  </div>
+
+  <div class="bgrid" style="margin-top:64px">
+    <div style="grid-column:span 5"><h3>Lines</h3>
+      <div class="bcard stack-lg">
+        <p style="font:700 34px/36px 'Archivo Narrow'">Get pimped here first.</p>
+        <p style="font:700 22px/26px 'Archivo Narrow';color:var(--text-2)">Pimp yourself before rounds does.</p>
+        <p style="font:700 22px/26px 'Archivo Narrow';color:var(--text-2)">Pimping without the humiliation.</p>
+        <p style="font:700 22px/26px 'Archivo Narrow';color:var(--text-2)">Raise your hand.</p>
+      </div>
+    </div>
+    <div style="grid-column:span 7"><h3>Voice</h3>
+      <div class="cols two">
+        <div><p class="h3">Do</p><ul class="dos">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Use the word the way the wards do: an attending asking hard questions.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Stay on the student's side. Tease attendings, never students.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Let the personas carry the edge. The app itself stays plain and kind.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Keep every medical fact serious and sourced to a reviewed script.</span></li>
+        </ul></div>
+        <div><p class="h3">Never</p><ul class="donts">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Anything from the word's street meaning: no hats, canes, chains, cash or sexual jokes.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Humiliation or hazing: no "you got owned", no leaderboards of shame.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Guilt about missed days, confetti or mascots.</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>The word in clinical or school-facing material without checking first.</span></li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bgrid" style="margin-top:64px">
+    <div style="grid-column:span 5"><h3>Colour</h3>
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div class="swatch" style="background:var(--bg);color:var(--text)">Scrub navy</div><div class="swatch" style="background:var(--signal);color:var(--on-signal)">Pager amber</div><div class="swatch" style="background:var(--ceil);color:var(--on-signal)">Ceil</div>
+        <div class="swatch" style="background:var(--surface);color:var(--text)">Surface</div><div class="swatch" style="background:var(--pass);color:var(--on-signal)">Pass</div><div class="swatch" style="background:var(--miss);color:var(--on-signal)">Pimped</div>
+      </div>
+      <p class="small mt12">Same tokens. One change: amber may now fill a whole block, once per page, for the closing call to action.</p>
+    </div>
+    <div style="grid-column:span 7"><h3>Copy, before and after</h3>
+      <table class="map"><tr><th>Rounds</th><th>PimpMe</th></tr>
+        <tr><td>Get asked here first.</td><td>Get pimped here first.</td></tr>
+        <tr><td>Missed on management</td><td>Pimped on management</td></tr>
+        <tr><td>The ladder</td><td>The pimp ladder</td></tr>
+        <tr><td>Today's ladder</td><td>Daily pimp</td></tr>
+        <tr><td>Who's asking?</td><td>Who's pimping?</td></tr>
+        <tr><td>Pimp me (in-app button, undecided)</td><td>Pimp me, everywhere, including the site's main button</td></tr>
+      </table>
+    </div>
+  </div>
+</div></div></div></div>
+<div class="group"><p class="group-title">Home</p><div class="row-of-frames"><div class="frame"><div class="site" id="home-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <p class="eyebrow">For third- and fourth-year medical students</p>
+    <h1 class="t-hero">Get pimped here first.</h1>
+    <p class="lede">Your attending is going to ask. Practice before they do.</p>
+    <p class="body t2 measure">Pimping without the humiliation. An AI attending asks out loud, one rung harder each time, until you miss. Nobody's watching, nothing's graded but you, and the miss is waiting in your review tonight.</p>
+    <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span><span class="btn btn-quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Join the iPhone beta</span></div>
+<p class="small">"Pimp me" opens the web app. The iPhone app is in beta through TestFlight for now.</p>
+  </div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="meta">Internist</span><span class="num t2" style="font-size:18px">0:42</span></div>
+    <div style="display:flex;gap:28px;margin-top:22px;align-items:flex-start;flex-wrap:wrap">
+      <div class="ladder" style="width:180px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung now"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung "><span class="n">4</span><span class="label">Workup</span></div><div class="rung "><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+      <div style="flex:1;min-width:220px">
+        <p class="meta">Acute pancreatitis</p>
+        <p class="q mt8">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p>
+      </div>
+    </div>
+    <p class="mt26" style="font-size:15px;line-height:21px;color:var(--text-2);min-height:63px">"I'd check the ALT. If it's more than three times normal, that points to gallstones, and then right upper quadrant…</p>
+  </div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">One day on the wards</h2>
+  <p class="body t2 mt12 measure">Three short habits that fit around rounds, not on top of them.</p>
+  <div class="cols mt40">
+    <div class="stack">
+      <span class="stepno">1</span>
+      <p class="meta">Morning, about five minutes</p>
+      <p class="h2">Get pimped</p>
+      <p class="body t2">Before rounds, the attending pimps you on your rotation or a patient you logged. Climb until you miss.</p>
+      <div style="padding-top:8px"><div class="strip"><i class="done">1</i><i class="done">2</i><i class="done">3</i><i class="done">4</i><i class="miss">5</i><i class="">6</i></div></div>
+    </div>
+    <div class="stack">
+      <span class="stepno">2</span>
+      <p class="meta">On the wards, ten seconds</p>
+      <p class="h2">Log a patient</p>
+      <p class="body t2">Save the diagnosis, never the patient. Tonight it becomes a short ladder of its own.</p>
+      <div style="padding-top:8px;display:flex;gap:8px;align-items:center"><div class="field on-surface" style="flex:1;min-height:44px;font-size:15px">Heart failure exacerbation</div><span class="chip">Save</span></div>
+    </div>
+    <div class="stack">
+      <span class="stepno">3</span>
+      <p class="meta">Evening, about twelve minutes</p>
+      <p class="h2">Review what you missed</p>
+      <p class="body t2">Today's misses, the script behind each one, and the Anki cards to match. It ends instead of scrolling forever.</p>
+      <div style="padding-top:8px;display:flex;align-items:center;gap:12px"><span class="mark" style="background:var(--miss)"></span><div><p style="font-weight:500;font-size:15px">Acute pancreatitis</p><p class="small">Pimped on management</p></div></div>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Answer out loud, like it's real.</h2>
+    <p class="body t2 measure">PimpMe asks the way an attending does, and you answer the way you would at the bedside. The mic opens when the question ends. Rather type? Text works everywhere.</p>
+    <div class="measure"><p class="h3">Who's asking?</p>
+      <div class="seg mt12" style="background:var(--surface)"><span>Teacher</span><span>Surgeon</span><span class="on">Internist</span></div>
+      <p class="small mt12">Three ways to get pimped: the Teacher waits, the Internist asks why, the Surgeon gives you ten seconds.</p></div>
+  </div>
+  <div>
+    <p class="meta">Acute pancreatitis</p>
+    <p class="q mt8">What are the two most common causes of acute pancreatitis?</p>
+    <div class="panel mt26" style="padding:16px 18px;border-radius:24px">
+      <div style="display:flex;align-items:center;gap:14px"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave"><i style="height:10px"></i><i style="height:18px"></i><i style="height:30px"></i><i style="height:22px"></i><i style="height:40px"></i><i style="height:28px"></i><i style="height:14px"></i><i style="height:34px"></i><i style="height:24px"></i><i style="height:12px"></i><i style="height:20px"></i><i style="height:8px"></i><i style="height:16px"></i><i style="height:26px"></i><i style="height:12px"></i></div></div>
+      <p class="mt12" style="font-size:15px;color:var(--text-2);min-height:63px;line-height:21px">"Gallstones first, then heavy alcohol use."</p>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack">
+    <div class="list">
+      <div class="lrow"><div class="grow"><p style="font-weight:500">Unsuspend 3 Anki cards</p><p class="small">Syncs next time Anki opens</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    </div>
+    <div class="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12A7.5 7.5 0 0 1 18 7.5M19.5 12A7.5 7.5 0 0 1 6 16.5"/><path d="M18 3.5v4h-4M6 20.5v-4h4"/></svg><p>3 Anki cards unsuspended today. They'll show up next time you open Anki.</p></div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">Your misses, waiting in Anki.</h2>
+    <p class="body t2 measure">Connect the PimpMe add-on and a miss unsuspends the matching AnKing cards, so they turn up in your next review. PimpMe reads card ids, never card text.</p>
+    <span class="link">How the Anki add-on works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Pimped on real medicine, not trivia.</h2>
+    <p class="body t2 measure">Each question and accepted answer traces to an illness script, and a physician reviews every script before anyone is asked from it. Grading checks your answer against the script, nothing else.</p>
+    <ul class="ticks no measure">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3H4a1 1 0 0 0-1 1v5a5 5 0 0 0 10 0V4a1 1 0 0 0-1-1h-1"/><path d="M8 14v1a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg><span>Scripts reviewed by a physician, named on every script.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><span>Educational use only, not clinical guidance.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>No patient details. The log keeps a diagnosis, never a name, date or record number.</span></li>
+    </ul>
+  </div>
+  <div class="panel" style="padding:24px 28px 14px">
+    <p class="h1">Acute pancreatitis</p>
+    <p class="small mt8">Reviewed by [physician name], [role], on [date]</p>
+    <div style="display:flex;gap:6px;margin-top:12px"><span class="chip">Internal medicine</span><span class="chip">Surgery</span></div>
+    <div class="mt16">
+      <div class="script-block"><p class="k">Key findings</p><p>Sudden epigastric pain radiating to the back, nausea and vomiting, recent heavy alcohol use or known gallstones.</p></div>
+      <div class="script-block"><p class="k">Management</p><p>Early goal-directed IV fluids with lactated Ringer's, pain control, early oral feeding as tolerated.</p></div>
+    </div>
+  </div>
+</div></section><section class="section band"><div class="wrap center stack-lg">
+  <h2 class="t-page" style="max-width:860px;margin-left:auto;margin-right:auto">Pimp yourself before rounds does.</h2>
+  <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span><span class="btn btn-quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Join the iPhone beta</span></div>
+<p class="small">"Pimp me" opens the web app. The iPhone app is in beta through TestFlight for now.</p>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Home, 1440.</b> The hook becomes "Get pimped here first." The main button is the brand: "Pimp me". The closing block is the one place amber fills a whole section.</p></div><div class="frame"><div class="site phone-w" id="home-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <p class="eyebrow">For third- and fourth-year medical students</p>
+    <h1 class="t-hero">Get pimped here first.</h1>
+    <p class="lede">Your attending is going to ask. Practice before they do.</p>
+    <p class="body t2 measure">Pimping without the humiliation. An AI attending asks out loud, one rung harder each time, until you miss. Nobody's watching, nothing's graded but you, and the miss is waiting in your review tonight.</p>
+    <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span><span class="btn btn-quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Join the iPhone beta</span></div>
+<p class="small">"Pimp me" opens the web app. The iPhone app is in beta through TestFlight for now.</p>
+  </div>
+  <div class="panel">
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="meta">Internist</span><span class="num t2" style="font-size:18px">0:42</span></div>
+    <div style="display:flex;gap:28px;margin-top:22px;align-items:flex-start;flex-wrap:wrap">
+      <div class="ladder" style="width:180px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung now"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung "><span class="n">4</span><span class="label">Workup</span></div><div class="rung "><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+      <div style="flex:1;min-width:220px">
+        <p class="meta">Acute pancreatitis</p>
+        <p class="q mt8">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p>
+      </div>
+    </div>
+    <p class="mt26" style="font-size:15px;line-height:21px;color:var(--text-2);min-height:63px">"I'd check the ALT. If it's more than three times normal, that points to gallstones, and then right upper quadrant…</p>
+  </div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">One day on the wards</h2>
+  <p class="body t2 mt12 measure">Three short habits that fit around rounds, not on top of them.</p>
+  <div class="cols mt40">
+    <div class="stack">
+      <span class="stepno">1</span>
+      <p class="meta">Morning, about five minutes</p>
+      <p class="h2">Get pimped</p>
+      <p class="body t2">Before rounds, the attending pimps you on your rotation or a patient you logged. Climb until you miss.</p>
+      <div style="padding-top:8px"><div class="strip"><i class="done">1</i><i class="done">2</i><i class="done">3</i><i class="done">4</i><i class="miss">5</i><i class="">6</i></div></div>
+    </div>
+    <div class="stack">
+      <span class="stepno">2</span>
+      <p class="meta">On the wards, ten seconds</p>
+      <p class="h2">Log a patient</p>
+      <p class="body t2">Save the diagnosis, never the patient. Tonight it becomes a short ladder of its own.</p>
+      <div style="padding-top:8px;display:flex;gap:8px;align-items:center"><div class="field on-surface" style="flex:1;min-height:44px;font-size:15px">Heart failure exacerbation</div><span class="chip">Save</span></div>
+    </div>
+    <div class="stack">
+      <span class="stepno">3</span>
+      <p class="meta">Evening, about twelve minutes</p>
+      <p class="h2">Review what you missed</p>
+      <p class="body t2">Today's misses, the script behind each one, and the Anki cards to match. It ends instead of scrolling forever.</p>
+      <div style="padding-top:8px;display:flex;align-items:center;gap:12px"><span class="mark" style="background:var(--miss)"></span><div><p style="font-weight:500;font-size:15px">Acute pancreatitis</p><p class="small">Pimped on management</p></div></div>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Answer out loud, like it's real.</h2>
+    <p class="body t2 measure">PimpMe asks the way an attending does, and you answer the way you would at the bedside. The mic opens when the question ends. Rather type? Text works everywhere.</p>
+    <div class="measure"><p class="h3">Who's asking?</p>
+      <div class="seg mt12" style="background:var(--surface)"><span>Teacher</span><span>Surgeon</span><span class="on">Internist</span></div>
+      <p class="small mt12">Three ways to get pimped: the Teacher waits, the Internist asks why, the Surgeon gives you ten seconds.</p></div>
+  </div>
+  <div>
+    <p class="meta">Acute pancreatitis</p>
+    <p class="q mt8">What are the two most common causes of acute pancreatitis?</p>
+    <div class="panel mt26" style="padding:16px 18px;border-radius:24px">
+      <div style="display:flex;align-items:center;gap:14px"><span class="mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></span><div class="wave"><i style="height:10px"></i><i style="height:18px"></i><i style="height:30px"></i><i style="height:22px"></i><i style="height:40px"></i><i style="height:28px"></i><i style="height:14px"></i><i style="height:34px"></i><i style="height:24px"></i><i style="height:12px"></i><i style="height:20px"></i><i style="height:8px"></i><i style="height:16px"></i><i style="height:26px"></i><i style="height:12px"></i></div></div>
+      <p class="mt12" style="font-size:15px;color:var(--text-2);min-height:63px;line-height:21px">"Gallstones first, then heavy alcohol use."</p>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack">
+    <div class="list">
+      <div class="lrow"><div class="grow"><p style="font-weight:500">Unsuspend 3 Anki cards</p><p class="small">Syncs next time Anki opens</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    </div>
+    <div class="info"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12A7.5 7.5 0 0 1 18 7.5M19.5 12A7.5 7.5 0 0 1 6 16.5"/><path d="M18 3.5v4h-4M6 20.5v-4h4"/></svg><p>3 Anki cards unsuspended today. They'll show up next time you open Anki.</p></div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">Your misses, waiting in Anki.</h2>
+    <p class="body t2 measure">Connect the PimpMe add-on and a miss unsuspends the matching AnKing cards, so they turn up in your next review. PimpMe reads card ids, never card text.</p>
+    <span class="link">How the Anki add-on works <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Pimped on real medicine, not trivia.</h2>
+    <p class="body t2 measure">Each question and accepted answer traces to an illness script, and a physician reviews every script before anyone is asked from it. Grading checks your answer against the script, nothing else.</p>
+    <ul class="ticks no measure">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3H4a1 1 0 0 0-1 1v5a5 5 0 0 0 10 0V4a1 1 0 0 0-1-1h-1"/><path d="M8 14v1a6 6 0 0 0 12 0v-3"/><circle cx="20" cy="10" r="2"/></svg><span>Scripts reviewed by a physician, named on every script.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><span>Educational use only, not clinical guidance.</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span>No patient details. The log keeps a diagnosis, never a name, date or record number.</span></li>
+    </ul>
+  </div>
+  <div class="panel" style="padding:24px 28px 14px">
+    <p class="h1">Acute pancreatitis</p>
+    <p class="small mt8">Reviewed by [physician name], [role], on [date]</p>
+    <div style="display:flex;gap:6px;margin-top:12px"><span class="chip">Internal medicine</span><span class="chip">Surgery</span></div>
+    <div class="mt16">
+      <div class="script-block"><p class="k">Key findings</p><p>Sudden epigastric pain radiating to the back, nausea and vomiting, recent heavy alcohol use or known gallstones.</p></div>
+      <div class="script-block"><p class="k">Management</p><p>Early goal-directed IV fluids with lactated Ringer's, pain control, early oral feeding as tolerated.</p></div>
+    </div>
+  </div>
+</div></section><section class="section band"><div class="wrap center stack-lg">
+  <h2 class="t-page" style="max-width:860px;margin-left:auto;margin-right:auto">Pimp yourself before rounds does.</h2>
+  <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span><span class="btn btn-quiet"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2.5" width="12" height="19" rx="2.5"/><path d="M11 18.5h2"/></svg>Join the iPhone beta</span></div>
+<p class="small">"Pimp me" opens the web app. The iPhone app is in beta through TestFlight for now.</p>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Home, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">How it works</p><div class="row-of-frames"><div class="frame"><div class="site" id="how-it-works-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="on">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-bottom:0"><div class="wrap stack-lg">
+  <h1 class="t-page">How it works</h1>
+  <p class="lede measure">One script, six rungs, pimped the way attendings pimp.</p>
+</div></section><section class="section tight" style="padding-top:64px"><div class="wrap split top-align wide-right">
+  <div class="stack-lg">
+    <h2 class="h1">The pimp ladder</h2>
+    <p class="body t2">Each session takes one illness script and climbs it: recall, the next most common, telling it apart, workup, management, then a pearl. Every rung is harder than the last.</p>
+    <p class="body t2">The session ends on your first miss. The rung you reach is your score, and your best rung on each script is kept.</p>
+    <div class="card" style="display:flex;gap:16px;align-items:flex-end"><p class="num" style="font-size:88px;line-height:.9">4</p><div style="padding-bottom:6px"><p class="meta">rungs climbed</p><p class="small">The example on the right, missed on management</p></div></div>
+  </div>
+  <div class="climb"><div class="step done"><span class="n">1</span><div><p class="rl">Recall</p><p class="qq">What are the two most common causes of acute pancreatitis?</p><p class="ans">"Gallstones first, then heavy alcohol use."</p></div></div><div class="step done"><span class="n">2</span><div><p class="rl">Next most common</p><p class="qq">And the next most common cause after those?</p><p class="ans">"Hypertriglyceridemia. It can also follow an ERCP."</p></div></div><div class="step done"><span class="n">3</span><div><p class="rl">Tell it apart</p><p class="qq">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p><p class="ans">"I'd check the ALT. If it's more than three times normal, that points to gallstones, and then right upper quadrant…</p></div></div><div class="step done"><span class="n">4</span><div><p class="rl">Workup</p><p class="qq">How do you confirm the diagnosis?</p><p class="ans">"Two of three: typical pain, lipase over three times normal, or imaging."</p></div></div><div class="step miss"><span class="n">5</span><div><p class="rl">Management</p><p class="qq">Mild disease, pain controlled. What about feeding?</p><p class="ans"><span class="tmiss">"Keep them NPO until the pain resolves."</span></p></div></div><div class="step "><span class="n">6</span><div><p class="rl">Pearl</p><p class="qq">Mild gallstone pancreatitis is settling. When should the gallbladder come out?</p><p class="ans"><span class="t3">Not reached</span></p></div></div></div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">Pick who's pimping</h2>
+  <p class="body t2 mt12 measure">Three attendings, the same scripts and the same grading. Only the pace and the tone change.</p>
+  <div class="cols mt40">
+    <div class="stack"><p class="h2">Teacher</p><p class="body t2">Pimps gently. Gives hints and waits for you.</p><p class="small">No time limit</p></div>
+    <div class="stack"><p class="h2">Internist</p><p class="body t2">Pimps Socratically. Asks why, then asks again.</p><p class="small">30 seconds an answer</p></div>
+    <div class="stack"><p class="h2">Surgeon</p><p class="body t2">Pimps fast. Short questions, short patience.</p><p class="small">10 seconds an answer</p></div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Lists get partial credit</h2>
+    <p class="body t2 measure">"Name three more" counts each one you know. The ones you didn't say show up as gaps, not errors, so you know exactly which to learn.</p>
+  </div>
+  <div class="panel">
+    <p class="meta">Acute pancreatitis, rung 2</p>
+    <p class="q mt8">Gallstones and alcohol are the top two causes. Name three more.</p>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:20px"><span class="num" style="font-size:56px;line-height:1;color:var(--signal)">2</span><span class="num t3" style="font-size:28px">/ 3</span><span class="meta" style="margin-left:8px">Partial credit</span></div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
+      <div class="answer got"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Hypertriglyceridemia</div>
+      <div class="answer got"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Post-ERCP</div>
+      <div class="answer missed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Medications</div>
+      <div class="answer missed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Hypercalcemia</div>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="panel">
+    <div style="display:flex;gap:22px;align-items:flex-end">
+      <div class="ladder" style="width:150px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung done"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung done"><span class="n">4</span><span class="label">Workup</span></div><div class="rung miss"><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+      <div style="padding-bottom:4px"><p class="num" style="font-size:88px;line-height:.9">4</p><p class="meta mt8">rungs climbed</p></div>
+    </div>
+    <div class="mt26" style="background:var(--bg);border-radius:18px;padding:16px">
+      <p class="small">Pimped on management</p>
+      <p style="margin-top:6px;font-size:15px;line-height:21px">You said <span class="tmiss">"Keep them NPO until the pain resolves."</span> The script says early oral feeding as tolerated.</p>
+      <p class="link mt8">Review the script</p>
+    </div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">Where you got pimped</h2>
+    <p class="body t2 measure">The result names the rung you missed, quotes what you said, and puts what the script says next to it. One card, with a link to the full script. A clean run gets no card at all.</p>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Review, and the mix-ups</h2>
+    <p class="body t2 measure">Each evening, Review lists today's misses with their scripts. When you keep confusing two diagnoses, PimpMe puts them side by side and drills the pair until they come apart.</p>
+  </div>
+  <div>
+    <p class="h3">Missed today</p>
+    <div class="list mt12"><div class="lrow"><span class="mark" style="background:var(--miss)"></span><div class="grow"><p style="font-weight:500">Acute pancreatitis</p><p class="small">Pimped on management</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+    <div class="section-title"><span class="h3">You keep mixing these up</span><span class="small">3 times this week</span></div>
+    <div class="compare">
+      <div><p class="h2" style="font-size:19px">Nephritic</p><p class="k">Urine</p><p class="v">Hematuria, RBC casts</p><p class="k">Protein</p><p class="v">Under 3.5 g/day</p><p class="k">Classic</p><p class="v">Post-strep GN</p></div>
+      <div><p class="h2" style="font-size:19px">Nephrotic</p><p class="k">Urine</p><p class="v">Fatty casts</p><p class="k">Protein</p><p class="v">Over 3.5 g/day</p><p class="k">Classic</p><p class="v">Minimal change</p></div>
+    </div>
+    <span class="btn btn-quiet btn-block mt12" style="height:46px;font-size:15px">Drill this pair</span>
+  </div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">Progress that rewards the work</h2>
+  <p class="body t2 mt12 measure">Everything runs on the rungs you already climb. There's no separate points system, and nothing nags you about a day off.</p>
+  <div class="cols grid2 mt40">
+    <div class="stack"><p class="h3">Today's rounds</p><div class="segs mt12" style="max-width:280px"><i class="on"></i><i class="on"></i><i></i></div><p class="small">2 of 3</p><p class="body t2">Three short sessions finish rounds for the day. Set your own goal from one to five.</p></div>
+    <div class="stack"><p class="h3">Shifts</p><div class="cal mt12" style="max-width:340px"><i class="l2"></i><i class="l3"></i><i class="l1"></i><i class="l3"></i><i class="off"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="off"></i><i class="l1"></i><i class="l3"></i><i class="l2"></i></div><p class="body t2">A day with rounds finished counts as a shift. One post-call day a week is applied for you. Miss a day and the count quietly starts again.</p></div>
+    <div class="stack"><p class="h3">Rank</p>
+      <div class="track mt12" style="max-width:340px"><i class="on" style="height:12px"></i><i class="on" style="height:20px"></i><i class="here" style="height:28px"></i><i style="height:36px"></i><i style="height:44px"></i><i style="height:52px"></i></div>
+      <div class="trackl" style="max-width:340px"><span>MS3</span><span>Sub-I</span><span class="here">Intern</span><span>Resident</span><span>Chief</span><span>Attending</span></div>
+      <p class="body t2">Six titles earned by total rungs climbed, from MS3 to Attending. Rank never goes down.</p></div>
+    <div class="stack"><p class="h3">Mastery</p>
+      <div class="tiles mt12" style="max-width:340px">
+        <div class="tile mastered"><p>Diabetic ketoacidosis</p><div class="mini mastered"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="tile due"><p>Hyponatremia</p><div class="mini"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="body t2">Reach rung 6 on two different days to master a script. Thirty days later it asks for a re-check.</p></div>
+  </div>
+</div></section><section class="section"><div class="wrap center stack-lg">
+  <h2 class="h1">Ready to get pimped?</h2>
+  <p class="body t2">It takes about five minutes.</p>
+  <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span></div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>How it works, 1440.</b> The pimp ladder, said out loud at last. Personas describe how each one pimps.</p></div><div class="frame"><div class="site phone-w" id="how-it-works-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="on">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-bottom:0"><div class="wrap stack-lg">
+  <h1 class="t-page">How it works</h1>
+  <p class="lede measure">One script, six rungs, pimped the way attendings pimp.</p>
+</div></section><section class="section tight" style="padding-top:64px"><div class="wrap split top-align wide-right">
+  <div class="stack-lg">
+    <h2 class="h1">The pimp ladder</h2>
+    <p class="body t2">Each session takes one illness script and climbs it: recall, the next most common, telling it apart, workup, management, then a pearl. Every rung is harder than the last.</p>
+    <p class="body t2">The session ends on your first miss. The rung you reach is your score, and your best rung on each script is kept.</p>
+    <div class="card" style="display:flex;gap:16px;align-items:flex-end"><p class="num" style="font-size:88px;line-height:.9">4</p><div style="padding-bottom:6px"><p class="meta">rungs climbed</p><p class="small">The example on the right, missed on management</p></div></div>
+  </div>
+  <div class="climb"><div class="step done"><span class="n">1</span><div><p class="rl">Recall</p><p class="qq">What are the two most common causes of acute pancreatitis?</p><p class="ans">"Gallstones first, then heavy alcohol use."</p></div></div><div class="step done"><span class="n">2</span><div><p class="rl">Next most common</p><p class="qq">And the next most common cause after those?</p><p class="ans">"Hypertriglyceridemia. It can also follow an ERCP."</p></div></div><div class="step done"><span class="n">3</span><div><p class="rl">Tell it apart</p><p class="qq">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p><p class="ans">"I'd check the ALT. If it's more than three times normal, that points to gallstones, and then right upper quadrant…</p></div></div><div class="step done"><span class="n">4</span><div><p class="rl">Workup</p><p class="qq">How do you confirm the diagnosis?</p><p class="ans">"Two of three: typical pain, lipase over three times normal, or imaging."</p></div></div><div class="step miss"><span class="n">5</span><div><p class="rl">Management</p><p class="qq">Mild disease, pain controlled. What about feeding?</p><p class="ans"><span class="tmiss">"Keep them NPO until the pain resolves."</span></p></div></div><div class="step "><span class="n">6</span><div><p class="rl">Pearl</p><p class="qq">Mild gallstone pancreatitis is settling. When should the gallbladder come out?</p><p class="ans"><span class="t3">Not reached</span></p></div></div></div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">Pick who's pimping</h2>
+  <p class="body t2 mt12 measure">Three attendings, the same scripts and the same grading. Only the pace and the tone change.</p>
+  <div class="cols mt40">
+    <div class="stack"><p class="h2">Teacher</p><p class="body t2">Pimps gently. Gives hints and waits for you.</p><p class="small">No time limit</p></div>
+    <div class="stack"><p class="h2">Internist</p><p class="body t2">Pimps Socratically. Asks why, then asks again.</p><p class="small">30 seconds an answer</p></div>
+    <div class="stack"><p class="h2">Surgeon</p><p class="body t2">Pimps fast. Short questions, short patience.</p><p class="small">10 seconds an answer</p></div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Lists get partial credit</h2>
+    <p class="body t2 measure">"Name three more" counts each one you know. The ones you didn't say show up as gaps, not errors, so you know exactly which to learn.</p>
+  </div>
+  <div class="panel">
+    <p class="meta">Acute pancreatitis, rung 2</p>
+    <p class="q mt8">Gallstones and alcohol are the top two causes. Name three more.</p>
+    <div style="display:flex;align-items:baseline;gap:8px;margin-top:20px"><span class="num" style="font-size:56px;line-height:1;color:var(--signal)">2</span><span class="num t3" style="font-size:28px">/ 3</span><span class="meta" style="margin-left:8px">Partial credit</span></div>
+    <div style="display:flex;flex-direction:column;gap:8px;margin-top:18px">
+      <div class="answer got"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Hypertriglyceridemia</div>
+      <div class="answer got"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Post-ERCP</div>
+      <div class="answer missed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Medications</div>
+      <div class="answer missed"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 12h8"/></svg>Hypercalcemia</div>
+    </div>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="panel">
+    <div style="display:flex;gap:22px;align-items:flex-end">
+      <div class="ladder" style="width:150px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung done"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung done"><span class="n">4</span><span class="label">Workup</span></div><div class="rung miss"><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+      <div style="padding-bottom:4px"><p class="num" style="font-size:88px;line-height:.9">4</p><p class="meta mt8">rungs climbed</p></div>
+    </div>
+    <div class="mt26" style="background:var(--bg);border-radius:18px;padding:16px">
+      <p class="small">Pimped on management</p>
+      <p style="margin-top:6px;font-size:15px;line-height:21px">You said <span class="tmiss">"Keep them NPO until the pain resolves."</span> The script says early oral feeding as tolerated.</p>
+      <p class="link mt8">Review the script</p>
+    </div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">Where you got pimped</h2>
+    <p class="body t2 measure">The result names the rung you missed, quotes what you said, and puts what the script says next to it. One card, with a link to the full script. A clean run gets no card at all.</p>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h2 class="h1">Review, and the mix-ups</h2>
+    <p class="body t2 measure">Each evening, Review lists today's misses with their scripts. When you keep confusing two diagnoses, PimpMe puts them side by side and drills the pair until they come apart.</p>
+  </div>
+  <div>
+    <p class="h3">Missed today</p>
+    <div class="list mt12"><div class="lrow"><span class="mark" style="background:var(--miss)"></span><div class="grow"><p style="font-weight:500">Acute pancreatitis</p><p class="small">Pimped on management</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+    <div class="section-title"><span class="h3">You keep mixing these up</span><span class="small">3 times this week</span></div>
+    <div class="compare">
+      <div><p class="h2" style="font-size:19px">Nephritic</p><p class="k">Urine</p><p class="v">Hematuria, RBC casts</p><p class="k">Protein</p><p class="v">Under 3.5 g/day</p><p class="k">Classic</p><p class="v">Post-strep GN</p></div>
+      <div><p class="h2" style="font-size:19px">Nephrotic</p><p class="k">Urine</p><p class="v">Fatty casts</p><p class="k">Protein</p><p class="v">Over 3.5 g/day</p><p class="k">Classic</p><p class="v">Minimal change</p></div>
+    </div>
+    <span class="btn btn-quiet btn-block mt12" style="height:46px;font-size:15px">Drill this pair</span>
+  </div>
+</div></section><section class="section"><div class="wrap">
+  <h2 class="h1">Progress that rewards the work</h2>
+  <p class="body t2 mt12 measure">Everything runs on the rungs you already climb. There's no separate points system, and nothing nags you about a day off.</p>
+  <div class="cols grid2 mt40">
+    <div class="stack"><p class="h3">Today's rounds</p><div class="segs mt12" style="max-width:280px"><i class="on"></i><i class="on"></i><i></i></div><p class="small">2 of 3</p><p class="body t2">Three short sessions finish rounds for the day. Set your own goal from one to five.</p></div>
+    <div class="stack"><p class="h3">Shifts</p><div class="cal mt12" style="max-width:340px"><i class="l2"></i><i class="l3"></i><i class="l1"></i><i class="l3"></i><i class="off"></i><i class="l2"></i><i class="l3"></i><i class="l3"></i><i class="l2"></i><i class="l3"></i><i class="off"></i><i class="l1"></i><i class="l3"></i><i class="l2"></i></div><p class="body t2">A day with rounds finished counts as a shift. One post-call day a week is applied for you. Miss a day and the count quietly starts again.</p></div>
+    <div class="stack"><p class="h3">Rank</p>
+      <div class="track mt12" style="max-width:340px"><i class="on" style="height:12px"></i><i class="on" style="height:20px"></i><i class="here" style="height:28px"></i><i style="height:36px"></i><i style="height:44px"></i><i style="height:52px"></i></div>
+      <div class="trackl" style="max-width:340px"><span>MS3</span><span>Sub-I</span><span class="here">Intern</span><span>Resident</span><span>Chief</span><span>Attending</span></div>
+      <p class="body t2">Six titles earned by total rungs climbed, from MS3 to Attending. Rank never goes down.</p></div>
+    <div class="stack"><p class="h3">Mastery</p>
+      <div class="tiles mt12" style="max-width:340px">
+        <div class="tile mastered"><p>Diabetic ketoacidosis</p><div class="mini mastered"><i></i><i></i><i></i><i></i><i></i><i></i></div></div>
+        <div class="tile due"><p>Hyponatremia</p><div class="mini"><i class="on"></i><i class="on"></i><i class="on"></i><i class="on"></i><i></i><i></i></div></div>
+      </div>
+      <p class="body t2">Reach rung 6 on two different days to master a script. Thirty days later it asks for a re-check.</p></div>
+  </div>
+</div></section><section class="section"><div class="wrap center stack-lg">
+  <h2 class="h1">Ready to get pimped?</h2>
+  <p class="body t2">It takes about five minutes.</p>
+  <div class="btns"><span class="btn btn-primary"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg>Pimp me</span></div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>How it works, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Anki</p><div class="row-of-frames"><div class="frame"><div class="site" id="anki-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="on">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h1 class="t-page">PimpMe for Anki</h1>
+    <p class="lede measure">Miss it on rounds, see it in Anki.</p>
+    <p class="body t2 measure">A small add-on for Anki on your computer. When you miss a question in PimpMe, it unsuspends the AnKing cards linked to that part of the script, so they turn up in your next review.</p>
+    <div class="btns"><span class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download the add-on</span></div>
+    <p class="small">For Anki on Windows, macOS and Linux. Works with the AnKing deck from AnkiHub.</p>
+  </div>
+  <div class="cols two">
+    <div><p class="h3">What it does</p><ul class="ticks yes mt16">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Unsuspends the cards linked to what you missed</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Tags those notes #PimpMe::missed</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Syncs when Anki opens and closes</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Puts each sync in one step you can undo</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Sends review numbers for linked cards: ids, due date, interval, lapses</span></li>
+    </ul></div>
+    <div><p class="h3">What it never does</p><ul class="ticks no mt16">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Read or upload card text, card fronts or note fields</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Touch cards you haven't missed on</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Ask for a password in Anki</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Run in AnkiMobile on the iPhone</span></li>
+    </ul></div>
+  </div>
+</div></section><section class="section"><div class="wrap split top-align">
+  <div class="stack-lg">
+    <h2 class="h1">Set it up once</h2>
+    <ol class="howto mt12">
+      <li><span class="stepn">1</span><div><p class="h3">Download</p><p class="body t2 mt8">Get <b style="font-weight:600;color:var(--text)">pimpme.ankiaddon</b> with the button above.</p></div></li>
+      <li><span class="stepn">2</span><div><p class="h3">Install by double-clicking</p><p class="body t2 mt8">Anki opens and asks to install it. Restart Anki when it's done.</p></div></li>
+      <li><span class="stepn">3</span><div><p class="h3">Get a code</p><p class="body t2 mt8">In PimpMe, open <span class="kbd">Settings → Anki</span> and tap Connect Anki. You'll see a code that works once, for 10 minutes.</p></div></li>
+      <li><span class="stepn">4</span><div><p class="h3">Enter it in Anki</p><p class="body t2 mt8">In Anki, choose <span class="kbd">Tools → PimpMe → Connect to PimpMe…</span> and type the code. That's it.</p></div></li>
+    </ol>
+  </div>
+  <div class="stack">
+    <p class="small">In PimpMe: Settings → Anki</p>
+    <div class="card" style="padding:18px">
+      <p class="body">See what you missed on rounds in your Anki.</p>
+      <p class="small mt8">For Anki on a computer. PimpMe reads card ids, never card text.</p>
+      <span class="btn btn-primary btn-block mt16">Connect Anki</span>
+      <p class="meta mt12">Install the PimpMe add-on, then enter this code: <span class="code" style="color:var(--text);font-size:18px">ABCD-2345</span></p>
+      <p class="small mt8">Works once, for 9 more min.</p>
+    </div>
+    <p class="small" style="margin-top:20px">Disconnect from either side: Settings → Anki → Disconnect in PimpMe, or Tools → PimpMe → Disconnect in Anki.</p>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack">
+    <p class="small">On the result screen, after a miss on management</p>
+    <div class="list"><div class="lrow"><div class="grow"><p style="font-weight:500">Unsuspend 3 Anki cards</p><p class="small">Syncs next time Anki opens</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+    <div class="card mt12" style="background:transparent;border:1.5px solid var(--line)">
+      <p class="small">Linked notes, acute pancreatitis, management</p>
+      <p class="ids mt8">1495670579999 · 1532131804405 · 1535304077148</p>
+    </div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">What "Unsuspend 3 Anki cards" means</h2>
+    <p class="body t2 measure">Each script is linked to AnKing notes by id, rung by rung. When a session ends on a miss, the result offers the cards linked to that rung. Tap it, and the next time Anki opens they're unsuspended and tagged, ready in your reviews.</p>
+    <p class="body t2 measure">Changed your mind? In Anki, <span class="kbd">Edit → Undo</span> puts the whole sync back in one step.</p>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Anki, 1440.</b> Renamed only. The add-on page stays plain.</p></div><div class="frame"><div class="site phone-w" id="anki-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="on">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split">
+  <div class="stack-lg">
+    <h1 class="t-page">PimpMe for Anki</h1>
+    <p class="lede measure">Miss it on rounds, see it in Anki.</p>
+    <p class="body t2 measure">A small add-on for Anki on your computer. When you miss a question in PimpMe, it unsuspends the AnKing cards linked to that part of the script, so they turn up in your next review.</p>
+    <div class="btns"><span class="btn btn-primary"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>Download the add-on</span></div>
+    <p class="small">For Anki on Windows, macOS and Linux. Works with the AnKing deck from AnkiHub.</p>
+  </div>
+  <div class="cols two">
+    <div><p class="h3">What it does</p><ul class="ticks yes mt16">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Unsuspends the cards linked to what you missed</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Tags those notes #PimpMe::missed</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Syncs when Anki opens and closes</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Puts each sync in one step you can undo</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7"/></svg><span>Sends review numbers for linked cards: ids, due date, interval, lapses</span></li>
+    </ul></div>
+    <div><p class="h3">What it never does</p><ul class="ticks no mt16">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Read or upload card text, card fronts or note fields</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Touch cards you haven't missed on</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Ask for a password in Anki</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg><span>Run in AnkiMobile on the iPhone</span></li>
+    </ul></div>
+  </div>
+</div></section><section class="section"><div class="wrap split top-align">
+  <div class="stack-lg">
+    <h2 class="h1">Set it up once</h2>
+    <ol class="howto mt12">
+      <li><span class="stepn">1</span><div><p class="h3">Download</p><p class="body t2 mt8">Get <b style="font-weight:600;color:var(--text)">pimpme.ankiaddon</b> with the button above.</p></div></li>
+      <li><span class="stepn">2</span><div><p class="h3">Install by double-clicking</p><p class="body t2 mt8">Anki opens and asks to install it. Restart Anki when it's done.</p></div></li>
+      <li><span class="stepn">3</span><div><p class="h3">Get a code</p><p class="body t2 mt8">In PimpMe, open <span class="kbd">Settings → Anki</span> and tap Connect Anki. You'll see a code that works once, for 10 minutes.</p></div></li>
+      <li><span class="stepn">4</span><div><p class="h3">Enter it in Anki</p><p class="body t2 mt8">In Anki, choose <span class="kbd">Tools → PimpMe → Connect to PimpMe…</span> and type the code. That's it.</p></div></li>
+    </ol>
+  </div>
+  <div class="stack">
+    <p class="small">In PimpMe: Settings → Anki</p>
+    <div class="card" style="padding:18px">
+      <p class="body">See what you missed on rounds in your Anki.</p>
+      <p class="small mt8">For Anki on a computer. PimpMe reads card ids, never card text.</p>
+      <span class="btn btn-primary btn-block mt16">Connect Anki</span>
+      <p class="meta mt12">Install the PimpMe add-on, then enter this code: <span class="code" style="color:var(--text);font-size:18px">ABCD-2345</span></p>
+      <p class="small mt8">Works once, for 9 more min.</p>
+    </div>
+    <p class="small" style="margin-top:20px">Disconnect from either side: Settings → Anki → Disconnect in PimpMe, or Tools → PimpMe → Disconnect in Anki.</p>
+  </div>
+</div></section><section class="section"><div class="wrap split">
+  <div class="stack">
+    <p class="small">On the result screen, after a miss on management</p>
+    <div class="list"><div class="lrow"><div class="grow"><p style="font-weight:500">Unsuspend 3 Anki cards</p><p class="small">Syncs next time Anki opens</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+    <div class="card mt12" style="background:transparent;border:1.5px solid var(--line)">
+      <p class="small">Linked notes, acute pancreatitis, management</p>
+      <p class="ids mt8">1495670579999 · 1532131804405 · 1535304077148</p>
+    </div>
+  </div>
+  <div class="stack-lg first-on-phone">
+    <h2 class="h1">What "Unsuspend 3 Anki cards" means</h2>
+    <p class="body t2 measure">Each script is linked to AnKing notes by id, rung by rung. When a session ends on a miss, the result offers the cards linked to that rung. Tap it, and the next time Anki opens they're unsuspended and tagged, ready in your reviews.</p>
+    <p class="body t2 measure">Changed your mind? In Anki, <span class="kbd">Edit → Undo</span> puts the whole sync back in one step.</p>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Anki, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">FAQ</p><div class="row-of-frames"><div class="frame"><div class="site" id="faq-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="on">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split top-align wide-right">
+  <div class="stack-lg">
+    <h1 class="t-page">Questions</h1>
+    <p class="body t2 measure">The short answers. Still stuck? <span class="link">Contact support</span></p>
+  </div>
+  <div class="faq"><div class="qrow"><div class="qh"><span>Why is it called PimpMe?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></div><p class="qa">Because that's what it's called on the wards. "Pimping" is medicine's word for an attending firing hard questions at a student, and it's been around since at least the 1980s. PimpMe takes your side: you ask for it, you practise in private, and you walk onto rounds ready.</p></div><div class="qrow"><div class="qh"><span>Is this pimping as mistreatment?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Is PimpMe clinical guidance?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Where do the questions come from?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Do I have to answer out loud?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Can I put patient details in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Does the Anki add-on read my cards?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>What happens if I miss a day?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Which rotations are covered?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Is there an Android app?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Can I use it on my computer?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div></div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>FAQ, 1440.</b> Opens with the name: why it's called PimpMe, and why it isn't mistreatment.</p></div><div class="frame"><div class="site phone-w" id="faq-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="on">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split top-align wide-right">
+  <div class="stack-lg">
+    <h1 class="t-page">Questions</h1>
+    <p class="body t2 measure">The short answers. Still stuck? <span class="link">Contact support</span></p>
+  </div>
+  <div class="faq"><div class="qrow"><div class="qh"><span>Why is it called PimpMe?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 15l6-6 6 6"/></svg></div><p class="qa">Because that's what it's called on the wards. "Pimping" is medicine's word for an attending firing hard questions at a student, and it's been around since at least the 1980s. PimpMe takes your side: you ask for it, you practise in private, and you walk onto rounds ready.</p></div><div class="qrow"><div class="qh"><span>Is this pimping as mistreatment?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Is PimpMe clinical guidance?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Where do the questions come from?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Do I have to answer out loud?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Can I put patient details in?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Does the Anki add-on read my cards?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>What happens if I miss a day?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Which rotations are covered?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Is there an Android app?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div><div class="qrow"><div class="qh"><span>Can I use it on my computer?</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div></div></div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>FAQ, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Privacy policy</p><div class="row-of-frames"><div class="frame"><div class="site" id="privacy-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap">
+  <div class="doc">
+    <ul class="toc hide-phone"><li class="on">What we collect</li><li class="">What we never collect</li><li class="">Anki data</li><li class="">Voice recordings</li><li class="">How we use it</li><li class="">Who we share it with</li><li class="">Keeping and deleting</li><li class="">Your choices</li><li class="">Contact</li></ul>
+    <div class="prose">
+      <h1 class="t-page">Privacy policy</h1>
+      <p class="meta mt12">Last updated [date]</p>
+      <div class="placeholder-note mt26"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><p><b style="font-weight:600">Placeholder text.</b> This page shows the layout only. The real privacy policy will be written and checked before launch.</p></div>
+      <div class="mt40"><h2>What we collect</h2><p class="ph-text">[Placeholder] Account details: an email address or Sign in with Apple. Your practice: sessions, rungs reached, answers you give, patients you log by diagnosis only.</p><h2>What we never collect</h2><p class="ph-text">[Placeholder] Patient details of any kind. The log stores a diagnosis label, a rotation and a date; free-text fields block names, dates of birth, record numbers, phone numbers and addresses.</p><h2>Anki data</h2><p class="ph-text">[Placeholder] If you connect the add-on: card and note ids and review numbers for linked cards. Never card text or note fields.</p><h2>Voice recordings</h2><p class="ph-text">[Placeholder] How audio is turned into text, which provider does it, and whether any audio is kept.</p><h2>How we use it</h2><p class="ph-text">[Placeholder] To run sessions, grade answers against the scripts, build your review, and fix problems you report.</p></div>
+      <p class="ph-text mt26" style="font-size:16px;line-height:26px">[Placeholder] Remaining sections continue in the same style.</p>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Privacy policy, 1440.</b> Legal pages keep a straight face.</p></div><div class="frame"><div class="site phone-w" id="privacy-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap">
+  <div class="doc">
+    <ul class="toc hide-phone"><li class="on">What we collect</li><li class="">What we never collect</li><li class="">Anki data</li><li class="">Voice recordings</li><li class="">How we use it</li><li class="">Who we share it with</li><li class="">Keeping and deleting</li><li class="">Your choices</li><li class="">Contact</li></ul>
+    <div class="prose">
+      <h1 class="t-page">Privacy policy</h1>
+      <p class="meta mt12">Last updated [date]</p>
+      <div class="placeholder-note mt26"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><p><b style="font-weight:600">Placeholder text.</b> This page shows the layout only. The real privacy policy will be written and checked before launch.</p></div>
+      <div class="mt40"><h2>What we collect</h2><p class="ph-text">[Placeholder] Account details: an email address or Sign in with Apple. Your practice: sessions, rungs reached, answers you give, patients you log by diagnosis only.</p><h2>What we never collect</h2><p class="ph-text">[Placeholder] Patient details of any kind. The log stores a diagnosis label, a rotation and a date; free-text fields block names, dates of birth, record numbers, phone numbers and addresses.</p><h2>Anki data</h2><p class="ph-text">[Placeholder] If you connect the add-on: card and note ids and review numbers for linked cards. Never card text or note fields.</p><h2>Voice recordings</h2><p class="ph-text">[Placeholder] How audio is turned into text, which provider does it, and whether any audio is kept.</p><h2>How we use it</h2><p class="ph-text">[Placeholder] To run sessions, grade answers against the scripts, build your review, and fix problems you report.</p></div>
+      <p class="ph-text mt26" style="font-size:16px;line-height:26px">[Placeholder] Remaining sections continue in the same style.</p>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Privacy policy, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Terms</p><div class="row-of-frames"><div class="frame"><div class="site" id="terms-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap">
+  <div class="doc">
+    <ul class="toc hide-phone"><li class="on">Using PimpMe</li><li class="">Educational use only</li><li class="">Your account</li><li class="">Patient details</li><li class="">Content and licences</li><li class="">Beta software</li><li class="">Ending use</li><li class="">Changes</li><li class="">Contact</li></ul>
+    <div class="prose">
+      <h1 class="t-page">Terms</h1>
+      <p class="meta mt12">Last updated [date]</p>
+      <div class="placeholder-note mt26"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><p><b style="font-weight:600">Placeholder text.</b> This page shows the layout only. The real terms will be written and checked before launch.</p></div>
+      <div class="mt40"><h2>Using PimpMe</h2><p class="ph-text">[Placeholder] Who can use PimpMe and what the service is.</p><h2>Educational use only</h2><p class="ph-text">[Placeholder] PimpMe is for education. It is not clinical guidance and must not be used to make decisions about a patient's care.</p><h2>Your account</h2><p class="ph-text">[Placeholder] Keeping your sign-in secure, and what happens to practice done before you sign in.</p><h2>Patient details</h2><p class="ph-text">[Placeholder] You agree never to enter information that could identify a patient.</p><h2>Content and licences</h2><p class="ph-text">[Placeholder] Who owns the illness scripts. PimpMe never stores or shows AnKing card text or question bank content.</p></div>
+      <p class="ph-text mt26" style="font-size:16px;line-height:26px">[Placeholder] Remaining sections continue in the same style.</p>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Terms, 1440.</b> </p></div><div class="frame"><div class="site phone-w" id="terms-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap">
+  <div class="doc">
+    <ul class="toc hide-phone"><li class="on">Using PimpMe</li><li class="">Educational use only</li><li class="">Your account</li><li class="">Patient details</li><li class="">Content and licences</li><li class="">Beta software</li><li class="">Ending use</li><li class="">Changes</li><li class="">Contact</li></ul>
+    <div class="prose">
+      <h1 class="t-page">Terms</h1>
+      <p class="meta mt12">Last updated [date]</p>
+      <div class="placeholder-note mt26"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.3"/></svg><p><b style="font-weight:600">Placeholder text.</b> This page shows the layout only. The real terms will be written and checked before launch.</p></div>
+      <div class="mt40"><h2>Using PimpMe</h2><p class="ph-text">[Placeholder] Who can use PimpMe and what the service is.</p><h2>Educational use only</h2><p class="ph-text">[Placeholder] PimpMe is for education. It is not clinical guidance and must not be used to make decisions about a patient's care.</p><h2>Your account</h2><p class="ph-text">[Placeholder] Keeping your sign-in secure, and what happens to practice done before you sign in.</p><h2>Patient details</h2><p class="ph-text">[Placeholder] You agree never to enter information that could identify a patient.</p><h2>Content and licences</h2><p class="ph-text">[Placeholder] Who owns the illness scripts. PimpMe never stores or shows AnKing card text or question bank content.</p></div>
+      <p class="ph-text mt26" style="font-size:16px;line-height:26px">[Placeholder] Remaining sections continue in the same style.</p>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Terms, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Support</p><div class="row-of-frames"><div class="frame"><div class="site" id="support-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="on">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split top-align">
+  <div class="stack-lg">
+    <h1 class="t-page">Support</h1>
+    <p class="lede measure">Something broken, confusing or wrong? Tell us.</p>
+    <div class="list mt12">
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M22 7l-10 6L2 7"/></svg><div class="grow"><p style="font-weight:500">Email</p><p class="small">support@&lt;domain&gt;</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="grow"><p style="font-weight:500">In the app</p><p class="small">Profile → Settings → Send feedback</p></div></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><div class="grow"><p style="font-weight:500">A question looks wrong</p><p class="small">Use "Something wrong with a question?" on the result screen</p></div></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v15H7.5A2.5 2.5 0 0 0 5 20.5z"/><path d="M5 20.5A2.5 2.5 0 0 1 7.5 18H19v3H7.5"/></svg><div class="grow"><p style="font-weight:500">Read the FAQ</p><p class="small">Voice, Anki, patient details and more</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="h2">Testing the beta? Send feedback</p>
+    <p class="small mt8">Goes straight to the developer. Never include patient details.</p>
+    <label class="label mt20">What happened?</label>
+    <div class="field area on-surface focus"><span>The mic stayed open after I tapped I don't know.<span class="caret"></span></span></div>
+    <label class="label mt16">Email, if you'd like a reply</label>
+    <div class="field on-surface"><span class="ph">you@school.edu</span></div>
+    <span class="btn btn-primary btn-block mt20">Send feedback</span>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Support, 1440.</b> </p></div><div class="frame"><div class="site phone-w" id="support-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="on">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section"><div class="wrap split top-align">
+  <div class="stack-lg">
+    <h1 class="t-page">Support</h1>
+    <p class="lede measure">Something broken, confusing or wrong? Tell us.</p>
+    <div class="list mt12">
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4.5" width="19" height="15" rx="2"/><path d="M22 7l-10 6L2 7"/></svg><div class="grow"><p style="font-weight:500">Email</p><p class="small">support@&lt;domain&gt;</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><div class="grow"><p style="font-weight:500">In the app</p><p class="small">Profile → Settings → Send feedback</p></div></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><div class="grow"><p style="font-weight:500">A question looks wrong</p><p class="small">Use "Something wrong with a question?" on the result screen</p></div></div>
+      <div class="lrow"><svg style="color:var(--text-2);width:20px;height:20px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v15H7.5A2.5 2.5 0 0 0 5 20.5z"/><path d="M5 20.5A2.5 2.5 0 0 1 7.5 18H19v3H7.5"/></svg><div class="grow"><p style="font-weight:500">Read the FAQ</p><p class="small">Voice, Anki, patient details and more</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    </div>
+  </div>
+  <div class="panel">
+    <p class="h2">Testing the beta? Send feedback</p>
+    <p class="small mt8">Goes straight to the developer. Never include patient details.</p>
+    <label class="label mt20">What happened?</label>
+    <div class="field area on-surface focus"><span>The mic stayed open after I tapped I don't know.<span class="caret"></span></span></div>
+    <label class="label mt16">Email, if you'd like a reply</label>
+    <div class="field on-surface"><span class="ph">you@school.edu</span></div>
+    <span class="btn btn-primary btn-block mt20">Send feedback</span>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Support, 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Daily pimp (optional)</p><div class="row-of-frames"><div class="frame"><div class="site" id="daily-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-top:56px"><div class="wrap">
+  <div class="split top-align wide-right">
+    <div class="stack-lg">
+      <p class="meta">Monday, November 16</p>
+      <h1 class="t-page">Daily pimp</h1>
+      <p class="body t2 measure">One script a day, the same for everyone, no account needed. See how far you get before you're pimped.</p>
+      <p class="small hide-phone">Sign in and your result is kept with your practice.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="meta">Acute pancreatitis</span><span class="num t2" style="font-size:18px">0:42</span></div>
+      <div class="hide-phone" style="display:flex;gap:28px;margin-top:22px;align-items:flex-start">
+        <div class="ladder" style="width:180px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung now"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung "><span class="n">4</span><span class="label">Workup</span></div><div class="rung "><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+        <p class="q" style="flex:1">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p>
+      </div>
+      <div class="hide-desk" style="margin-top:16px"><div class="strip"><i class="done">1</i><i class="done">2</i><i class="now">3</i><i class="">4</i><i class="">5</i><i class="">6</i></div><p class="q mt20">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p></div>
+      <div class="field area on-surface focus mt26" style="min-height:104px"><span>ALT more than three times normal<span class="caret"></span></span></div>
+      <div style="display:flex;gap:10px;margin-top:12px"><span class="btn btn-quiet" style="flex:1">I don't know</span><span class="btn btn-primary" style="flex:2">Submit</span></div>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Daily pimp (optional), 1440.</b> </p></div><div class="frame"><div class="site phone-w" id="daily-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-top:56px"><div class="wrap">
+  <div class="split top-align wide-right">
+    <div class="stack-lg">
+      <p class="meta">Monday, November 16</p>
+      <h1 class="t-page">Daily pimp</h1>
+      <p class="body t2 measure">One script a day, the same for everyone, no account needed. See how far you get before you're pimped.</p>
+      <p class="small hide-phone">Sign in and your result is kept with your practice.</p>
+    </div>
+    <div class="panel">
+      <div style="display:flex;justify-content:space-between;align-items:center"><span class="meta">Acute pancreatitis</span><span class="num t2" style="font-size:18px">0:42</span></div>
+      <div class="hide-phone" style="display:flex;gap:28px;margin-top:22px;align-items:flex-start">
+        <div class="ladder" style="width:180px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung now"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung "><span class="n">4</span><span class="label">Workup</span></div><div class="rung "><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+        <p class="q" style="flex:1">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p>
+      </div>
+      <div class="hide-desk" style="margin-top:16px"><div class="strip"><i class="done">1</i><i class="done">2</i><i class="now">3</i><i class="">4</i><i class="">5</i><i class="">6</i></div><p class="q mt20">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p></div>
+      <div class="field area on-surface focus mt26" style="min-height:104px"><span>ALT more than three times normal<span class="caret"></span></span></div>
+      <div style="display:flex;gap:10px;margin-top:12px"><span class="btn btn-quiet" style="flex:1">I don't know</span><span class="btn btn-primary" style="flex:2">Submit</span></div>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Daily pimp (optional), 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Daily pimp: result (optional)</p><div class="row-of-frames"><div class="frame"><div class="site" id="daily-result-desktop" style="width:1440px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-top:56px"><div class="wrap">
+  <div class="split">
+    <div class="stack-lg">
+      <p class="meta">Monday, November 16</p>
+      <div style="display:flex;gap:22px;align-items:flex-end">
+        <div class="ladder" style="width:150px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung done"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung done"><span class="n">4</span><span class="label">Workup</span></div><div class="rung miss"><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+        <div style="padding-bottom:4px"><p class="num" style="font-size:88px;line-height:.9">4</p><p class="meta mt8">rungs climbed</p></div>
+      </div>
+      <div class="card" style="max-width:520px"><p class="small">Pimped on management</p><p style="margin-top:6px;font-size:15px;line-height:21px">You said <span class="tmiss">"Keep them NPO until the pain resolves."</span> The script says early oral feeding as tolerated.</p></div>
+      <p class="small">A new pimp tomorrow.</p>
+    </div>
+    <div class="stack-lg" style="align-items:center;display:flex;flex-direction:column">
+      <div class="sharecard">
+        <div style="display:flex;gap:20px;align-items:flex-end">
+          <div class="sq"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="miss"></i><i class=""></i></div>
+          <div><p class="small">PimpMe · Nov 16</p><p class="num" style="font-size:56px;line-height:1;margin-top:6px">4<span class="t3" style="font-size:28px"> / 6</span></p><p class="small mt8">&lt;domain&gt;/daily</p></div>
+        </div>
+      </div>
+      <p class="small center" style="max-width:280px">The share shows the squares only, never the script, questions or answers.</p>
+      <div class="btns" style="width:280px"><span class="btn btn-primary" style="width:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share result</span><span class="btn btn-quiet" style="width:100%">Get the full app</span></div>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption" style="max-width:1000px"><b>Daily pimp: result (optional), 1440.</b> The share card: "PimpMe · Nov 16 · 4/6", squares only.</p></div><div class="frame"><div class="site phone-w" id="daily-result-phone" style="width:390px"><header class="wrap top">
+  <span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span>
+  <nav class="nav"><a class="">How it works</a><a class="">Anki</a><a class="">FAQ</a><a class="">Support</a></nav>
+  <span class="btn btn-quiet btn-sm btn-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="3.5" width="19" height="13" rx="2"/><path d="M8 21h8M12 16.5V21"/></svg>Open the web app</span>
+  <span class="btn btn-quiet btn-sm menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>Menu</span>
+</header><section class="section" style="padding-top:56px"><div class="wrap">
+  <div class="split">
+    <div class="stack-lg">
+      <p class="meta">Monday, November 16</p>
+      <div style="display:flex;gap:22px;align-items:flex-end">
+        <div class="ladder" style="width:150px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung done"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung done"><span class="n">4</span><span class="label">Workup</span></div><div class="rung miss"><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div>
+        <div style="padding-bottom:4px"><p class="num" style="font-size:88px;line-height:.9">4</p><p class="meta mt8">rungs climbed</p></div>
+      </div>
+      <div class="card" style="max-width:520px"><p class="small">Pimped on management</p><p style="margin-top:6px;font-size:15px;line-height:21px">You said <span class="tmiss">"Keep them NPO until the pain resolves."</span> The script says early oral feeding as tolerated.</p></div>
+      <p class="small">A new pimp tomorrow.</p>
+    </div>
+    <div class="stack-lg" style="align-items:center;display:flex;flex-direction:column">
+      <div class="sharecard">
+        <div style="display:flex;gap:20px;align-items:flex-end">
+          <div class="sq"><i class="done"></i><i class="done"></i><i class="done"></i><i class="done"></i><i class="miss"></i><i class=""></i></div>
+          <div><p class="small">PimpMe · Nov 16</p><p class="num" style="font-size:56px;line-height:1;margin-top:6px">4<span class="t3" style="font-size:28px"> / 6</span></p><p class="small mt8">&lt;domain&gt;/daily</p></div>
+        </div>
+      </div>
+      <p class="small center" style="max-width:280px">The share shows the squares only, never the script, questions or answers.</p>
+      <div class="btns" style="width:280px"><span class="btn btn-primary" style="width:100%"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7M16 6l-4-4-4 4M12 2v13"/></svg>Share result</span><span class="btn btn-quiet" style="width:100%">Get the full app</span></div>
+    </div>
+  </div>
+</div></section><footer class="foot"><div class="wrap">
+  <div class="foot-grid">
+    <div><span class="logo"><span class="mk" style="width:28px;height:28px;border-radius:8px"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2"/><path d="M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2"/><path d="M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8"/><path d="M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15"/></svg></span><span class="wm">pimp me<i>.</i></span></span><p class="meta mt12" style="max-width:300px">Get pimped here first.</p></div>
+    <div><h4>PimpMe</h4><ul><li>How it works</li><li>Anki add-on</li><li>Daily pimp</li><li>Open the web app</li></ul></div>
+    <div><h4>Help</h4><ul><li>FAQ</li><li>Support</li><li>Send feedback</li></ul></div>
+    <div><h4>Legal</h4><ul><li>Privacy policy</li><li>Terms</li></ul></div>
+  </div>
+  <div class="foot-base"><span><b>Educational use only, not clinical guidance.</b> Never enter patient details.</span><span>© 2026 PimpMe · &lt;domain&gt;</span></div>
+</div></footer></div><p class="caption"><b>Daily pimp: result (optional), 390.</b></p></div></div></div>
+<div class="group"><p class="group-title">Web app on a computer (app.&lt;domain&gt;)</p><div class="row-of-frames">
+<div class="frame"><div id="webapp-home"><div class="browser"><div class="chrome"><div class="lights"><i></i><i></i><i></i></div><div class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.&lt;domain&gt;</div><div style="width:52px"></div></div>
+<div class="viewport"><div class="column"><div class="scroll">
+  <div style="display:flex;justify-content:space-between;align-items:center"><p class="meta">Monday, November 16</p><span class="rank"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17 3v18M7 7.5h10M7 12h10M7 16.5h10"/></svg>Intern</span></div>
+  <h1 class="h1" style="margin-top:6px">Internal medicine</h1>
+  <p class="meta" style="margin-top:6px">Week 3 of 8 <span class="link" style="margin-left:10px;font-size:14px">Change rotation</span></p>
+  <div style="margin-top:22px;background:var(--surface);border-radius:28px;padding:18px 20px 20px">
+    <div style="display:flex;justify-content:space-between;align-items:baseline"><p class="h3">Today's rounds</p><p class="small"><span class="num" style="font-size:16px;color:var(--text)">1</span> of 3 sessions</p></div>
+    <div class="segs" style="margin-top:10px"><i class="on"></i><i></i><i></i></div>
+    <p class="small" style="margin-top:8px">12 shifts in a row. Finish rounds to make it 13.</p>
+    <div style="height:1px;background:var(--line);margin:14px 0"></div>
+    <p class="h3">Who's asking?</p>
+    <div class="seg" style="margin-top:12px"><span>Teacher</span><span>Surgeon</span><span class="on">Internist</span></div>
+    <div class="btn btn-primary btn-block" style="margin-top:16px;height:60px;font-size:18px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a3 3 0 0 0-3 3v6a3 3 0 0 0 6 0V6a3 3 0 0 0-3-3z"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Pimp me</div>
+  </div>
+  <div class="section-title"><span class="h3">From today's patients</span><span class="link" style="font-size:14px">Log one</span></div>
+  <div class="list">
+    <div class="lrow"><div class="grow"><p class="h3" style="font-weight:500">Diabetic ketoacidosis</p><p class="small">Logged 8:12 am</p></div><span class="chip">Start</span></div>
+    <div class="lrow"><div class="grow"><p class="h3" style="font-weight:500">New-onset atrial fibrillation</p><p class="small">Logged 10:40 am</p></div><span class="chip">Start</span></div>
+    <div class="lrow"><div class="grow"><p class="h3" style="font-weight:500">Community-acquired pneumonia</p><p class="small">Logged 1:05 pm</p></div><span class="chip">Start</span></div>
+  </div>
+</div><nav class="tabs"><div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17 3v18M7 7.5h10M7 12h10M7 16.5h10"/></svg><span>Pimp</span></div><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9.5 3v3h5V3M12 10.5v6M9 13.5h6"/></svg><span>Log</span></div><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v15H7.5A2.5 2.5 0 0 0 5 20.5z"/><path d="M5 20.5A2.5 2.5 0 0 1 7.5 18H19v3H7.5"/></svg><span>Review</span></div><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Profile</span></div></nav></div></div></div></div><p class="caption"><b>Home at 1440.</b> The app barely changes: "Pimp me" was always the button.</p></div>
+<div class="frame"><div id="webapp-session"><div class="browser"><div class="chrome"><div class="lights"><i></i><i></i><i></i></div><div class="url"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>app.&lt;domain&gt;</div><div style="width:52px"></div></div>
+<div class="viewport"><div class="column"><div class="scroll on-bg" style="display:flex;flex-direction:column;padding-bottom:28px">
+  <div style="display:flex;justify-content:space-between;align-items:center">
+    <span class="iconbtn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6l12 12M18 6L6 18"/></svg></span><span class="meta">Internist</span><span class="num t2" style="font-size:18px">0:42</span>
+  </div>
+  <div style="margin-top:26px"><div class="ladder" style="width:190px;flex:none"><div class="rung done"><span class="n">1</span><span class="label">Recall</span></div><div class="rung done"><span class="n">2</span><span class="label">Next most common</span></div><div class="rung now"><span class="n">3</span><span class="label">Tell it apart</span></div><div class="rung "><span class="n">4</span><span class="label">Workup</span></div><div class="rung "><span class="n">5</span><span class="label">Management</span></div><div class="rung "><span class="n">6</span><span class="label">Pearl</span></div></div></div>
+  <div style="margin-top:30px"><p class="meta">Acute pancreatitis</p><p class="q mt8">How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?</p></div>
+  <div style="flex:1"></div>
+  <div class="field area focus" style="min-height:104px"><span>ALT more than three times normal<span class="caret"></span></span></div>
+  <div style="display:flex;gap:10px;margin-top:12px"><span class="btn btn-quiet" style="flex:1">I don't know</span><span class="btn btn-primary" style="flex:2">Submit</span></div>
+</div></div></div></div></div><p class="caption"><b>Live session, text, at 1440.</b> Unchanged.</p></div>
+</div></div><div class="group"><p class="group-title">In-app pieces</p><div class="row-of-frames">
+<div class="frame"><section class="phone" id="settings-legal"><div class="status"><span>9:41</span><span class="dots"><i></i><i></i></span></div><div class="scroll">
+  <div class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span>Profile</span></div>
+  <p class="small" style="margin-top:14px">Scrolled to the end of Settings</p>
+  <div class="section-title" style="margin-top:12px"><span class="h3">Appearance</span></div>
+  <div class="card" style="padding:8px"><div class="seg" style="background:transparent"><span>Light</span><span class="on">Dark</span><span>System</span></div></div>
+  <div class="list" style="margin-top:26px"><div class="lrow"><div class="grow"><p style="font-weight:500">Account</p><p class="small">Signed in with Apple</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div></div>
+  <div class="section-title"><span class="h3">Help and legal</span></div>
+  <div class="list">
+    <div class="lrow"><div class="grow"><p style="font-weight:500">Send feedback</p><p class="small">Goes straight to the developer</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></div>
+    <div class="lrow"><div class="grow"><p style="font-weight:500">Privacy policy</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></div>
+    <div class="lrow"><div class="grow"><p style="font-weight:500">Terms</p></div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h6v6M10 14L21 3M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></svg></div>
+  </div>
+  <p class="small center" style="margin-top:26px;color:var(--text-3)">Educational use only, not clinical guidance. Never enter patient details.</p>
+</div><nav class="tabs"><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 3v18M17 3v18M7 7.5h10M7 12h10M7 16.5h10"/></svg><span>Pimp</span></div><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="4" width="14" height="17" rx="2.5"/><path d="M9.5 3v3h5V3M12 10.5v6M9 13.5h6"/></svg><span>Log</span></div><div class="tab"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 5.5A2.5 2.5 0 0 1 7.5 3H19v15H7.5A2.5 2.5 0 0 0 5 20.5z"/><path d="M5 20.5A2.5 2.5 0 0 1 7.5 18H19v3H7.5"/></svg><span>Review</span></div><div class="tab on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/></svg><span>Profile</span></div></nav></section><p class="caption"><b>Settings, end of the screen.</b></p></div>
+<div class="frame"><section class="phone" id="send-feedback"><div class="status"><span>9:41</span><span class="dots"><i></i><i></i></span></div><div class="scroll" style="display:flex;flex-direction:column;padding-bottom:28px">
+  <div class="back"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg><span>Settings</span></div>
+  <h1 class="h1" style="margin-top:14px">Send feedback</h1>
+  <p class="meta" style="margin-top:6px">What's broken, confusing or missing? Never include patient details.</p>
+  <div class="field area error" style="margin-top:22px;min-height:160px"><span>The answer box jumped when I logged Mr. Alvarez CHF and went back to Pimp.<span class="caret"></span></span></div>
+  <div class="warn" style="margin-top:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3.5l9.5 17h-19z"/><path d="M12 10v4.5M12 17.5v.3"/></svg><span>This looks like it contains a patient's name. PimpMe never stores patient details. Remove it and try again.</span></div>
+  <p class="small" style="margin-top:14px">Sent with your app version and device type, nothing else.</p>
+  <div style="flex:1"></div>
+  <span class="btn btn-primary btn-block off">Send</span>
+</div></section><p class="caption"><b>Send feedback, blocked.</b></p></div>
+</div></div></body></html>

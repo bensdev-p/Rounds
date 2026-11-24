@@ -35,7 +35,7 @@ export default function RootLayout() {
           <ProfileProvider>
             <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: c.bg } }}>
               {/* The four tabs. Screens below cover the tab bar (session screens hide it). */}
-              <Stack.Screen name="(tabs)" options={{ title: 'Rounds' }} />
+              <Stack.Screen name="(tabs)" options={{ title: 'PimpMe' }} />
               <Stack.Screen
                 name="session/[scriptId]"
                 options={{ title: 'Session', gestureEnabled: false }}

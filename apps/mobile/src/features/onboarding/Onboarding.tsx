@@ -55,7 +55,7 @@ export function Onboarding({ onDone }: { onDone: (profile: Profile) => Promise<v
       }
     >
       <Txt variant="h1" accessibilityRole="header" style={styles.title}>
-        Set up Rounds
+        Set up PimpMe
       </Txt>
       <Txt variant="meta" tone="text2" style={styles.sub}>
         Two questions. Change any time.

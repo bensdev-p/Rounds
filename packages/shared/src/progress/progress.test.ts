@@ -87,7 +87,11 @@ describe('shiftStreak', () => {
     });
   });
   it('is zero with no shifts, without fuss', () => {
-    expect(shiftStreak([session(13)], nov(13, 20))).toEqual({ count: 0, today: false, postCall: [] });
+    expect(shiftStreak([session(13)], nov(13, 20))).toEqual({
+      count: 0,
+      today: false,
+      postCall: [],
+    });
   });
   it('resets quietly after a long gap', () => {
     expect(shiftStreak(shifts([1, 2, 3]), nov(13, 20)).count).toBe(0);
@@ -119,9 +123,7 @@ describe('masteryFor', () => {
     expect(masteryFor('a', [], nov(13))).toBe('not_tried');
   });
   it('needs rung 6 on two different days', () => {
-    expect(masteryFor('a', [session(12, 6), session(12, 6, 'a', 15)], nov(13))).toBe(
-      'in_progress',
-    );
+    expect(masteryFor('a', [session(12, 6), session(12, 6, 'a', 15)], nov(13))).toBe('in_progress');
     expect(masteryFor('a', [session(12, 6), session(13, 6)], nov(13))).toBe('mastered');
   });
   it('becomes re-check due 30 days after the last top run', () => {
@@ -166,7 +168,12 @@ describe('summarizeResult', () => {
     expect(r.badges).toEqual(['new_best']);
   });
   it('no new best on a first run', () => {
-    const r = summarizeResult({ before: [], session: session(13, 3), anyPartial: false, now: nov(13) });
+    const r = summarizeResult({
+      before: [],
+      session: session(13, 3),
+      anyPartial: false,
+      now: nov(13),
+    });
     expect(r).toMatchObject({ previousBest: null, newBest: false, badges: [] });
   });
   it('detects a promotion', () => {
@@ -259,7 +266,7 @@ describe('buildMissCard', () => {
       persona: 'teacher',
     });
     expect(card).toEqual({
-      label: 'Missed on management',
+      label: 'Pimped on management',
       quote: 'keep them NPO',
       correction: 'The script says: zorbicillin.',
       script_id: script.id,
@@ -278,7 +285,7 @@ describe('buildMissCard', () => {
       persona: 'teacher',
     });
     expect(card.quote).toBeNull();
-    expect(card.label).toBe(`Missed on ${RUNG_LABELS.recall.toLowerCase()}`);
+    expect(card.label).toBe(`Pimped on ${RUNG_LABELS.recall.toLowerCase()}`);
   });
 
   it('lists what a list answer left out', () => {
@@ -419,9 +426,23 @@ describe('collectionTiles', () => {
 
 describe('usageSummary', () => {
   it('counts active days and runs of consecutive days', () => {
-    const sessions = [session(5, 2), session(6, 4), session(6, 6), session(7, 1), session(11), session(12), session(13)];
+    const sessions = [
+      session(5, 2),
+      session(6, 4),
+      session(6, 6),
+      session(7, 1),
+      session(11),
+      session(12),
+      session(13),
+    ];
     const u = usageSummary(sessions, nov(13, 20));
-    expect(u).toMatchObject({ sessions: 7, activeDays: 6, currentRun: 3, longestRun: 3, bestRung: 6 });
+    expect(u).toMatchObject({
+      sessions: 7,
+      activeDays: 6,
+      currentRun: 3,
+      longestRun: 3,
+      bestRung: 6,
+    });
     expect(u.firstDay).toBe('2026-11-05');
     expect(u.recent[0]).toEqual({ day: '2026-11-13', sessions: 1, best: 3 });
     expect(u.recent[7]).toEqual({ day: '2026-11-06', sessions: 2, best: 6 });
@@ -433,6 +454,11 @@ describe('usageSummary', () => {
   });
 
   it('handles no sessions', () => {
-    expect(usageSummary([], nov(13))).toMatchObject({ sessions: 0, activeDays: 0, meanRung: 0, firstDay: null });
+    expect(usageSummary([], nov(13))).toMatchObject({
+      sessions: 0,
+      activeDays: 0,
+      meanRung: 0,
+      firstDay: null,
+    });
   });
 });

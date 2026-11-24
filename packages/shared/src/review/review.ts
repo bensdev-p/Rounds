@@ -97,7 +97,7 @@ export const MAX_SUBTITLE_CHARS = 40;
  * The line under a missed script. A list question that named some items says
  * which ones were left out ("Missed uremia, salicylates", review.png), cut
  * short to fit one line; everything else uses the miss card's label
- * ("Missed on management").
+ * ("Pimped on management").
  */
 export function missSubtitle(miss: Pick<MissRecord, 'question' | 'matched'>): string {
   const { question, matched } = miss;

@@ -1,10 +1,10 @@
-"""Rounds for Anki (M3.3): connects Anki to a student's Rounds account.
+"""PimpMe for Anki (M3.3): connects Anki to a student's PimpMe account.
 
-Tools → Rounds: Connect (a one-time code from the Rounds app, Settings → Anki;
+Tools → PimpMe: Connect (a one-time code from the PimpMe app, Settings → Anki;
 no password is typed into Anki), Sync now, Disconnect.
 
-Each sync: pull the notes Rounds links and any pending actions, apply them in
-one undo step ("Rounds: apply changes"), then upload per-card numbers for the
+Each sync: pull the notes PimpMe links and any pending actions, apply them in
+one undo step ("PimpMe: apply changes"), then upload per-card numbers for the
 linked notes. Syncs when a profile opens, after Anki's own sync, and (upload
 only) when a profile closes.
 
@@ -61,7 +61,7 @@ def _set_token(token: str | None) -> None:
 def _client(timeout: float = 30.0) -> Client | None:
     server = _server()
     if not server:
-        showWarning("The Rounds add-on has no server set. Check its config (Tools → Add-ons).")
+        showWarning("The PimpMe add-on has no server set. Check its config (Tools → Add-ons).")
         return None
     return Client(server, timeout=timeout)
 
@@ -71,13 +71,13 @@ def _client(timeout: float = 30.0) -> Client | None:
 
 def connect() -> None:
     if _token() and not askUser(
-        "This Anki profile is already connected to Rounds. Connect it again with a new code?"
+        "This Anki profile is already connected to PimpMe. Connect it again with a new code?"
     ):
         return
     code, ok = QInputDialog.getText(
         mw,
-        "Connect to Rounds",
-        "In the Rounds app, open Profile → Settings → Anki and tap Connect Anki.\n"
+        "Connect to PimpMe",
+        "In the PimpMe app, open Profile → Settings → Anki and tap Connect Anki.\n"
         "Enter the code it shows:",
         QLineEdit.EchoMode.Normal,
     )
@@ -91,10 +91,10 @@ def connect() -> None:
         try:
             token = future.result()
         except RoundsError as e:
-            showWarning(str(e), title="Rounds")
+            showWarning(str(e), title="PimpMe")
             return
         _set_token(token)
-        tooltip(f"Connected to Rounds (profile {mw.pm.name}).")
+        tooltip(f"Connected to PimpMe (profile {mw.pm.name}).")
         sync(quiet=False)
 
     mw.taskman.run_in_background(lambda: client.claim(code.strip()), done)
@@ -103,9 +103,9 @@ def connect() -> None:
 def disconnect() -> None:
     token = _token()
     if not token:
-        tooltip("This Anki profile isn't connected to Rounds.")
+        tooltip("This Anki profile isn't connected to PimpMe.")
         return
-    if not askUser("Disconnect this Anki profile from Rounds? Cards already changed stay as they are."):
+    if not askUser("Disconnect this Anki profile from PimpMe? Cards already changed stay as they are."):
         return
     client = _client(timeout=15.0)
     _set_token(None)
@@ -118,9 +118,9 @@ def disconnect() -> None:
         except NotConnected:
             pass
         except RoundsError as e:
-            showWarning(f"Disconnected here, but Rounds couldn't be told: {e}", title="Rounds")
+            showWarning(f"Disconnected here, but PimpMe couldn't be told: {e}", title="PimpMe")
             return
-        tooltip("Disconnected from Rounds.")
+        tooltip("Disconnected from PimpMe.")
 
     mw.taskman.run_in_background(lambda: client.disconnect(token), done)
 
@@ -131,7 +131,7 @@ def disconnect() -> None:
 def _lost_connection() -> None:
     _set_token(None)
     tooltip(
-        "Rounds: this Anki was disconnected. Connect again from Tools → Rounds.",
+        "PimpMe: this Anki was disconnected. Connect again from Tools → PimpMe.",
         period=6000,
     )
 
@@ -142,7 +142,7 @@ def sync(quiet: bool = True) -> None:
     token = _token()
     if _busy or _closing or not token or not mw.col:
         if not quiet and not token:
-            showInfo("Connect to Rounds first: Tools → Rounds → Connect to Rounds.")
+            showInfo("Connect to PimpMe first: Tools → PimpMe → Connect to PimpMe.")
         return
     client = _client()
     if not client:
@@ -156,7 +156,7 @@ def sync(quiet: bool = True) -> None:
             _lost_connection()
         elif isinstance(e, RoundsError):
             if not quiet:
-                showWarning(str(e), title="Rounds")
+                showWarning(str(e), title="PimpMe")
         else:
             raise e
 
@@ -167,7 +167,7 @@ def sync(quiet: bool = True) -> None:
             fail(e)
             return
         if not mw.col:
-            fail(RoundsError("The collection closed before Rounds could sync."))
+            fail(RoundsError("The collection closed before PimpMe could sync."))
             return
         plan = core.plan_changes(mw.col.db, pull)
         if plan.empty:
@@ -197,7 +197,7 @@ def sync(quiet: bool = True) -> None:
             if message:
                 tooltip(message, period=6000)
             elif not quiet:
-                tooltip(f"Rounds synced: {core.plural(len(stats), 'linked card')}.")
+                tooltip(f"PimpMe synced: {core.plural(len(stats), 'linked card')}.")
 
         mw.taskman.run_in_background(lambda: client.push(token, stats, result.applied), pushed)
 
@@ -227,10 +227,10 @@ def upload_on_close() -> None:
 
 
 def _setup_menu() -> None:
-    menu = QMenu("Rounds", mw)
-    connect_action = QAction("Connect to Rounds…", mw)
-    sync_action = QAction("Sync with Rounds now", mw)
-    disconnect_action = QAction("Disconnect from Rounds", mw)
+    menu = QMenu("PimpMe", mw)
+    connect_action = QAction("Connect to PimpMe…", mw)
+    sync_action = QAction("Sync with PimpMe now", mw)
+    disconnect_action = QAction("Disconnect from PimpMe", mw)
     connect_action.triggered.connect(connect)
     sync_action.triggered.connect(lambda: sync(quiet=False))
     disconnect_action.triggered.connect(disconnect)

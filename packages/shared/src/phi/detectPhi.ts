@@ -115,7 +115,7 @@ const KIND_LABEL: Record<PhiKind, string> = {
 export function phiWarning(result: PhiResult): string | null {
   if (!result.blocked) return null;
   const kinds = [...new Set(result.findings.map((f) => KIND_LABEL[f.kind]))];
-  return `This looks like it contains ${kinds.join(', ')}. Rounds never stores patient details. Remove it and try again.`;
+  return `This looks like it contains ${kinds.join(', ')}. PimpMe never stores patient details. Remove it and try again.`;
 }
 
 /**

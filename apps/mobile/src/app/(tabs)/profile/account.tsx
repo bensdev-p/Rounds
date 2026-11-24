@@ -60,7 +60,7 @@ function messageFor(e: unknown): string {
   if (e instanceof WrongCodeError) {
     return "That code didn't work. Use the newest email's code, or send a new one.";
   }
-  if (e instanceof Error && isUnreachable(e)) return "Can't reach Rounds. Check the connection.";
+  if (e instanceof Error && isUnreachable(e)) return "Can't reach PimpMe. Check the connection.";
   return e instanceof Error ? e.message : 'Something went wrong. Try again.';
 }
 
@@ -124,7 +124,7 @@ function SignIn() {
     return (
       <View>
         <Txt variant="body" style={styles.lead}>
-          {step.email ?? 'That Apple ID'} already has a Rounds account. Signing in switches this
+          {step.email ?? 'That Apple ID'} already has a PimpMe account. Signing in switches this
           phone to it, and the practice done here without an account stays behind.
         </Txt>
         <Button
@@ -185,7 +185,7 @@ function SignIn() {
     <View>
       <Txt variant="body" style={styles.lead}>
         {
-          "You're using Rounds without an account. Sign in to keep your rungs, rank and misses on any phone. Anki sync and teams will use your account too, when they come."
+          "You're using PimpMe without an account. Sign in to keep your rungs, rank and misses on any phone. Anki sync and teams will use your account too, when they come."
         }
       </Txt>
       <Field

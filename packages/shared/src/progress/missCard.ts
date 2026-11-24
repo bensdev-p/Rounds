@@ -21,13 +21,13 @@ export const RUNG_LABELS: Record<Rung, string> = {
   pearl: 'Pearl',
 };
 
-/** "Missed on management": the miss card's label, also used in Review (DESIGN.md, step 6). */
+/** "Pimped on management": the miss card's label, also used in Review (DESIGN.md, step 6). */
 export function missLabel(rung: Rung): string {
-  return `Missed on ${RUNG_LABELS[rung].toLowerCase()}`;
+  return `Pimped on ${RUNG_LABELS[rung].toLowerCase()}`;
 }
 
 export interface MissCard {
-  /** "Missed on management" */
+  /** "Pimped on management" */
   label: string;
   /** The student's answer, to quote; null when they gave none. */
   quote: string | null;
