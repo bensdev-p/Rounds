@@ -52,6 +52,8 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **Stage 4 planned (24 Nov 2026):** Rounds becomes PimpMe at pimpme.app (domain bought); a website, the web app, email, a polish pass and medical-student testers, then an exploration of student-made ladders. Payments, the App Store and Android move to Stage 5. Next: M4.1, the rebrand.
 
+**M4.1 (rebrand to PimpMe):** the brand board and site mockups are in `docs/design/site` (PNGs in `png/site`); DESIGN.md has Brand and the new Voice and copy, and the brand board wins over older mockup copy. The app is named PimpMe with the raised-hand icon (navy on amber), Home says "Who's pimping?", and misses read "Pimped on management" on the result screen and Review. The add-on is Tools → PimpMe and tags `#PimpMe::missed`, swapping the old `#Rounds::missed` on its next sync. The Anki functions' messages and the sign-in emails say PimpMe. Bundle id, repo and package names keep "Rounds". Deployed to `rounds-dev` (`anki-pair`, `anki-sync`); build 5 on TestFlight. Tried by the developer on the phone and in Anki on his PC. **M4.1 is complete.** Next: M4.2, domain and email.
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
