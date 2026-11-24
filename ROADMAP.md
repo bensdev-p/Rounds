@@ -50,6 +50,8 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M3.4 (Anki in the app):** after a miss on a script with linked notes, the result screen shows **"Unsuspend 3 Anki cards"** / "Syncs next time Anki opens" (`result.png`): the count is the suspended cards among the missed rung's notes (else the core notes) in the last upload, and tapping queues them for the next sync. Not drawn: once tapped (or already waiting), "3 Anki cards queued" with a check; "Unsuspend Anki cards" with no number before the first sync; no row when none of those cards are suspended. Without Anki connected the row says **"Connect Anki"** and opens Settings (wireframe 07 note 3). No row on clean runs or drills. Review ends with the Anki sync status (wireframe 09 note 3, `review.png`, `review-light.png`), hidden until connected, first that applies: "7 Anki cards unsuspended today. They'll show up next time you open Anki." (as drawn), "3 Anki cards will be unsuspended next time Anki opens.", or "Anki connected. Last synced today, 8:14 pm." Misses tag `#Rounds::missed` automatically: `finish_ladder_session` queues a `tag_missed` action for the missed rung's notes (else core) when a ladder (not a drill) ends on a miss with Anki connected (new migration, pgTAP tests). Checked in the web app with a scripted add-on against the local stack, dark and light. Tried by the developer on the phone and in Anki on his PC (local stack). Deployed to `rounds-dev` (migration); build 4 is on TestFlight (not yet tried on the phone), and `pnpm anki:addon:build --hosted` makes the add-on file for it. `eas.json` now holds the App Store Connect app id, so `--auto-submit` works. **M3.4 is complete, and so is Stage 3.**
 
+**Stage 4 planned (24 Nov 2026):** Rounds becomes PimpMe at pimpme.app (domain bought); a website, the web app, email, a polish pass and medical-student testers, then an exploration of student-made ladders. Payments, the App Store and Android move to Stage 5. Next: M4.1, the rebrand.
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
@@ -240,22 +242,97 @@ Facts to plan around:
 - Review: "Anki sync status" row (wireframe 09 note 3, `review.png`), hidden until connected.
 - Misses tag their script's cards `#Rounds::missed` on the next sync.
 
-## Stages 4–5 (detail added when Stage 3 is done)
-- **4. Launch:** public web portal, marketing site (copy follows DESIGN.md → Voice and copy), payments, Android.
-- **5. Expand:** all rotations, shadowing mode (including organ systems instead of rotations for MS1–2 in onboarding, wireframe 01 note 1; scripts need a "system" field first), Teams (mockups and wireframes 16–18 are ready), desktop decision, school licenses.
+---
+
+## Stage 4 — PimpMe on the web, polish and testers
+
+**Goal:** Rounds becomes **PimpMe**, at **pimpme.app**: a website that explains it, the web app at a public address, real email, and an app polished enough to hand to a group of medical students. Once the site is up, the developer widens the testers to some medical students, and their feedback shapes the end of the stage.
+
+**Decided (developer, 24 Nov 2026):**
+- **Rebrand to PimpMe**, aimed at students rather than school admin. The brand, the site and the store copy use the word "pimp" openly. This replaces the old rule that kept it inside the app. The guide is the brand-and-site mockup (`pimpme.html`, dark), which goes into `docs/design/site/` in M4.1.
+- **Domain:** pimpme.app (bought at Squarespace). DNS and hosting on Cloudflare (Pages, free); sign-in codes sent through Resend over SMTP; incoming mail to the domain forwarded by Cloudflare Email Routing.
+- **Testers see the preview:** the named tester group (medical students) uses `rounds-dev` and sees `in_review` scripts labelled "Not yet reviewed", like the developer and the reviewer (domain rule 2 updated). Anyone outside that group still sees `approved` scripts only.
+- **Light mode** for the site is derived from the tokens; there are no light site mockups.
+- **The daily pimp** is in (M4.3).
+
+Facts to plan around:
+- **No script is approved yet** (all 30 are `in_review`). So everything public that shows medical content stays testers-only until scripts are approved: the web app and the daily pimp. A gate keeps others out, and it opens without a code change once scripts are approved.
+- **Bundle id, repo and package names stay** (`com.ben.rounds`, `Rounds`, `@rounds/*`). Changing the bundle id would break Sign in with Apple and the App Store Connect app. Only what students see changes.
+- **External TestFlight** (testers who aren't App Store Connect users) needs Beta App Review and a privacy policy link, which the site provides.
+- **"Pimp" in the domain** may trip hospital and school web filters and spam filters. M4.2 and M4.4 check both early.
+- Domain, Cloudflare, Resend and Apple accounts, payment and sign-ins are the developer's. Deploys, DNS changes, pushes and builds need his OK first.
+
+### M4.1 Rebrand to PimpMe
+- **Design:** `pimpme.html` (the brand board, the site pages, the web app frame, the in-app pieces) into `docs/design/site/`, with PNGs in `docs/design/png/site/`.
+- **Docs:** update the name, the voice and the copy rules in PRODUCT.md and DESIGN.md (Voice and copy, the one amber block per page, the brand board) and CLAUDE.md.
+- **App copy:** follow the mockup's before-and-after table ("Pimped on management", "Who's pimping?" and the rest). The ladder, the tokens and the medical content are unchanged.
+- **Name and icon:** the app's display name becomes PimpMe, with the raised-hand icon (amber tile; `make-icons.mjs`). The add-on menu becomes Tools → PimpMe.
+- **Done when:** the phone shows PimpMe with the new icon and copy, and every changed screen still matches its mockup, dark and light.
+
+### M4.2 Domain and email
+- **DNS:** pimpme.app on Cloudflare (nameservers moved from Squarespace).
+- **Sign-in codes:** Resend sends them from an address on pimpme.app, through SMTP on `rounds-dev`. Then the normal `config push` with the code templates (HOSTING.md → Email).
+- **Incoming mail:** support@pimpme.app forwards to the developer.
+- **Done when:** email sign-in works on the TestFlight build, and a code lands in the inbox (not spam) at Gmail and at a school `.edu` address.
+
+### M4.3 Website
+- **Pages:** `apps/site` (Next.js, static) at pimpme.app with Home, How it works, Anki, FAQ, Privacy policy, Terms and Support, matching the mockups at 1440 and 390 widths, dark and light (light derived).
+- **The daily pimp:** one script a day, the same for everyone. A share card shows only the ladder's squares, never the questions or answers. It uses `approved` scripts only, so it shows to signed-in testers until scripts are approved.
+- **The Anki add-on file** is downloadable from the Anki page.
+- **Done when:** the site is live and the developer is happy with it.
+
+### M4.4 Web app
+- **Address:** the Expo web app at app.pimpme.app (Cloudflare Pages, HTTPS, so voice works in the browser), in the frame the mockup draws. It can be added to the phone's home screen (PWA).
+- **Tester gate:** only signed-in emails on the tester list get in. Others see a "PimpMe is in testing" page. The list lives in the database (migration, RLS, pgTAP).
+- **Done when:** a tester can sign up, practise by voice and text and connect Anki on the web, on home Wi-Fi and on a hospital network.
+
+### M4.5 App polish
+- **Parking lot items:**
+  - Tidy the text session with the iPhone keyboard up.
+  - A haptic when holding the mic starts keeping it open.
+  - In voice sessions, type the question out word by word in time with the attending's voice.
+  - The animated ladder while the app loads.
+  - The Log's warning wording on the topic search and the flag note.
+- **Settings → Help and legal:** Send feedback, Privacy policy, Terms. Send feedback carries the PHI guard and sends only the app version and device type (mockup).
+- **Build 4:** anything the developer notices on TestFlight build 4.
+- **Done when:** each item matches DESIGN.md (Reduce Motion included) and has been tried on the phone.
+
+### M4.6 Tester release
+- **Release rule:** HOSTING.md updated to name the tester group.
+- **Distribution:** external TestFlight (Beta App Review, the site's privacy link), plus the web app link.
+- **Usage and cost:** spending caps checked for more users; `pnpm stats` reads `rounds-dev`.
+- **Wrong-code limit:** the fix flagged "revisit before launch".
+- **Done when:** the first medical students are using PimpMe, and their feedback reaches the developer.
+
+### M4.7 Student-made ladders (exploration)
+- **What it produces:** a written proposal, not code. It chooses between:
+  - students suggesting a question for an existing script, which joins the ladder once approved (fits today's rules);
+  - private "My ladders" graded only against the student's own answers, labelled "Written by you", not counting toward rank or mastery;
+  - ladders drafted by AI from the student's notes;
+  - ladders shared between students.
+- **Rules:** all but the first need a change to domain rules 1 and 2 (the developer's call). The PHI guard and domain rule 6 (no pasted AnKing or Qbank text) apply to all of them.
+- **Informed by** what testers say. It ends with a prompt for mockups if the developer picks one.
+
+### M4.8 and on
+- Fixes and Parking lot items the developer picks from tester feedback, each planned when the feedback is in.
+
+## Later stages
+- **5. Launch:** a production Supabase project with `approved` scripts only (release rule), payments (Stripe on the web, RevenueCat in the app), the App Store release, the add-on on AnkiWeb, Android.
+- **6. Expand:** all rotations, shadowing mode (including organ systems instead of rotations for MS1–2 in onboarding, wireframe 01 note 1; scripts need a "system" field first), Teams (mockups and wireframes 16–18 are ready), shared student ladders, desktop decision, school licenses.
 
 ## Decisions for the developer (not Code)
-- **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release, not before building.
-- **Name and button label** ("Pimp me" or "Ask me"): decide before anyone outside the household sees it.
+- **Review at scale:** who reviews scripts for rotations other than IM. This is needed before a public release (Stage 5), not before building. Testers see `in_review` scripts (24 Nov 2026).
+- **Name and button label:** decided 24 Nov 2026. The brand is PimpMe (pimpme.app) and the button stays "Pimp me".
+- **Student-made ladders:** which shape, if any, and the domain-rule change it needs (M4.7).
 - **Spending caps:** speech $10 per vendor (14 Nov 2026); hosting $0 (Supabase Free plan, M2.6). Grading: set a monthly spend limit on the Anthropic workspace whose key `rounds-dev` uses (not yet set).
 - **For Stage 3:** answered 15 Nov 2026. AnKing Step Deck through AnkiHub (paid, on the developer's own profile only); the spike read the real collection; the write test ran on a restored copy, and the sync tag test and pairing ran on the real profile (changes undone). Later: whether the add-on is listed on AnkiWeb or shared as a file (M3.1 recommends a file for Stage 3, AnkiWeb at launch).
-- **Hosted dev preview:** decided 14 Nov 2026. One private hosted project (`rounds-dev`) shows `in_review` scripts to the developer and the reviewer only, through TestFlight internal testing. A production project with approved scripts only comes before anyone else gets a build (`docs/HOSTING.md`).
+- **Hosted dev preview:** decided 14 Nov 2026, widened 24 Nov 2026. `rounds-dev` shows `in_review` scripts to the developer, the reviewer and the named tester group (medical students, M4.6), through TestFlight and the gated web app. A production project with approved scripts only comes before a public release (Stage 5).
 
 ## Frozen unless the developer reopens them
-Mockups, wireframes and the vision video (finished) · new progression mechanics · Teams before Stage 5 · marketing site · Android · desktop · payments.
+Mockups, wireframes and the vision video (finished; M4.1 adds the PimpMe site mockups) · new progression mechanics · Teams before Stage 6 · Android · desktop · payments.
 
 ## Parking lot
-(Add ideas here with a date. Moving one into a milestone is the developer's call.)
+(Add ideas here with a date. Moving one into a milestone is the developer's call. Moved into Stage 4 on 24 Nov 2026: the daily ladder (M4.3), email sign-in (M4.2), keyboard tidy, mic haptic, word-by-word question, loading animation, Log warning wording (M4.5), external TestFlight and the wrong-code limit (M4.6).)
 - Show the reviewer in the session (PRODUCT.md → Recommendations).
 - Morning warm-up on yesterday's logged patients (PRODUCT.md → Recommendations; fits M2.2).
 - Open the next session on the missed question.
@@ -265,30 +342,21 @@ Mockups, wireframes and the vision video (finished) · new progression mechanics
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
 - (14 Nov 2026) Deleting or editing a patient log. Not drawn; the table already allows deleting your own rows.
-- (14 Nov 2026) Use the Log's warning wording ('Remove "…" and keep only the diagnosis') on the topic picker search and the flag note too.
 - (14 Nov 2026) The Log's matching-script subtitle reads "Internal medicine, cardiology" in `log.png`; it needs the same "system" field as the filter chips.
 - (14 Nov 2026) Mix-up pairs on Profile (PRODUCT.md lists them there). M2.2 shows only the week's top pair, on Review.
 - (14 Nov 2026) More than one mix-up pair on Review at a time. Wireframe 09 draws one, and the review is meant to end.
 - (14 Nov 2026) A drawn screen for the mix-up drill and its result. M2.2 reuses the live session (four squares instead of the ladder) and the result screen's pieces.
 - (14 Nov 2026) Short column headers on the comparison ("Nephritic" in `review.png`). Scripts have only full names, so long ones wrap to two lines.
 - (14 Nov 2026) Merging two accounts' history when a student who practised without an account signs in to an existing one. M2.3 warns and leaves the anonymous practice behind.
-- (14 Nov 2026) A daily ladder on the public web (Stage 4, alongside the marketing site): one script a day, the same for everyone, playable without an account and kept with it when signed in. A shareable result could be the ladder itself as squares (passed, missed, not reached), with no answers in it. Constraints: approved scripts only (release rule), no "pimp" in public copy (DESIGN.md → Voice and copy), and no-guilt streaks (DESIGN.md → Progression).
-- (14 Nov 2026) Tidy the text-mode session with the iPhone keyboard up (developer, M2.5): the answer box now stays above the keyboard, but the layout needs a cleanup pass.
-- (14 Nov 2026) A haptic when holding the mic starts keeping it open (developer, M2.5). Holding works; it only has the button's pressed look.
 - (14 Nov 2026) Voice in the mix-up drill. M2.5 voiced the pimp session only; the drill stays text (developer's call).
-- (14 Nov 2026) A production Supabase project and an approved-only store build, before anyone beyond the developer and the reviewer gets the app (M2.6 release rule).
-- (14 Nov 2026) Email sign-in on the hosted project: needs SMTP (e.g. Gmail app password, or Resend with an owned domain), since the Free plan's built-in email can't send the 6-digit code template. M2.6 ships with anonymous use and Sign in with Apple only (developer's call).
-- (14 Nov 2026) External TestFlight testing: needs Beta App Review and a privacy policy URL.
+- (14 Nov 2026) A production Supabase project and an approved-only store build before a public release (M2.6 release rule; Stage 5).
 - (14 Nov 2026) Over-the-air updates (EAS Update) so JavaScript fixes reach TestFlight without a new build.
 - (14 Nov 2026) Revisit after beta testing (developer, M2.3): more onboarding questions; where the daily goal lives (Settings for now); signing in to an existing account from a phone with practice on it.
 - (15 Nov 2026) A Rounds deck in Anki (developer, M3.1): the add-on creates its own deck from Rounds' content, for example one card per missed question with its accepted answers, so a miss on rounds becomes an Anki review even for students without AnKing. Possible: the add-on can create a note type, deck and notes, and a stable GUID per question lets updates replace cards in place. Constraints: approved scripts only (release rule), cards trace to script fields (domain rule 1), our own text only, never AnKing's (domain rule 6), and retired scripts' cards are suspended or removed. Best kept to missed questions so it doesn't pile reviews on top of AnKing. Not part of Stage 3 as planned.
 - (15 Nov 2026) Linking for students without AnkiHub (free AnKing `.apkg`) and for decks other than AnKing (students' own cards). M3.1 tested AnkiHub only; a second id dump from an `.apkg` import would settle the first.
-- (15 Nov 2026) An animated ladder icon while the app loads (launch/splash), like openGym's (developer; reference video to come). Not drawn yet; would follow DESIGN.md → Motion (rung fill, Reduce Motion).
-- (15 Nov 2026) In a voice session, type the question out word by word in time with the attending's voice, as the vision video does, instead of showing it all at once (developer). Check `apps/video` and DESIGN.md → Motion (Reduce Motion shows it whole); the question still never pushes the ladder or panel.
 - (15 Nov 2026) Protecting `#Rounds::missed` in AnkiHub (its protected tags) as an alternative to re-applying it every sync (M3.1).
 - (15 Nov 2026) Taking `#Rounds::missed` off a note once its miss clears (M2.2's rule: a later ladder passes the rung, or a week). M3.3 only adds and re-adds the tag.
 - (15 Nov 2026) More than one Anki connection per account (two profiles or two computers). M3.3 keeps one; connecting again replaces it.
-- (15 Nov 2026) The wrong-code limit counts by the first `X-Forwarded-For` address, which a caller can set. The code's size (31⁸, 10 minutes, once) is the real protection; revisit before launch.
 - (16 Nov 2026) An Anki row on the mix-up drill result (M3.4 shows it after ladder misses only; the drill result isn't drawn).
 - (16 Nov 2026) Tagging misses from before Anki was connected. M3.4 tags misses from the moment Anki is connected.
 - (16 Nov 2026) Undoing a queued unsuspend from the app before Anki syncs. In Anki, Edit → Undo already reverses it in one step.

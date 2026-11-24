@@ -6,8 +6,8 @@ Rounds is a voice-first "pimping" trainer for medical students. It quizzes stude
 
 **Read `ROADMAP.md` first.** It sets the order of work and the current milestone. Work on one milestone at a time; anything outside it goes in ROADMAP.md → Parking lot, not in code.
 
-**Stage 3: Anki bridge.** Stage 1 (local text prototype, tab shell) was completed on 14 Nov 2026 and Stage 2 (Log, Review, accounts, voice, hosting and TestFlight) on 15 Nov 2026. Stage 3 connects Rounds to the student's Anki through a desktop add-on, in the milestone order in ROADMAP.md.
-Do not build anything from later stages unless asked: payments, Android release, marketing site, public web portal, Teams. Text mode stays available everywhere.
+**Stage 4: PimpMe on the web, polish and testers.** Stage 1 (local text prototype, tab shell) was completed on 14 Nov 2026, Stage 2 (Log, Review, accounts, voice, hosting and TestFlight) on 15 Nov 2026 and Stage 3 (Anki bridge) on 16 Nov 2026. Stage 4 renames Rounds to **PimpMe** (domain pimpme.app). It builds the website and the public web app, sets up email, polishes the app and opens testing to a group of medical students, in the milestone order in ROADMAP.md. The repo, bundle id (`com.ben.rounds`) and package names keep "Rounds".
+Do not build anything from later stages unless asked: payments, a production project, the App Store release, Android, Teams. Text mode stays available everywhere.
 The app runs against the private hosted project `rounds-dev` on TestFlight (`docs/HOSTING.md`) and against the local stack via `pnpm start`. Anki add-ons run only in Anki on a computer (Windows, macOS, Linux), not in AnkiMobile on the iPhone.
 Content review and user testing are not gates: development doesn't wait for scripts to be approved or for a testing period. The developer tests as he goes.
 
@@ -15,7 +15,7 @@ Content review and user testing are not gates: development doesn't wait for scri
 
 - **Monorepo:** pnpm workspaces + Turborepo
 - **apps/mobile:** Expo (React Native) + Expo Router + TypeScript. Also serves the web app (Expo web). iPhone first; Android ships later from the same code.
-- **apps/site:** Next.js marketing site (Stage 4, not yet)
+- **apps/site:** Next.js website at pimpme.app (Stage 4, M4.3)
 - **packages/shared:** TypeScript types, Zod schemas (illness script, question, attempt), API client, pure grading/ladder logic
 - **packages/anki-linker:** developer-only Anki add-on that proposes AnKing note links per script and rung (M3.2). Never shipped to students.
 - **packages/anki-addon:** the student's Python Anki add-on, the "bridge" (M3.3). It talks to Supabase only through the `anki-pair` and `anki-sync` Edge Functions with a device token, never with a Supabase key, and never reads or uploads card text.
@@ -65,7 +65,7 @@ pnpm comes from corepack (version pinned in root `package.json`).
 
 1. **The illness script is the source of truth.** Every question, every accepted answer and every grading rubric must trace to fields in an approved script. The AI never invents medical facts at runtime.
 2. **Script status:** `draft` → `in_review` → `approved` → `retired`. Only `approved` scripts are used for pimping. Every approved script records `reviewed_by` and `reviewed_at`.
-   - **Preview (developer's decisions, 2026-11-13 and 2026-11-14):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed and `pnpm content:push --preview` turn it on, and the push allows it only for projects in `supabase/hosting.json` → `previewProjects`: the private dev project that only the developer and the reviewer use (TestFlight internal testing). Never turn it on for a project anyone else's build points at. Drafts are never shown.
+   - **Preview (developer's decisions, 2026-11-13, 2026-11-14 and 2026-11-24):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed and `pnpm content:push --preview` turn it on, and the push allows it only for projects in `supabase/hosting.json` → `previewProjects`: the dev project used by the developer, the reviewer and the named tester group (medical students, through TestFlight and the gated web app). Never turn it on for a project that anyone outside that group can reach. Drafts are never shown.
 3. **The pimp ladder** escalates until the student misses, then ends. Score = the rung reached. Partial credit applies to list questions ("name 5 causes").
 4. **Miss tagging is automatic:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`. The user never fills in a form.
 5. **No patient data (PHI), ever.** The patient log stores a diagnosis label, rotation and date only. Free-text inputs must warn on, and block, anything resembling names, dates of birth, medical record numbers, phone numbers or addresses. Do not add fields that could hold patient details.
