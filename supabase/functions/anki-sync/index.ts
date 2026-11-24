@@ -4,7 +4,7 @@
  *
  *   { op: 'pull' } -> { note_ids, actions, tag_note_ids }
  *     The notes linked to scripts the student may see (domain rule 2), the
- *     actions not yet applied, and the notes that should carry #Rounds::missed
+ *     actions not yet applied, and the notes that should carry #PimpMe::missed
  *     (AnkiHub updates wipe it, so the add-on puts it back every sync).
  *   { op: 'push', cards, applied } -> { ok, cards }
  *     Replaces the student's card statistics and marks applied actions.
@@ -17,7 +17,7 @@ import { AnkiSyncRequestSchema, DeviceTokenSchema, linkedCardStats } from '@roun
 import { CORS, admin, json, log, readBody, sha256 } from '../_shared/anki/http.ts';
 
 const NOT_CONNECTED =
-  'This Anki is not connected to Rounds. Get a code in Rounds: Settings → Anki.';
+  'This Anki is not connected to PimpMe. Get a code in PimpMe: Settings → Anki.';
 
 async function linkedNoteIds(): Promise<number[]> {
   const { data, error } = await admin.rpc('anki_linked_notes');
@@ -43,7 +43,7 @@ Deno.serve(async (request) => {
   const parsed = AnkiSyncRequestSchema.safeParse(await readBody(request));
   if (!parsed.success) {
     log({ event: 'anki-sync', refused: true });
-    return json(400, { error: 'Rounds could not read this sync. Update the add-on.' });
+    return json(400, { error: 'PimpMe could not read this sync. Update the add-on.' });
   }
   const body = parsed.data;
 
@@ -104,7 +104,7 @@ Deno.serve(async (request) => {
   } catch (e) {
     log({ event: 'anki-sync', op: body.op, error: String(e) });
     return json(500, {
-      error: 'Rounds had a problem with this sync. It will try again next time.',
+      error: 'PimpMe had a problem with this sync. It will try again next time.',
     });
   }
 });

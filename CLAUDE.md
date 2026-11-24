@@ -1,6 +1,6 @@
-# CLAUDE.md — Rounds
+# CLAUDE.md — PimpMe (repo: Rounds)
 
-Rounds is a voice-first "pimping" trainer for medical students. It quizzes students the way attendings do on rounds: rapid, escalating, out loud. All content is built on structured **illness scripts**. Full product spec: `docs/PRODUCT.md`. Read it before starting any feature.
+PimpMe (formerly Rounds, pimpme.app) is a voice-first "pimping" trainer for medical students. It quizzes students the way attendings do on rounds: rapid, escalating, out loud. All content is built on structured **illness scripts**. Full product spec: `docs/PRODUCT.md`. Read it before starting any feature.
 
 ## Current stage
 
@@ -42,8 +42,8 @@ pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm content:approve <id> --by "Name, role"`: record a medical reviewer's approval. Only on the reviewer's explicit sign-off; never run it yourself. See `content/README.md`
 - `pnpm stats`: usage report per student on the local database: days used, days in a row, sessions, rungs, flags, last 14 days (`--all` includes test accounts)
 - `pnpm anki:linker:install`: copy the Rounds linker add-on into Anki on this computer (restart Anki; Tools → Rounds: link scripts). `pnpm content:link-anki <links.json> [--dry-run]`: write the links it saved into `content/scripts` as `anki_refs` (ids and rungs only)
-- `pnpm anki:addon:install`: copy the student add-on into Anki on this computer, pointed at the local stack (restart Anki; Tools → Rounds). `pnpm anki:addon:build [--hosted]`: pack it as a `.ankiaddon` in `packages/anki-addon/dist` (local stack, or `rounds-dev` with `--hosted`). `pnpm anki:test` runs both add-ons' Python tests
-- `pnpm anki:queue <script-id> [rung] [--tag]`: queue an unsuspend (or `#Rounds::missed` tag) action on the local database for the most recently connected Anki, without playing a session (the result screen's row and automatic miss tags do the same, M3.4)
+- `pnpm anki:addon:install`: copy the student add-on into Anki on this computer, pointed at the local stack (restart Anki; Tools → PimpMe). `pnpm anki:addon:build [--hosted]`: pack it as a `.ankiaddon` in `packages/anki-addon/dist` (local stack, or `rounds-dev` with `--hosted`). `pnpm anki:test` runs both add-ons' Python tests
+- `pnpm anki:queue <script-id> [rung] [--tag]`: queue an unsuspend (or `#PimpMe::missed` tag) action on the local database for the most recently connected Anki, without playing a session (the result screen's row and automatic miss tags do the same, M3.4)
 - `pnpm content:flags`: list the "This is wrong" flags students sent, by script and question (local database)
 - `pnpm content:seed`: regenerate `supabase/seed.sql` from the test fixtures plus approved scripts (then `pnpm db:reset`)
 - `pnpm content:push [--preview] [--dry-run]`: send approved and in-review scripts (never fixtures or drafts) to the linked hosted project. Changes hosted data: get the developer's OK first
@@ -77,6 +77,7 @@ Visual guidance lives in `docs/design/`. Read `docs/design/DESIGN.md` before bui
 - **The mockups, wireframes and vision video are finished, and they are the target.** The app must match them. Don't edit `docs/design/` or `apps/video` unless the developer asks. If the app and a mockup disagree, change the app. If a mockup seems wrong or can't be built as drawn, stop and ask rather than diverging.
 - Structure and behaviour: `docs/design/png/wireframes/` (18 screens with numbered notes; 16–18 are the later-stage Teams feature).
 - Look and feel: `docs/design/png/mockups/` (14 in dark mode, 7 in light).
+- Brand, website, web app frame, Settings → Help and legal, Send feedback: `docs/design/site/` and `docs/design/png/site/`. Where an older mockup's copy differs from the brand board ("Missed on…", "Who's asking?"), the brand board wins (DESIGN.md → Brand).
 - Gamification rules (rounds, shifts, rank, mastery) are in DESIGN.md → Progression. Don't add mechanics beyond those. Teams is Stage 5: don't build it before then.
 - Theme values come only from `docs/design/tokens.json` → `packages/shared/theme` (a test keeps them in sync). No raw hex in components.
 - App building blocks live in `apps/mobile/src/ui/` (text styles, buttons, ladder, progress pieces). Reuse them before adding new ones.

@@ -1,6 +1,6 @@
 /**
  * Settings → Anki (wireframe 12, note 1; M3.3). Connect Anki shows a one-time
- * code for the Rounds add-on: no password is typed into Anki. While the code
+ * code for the PimpMe add-on: no password is typed into Anki. While the code
  * shows, the panel checks every few seconds and turns into the connected
  * state once the add-on claims it. The connected state and Disconnect aren't
  * drawn; they follow the Account screen's patterns.
@@ -30,7 +30,7 @@ interface Code {
 }
 
 function messageFor(e: unknown): string {
-  if (e instanceof Error && isUnreachable(e)) return "Can't reach Rounds. Check your connection.";
+  if (e instanceof Error && isUnreachable(e)) return "Can't reach PimpMe. Check your connection.";
   return 'Something went wrong. Try again.';
 }
 
@@ -124,13 +124,13 @@ export function AnkiSettings() {
           Anki connected
         </Txt>
         <Txt variant="small" tone="text2" style={styles.lineTight}>
-          {lastSyncedLabel(connection.lastSyncAt, new Date())}. Anki syncs with Rounds when you open
+          {lastSyncedLabel(connection.lastSyncAt, new Date())}. Anki syncs with PimpMe when you open
           or close it.
         </Txt>
         {confirming ? (
           <>
             <Txt variant="body" style={styles.line}>
-              Anki stops syncing with Rounds. Cards already changed stay as they are.
+              Anki stops syncing with PimpMe. Cards already changed stay as they are.
             </Txt>
             <Button
               variant="line"
@@ -165,7 +165,7 @@ export function AnkiSettings() {
     <Panel>
       <Txt variant="body">See what you missed on rounds in your Anki.</Txt>
       <Txt variant="small" tone="text2" style={styles.lineTight}>
-        For Anki on a computer. Rounds reads card ids, never card text.
+        For Anki on a computer. PimpMe reads card ids, never card text.
       </Txt>
       <Button
         label="Connect Anki"
@@ -177,7 +177,7 @@ export function AnkiSettings() {
       {code && !expired && (
         <View accessibilityLiveRegion="polite">
           <Txt variant="meta" tone="text2" style={styles.line}>
-            {'Install the Rounds add-on, then enter this code: '}
+            {'Install the PimpMe add-on, then enter this code: '}
             <Txt
               variant="meta"
               weight="bodySemi"

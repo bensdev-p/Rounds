@@ -1,7 +1,7 @@
 {
-  "name": "Rounds",
-  "short_name": "Rounds",
-  "description": "Get asked here first.",
+  "name": "PimpMe",
+  "short_name": "PimpMe",
+  "description": "Get pimped here first.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",

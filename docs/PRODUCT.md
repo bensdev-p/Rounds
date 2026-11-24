@@ -1,4 +1,4 @@
-# Rounds — Product Spec
+# PimpMe — Product Spec
 
 ## One-liner
 A voice-first trainer that quizzes ("pimps") medical students the way attendings do on rounds. It's built on structured illness scripts, connects to Anki, and ties study back to the real patients students see.
@@ -65,9 +65,9 @@ A possible extension, not decided: open the next session on the same script with
 
 ## Anki bridge (Stage 3)
 A Python Anki add-on that:
-- signs in to the user's Rounds account,
+- signs in to the user's PimpMe account,
 - uploads review statistics for cards that have `anki_refs`,
-- downloads actions: unsuspend card IDs, add tag `#Rounds::missed`,
+- downloads actions: unsuspend card IDs, add tag `#PimpMe::missed`,
 - never uploads card content.
 
 ## Platforms
@@ -106,11 +106,11 @@ Content review runs alongside development and never blocks it. It is a release r
 Oral presentation coach · virtual patients · crowdsourced rotation guides · polished Anki review tab.
 
 ## Name
-Working name **Rounds**. Use "Pimp me" as the in-app button label, not the brand.
+**PimpMe** (pimpme.app), decided 24 Nov 2026; the working name until then was Rounds. The brand leans into the word students already use and is aimed at students, not school admin. "Pimp me" is the main button in the app and on the site. Brand, voice and lines: `docs/design/DESIGN.md` → Brand. The repo, the bundle id (`com.ben.rounds`) and the code's package names keep "Rounds".
 
 ## Recommendations (not decided)
 Suggestions that came out of making the vision video (November 2026). **None of these are requirements.** Don't build or design toward them unless the developer says so; raise them when the related work comes up.
 
 - **Sell the morning.** The moment students dread is being asked on morning rounds. A three-minute warm-up on yesterday's logged patients, before rounds, may be a stronger habit than the evening review. The video's line for this is "Get asked here first."
-- **Show the reviewer in the session.** "Reviewed by Dr. J. Patel, PGY-3" currently appears only on the script page. Showing it with the question is the reason to trust Rounds over a general chatbot.
-- **Revisit the word "pimp".** The Name section keeps it on the button only, and VIDEO.md bans it from marketing. Some schools treat the practice as mistreatment, so the button label may matter for school licenses (Stage 5). "Ask me" is the neutral option.
+- **Show the reviewer in the session.** "Reviewed by Dr. J. Patel, PGY-3" currently appears only on the script page. Showing it with the question is the reason to trust PimpMe over a general chatbot.
+- **Revisit the word "pimp".** Settled 24 Nov 2026: the brand is PimpMe (see Name).

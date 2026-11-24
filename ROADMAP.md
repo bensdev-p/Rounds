@@ -56,11 +56,11 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5) | Done |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5). "Who's pimping?" (M4.1, brand board) | Done |
 | Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
-| Result + miss card | 07 | result | Matches (M1.2). Anki row: Unsuspend N Anki cards, queued state, Connect Anki (M3.4); flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
+| Result + miss card | 07 | result | Matches (M1.2). Miss label "Pimped on management" (M4.1, brand board; also on Review). Anki row: Unsuspend N Anki cards, queued state, Connect Anki (M3.4); flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
 | Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5). No linked-card count: not drawn (M3.2) | Done |
@@ -73,6 +73,10 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki first, as drawn: Connect Anki, one-time code, connected state and Disconnect (M3.3, connected state not drawn) | Done |
 | Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code waits for SMTP on the hosted project | Done |
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
+| App icon, name | — | site/brand | PimpMe, the raised hand on amber (M4.1) | Done |
+| Settings → Help and legal, Send feedback | — | site/settings-legal, site/send-feedback | Not built | M4.5 |
+| Website (Home, How it works, Anki, FAQ, Privacy, Terms, Support, Daily pimp) | — | site/* (dark; light derived) | Not built | M4.3 |
+| Web app frame (desktop browser) | — | site/webapp-home, site/webapp-session | Not built | M4.4 |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
 ---

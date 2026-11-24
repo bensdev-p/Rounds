@@ -145,7 +145,7 @@ export default function PimpHome() {
         </Txt>
         <View style={[styles.divider, { backgroundColor: c.line }]} />
         <Txt variant="h3" style={styles.askHead}>
-          {"Who's asking?"}
+          {"Who's pimping?"}
         </Txt>
         <Segmented
           label="Attending persona"

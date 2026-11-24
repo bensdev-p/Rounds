@@ -121,7 +121,7 @@ describe('phiWarning', () => {
   it('describes what was found', () => {
     expect(phiWarning(detectPhi('DKA'))).toBeNull();
     expect(phiWarning(detectPhi('MRN 1234567, DOB 1/2/1990'))).toBe(
-      'This looks like it contains a medical record number, a date of birth. Rounds never stores patient details. Remove it and try again.',
+      'This looks like it contains a medical record number, a date of birth. PimpMe never stores patient details. Remove it and try again.',
     );
   });
 });

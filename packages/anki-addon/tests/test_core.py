@@ -78,6 +78,16 @@ class FakeCollection:
                         changed += 1
                 return Count(changed)
 
+            def bulk_remove(self, nids, tag):
+                changed = 0
+                for nid in nids:
+                    (tags,) = col.db.all("select tags from notes where id = ?", nid)[0]
+                    kept = [t for t in tags.split() if t.lower() != tag.lower()]
+                    if len(kept) != len(tags.split()):
+                        col.db.execute("update notes set tags = ? where id = ?", f" {' '.join(kept)} " if kept else "", nid)
+                        changed += 1
+                return Count(changed)
+
         self.sched = Sched()
         self.tags = Tags()
 
@@ -206,9 +216,21 @@ class ApplyTest(unittest.TestCase):
 
     def test_tag_check_ignores_case(self):
         col = collection()
-        col.note(400, "#rounds::MISSED")
+        col.note(400, "#pimpme::MISSED")
         plan = core.plan_changes(col.db, {"actions": [], "tag_note_ids": [400]})
         self.assertTrue(plan.empty)
+
+    def test_swaps_the_old_rounds_tag(self):
+        col = collection()
+        col.note(500, "#AK_Step2_v12::#Subjects::GI #Rounds::missed")
+        col.note(600, "#rounds::MISSED")
+        plan = core.plan_changes(col.db, {"actions": [], "tag_note_ids": [500]})
+        self.assertEqual(sorted(plan.untag_old), [500, 600])
+        _, result = core.apply_plan(col, plan)
+        self.assertEqual(col.tags_of(500), ["#AK_Step2_v12::#Subjects::GI", core.MISSED_TAG])
+        self.assertEqual(col.tags_of(600), [])  # the server no longer lists it
+        self.assertEqual(result.tagged, 1)
+        self.assertTrue(core.plan_changes(col.db, {"actions": [], "tag_note_ids": [500]}).empty)
 
     def test_notes_this_collection_lacks_report_zero(self):
         col = collection()
@@ -234,7 +256,7 @@ class ApplyTest(unittest.TestCase):
     def test_summary_names_the_counts(self):
         self.assertEqual(
             core.summary(core.Result(applied=[], unsuspended=3, tagged=1)),
-            "Rounds: unsuspended 3 cards and tagged 1 note #Rounds::missed. Edit → Undo puts them back.",
+            "PimpMe: unsuspended 3 cards and tagged 1 note #PimpMe::missed. Edit → Undo puts them back.",
         )
         self.assertIsNone(core.summary(core.Result(applied=[], unsuspended=0, tagged=0)))
 

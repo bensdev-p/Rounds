@@ -98,17 +98,17 @@ describe('missedRows', () => {
 
 describe('missSubtitle', () => {
   it("uses the miss card's label", () => {
-    expect(missSubtitle({ question: single, matched: [] })).toBe('Missed on management');
+    expect(missSubtitle({ question: single, matched: [] })).toBe('Pimped on management');
   });
 
   it('names the list items left out', () => {
-    expect(
-      missSubtitle({ question: list, matched: ['glimmer exposure', 'family history'] }),
-    ).toBe('Missed night shift work, low blorp diet');
+    expect(missSubtitle({ question: list, matched: ['glimmer exposure', 'family history'] })).toBe(
+      'Missed night shift work, low blorp diet',
+    );
   });
 
   it('falls back to the label when nothing on the list was named', () => {
-    expect(missSubtitle({ question: list, matched: [] })).toBe('Missed on next most common');
+    expect(missSubtitle({ question: list, matched: [] })).toBe('Pimped on next most common');
   });
 
   it('keeps a long list to one line', () => {
@@ -192,7 +192,10 @@ describe('comparisonRows', () => {
   });
 
   it('gives up when a side has no rows or the labels differ', () => {
-    const bare = { ...quellan!, confused_with: [{ script_id: zorblax!.id, how_to_tell_apart: 'x' }] };
+    const bare = {
+      ...quellan!,
+      confused_with: [{ script_id: zorblax!.id, how_to_tell_apart: 'x' }],
+    };
     expect(comparisonRows(zorblax!, bare)).toBeNull();
     const link = quellan!.confused_with[0]!;
     const other = {
@@ -215,9 +218,7 @@ describe('patientsToPractise', () => {
   it('keeps scripts not yet pimped today, once each', () => {
     const logs = [log('1', 'a', 8), log('2', null, 9), log('3', 'b', 10), log('4', 'a', 11)];
     expect(patientsToPractise(logs, [], NOW).map((l) => l.id)).toEqual(['1', '3']);
-    expect(patientsToPractise(logs, [ladder('a', 14, 12, 2)], NOW).map((l) => l.id)).toEqual([
-      '3',
-    ]);
+    expect(patientsToPractise(logs, [ladder('a', 14, 12, 2)], NOW).map((l) => l.id)).toEqual(['3']);
   });
 });
 

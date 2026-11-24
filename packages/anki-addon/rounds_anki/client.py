@@ -1,4 +1,4 @@
-"""HTTP calls to Rounds' Edge Functions (M3.3). Standard library only.
+"""HTTP calls to PimpMe's Edge Functions (M3.3). Standard library only.
 
 The add-on never holds a Supabase key: it sends the one-time code to
 `anki-pair`, then its device token to `anki-sync` in `x-rounds-device`.
@@ -15,7 +15,7 @@ USER_AGENT = "RoundsAnki/0.1"
 
 
 class RoundsError(Exception):
-    """Something the student should read, from Rounds or about reaching it."""
+    """Something the student should read, from PimpMe or about reaching it."""
 
 
 class NotConnected(RoundsError):
@@ -47,7 +47,7 @@ class Client:
             except Exception:
                 message = None
             if e.code == 401 and token:
-                raise NotConnected(message or "This Anki is not connected to Rounds.") from e
+                raise NotConnected(message or "This Anki is not connected to PimpMe.") from e
             raise RoundsError(message or f"Rounds answered with error {e.code}.") from e
         except (urllib.error.URLError, TimeoutError, OSError) as e:
             raise RoundsError("Couldn't reach Rounds. Check your internet connection.") from e

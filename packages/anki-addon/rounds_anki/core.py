@@ -1,7 +1,7 @@
-"""What the Rounds add-on does to a collection, without Anki's GUI (M3.3).
+"""What the PimpMe add-on does to a collection, without Anki's GUI (M3.3).
 
 Pure enough to test with a fake collection (tests/test_core.py): it needs only
-`col.db` (all/list), `col.sched` (today, unsuspend_cards), `col.tags.bulk_add`
+`col.db` (all/list), `col.sched` (today, unsuspend_cards), `col.tags.bulk_add` and `bulk_remove`
 and Anki's custom undo entries.
 
 Reads ids, tags and scheduling numbers only. Never reads note fields (card
@@ -13,8 +13,10 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 from typing import Any, Iterable
 
-MISSED_TAG = "#Rounds::missed"
-UNDO_LABEL = "Rounds: apply changes"
+MISSED_TAG = "#PimpMe::missed"
+# The tag from before the rebrand (24 Nov 2026). Each sync swaps it for MISSED_TAG.
+OLD_MISSED_TAG = "#Rounds::missed"
+UNDO_LABEL = "PimpMe: apply changes"
 # SQLite caps bound variables; ids go in as literals in chunks of this size.
 CHUNK = 400
 
@@ -69,6 +71,13 @@ def _suspended_cards(db: Any, note_ids: list[int]) -> list[int]:
     return [int(c) for c in out]
 
 
+def _notes_with_tag(db: Any, tag: str) -> list[int]:
+    wanted = tag.lower()
+    # LIKE narrows the scan; the exact, case-insensitive check is below.
+    rows = db.all("select id, tags from notes where tags like ?", f"%{tag}%")
+    return [int(nid) for nid, tags in rows if wanted in (t.lower() for t in tags.split())]
+
+
 def _notes_without_tag(db: Any, note_ids: list[int], tag: str) -> list[int]:
     out: list[int] = []
     wanted = tag.lower()
@@ -85,12 +94,15 @@ class Plan:
 
     # Per action: (action id, kind, card or note ids to change).
     actions: list[tuple[str, str, list[int]]] = field(default_factory=list)
-    # Notes that lost #Rounds::missed (AnkiHub updates wipe it).
+    # Notes that lost #PimpMe::missed (AnkiHub updates wipe it).
     retag: list[int] = field(default_factory=list)
+    # Notes still carrying the old #Rounds::missed: it comes off, and they get
+    # #PimpMe::missed if the server still lists them.
+    untag_old: list[int] = field(default_factory=list)
 
     @property
     def empty(self) -> bool:
-        return not self.retag and all(not ids for _, _, ids in self.actions)
+        return not self.retag and not self.untag_old and all(not ids for _, _, ids in self.actions)
 
 
 def plan_changes(db: Any, pull: dict[str, Any]) -> Plan:
@@ -111,6 +123,7 @@ def plan_changes(db: Any, pull: dict[str, Any]) -> Plan:
         for n in _notes_without_tag(db, [int(n) for n in pull.get("tag_note_ids", [])], MISSED_TAG)
         if n not in seen_notes
     ]
+    plan.untag_old = _notes_with_tag(db, OLD_MISSED_TAG)
     return plan
 
 
@@ -122,7 +135,7 @@ class Result:
 
 
 def apply_plan(col: Any, plan: Plan) -> tuple[Any, Result]:
-    """Applies a plan in one undo step ("Rounds: apply changes").
+    """Applies a plan in one undo step ("PimpMe: apply changes").
 
     Returns Anki's OpChanges (for CollectionOp) and what changed. Every action
     is reported back, with a count of 0 when this collection doesn't have its
@@ -143,6 +156,8 @@ def apply_plan(col: Any, plan: Plan) -> tuple[Any, Result]:
         applied.append({"id": action_id, "count": count})
     if plan.retag:
         tagged += col.tags.bulk_add(plan.retag, MISSED_TAG).count
+    if plan.untag_old:
+        col.tags.bulk_remove(plan.untag_old, OLD_MISSED_TAG)
     changes = col.merge_undo_entries(pos)
     return changes, Result(applied=applied, unsuspended=unsuspended, tagged=tagged)
 
@@ -160,4 +175,4 @@ def summary(result: Result) -> str | None:
         parts.append(f"tagged {plural(result.tagged, 'note')} {MISSED_TAG}")
     if not parts:
         return None
-    return "Rounds: " + " and ".join(parts) + ". Edit → Undo puts them back."
+    return "PimpMe: " + " and ".join(parts) + ". Edit → Undo puts them back."

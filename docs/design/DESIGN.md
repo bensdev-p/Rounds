@@ -1,6 +1,8 @@
-# Rounds design language
+# PimpMe design language
 
-Visual guidance for building the app. The mockups, wireframes and vision video are finished: they are the target the app must match, not drafts to revise. If a screen isn't covered here, follow the closest mockup and these rules rather than inventing a new pattern.
+Visual guidance for building the app and the website. The mockups, wireframes and vision video are finished: they are the target the app must match, not drafts to revise. If a screen isn't covered here, follow the closest mockup and these rules rather than inventing a new pattern.
+
+**PimpMe was called Rounds until 24 Nov 2026** (developer's decision). The app mockups, wireframes and the vision video were drawn under the old name and still say "Rounds", "Missed on…" and "Who's asking?" in places. They stay the target for layout and look. **Where their copy differs from the brand board** (`site/index.html`, see Brand below), **the brand board wins.** "Rounds" as hospital vocabulary (Today's rounds, Rounds done) is unchanged.
 
 ## What's in this folder
 
@@ -12,6 +14,7 @@ Visual guidance for building the app. The mockups, wireframes and vision video a
 | `mockups/index.html`, `mockups/light.html`, `mockups/rounds.css` | Source for the mockups. The CSS is a readable reference for exact values. |
 | `VIDEO.md` | Spec for the animated vision video (Remotion, `apps/video`) |
 | `apps/video/src/screens/` (outside this folder) | Seven screens already recreated in React from these tokens for the video: Home, live session, list feedback, result (miss and clean run), Log, Review, Promotion. They are web React, not React Native, so use them as a worked reference for values and structure, not as code to import. |
+| `site/index.html`, `png/site/` | The PimpMe brand board, the website pages (desktop 1440 and phone 390, dark), the web app in a desktop browser, and two in-app pieces (Settings → Help and legal, Send feedback). **Use these for the site, the web app frame and those two screens.** Light mode for the site is derived from the tokens; there are no light site mockups. |
 | `tokens.json` | Colours, type, spacing, radii, motion. Import into `packages/shared/theme`. |
 | `fonts/` | Archivo and Archivo Narrow (also on npm as `@expo-google-fonts/archivo` and `@expo-google-fonts/archivo-narrow`) |
 
@@ -110,6 +113,7 @@ Rules:
 - Text on amber is always `onSignal` (navy), never white.
 - Green and coral carry meaning only. A coral bar means "weakest", a coral chip means "you confuse this one."
 - Dark mode is the default. Light mode uses the same layouts and only swaps tokens.
+- **On the website only:** amber may fill one whole block per page, for the closing call to action (brand board). The app keeps the rules above.
 
 ## Type
 
@@ -173,15 +177,25 @@ The video also uses slow camera push-ins and a touch dot where the student taps.
 
 Everything else is plain and quick: sheets slide at 240 ms, no entrance animations on lists, no looping decoration. The voice waveform is the only continuous animation, and only while the mic is live. Respect Reduce Motion: swap the animations for instant state changes.
 
+## Brand
+
+The name is **PimpMe**, written as the wordmark **pimp me.** (Archivo Narrow 700, lower case, with an amber period: the pager light, "you're up"). The domain is pimpme.app.
+- **The mark is a raised hand:** volunteering to be asked. A navy hand on an amber tile is the app icon; a navy tile with an amber hand is the alternate. The hand is Lucide's `hand`, stroke 2.2.
+- **The idea:** "pimping" is medicine's own word for an attending's rapid questions. PimpMe uses it on the student's side. The name is the button: asking to be pimped is the whole product.
+- **Lines:** "Get pimped here first." Also: "Pimp yourself before rounds does.", "Pimping without the humiliation.", "Raise your hand."
+
 ## Voice and copy
 
 - The app speaks plainly. The **attending persona** has the personality, and it shows up only in quoted lines during sessions.
-- Buttons say what happens: "Pimp me", "Go again", "Save", "Drill this pair". The same action keeps the same name everywhere.
+- Buttons say what happens: "Pimp me", "Go again", "Save", "Drill this pair". The same action keeps the same name everywhere, the site's main button included.
+- Use the word the way the wards do: an attending asking hard questions. "Pimped on management", "Who's pimping?", "The pimp ladder", "Daily pimp".
+- Stay on the student's side. Tease attendings, never students. Let the personas carry the edge; the app itself stays plain and kind.
+- Keep every medical fact serious and sourced to a reviewed script.
 - Errors say what's wrong and how to fix it: "This looks like a patient's name. Remove 'Mr. Alvarez' and keep only the diagnosis."
 - Empty states invite an action: "Log a patient to practise on them tonight."
 - No guilt: missed days are never called out. No confetti, no mascots, no sparkle icons.
-- Outside the app (video, store listing, site), the line is "Get asked here first." The longer form is "Practice the questions before rounds ask them." Neither uses the word "pimp".
 - Hospital vocabulary is the theme: rounds, shifts, post-call, ranks. Use it plainly; don't pun on top of it.
+- **Never:** anything from the word's street meaning (no hats, canes, chains, cash or sexual jokes); humiliation or hazing ("you got owned", leaderboards of shame); the word in clinical or school-facing material without checking with the developer first.
 
 ## Avoid
 

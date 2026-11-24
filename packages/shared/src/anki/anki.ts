@@ -103,7 +103,7 @@ export const AnkiPullResponseSchema = z.strictObject({
   note_ids: z.array(AnkiIdSchema),
   /** Actions not yet applied, oldest first. */
   actions: z.array(AnkiActionSchema),
-  /** Notes that should carry #Rounds::missed (AnkiHub updates wipe it). */
+  /** Notes that should carry #PimpMe::missed (AnkiHub updates wipe it). */
   tag_note_ids: z.array(AnkiIdSchema),
 });
 export type AnkiPullResponse = z.infer<typeof AnkiPullResponseSchema>;

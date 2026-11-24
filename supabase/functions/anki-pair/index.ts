@@ -33,7 +33,7 @@ import {
   sha256,
 } from '../_shared/anki/http.ts';
 
-const WRONG_CODE = 'That code is wrong or has expired. Get a new one in Rounds: Settings → Anki.';
+const WRONG_CODE = 'That code is wrong or has expired. Get a new one in PimpMe: Settings → Anki.';
 
 async function start(request: Request): Promise<Response> {
   const userId = await callerId(request);
@@ -58,7 +58,7 @@ async function start(request: Request): Promise<Response> {
 async function claim(request: Request, body: unknown): Promise<Response> {
   const parsed = AnkiClaimRequestSchema.safeParse(body);
   const code = parsed.success ? normalisePairingCode(parsed.data.code) : null;
-  if (!code) return json(400, { error: 'Enter the 8-character code from Rounds.' });
+  if (!code) return json(400, { error: 'Enter the 8-character code from PimpMe.' });
 
   const ipHash = await callerIpHash(request);
   const since = new Date(Date.now() - CLAIM_FAILURE_WINDOW_S * 1000).toISOString();
