@@ -38,7 +38,7 @@ const FAQ: { q: string; a: ReactNode[] }[] = [
   {
     q: 'Do I have to answer out loud?',
     a: [
-      'No. Voice is the default because it’s closest to rounds, but you can switch to typing in any session, and text works everywhere.',
+      'No, but you should. Knowing the answer and saying it with someone waiting are different skills, and rounds tests the second one. In the library or on the shuttle? Switch to typing in any session.',
     ],
   },
   {
@@ -60,25 +60,25 @@ const FAQ: { q: string; a: ReactNode[] }[] = [
   {
     q: 'What happens if I miss a day?',
     a: [
-      'Nothing bad. One post-call day a week is applied for you, and if you miss more, your count of shifts quietly starts again. Your rank never goes down.',
+      'Nothing. You were post-call, we know. One day off a week is applied for you, and if you miss more, your count of shifts quietly starts again. Your rank never goes down. Nobody gets a guilt notification.',
     ],
   },
   {
     q: 'Which rotations are covered?',
     a: [
-      'The first scripts are for internal medicine, with some for emergency medicine, surgery, pediatrics, family medicine, neurology and psychiatry. More rotations are coming.',
+      'Medicine first, because that’s where the pimping is heaviest. Some scripts also cover emergency medicine, surgery, pediatrics, family medicine, neurology and psychiatry, and more are coming.',
     ],
   },
   {
     q: 'Is there an Android app?',
     a: [
-      'Not yet. The iPhone app comes first. On Android you’ll be able to use PimpMe in the browser.',
+      'Not yet. The iPhone app came first, sorry. On Android you’ll be able to use PimpMe in the browser.',
     ],
   },
   {
     q: 'Can I use it on my computer?',
     a: [
-      'Yes, in the web app, which is in testing now. The Anki add-on runs in Anki on Windows, macOS and Linux.',
+      'Yes, in the web app, which is in testing now. Same attendings, bigger screen. The Anki add-on runs in Anki on Windows, macOS and Linux.',
     ],
   },
 ];
@@ -90,7 +90,7 @@ export default function Faq() {
         <div className="stack-lg">
           <h1 className="t-page">Questions</h1>
           <p className="body t2 measure">
-            The short answers. Still stuck?{' '}
+            The short answers, no lecture. Still stuck?{' '}
             <Link className="link" href="/support">
               Contact support
             </Link>

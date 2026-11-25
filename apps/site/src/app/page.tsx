@@ -14,11 +14,11 @@ export default function Home() {
           <div className="stack-lg">
             <p className="eyebrow">For third- and fourth-year medical students</p>
             <h1 className="t-hero">Get pimped here first.</h1>
-            <p className="lede">Your attending is going to ask. Practice before they do.</p>
+            <p className="lede">Your attending is going to ask. Hear it here first.</p>
             <p className="body t2 measure">
-              Pimping without the humiliation. An AI attending asks out loud, one rung harder each
-              time, until you miss. Nobody&apos;s watching, nothing&apos;s graded but you, and the
-              miss is waiting in your review tonight.
+              All of the pimping, none of the audience. An AI attending asks out loud, one rung
+              harder each time, until you fall off. No resident smirking, no &ldquo;anyone
+              else?&rdquo; Just you, the ladder, and tonight&apos;s review.
             </p>
             <GetStarted />
           </div>
@@ -62,7 +62,8 @@ export default function Home() {
         <div className="wrap">
           <h2 className="h1">One day on the wards</h2>
           <p className="body t2 mt12 measure">
-            Three short habits that fit around rounds, not on top of them.
+            Five minutes before pre-rounding, ten seconds on the wards, twelve in bed pretending
+            you&apos;re not on your phone.
           </p>
           <div className="cols mt40">
             <div className="stack">
@@ -70,8 +71,8 @@ export default function Home() {
               <p className="meta">Morning, about five minutes</p>
               <h3 className="h2">Get pimped</h3>
               <p className="body t2">
-                Before rounds, the attending pimps you on your rotation or a patient you logged.
-                Climb until you miss.
+                Get pimped on your rotation or yesterday&apos;s patient while the coffee&apos;s
+                still hot. Climb until you miss.
               </p>
               <div style={{ paddingTop: 8 }}>
                 <div className="strip" aria-label="Rungs 1 to 4 passed, missed on 5">
@@ -89,7 +90,8 @@ export default function Home() {
               <p className="meta">On the wards, ten seconds</p>
               <h3 className="h2">Log a patient</h3>
               <p className="body t2">
-                Save the diagnosis, never the patient. Tonight it becomes a short ladder of its own.
+                Save the diagnosis, never the patient. Tonight you get pimped on it, so the next
+                time it rolls in, you&apos;re ready.
               </p>
               <div
                 style={{ paddingTop: 8, display: 'flex', gap: 8, alignItems: 'center' }}
@@ -106,8 +108,8 @@ export default function Home() {
               <p className="meta">Evening, about twelve minutes</p>
               <h3 className="h2">Review what you missed</h3>
               <p className="body t2">
-                Today&apos;s misses, the script behind each one, and the Anki cards to match. It
-                ends instead of scrolling forever.
+                Today&apos;s misses, the script behind each one, and the Anki cards to match. Then
+                it ends. Go to sleep.
               </p>
               <div style={{ paddingTop: 8, display: 'flex', alignItems: 'center', gap: 12 }}>
                 <span className="mark" />
@@ -126,8 +128,9 @@ export default function Home() {
           <div className="stack-lg">
             <h2 className="h1">Answer out loud, like it&apos;s real.</h2>
             <p className="body t2 measure">
-              PimpMe asks the way an attending does, and you answer the way you would at the
-              bedside. The mic opens when the question ends. Rather type? Text works everywhere.
+              Typing an answer is easy. Saying it out loud with someone waiting is the hard part, so
+              that&apos;s what you practise. The mic opens when the question ends. In the library?
+              Text works everywhere.
             </p>
             <div className="measure">
               <h3 className="h3">Who&apos;s pimping?</h3>
@@ -137,8 +140,8 @@ export default function Home() {
                 <span className="on">Internist</span>
               </div>
               <p className="small mt12">
-                Three ways to get pimped: the Teacher waits, the Internist asks why, the Surgeon
-                gives you ten seconds.
+                The Teacher waits. The Internist asks why, then why again. The Surgeon gives you ten
+                seconds, then scrubs out.
               </p>
             </div>
           </div>
@@ -187,8 +190,9 @@ export default function Home() {
           <div className="stack-lg first-on-phone">
             <h2 className="h1">Your misses, waiting in Anki.</h2>
             <p className="body t2 measure">
-              Connect the PimpMe add-on and a miss unsuspends the matching AnKing cards, so they
-              turn up in your next review. PimpMe reads card ids, never card text.
+              Connect the PimpMe add-on and every miss unsuspends the matching AnKing cards. No more
+              digging through 30,000 cards for the one you blanked on. PimpMe reads card ids, never
+              card text.
             </p>
             <Link className="link" href="/anki">
               How the Anki add-on works <ChevronRight aria-hidden="true" />
