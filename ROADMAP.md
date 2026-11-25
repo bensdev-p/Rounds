@@ -52,6 +52,10 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **Stage 4 planned (24 Nov 2026):** Rounds becomes PimpMe at pimpme.app (domain bought); a website, the web app, email, a polish pass and medical-student testers, then an exploration of student-made ladders. Payments, the App Store and Android move to Stage 5. Next: M4.1, the rebrand.
 
+**M4.1 (rebrand to PimpMe):** the brand board and site mockups are in `docs/design/site` (PNGs in `png/site`); DESIGN.md has Brand and the new Voice and copy, and the brand board wins over older mockup copy. The app is named PimpMe with the raised-hand icon (navy on amber), Home says "Who's pimping?", and misses read "Pimped on management" on the result screen and Review. The add-on is Tools → PimpMe and tags `#PimpMe::missed`, swapping the old `#Rounds::missed` on its next sync. The Anki functions' messages and the sign-in emails say PimpMe. Bundle id, repo and package names keep "Rounds". Deployed to `rounds-dev` (`anki-pair`, `anki-sync`); build 5 on TestFlight. Tried by the developer on the phone and in Anki on his PC. **M4.1 is complete.** Next: M4.2, domain and email.
+
+**M4.2 (domain and email):** pimpme.app was bought through Cloudflare Registrar, so its DNS was already on Cloudflare. support@pimpme.app forwards to the developer through Cloudflare Email Routing. Sign-in codes go out through Resend over SMTP from "PimpMe" <support@pimpme.app>, with SPF, DKIM and DMARC (`p=none`); `config push` sent the SMTP settings, the 6-digit code templates and 30 code emails an hour to `rounds-dev` (HOSTING.md → Email). Email sign-in works on TestFlight build 5, and the code landed in the Gmail inbox (25 Nov 2026). **Not yet checked:** a school `.edu` inbox (the developer had none to hand); carried to M4.6, before students are invited. **M4.2 is complete** apart from that check. Next: M4.3, the website.
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
@@ -71,7 +75,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki sync status row, hidden until connected (M3.4) | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
 | Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki first, as drawn: Connect Anki, one-time code, connected state and Disconnect (M3.3, connected state not drawn) | Done |
-| Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code waits for SMTP on the hosted project | Done |
+| Account | — | — | Built (M2.3, not drawn): email code, Apple (iPhone build), sign out, delete. On TestFlight (M2.6): Apple and delete work; email code works since M4.2 (Resend) | Done |
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
 | App icon, name | — | site/brand | PimpMe, the raised hand on amber (M4.1) | Done |
 | Settings → Help and legal, Send feedback | — | site/settings-legal, site/send-feedback | Not built | M4.5 |
@@ -254,7 +258,7 @@ Facts to plan around:
 
 **Decided (developer, 24 Nov 2026):**
 - **Rebrand to PimpMe**, aimed at students rather than school admin. The brand, the site and the store copy use the word "pimp" openly. This replaces the old rule that kept it inside the app. The guide is the brand-and-site mockup (`pimpme.html`, dark), which goes into `docs/design/site/` in M4.1.
-- **Domain:** pimpme.app (bought at Squarespace). DNS and hosting on Cloudflare (Pages, free); sign-in codes sent through Resend over SMTP; incoming mail to the domain forwarded by Cloudflare Email Routing.
+- **Domain:** pimpme.app (bought through Cloudflare Registrar). DNS and hosting on Cloudflare (Pages, free); sign-in codes sent through Resend over SMTP; incoming mail to the domain forwarded by Cloudflare Email Routing.
 - **Testers see the preview:** the named tester group (medical students) uses `rounds-dev` and sees `in_review` scripts labelled "Not yet reviewed", like the developer and the reviewer (domain rule 2 updated). Anyone outside that group still sees `approved` scripts only.
 - **Light mode** for the site is derived from the tokens; there are no light site mockups.
 - **The daily pimp** is in (M4.3).
@@ -274,7 +278,7 @@ Facts to plan around:
 - **Done when:** the phone shows PimpMe with the new icon and copy, and every changed screen still matches its mockup, dark and light.
 
 ### M4.2 Domain and email
-- **DNS:** pimpme.app on Cloudflare (nameservers moved from Squarespace).
+- **DNS:** pimpme.app on Cloudflare (bought through Cloudflare Registrar, so DNS is there already).
 - **Sign-in codes:** Resend sends them from an address on pimpme.app, through SMTP on `rounds-dev`. Then the normal `config push` with the code templates (HOSTING.md → Email).
 - **Incoming mail:** support@pimpme.app forwards to the developer.
 - **Done when:** email sign-in works on the TestFlight build, and a code lands in the inbox (not spam) at Gmail and at a school `.edu` address.
@@ -306,6 +310,7 @@ Facts to plan around:
 - **Distribution:** external TestFlight (Beta App Review, the site's privacy link), plus the web app link.
 - **Usage and cost:** spending caps checked for more users; `pnpm stats` reads `rounds-dev`.
 - **Wrong-code limit:** the fix flagged "revisit before launch".
+- **School email:** a sign-in code lands in the inbox (not spam or quarantine) at a school `.edu` address, carried over from M4.2.
 - **Done when:** the first medical students are using PimpMe, and their feedback reaches the developer.
 
 ### M4.7 Student-made ladders (exploration)

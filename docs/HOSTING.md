@@ -34,7 +34,7 @@ pnpm supabase config diff
 ```bash
 pnpm supabase config push
 ```
-Sends the auth settings from `supabase/config.toml`: "Confirm email" on, anonymous sign-ins, manual linking (for Apple), the 6-digit code email templates, and Sign in with Apple with `com.ben.rounds` as the client id. The `[remotes.rounds-dev]` block at the end of `config.toml` keeps the hosted project's own pooler and storage settings, a 60 s gap between code emails, and no localhost redirect. Read the diff before saying yes.
+Sends the auth settings from `supabase/config.toml`: "Confirm email" on, anonymous sign-ins, manual linking (for Apple), the 6-digit code email templates, and Sign in with Apple with `com.ben.rounds` as the client id. The `[remotes.rounds-dev]` block at the end of `config.toml` keeps the hosted project's own pooler and storage settings, a 60 s gap between code emails, no localhost redirect, and Resend for the code emails (section 4; needs `supabase/.env`). Read the diff before saying yes.
 ```bash
 pnpm supabase secrets set ANTHROPIC_API_KEY=... DEEPGRAM_API_KEY=... GRADER_MODEL=claude-opus-5-5
 ```
@@ -49,14 +49,16 @@ Deploys `grade-answer`, `delete-account`, `speak`, `speech-token`, `anki-pair` a
 - **Deepgram** (speech): $10. Each question is voiced once per persona and speed, then cached; speech-to-text is about $0.008 a minute.
 - **Supabase**: Free plan, $0.
 
-### 4. Email (not set up yet)
-On the Free plan, Supabase's built-in email can't use custom templates, and its default sign-in email has a link, not the 6-digit code the app asks for. So `config push` is refused while `config.toml` declares the code templates. **Email sign-in doesn't work on `rounds-dev` yet** (developer's call, 14 Nov 2026); use the app without an account or with Sign in with Apple.
+### 4. Email
+Sign-in codes go out through **Resend** over SMTP from `support@pimpme.app`; mail sent to support@pimpme.app is forwarded to the developer by **Cloudflare Email Routing**. The domain was bought through Cloudflare Registrar, so its DNS is already on Cloudflare. Accounts, sign-ins and keys are the developer's.
 
-Until then, push the auth settings from a copy of `config.toml` without the `[auth.email.template.*]` sections:
-```bash
-pnpm supabase config push --workdir <folder holding supabase/config.toml without the template sections> --remote=qugvfidjzmtkrnfdokhf
-```
-To turn email on: set up SMTP (Supabase → Authentication → Emails → SMTP Settings; for example Gmail with an app password, or Resend with a domain you own), then run the normal `pnpm supabase config push`.
+1. **Forward support@:** Cloudflare → pimpme.app → Email → Email Routing → Get started. Custom address `support`, action "Send to an email", the developer's inbox. Verify that inbox from the email Cloudflare sends, then "Add records and enable" (MX records and an SPF record on `pimpme.app`).
+2. **Resend domain:** resend.com → Domains → Add domain → `pimpme.app`. Add its records with the "Sign in to Cloudflare" button or by hand in Cloudflare → DNS → Records (an MX and an SPF TXT on `send`, a DKIM TXT on `resend._domainkey`), then Verify.
+3. **DMARC:** Cloudflare → DNS → Records → Add record: TXT, name `_dmarc`, content `v=DMARC1; p=none;`.
+4. **SMTP key:** Resend → API Keys → Create API key, "Sending access", domain `pimpme.app`. Paste it after `RESEND_SMTP_PASS=` in `supabase/.env` (gitignored; create the file if it isn't there). Never paste it into a chat.
+5. **Push:** the normal `pnpm supabase config diff` and `pnpm supabase config push` (section 2). The `[remotes.rounds-dev.auth.email.smtp]` block in `config.toml` turns on Resend (`smtp.resend.com`, port 465, user `resend`, the key as password, sender "PimpMe"), and the push sends the 6-digit code templates with it. The same block raises the limit to 30 code emails an hour; the local stack keeps 2 and Mailpit.
+
+Resend's free plan sends 100 emails a day. To check delivery, sign in with an email code on the phone and, in Gmail, open the email → ⋮ → Show original: SPF, DKIM and DMARC should all say PASS.
 
 ### 5. Content
 ```bash
