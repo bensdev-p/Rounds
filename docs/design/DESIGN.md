@@ -186,15 +186,16 @@ The name is **PimpMe**, written as the wordmark **pimp me.** (Archivo Narrow 700
 
 ## Voice and copy
 
-- The app speaks plainly. The **attending persona** has the personality, and it shows up only in quoted lines during sessions.
+- **By students, for students** (developer's decision, 25 Nov 2026). The site and the app sound like a fourth-year telling you how to survive a rotation: ward in-jokes, a little gallows humour about student life ("Then it ends. Go to sleep.", "You were post-call, we know."), and teasing aimed at attendings ("The Surgeon gives you ten seconds, then scrubs out."). The **attending personas** still carry the sharpest edge, in their quoted lines during sessions.
+- **Trust copy stays plain:** patient-details warnings and every error, anything medical or graded, sign-in and account deletion, the privacy policy and terms, Support, and the FAQ answers on mistreatment and clinical guidance.
 - Buttons say what happens: "Pimp me", "Go again", "Save", "Drill this pair". The same action keeps the same name everywhere, the site's main button included.
 - Use the word the way the wards do: an attending asking hard questions. "Pimped on management", "Who's pimping?", "The pimp ladder", "Daily pimp".
-- Stay on the student's side. Tease attendings, never students. Let the personas carry the edge; the app itself stays plain and kind.
+- Stay on the student's side. Tease attendings and ward life, never students. Edgy, never mean: the joke is on the situation, and the student is in on it.
 - Keep every medical fact serious and sourced to a reviewed script.
 - Errors say what's wrong and how to fix it: "This looks like a patient's name. Remove 'Mr. Alvarez' and keep only the diagnosis."
 - Empty states invite an action: "Log a patient to practise on them tonight."
 - No guilt: missed days are never called out. No confetti, no mascots, no sparkle icons.
-- Hospital vocabulary is the theme: rounds, shifts, post-call, ranks. Use it plainly; don't pun on top of it.
+- Hospital vocabulary is the theme: rounds, shifts, post-call, ranks. Use it the way students do; don't pun on top of it.
 - **Never:** anything from the word's street meaning (no hats, canes, chains, cash or sexual jokes); humiliation or hazing ("you got owned", leaderboards of shame); the word in clinical or school-facing material without checking with the developer first.
 
 ## Avoid
