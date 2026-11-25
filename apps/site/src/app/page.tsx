@@ -12,7 +12,6 @@ export default function Home() {
       <section className="section">
         <div className="wrap split">
           <div className="stack-lg">
-            <p className="eyebrow">For third- and fourth-year medical students</p>
             <h1 className="t-hero">Get pimped here first.</h1>
             <p className="lede">Your attending is going to ask. Hear it here first.</p>
             <p className="body t2 measure">

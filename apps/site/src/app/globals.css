@@ -263,12 +263,6 @@ button {
 .measure {
   max-width: 520px;
 }
-.eyebrow {
-  font: 700 14px/1 'Archivo Narrow';
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-2);
-}
 .strong {
   font-weight: 600;
   color: var(--text);

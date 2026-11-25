@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: { default: 'PimpMe: get pimped here first', template: '%s · PimpMe' },
   description:
-    'A pimping trainer for third- and fourth-year medical students. An AI attending asks out loud, one rung harder each time, until you miss.',
+    'A pimping trainer for medical students. An AI attending asks out loud, one rung harder each time, until you miss.',
   icons: { icon: '/favicon.png', apple: '/apple-touch-icon.png' },
   openGraph: { siteName: 'PimpMe', type: 'website' },
 };
