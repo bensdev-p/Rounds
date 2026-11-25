@@ -84,7 +84,7 @@ The publishable key is safe in the app; RLS protects the data. Never put the sec
 The site in `apps/site` is a static export served by **Cloudflare Pages** (free) from the Pages project `pimpme`. Deploys are direct uploads from the developer's PC, one per OK: there is no Git integration, so pushing to GitHub deploys nothing.
 
 1. **Sign wrangler in (once):** `pnpm --filter site exec wrangler login`. A browser opens on Cloudflare; click Allow.
-2. **Deploy:** `pnpm site:deploy`. It builds the site (and `pimpme.ankiaddon` from `packages/anki-addon`, pointed at `rounds-dev`) and uploads `apps/site/out`. The first run creates the project and the address `pimpme.pages.dev`.
+2. **Deploy:** `pnpm site:deploy`. It builds the site (and `pimpme.ankiaddon` from `packages/anki-addon`, pointed at `rounds-dev`) and uploads `apps/site/out`. The project `pimpme` and the address `pimpme.pages.dev` exist since 25 Nov 2026. (Wrangler 4.168 hands new Pages projects to Workers, which failed on this monorepo, so it was made with `wrangler pages project create pimpme --production-branch main --force`; later deploys need no flag.)
 3. **Custom domain (once):** Cloudflare → Workers & Pages → `pimpme` → Custom domains → Set up a custom domain → `pimpme.app` → Continue → Activate domain. Repeat for `www.pimpme.app`. Cloudflare adds a CNAME for each; the MX, SPF, DKIM, DMARC and Email Routing records (section 4) stay as they are. Check with `Resolve-DnsName pimpme.app -Type MX` afterwards.
 
 ## Each release
