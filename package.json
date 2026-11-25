@@ -7,6 +7,9 @@
   },
   "scripts": {
     "dev": "turbo run dev --filter=mobile",
+    "site": "pnpm --filter site dev",
+    "site:build": "pnpm --filter site build",
+    "site:deploy": "pnpm --filter site run pages:deploy",
     "test": "turbo run test",
     "typecheck": "turbo run typecheck && pnpm functions:check",
     "lint": "turbo run lint",

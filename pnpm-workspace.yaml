@@ -8,3 +8,5 @@ nodeLinker: hoisted
 # esbuild (via tsx) ships prebuilt binaries; its install script isn't needed.
 allowBuilds:
   esbuild: false
+  # wrangler's local runtime (apps/site deploys only; its postinstall isn't needed).
+  workerd: false

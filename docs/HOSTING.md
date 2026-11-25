@@ -80,6 +80,13 @@ The publishable key is safe in the app; RLS protects the data. Never put the sec
 - Sign in with Apple: the bundle id `com.ben.rounds` has `usesAppleSignIn`; EAS turns the capability on during the build. Nothing else is needed for the native flow.
 - The first `eas submit` creates the app in App Store Connect if it doesn't exist (it asks for your Apple ID). In App Store Connect → TestFlight → Internal Testing, add yourself and the reviewer.
 
+### 8. Website (pimpme.app)
+The site in `apps/site` is a static export served by **Cloudflare Pages** (free) from the Pages project `pimpme`. Deploys are direct uploads from the developer's PC, one per OK: there is no Git integration, so pushing to GitHub deploys nothing.
+
+1. **Sign wrangler in (once):** `pnpm --filter site exec wrangler login`. A browser opens on Cloudflare; click Allow.
+2. **Deploy:** `pnpm site:deploy`. It builds the site (and `pimpme.ankiaddon` from `packages/anki-addon`, pointed at `rounds-dev`) and uploads `apps/site/out`. The first run creates the project and the address `pimpme.pages.dev`.
+3. **Custom domain (once):** Cloudflare → Workers & Pages → `pimpme` → Custom domains → Set up a custom domain → `pimpme.app` → Continue → Activate domain. Repeat for `www.pimpme.app`. Cloudflare adds a CNAME for each; the MX, SPF, DKIM, DMARC and Email Routing records (section 4) stay as they are. Check with `Resolve-DnsName pimpme.app -Type MX` afterwards.
+
 ## Each release
 From `apps/mobile`:
 ```bash

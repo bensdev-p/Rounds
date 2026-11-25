@@ -56,6 +56,8 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M4.2 (domain and email):** pimpme.app was bought through Cloudflare Registrar, so its DNS was already on Cloudflare. support@pimpme.app forwards to the developer through Cloudflare Email Routing. Sign-in codes go out through Resend over SMTP from "PimpMe" <support@pimpme.app>, with SPF, DKIM and DMARC (`p=none`); `config push` sent the SMTP settings, the 6-digit code templates and 30 code emails an hour to `rounds-dev` (HOSTING.md → Email). Email sign-in works on TestFlight build 5, and the code landed in the Gmail inbox (25 Nov 2026). **Not yet checked:** a school `.edu` inbox (the developer had none to hand); carried to M4.6, before students are invited. **M4.2 is complete** apart from that check. Next: M4.3, the website.
 
+**M4.3 (website), phase 1 built, not yet live (25 Nov 2026):** `apps/site` is a static Next.js site with Home, How it works, Anki, FAQ, Privacy policy, Terms, Support, a waiting Daily pimp page and a not-found page. It is ported from the site mockup, with colours from the shared tokens (a test keeps them in step) and light mode following the system setting. Page heights match the mockups within a few pixels at 1440 and 390. The Anki page offers `pimpme.ankiaddon`, built for `rounds-dev` on each site build. Developer's decisions: "Pimp me", "Open the web app" and "Join the iPhone beta" point to Support (ask for an invite) until M4.4 and M4.6 (`apps/site/src/lib/site.ts`). Send feedback on Support opens the visitor's email app, behind the PHI guard. Deploys are direct uploads (`pnpm site:deploy`, HOSTING.md → Website). The FAQ answers after the first, the Privacy policy and the Terms are **drafts** (operator Benjamin Brunson, Texas, 18 and over), marked as drafts on the pages; review carried to M4.6. **Next:** the developer signs wrangler in, OKs the first deploy and adds the custom domain. Then phase 2, the daily pimp, with the tester list pulled forward from M4.4 (developer's decision).
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
@@ -79,7 +81,7 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 | Live session, voice | 04 | session | Built (M2.5): voice panel as drawn (mic, waveform dots while asking and bars once live, three-line transcript), Type instead, I don't know. Questions over three lines collapse the ladder to its strip (developer's call), as with the keyboard. Tried on the phone (development build) | Done |
 | App icon, name | — | site/brand | PimpMe, the raised hand on amber (M4.1) | Done |
 | Settings → Help and legal, Send feedback | — | site/settings-legal, site/send-feedback | Not built | M4.5 |
-| Website (Home, How it works, Anki, FAQ, Privacy, Terms, Support, Daily pimp) | — | site/* (dark; light derived) | Not built | M4.3 |
+| Website (Home, How it works, Anki, FAQ, Privacy, Terms, Support, Daily pimp) | — | site/* (dark; light derived) | Pages built (M4.3 phase 1), dark and light, 1440 and 390. Support adds an invite line and a note that Send feedback opens the email app (not drawn). Home's example script says "Example script" instead of a reviewer, since none is approved. Daily pimp: waiting page only | M4.3 |
 | Web app frame (desktop browser) | — | site/webapp-home, site/webapp-session | Not built | M4.4 |
 | Team board, join, challenge | 16–18 | team, team-light, team-join, challenge | Not built | Stage 5 |
 
@@ -311,6 +313,7 @@ Facts to plan around:
 - **Usage and cost:** spending caps checked for more users; `pnpm stats` reads `rounds-dev`.
 - **Wrong-code limit:** the fix flagged "revisit before launch".
 - **School email:** a sign-in code lands in the inbox (not spam or quarantine) at a school `.edu` address, carried over from M4.2.
+- **Privacy policy and Terms:** the drafts written in M4.3 (`apps/site/src/app/privacy`, `terms`) reviewed, the "Draft" notes removed, and the date updated. External TestFlight links to the privacy policy.
 - **Done when:** the first medical students are using PimpMe, and their feedback reaches the developer.
 
 ### M4.7 Student-made ladders (exploration)

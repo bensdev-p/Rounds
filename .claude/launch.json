@@ -6,6 +6,12 @@
       "runtimeExecutable": "pnpm",
       "runtimeArgs": ["--filter", "mobile", "exec", "expo", "start", "--port", "8081"],
       "port": 8081
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "pnpm",
+      "runtimeArgs": ["--filter", "site", "dev"],
+      "port": 3000
     }
   ]
 }
