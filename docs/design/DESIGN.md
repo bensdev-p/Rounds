@@ -173,6 +173,8 @@ There are two memorable moments, and nothing else:
 
 Result screens can count the score up once (under 600 ms). Rounds segments fill without animation.
 
+**On the website only** (developer's decision, 26 Nov 2026): the Home hero panel plays one short example session once when it comes into view, using the rung pass above, then stops on the miss with a "Watch again" link. With Reduce Motion it shows the still panel as drawn.
+
 The video also uses slow camera push-ins and a touch dot where the student taps. Those are for the video only; don't add them to the app.
 
 Everything else is plain and quick: sheets slide at 240 ms, no entrance animations on lists, no looping decoration. The voice waveform is the only continuous animation, and only while the mic is live. Respect Reduce Motion: swap the animations for instant state changes.
