@@ -1,7 +1,7 @@
 import { ChevronRight, Info, Lock, Mic, RefreshCw, Stethoscope } from 'lucide-react';
 import Link from 'next/link';
 import { GetStarted } from '../components/Buttons.tsx';
-import { Ladder } from '../components/Ladder.tsx';
+import { HeroSession } from '../components/HeroSession.tsx';
 
 // Waveform bar heights, as drawn.
 const WAVE = [10, 18, 30, 22, 40, 28, 14, 34, 24, 12, 20, 8, 16, 26, 12];
@@ -21,39 +21,7 @@ export default function Home() {
             </p>
             <GetStarted />
           </div>
-          <div className="panel" aria-label="Example: a live session">
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <span className="meta">Internist</span>
-              <span className="num t2" style={{ fontSize: 18 }}>
-                0:42
-              </span>
-            </div>
-            <div
-              style={{
-                display: 'flex',
-                gap: 28,
-                marginTop: 22,
-                alignItems: 'flex-start',
-                flexWrap: 'wrap',
-              }}
-            >
-              <Ladder states={['done', 'done', 'now', '', '', '']} width={180} />
-              <div style={{ flex: 1, minWidth: 220 }}>
-                <p className="meta">Acute pancreatitis</p>
-                <p className="q mt8">
-                  How would you tell gallstone pancreatitis from alcoholic pancreatitis at the
-                  bedside?
-                </p>
-              </div>
-            </div>
-            <p
-              className="mt26"
-              style={{ fontSize: 15, lineHeight: '21px', color: 'var(--text-2)', minHeight: 63 }}
-            >
-              &ldquo;I&apos;d check the ALT. If it&apos;s more than three times normal, that points
-              to gallstones, and then right upper quadrant…
-            </p>
-          </div>
+          <HeroSession />
         </div>
       </section>
 

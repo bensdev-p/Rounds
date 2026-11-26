@@ -2,33 +2,9 @@ import { Check, ChevronRight, Minus } from 'lucide-react';
 import type { Metadata } from 'next';
 import { GetStarted } from '../../components/Buttons.tsx';
 import { Ladder, RUNGS } from '../../components/Ladder.tsx';
+import { EXAMPLE_CLIMB as CLIMB } from '../../lib/example.ts';
 
 export const metadata: Metadata = { title: 'How it works' };
-
-/** The worked example: acute pancreatitis, missed on management (rung 5). */
-const CLIMB = [
-  {
-    q: 'What are the two most common causes of acute pancreatitis?',
-    a: '“Gallstones first, then heavy alcohol use.”',
-  },
-  {
-    q: 'And the next most common cause after those?',
-    a: '“Hypertriglyceridemia. It can also follow an ERCP.”',
-  },
-  {
-    q: 'How would you tell gallstone pancreatitis from alcoholic pancreatitis at the bedside?',
-    a: '“I’d check the ALT. If it’s more than three times normal, that points to gallstones, and then right upper quadrant…',
-  },
-  {
-    q: 'How do you confirm the diagnosis?',
-    a: '“Two of three: typical pain, lipase over three times normal, or imaging.”',
-  },
-  {
-    q: 'Mild disease, pain controlled. What about feeding?',
-    a: '“Keep them NPO until the pain resolves.”',
-  },
-  { q: 'Mild gallstone pancreatitis is settling. When should the gallbladder come out?', a: null },
-];
 
 const PERSONAS = [
   { name: 'Teacher', how: 'Pimps gently. Gives hints and waits for you.', pace: 'No time limit' },

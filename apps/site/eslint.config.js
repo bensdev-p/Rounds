@@ -11,6 +11,11 @@ export default tseslint.config(
     },
   },
   {
+    // Tests index into known fixtures; `!` keeps them readable (as in packages/shared).
+    files: ['**/*.test.ts'],
+    rules: { '@typescript-eslint/no-non-null-assertion': 'off' },
+  },
+  {
     files: ['scripts/**/*.mjs'],
     languageOptions: { globals: { process: 'readonly', console: 'readonly' } },
   },

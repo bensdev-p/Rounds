@@ -1226,3 +1226,53 @@ a.lrow:hover {
     transition: none;
   }
 }
+
+/* ---------- Playing hero (Home) ---------- */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.hero-q {
+  min-height: 167px;
+}
+.hero-a {
+  min-height: 63px;
+  font-size: 15px;
+  line-height: 21px;
+  color: var(--text-2);
+}
+.hero-live .rung .n {
+  transition:
+    background-color var(--rung-pass-ms) ease-out,
+    color var(--rung-pass-ms) ease-out;
+}
+.hero-live .rung.now .n {
+  animation: rung-up var(--rung-pass-ms) var(--rung-pass-ease);
+}
+@keyframes rung-up {
+  from {
+    transform: scale(0.82);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@media (max-width: 700px) {
+  /* The question sits under the ladder here: room for the longest one (rung 3, five lines). */
+  .hero-q {
+    min-height: 203px;
+  }
+  .hero-a {
+    min-height: 84px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-live .rung .n {
+    transition: none;
+    animation: none;
+  }
+}
