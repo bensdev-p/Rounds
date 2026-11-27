@@ -358,6 +358,25 @@ describe('buildMissCard', () => {
     );
   });
 
+  it('uses the Settings time limit when it overrides the persona', () => {
+    const card = buildMissCard({
+      answer: '',
+      result: {
+        grade: 'incorrect',
+        reason: 'Time ran out',
+        matched: [],
+        confused_with_script_id: null,
+      },
+      missTag: 'slow',
+      question: byRung('recall'),
+      script,
+      confusables,
+      persona: 'internist',
+      timeLimitMs: 20_000,
+    });
+    expect(card.correction).toMatch(/^Time's up: the Internist wanted it inside 20 seconds\. /);
+  });
+
   it('shortens a long quote', () => {
     const question = byRung('management');
     const answer = 'word '.repeat(60);

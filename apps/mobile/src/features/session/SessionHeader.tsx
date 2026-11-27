@@ -1,22 +1,21 @@
+import type { ClockReading } from '@rounds/shared';
 import { X } from 'lucide-react-native';
 import { StyleSheet, View } from 'react-native';
 import { IconButton } from '@/ui/controls';
 import { Txt } from '@/ui/Text';
 
-export function formatClock(ms: number): string {
-  const total = Math.max(0, Math.floor(ms / 1000));
-  return `${Math.floor(total / 60)}:${String(total % 60).padStart(2, '0')}`;
-}
-
-/** Close, a centred title (persona or script) and an optional clock. */
+/**
+ * Close, a centred title (persona or script) and an optional clock: time left
+ * on the question for a timed attending, time since the first question otherwise.
+ */
 export function SessionHeader({
   title,
-  clockMs,
+  clock,
   onClose,
   closeLabel = 'End session',
 }: {
   title: string;
-  clockMs?: number;
+  clock?: Pick<ClockReading, 'mode' | 'text'>;
   onClose: () => void;
   closeLabel?: string;
 }) {
@@ -27,15 +26,16 @@ export function SessionHeader({
         {title}
       </Txt>
       <View style={styles.side}>
-        {clockMs !== undefined && (
+        {clock !== undefined && (
           <Txt
             variant="h2"
             tone="text2"
             fontSize={18}
             tabular
-            accessibilityLabel={`Time ${formatClock(clockMs)}`}
+            accessibilityRole="timer"
+            accessibilityLabel={`${clock.mode === 'countdown' ? 'Time left' : 'Time'} ${clock.text}`}
           >
-            {formatClock(clockMs)}
+            {clock.text}
           </Txt>
         )}
       </View>

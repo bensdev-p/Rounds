@@ -21,6 +21,8 @@ import {
   startLadder,
   submitAnswer,
   summarizeResult,
+  TIME_UP_RESULT,
+  timeUp,
   type Confusable,
   type GradeResult,
   type IllnessScript,
@@ -57,6 +59,7 @@ import { useClient } from '@/lib/auth';
 import { ROTATION_NAMES } from '@/lib/copy';
 import { rungPassHaptic } from '@/lib/haptics';
 import { SignInPrompt } from '@/features/session/SignInPrompt';
+import { useQuestionClock } from '@/features/session/useQuestionClock';
 import { parsePersona } from '@/lib/prefs';
 import { useRoundsGoal, useTimeLimit, useVoiceSpeed } from '@/lib/profile';
 import { useAsync } from '@/lib/useAsync';
@@ -180,26 +183,30 @@ function Session({
   const listening = useRef<Listening | null>(null);
   // The question already spoken, so listening again doesn't ask it twice.
   const spoken = useRef<string | null>(null);
+  // The same, as state: in voice the countdown waits until the attending has asked.
+  const [askedKey, setAskedKey] = useState<string | null>(null);
 
   // Bumped on restart so a grade or timer that arrives late is ignored.
   const run = useRef(0);
-  // When the current question appeared, for the persona time limit.
-  const shownAt = useRef(0);
-  useEffect(() => {
-    shownAt.current = Date.now();
-  }, []);
-  // The clock runs from the first question until the miss or the top.
-  const [clock, setClock] = useState(() => ({ start: Date.now(), stop: null as number | null }));
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    if (clock.stop !== null) return;
-    const timer = setInterval(() => setNow(Date.now()), 500);
-    return () => clearInterval(timer);
-  }, [clock.stop]);
-  const clockMs = (clock.stop ?? now) - clock.start;
 
   const question = currentQuestion(state);
   const personaLabel = PERSONAS[persona].label;
+
+  // The clock (timed attending): a countdown per question that runs while the
+  // student can answer. In voice it starts once the attending has asked, and
+  // keeps running while the mic listens; it holds while an answer is graded.
+  // Once the ladder ends the key stays on the last question, so the clock holds.
+  const questionKey = `${run.current}|${question?.id ?? state.attempts.at(-1)?.question_id}`;
+  const waitingForVoice =
+    mode === 'voice' &&
+    (voice.status === 'starting' || (voice.status === 'on' && askedKey !== questionKey));
+  const clock = useQuestionClock({
+    timeLimitMs: state.time_limit_ms,
+    runKey: run.current,
+    questionKey,
+    running: phase === 'asking' && state.status === 'in_progress' && !grading && !waitingForVoice,
+    ended: state.status !== 'in_progress',
+  });
 
   function finish(final: LadderState, runAtFinish: number) {
     const endedAt = new Date();
@@ -218,7 +225,6 @@ function Session({
     });
     setHistory([...history, record]);
     setSummary(result);
-    setClock((c) => ({ ...c, stop: Date.now() }));
     setTimeout(
       () => {
         if (run.current === runAtFinish) setPhase((p) => (p === 'list' ? p : 'result'));
@@ -238,7 +244,7 @@ function Session({
       return;
     }
     // Time to answer stops at submit; grading time doesn't count against the student.
-    const elapsed_ms = Date.now() - shownAt.current;
+    const elapsed_ms = clock.answerMs();
     const runAtSubmit = run.current;
     let graded: Pick<SubmittedAnswer, 'result' | 'grader' | 'grader_version'>;
     if (dontKnow) {
@@ -274,7 +280,6 @@ function Session({
     setLast({ question, answer: text, result: graded.result });
     setGrading(false);
     setWarning(null);
-    shownAt.current = Date.now();
 
     if (attempt?.passed) {
       rungPassHaptic();
@@ -286,6 +291,25 @@ function Session({
     }
     if (next.status !== 'in_progress') finish(next, runAtSubmit);
   }
+
+  // 0:00 before an answer was sent: the ladder ends on a slow miss, "Time's up".
+  const expired = useRef<string | null>(null);
+  useEffect(() => {
+    if (!clock.timeUp || !question || phase !== 'asking' || grading) return;
+    if (expired.current === questionKey) return;
+    expired.current = questionKey;
+    const next = timeUp(state);
+    const attempt = next.attempts.at(-1);
+    if (attempt) recorder.record(attempt);
+    recorder.finish(next);
+    setState(next);
+    setLast({ question, answer: '', result: TIME_UP_RESULT });
+    setWarning(null);
+    setPhase('missed');
+    finish(next, run.current);
+    // Runs when the clock reaches 0:00; the rest is read fresh from this render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clock.timeUp, questionKey, phase, grading]);
 
   // The voice turn effect below calls the latest submit, not the one from its first render.
   const submitRef = useRef(submit);
@@ -305,20 +329,20 @@ function Session({
   useEffect(() => {
     if (!turnKey || !engine || !question) return;
     let cancelled = false;
-    const askedKey = `${run.current}|${question.id}`;
+    const turnAsked = `${run.current}|${question.id}`;
     engine.prepare(question);
     void (async () => {
       setTranscript('');
       setVoicePhase('asking');
-      if (spoken.current !== askedKey) {
+      if (spoken.current !== turnAsked) {
         setHint(null);
         await engine.speak(question.id);
         if (cancelled) return;
-        spoken.current = askedKey;
+        spoken.current = turnAsked;
       }
+      // Time to answer runs from the end of the question.
+      setAskedKey(turnAsked);
       for (;;) {
-        // Time to answer runs from the end of the question.
-        shownAt.current = Date.now();
         setVoicePhase('listening');
         const turn = engine.listen(question, { onText: setTranscript, onLevel: pushLevel });
         listening.current = turn;
@@ -366,7 +390,6 @@ function Session({
   }
 
   function nextFromList() {
-    shownAt.current = Date.now();
     setPhase(state.status === 'in_progress' ? 'asking' : 'result');
   }
 
@@ -388,8 +411,6 @@ function Session({
     setHint(null);
     setLast(null);
     setSummary(null);
-    shownAt.current = Date.now();
-    setClock({ start: Date.now(), stop: null });
   }
 
   function nextTopic() {
@@ -454,6 +475,7 @@ function Session({
             script,
             confusables,
             persona,
+            timeLimitMs: state.time_limit_ms,
           })
         : null;
     const rotation = script.rotation[0] ?? 'IM';
@@ -505,7 +527,7 @@ function Session({
       <ListFeedbackView
         persona={persona}
         personaLabel={personaLabel}
-        clockMs={clockMs}
+        clock={clock}
         scriptName={script.name}
         inReview={script.status === 'in_review'}
         rungNumber={rungIndex(last.question.rung) + 1}
@@ -529,7 +551,7 @@ function Session({
   return (
     <AskingView
       personaLabel={personaLabel}
-      clockMs={clockMs}
+      clock={clock}
       rungs={rungs}
       scriptName={script.name}
       inReview={script.status === 'in_review'}

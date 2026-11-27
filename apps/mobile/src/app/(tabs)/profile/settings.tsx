@@ -146,8 +146,8 @@ export default function Settings() {
         )}
       </List>
       <Txt variant="small" tone="text2" style={styles.caption}>
-        Surgeon gives 10 s and Internist 30 s; Teacher waits. A right answer past the limit counts
-        as slow.
+        Surgeon gives 10 s a question and Internist 30 s; Teacher waits. The clock counts down, and
+        at 0:00 the session ends.
       </Txt>
 
       <SectionHead title="Appearance" />

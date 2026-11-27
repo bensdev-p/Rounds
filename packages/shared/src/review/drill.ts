@@ -105,6 +105,35 @@ export function submitDrillAnswer(state: DrillState, submitted: SubmittedAnswer)
   return { ...state, index: next, attempts: [...state.attempts, attempt], status };
 }
 
+/**
+ * The time limit ran out before an answer was sent: the drill ends on a
+ * `slow` miss, with nothing graded. Only for a timed drill (like `timeUp`).
+ */
+export function drillTimeUp(state: DrillState): DrillState {
+  const question = drillQuestion(state);
+  if (!question) throw new DrillError(`Drill is ${state.status}; no question to answer`);
+  if (state.time_limit_ms === null) throw new DrillError('An untimed drill cannot run out of time');
+  const attempt: Attempt = {
+    question_id: question.id,
+    answer: '',
+    elapsed_ms: state.time_limit_ms,
+    grade: 'incorrect',
+    reason: 'Time ran out',
+    credit: 0,
+    passed: false,
+    miss_tag: 'slow',
+    matched: [],
+    grader: 'local',
+    grader_version: null,
+  };
+  return {
+    ...state,
+    index: state.index + 1,
+    attempts: [...state.attempts, attempt],
+    status: 'missed',
+  };
+}
+
 /** Questions answered before the miss (or all of them). */
 export function drillScore(state: DrillState): number {
   return state.attempts.filter((a) => a.passed).length;

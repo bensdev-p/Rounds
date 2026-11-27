@@ -10,6 +10,7 @@ export * from './grading/llmGrade.ts';
 export * from './ladder/personas.ts';
 export * from './ladder/missTags.ts';
 export * from './ladder/engine.ts';
+export * from './ladder/clock.ts';
 export * from './phi/detectPhi.ts';
 export { normalize, containsTerm, containsAffirmedTerm } from './text.ts';
 export * from './db/rows.ts';

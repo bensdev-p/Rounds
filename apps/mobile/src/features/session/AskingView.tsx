@@ -3,6 +3,7 @@
  * screen shows the ladder and the question and nothing else: no feedback text,
  * no progress. The question is replaced in place; it never pushes the ladder.
  */
+import type { ClockReading } from '@rounds/shared';
 import { useState, type ReactNode } from 'react';
 import { PixelRatio, Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
@@ -17,7 +18,7 @@ import { SessionHeader } from './SessionHeader';
 
 export function AskingView({
   personaLabel,
-  clockMs,
+  clock,
   rungs,
   steps,
   dontKnowHint = 'Ends the session on this rung',
@@ -37,7 +38,7 @@ export function AskingView({
   voice,
 }: {
   personaLabel: string;
-  clockMs: number;
+  clock: Pick<ClockReading, 'mode' | 'text'>;
   /** The six-rung ladder. Ignored when `steps` is given. */
   rungs: RungState[];
   /** A short run instead of the ladder (the mix-up drill): squares and their spoken label. */
@@ -138,7 +139,7 @@ export function AskingView({
 
   return (
     <Screen footer={voice ?? footer}>
-      <SessionHeader title={personaLabel} clockMs={clockMs} onClose={onClose} />
+      <SessionHeader title={personaLabel} clock={clock} onClose={onClose} />
       <View style={styles.ladder}>
         {steps ? (
           <StepStrip states={steps.states} label={steps.label} />

@@ -10,12 +10,14 @@ import {
   detectPhi,
   drillQuestion,
   drillScore,
+  drillTimeUp,
   gradeLocally,
   PERSONAS,
   phiWarning,
   pickDrill,
   startDrill,
   submitDrillAnswer,
+  TIME_UP_RESULT,
   type DrillState,
   type GradeResult,
   type PersonaId,
@@ -34,6 +36,7 @@ import { ErrorView, Loading } from '@/components/StatusView';
 import { FlagSheet, type FlagTarget } from '@/features/flag/FlagSheet';
 import { DrillResultView } from '@/features/review/DrillResultView';
 import { AskingView } from '@/features/session/AskingView';
+import { useQuestionClock } from '@/features/session/useQuestionClock';
 import { useClient } from '@/lib/auth';
 import { loadErrorMessage } from '@/lib/errors';
 import { rungPassHaptic } from '@/lib/haptics';
@@ -125,22 +128,21 @@ function Drill({
   const [flagTarget, setFlagTarget] = useState<FlagTarget | null>(null);
 
   const run = useRef(0);
-  const shownAt = useRef(0);
-  useEffect(() => {
-    shownAt.current = Date.now();
-  }, []);
-  const [clock, setClock] = useState(() => ({ start: Date.now(), stop: null as number | null }));
-  const [now, setNow] = useState(() => Date.now());
-  useEffect(() => {
-    if (clock.stop !== null) return;
-    const timer = setInterval(() => setNow(Date.now()), 500);
-    return () => clearInterval(timer);
-  }, [clock.stop]);
-  const clockMs = (clock.stop ?? now) - clock.start;
 
   const contentFor = (scriptId: string): LadderContent =>
     scriptId === right.script.id ? right : left;
   const question = drillQuestion(state);
+
+  // Like the session: a timed attending counts down per question, holding
+  // while an answer is graded; untimed, the clock counts up.
+  const questionKey = `${run.current}|${question?.id ?? state.attempts.at(-1)?.question_id}`;
+  const clock = useQuestionClock({
+    timeLimitMs: state.time_limit_ms,
+    runKey: run.current,
+    questionKey,
+    running: phase === 'asking' && state.status === 'in_progress' && !grading,
+    ended: state.status !== 'in_progress',
+  });
   const personaLabel = PERSONAS[persona].label;
   const title = 'Mix-up drill';
 
@@ -153,7 +155,7 @@ function Drill({
       setWarning(phi);
       return;
     }
-    const elapsed_ms = Date.now() - shownAt.current;
+    const elapsed_ms = clock.answerMs();
     const runAtSubmit = run.current;
     const { confusables } = contentFor(question.script_id);
     let graded: Pick<SubmittedAnswer, 'result' | 'grader' | 'grader_version'>;
@@ -186,7 +188,6 @@ function Drill({
     setLast({ question, answer: text, result: graded.result });
     setGrading(false);
     setWarning(null);
-    shownAt.current = Date.now();
 
     if (attempt?.passed) {
       rungPassHaptic();
@@ -194,16 +195,36 @@ function Drill({
     } else {
       setPhase('missed');
     }
-    if (next.status !== 'in_progress') {
-      setClock((c) => ({ ...c, stop: Date.now() }));
-      setTimeout(
-        () => {
-          if (run.current === runAtSubmit) setPhase('result');
-        },
-        next.status === 'completed' ? TOP_HOLD_MS : MISS_HOLD_MS,
-      );
-    }
+    if (next.status !== 'in_progress') showResultAfterHold(next, runAtSubmit);
   }
+
+  function showResultAfterHold(final: DrillState, runAtEnd: number) {
+    setTimeout(
+      () => {
+        if (run.current === runAtEnd) setPhase('result');
+      },
+      final.status === 'completed' ? TOP_HOLD_MS : MISS_HOLD_MS,
+    );
+  }
+
+  // 0:00 before an answer was sent: the drill ends on a slow miss, "Time's up".
+  const expired = useRef<string | null>(null);
+  useEffect(() => {
+    if (!clock.timeUp || !question || phase !== 'asking' || grading) return;
+    if (expired.current === questionKey) return;
+    expired.current = questionKey;
+    const next = drillTimeUp(state);
+    const attempt = next.attempts.at(-1);
+    if (attempt) recorder.record(attempt);
+    recorder.finish(next);
+    setState(next);
+    setLast({ question, answer: '', result: TIME_UP_RESULT });
+    setWarning(null);
+    setPhase('missed');
+    showResultAfterHold(next, run.current);
+    // Runs when the clock reaches 0:00; the rest is read fresh from this render.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [clock.timeUp, questionKey, phase, grading]);
 
   function goAgain() {
     run.current += 1;
@@ -214,8 +235,6 @@ function Drill({
     setWarning(null);
     setGrading(false);
     setLast(null);
-    shownAt.current = Date.now();
-    setClock({ start: Date.now(), stop: null });
   }
 
   function reportProblem() {
@@ -246,6 +265,7 @@ function Drill({
             script: missed.script,
             confusables: missed.confusables,
             persona,
+            timeLimitMs: state.time_limit_ms,
           })
         : null;
     return (
@@ -285,7 +305,7 @@ function Drill({
   return (
     <AskingView
       personaLabel={personaLabel}
-      clockMs={clockMs}
+      clock={clock}
       rungs={[]}
       steps={{
         states: stepStates(state),

@@ -65,13 +65,17 @@ export function buildMissCard(input: {
   script: IllnessScript;
   confusables: readonly Confusable[];
   persona: PersonaId;
+  /** The run's time limit, when Settings overrode the persona's. */
+  timeLimitMs?: number | null;
 }): MissCard {
   const { answer, result, missTag, question, script, confusables, persona } = input;
   const label = missLabel(question.rung);
 
   let correction: string;
   if (missTag === 'slow') {
-    const { label: who, time_limit_ms } = PERSONAS[persona];
+    const { label: who } = PERSONAS[persona];
+    const time_limit_ms =
+      input.timeLimitMs !== undefined ? input.timeLimitMs : PERSONAS[persona].time_limit_ms;
     const limit = time_limit_ms === null ? null : `${Math.round(time_limit_ms / 1000)} seconds`;
     if (result.grade === 'incorrect') {
       // The clock ran out before an answer was sent (timeUp).
