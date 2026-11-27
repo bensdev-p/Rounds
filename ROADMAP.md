@@ -352,6 +352,8 @@ Mockups, wireframes and the vision video (finished; M4.1 adds the PimpMe site mo
 - Open the next session on the missed question.
 - When shared UI components exist, swap them into the video (VIDEO.md → Later).
 - (13 Nov 2026) A third question on rungs where a script has a third fact worth asking. M1.1 shipped two per rung; the content rules allow three.
+- (27 Nov 2026) A `pnpm testers add|remove|list` command against `rounds-dev`, so the tester list needs no SQL (developer: not now).
+- (27 Nov 2026) A small admin page in the web app for the developer only, around M4.6: the tester list, "This is wrong" flags and usage numbers. Never script editing (scripts stay files with review), and it needs an admin role, RLS and pgTAP tests.
 - (14 Nov 2026) Filter chips on the topic picker (All, Cardio, Renal, GI; wireframe 03). Scripts need a "system" field first, which is a content change.
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
