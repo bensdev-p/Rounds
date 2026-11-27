@@ -1,5 +1,11 @@
 /** List-question feedback. Wireframe 06, mockup list.png: partial credit, real gaps. */
-import { personaLine, type GradeResult, type PersonaId, type Question } from '@rounds/shared';
+import {
+  personaLine,
+  type ClockReading,
+  type GradeResult,
+  type PersonaId,
+  type Question,
+} from '@rounds/shared';
 import { StyleSheet, View } from 'react-native';
 import { space } from '@/theme';
 import { Button } from '@/ui/controls';
@@ -11,7 +17,7 @@ import { SessionHeader } from './SessionHeader';
 export function ListFeedbackView({
   persona,
   personaLabel,
-  clockMs,
+  clock,
   scriptName,
   inReview,
   rungNumber,
@@ -24,7 +30,7 @@ export function ListFeedbackView({
   /** For the attending's one-line comment under the answers. */
   persona: PersonaId;
   personaLabel: string;
-  clockMs: number;
+  clock: Pick<ClockReading, 'mode' | 'text'>;
   scriptName: string;
   inReview: boolean;
   rungNumber: number;
@@ -42,7 +48,7 @@ export function ListFeedbackView({
 
   return (
     <Screen footer={<Button label={last ? 'See result' : 'Next question'} onPress={onNext} />}>
-      <SessionHeader title={personaLabel} clockMs={clockMs} onClose={onClose} />
+      <SessionHeader title={personaLabel} clock={clock} onClose={onClose} />
       <Txt variant="meta" tone="text2" style={styles.where}>
         {scriptName}, rung {rungNumber}
         {inReview && (

@@ -4,7 +4,14 @@ import type { SessionRecord } from '../progress/progression.ts';
 import type { MissTag } from '../schemas/attempt.ts';
 import type { PatientLog } from '../schemas/patientLog.ts';
 import type { Question } from '../schemas/question.ts';
-import { drillQuestion, drillScore, pickDrill, startDrill, submitDrillAnswer } from './drill.ts';
+import {
+  drillQuestion,
+  drillScore,
+  drillTimeUp,
+  pickDrill,
+  startDrill,
+  submitDrillAnswer,
+} from './drill.ts';
 import {
   comparisonRows,
   missedRows,
@@ -274,6 +281,21 @@ describe('drill', () => {
     let state = startDrill(['x', 'y'], [diff('x', 1)], 'teacher');
     state = submitDrillAnswer(state, correct);
     expect(state.status).toBe('completed');
+  });
+
+  it('ends a timed drill on a slow miss when time runs out', () => {
+    let state = startDrill(['x', 'y'], pickDrill(left, right, { random: () => 0 }), 'surgeon');
+    state = submitDrillAnswer(state, correct);
+    const ended = drillTimeUp(state);
+    expect(ended.status).toBe('missed');
+    expect(drillScore(ended)).toBe(1);
+    expect(ended.attempts[1]).toMatchObject({
+      question_id: state.questions[1]!.id,
+      miss_tag: 'slow',
+      passed: false,
+      elapsed_ms: 10_000,
+    });
+    expect(() => drillTimeUp(startDrill(['x', 'y'], [diff('x', 1)], 'teacher'))).toThrow();
   });
 
   it('refuses questions from outside the pair', () => {
