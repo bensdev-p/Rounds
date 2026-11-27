@@ -281,6 +281,9 @@ importers:
       '@rounds/shared':
         specifier: workspace:*
         version: link:../../packages/shared
+      '@supabase/supabase-js':
+        specifier: ^2.119.0
+        version: 2.119.0
       lucide-react:
         specifier: ~1.72.0
         version: 1.72.0(@types/react@19.3.0)(react@19.3.0)

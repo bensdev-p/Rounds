@@ -85,7 +85,13 @@ The site in `apps/site` is a static export served by **Cloudflare Pages** (free)
 
 1. **Sign wrangler in (once):** `pnpm --filter site exec wrangler login`. A browser opens on Cloudflare; click Allow.
 2. **Deploy:** `pnpm site:deploy`. It builds the site (and `pimpme.ankiaddon` from `packages/anki-addon`, pointed at `rounds-dev`) and uploads `apps/site/out`. The project `pimpme` and the address `pimpme.pages.dev` exist since 25 Nov 2026. (Wrangler 4.168 hands new Pages projects to Workers, which failed on this monorepo, so it was made with `wrangler pages project create pimpme --production-branch main --force`; later deploys need no flag.)
-3. **Custom domain (once):** Cloudflare → Workers & Pages → `pimpme` → Custom domains → Set up a custom domain → `pimpme.app` → Continue → Activate domain. Repeat for `www.pimpme.app`. Cloudflare adds a CNAME for each; the MX, SPF, DKIM, DMARC and Email Routing records (section 4) stay as they are. Check with `Resolve-DnsName pimpme.app -Type MX` afterwards.
+4. **Daily pimp:** the site talks to `rounds-dev` with the URL and publishable key in `apps/site/.env.production` (public values; RLS protects the data). For `pnpm site` against the local stack, copy `apps/site/.env.example` to `.env.development.local` with the values from `supabase status`. The page needs the migration `20261127120000_daily_pimp.sql` on the project (`pnpm supabase db push`).
+5. **Tester list (M4.3, used again in M4.4):** testers sign in with the email of an existing PimpMe account (the app's Settings → Account → email). Only the developer adds them, in the Supabase dashboard → SQL Editor (lower case):
+   ```sql
+   insert into public.testers (email) values ('student@school.edu');
+   ```
+   Remove one with `delete from public.testers where email = '…';`. Clients can't read or change the list. Until a script is approved, only testers can play the daily pimp; after that it is open to everyone, with approved scripts only.
+6. **Custom domain (once):** Cloudflare → Workers & Pages → `pimpme` → Custom domains → Set up a custom domain → `pimpme.app` → Continue → Activate domain. Repeat for `www.pimpme.app`. Cloudflare adds a CNAME for each; the MX, SPF, DKIM, DMARC and Email Routing records (section 4) stay as they are. Check with `Resolve-DnsName pimpme.app -Type MX` afterwards.
 
 ## Each release
 From `apps/mobile`:
