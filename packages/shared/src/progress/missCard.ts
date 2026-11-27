@@ -72,10 +72,19 @@ export function buildMissCard(input: {
   let correction: string;
   if (missTag === 'slow') {
     const { label: who, time_limit_ms } = PERSONAS[persona];
-    correction =
-      time_limit_ms === null
-        ? 'Right answer, but too slow.'
-        : `Right answer, but the ${who} wanted it inside ${Math.round(time_limit_ms / 1000)} seconds.`;
+    const limit = time_limit_ms === null ? null : `${Math.round(time_limit_ms / 1000)} seconds`;
+    if (result.grade === 'incorrect') {
+      // The clock ran out before an answer was sent (timeUp).
+      correction = [
+        limit ? `Time's up: the ${who} wanted it inside ${limit}.` : "Time's up.",
+        `The script says: ${sentence(scriptSays(question, script))}`,
+      ].join(' ');
+    } else {
+      correction =
+        limit === null
+          ? 'Right answer, but too slow.'
+          : `Right answer, but the ${who} wanted it inside ${limit}.`;
+    }
   } else if (question.kind === 'list') {
     const named = new Set(result.matched);
     const missed = question.accepted_answers.map((a) => a.answer).filter((a) => !named.has(a));

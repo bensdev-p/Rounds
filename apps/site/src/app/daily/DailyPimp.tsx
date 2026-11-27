@@ -9,11 +9,13 @@ import {
   localDayKey,
   longDay,
   MAX_ANSWER_LENGTH,
+  PERSONAS,
   phiWarning,
   pickDailyLadder,
   pickDailyScript,
   startLadder,
   submitAnswer,
+  timeUp,
   type DayKey,
   type GradeResult,
   type LadderState,
@@ -40,8 +42,21 @@ import { DailyResult } from './DailyResult.tsx';
 import { loadRun, saveRun, type SavedRun } from './saved.ts';
 import { TesterSignIn } from './TesterSignIn.tsx';
 
-/** Every visitor plays as the patient attending: untimed, as the app's default. */
-const PERSONA = 'teacher';
+/**
+ * The same attending for everyone, so scores compare: the Internist, 30
+ * seconds a question (developer's decision, 27 Nov 2026). The clock counts
+ * down per question; at 0:00 the ladder ends on a slow miss.
+ */
+const PERSONA = 'internist';
+const LIMIT_MS = PERSONAS[PERSONA].time_limit_ms ?? 30_000;
+
+/** What a timed-out rung was "graded": nothing was sent. */
+const TIME_UP: GradeResult = {
+  grade: 'incorrect',
+  reason: 'Time ran out',
+  matched: [],
+  confused_with_script_id: null,
+};
 
 type Account = { kind: 'none' } | { kind: 'anonymous' } | { kind: 'email'; email: string };
 
@@ -178,6 +193,12 @@ export function DailyPimp() {
           </p>
           {view.name === 'waiting' ? <WaitingNote view={view} onSignOut={signOut} /> : null}
           {view.name === 'playing' ? (
+            <p className="small">
+              The {PERSONAS[PERSONA].label} is asking: {Math.round(LIMIT_MS / 1000)} seconds a
+              question.
+            </p>
+          ) : null}
+          {view.name === 'playing' ? (
             <AccountLine account={view.account} inReview={inReview} onSignOut={signOut} />
           ) : null}
           {view.name === 'error' ? (
@@ -285,8 +306,9 @@ function AccountLine({
   return <p className="small hide-phone">Sign in and your result is kept with your practice.</p>;
 }
 
+/** Time left, rounded up: 0:30 when a question appears, 0:00 when it runs out. */
 function clock(ms: number): string {
-  const s = Math.max(0, Math.floor(ms / 1000));
+  const s = Math.max(0, Math.ceil(ms / 1000));
   return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`;
 }
 
@@ -313,24 +335,43 @@ function PlayPanel({
   const [grading, setGrading] = useState(false);
   const [rejected, setRejected] = useState<string | null>(null);
   const [now, setNow] = useState(() => Date.now());
-  const startedAt = useRef(Date.now());
   const shownAt = useRef(Date.now());
+  // While an answer is being graded the clock holds where it stopped.
+  const [heldAt, setHeldAt] = useState<number | null>(null);
+  const finished = useRef(false);
   const input = useRef<HTMLTextAreaElement>(null);
 
   useEffect(() => {
-    const timer = setInterval(() => setNow(Date.now()), 500);
+    const timer = setInterval(() => setNow(Date.now()), 250);
     return () => clearInterval(timer);
   }, []);
 
   const question = currentQuestion(ladder);
+  const elapsed = heldAt ?? now - shownAt.current;
+  const left = LIMIT_MS - elapsed;
   const warning = phiWarning(detectPhi(answer)) ?? rejected;
 
   const states: RungState[] = ladder.questions.map((_, i) =>
     i < ladder.index ? 'done' : i === ladder.index ? 'now' : '',
   );
 
+  function finish(next: LadderState, last: { answer: string; result: GradeResult }) {
+    finished.current = true;
+    const run = runFrom(day, content, next, last);
+    saveRun(run);
+    if (account.kind === 'email') void keepWithPractice(client, content, next);
+    onDone(run);
+  }
+
+  // 0:00 before an answer was sent: the ladder ends, too slow.
+  useEffect(() => {
+    if (left > 0 || grading || heldAt !== null || finished.current) return;
+    if (ladder.status !== 'in_progress') return;
+    finish(timeUp(ladder), { answer: '', result: TIME_UP });
+  });
+
   async function submit(dontKnow: boolean) {
-    if (!question || grading) return;
+    if (!question || grading || finished.current) return;
     const text = dontKnow ? '' : answer.trim();
     if (!dontKnow && (!text || phiWarning(detectPhi(text)))) return;
     // Time to answer stops at submit; grading time doesn't count.
@@ -340,6 +381,7 @@ function PlayPanel({
       graded = { result: gradeLocally(question, '', content.confusables), grader: 'local' };
     } else {
       setGrading(true);
+      setHeldAt(elapsed_ms);
       try {
         // Grading needs a session: a visitor with no account gets an anonymous one.
         if (account.kind === 'none') {
@@ -350,6 +392,9 @@ function PlayPanel({
       } catch (error) {
         if (error instanceof GradeRejectedError) {
           setGrading(false);
+          // Back to answering: the clock carries on from where it held.
+          shownAt.current = Date.now() - elapsed_ms;
+          setHeldAt(null);
           setRejected(
             'That answer looks like it contains patient details. Remove them and try again.',
           );
@@ -361,19 +406,18 @@ function PlayPanel({
     }
 
     const next = submitAnswer(ladder, { answer: text, elapsed_ms, ...graded });
+    if (next.status !== 'in_progress') {
+      finish(next, { answer: text, result: graded.result });
+      return;
+    }
     setGrading(false);
     setRejected(null);
     setAnswer('');
     shownAt.current = Date.now();
-    if (next.status === 'in_progress') {
-      setLadder(next);
-      input.current?.focus();
-      return;
-    }
-    const run = runFrom(day, content, next, { answer: text, result: graded.result });
-    saveRun(run);
-    if (account.kind === 'email') void keepWithPractice(client, content, next);
-    onDone(run);
+    setNow(shownAt.current);
+    setHeldAt(null);
+    setLadder(next);
+    input.current?.focus();
   }
 
   if (!question) return null;
@@ -385,8 +429,13 @@ function PlayPanel({
           {content.script.name}
           {inReview ? <span className="t3"> · Not yet reviewed</span> : null}
         </span>
-        <span className="num t2" style={{ fontSize: 18 }} aria-label="Time">
-          {clock(now - startedAt.current)}
+        <span
+          className="num t2"
+          style={{ fontSize: 18 }}
+          role="timer"
+          aria-label={`Time left ${clock(left)}`}
+        >
+          {clock(left)}
         </span>
       </div>
       <div

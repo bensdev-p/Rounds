@@ -132,6 +132,36 @@ export function submitAnswer(state: LadderState, submitted: SubmittedAnswer): La
   return { ...state, index: nextIndex, attempts: [...state.attempts, attempt], status };
 }
 
+/**
+ * The time limit ran out before an answer was sent: the ladder ends on a
+ * `slow` miss, with nothing graded. Only for a timed ladder.
+ */
+export function timeUp(state: LadderState): LadderState {
+  const question = currentQuestion(state);
+  if (!question) throw new LadderError(`Ladder is ${state.status}; no question to answer`);
+  if (state.time_limit_ms === null)
+    throw new LadderError('An untimed ladder cannot run out of time');
+  const attempt: Attempt = {
+    question_id: question.id,
+    answer: '',
+    elapsed_ms: state.time_limit_ms,
+    grade: 'incorrect',
+    reason: 'Time ran out',
+    credit: 0,
+    passed: false,
+    miss_tag: 'slow',
+    matched: [],
+    grader: 'local',
+    grader_version: null,
+  };
+  return {
+    ...state,
+    index: state.index + 1,
+    attempts: [...state.attempts, attempt],
+    status: 'missed',
+  };
+}
+
 /** Rungs whose question was passed, in ladder order. */
 export function clearedRungs(state: LadderState): Rung[] {
   const passedIds = new Set(state.attempts.filter((a) => a.passed).map((a) => a.question_id));

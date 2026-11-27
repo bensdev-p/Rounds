@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { TEST_QUESTIONS, TEST_SCRIPTS } from '../fixtures/index.ts';
 import { confusablesFor, gradeLocally } from '../grading/localGrader.ts';
-import type { GradeResult } from '../schemas/attempt.ts';
+import { AttemptSchema, type GradeResult } from '../schemas/attempt.ts';
 import { RUNGS, type ListQuestion, type Question } from '../schemas/question.ts';
 import {
   bestRung,
@@ -13,6 +13,7 @@ import {
   pickLadder,
   startLadder,
   submitAnswer,
+  timeUp,
   type LadderState,
 } from './engine.ts';
 import { classifyMiss } from './missTags.ts';
@@ -207,6 +208,28 @@ describe('pickLadder', () => {
   it('scores rungs, not questions', () => {
     const picks = pickLadder(pool, { random: () => 0 });
     expect(ladderScore(answerCorrectly(startLadder(picks), RUNGS.length))).toBe(6);
+  });
+});
+
+describe('timeUp', () => {
+  it('ends a timed ladder on a slow miss at the current rung', () => {
+    let state = startLadder(TEST_QUESTIONS.slice(0, 6), 'internist');
+    state = answer(state, CORRECT['zorblax-syndrome.recall.1']!);
+    const ended = timeUp(state);
+    expect(ended.status).toBe('missed');
+    expect(ladderScore(ended)).toBe(1);
+    expect(endingMiss(ended)).toMatchObject({
+      question_id: 'zorblax-syndrome.second-order.1',
+      miss_tag: 'slow',
+      passed: false,
+      elapsed_ms: 30_000,
+    });
+    // Saved like any other attempt (a tester's run is kept with their practice).
+    expect(AttemptSchema.safeParse(endingMiss(ended)).success).toBe(true);
+  });
+
+  it('refuses an untimed ladder', () => {
+    expect(() => timeUp(startLadder(TEST_QUESTIONS.slice(0, 6), 'teacher'))).toThrow(LadderError);
   });
 });
 

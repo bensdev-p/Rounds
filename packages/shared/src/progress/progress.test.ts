@@ -336,6 +336,28 @@ describe('buildMissCard', () => {
     expect(card.correction).toBe('Right answer, but the Surgeon wanted it inside 10 seconds.');
   });
 
+  it('explains a timeout with the persona limit and the script', () => {
+    const question = byRung('recall');
+    const card = buildMissCard({
+      answer: '',
+      result: {
+        grade: 'incorrect',
+        reason: 'Time ran out',
+        matched: [],
+        confused_with_script_id: null,
+      },
+      missTag: 'slow',
+      question,
+      script,
+      confusables,
+      persona: 'internist',
+    });
+    expect(card.quote).toBeNull();
+    expect(card.correction).toMatch(
+      /^Time's up: the Internist wanted it inside 30 seconds\. The script says: /,
+    );
+  });
+
   it('shortens a long quote', () => {
     const question = byRung('management');
     const answer = 'word '.repeat(60);
