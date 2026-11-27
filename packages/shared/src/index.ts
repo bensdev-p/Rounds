@@ -27,3 +27,4 @@ export * from './voice/keyterms.ts';
 export * from './voice/voice.ts';
 export * from './voice/pcm.ts';
 export * from './anki/anki.ts';
+export * from './daily/daily.ts';

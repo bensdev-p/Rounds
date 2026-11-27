@@ -28,6 +28,7 @@ Content review and user testing are not gates: development doesn't wait for scri
 pnpm comes from corepack (version pinned in root `package.json`).
 - `pnpm install`
 - `pnpm dev`: run the mobile app in web mode (http://localhost:8081)
+- `pnpm site`: the website (`apps/site`, Next.js static export) at http://localhost:3000. `pnpm site:build` writes `apps/site/out`. `pnpm site:deploy` uploads it to Cloudflare Pages (pimpme.app): a hosted change, so get the developer's OK first (`docs/HOSTING.md` → Website). Buttons that point at the web app and the iPhone beta are set in `apps/site/src/lib/site.ts`
 - `pnpm start`: the everyday command. Checks Docker, starts the database, the grading server and the web app, and prints the address for a phone on the home Wi-Fi
 - `pnpm phone`: same, and prints the address to open on a phone on the home Wi-Fi (needs `pnpm db:start`; `pnpm functions:serve` for Claude grading)
 - `pnpm test`: unit tests (Vitest)

@@ -6,7 +6,14 @@
 import type { SupabaseClient } from '@supabase/supabase-js';
 import { z } from 'zod';
 import type { Database } from '../db/database.types.ts';
-import { parseRows, questionFromRow, scriptFromRow, type ParseResult } from '../db/rows.ts';
+import {
+  parseRows,
+  questionFromRow,
+  scriptFromRow,
+  type ParseResult,
+  type QuestionRow,
+  type ScriptRow,
+} from '../db/rows.ts';
 import type { Confusable } from '../grading/localGrader.ts';
 import { isFixtureScript } from '../fixtures/index.ts';
 import { ladderScore, type LadderState } from '../ladder/engine.ts';
@@ -138,12 +145,37 @@ export async function getLadderContent(
   }
   if (!scriptResult.data) return null;
 
-  const scriptParse = parseRows([scriptResult.data], scriptFromRow);
+  const content = ladderContentFromRows(
+    scriptResult.data,
+    unwrap(questionResult, 'Loading questions'),
+    onReject,
+  );
+  if (!content) return null;
+
+  const confusedIds = content.script.confused_with.map((c) => c.script_id);
+  if (confusedIds.length > 0) {
+    // Only approved scripts are visible, so drafts never show up as confusables.
+    const others = unwrap(
+      await client.from('illness_scripts').select('*').in('id', confusedIds),
+      'Loading related scripts',
+    );
+    content.confusables = confusablesFromRows(others, onReject);
+  }
+  return content;
+}
+
+/** Validates a script and its questions, keeping only questions that trace to the script. */
+function ladderContentFromRows(
+  scriptRow: ScriptRow,
+  questionRows: readonly QuestionRow[],
+  onReject: RejectHandler,
+): LadderContent | null {
+  const scriptParse = parseRows([scriptRow], scriptFromRow);
   onReject('illness_scripts', scriptParse.rejected);
   const script = scriptParse.items[0];
   if (!script) return null;
 
-  const questionParse = parseRows(unwrap(questionResult, 'Loading questions'), questionFromRow);
+  const questionParse = parseRows(questionRows, questionFromRow);
   const untraced: ParseResult<unknown>['rejected'] = [];
   const questions = questionParse.items.filter((q) => {
     const issues = traceQuestionToScript(q, script);
@@ -153,21 +185,67 @@ export async function getLadderContent(
     return issues.length === 0;
   });
   onReject('questions', [...questionParse.rejected, ...untraced]);
+  return { script, questions, confusables: [] };
+}
 
-  const confusedIds = script.confused_with.map((c) => c.script_id);
-  let confusables: Confusable[] = [];
-  if (confusedIds.length > 0) {
-    // Only approved scripts are visible, so drafts never show up as confusables.
-    const others = unwrap(
-      await client.from('illness_scripts').select('*').in('id', confusedIds),
-      'Loading related scripts',
-    );
-    const otherParse = parseRows(others, scriptFromRow);
-    onReject('illness_scripts', otherParse.rejected);
-    confusables = otherParse.items.map((s) => ({ script_id: s.id, names: [s.name, ...s.aliases] }));
-  }
+function confusablesFromRows(rows: readonly ScriptRow[], onReject: RejectHandler): Confusable[] {
+  const parsed = parseRows(rows, scriptFromRow);
+  onReject('illness_scripts', parsed.rejected);
+  return parsed.items.map((s) => ({ script_id: s.id, names: [s.name, ...s.aliases] }));
+}
 
-  return { script, questions, confusables };
+// ─── Daily pimp (M4.3) ──────────────────────────────────────────────────────
+
+/**
+ * The scripts the daily pimp may use for the caller: approved ones, plus
+ * in-review ones for testers. Works signed out. Pick the day's script from
+ * it with `pickDailyScript`.
+ */
+export async function getDailyPool(client: RoundsClient): Promise<string[]> {
+  const { data, error } = await client.rpc('daily_pool');
+  if (error) throw new RoundsApiError(`Loading the daily pool: ${error.message}`);
+  return z.array(ScriptIdSchema).parse(data ?? []);
+}
+
+/** The shape `daily_content()` returns: table rows, validated field by field below. */
+const DailyContentSchema = z.object({
+  script: z.looseObject({ id: z.string() }),
+  questions: z.array(z.looseObject({ id: z.string() })),
+  related: z.array(z.looseObject({ id: z.string() })),
+});
+
+/** One script from the caller's daily pool, ready for a ladder; null if it isn't in the pool. */
+export async function getDailyContent(
+  client: RoundsClient,
+  scriptId: string,
+  onReject: RejectHandler = warnRejected,
+): Promise<LadderContent | null> {
+  const { data, error } = await client.rpc('daily_content', {
+    p_script_id: ScriptIdSchema.parse(scriptId),
+  });
+  if (error) throw new RoundsApiError(`Loading the daily pimp: ${error.message}`);
+  if (data === null) return null;
+  const parsed = DailyContentSchema.safeParse(data);
+  if (!parsed.success) throw new RoundsApiError('Loading the daily pimp: unexpected response');
+  // These are table rows (to_jsonb); scriptFromRow and questionFromRow validate every field.
+  const content = ladderContentFromRows(
+    parsed.data.script as unknown as ScriptRow,
+    parsed.data.questions as unknown as QuestionRow[],
+    onReject,
+  );
+  if (!content) return null;
+  content.confusables = confusablesFromRows(
+    parsed.data.related as unknown as ScriptRow[],
+    onReject,
+  );
+  return content;
+}
+
+/** True when the signed-in, non-anonymous user's email is on the tester list. */
+export async function isTester(client: RoundsClient): Promise<boolean> {
+  const { data, error } = await client.rpc('is_tester');
+  if (error) throw new RoundsApiError(`Checking the tester list: ${error.message}`);
+  return data === true;
 }
 
 /** Starts a ladder session for the signed-in student. Returns the session id. */

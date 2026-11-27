@@ -519,6 +519,22 @@ export type Database = {
           },
         ];
       };
+      testers: {
+        Row: {
+          added_at: string;
+          email: string;
+        };
+        ComputedFields: never;
+        Insert: {
+          added_at?: string;
+          email: string;
+        };
+        Update: {
+          added_at?: string;
+          email?: string;
+        };
+        Relationships: [];
+      };
     };
     Views: {
       [_ in never]: never;
@@ -536,6 +552,8 @@ export type Database = {
         Args: { p_applied: Json; p_cards: Json; p_user: string };
         Returns: undefined;
       };
+      daily_content: { Args: { p_script_id: string }; Returns: Json };
+      daily_pool: { Args: Record<PropertyKey, never>; Returns: string[] };
       finish_ladder_session: {
         Args: {
           p_score: number;
@@ -556,6 +574,7 @@ export type Database = {
           isSetofReturn: false;
         };
       };
+      is_tester: { Args: Record<PropertyKey, never>; Returns: boolean };
       queue_anki_action: {
         Args: { p_kind: string; p_rung: string; p_script_id: string };
         Returns: string;

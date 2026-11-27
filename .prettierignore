@@ -7,3 +7,6 @@ pnpm-lock.yaml
 *.md
 expo-env.d.ts
 .expo-types
+apps/site/.next
+apps/site/out
+apps/site/next-env.d.ts
