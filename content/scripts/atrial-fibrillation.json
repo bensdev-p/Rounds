@@ -81,7 +81,12 @@
       "tachycardia-induced cardiomyopathy",
       "heart failure"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "atrial-flutter",
+        "how_to_tell_apart": "Atrial fibrillation is irregularly irregular with no organized P waves; atrial flutter is regular, with sawtooth waves and a ventricular rate often near 150."
+      }
+    ],
     "pearls": [
       "Direct oral anticoagulants are preferred over warfarin, except with a mechanical heart valve or moderate to severe mitral stenosis."
     ],

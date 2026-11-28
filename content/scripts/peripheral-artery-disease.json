@@ -1,0 +1,405 @@
+{
+  "script": {
+    "id": "peripheral-artery-disease",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Peripheral artery disease",
+    "aliases": [
+      "peripheral arterial disease",
+      "PAD"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Adults over 50, especially smokers and people with diabetes",
+      "risk_factors": [
+        "smoking",
+        "diabetes",
+        "hypertension",
+        "hyperlipidemia",
+        "older age",
+        "chronic kidney disease"
+      ]
+    },
+    "pathophysiology": "Atherosclerosis narrows the leg arteries, so blood flow cannot rise with exercise and the muscles become ischemic. Severe disease causes pain at rest, ulcers and gangrene.",
+    "timeline": {
+      "onset": "Gradual over years",
+      "course": "Most stay stable; a minority progress to limb-threatening ischemia; the risk of heart attack and stroke is high"
+    },
+    "key_findings": {
+      "history": [
+        "intermittent claudication: calf pain on walking, relieved by rest",
+        "rest pain in the foot, worse with the leg raised",
+        "nonhealing ulcers"
+      ],
+      "exam": [
+        "weak or absent pedal pulses",
+        "cool, hairless, shiny skin",
+        "delayed capillary refill",
+        "dependent rubor, with pallor on elevation",
+        "arterial ulcers on the toes and pressure points"
+      ],
+      "labs": [
+        "lipid panel and HbA1c"
+      ],
+      "imaging": [
+        "ankle-brachial index",
+        "toe-brachial index when the arteries are incompressible",
+        "duplex ultrasound, CT or MR angiography to plan revascularization"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "ankle-brachial index"
+      ],
+      "criteria": [
+        "an ABI of 0.90 or less is diagnostic; above 1.40 means stiff, incompressible arteries"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "supervised exercise therapy",
+        "stop smoking",
+        "high-intensity statin",
+        "antiplatelet therapy with aspirin or clopidogrel",
+        "blood pressure and diabetes control"
+      ],
+      "next_line": [
+        "cilostazol for claudication",
+        "revascularization, endovascular or bypass, for lifestyle-limiting claudication or limb-threatening ischemia",
+        "low-dose rivaroxaban with aspirin in selected patients"
+      ]
+    },
+    "complications": [
+      "chronic limb-threatening ischemia",
+      "amputation",
+      "myocardial infarction",
+      "stroke"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Neurogenic claudication from spinal stenosis improves with sitting or bending forward; vascular claudication improves with standing still.",
+      "Cilostazol is contraindicated in heart failure.",
+      "An ABI above 1.40 means stiff, calcified arteries, common in diabetes and kidney disease; use the toe-brachial index instead."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.history[0]"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2024 ACC/AHA/AACVPR/APMA/ABC/SCAI/SVM/SVN/SVS/SIR/VESS Guideline for the Management of Lower Extremity Peripheral Artery Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "peripheral-artery-disease.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 65-year-old smoker gets calf pain after walking two blocks that goes away when he stops. His pedal pulses are weak. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Peripheral artery disease",
+          "synonyms": [
+            "PAD",
+            "peripheral arterial disease",
+            "peripheral vascular disease",
+            "PVD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is calf pain on walking, relieved by rest, called?",
+      "source_fields": [
+        "key_findings.history[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "intermittent claudication",
+          "synonyms": [
+            "claudication"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for peripheral artery disease.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "smoking",
+          "synonyms": [
+            "smoker",
+            "tobacco"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "hyperlipidemia",
+          "synonyms": [
+            "high cholesterol",
+            "hypercholesterolemia",
+            "dyslipidemia"
+          ]
+        },
+        {
+          "answer": "older age",
+          "synonyms": [
+            "age",
+            "old age"
+          ]
+        },
+        {
+          "answer": "chronic kidney disease",
+          "synonyms": [
+            "CKD",
+            "kidney disease"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "peripheral-artery-disease.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which pain marks limb-threatening peripheral artery disease?",
+      "source_fields": [
+        "key_findings.history[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rest pain",
+          "synonyms": [
+            "pain at rest",
+            "foot pain at rest"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Spinal stenosis or vascular claudication: which improves just by standing still?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vascular claudication",
+          "synonyms": [
+            "vascular",
+            "peripheral artery disease",
+            "PAD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In peripheral artery disease, what color change appears when the leg hangs down?",
+      "source_fields": [
+        "key_findings.exam[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dependent rubor",
+          "synonyms": [
+            "rubor",
+            "redness"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "First test for peripheral artery disease?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ankle-brachial index",
+          "synonyms": [
+            "ABI",
+            "ankle brachial index"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What ankle-brachial index is diagnostic of peripheral artery disease?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "0.90 or less",
+          "synonyms": [
+            "0.9 or less",
+            "below 0.9",
+            "less than 0.9",
+            "under 0.9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two first-line treatments for claudication.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "supervised exercise therapy",
+          "synonyms": [
+            "supervised exercise",
+            "exercise",
+            "walking program"
+          ]
+        },
+        {
+          "answer": "stop smoking",
+          "synonyms": [
+            "smoking cessation",
+            "quit smoking"
+          ]
+        },
+        {
+          "answer": "high-intensity statin",
+          "synonyms": [
+            "statin",
+            "statins"
+          ]
+        },
+        {
+          "answer": "antiplatelet therapy",
+          "synonyms": [
+            "antiplatelet",
+            "aspirin",
+            "clopidogrel"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "peripheral-artery-disease.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug improves walking distance but is contraindicated in heart failure?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cilostazol",
+          "synonyms": [
+            "Pletal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A patient with diabetes has an ABI of 1.6. Which test do you use instead?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "toe-brachial index",
+          "synonyms": [
+            "toe brachial index",
+            "TBI",
+            "toe pressures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "peripheral-artery-disease.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a revascularization option for peripheral artery disease.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "endovascular",
+          "synonyms": [
+            "angioplasty",
+            "stenting",
+            "stent"
+          ]
+        },
+        {
+          "answer": "bypass",
+          "synonyms": [
+            "bypass surgery",
+            "surgical bypass"
+          ]
+        }
+      ]
+    }
+  ]
+}

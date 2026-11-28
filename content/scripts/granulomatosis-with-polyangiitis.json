@@ -77,7 +77,16 @@
       "saddle nose deformity",
       "subglottic stenosis"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "microscopic-polyangiitis",
+        "how_to_tell_apart": "Granulomatosis with polyangiitis involves the sinuses and nose, has granulomas and is usually PR3-ANCA; microscopic polyangiitis has no granulomas or upper airway disease and is usually MPO-ANCA."
+      },
+      {
+        "script_id": "eosinophilic-granulomatosis-with-polyangiitis",
+        "how_to_tell_apart": "Granulomatosis with polyangiitis has destructive sinus and nose disease without asthma or eosinophilia and is usually c-ANCA; EGPA comes with asthma and marked eosinophilia and is p-ANCA positive in some."
+      }
+    ],
     "pearls": [
       "Upper airway disease separates granulomatosis with polyangiitis from microscopic polyangiitis, which has no granulomas and is usually MPO-ANCA (p-ANCA).",
       "c-ANCA is aimed at proteinase 3.",
@@ -246,6 +255,26 @@
             "anti-MPO",
             "myeloperoxidase",
             "MPO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Granulomatosis with polyangiitis or EGPA: which comes without asthma or eosinophilia?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Granulomatosis with polyangiitis",
+          "synonyms": [
+            "GPA",
+            "Wegener granulomatosis",
+            "Wegener"
           ]
         }
       ]

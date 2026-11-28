@@ -79,7 +79,12 @@
       "thoracic aortic aneurysm",
       "glucocorticoid side effects"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "takayasu-arteritis",
+        "how_to_tell_apart": "Giant cell arteritis affects people over 50 and favors the temporal and other cranial arteries; Takayasu arteritis affects women under 40 and narrows the aorta and its branches, causing weak arm pulses."
+      }
+    ],
     "pearls": [
       "Start steroids before the biopsy; the biopsy stays positive for at least 1 to 2 weeks.",
       "A biopsy can be falsely negative because the inflammation leaves gaps (skip lesions).",
@@ -260,6 +265,25 @@
             "granulomatous inflammation",
             "granulomas",
             "giant cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Giant cell arteritis or Takayasu arteritis: which affects people over 50 and the temporal arteries?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Giant cell arteritis",
+          "synonyms": [
+            "GCA",
+            "temporal arteritis"
           ]
         }
       ]

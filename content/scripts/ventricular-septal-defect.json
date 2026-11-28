@@ -72,6 +72,14 @@
       {
         "script_id": "tetralogy-of-fallot",
         "how_to_tell_apart": "An isolated VSD shunts left to right, so the child is pink with a holosystolic murmur; tetralogy of Fallot adds outflow obstruction that drives blood right to left and causes cyanosis."
+      },
+      {
+        "script_id": "atrial-septal-defect",
+        "how_to_tell_apart": "A VSD gives a harsh holosystolic murmur at the left lower sternal border in infancy; an ASD gives wide fixed splitting of S2 and a soft pulmonary flow murmur, often found in adults."
+      },
+      {
+        "script_id": "patent-ductus-arteriosus",
+        "how_to_tell_apart": "A VSD gives a holosystolic murmur at the left lower sternal border; a PDA gives a continuous machine-like murmur below the left clavicle with bounding pulses."
       }
     ],
     "pearls": [
@@ -231,6 +239,23 @@
           "synonyms": [
             "ventricular septal defect",
             "isolated VSD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "VSD or ASD: which gives wide fixed splitting of S2?",
+      "source_fields": [
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ASD",
+          "synonyms": [
+            "atrial septal defect"
           ]
         }
       ]

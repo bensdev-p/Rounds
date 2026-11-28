@@ -1,0 +1,374 @@
+{
+  "script": {
+    "id": "iga-vasculitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "IgA vasculitis",
+    "aliases": [
+      "Henoch-Schönlein purpura",
+      "HSP"
+    ],
+    "systems": [
+      "cardio",
+      "renal",
+      "derm"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children aged 3 to 15, often after an upper respiratory infection; the most common vasculitis of childhood",
+      "risk_factors": [
+        "recent upper respiratory infection",
+        "childhood",
+        "autumn and winter"
+      ]
+    },
+    "pathophysiology": "IgA immune complexes deposit in small vessels of the skin, gut, joints and kidneys, causing a leukocytoclastic vasculitis.",
+    "timeline": {
+      "onset": "Days to weeks after a respiratory infection",
+      "course": "Usually settles in about 4 weeks; kidney disease can persist, more often in adults"
+    },
+    "key_findings": {
+      "history": [
+        "rash on the buttocks and legs",
+        "joint pain, often in the knees and ankles",
+        "colicky abdominal pain",
+        "recent upper respiratory infection"
+      ],
+      "exam": [
+        "palpable purpura on the buttocks and lower legs with a normal platelet count",
+        "arthritis",
+        "swelling of the hands, feet or scrotum"
+      ],
+      "labs": [
+        "normal platelet count and clotting",
+        "urinalysis with hematuria or proteinuria",
+        "raised serum IgA in some"
+      ],
+      "imaging": [
+        "abdominal ultrasound for intussusception if pain is severe"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical diagnosis",
+        "skin or kidney biopsy showing IgA deposits"
+      ],
+      "criteria": [
+        "palpable purpura, mainly on the legs, plus at least one of abdominal pain, arthritis or arthralgia, kidney involvement, or IgA deposits on biopsy"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "supportive care: rest, fluids, and acetaminophen or NSAIDs for joint pain (avoid NSAIDs with kidney involvement)",
+        "monitor the urine and blood pressure for 6 to 12 months"
+      ],
+      "next_line": [
+        "glucocorticoids for severe abdominal pain",
+        "immunosuppression for significant nephritis"
+      ]
+    },
+    "complications": [
+      "intussusception, usually ileoileal",
+      "glomerulonephritis like IgA nephropathy",
+      "chronic kidney disease, rarely"
+    ],
+    "confused_with": [
+      {
+        "script_id": "kawasaki-disease",
+        "how_to_tell_apart": "IgA vasculitis gives palpable purpura on the legs, joint pain, belly pain and hematuria; Kawasaki disease gives prolonged fever, conjunctivitis, oral changes and coronary aneurysms."
+      }
+    ],
+    "pearls": [
+      "Palpable purpura with a normal platelet count separates it from thrombocytopenic purpura.",
+      "Intussusception in IgA vasculitis is usually ileoileal, unlike the ileocolic type in idiopathic intussusception.",
+      "Monitor the urine for months, because kidney disease can appear after the rash has faded."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "EULAR/PRINTO/PRES criteria for Henoch-Schönlein purpura, childhood polyarteritis nodosa, childhood Wegener granulomatosis and childhood Takayasu arteritis: Ankara 2008. Part II: Final classification criteria"
+      },
+      {
+        "title": "Nelson Textbook of Pediatrics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "iga-vasculitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 6-year-old has palpable purpura on the buttocks and legs, sore knees and belly pain two weeks after a cold. Platelets are normal. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IgA vasculitis",
+          "synonyms": [
+            "Henoch-Schönlein purpura",
+            "Henoch-Schonlein purpura",
+            "Henoch-Schoenlein purpura",
+            "Henoch Schonlein",
+            "HSP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the most common vasculitis of childhood?",
+      "source_fields": [
+        "name",
+        "epidemiology.who"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IgA vasculitis",
+          "synonyms": [
+            "Henoch-Schönlein purpura",
+            "Henoch-Schonlein purpura",
+            "Henoch-Schoenlein purpura",
+            "Henoch Schonlein",
+            "HSP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What kind of small-vessel vasculitis do the immune complexes cause in IgA vasculitis?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "leukocytoclastic vasculitis",
+          "synonyms": [
+            "leukocytoclastic",
+            "immune complex vasculitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three tissues that IgA vasculitis affects.",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "skin",
+          "synonyms": [
+            "rash"
+          ]
+        },
+        {
+          "answer": "gut",
+          "synonyms": [
+            "bowel",
+            "bowels",
+            "intestine",
+            "intestines",
+            "GI",
+            "GI tract"
+          ]
+        },
+        {
+          "answer": "joints",
+          "synonyms": [
+            "joint"
+          ]
+        },
+        {
+          "answer": "kidneys",
+          "synonyms": [
+            "kidney",
+            "renal"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "iga-vasculitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "IgA vasculitis or Kawasaki disease: which gives palpable purpura and hematuria?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IgA vasculitis",
+          "synonyms": [
+            "Henoch-Schönlein purpura",
+            "Henoch-Schonlein purpura",
+            "Henoch-Schoenlein purpura",
+            "Henoch Schonlein",
+            "HSP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In IgA vasculitis, what is the platelet count?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "normal",
+          "synonyms": [
+            "normal platelets",
+            "normal platelet count"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In IgA vasculitis, which test is repeated for months after the rash fades?",
+      "source_fields": [
+        "key_findings.labs[1]",
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "urinalysis",
+          "synonyms": [
+            "urine test",
+            "urine dipstick",
+            "urine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does a skin biopsy show in IgA vasculitis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IgA deposits",
+          "synonyms": [
+            "IgA deposition",
+            "leukocytoclastic vasculitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "What treatment do most children with IgA vasculitis need?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "supportive care",
+          "synonyms": [
+            "supportive",
+            "rest and fluids",
+            "analgesia",
+            "pain control",
+            "acetaminophen",
+            "NSAIDs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "In IgA vasculitis, which gut symptom is a reason to give glucocorticoids?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "severe abdominal pain",
+          "synonyms": [
+            "abdominal pain",
+            "severe belly pain",
+            "GI involvement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which bowel complication of IgA vasculitis is feared?",
+      "source_fields": [
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "intussusception",
+          "synonyms": [
+            "ileoileal intussusception"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "iga-vasculitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In IgA vasculitis, which type of intussusception occurs?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ileoileal",
+          "synonyms": [
+            "ileo-ileal",
+            "small bowel"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,425 @@
+{
+  "script": {
+    "id": "atrioventricular-block",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Atrioventricular block",
+    "aliases": [
+      "heart block",
+      "AV block"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Older adults most often; any age with drugs, infection or congenital disease",
+      "risk_factors": [
+        "degenerative fibrosis of the conduction system with age",
+        "inferior myocardial infarction",
+        "AV nodal blocking drugs: beta blockers, calcium channel blockers, digoxin",
+        "hyperkalemia",
+        "Lyme carditis",
+        "high vagal tone in athletes",
+        "neonatal lupus from maternal anti-Ro antibodies",
+        "sarcoidosis"
+      ]
+    },
+    "pathophysiology": "Conduction from atria to ventricles is delayed or blocked in the AV node or below it, in the His-Purkinje system. Block in the AV node (first-degree, Mobitz I) is usually benign; Mobitz II and most acquired third-degree block are below the node (infranodal) and unstable, while congenital block and block after an inferior MI are often nodal with a junctional escape rhythm.",
+    "timeline": {
+      "onset": "Sudden or gradual",
+      "course": "First-degree and Mobitz I are usually benign; Mobitz II and third-degree block can cause syncope and death"
+    },
+    "key_findings": {
+      "history": [
+        "often no symptoms",
+        "fatigue",
+        "dizziness",
+        "syncope (Stokes-Adams attacks)"
+      ],
+      "exam": [
+        "bradycardia",
+        "cannon A waves in the neck in complete heart block",
+        "varying loudness of S1 in complete heart block"
+      ],
+      "labs": [
+        "electrolytes, especially potassium",
+        "Lyme serology where relevant",
+        "digoxin level if taking it"
+      ],
+      "imaging": [
+        "ECG: first-degree, PR over 200 ms; Mobitz I, PR lengthens until a beat drops; Mobitz II, a sudden dropped beat with a constant PR; third-degree, P waves and QRS complexes independent"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "12-lead ECG",
+        "ambulatory ECG monitoring for intermittent block"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "treat reversible causes: stop AV nodal blockers, treat Lyme disease",
+        "atropine for symptomatic bradycardia",
+        "a beta-agonist infusion such as dopamine, epinephrine or isoproterenol if atropine fails",
+        "transcutaneous or transvenous pacing if unstable"
+      ],
+      "next_line": [
+        "permanent pacemaker for Mobitz II, high-grade AV block, third-degree block, or symptomatic block without a reversible cause"
+      ]
+    },
+    "complications": [
+      "syncope",
+      "sudden cardiac death",
+      "heart failure"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Mobitz I (Wenckebach): the PR interval lengthens beat by beat until a QRS drops.",
+      "Mobitz II rarely responds to atropine, because the block is below the AV node.",
+      "Lyme carditis causes reversible heart block that usually resolves with antibiotics."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.imaging[0]"
+      ],
+      "MS3": [
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2018 ACC/AHA/HRS Guideline on the Evaluation and Management of Patients With Bradycardia and Cardiac Conduction Delay"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "atrioventricular-block.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "The PR interval lengthens with each beat until a QRS drops, then the cycle repeats. Which rhythm?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mobitz I",
+          "synonyms": [
+            "Mobitz type I",
+            "Mobitz 1",
+            "Wenckebach",
+            "second-degree AV block Mobitz I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "P waves and QRS complexes march independently, with a slow ventricular rate. Which rhythm?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "third-degree",
+          "synonyms": [
+            "third-degree AV block",
+            "third degree heart block",
+            "complete heart block",
+            "complete AV block",
+            "3rd degree"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of AV block.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "degenerative fibrosis",
+          "synonyms": [
+            "fibrosis",
+            "aging",
+            "age"
+          ]
+        },
+        {
+          "answer": "inferior myocardial infarction",
+          "synonyms": [
+            "inferior MI",
+            "myocardial infarction",
+            "MI",
+            "ischemia",
+            "heart attack"
+          ]
+        },
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker"
+          ]
+        },
+        {
+          "answer": "calcium channel blockers",
+          "synonyms": [
+            "calcium channel blocker",
+            "verapamil",
+            "diltiazem"
+          ]
+        },
+        {
+          "answer": "digoxin",
+          "synonyms": []
+        },
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        },
+        {
+          "answer": "Lyme carditis",
+          "synonyms": [
+            "Lyme disease",
+            "Lyme"
+          ]
+        },
+        {
+          "answer": "high vagal tone",
+          "synonyms": [
+            "vagal tone",
+            "athletes"
+          ]
+        },
+        {
+          "answer": "neonatal lupus",
+          "synonyms": [
+            "anti-Ro",
+            "maternal lupus"
+          ]
+        },
+        {
+          "answer": "sarcoidosis",
+          "synonyms": [
+            "sarcoid"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "atrioventricular-block.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What PR interval defines first-degree AV block?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "over 200 ms",
+          "synonyms": [
+            "more than 200 ms",
+            "greater than 200 ms",
+            "over 200 milliseconds",
+            "more than 200 milliseconds",
+            "over 0.2 seconds",
+            "one big box"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Mobitz I or Mobitz II: which drops a beat with a constant PR interval?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mobitz II",
+          "synonyms": [
+            "Mobitz type II",
+            "Mobitz 2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Why does Mobitz II rarely respond to atropine?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "below the AV node",
+          "synonyms": [
+            "infranodal",
+            "His-Purkinje",
+            "below the node",
+            "block below the AV node"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Intermittent dizziness and a normal resting ECG. Which test?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ambulatory ECG monitoring",
+          "synonyms": [
+            "Holter monitor",
+            "Holter",
+            "event monitor",
+            "ambulatory monitoring",
+            "loop recorder"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Heart block after a tick bite in an area where Lyme disease is common. Which blood test?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Lyme serology",
+          "synonyms": [
+            "Lyme antibodies",
+            "Lyme test",
+            "Borrelia serology"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Symptomatic bradycardia from AV block. First drug?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atropine",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.management.2",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two indications for a permanent pacemaker in AV block.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mobitz II",
+          "synonyms": [
+            "Mobitz type II",
+            "Mobitz 2"
+          ]
+        },
+        {
+          "answer": "high-grade AV block",
+          "synonyms": [
+            "high-grade block",
+            "high grade AV block"
+          ]
+        },
+        {
+          "answer": "third-degree block",
+          "synonyms": [
+            "third-degree",
+            "third degree",
+            "complete heart block"
+          ]
+        },
+        {
+          "answer": "symptomatic block",
+          "synonyms": [
+            "symptomatic bradycardia",
+            "symptomatic heart block"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "atrioventricular-block.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which neck sign appears in complete heart block?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cannon A waves",
+          "synonyms": [
+            "cannon waves",
+            "cannon a waves"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrioventricular-block.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Congenital complete heart block in a newborn is linked to which maternal antibody?",
+      "source_fields": [
+        "epidemiology.risk_factors[6]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "anti-Ro",
+          "synonyms": [
+            "anti-SSA",
+            "anti-Ro/SSA",
+            "SSA"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -78,7 +78,12 @@
       "myocarditis",
       "sudden death"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "iga-vasculitis",
+        "how_to_tell_apart": "Kawasaki disease gives prolonged fever, conjunctivitis, oral changes and coronary aneurysms; IgA vasculitis gives palpable purpura on the legs, joint pain, belly pain and hematuria."
+      }
+    ],
     "pearls": [
       "Kawasaki disease is one of the few reasons to give aspirin to a child despite the risk of Reye syndrome.",
       "The features spell CRASH and burn: conjunctivitis, rash, adenopathy, strawberry tongue, hands and feet, with fever (burn) for 5 days.",
@@ -258,6 +263,24 @@
             "nonexudative",
             "non-exudative",
             "dry"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Kawasaki disease or IgA vasculitis: which gives prolonged fever with conjunctivitis rather than palpable purpura?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kawasaki disease",
+          "synonyms": [
+            "Kawasaki"
           ]
         }
       ]

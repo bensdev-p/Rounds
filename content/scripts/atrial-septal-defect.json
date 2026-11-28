@@ -1,0 +1,360 @@
+{
+  "script": {
+    "id": "atrial-septal-defect",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Atrial septal defect",
+    "aliases": [
+      "ASD",
+      "secundum ASD"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds",
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Children and adults, more often female; often first found in adulthood",
+      "risk_factors": [
+        "trisomy 21",
+        "Holt-Oram syndrome",
+        "fetal alcohol syndrome"
+      ]
+    },
+    "pathophysiology": "A hole in the atrial septum, most often ostium secundum, lets blood shunt left to right. The right heart and lungs carry extra volume and the right ventricle enlarges. Rarely, pulmonary hypertension reverses the shunt (Eisenmenger syndrome).",
+    "timeline": {
+      "onset": "Often silent in childhood",
+      "course": "Dyspnea and atrial arrhythmias often start in adulthood"
+    },
+    "key_findings": {
+      "history": [
+        "often no symptoms",
+        "exertional dyspnea in adults",
+        "palpitations from atrial fibrillation or flutter",
+        "stroke from paradoxical embolism"
+      ],
+      "exam": [
+        "wide, fixed splitting of S2",
+        "systolic ejection murmur at the left upper sternal border from extra pulmonary flow"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram with a bubble study showing the defect and shunt",
+        "ECG with right axis deviation and incomplete right bundle branch block",
+        "transesophageal echo to size the defect"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram with Doppler, plus a bubble study if needed",
+        "transesophageal echocardiogram"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "closure, by catheter device for secundum defects or by surgery, when the right heart is enlarged"
+      ],
+      "next_line": [
+        "observation of small defects without right heart enlargement",
+        "closure is contraindicated once severe pulmonary hypertension has reversed the shunt"
+      ]
+    },
+    "complications": [
+      "right heart failure",
+      "atrial fibrillation",
+      "paradoxical embolism",
+      "Eisenmenger syndrome"
+    ],
+    "confused_with": [
+      {
+        "script_id": "ventricular-septal-defect",
+        "how_to_tell_apart": "An ASD gives wide fixed splitting of S2 and a soft pulmonary flow murmur, often found in adults; a VSD gives a harsh holosystolic murmur at the left lower sternal border in infancy."
+      }
+    ],
+    "pearls": [
+      "Fixed splitting of S2 is the hallmark: the split does not change with breathing.",
+      "The murmur comes from extra flow across the pulmonary valve, not from blood crossing the defect.",
+      "Ostium primum defects are part of the atrioventricular canal defects seen in Down syndrome."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "management.next_line[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Moss & Adams' Heart Disease in Infants, Children, and Adolescents"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline for the Management of Adults With Congenital Heart Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "atrial-septal-defect.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 30-year-old woman with exertional dyspnea has wide, fixed splitting of S2 and a soft systolic murmur at the left upper sternal border. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Atrial septal defect",
+          "synonyms": [
+            "ASD",
+            "secundum ASD",
+            "ostium secundum defect"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the hallmark heart sound of an ASD?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fixed splitting of S2",
+          "synonyms": [
+            "fixed split S2",
+            "wide fixed splitting",
+            "fixed splitting",
+            "fixed split"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What is the most common type of ASD?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ostium secundum",
+          "synonyms": [
+            "secundum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of an ASD.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right heart failure",
+          "synonyms": [
+            "right ventricular failure"
+          ]
+        },
+        {
+          "answer": "atrial fibrillation",
+          "synonyms": [
+            "afib",
+            "AF",
+            "atrial flutter"
+          ]
+        },
+        {
+          "answer": "paradoxical embolism",
+          "synonyms": [
+            "paradoxical stroke",
+            "stroke"
+          ]
+        },
+        {
+          "answer": "Eisenmenger syndrome",
+          "synonyms": [
+            "Eisenmenger",
+            "pulmonary hypertension"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "atrial-septal-defect.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "ASD or VSD: which gives fixed splitting of S2?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ASD",
+          "synonyms": [
+            "atrial septal defect"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What causes the systolic murmur of an ASD?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "extra flow across the pulmonary valve",
+          "synonyms": [
+            "increased pulmonary flow",
+            "flow across the pulmonary valve",
+            "pulmonary flow murmur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms an ASD?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "bubble study",
+            "echo",
+            "TTE",
+            "TEE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which conduction pattern does the ECG often show in an ASD?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "incomplete right bundle branch block",
+          "synonyms": [
+            "incomplete RBBB",
+            "right bundle branch block",
+            "RBBB"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Secundum ASD with an enlarged right ventricle. Treatment?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "closure",
+          "synonyms": [
+            "device closure",
+            "catheter closure",
+            "percutaneous closure",
+            "surgical closure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "When is ASD closure contraindicated?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "severe pulmonary hypertension",
+          "synonyms": [
+            "Eisenmenger syndrome",
+            "Eisenmenger",
+            "reversed shunt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which ASD type is seen in Down syndrome?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ostium primum",
+          "synonyms": [
+            "primum",
+            "atrioventricular canal defect",
+            "AV canal defect"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-septal-defect.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "By what mechanism can an ASD cause a stroke?",
+      "source_fields": [
+        "complications[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "paradoxical embolism",
+          "synonyms": [
+            "paradoxical embolus",
+            "paradoxical emboli"
+          ]
+        }
+      ]
+    }
+  ]
+}

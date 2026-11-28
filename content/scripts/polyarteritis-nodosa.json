@@ -1,0 +1,339 @@
+{
+  "script": {
+    "id": "polyarteritis-nodosa",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Polyarteritis nodosa",
+    "aliases": [
+      "PAN"
+    ],
+    "systems": [
+      "cardio",
+      "renal"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Middle-aged adults; linked to hepatitis B",
+      "risk_factors": [
+        "hepatitis B infection",
+        "hairy cell leukemia",
+        "hepatitis C, less often"
+      ]
+    },
+    "pathophysiology": "Necrotizing inflammation of medium-sized muscular arteries, with segmental lesions of different ages and microaneurysms. It spares the lungs and the glomeruli and is not associated with ANCA.",
+    "timeline": {
+      "onset": "Weeks to months of systemic symptoms",
+      "course": "Fatal untreated; most remit with treatment and rarely relapse"
+    },
+    "key_findings": {
+      "history": [
+        "fever, weight loss and muscle pain",
+        "abdominal pain after meals from mesenteric ischemia",
+        "testicular pain",
+        "foot or wrist drop from mononeuritis multiplex"
+      ],
+      "exam": [
+        "livedo reticularis",
+        "subcutaneous nodules and skin ulcers",
+        "new hypertension"
+      ],
+      "labs": [
+        "raised ESR or CRP",
+        "negative ANCA",
+        "positive hepatitis B surface antigen in some"
+      ],
+      "imaging": [
+        "mesenteric or renal angiography with microaneurysms and stenoses"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "biopsy of affected skin, nerve or muscle showing necrotizing arteritis",
+        "angiography showing microaneurysms"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "glucocorticoids, plus cyclophosphamide for severe disease",
+        "hepatitis B related disease: antivirals with a short course of glucocorticoids"
+      ],
+      "next_line": [
+        "azathioprine or methotrexate for maintenance"
+      ]
+    },
+    "complications": [
+      "bowel infarction",
+      "kidney infarction and hypertension",
+      "myocardial infarction",
+      "stroke"
+    ],
+    "confused_with": [
+      {
+        "script_id": "microscopic-polyangiitis",
+        "how_to_tell_apart": "Polyarteritis nodosa inflames medium arteries, spares the lungs and glomeruli and is ANCA-negative; microscopic polyangiitis inflames small vessels, causes glomerulonephritis and lung hemorrhage and is usually MPO-ANCA positive."
+      }
+    ],
+    "pearls": [
+      "Polyarteritis nodosa spares the lungs.",
+      "Its classic association is hepatitis B.",
+      "Angiography shows a beaded, rosary-like pattern of microaneurysms in the renal and mesenteric arteries."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[1]"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "epidemiology.risk_factors[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Polyarteritis Nodosa"
+      },
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "polyarteritis-nodosa.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 50-year-old with hepatitis B has fever, belly pain after eating, foot drop and new hypertension. ANCA is negative. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Polyarteritis nodosa",
+          "synonyms": [
+            "PAN",
+            "polyarteritis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which viral infection is linked to polyarteritis nodosa?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hepatitis B",
+          "synonyms": [
+            "HBV",
+            "hep B",
+            "hepatitis B virus"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What size of artery does polyarteritis nodosa affect?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "medium-sized",
+          "synonyms": [
+            "medium",
+            "medium arteries",
+            "medium vessels",
+            "medium-sized muscular arteries"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which organ does polyarteritis nodosa spare?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lungs",
+          "synonyms": [
+            "lung",
+            "pulmonary",
+            "glomeruli"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Polyarteritis nodosa or microscopic polyangiitis: which is ANCA-negative and spares the glomeruli?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Polyarteritis nodosa",
+          "synonyms": [
+            "PAN",
+            "polyarteritis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In polyarteritis nodosa, what is foot or wrist drop from patchy nerve infarcts called?",
+      "source_fields": [
+        "key_findings.history[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mononeuritis multiplex",
+          "synonyms": [
+            "mononeuropathy multiplex"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does mesenteric or renal angiography show in polyarteritis nodosa?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "microaneurysms",
+          "synonyms": [
+            "microaneurysm",
+            "aneurysms",
+            "rosary sign",
+            "beading"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does a biopsy of affected tissue show in polyarteritis nodosa?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "necrotizing arteritis",
+          "synonyms": [
+            "necrotizing vasculitis",
+            "fibrinoid necrosis",
+            "transmural inflammation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe polyarteritis nodosa without hepatitis B. Treatment?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "glucocorticoids",
+          "synonyms": [
+            "steroids",
+            "prednisone",
+            "corticosteroids",
+            "glucocorticoid",
+            "cyclophosphamide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Hepatitis B related polyarteritis nodosa. Which drugs are key?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "antivirals",
+          "synonyms": [
+            "antiviral",
+            "antiviral therapy",
+            "tenofovir",
+            "entecavir"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which net-like skin pattern is common in polyarteritis nodosa?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "livedo reticularis",
+          "synonyms": [
+            "livedo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "polyarteritis-nodosa.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which blood cancer is linked to polyarteritis nodosa?",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hairy cell leukemia",
+          "synonyms": [
+            "hairy cell"
+          ]
+        }
+      ]
+    }
+  ]
+}

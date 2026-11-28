@@ -84,7 +84,16 @@
       "aortic dissection",
       "hypertensive retinopathy"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "hypertensive-emergency",
+        "how_to_tell_apart": "Essential hypertension is chronic, silent and treated with oral drugs; a hypertensive emergency is severe hypertension with acute organ damage, needing IV drugs in the ICU."
+      },
+      {
+        "script_id": "coarctation-of-the-aorta",
+        "how_to_tell_apart": "In essential hypertension arm and leg pressures match and the pulses are normal; coarctation causes high arm pressure, low leg pressure and weak, delayed femoral pulses."
+      }
+    ],
     "pearls": [
       "Never combine an ACE inhibitor with an ARB.",
       "Resistant hypertension is blood pressure above goal despite three drugs, one of them a diuretic.",
@@ -287,17 +296,36 @@
       "id": "essential-hypertension.differentiate.2",
       "rung": "differentiate",
       "kind": "single",
-      "prompt": "Under the AHA/ACC guideline, what blood pressure range is stage 1 hypertension?",
+      "prompt": "Essential hypertension or hypertensive emergency: which is silent and treated with oral drugs?",
       "source_fields": [
-        "diagnosis.criteria[0]"
+        "name",
+        "confused_with[0].how_to_tell_apart"
       ],
       "accepted_answers": [
         {
-          "answer": "130 to 139 systolic or 80 to 89 diastolic",
+          "answer": "Essential hypertension",
           "synonyms": [
-            "130 to 139",
-            "130 to 139 over 80 to 89",
-            "130/80"
+            "primary hypertension",
+            "essential HTN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Essential hypertension or coarctation: which has matching arm and leg pressures?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Essential hypertension",
+          "synonyms": [
+            "primary hypertension",
+            "essential HTN"
           ]
         }
       ]
@@ -340,6 +368,25 @@
           "synonyms": [
             "EKG",
             "electrocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.workup.3",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Under the AHA/ACC guideline, what blood pressure range is stage 1 hypertension?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "130 to 139 systolic or 80 to 89 diastolic",
+          "synonyms": [
+            "130 to 139",
+            "130 to 139 over 80 to 89",
+            "130/80"
           ]
         }
       ]

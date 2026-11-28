@@ -74,6 +74,10 @@
       {
         "script_id": "ventricular-septal-defect",
         "how_to_tell_apart": "Tetralogy of Fallot causes cyanosis because outflow obstruction drives blood right to left across the VSD; an isolated VSD shunts left to right, so the child stays pink unless Eisenmenger syndrome develops."
+      },
+      {
+        "script_id": "transposition-of-the-great-arteries",
+        "how_to_tell_apart": "Tetralogy of Fallot usually causes cyanosis later in infancy with a boot-shaped heart; transposition causes severe cyanosis in the first days of life with an egg-on-a-string heart."
       }
     ],
     "pearls": [
@@ -247,6 +251,25 @@
             "increases SVR",
             "increases afterload",
             "more blood through the lungs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Tetralogy of Fallot or transposition: which has a boot-shaped heart?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Tetralogy of Fallot",
+          "synonyms": [
+            "TOF",
+            "tetralogy"
           ]
         }
       ]

@@ -105,6 +105,10 @@
             "source_field": "management.first_line[0]"
           }
         ]
+      },
+      {
+        "script_id": "cardiogenic-shock",
+        "how_to_tell_apart": "Septic shock is usually warm, with a normal or high cardiac output, low systemic resistance and a low wedge pressure; cardiogenic shock is cold and wet, with a low output, a high wedge pressure and high systemic resistance."
       }
     ],
     "pearls": [
@@ -332,6 +336,25 @@
           "synonyms": [
             "adrenal crisis",
             "Addisonian crisis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "septic-shock.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Septic or cardiogenic shock: which is usually warm, with low systemic vascular resistance?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Septic shock",
+          "synonyms": [
+            "sepsis",
+            "septic"
           ]
         }
       ]

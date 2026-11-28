@@ -1,0 +1,360 @@
+{
+  "script": {
+    "id": "microscopic-polyangiitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Microscopic polyangiitis",
+    "aliases": [
+      "MPA"
+    ],
+    "systems": [
+      "cardio",
+      "renal",
+      "pulm"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults, usually aged 50 to 70",
+      "risk_factors": [
+        "older age",
+        "silica exposure",
+        "drugs such as hydralazine and propylthiouracil (drug-induced ANCA vasculitis)"
+      ]
+    },
+    "pathophysiology": "A necrotizing small-vessel vasculitis without granulomas, usually with MPO-ANCA (p-ANCA). It mainly affects the kidneys, as a pauci-immune glomerulonephritis, and the lungs, with capillaritis and hemorrhage.",
+    "timeline": {
+      "onset": "Weeks to months",
+      "course": "Fatal untreated; relapses are less common than in granulomatosis with polyangiitis"
+    },
+    "key_findings": {
+      "history": [
+        "fever, weight loss and muscle pain",
+        "hemoptysis",
+        "dark urine",
+        "numbness or weakness from mononeuritis multiplex"
+      ],
+      "exam": [
+        "palpable purpura",
+        "no upper airway or sinus disease"
+      ],
+      "labs": [
+        "positive MPO-ANCA (p-ANCA)",
+        "hematuria with red cell casts",
+        "rising creatinine"
+      ],
+      "imaging": [
+        "chest CT with diffuse alveolar hemorrhage or fibrosis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "MPO-ANCA",
+        "kidney biopsy showing pauci-immune necrotizing crescentic glomerulonephritis"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "induction with glucocorticoids plus rituximab or cyclophosphamide"
+      ],
+      "next_line": [
+        "maintenance with rituximab or azathioprine",
+        "trimethoprim-sulfamethoxazole to prevent Pneumocystis pneumonia"
+      ]
+    },
+    "complications": [
+      "rapidly progressive glomerulonephritis",
+      "diffuse alveolar hemorrhage",
+      "end-stage kidney disease"
+    ],
+    "confused_with": [
+      {
+        "script_id": "granulomatosis-with-polyangiitis",
+        "how_to_tell_apart": "Microscopic polyangiitis has no granulomas and no upper airway disease and is usually MPO-ANCA; granulomatosis with polyangiitis involves the sinuses and nose, has granulomas and is usually PR3-ANCA."
+      },
+      {
+        "script_id": "polyarteritis-nodosa",
+        "how_to_tell_apart": "Microscopic polyangiitis inflames small vessels, causes glomerulonephritis and lung hemorrhage and is usually MPO-ANCA positive; polyarteritis nodosa inflames medium arteries, spares the lungs and glomeruli and is ANCA-negative."
+      }
+    ],
+    "pearls": [
+      "Pauci-immune means few or no immune deposits on immunofluorescence, unlike lupus nephritis or anti-GBM disease.",
+      "No granulomas and no upper airway disease separate it from granulomatosis with polyangiitis.",
+      "Hydralazine and propylthiouracil can cause drug-induced MPO-ANCA vasculitis."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Antineutrophil Cytoplasmic Antibody-Associated Vasculitis"
+      },
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "microscopic-polyangiitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 65-year-old has hemoptysis, a rising creatinine with red cell casts and a positive p-ANCA, with no sinus disease. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Microscopic polyangiitis",
+          "synonyms": [
+            "MPA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which antibody is typical of microscopic polyangiitis?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "MPO-ANCA",
+          "synonyms": [
+            "p-ANCA",
+            "pANCA",
+            "anti-MPO",
+            "MPO",
+            "myeloperoxidase",
+            "perinuclear ANCA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Which two organs does microscopic polyangiitis mainly affect?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "kidneys",
+          "synonyms": [
+            "kidney",
+            "renal"
+          ]
+        },
+        {
+          "answer": "lungs",
+          "synonyms": [
+            "lung",
+            "pulmonary"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "microscopic-polyangiitis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Name a drug that can cause MPO-ANCA vasculitis.",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hydralazine",
+          "synonyms": []
+        },
+        {
+          "answer": "propylthiouracil",
+          "synonyms": [
+            "PTU"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Microscopic polyangiitis or granulomatosis with polyangiitis: which has no granulomas and no upper airway disease?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Microscopic polyangiitis",
+          "synonyms": [
+            "MPA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Microscopic polyangiitis or polyarteritis nodosa: which inflames small vessels and is ANCA-positive?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Microscopic polyangiitis",
+          "synonyms": [
+            "MPA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In microscopic polyangiitis, what does the kidney biopsy show?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pauci-immune necrotizing crescentic glomerulonephritis",
+          "synonyms": [
+            "pauci-immune glomerulonephritis",
+            "crescentic glomerulonephritis",
+            "pauci-immune",
+            "crescents"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "On kidney biopsy immunofluorescence, what does pauci-immune mean?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "few or no immune deposits",
+          "synonyms": [
+            "no immune deposits",
+            "few immune deposits",
+            "little immune staining"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Microscopic polyangiitis induction: glucocorticoids plus which drug?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rituximab",
+          "synonyms": [
+            "Rituxan"
+          ]
+        },
+        {
+          "answer": "cyclophosphamide",
+          "synonyms": [
+            "Cytoxan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "During treatment of microscopic polyangiitis, which antibiotic prevents Pneumocystis pneumonia?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "trimethoprim-sulfamethoxazole",
+          "synonyms": [
+            "TMP-SMX",
+            "Bactrim",
+            "co-trimoxazole",
+            "cotrimoxazole",
+            "Septra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which lung complication of microscopic polyangiitis is life-threatening?",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diffuse alveolar hemorrhage",
+          "synonyms": [
+            "DAH",
+            "alveolar hemorrhage",
+            "pulmonary hemorrhage",
+            "lung hemorrhage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "microscopic-polyangiitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which kidney syndrome does microscopic polyangiitis cause?",
+      "source_fields": [
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rapidly progressive glomerulonephritis",
+          "synonyms": [
+            "RPGN",
+            "crescentic glomerulonephritis",
+            "glomerulonephritis"
+          ]
+        }
+      ]
+    }
+  ]
+}

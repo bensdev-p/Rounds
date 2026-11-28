@@ -83,6 +83,10 @@
       {
         "script_id": "acute-coronary-syndrome",
         "how_to_tell_apart": "Pericarditis pain is sharp, pleuritic and eased by leaning forward, with ST elevation in most leads and PR depression; a myocardial infarction causes ST elevation in one coronary territory with reciprocal depression."
+      },
+      {
+        "script_id": "myocarditis",
+        "how_to_tell_apart": "Pericarditis inflames the pericardium, causing pleuritic pain, a rub and PR depression; myocarditis inflames the heart muscle, raising troponin and weakening contraction."
       }
     ],
     "pearls": [
@@ -279,6 +283,24 @@
           "answer": "Pericarditis",
           "synonyms": [
             "acute pericarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Pericarditis or myocarditis: which causes a friction rub and PR depression?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pericarditis",
+          "synonyms": [
+            "pericarditis"
           ]
         }
       ]
