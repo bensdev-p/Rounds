@@ -66,7 +66,40 @@
         "IV fluids and electrolyte replacement"
       ]
     },
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "thiazide-diuretics",
+        "how_to_tell_apart": "Loop diuretics act on the thick ascending limb, are stronger and lose calcium; thiazides act on the distal convoluted tubule and keep calcium.",
+        "compare": [
+          {
+            "label": "Site",
+            "text": "Thick ascending limb",
+            "source_field": "mechanism"
+          },
+          {
+            "label": "Calcium",
+            "text": "Lost: hypocalcemia",
+            "source_field": "adverse_effects[2]"
+          }
+        ]
+      },
+      {
+        "script_id": "mineralocorticoid-receptor-antagonists",
+        "how_to_tell_apart": "Loop diuretics such as furosemide waste potassium and cause hypokalemia; spironolactone keeps potassium and can cause hyperkalemia, which is why the two are often combined.",
+        "compare": [
+          {
+            "label": "Potassium",
+            "text": "Lost: hypokalemia",
+            "source_field": "adverse_effects[0]"
+          },
+          {
+            "label": "Site",
+            "text": "Thick ascending limb",
+            "source_field": "mechanism"
+          }
+        ]
+      }
+    ],
     "pearls": [
       "Loops lose calcium, thiazides keep it: loop diuretics cause hypocalcemia, thiazides cause hypercalcemia.",
       "Ethacrynic acid is the loop diuretic without a sulfonamide group, used when a sulfa reaction is a concern.",

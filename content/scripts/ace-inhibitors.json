@@ -64,7 +64,12 @@
         "IV fluids"
       ]
     },
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "angiotensin-receptor-blockers",
+        "how_to_tell_apart": "ACE inhibitors block angiotensin II production and raise bradykinin, causing cough and more angioedema; ARBs block the angiotensin II receptor and do not raise bradykinin."
+      }
+    ],
     "pearls": [
       "A creatinine rise of up to 30% after starting is expected, and the drug can be continued.",
       "The cough comes from bradykinin; switch to an ARB, which does not raise bradykinin.",

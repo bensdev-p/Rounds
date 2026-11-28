@@ -1,0 +1,435 @@
+{
+  "script": {
+    "id": "dihydropyridine-calcium-channel-blockers",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Dihydropyridine calcium channel blockers",
+    "aliases": [
+      "dihydropyridines",
+      "DHP calcium channel blockers"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Dihydropyridine calcium channel blockers",
+    "class_members": [
+      "amlodipine",
+      "nifedipine",
+      "felodipine",
+      "nicardipine",
+      "clevidipine",
+      "nimodipine"
+    ],
+    "mechanism": "Block L-type calcium channels mainly in vascular smooth muscle, dilating arteries and lowering blood pressure. At usual doses they have little effect on heart rate or contractility.",
+    "pharmacokinetics": [
+      "amlodipine has a long half-life and is taken once daily",
+      "nicardipine and clevidipine are given IV and titrated quickly"
+    ],
+    "indications": [
+      "hypertension",
+      "stable angina",
+      "vasospastic angina",
+      "Raynaud phenomenon",
+      "hypertensive emergency (IV nicardipine or clevidipine)",
+      "subarachnoid hemorrhage, to reduce injury from vasospasm (nimodipine)"
+    ],
+    "adverse_effects": [
+      "peripheral edema",
+      "headache",
+      "flushing",
+      "reflex tachycardia",
+      "gingival hyperplasia"
+    ],
+    "contraindications": [
+      "short-acting nifedipine in acute coronary syndrome",
+      "heart failure with reduced ejection fraction, except amlodipine and felodipine, which are neutral"
+    ],
+    "interactions": [
+      "CYP3A4 inhibitors raise levels",
+      "combined with beta blockers, which offset the reflex tachycardia"
+    ],
+    "monitoring": [
+      "blood pressure",
+      "ankle swelling"
+    ],
+    "overdose": {
+      "features": [
+        "hypotension",
+        "reflex tachycardia, or bradycardia in severe overdose"
+      ],
+      "treatment": [
+        "IV calcium",
+        "high-dose insulin with glucose",
+        "vasopressors"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "non-dihydropyridine-calcium-channel-blockers",
+        "how_to_tell_apart": "Dihydropyridines act mainly on arteries and lower blood pressure without slowing the heart; verapamil and diltiazem act mainly on the heart, slowing the rate and AV conduction.",
+        "compare": [
+          {
+            "label": "Acts on",
+            "text": "Arteries",
+            "source_field": "mechanism"
+          },
+          {
+            "label": "Heart rate",
+            "text": "Little effect",
+            "source_field": "mechanism"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "Ankle edema from dihydropyridines comes from arteriolar dilation, not fluid retention, so diuretics barely help; adding an ACE inhibitor or ARB does.",
+      "Drugs ending in -dipine are dihydropyridines.",
+      "Nimodipine improves outcomes after subarachnoid hemorrhage."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "contraindications"
+      ],
+      "MS4": [
+        "overdose.treatment",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Amlodipine and nifedipine belong to which drug class?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Dihydropyridine calcium channel blockers",
+          "synonyms": [
+            "dihydropyridines",
+            "dihydropyridine",
+            "DHP",
+            "calcium channel blocker",
+            "calcium channel blockers",
+            "CCB",
+            "CCBs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which drug name ending marks a dihydropyridine?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "-dipine",
+          "synonyms": [
+            "dipine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which channels do these drugs block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "L-type calcium channels",
+          "synonyms": [
+            "L-type calcium channel",
+            "L-type",
+            "L type calcium channels",
+            "voltage-gated calcium channels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Arteries or the heart: where do dihydropyridines mainly act?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vascular smooth muscle",
+          "synonyms": [
+            "arteries",
+            "arterial smooth muscle",
+            "blood vessels",
+            "vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of dihydropyridines.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "stable angina",
+          "synonyms": [
+            "chronic angina",
+            "exertional angina"
+          ]
+        },
+        {
+          "answer": "vasospastic angina",
+          "synonyms": [
+            "Prinzmetal angina",
+            "variant angina"
+          ]
+        },
+        {
+          "answer": "Raynaud phenomenon",
+          "synonyms": [
+            "Raynaud",
+            "Raynaud's"
+          ]
+        },
+        {
+          "answer": "hypertensive emergency",
+          "synonyms": [
+            "hypertensive crisis"
+          ]
+        },
+        {
+          "answer": "subarachnoid hemorrhage",
+          "synonyms": [
+            "SAH"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which dihydropyridine is given after subarachnoid hemorrhage?",
+      "source_fields": [
+        "indications[5]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nimodipine",
+          "synonyms": [
+            "Nimotop"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of dihydropyridines.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "peripheral edema",
+          "synonyms": [
+            "ankle swelling",
+            "edema",
+            "pedal edema",
+            "leg swelling",
+            "ankle edema"
+          ]
+        },
+        {
+          "answer": "headache",
+          "synonyms": [
+            "headaches"
+          ]
+        },
+        {
+          "answer": "flushing",
+          "synonyms": []
+        },
+        {
+          "answer": "reflex tachycardia",
+          "synonyms": [
+            "tachycardia",
+            "palpitations"
+          ]
+        },
+        {
+          "answer": "gingival hyperplasia",
+          "synonyms": [
+            "gum overgrowth",
+            "gum hyperplasia",
+            "gingival overgrowth"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Amlodipine causes ankle swelling. Why do diuretics barely help?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "arteriolar dilation",
+          "synonyms": [
+            "arterial dilation",
+            "arteriolar dilatation",
+            "arteriolar vasodilation",
+            "vasodilation",
+            "vasodilatation",
+            "not fluid retention"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Amlodipine or verapamil: which one slows AV conduction?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "verapamil",
+          "synonyms": [
+            "Calan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Amlodipine or diltiazem: which one lowers blood pressure without slowing the heart?",
+      "source_fields": [
+        "class_members",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amlodipine",
+          "synonyms": [
+            "Norvasc",
+            "dihydropyridine",
+            "dihydropyridines"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What reduces amlodipine ankle edema better than a diuretic?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "adding an ACE inhibitor or ARB",
+          "synonyms": [
+            "ACE inhibitor",
+            "ACE inhibitors",
+            "ACEi",
+            "ARB",
+            "ARBs",
+            "angiotensin receptor blocker"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dihydropyridine-calcium-channel-blockers.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a treatment for calcium channel blocker overdose.",
+      "source_fields": [
+        "overdose.treatment"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV calcium",
+          "synonyms": [
+            "calcium",
+            "calcium gluconate",
+            "calcium chloride"
+          ]
+        },
+        {
+          "answer": "high-dose insulin",
+          "synonyms": [
+            "insulin",
+            "high-dose insulin with glucose",
+            "HIET"
+          ]
+        },
+        {
+          "answer": "vasopressors",
+          "synonyms": [
+            "vasopressor",
+            "norepinephrine"
+          ]
+        }
+      ]
+    }
+  ]
+}

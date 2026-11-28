@@ -1,0 +1,423 @@
+{
+  "script": {
+    "id": "amiodarone",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Amiodarone",
+    "aliases": [
+      "Cordarone",
+      "Pacerone"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Class III antiarrhythmic (potassium channel blocker) with class I, II and IV effects",
+    "class_members": [
+      "amiodarone",
+      "dronedarone, a related drug without iodine"
+    ],
+    "mechanism": "Blocks potassium channels, prolonging repolarization, the action potential and the QT interval. It also blocks sodium channels, beta receptors and calcium channels.",
+    "pharmacokinetics": [
+      "very lipophilic, with a half-life of weeks to months",
+      "contains iodine",
+      "metabolized by CYP3A4 and inhibits several CYP enzymes"
+    ],
+    "indications": [
+      "ventricular tachycardia and fibrillation, including cardiac arrest that does not respond to shocks",
+      "atrial fibrillation: rhythm control, or rate control when other drugs fail, especially with heart failure"
+    ],
+    "adverse_effects": [
+      "pulmonary fibrosis",
+      "hypothyroidism or hyperthyroidism",
+      "liver injury with raised transaminases",
+      "corneal deposits",
+      "blue-gray skin discoloration",
+      "photosensitivity",
+      "bradycardia and QT prolongation",
+      "optic neuropathy"
+    ],
+    "contraindications": [
+      "sinus node disease or AV block without a pacemaker",
+      "cardiogenic shock"
+    ],
+    "interactions": [
+      "raises the effect of warfarin",
+      "raises digoxin levels",
+      "raises statin levels and the risk of myopathy"
+    ],
+    "monitoring": [
+      "thyroid function tests",
+      "liver function tests",
+      "chest X-ray and pulmonary function tests",
+      "eye exams"
+    ],
+    "overdose": {
+      "features": [
+        "bradycardia",
+        "hypotension",
+        "QT prolongation"
+      ],
+      "treatment": [
+        "supportive care",
+        "pacing if needed"
+      ]
+    },
+    "confused_with": [],
+    "pearls": [
+      "Check thyroid, liver and lung tests before starting amiodarone and during treatment.",
+      "Torsades de pointes is rare with amiodarone despite its long QT.",
+      "Lower the warfarin dose when starting amiodarone."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "monitoring"
+      ],
+      "MS4": [
+        "interactions",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "amiodarone.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "In the Vaughan Williams scheme, which antiarrhythmic class is amiodarone?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "class III",
+          "synonyms": [
+            "class 3",
+            "class three",
+            "potassium channel blocker"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which element in amiodarone explains its thyroid effects?",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "iodine",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which channels does amiodarone mainly block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "potassium channels",
+          "synonyms": [
+            "potassium channel",
+            "K channels",
+            "potassium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which ECG interval does amiodarone lengthen?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "QT interval",
+          "synonyms": [
+            "QT",
+            "QTc"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of amiodarone.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ventricular tachycardia",
+          "synonyms": [
+            "VT",
+            "ventricular fibrillation",
+            "VF",
+            "ventricular arrhythmias",
+            "cardiac arrest"
+          ]
+        },
+        {
+          "answer": "atrial fibrillation",
+          "synonyms": [
+            "afib",
+            "a fib",
+            "AF",
+            "rhythm control"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "amiodarone.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Ventricular fibrillation keeps going after shocks during a cardiac arrest. Which class III antiarrhythmic is given?",
+      "source_fields": [
+        "name",
+        "indications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Amiodarone",
+          "synonyms": [
+            "Cordarone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of amiodarone.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary fibrosis",
+          "synonyms": [
+            "lung fibrosis",
+            "lung toxicity",
+            "pulmonary toxicity"
+          ]
+        },
+        {
+          "answer": "hypothyroidism",
+          "synonyms": [
+            "hyperthyroidism",
+            "thyroid dysfunction",
+            "thyroid"
+          ]
+        },
+        {
+          "answer": "liver injury",
+          "synonyms": [
+            "hepatotoxicity",
+            "hepatitis",
+            "raised transaminases",
+            "raised LFTs",
+            "liver toxicity"
+          ]
+        },
+        {
+          "answer": "corneal deposits",
+          "synonyms": [
+            "corneal microdeposits"
+          ]
+        },
+        {
+          "answer": "blue-gray skin discoloration",
+          "synonyms": [
+            "skin discoloration",
+            "blue skin",
+            "gray skin",
+            "blue-grey skin",
+            "slate-gray skin"
+          ]
+        },
+        {
+          "answer": "photosensitivity",
+          "synonyms": []
+        },
+        {
+          "answer": "bradycardia",
+          "synonyms": []
+        },
+        {
+          "answer": "QT prolongation",
+          "synonyms": [
+            "long QT",
+            "prolonged QT"
+          ]
+        },
+        {
+          "answer": "optic neuropathy",
+          "synonyms": [
+            "optic neuritis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "amiodarone.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which lung complication of amiodarone is most feared?",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary fibrosis",
+          "synonyms": [
+            "lung fibrosis",
+            "interstitial lung disease",
+            "pneumonitis",
+            "pulmonary toxicity"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two tests to monitor on amiodarone.",
+      "source_fields": [
+        "monitoring"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thyroid function tests",
+          "synonyms": [
+            "TFTs",
+            "TSH",
+            "thyroid tests"
+          ]
+        },
+        {
+          "answer": "liver function tests",
+          "synonyms": [
+            "LFTs",
+            "liver enzymes"
+          ]
+        },
+        {
+          "answer": "chest X-ray",
+          "synonyms": [
+            "CXR",
+            "chest xray",
+            "pulmonary function tests",
+            "lung function tests",
+            "PFTs"
+          ]
+        },
+        {
+          "answer": "eye exams",
+          "synonyms": [
+            "eye exam",
+            "ophthalmology",
+            "ophthalmology review"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "amiodarone.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A patient on warfarin starts amiodarone. What do you do to the warfarin dose?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lower",
+          "synonyms": [
+            "reduce",
+            "decrease",
+            "cut",
+            "lower the dose",
+            "reduce the dose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How long is the half-life of amiodarone?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "weeks to months",
+          "synonyms": [
+            "months",
+            "weeks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "amiodarone.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Amiodarone prolongs the QT interval. How often does it cause torsades de pointes?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rare",
+          "synonyms": [
+            "rarely",
+            "uncommon",
+            "uncommonly"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,369 @@
+{
+  "script": {
+    "id": "adenosine",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Adenosine",
+    "aliases": [
+      "Adenocard"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Adenosine receptor agonist (unclassified antiarrhythmic)",
+    "class_members": [
+      "adenosine"
+    ],
+    "mechanism": "Activates A1 receptors in the AV node, opening potassium channels and hyperpolarizing the cells, which briefly blocks AV conduction.",
+    "pharmacokinetics": [
+      "half-life under 10 seconds",
+      "given as a rapid IV push with a saline flush, through a large vein close to the heart"
+    ],
+    "indications": [
+      "stopping supraventricular tachycardia that uses the AV node",
+      "diagnosing atrial flutter or other atrial tachycardias by briefly slowing the ventricular rate",
+      "pharmacologic stress testing"
+    ],
+    "adverse_effects": [
+      "flushing",
+      "chest discomfort",
+      "dyspnea or bronchospasm",
+      "a sense of impending doom",
+      "brief asystole or bradycardia"
+    ],
+    "contraindications": [
+      "asthma with active bronchospasm",
+      "second- or third-degree AV block or sick sinus syndrome without a pacemaker",
+      "atrial fibrillation with Wolff-Parkinson-White syndrome"
+    ],
+    "interactions": [
+      "theophylline and caffeine block its effect, so higher doses may be needed",
+      "dipyridamole and carbamazepine increase its effect, so lower doses are needed"
+    ],
+    "monitoring": [
+      "continuous ECG during the dose"
+    ],
+    "overdose": {
+      "features": [
+        "brief asystole"
+      ],
+      "treatment": [
+        "usually passes within seconds; aminophylline if needed"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "non-dihydropyridine-calcium-channel-blockers",
+        "how_to_tell_apart": "Both stop SVT by blocking the AV node, but adenosine works for only seconds and is the first choice, while verapamil and diltiazem act for hours and also slow the rate in atrial fibrillation."
+      }
+    ],
+    "pearls": [
+      "Warn the patient that a few seconds of feeling awful are expected.",
+      "Start with 6 mg, then give 12 mg if needed.",
+      "Heart transplant recipients are very sensitive to adenosine and need a lower dose."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "mechanism",
+        "pharmacokinetics[0]"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "interactions",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "adenosine.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which drug briefly blocks the AV node to stop supraventricular tachycardia, and lasts only seconds?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Adenosine",
+          "synonyms": [
+            "Adenocard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which receptor does adenosine act on in the AV node?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "A1 receptors",
+          "synonyms": [
+            "A1",
+            "A1 receptor",
+            "adenosine A1 receptor",
+            "adenosine receptors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which channels open when adenosine binds its receptor?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "potassium channels",
+          "synonyms": [
+            "potassium channel",
+            "K channels",
+            "potassium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Why must adenosine be pushed fast with a saline flush?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "half-life under 10 seconds",
+          "synonyms": [
+            "short half-life",
+            "very short half-life",
+            "half-life of seconds",
+            "rapidly metabolized",
+            "short-acting"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of adenosine.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "supraventricular tachycardia",
+          "synonyms": [
+            "SVT",
+            "PSVT",
+            "AVNRT",
+            "AVRT"
+          ]
+        },
+        {
+          "answer": "atrial flutter",
+          "synonyms": [
+            "diagnosing atrial flutter",
+            "unmask atrial flutter",
+            "unmasking flutter"
+          ]
+        },
+        {
+          "answer": "pharmacologic stress testing",
+          "synonyms": [
+            "stress testing",
+            "stress test",
+            "nuclear stress test"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "adenosine.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Adenosine briefly slows a narrow-complex tachycardia and sawtooth waves appear. What is the rhythm?",
+      "source_fields": [
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial flutter",
+          "synonyms": [
+            "flutter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two side effects of adenosine.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "flushing",
+          "synonyms": []
+        },
+        {
+          "answer": "chest discomfort",
+          "synonyms": [
+            "chest pain",
+            "chest tightness"
+          ]
+        },
+        {
+          "answer": "dyspnea",
+          "synonyms": [
+            "shortness of breath",
+            "breathlessness",
+            "bronchospasm"
+          ]
+        },
+        {
+          "answer": "impending doom",
+          "synonyms": [
+            "sense of doom",
+            "feeling of doom"
+          ]
+        },
+        {
+          "answer": "brief asystole",
+          "synonyms": [
+            "asystole",
+            "transient asystole",
+            "bradycardia",
+            "pause"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "adenosine.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which lung disease makes adenosine risky?",
+      "source_fields": [
+        "contraindications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "asthma",
+          "synonyms": [
+            "bronchospasm",
+            "reactive airway disease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "What is the first dose of adenosine for SVT?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "6 mg",
+          "synonyms": [
+            "6",
+            "6 milligrams",
+            "six mg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Adenosine or verapamil for SVT: which one wears off within seconds?",
+      "source_fields": [
+        "name",
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Adenosine",
+          "synonyms": [
+            "Adenocard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which patients need a much lower adenosine dose because they are very sensitive?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart transplant recipients",
+          "synonyms": [
+            "heart transplant",
+            "cardiac transplant",
+            "transplanted heart"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "adenosine.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In which syndrome must adenosine not be given for atrial fibrillation?",
+      "source_fields": [
+        "contraindications[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Wolff-Parkinson-White syndrome",
+          "synonyms": [
+            "WPW",
+            "Wolff-Parkinson-White",
+            "pre-excitation"
+          ]
+        }
+      ]
+    }
+  ]
+}
