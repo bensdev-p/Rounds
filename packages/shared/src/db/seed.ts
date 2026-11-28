@@ -61,8 +61,14 @@ export function validateContent(
       if (!linkTargets.has(link.script_id)) {
         problems.push(`${script.id}: confused_with links to unknown script ${link.script_id}`);
       }
-      // Comparison rows line up only if the link back has the same labels.
       const other = byId.get(link.script_id);
+      // Mix-ups are within a kind: a drug is confused with a drug, not a disease.
+      if (other && other.kind !== script.kind) {
+        problems.push(
+          `${script.id}: confused_with links a ${script.kind} to a ${other.kind} (${other.id}); links stay within a kind`,
+        );
+      }
+      // Comparison rows line up only if the link back has the same labels.
       if (!link.compare || !other) continue;
       const back = other.confused_with.find((l) => l.script_id === script.id);
       const mine = link.compare.map((r) => r.label).join(' | ');

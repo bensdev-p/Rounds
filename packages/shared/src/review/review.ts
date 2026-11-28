@@ -10,7 +10,7 @@
  * - Every word shown comes from the script or the miss card's wording
  *   (domain rule 1); nothing here is generated.
  */
-import type { IllnessScript, CompareRow } from '../schemas/illnessScript.ts';
+import type { IllnessScript, CompareRow, ScriptKind } from '../schemas/illnessScript.ts';
 import type { MissTag } from '../schemas/attempt.ts';
 import { rungIndex, type Question } from '../schemas/question.ts';
 import type { SessionRecord } from '../progress/progression.ts';
@@ -99,7 +99,10 @@ export const MAX_SUBTITLE_CHARS = 40;
  * short to fit one line; everything else uses the miss card's label
  * ("Pimped on management").
  */
-export function missSubtitle(miss: Pick<MissRecord, 'question' | 'matched'>): string {
+export function missSubtitle(
+  miss: Pick<MissRecord, 'question' | 'matched'>,
+  kind: ScriptKind = 'disease',
+): string {
   const { question, matched } = miss;
   if (question.kind === 'list' && matched.length > 0) {
     const named = new Set(matched);
@@ -115,7 +118,7 @@ export function missSubtitle(miss: Pick<MissRecord, 'question' | 'matched'>): st
       return line(count);
     }
   }
-  return missLabel(question.rung);
+  return missLabel(question.rung, kind);
 }
 
 export interface MixUp {

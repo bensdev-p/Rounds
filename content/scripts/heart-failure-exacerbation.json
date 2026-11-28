@@ -5,11 +5,15 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Acute decompensated heart failure",
     "aliases": [
       "heart failure exacerbation",
       "ADHF",
       "CHF exacerbation"
+    ],
+    "systems": [
+      "cardio"
     ],
     "rotation": [
       "IM",

@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Upper gastrointestinal bleeding",
     "aliases": [
       "upper GI bleed",
       "UGIB"
+    ],
+    "systems": [
+      "gi"
     ],
     "rotation": [
       "IM",

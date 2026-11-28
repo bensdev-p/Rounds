@@ -3,17 +3,30 @@
  * Stage 1 demo exercise the ladder without putting unreviewed medical content
  * in the repo. Never ship them as real content.
  */
-import { IllnessScriptSchema, type IllnessScript } from '../schemas/illnessScript.ts';
+import {
+  IllnessScriptSchema,
+  type DiseaseScript,
+  type IllnessScript,
+} from '../schemas/illnessScript.ts';
 import { QuestionSchema, type Question } from '../schemas/question.ts';
 
-const zorblax = IllnessScriptSchema.parse({
+/** Parses a fixture that must be a disease script (they all are). */
+function disease(raw: unknown): DiseaseScript {
+  const script = IllnessScriptSchema.parse(raw);
+  if (script.kind !== 'disease') throw new Error(`${script.id} is not a disease fixture`);
+  return script;
+}
+
+const zorblax = disease({
   id: 'zorblax-syndrome',
   status: 'approved',
   version: 1,
   reviewed_by: 'TEST',
   reviewed_at: '2026-11-13T00:00:00Z',
+  kind: 'disease',
   name: 'Zorblax syndrome',
   aliases: ['ZBX'],
+  systems: ['general'],
   rotation: ['IM'],
   epidemiology: {
     who: 'Fictional adults over 40 (test fixture, not a real disease)',
@@ -56,14 +69,16 @@ const zorblax = IllnessScriptSchema.parse({
   sources: [{ title: 'Rounds test fixture (fictional)' }],
 });
 
-const quellan = IllnessScriptSchema.parse({
+const quellan = disease({
   id: 'quellan-fever',
   status: 'approved',
   version: 1,
   reviewed_by: 'TEST',
   reviewed_at: '2026-11-13T00:00:00Z',
+  kind: 'disease',
   name: 'Quellan fever',
   aliases: ['QF'],
+  systems: ['general'],
   rotation: ['IM'],
   epidemiology: { who: 'Fictional travelers (test fixture)', risk_factors: ['quellan bites'] },
   pathophysiology: 'Fictional infection of the nail matrix.',

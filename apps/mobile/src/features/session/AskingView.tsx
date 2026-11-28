@@ -3,7 +3,7 @@
  * screen shows the ladder and the question and nothing else: no feedback text,
  * no progress. The question is replaced in place; it never pushes the ladder.
  */
-import type { ClockReading } from '@rounds/shared';
+import type { ClockReading, ScriptKind } from '@rounds/shared';
 import { useState, type ReactNode } from 'react';
 import { PixelRatio, Platform, StyleSheet, TextInput, View } from 'react-native';
 import { useKeyboardVisible } from '@/lib/useKeyboardVisible';
@@ -23,6 +23,7 @@ export function AskingView({
   steps,
   dontKnowHint = 'Ends the session on this rung',
   scriptName,
+  kind,
   inReview,
   prompt,
   isList,
@@ -45,6 +46,8 @@ export function AskingView({
   steps?: { states: RungState[]; label: string };
   dontKnowHint?: string;
   scriptName: string;
+  /** The script's kind: picks the ladder's labels. */
+  kind: ScriptKind;
   /** In-review script (local preview): show "Not yet reviewed". */
   inReview: boolean;
   prompt: string;
@@ -144,9 +147,9 @@ export function AskingView({
         {steps ? (
           <StepStrip states={steps.states} label={steps.label} />
         ) : collapsed ? (
-          <LadderStrip states={rungs} />
+          <LadderStrip states={rungs} kind={kind} />
         ) : (
-          <Ladder states={rungs} />
+          <Ladder states={rungs} kind={kind} />
         )}
       </View>
       <Txt variant="meta" tone="text2" style={styles.script}>

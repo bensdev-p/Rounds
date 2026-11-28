@@ -4,7 +4,7 @@
  * The one moment of motion: a passed rung fills green from the bottom and the
  * next pops amber with a slight overshoot (280 ms). Reduce Motion skips both.
  */
-import { RUNG_LABELS, RUNGS } from '@rounds/shared';
+import { RUNGS, rungLabel, type ScriptKind } from '@rounds/shared';
 import { useEffect, useRef, useState } from 'react';
 import { Animated, Easing, StyleSheet, View } from 'react-native';
 import { motion, radius, size, type, useTheme } from '@/theme';
@@ -14,14 +14,16 @@ import { Txt } from './Text';
 export type RungState = 'dim' | 'now' | 'done' | 'miss';
 
 const POP_EASING = Easing.bezier(0.2, 0.9, 0.3, 1.2);
-const LABELS = RUNGS.map((r) => RUNG_LABELS[r]);
+/** The rung labels for a kind of script (DESIGN.md → Script kinds). */
+const labelsFor = (kind: ScriptKind = 'disease') => RUNGS.map((r) => rungLabel(r, kind));
 
 /** Rung states for a ladder `score` rungs up, with the next rung current or missed. */
 export function rungStates(score: number, next: 'now' | 'miss' | 'none'): RungState[] {
-  return LABELS.map((_, i) => (i < score ? 'done' : i === score && next !== 'none' ? next : 'dim'));
+  return RUNGS.map((_, i) => (i < score ? 'done' : i === score && next !== 'none' ? next : 'dim'));
 }
 
-function describe(states: readonly RungState[]): string {
+function describe(states: readonly RungState[], kind?: ScriptKind): string {
+  const LABELS = labelsFor(kind);
   const passed = states.filter((s) => s === 'done').length;
   const now = states.indexOf('now');
   const miss = states.indexOf('miss');
@@ -91,14 +93,23 @@ function Rung({ n, state }: { n: number; state: RungState }) {
 const LABEL_TONE = { dim: 'text3', done: 'text2', now: 'text', miss: 'miss' } as const;
 
 /** Six rungs with labels, bottom to top. `states[0]` is rung 1. */
-export function Ladder({ states, width }: { states: readonly RungState[]; width?: number }) {
+export function Ladder({
+  states,
+  width,
+  kind,
+}: {
+  states: readonly RungState[];
+  width?: number;
+  /** Which labels to show. Disease when not given. */
+  kind?: ScriptKind;
+}) {
   return (
     <View
       accessible
-      accessibilityLabel={describe(states)}
+      accessibilityLabel={describe(states, kind)}
       style={[styles.ladder, width !== undefined && { width }]}
     >
-      {LABELS.map((label, i) => {
+      {labelsFor(kind).map((label, i) => {
         const state = states[i] ?? 'dim';
         return (
           <View key={label} style={styles.rungRow}>
@@ -120,10 +131,10 @@ export function Ladder({ states, width }: { states: readonly RungState[]; width?
 }
 
 /** The ladder as a horizontal strip, for when the keyboard is up. */
-export function LadderStrip({ states }: { states: readonly RungState[] }) {
+export function LadderStrip({ states, kind }: { states: readonly RungState[]; kind?: ScriptKind }) {
   return (
-    <View accessible accessibilityLabel={describe(states)} style={styles.strip}>
-      {LABELS.map((label, i) => (
+    <View accessible accessibilityLabel={describe(states, kind)} style={styles.strip}>
+      {labelsFor(kind).map((label, i) => (
         <Rung key={label} n={i + 1} state={states[i] ?? 'dim'} />
       ))}
     </View>

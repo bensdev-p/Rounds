@@ -5,9 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Pulmonary embolism",
     "aliases": [
       "PE"
+    ],
+    "systems": [
+      "pulm",
+      "heme_onc"
     ],
     "rotation": [
       "IM",

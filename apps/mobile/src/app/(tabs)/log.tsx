@@ -90,9 +90,10 @@ export default function Log() {
   const now = new Date();
   const rotation = profile.rotation;
   const label = query.trim();
+  // Patients are logged by diagnosis, so only disease scripts match.
   const matches = matchScripts(
     query,
-    scripts.map((s) => s.script),
+    scripts.map((s) => s.script).filter((s) => s.kind === 'disease'),
   );
   // A diagnosis with no matching script is still saved, under what was typed.
   // Hidden while flagged, so the patient details are not echoed back.

@@ -1,16 +1,25 @@
 /** Script picker. Wireframe 03: best rung per script so weak topics stand out. */
-import { detectPhi, normalize, phiWarning, type PersonaId } from '@rounds/shared';
+import {
+  detectPhi,
+  matchesTopicFilter,
+  normalize,
+  phiWarning,
+  sameTopicFilter,
+  topicChips,
+  type PersonaId,
+  type TopicFilter,
+} from '@rounds/shared';
 import { listPimpableScripts } from '@rounds/shared/api';
 import { router, useLocalSearchParams } from 'expo-router';
 import { ChevronLeft, ChevronRight, Search } from 'lucide-react-native';
 import { useState } from 'react';
-import { StyleSheet, TextInput, View } from 'react-native';
+import { ScrollView, StyleSheet, TextInput, View } from 'react-native';
 import { ErrorView, Loading } from '@/components/StatusView';
 import { useClient } from '@/lib/auth';
 import { parsePersona } from '@/lib/prefs';
 import { useAsync } from '@/lib/useAsync';
 import { radius, size, space, type, useTheme } from '@/theme';
-import { Link, List, Row } from '@/ui/controls';
+import { Chip, Link, List, Row } from '@/ui/controls';
 import { MiniLadder } from '@/ui/progress';
 import { Screen } from '@/ui/Screen';
 import { Txt } from '@/ui/Text';
@@ -25,6 +34,7 @@ export default function Topics() {
   const persona: PersonaId = parsePersona(params.persona) ?? 'teacher';
   const scripts = useAsync(() => listPimpableScripts(client), 'topics');
   const [query, setQuery] = useState('');
+  const [filter, setFilter] = useState<TopicFilter>({ type: 'all' });
 
   if (scripts.status === 'loading') return <Loading label="Loading topics" />;
   if (scripts.status === 'error') {
@@ -39,9 +49,11 @@ export default function Topics() {
   // A diagnosis search, like the patient log: names are checked too.
   const phi = phiWarning(detectPhi(query, { checkNames: true }));
   const needle = phi ? '' : normalize(query);
+  const chips = topicChips(scripts.data.map(({ script }) => script));
   const shown = scripts.data.filter(
     ({ script }) =>
-      !needle || [script.name, ...script.aliases].some((n) => normalize(n).includes(needle)),
+      matchesTopicFilter(script, filter) &&
+      (!needle || [script.name, ...script.aliases].some((n) => normalize(n).includes(needle))),
   );
 
   return (
@@ -74,12 +86,34 @@ export default function Topics() {
       </View>
       {phi && <PhiWarning message={phi} />}
 
+      {chips.length > 2 && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.chipScroll}
+          contentContainerStyle={styles.chips}
+        >
+          {chips.map((chip) => (
+            <Chip
+              key={chip.label}
+              label={chip.label}
+              role="button"
+              selected={sameTopicFilter(chip.filter, filter)}
+              accessibilityHint="Shows only these topics"
+              onPress={() => setFilter(chip.filter)}
+            />
+          ))}
+        </ScrollView>
+      )}
+
       <View style={styles.list}>
         {shown.length === 0 ? (
           <Txt variant="meta" tone="text2">
             {scripts.data.length === 0
               ? 'No approved scripts yet.'
-              : 'No topic matches that search.'}
+              : needle
+                ? 'No topic matches that search.'
+                : 'No topics under this filter yet.'}
           </Txt>
         ) : (
           <List>
@@ -128,6 +162,8 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
   },
   input: { flex: 1, height: '100%' },
+  chipScroll: { marginTop: space.lg, flexGrow: 0 },
+  chips: { flexDirection: 'row', gap: space.sm },
   list: { marginTop: space.section },
   trailing: { flexDirection: 'row', alignItems: 'center', gap: space.md },
 });

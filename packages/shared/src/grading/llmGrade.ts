@@ -10,6 +10,7 @@
 import { z } from 'zod';
 import { collectStrings, resolveFieldPath } from '../schemas/fieldPath.ts';
 import type { GradeResult } from '../schemas/attempt.ts';
+import type { ScriptKind } from '../schemas/illnessScript.ts';
 import type { IllnessScript } from '../schemas/illnessScript.ts';
 import type { Question } from '../schemas/question.ts';
 import { normalize } from '../text.ts';
@@ -33,6 +34,8 @@ export interface GradingConfusable {
 /** Everything the model may use to grade, all taken from the approved script. */
 export interface GradingContext {
   script_name: string;
+  /** What the script is about: a disease, drug, bug (organism) or pathway. */
+  script_kind: ScriptKind;
   question: string;
   kind: Question['kind'];
   /** List questions only. */
@@ -50,6 +53,7 @@ export function buildGradingContext(
 ): GradingContext {
   return {
     script_name: script.name,
+    script_kind: script.kind,
     question: question.prompt,
     kind: question.kind,
     required_count: question.kind === 'list' ? question.required_count : null,

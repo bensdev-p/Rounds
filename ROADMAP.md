@@ -60,22 +60,24 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 **M4.3 phase 2, the daily pimp (live at pimpme.app/daily since 27 Nov 2026; migration on `rounds-dev`):** `/daily` plays one script a day, the same for everyone, picked from the visitor's own calendar date (developer's decision) by `pickDailyScript` in `packages/shared/src/daily`, which walks the pool so each script comes up once before any repeats. The ladder is the app's (one question per rung, picked from the date; graded by `grade-answer`, falling back to local grading). Everyone gets the Internist: the clock counts down 30 seconds per question, holds while grading, and at 0:00 the ladder ends on a `slow` miss ("Time's up", `timeUp` in the engine; developer's decisions, 27 Nov 2026), with the PHI guard on the answer box. The result shows the rung reached, the miss card (or a clean-run card) and a share card; Share result sends only the squares and "PimpMe · Nov 16 · 4/6 · pimpme.app/daily" (Web Share, else copy). A reload shows today's result instead of a replay. The tester list is pulled forward from M4.4: migration `20261127120000_daily_pimp.sql` adds `testers` (RLS on, no client access), `is_tester()`, `daily_pool()` and `daily_content()`. The daily serves approved scripts to everyone and in-review ones only to signed-in testers, labelled "Not yet reviewed"; it ignores `show_in_review`, so the public site can't show in-review content (pgTAP `daily.test.sql`). Signed-out visitors see the waiting state and a tester sign-in (6-digit email code, existing accounts only); signed-in non-testers are told they aren't on the list. A tester's run is also saved as a normal session, so it counts in the app. Once a script is approved, the page opens to everyone with no code change (anonymous sign-in for grading). Before the push, the repo and the built site were checked for keys: only the project URL and the publishable key are public. **Left:** tester emails on the list (HOSTING.md → Website), a tester's run on the live site, and the developer's look at it.
 
+**MC (content library), phase 0 (27 Nov 2026):** scripts now come in four kinds, disease, drug, bug and pathway (domain rule 1 widened; developer's decisions, 27 Nov 2026). Each kind has its own content fields and rung labels (DESIGN.md → Script kinds); the six rungs, the score, progression and the DB enum are unchanged, so no migration. Every script carries `systems`; `rotation` may be empty. The 30 scripts are `kind: "disease"` with systems. `content:check` requires systems and keeps `confused_with` within a kind; review sheets print each kind's sections and labels; grading prompt `grade-answer/v2` names the kind. The app's ladder, miss card, Review line, script screen and the site's daily pimp use the kind's labels; the topic picker has wireframe 03's filter chips (systems, then kinds); Log matches diseases only. The topic catalogue is in `content/topics/` (482 diseases, 262 drugs, 131 bugs, 73 pathways, 85 clinical additions). **Release order:** builds and the web app from before phase 0 can't read scripts in the new shape (strict parsing), so a new TestFlight build and web deploy go out before the first `content:push` of the new shape.
+
 ## Screen map
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
 | Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5). "Who's pimping?" (M4.1, brand board) | Done |
-| Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips: Parking lot | Done |
+| Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips by system and kind (MC phase 0) | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
 | Result + miss card | 07 | result | Matches (M1.2). Miss label "Pimped on management" (M4.1, brand board; also on Review). Anki row: Unsuspend N Anki cards, queued state, Connect Anki (M3.4); flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |
 | Clean run | 13 | win, win-light | Matches (M1.2). Keeps "Next topic"; light "Script mastered" badge text needs a dark-amber token | Done |
 | Promotion | 14 | promo | Matches (M1.2) | Done |
-| Illness script | 10 | script | Matches (M1.2). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5). No linked-card count: not drawn (M3.2) | Done |
+| Illness script | 10 | script | Matches (M1.2). Drugs, bugs and pathways use the same blocks with their own sections and a kind chip (MC phase 0, DESIGN.md → Script kinds). Back link says "Review" when opened from Review (M2.2). Mic icon on Pimp me on this (M2.5). No linked-card count: not drawn (M3.2) | Done |
 | Script collection | 15 | collection, collection-light | Matches (M1.2) | Done |
 | Profile | 11 | profile, profile-light | Matches (M1.3): the Profile tab, titled Progress, with a Settings row. Teams row: Stage 5 | Done |
 | Tab bar (Pimp, Log, Review, Profile) | — | all tab screens | Built (M1.3). Shown on Home, topic picker, Log, Review, Profile, collection, Settings; hidden on session screens and the illness script | Done |
-| Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only until scripts have a system field | Done |
+| Log | 08 | log | Matches (M2.1). Subtitle shows the rotation only (scripts have `systems` since MC phase 0; Parking lot). Matches disease scripts only (MC) | Done |
 | Review + mix-up drill | 09 | review, review-light | Matches (M2.2). Drill screens reuse the session and result pieces (not drawn). Anki sync status row, hidden until connected (M3.4) | Done |
 | Onboarding | 01 | — | Built (M2.3), plus an optional week row. Also used by Change rotation. MS1–2 systems: Stage 5 | Done |
 | Settings | 12 | — | Built (M2.3): daily goal, answer timeout, appearance, account. Attending voice speed (M2.5). Anki first, as drawn: Connect Anki, one-time code, connected state and Disconnect (M3.3, connected state not drawn) | Done |
@@ -293,6 +295,19 @@ Facts to plan around:
 - **The Anki add-on file** is downloadable from the Anki page.
 - **Done when:** the site is live and the developer is happy with it.
 
+### MC Content library (ahead of M4.4)
+**Goal:** a large script library: preclinical (first and second year) by organ system, then the clinical rotations. Decided by the developer on 27 Nov 2026.
+- **Method:** Claude Code sessions draft scripts as JSON in `content/scripts`, about 10 per batch (not the Claude API). New scripts go straight to `in_review`; testers see them as "Not yet reviewed", and physicians review later with `content:review` and `content:approve` (never run by Code).
+- **Kinds:** disease, drug, bug, pathway, each with its own fields and rung labels (PRODUCT.md → Core entity). One script per disease: clinical waves extend disease scripts instead of duplicating them.
+- **Phase 0, design:** schemas, labels, tooling, app and site, docs, the topic catalogue in `content/topics/`. Done 27 Nov 2026.
+- **Phase 1, pilot:** cardiovascular: about 5 diseases, 5 drugs, 3 bugs (endocarditis organisms) and 2 pathways (cholesterol). The developer tries them in the app before scaling up.
+- **Phase 2, preclinical waves,** by system: cardio, pulm, renal, GI, endo, repro, heme/onc, neuro and psych, MSK and derm, then general micro, pharm, biochem and immunology. One commit per batch of about 10, one PR per system. P1 topics first, then P2; P3 only if the developer wants them.
+- **Phase 3, clinical waves,** about 500 rotation-tagged scripts: IM, surgery, EM, peds, OB/GYN, psych, neuro, FM. Mostly existing disease scripts gaining a rotation and clinical questions, plus `content/topics/clinical.md`.
+- **Quality gates, every batch, before committing:** `pnpm content:check` passes; a second agent reviews the batch (facts against current guidance; canonical answers quoted word for word from their source field; missing synonyms; synonyms too short or common for whole-word matching; nothing outside the script needed; list questions not accepting what the prompt excludes); sources are real guideline or textbook titles with no invented URLs; no AnKing or Qbank text (rule 6) and no patient details, even in vignettes (rule 5); `confused_with` only to existing scripts of the same kind; content/README.md → Writing good questions and the house style of the first 30 scripts.
+- **Hosted:** each `content:push --preview` to `rounds-dev` needs the developer's OK. The first push of the new shape waits for a new build and web deploy (phase 0 note above).
+- **Scale:** about 1,000 planned topics at about 10 per batch is about 100 batches.
+- **Done when:** the preclinical waves and the clinical waves are in, each batch has passed its gates, and the developer has tried the pilot in the app.
+
 ### M4.4 Web app
 - **Address:** the Expo web app at app.pimpme.app (Cloudflare Pages, HTTPS, so voice works in the browser), in the frame the mockup draws. It can be added to the phone's home screen (PWA).
 - **Tester gate:** only signed-in emails on the tester list get in. Others see a "PimpMe is in testing" page. The list lives in the database (migration, RLS, pgTAP).
@@ -354,11 +369,10 @@ Mockups, wireframes and the vision video (finished; M4.1 adds the PimpMe site mo
 - (13 Nov 2026) A third question on rungs where a script has a third fact worth asking. M1.1 shipped two per rung; the content rules allow three.
 - (27 Nov 2026) A `pnpm testers add|remove|list` command against `rounds-dev`, so the tester list needs no SQL (developer: not now).
 - (27 Nov 2026) A small admin page in the web app for the developer only, around M4.6: the tester list, "This is wrong" flags and usage numbers. Never script editing (scripts stay files with review), and it needs an admin role, RLS and pgTAP tests.
-- (14 Nov 2026) Filter chips on the topic picker (All, Cardio, Renal, GI; wireframe 03). Scripts need a "system" field first, which is a content change.
 - (13 Nov 2026) Weight "Pimp me" by how long ago a script was missed (spaced repetition), not only whether the last session ended on a miss.
 - (13 Nov 2026) Show a rung's question versions on the illness script screen.
 - (14 Nov 2026) Deleting or editing a patient log. Not drawn; the table already allows deleting your own rows.
-- (14 Nov 2026) The Log's matching-script subtitle reads "Internal medicine, cardiology" in `log.png`; it needs the same "system" field as the filter chips.
+- (14 Nov 2026) The Log's matching-script subtitle reads "Internal medicine, cardiology" in `log.png`. Scripts have had `systems` since MC phase 0, so this is now buildable.
 - (14 Nov 2026) Mix-up pairs on Profile (PRODUCT.md lists them there). M2.2 shows only the week's top pair, on Review.
 - (14 Nov 2026) More than one mix-up pair on Review at a time. Wireframe 09 draws one, and the review is meant to end.
 - (14 Nov 2026) A drawn screen for the mix-up drill and its result. M2.2 reuses the live session (four squares instead of the ladder) and the result screen's pieces.
@@ -376,6 +390,8 @@ Mockups, wireframes and the vision video (finished; M4.1 adds the PimpMe site mo
 - (16 Nov 2026) An Anki row on the mix-up drill result (M3.4 shows it after ladder misses only; the drill result isn't drawn).
 - (16 Nov 2026) Tagging misses from before Anki was connected. M3.4 tags misses from the moment Anki is connected.
 - (16 Nov 2026) Undoing a queued unsuspend from the app before Anki syncs. In Anki, Edit → Undo already reverses it in one step.
+- (27 Nov 2026) Anki linking at scale for the content library (MC). The linker add-on maps AnKing's disease leaves (Management, Diagnosis) to rungs; drugs, bugs and pathways need their own leaf map, and about 1,000 scripts need a faster confirm flow than one script at a time.
+- (27 Nov 2026) Choosing organ systems instead of a rotation in onboarding for MS1–2 (wireframe 01 note 1). Scripts have `systems` since MC phase 0; until then preclinical scripts are reached through the topic picker's chips.
 
 ---
 

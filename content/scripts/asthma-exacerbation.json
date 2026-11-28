@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Asthma exacerbation",
     "aliases": [
       "acute asthma",
       "asthma attack"
+    ],
+    "systems": [
+      "pulm"
     ],
     "rotation": [
       "IM",

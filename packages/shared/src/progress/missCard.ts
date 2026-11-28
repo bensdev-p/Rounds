@@ -8,22 +8,16 @@ import type { Confusable } from '../grading/localGrader.ts';
 import { PERSONAS, type PersonaId } from '../ladder/personas.ts';
 import type { GradeResult, MissTag } from '../schemas/attempt.ts';
 import { collectStrings, resolveFieldPath } from '../schemas/fieldPath.ts';
-import type { IllnessScript } from '../schemas/illnessScript.ts';
+import type { IllnessScript, ScriptKind } from '../schemas/illnessScript.ts';
+import { RUNG_LABELS_BY_KIND, rungLabel } from '../schemas/kindLabels.ts';
 import type { Question, Rung } from '../schemas/question.ts';
 
-/** Rung names as shown on the ladder. */
-export const RUNG_LABELS: Record<Rung, string> = {
-  recall: 'Recall',
-  second_order: 'Next most common',
-  differentiate: 'Tell it apart',
-  workup: 'Workup',
-  management: 'Management',
-  pearl: 'Pearl',
-};
+/** Disease rung names as shown on the ladder. Other kinds: `RUNG_LABELS_BY_KIND`. */
+export const RUNG_LABELS: Record<Rung, string> = RUNG_LABELS_BY_KIND.disease;
 
 /** "Pimped on management": the miss card's label, also used in Review (DESIGN.md, step 6). */
-export function missLabel(rung: Rung): string {
-  return `Pimped on ${RUNG_LABELS[rung].toLowerCase()}`;
+export function missLabel(rung: Rung, kind: ScriptKind = 'disease'): string {
+  return `Pimped on ${rungLabel(rung, kind).toLowerCase()}`;
 }
 
 export interface MissCard {
@@ -69,7 +63,7 @@ export function buildMissCard(input: {
   timeLimitMs?: number | null;
 }): MissCard {
   const { answer, result, missTag, question, script, confusables, persona } = input;
-  const label = missLabel(question.rung);
+  const label = missLabel(question.rung, script.kind);
 
   let correction: string;
   if (missTag === 'slow') {

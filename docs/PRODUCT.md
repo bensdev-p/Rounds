@@ -1,7 +1,7 @@
 # PimpMe — Product Spec
 
 ## One-liner
-A voice-first trainer that quizzes ("pimps") medical students the way attendings do on rounds. It's built on structured illness scripts, connects to Anki, and ties study back to the real patients students see.
+A voice-first trainer that quizzes ("pimps") medical students the way attendings do on rounds. It's built on structured illness scripts, connects to Anki, and ties study back to the real patients students see. Preclinical students study by organ system; clinical students by rotation.
 
 ## Users
 - **Primary:** third- and fourth-year students on clinical rotations.
@@ -15,9 +15,25 @@ A voice-first trainer that quizzes ("pimps") medical students the way attendings
 
 Everything else (stats, weakness map, mix-up pairs, settings) lives in a single **Profile** screen.
 
-## Core entity: the illness script
+## Core entity: the script
+Every question traces to an approved script (domain rule 1). There are four kinds (developer's decision, 27 Nov 2026):
+
+| Kind | What it covers | Rung labels, bottom to top |
+|---|---|---|
+| **disease** (the illness script) | one disease | Recall, Next most common, Tell it apart, Workup, Management, Pearl |
+| **drug** | a drug class, or a drug pimped on its own | Class, Mechanism, Uses, Adverse effects, Tell it apart, Pearl |
+| **bug** | a microorganism | Identify, Virulence, Diseases, Diagnosis, Treatment, Pearl |
+| **pathway** | a biochemical or physiological pathway (vitamins included) | Step, Regulation, Deficiency, Tell it apart, Treatment, Pearl |
+
+Every kind has `id`, `kind`, `name`, `aliases[]`, `systems[]` (cardio, pulm, renal, gi, endo, repro, heme_onc, neuro, psych, msk, derm, immuno, general), `rotation[]` (may be empty), `confused_with[]` (within the kind), `pearls[]`, `difficulty_tiers`, `anki_refs[]`, `sources[]` and the review fields. One script per disease: it carries both its systems and its rotations, and clinical content extends it rather than duplicating it. The planned topics are in `content/topics/`.
+
+- **Drug:** `class`, `class_members[]`, `mechanism`, `pharmacokinetics[]`, `indications[]`, `adverse_effects[]`, `contraindications[]`, `interactions[]`, `monitoring[]`, `overdose` (features, treatment).
+- **Bug:** `morphology`, `lab_features[]`, `transmission[]`, `virulence_factors[]`, `diseases[]`, `diagnosis[]`, `treatment[]`, `prevention[]`.
+- **Pathway:** `location`, `purpose`, `steps[]`, `rate_limiting_enzyme` (optional), `regulation[]`, `cofactors[]`, `deficiencies[]`, `drug_targets[]`, `treatment[]`.
+
+### The disease script (illness script)
 A disease's structured summary. Fields:
-- `id`, `name`, `aliases[]`, `rotation[]` (IM, surgery, peds, OB/GYN, psych, neuro, FM, EM)
+- `id`, `name`, `aliases[]`, `systems[]`, `rotation[]` (IM, surgery, peds, OB/GYN, psych, neuro, FM, EM)
 - `epidemiology`: who gets it, risk factors
 - `pathophysiology`: short mechanism
 - `timeline`: onset and course
@@ -35,7 +51,7 @@ Scripts are drafted by AI and approved by a human medical reviewer. Each questio
 
 ## The pimp ladder
 - Each session picks a script (or a rotation and lets the app choose).
-- Questions climb rungs: recall → second-order ("what's next most common?") → differentiate ("how do you tell it from X?") → workup → management → pearl.
+- Questions climb rungs: recall → second-order ("what's next most common?") → differentiate ("how do you tell it from X?") → workup → management → pearl. Drugs, bugs and pathways climb the same six rungs under their own labels (table above).
 - Session ends on the first miss. Score = the rung reached. Track best rung per script.
 - **List questions:** "Name 5 causes of…", graded with partial credit, showing the ones missed.
 - **Attending personas:** Teacher (patient, hints), Surgeon (rapid-fire, short time limit), Internist (Socratic, "why?"). Same content, different pacing and tone.

@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Acute kidney injury",
     "aliases": [
       "AKI",
       "acute renal failure"
+    ],
+    "systems": [
+      "renal"
     ],
     "rotation": [
       "IM"

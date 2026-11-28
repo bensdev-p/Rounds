@@ -19,7 +19,12 @@ const NOW = new Date('2026-11-14T15:00:00Z');
 
 /** The zorblax fixture as a draft content file on disk. */
 function rawDraft(id = 'zorblax-syndrome') {
-  const script = { ...TEST_SCRIPTS.find((s) => s.id === id)!, status: 'draft', reviewed_by: null, reviewed_at: null };
+  const script = {
+    ...TEST_SCRIPTS.find((s) => s.id === id)!,
+    status: 'draft',
+    reviewed_by: null,
+    reviewed_at: null,
+  };
   const questions = testQuestionsFor(id).map((q) => {
     const copy: Record<string, unknown> = { ...q };
     delete copy.script_id;
@@ -39,7 +44,9 @@ describe('parseContentFile', () => {
   it('fills script id and version into questions', () => {
     const file = draftFile();
     expect(file.questions).toHaveLength(6);
-    expect(file.questions.every((q) => q.script_id === 'zorblax-syndrome' && q.script_version === 1)).toBe(true);
+    expect(
+      file.questions.every((q) => q.script_id === 'zorblax-syndrome' && q.script_version === 1),
+    ).toBe(true);
   });
 
   it('requires the file name to match the script id', () => {
@@ -83,7 +90,9 @@ describe('parseContentFile', () => {
 
 describe('canonicalJson', () => {
   it('ignores key order', () => {
-    expect(canonicalJson({ b: 1, a: [{ d: 2, c: 3 }] })).toBe(canonicalJson({ a: [{ c: 3, d: 2 }], b: 1 }));
+    expect(canonicalJson({ b: 1, a: [{ d: 2, c: 3 }] })).toBe(
+      canonicalJson({ a: [{ c: 3, d: 2 }], b: 1 }),
+    );
   });
 });
 
@@ -133,7 +142,9 @@ describe('approval', () => {
   it('refuses a blank reviewer or a second approval', () => {
     expect(() => approve(draftFile(), {}, '  ', NOW, sha256)).toThrow(/Reviewer/);
     const once = approve(draftFile(), {}, 'Reviewer', NOW, sha256);
-    expect(() => approve(once.file, once.approvals, 'Reviewer', NOW, sha256)).toThrow(/already approved/);
+    expect(() => approve(once.file, once.approvals, 'Reviewer', NOW, sha256)).toThrow(
+      /already approved/,
+    );
   });
 });
 
@@ -177,7 +188,7 @@ describe('renderReviewSheet', () => {
     expect(sheet).toContain('# Zorblax syndrome');
     expect(sheet).toContain('Status: **draft**, version 1');
     expect(sheet).toContain('**Quellan fever**: Quellan fever causes green nail beds');
-    expect(sheet).toContain('### 2. second order\n\n#### 2a (list: name 3)');
+    expect(sheet).toContain('### 2. Next most common\n\n#### 2a (list: name 3)');
     expect(sheet).toContain('| night shift work | night shift, shift work |');
     expect(sheet).toContain('`management.first_line`: zorbicillin');
     expect(sheet).toContain('pnpm content:approve zorblax-syndrome --by "Your name, role"');
@@ -186,11 +197,14 @@ describe('renderReviewSheet', () => {
   it('groups a rung with several questions under one heading', () => {
     const file = draftFile();
     const variant = { ...file.questions[4]!, id: 'zorblax-syndrome.management.2', prompt: 'Next?' };
-    const sheet = renderReviewSheet({ ...file, questions: [...file.questions, variant] }, new Map());
+    const sheet = renderReviewSheet(
+      { ...file, questions: [...file.questions, variant] },
+      new Map(),
+    );
     expect(sheet).toContain(
-      '### 5. management\n\n_2 versions; each session asks one._\n\n#### 5a\n\n**Q:** First-line treatment?',
+      '### 5. Management\n\n_2 versions; each session asks one._\n\n#### 5a\n\n**Q:** First-line treatment?',
     );
     expect(sheet).toContain('#### 5b\n\n**Q:** Next?');
-    expect(sheet.indexOf('#### 5b')).toBeLessThan(sheet.indexOf('### 6. pearl'));
+    expect(sheet.indexOf('#### 5b')).toBeLessThan(sheet.indexOf('### 6. Pearl'));
   });
 });

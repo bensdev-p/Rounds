@@ -1,4 +1,4 @@
-import type { DayKey, MissCard } from '@rounds/shared';
+import { SCRIPT_KINDS, type DayKey, type MissCard, type ScriptKind } from '@rounds/shared';
 
 /**
  * Today's finished run, kept in this browser so a reload shows the result
@@ -8,6 +8,8 @@ export interface SavedRun {
   day: DayKey;
   script_id: string;
   script_name: string;
+  /** Picks the ladder's labels. Runs saved before kinds existed have none: disease. */
+  script_kind?: ScriptKind;
   cleared: number;
   missed: boolean;
   total: number;
@@ -24,6 +26,7 @@ function isSavedRun(value: unknown): value is SavedRun {
     typeof v.day === 'string' &&
     typeof v.script_id === 'string' &&
     typeof v.script_name === 'string' &&
+    (v.script_kind === undefined || SCRIPT_KINDS.some((k) => k === v.script_kind)) &&
     typeof v.cleared === 'number' &&
     typeof v.missed === 'boolean' &&
     typeof v.total === 'number' &&

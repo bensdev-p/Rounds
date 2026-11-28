@@ -14,7 +14,7 @@ import {
   type IllnessScript,
   type Question,
 } from '@rounds/shared';
-import { PROMPT_VERSION, renderUserMessage, SYSTEM } from '../_prompts/grade-answer/v1.ts';
+import { PROMPT_VERSION, renderUserMessage, SYSTEM } from '../_prompts/grade-answer/v2.ts';
 import type { LlmProvider, LlmUsage } from '../_shared/llm/types.ts';
 
 export type GradeOutcome = 'local_match' | 'local_only' | 'llm' | `llm_${string}`;

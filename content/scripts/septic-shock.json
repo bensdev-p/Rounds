@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Sepsis and septic shock",
     "aliases": [
       "sepsis",
       "septic shock"
+    ],
+    "systems": [
+      "general"
     ],
     "rotation": [
       "IM",

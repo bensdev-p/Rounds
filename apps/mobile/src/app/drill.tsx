@@ -78,7 +78,7 @@ export default function DrillRoute() {
   }
   const { left, right } = data.data;
   if (!left || !right) return <ErrorView message="That pair isn't available." onRetry={goBack} />;
-  if (pickDrill(left.questions, right.questions).length === 0) {
+  if (pickDrill(left.questions, right.questions, { kind: left.script.kind }).length === 0) {
     return <ErrorView message="This pair has no tell-apart questions yet." onRetry={goBack} />;
   }
   return <Drill left={left} right={right} persona={persona} />;
@@ -114,7 +114,7 @@ function Drill({
   const pick = () =>
     startDrill(
       [left.script.id, right.script.id],
-      pickDrill(left.questions, right.questions),
+      pickDrill(left.questions, right.questions, { kind: left.script.kind }),
       persona,
       { time_limit_ms: timeLimit },
     );
@@ -316,6 +316,7 @@ function Drill({
       }}
       dontKnowHint="Ends the drill on this question"
       scriptName={shownScript.name}
+      kind={shownScript.kind}
       inReview={shownScript.status === 'in_review'}
       prompt={shownQuestion?.prompt ?? ''}
       isList={shownQuestion?.kind === 'list'}

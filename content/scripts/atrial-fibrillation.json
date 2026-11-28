@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Atrial fibrillation",
     "aliases": [
       "AF",
       "AFib"
+    ],
+    "systems": [
+      "cardio"
     ],
     "rotation": [
       "IM",

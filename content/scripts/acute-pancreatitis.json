@@ -5,8 +5,12 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Acute pancreatitis",
     "aliases": [],
+    "systems": [
+      "gi"
+    ],
     "rotation": [
       "IM",
       "surgery"

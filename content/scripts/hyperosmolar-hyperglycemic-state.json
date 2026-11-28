@@ -5,9 +5,13 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Hyperosmolar hyperglycemic state",
     "aliases": [
       "HHS"
+    ],
+    "systems": [
+      "endo"
     ],
     "rotation": [
       "IM",

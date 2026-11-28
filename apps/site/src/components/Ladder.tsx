@@ -10,14 +10,26 @@ export const RUNGS = [
 
 export type RungState = 'done' | 'now' | 'miss' | '';
 
-export function Ladder({ states, width }: { states: readonly RungState[]; width: number }) {
+/**
+ * `labels` replaces the disease labels for drug, bug and pathway scripts
+ * (DESIGN.md → Script kinds); the daily pimp passes them.
+ */
+export function Ladder({
+  states,
+  width,
+  labels = RUNGS,
+}: {
+  states: readonly RungState[];
+  width: number;
+  labels?: readonly string[];
+}) {
   return (
     <ol
       className="ladder"
       style={{ width, flex: 'none', listStyle: 'none' }}
       aria-label="The pimp ladder"
     >
-      {RUNGS.map((label, i) => (
+      {labels.map((label, i) => (
         <li key={label} className={`rung ${states[i] ?? ''}`}>
           <span className="n num">{i + 1}</span>
           <span className="rl">{label}</span>

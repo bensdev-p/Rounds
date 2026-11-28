@@ -261,6 +261,22 @@ describe('drill', () => {
     expect(picked.every((q) => q.rung === 'differentiate')).toBe(true);
   });
 
+  it("asks the kind's tell-apart rung: management for drugs, recall for bugs", () => {
+    const asRung = (qs: typeof left, rung: 'management' | 'recall') =>
+      qs.map((q) => ({ ...q, rung }));
+    expect(pickDrill(asRung(left, 'management'), asRung(right, 'management'))).toEqual([]);
+    const drugs = pickDrill(asRung(left, 'management'), asRung(right, 'management'), {
+      random: () => 0,
+      kind: 'drug',
+    });
+    expect(drugs.map((q) => q.script_id)).toEqual(['x', 'y', 'x']);
+    const bugs = pickDrill(asRung(left, 'recall'), asRung(right, 'recall'), {
+      random: () => 0,
+      kind: 'bug',
+    });
+    expect(bugs).toHaveLength(3);
+  });
+
   it('ends on the first miss and scores the answers before it', () => {
     let state = startDrill(['x', 'y'], pickDrill(left, right, { random: () => 0 }), 'teacher');
     state = submitDrillAnswer(state, correct);

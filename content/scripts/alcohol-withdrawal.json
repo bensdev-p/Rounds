@@ -5,10 +5,15 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Alcohol withdrawal",
     "aliases": [
       "alcohol withdrawal syndrome",
       "delirium tremens"
+    ],
+    "systems": [
+      "psych",
+      "neuro"
     ],
     "rotation": [
       "IM",

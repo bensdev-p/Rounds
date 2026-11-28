@@ -64,9 +64,9 @@ describe('IllnessScriptSchema', () => {
   it('caps notes per rung and core notes', () => {
     const notes = (n: number, rung?: string) =>
       Array.from({ length: n }, (_, i) => ({ kind: 'note', id: String(100 + i), rung }));
-    expect(
-      issues({ ...base(), anki_refs: notes(MAX_ANKI_NOTES_PER_RUNG, 'management') }),
-    ).toEqual([]);
+    expect(issues({ ...base(), anki_refs: notes(MAX_ANKI_NOTES_PER_RUNG, 'management') })).toEqual(
+      [],
+    );
     expect(
       issues({ ...base(), anki_refs: notes(MAX_ANKI_NOTES_PER_RUNG + 1, 'management') }),
     ).toEqual([`More than ${MAX_ANKI_NOTES_PER_RUNG} Anki notes on the management rung`]);
@@ -110,7 +110,8 @@ describe('IllnessScriptSchema', () => {
   it('rejects bad ids, statuses and rotations', () => {
     expect(issues({ ...base(), id: 'Zorblax Syndrome' })).not.toEqual([]);
     expect(issues({ ...base(), status: 'published' })).not.toEqual([]);
-    expect(issues({ ...base(), rotation: [] })).not.toEqual([]);
+    expect(issues({ ...base(), rotation: ['wards'] })).not.toEqual([]);
+    expect(issues({ ...base(), systems: ['heart'] })).not.toEqual([]);
   });
 });
 

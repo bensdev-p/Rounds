@@ -7,6 +7,8 @@
 import { makeAttempt, type LadderStatus, type SubmittedAnswer } from '../ladder/engine.ts';
 import { PERSONAS, type PersonaId } from '../ladder/personas.ts';
 import type { Attempt } from '../schemas/attempt.ts';
+import type { ScriptKind } from '../schemas/illnessScript.ts';
+import { TELL_APART_RUNG } from '../schemas/kindLabels.ts';
 import type { Question } from '../schemas/question.ts';
 
 export const DRILL_PER_SCRIPT = 2;
@@ -36,22 +38,24 @@ function shuffled<T>(items: readonly T[], random: () => number): T[] {
 }
 
 /**
- * Picks the drill's questions: each script's differentiate questions in a
- * random order, up to two each, alternating left, right, left, right.
+ * Picks the drill's questions: each script's tell-apart questions in a
+ * random order, up to two each, alternating left, right, left, right. The
+ * rung depends on the pair's kind (`TELL_APART_RUNG`); pairs share a kind.
  */
 export function pickDrill(
   left: readonly Question[],
   right: readonly Question[],
-  options: { random?: () => number; perScript?: number } = {},
+  options: { random?: () => number; perScript?: number; kind?: ScriptKind } = {},
 ): Question[] {
   const random = options.random ?? Math.random;
   const per = options.perScript ?? DRILL_PER_SCRIPT;
+  const rung = TELL_APART_RUNG[options.kind ?? 'disease'];
   const a = shuffled(
-    left.filter((q) => q.rung === 'differentiate'),
+    left.filter((q) => q.rung === rung),
     random,
   ).slice(0, per);
   const b = shuffled(
-    right.filter((q) => q.rung === 'differentiate'),
+    right.filter((q) => q.rung === rung),
     random,
   ).slice(0, per);
   const out: Question[] = [];

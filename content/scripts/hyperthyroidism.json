@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Hyperthyroidism",
     "aliases": [
       "thyrotoxicosis",
       "Graves disease"
+    ],
+    "systems": [
+      "endo"
     ],
     "rotation": [
       "IM",
