@@ -1,0 +1,392 @@
+{
+  "script": {
+    "id": "hypertrophic-cardiomyopathy",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Hypertrophic cardiomyopathy",
+    "aliases": [
+      "HCM",
+      "hypertrophic obstructive cardiomyopathy",
+      "HOCM"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Any age, often first found in adolescents and young adults; the most common inherited heart disease (about 1 in 500) and a leading cause of sudden death in young athletes",
+      "risk_factors": [
+        "family history of hypertrophic cardiomyopathy or sudden death",
+        "a sarcomere gene variant, most often in beta-myosin heavy chain or myosin-binding protein C"
+      ]
+    },
+    "pathophysiology": "A variant in a sarcomere protein causes asymmetric hypertrophy of the left ventricle, usually of the septum, with disorganized myocytes (myocyte disarray). The stiff ventricle fills poorly. In the obstructive form, the anterior mitral leaflet is pulled toward the septum in systole (systolic anterior motion), obstructing outflow and causing mitral regurgitation.",
+    "timeline": {
+      "onset": "Often appears in adolescence or early adulthood",
+      "course": "Variable: many live normal lives, but some develop sudden death, heart failure or atrial fibrillation"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "chest pain",
+        "syncope or presyncope on exertion",
+        "palpitations",
+        "sudden death may be the first sign"
+      ],
+      "exam": [
+        "systolic ejection murmur at the left lower sternal border that gets louder with Valsalva or standing and softer with squatting or handgrip",
+        "S4",
+        "bifid carotid pulse"
+      ],
+      "labs": [
+        "genetic testing for sarcomere variants"
+      ],
+      "imaging": [
+        "echocardiogram showing a septum 15 mm or thicker, often with systolic anterior motion of the mitral valve",
+        "cardiac MRI showing hypertrophy and fibrosis",
+        "ECG with left ventricular hypertrophy and deep Q waves"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram",
+        "cardiac MRI"
+      ],
+      "criteria": [
+        "Left ventricular wall thickness of 15 mm or more (13 mm or more with a family history), not explained by another cause"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "beta blocker for symptoms",
+        "avoid dehydration and vasodilators",
+        "ICD for patients at high risk of sudden death",
+        "screen first-degree relatives with ECG and echocardiogram"
+      ],
+      "next_line": [
+        "verapamil or diltiazem if beta blockers fail",
+        "mavacamten, a cardiac myosin inhibitor, for obstructive symptoms",
+        "septal reduction: surgical myectomy or alcohol septal ablation"
+      ]
+    },
+    "complications": [
+      "sudden cardiac death from ventricular arrhythmia",
+      "atrial fibrillation",
+      "heart failure",
+      "mitral regurgitation"
+    ],
+    "confused_with": [
+      {
+        "script_id": "aortic-stenosis",
+        "how_to_tell_apart": "Hypertrophic cardiomyopathy causes a systolic murmur at the left lower sternal border that gets louder with Valsalva or standing; the murmur of aortic stenosis radiates to the carotids and gets softer. Hypertrophic cardiomyopathy is inherited and shows up in the young; aortic stenosis is a disease of older adults.",
+        "compare": [
+          {
+            "label": "Murmur",
+            "text": "Left lower sternal border",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Valsalva",
+            "text": "Louder",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Who",
+            "text": "Young, inherited",
+            "source_field": "epidemiology.who"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "Anything that shrinks the ventricle (Valsalva, standing, dehydration) makes the obstruction and murmur worse; squatting and handgrip make them softer.",
+      "Hypertrophic cardiomyopathy is inherited in an autosomal dominant pattern.",
+      "Systolic anterior motion of the mitral valve also causes mitral regurgitation."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[1]"
+      ],
+      "MS3": [
+        "key_findings.exam[0]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2024 AHA/ACC/AMSSM/HRS/PACES/SCMR Guideline for the Management of Hypertrophic Cardiomyopathy"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of cardiomyopathies"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hypertrophic-cardiomyopathy.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 17-year-old collapses during a basketball game. His father died suddenly at 40. He has a systolic murmur that gets louder when he stands. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hypertrophic cardiomyopathy",
+          "synonyms": [
+            "HCM",
+            "HOCM",
+            "hypertrophic obstructive cardiomyopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which part of the left ventricle thickens most in hypertrophic cardiomyopathy?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "septum",
+          "synonyms": [
+            "interventricular septum",
+            "septal wall",
+            "septal hypertrophy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "How is hypertrophic cardiomyopathy inherited?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "autosomal dominant",
+          "synonyms": [
+            "autosomal dominant inheritance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Name a sarcomere gene often affected in hypertrophic cardiomyopathy.",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta-myosin heavy chain",
+          "synonyms": [
+            "MYH7",
+            "beta myosin heavy chain",
+            "myosin heavy chain"
+          ]
+        },
+        {
+          "answer": "myosin-binding protein C",
+          "synonyms": [
+            "MYBPC3",
+            "myosin binding protein C"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Name a maneuver that makes the murmur of hypertrophic cardiomyopathy louder.",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Valsalva",
+          "synonyms": [
+            "Valsalva maneuver",
+            "bearing down"
+          ]
+        },
+        {
+          "answer": "standing",
+          "synonyms": [
+            "standing up",
+            "squat to stand"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Aortic stenosis is loudest at the right upper sternal border. Where is the murmur of hypertrophic cardiomyopathy loudest?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "left lower sternal border",
+          "synonyms": [
+            "LLSB",
+            "lower left sternal border",
+            "left sternal border"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "With no family history, what left ventricular wall thickness on echo defines hypertrophic cardiomyopathy?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "15 mm or more",
+          "synonyms": [
+            "15 mm",
+            "15 millimeters",
+            "more than 15 mm",
+            "1.5 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.workup.2",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "A patient has hypertrophic cardiomyopathy. Name the two tests used to screen the patient's brother and sister.",
+      "source_fields": [
+        "management.first_line[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ECG",
+          "synonyms": [
+            "EKG",
+            "electrocardiogram"
+          ]
+        },
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line drug class for symptoms of obstructive hypertrophic cardiomyopathy?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta blocker",
+          "synonyms": [
+            "beta-blocker",
+            "beta blockers",
+            "metoprolol",
+            "propranolol",
+            "atenolol",
+            "bisoprolol",
+            "nadolol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which device prevents sudden death in a high-risk patient with hypertrophic cardiomyopathy?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ICD",
+          "synonyms": [
+            "implantable cardioverter-defibrillator",
+            "implantable cardioverter defibrillator",
+            "defibrillator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Obstructive symptoms persist on a beta blocker. Name the oral drug that inhibits cardiac myosin.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mavacamten",
+          "synonyms": [
+            "Camzyos"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertrophic-cardiomyopathy.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a procedure that relieves septal obstruction.",
+      "source_fields": [
+        "management.next_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "surgical myectomy",
+          "synonyms": [
+            "myectomy",
+            "septal myectomy"
+          ]
+        },
+        {
+          "answer": "alcohol septal ablation",
+          "synonyms": [
+            "septal ablation",
+            "alcohol ablation"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,391 @@
+{
+  "script": {
+    "id": "aortic-stenosis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Aortic stenosis",
+    "aliases": [
+      "calcific aortic stenosis",
+      "aortic valve stenosis"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Older adults with age-related calcification of a normal valve, and younger adults with a bicuspid valve",
+      "risk_factors": [
+        "older age",
+        "bicuspid aortic valve",
+        "rheumatic heart disease",
+        "chronic kidney disease",
+        "atherosclerotic risk factors"
+      ]
+    },
+    "pathophysiology": "The aortic valve calcifies and narrows, obstructing left ventricular outflow. The ventricle hypertrophies concentrically to keep up its output and eventually fails. Coronary flow cannot meet the thick wall's oxygen demand, which causes angina.",
+    "timeline": {
+      "onset": "Silent for decades; symptoms appear once the stenosis is severe",
+      "course": "Once symptoms start, survival without valve replacement is short"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "angina",
+        "syncope on exertion",
+        "heart failure symptoms"
+      ],
+      "exam": [
+        "harsh crescendo-decrescendo systolic murmur at the right upper sternal border radiating to the carotids",
+        "slow-rising, weak carotid pulse (pulsus parvus et tardus)",
+        "soft or absent second heart sound",
+        "sustained apex beat"
+      ],
+      "labs": [
+        "BNP rises as the ventricle fails"
+      ],
+      "imaging": [
+        "echocardiogram showing a calcified valve, a small valve area and a high gradient",
+        "ECG with left ventricular hypertrophy"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram"
+      ],
+      "criteria": [
+        "Severe aortic stenosis: mean gradient 40 mmHg or more, peak velocity 4 m/s or more, or a valve area of 1 square centimeter or less"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "aortic valve replacement for severe stenosis with symptoms or an ejection fraction below 50%: transcatheter (TAVR) or surgical (SAVR)",
+        "TAVR is preferred for older patients and those at high surgical risk",
+        "serial echocardiograms while asymptomatic; earlier replacement is increasingly offered for severe disease"
+      ],
+      "next_line": [
+        "balloon valvuloplasty as a bridge in unstable patients",
+        "cautious diuresis; avoid strong vasodilators, which can drop blood pressure"
+      ]
+    },
+    "complications": [
+      "heart failure",
+      "sudden cardiac death",
+      "GI bleeding from angiodysplasia (Heyde syndrome)",
+      "infective endocarditis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "hypertrophic-cardiomyopathy",
+        "how_to_tell_apart": "Both cause a systolic ejection murmur, but the murmur of aortic stenosis radiates to the carotids and gets softer with Valsalva, while the murmur of hypertrophic cardiomyopathy gets louder with Valsalva or standing. Aortic stenosis is a disease of older adults; hypertrophic cardiomyopathy is inherited and shows up in the young.",
+        "compare": [
+          {
+            "label": "Murmur",
+            "text": "RUSB, radiates to carotids",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Valsalva",
+            "text": "Softer",
+            "source_field": "pearls[0]"
+          },
+          {
+            "label": "Who",
+            "text": "Older adults, calcified valve",
+            "source_field": "epidemiology.who"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "The murmur of aortic stenosis gets softer with Valsalva and standing, because less blood fills the ventricle.",
+      "The classic symptoms of severe aortic stenosis are syncope, angina and dyspnea from heart failure.",
+      "Severe aortic stenosis with GI bleeding from angiodysplasia is Heyde syndrome."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+      },
+      {
+        "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "aortic-stenosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "An 80-year-old faints while walking. There is a harsh systolic murmur at the right upper sternal border that radiates to the carotids. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic stenosis",
+          "synonyms": [
+            "calcific aortic stenosis",
+            "aortic valve stenosis",
+            "severe aortic stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 55-year-old with a bicuspid aortic valve has new exertional angina and a slow-rising carotid pulse. Which valve lesion?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic stenosis",
+          "synonyms": [
+            "calcific aortic stenosis",
+            "aortic valve stenosis",
+            "severe aortic stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name the three classic symptoms of severe aortic stenosis.",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "syncope",
+          "synonyms": [
+            "fainting",
+            "passing out",
+            "exertional syncope"
+          ]
+        },
+        {
+          "answer": "angina",
+          "synonyms": [
+            "chest pain"
+          ]
+        },
+        {
+          "answer": "dyspnea",
+          "synonyms": [
+            "shortness of breath",
+            "breathlessness",
+            "heart failure"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "aortic-stenosis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Aortic stenosis in a 50-year-old. Which congenital valve problem is the likely cause?",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bicuspid aortic valve",
+          "synonyms": [
+            "bicuspid valve",
+            "bicuspid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Both cause a systolic murmur. Which one gets softer with Valsalva: aortic stenosis or hypertrophic cardiomyopathy?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic stenosis",
+          "synonyms": [
+            "aortic valve stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which carotid pulse goes with aortic stenosis?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulsus parvus et tardus",
+          "synonyms": [
+            "parvus et tardus",
+            "slow-rising pulse",
+            "slow rising pulse",
+            "slow-rising",
+            "slow upstroke",
+            "delayed upstroke",
+            "weak and delayed pulse",
+            "slow-rising carotid pulse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms and grades aortic stenosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echo",
+            "TTE",
+            "echocardiography",
+            "transthoracic echo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What mean gradient across the aortic valve marks severe stenosis?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "40 mmHg",
+          "synonyms": [
+            "40",
+            "40 mm Hg",
+            "40 millimeters of mercury",
+            "more than 40 mmHg",
+            "over 40 mmHg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe aortic stenosis, and now exertional syncope. Definitive treatment?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic valve replacement",
+          "synonyms": [
+            "valve replacement",
+            "AVR",
+            "TAVR",
+            "TAVI",
+            "SAVR",
+            "transcatheter aortic valve replacement",
+            "surgical aortic valve replacement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Symptomatic severe aortic stenosis in an 87-year-old at high surgical risk. Which kind of valve replacement?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "TAVR",
+          "synonyms": [
+            "TAVI",
+            "transcatheter aortic valve replacement",
+            "transcatheter aortic valve implantation",
+            "transcatheter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Severe aortic stenosis with recurrent GI bleeding from angiodysplasia. Name the syndrome.",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Heyde syndrome",
+          "synonyms": [
+            "Heyde",
+            "Heyde's syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-stenosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why are strong vasodilators risky in severe aortic stenosis?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "drop blood pressure",
+          "synonyms": [
+            "hypotension",
+            "hypotensive",
+            "low blood pressure",
+            "drops blood pressure",
+            "fall in blood pressure",
+            "fixed cardiac output"
+          ]
+        }
+      ]
+    }
+  ]
+}

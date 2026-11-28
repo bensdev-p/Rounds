@@ -1,0 +1,382 @@
+{
+  "script": {
+    "id": "nitrates",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Nitrates",
+    "aliases": [
+      "organic nitrates"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Organic nitrates (nitric oxide donors)",
+    "class_members": [
+      "nitroglycerin",
+      "isosorbide dinitrate",
+      "isosorbide mononitrate"
+    ],
+    "mechanism": "Release nitric oxide in vascular smooth muscle, which raises cGMP and relaxes the vessel. Veins dilate much more than arteries, so preload and ventricular wall stress fall and the heart needs less oxygen.",
+    "pharmacokinetics": [
+      "nitroglycerin has high first-pass metabolism, so it is given sublingually, as a patch or IV",
+      "isosorbide mononitrate is taken by mouth once daily"
+    ],
+    "indications": [
+      "relief of an angina attack (sublingual nitroglycerin)",
+      "angina prevention (long-acting nitrates)",
+      "chest pain in acute coronary syndrome",
+      "acute pulmonary edema",
+      "hypertensive emergency (IV nitroglycerin)",
+      "heart failure, as isosorbide dinitrate with hydralazine"
+    ],
+    "adverse_effects": [
+      "headache",
+      "flushing",
+      "hypotension",
+      "reflex tachycardia",
+      "tolerance with continuous use"
+    ],
+    "contraindications": [
+      "use of a PDE5 inhibitor: sildenafil in the past 24 hours or tadalafil in the past 48 hours",
+      "right ventricular infarction",
+      "severe aortic stenosis",
+      "hypertrophic obstructive cardiomyopathy"
+    ],
+    "interactions": [
+      "PDE5 inhibitors cause severe hypotension"
+    ],
+    "monitoring": [
+      "blood pressure"
+    ],
+    "overdose": {
+      "features": [
+        "hypotension",
+        "methemoglobinemia"
+      ],
+      "treatment": [
+        "methylene blue for methemoglobinemia"
+      ]
+    },
+    "confused_with": [],
+    "pearls": [
+      "A nitrate-free interval of 10 to 12 hours each day prevents tolerance.",
+      "Workers exposed to nitrates in explosives factories get headaches and dizziness at the start of the week that fade by the weekend (Monday disease).",
+      "Avoid nitrates in right ventricular infarction (low blood pressure, raised JVP, clear lungs), which depends on preload."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "contraindications"
+      ],
+      "MS4": [
+        "overdose",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "nitrates.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Nitroglycerin and isosorbide mononitrate belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Nitrates",
+          "synonyms": [
+            "nitrate",
+            "organic nitrates",
+            "nitric oxide donors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Name a nitrate other than nitroglycerin.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "isosorbide mononitrate",
+          "synonyms": [
+            "ISMN",
+            "Imdur",
+            "isosorbide"
+          ]
+        },
+        {
+          "answer": "isosorbide dinitrate",
+          "synonyms": [
+            "ISDN",
+            "Isordil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which molecule do nitrates release in smooth muscle?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nitric oxide",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "nitrates.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Do nitrates dilate veins or arteries more?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "veins",
+          "synonyms": [
+            "venous",
+            "venodilation",
+            "the veins"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of nitrates.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "angina",
+          "synonyms": [
+            "angina attack",
+            "angina prevention"
+          ]
+        },
+        {
+          "answer": "acute coronary syndrome",
+          "synonyms": [
+            "ACS",
+            "myocardial infarction"
+          ]
+        },
+        {
+          "answer": "acute pulmonary edema",
+          "synonyms": [
+            "pulmonary edema"
+          ]
+        },
+        {
+          "answer": "hypertensive emergency",
+          "synonyms": [
+            "hypertensive crisis"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HFrEF",
+            "CHF"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "nitrates.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which drug is paired with isosorbide dinitrate for heart failure?",
+      "source_fields": [
+        "indications[5]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hydralazine",
+          "synonyms": [
+            "BiDil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of nitrates.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "headache",
+          "synonyms": [
+            "headaches"
+          ]
+        },
+        {
+          "answer": "flushing",
+          "synonyms": []
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure"
+          ]
+        },
+        {
+          "answer": "reflex tachycardia",
+          "synonyms": [
+            "tachycardia",
+            "fast heart rate"
+          ]
+        },
+        {
+          "answer": "tolerance",
+          "synonyms": [
+            "tachyphylaxis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "nitrates.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Nitrate overdose: chocolate-brown blood and a low oxygen saturation. What is it?",
+      "source_fields": [
+        "overdose.features"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "methemoglobinemia",
+          "synonyms": [
+            "methemoglobin",
+            "methaemoglobinaemia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Inferior MI with clear lungs, a raised JVP and low blood pressure. Which complication makes nitrates dangerous here?",
+      "source_fields": [
+        "contraindications[1]",
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right ventricular infarction",
+          "synonyms": [
+            "RV infarction",
+            "right ventricular MI",
+            "RV MI",
+            "RVMI",
+            "RV infarct",
+            "right ventricular infarct"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How long after a dose of tadalafil must you wait before giving a nitrate?",
+      "source_fields": [
+        "contraindications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "48 hours",
+          "synonyms": [
+            "48 h",
+            "48 hrs",
+            "2 days",
+            "two days"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How do you prevent tolerance to long-acting nitrates?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nitrate-free interval",
+          "synonyms": [
+            "nitrate free interval",
+            "nitrate-free period",
+            "drug-free interval",
+            "nitrate holiday",
+            "eccentric dosing"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nitrates.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Explosives factory workers get headaches at the start of each week that fade by the weekend. What is this called?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Monday disease",
+          "synonyms": [
+            "Monday headache",
+            "Monday morning headache"
+          ]
+        }
+      ]
+    }
+  ]
+}

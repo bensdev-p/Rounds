@@ -1,0 +1,430 @@
+{
+  "script": {
+    "id": "statins",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Statins",
+    "aliases": [
+      "HMG-CoA reductase inhibitors"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "HMG-CoA reductase inhibitors",
+    "class_members": [
+      "atorvastatin",
+      "rosuvastatin",
+      "simvastatin",
+      "pravastatin",
+      "lovastatin",
+      "pitavastatin",
+      "fluvastatin"
+    ],
+    "mechanism": "Inhibit HMG-CoA reductase, the rate-limiting enzyme of cholesterol synthesis in the liver. Liver cells respond by making more LDL receptors, which pull LDL out of the blood. LDL falls most; triglycerides fall a little and HDL rises a little.",
+    "pharmacokinetics": [
+      "simvastatin, lovastatin and atorvastatin are metabolized by CYP3A4",
+      "rosuvastatin and pravastatin depend little on CYP3A4"
+    ],
+    "indications": [
+      "established atherosclerotic cardiovascular disease",
+      "LDL of 190 mg/dL or higher",
+      "diabetes in adults aged 40 to 75",
+      "high 10-year cardiovascular risk"
+    ],
+    "adverse_effects": [
+      "muscle aches",
+      "myopathy",
+      "rhabdomyolysis, rarely",
+      "raised liver enzymes",
+      "a small rise in the risk of diabetes"
+    ],
+    "contraindications": [
+      "active liver disease",
+      "pregnancy and breastfeeding, for most patients"
+    ],
+    "interactions": [
+      "CYP3A4 inhibitors such as clarithromycin, azole antifungals and grapefruit juice raise levels and the risk of myopathy",
+      "gemfibrozil raises the risk of myopathy"
+    ],
+    "monitoring": [
+      "lipid panel 4 to 12 weeks after starting",
+      "liver enzymes at baseline",
+      "CK only if muscle symptoms appear"
+    ],
+    "overdose": {
+      "features": [],
+      "treatment": []
+    },
+    "confused_with": [],
+    "pearls": [
+      "High-intensity statin therapy (atorvastatin 40 to 80 mg or rosuvastatin 20 to 40 mg) lowers LDL by 50% or more.",
+      "Short-acting statins such as simvastatin work best taken in the evening, when the liver makes most of its cholesterol.",
+      "Gemfibrozil with a statin carries a much higher risk of myopathy than fenofibrate."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "interactions",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "statins.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Atorvastatin and rosuvastatin belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Statins",
+          "synonyms": [
+            "statin",
+            "HMG-CoA reductase inhibitors",
+            "HMG-CoA reductase inhibitor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two statins.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atorvastatin",
+          "synonyms": [
+            "Lipitor"
+          ]
+        },
+        {
+          "answer": "rosuvastatin",
+          "synonyms": [
+            "Crestor"
+          ]
+        },
+        {
+          "answer": "simvastatin",
+          "synonyms": [
+            "Zocor"
+          ]
+        },
+        {
+          "answer": "pravastatin",
+          "synonyms": [
+            "Pravachol"
+          ]
+        },
+        {
+          "answer": "lovastatin",
+          "synonyms": [
+            "Mevacor"
+          ]
+        },
+        {
+          "answer": "pitavastatin",
+          "synonyms": [
+            "Livalo"
+          ]
+        },
+        {
+          "answer": "fluvastatin",
+          "synonyms": [
+            "Lescol"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "statins.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which enzyme do statins inhibit?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HMG-CoA reductase",
+          "synonyms": [
+            "HMG CoA reductase",
+            "HMG-CoA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Blocking cholesterol synthesis makes liver cells make more of what, lowering blood LDL?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LDL receptors",
+          "synonyms": [
+            "LDL receptor",
+            "more LDL receptors",
+            "LDL receptor upregulation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two groups of patients who should take a statin.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "established atherosclerotic cardiovascular disease",
+          "synonyms": [
+            "ASCVD",
+            "cardiovascular disease",
+            "coronary artery disease",
+            "prior heart attack",
+            "prior stroke",
+            "previous MI"
+          ]
+        },
+        {
+          "answer": "LDL of 190 mg/dL",
+          "synonyms": [
+            "LDL of 190 mg/dL or higher",
+            "LDL over 190",
+            "LDL above 190",
+            "LDL 190",
+            "very high LDL"
+          ]
+        },
+        {
+          "answer": "diabetes in adults aged 40 to 75",
+          "synonyms": [
+            "diabetes",
+            "diabetics",
+            "diabetes mellitus"
+          ]
+        },
+        {
+          "answer": "high 10-year cardiovascular risk",
+          "synonyms": [
+            "high cardiovascular risk",
+            "high 10-year risk"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "statins.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which blood lipid do statins lower the most?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LDL",
+          "synonyms": [
+            "LDL cholesterol",
+            "low-density lipoprotein",
+            "bad cholesterol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two adverse effects of statins.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "muscle aches",
+          "synonyms": [
+            "myalgia",
+            "myalgias",
+            "muscle pain",
+            "muscle weakness",
+            "myositis"
+          ]
+        },
+        {
+          "answer": "myopathy",
+          "synonyms": []
+        },
+        {
+          "answer": "rhabdomyolysis",
+          "synonyms": [
+            "rhabdo"
+          ]
+        },
+        {
+          "answer": "raised liver enzymes",
+          "synonyms": [
+            "elevated liver enzymes",
+            "transaminitis",
+            "high LFTs"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "new diabetes",
+            "hyperglycemia"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "statins.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "A patient on simvastatin starts clarithromycin, then has severe muscle pain and dark urine. What happened?",
+      "source_fields": [
+        "adverse_effects[2]",
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rhabdomyolysis",
+          "synonyms": [
+            "rhabdo",
+            "myopathy",
+            "muscle breakdown"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which fibrate is safer to combine with a statin?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fenofibrate",
+          "synonyms": [
+            "Tricor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a statin that depends little on CYP3A4.",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rosuvastatin",
+          "synonyms": [
+            "Crestor"
+          ]
+        },
+        {
+          "answer": "pravastatin",
+          "synonyms": [
+            "Pravachol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a high-intensity statin regimen.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atorvastatin 40 to 80 mg",
+          "synonyms": [
+            "atorvastatin 80",
+            "atorvastatin 40",
+            "atorvastatin 80 mg",
+            "atorvastatin 40 mg"
+          ]
+        },
+        {
+          "answer": "rosuvastatin 20 to 40 mg",
+          "synonyms": [
+            "rosuvastatin 20",
+            "rosuvastatin 40",
+            "rosuvastatin 20 mg",
+            "rosuvastatin 40 mg"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "statins.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Muscle aches on a statin. Which blood test do you check?",
+      "source_fields": [
+        "monitoring[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CK",
+          "synonyms": [
+            "creatine kinase",
+            "CPK",
+            "creatine phosphokinase"
+          ]
+        }
+      ]
+    }
+  ]
+}

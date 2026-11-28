@@ -1,0 +1,494 @@
+{
+  "script": {
+    "id": "essential-hypertension",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Essential hypertension",
+    "aliases": [
+      "primary hypertension",
+      "high blood pressure"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "FM"
+    ],
+    "epidemiology": {
+      "who": "Adults, more often with age; about 90% of hypertension has no single identifiable cause",
+      "risk_factors": [
+        "older age",
+        "family history",
+        "obesity",
+        "high sodium intake",
+        "physical inactivity",
+        "excess alcohol",
+        "Black ancestry"
+      ]
+    },
+    "pathophysiology": "Blood pressure rises from a mix of genetic and environmental factors: more sympathetic tone, renin-angiotensin-aldosterone activity, sodium retention and stiffer arteries. Over years it damages the heart, kidneys, brain and eyes.",
+    "timeline": {
+      "onset": "Silent; usually found on screening",
+      "course": "Lifelong; untreated, it raises the risk of stroke, heart attack, heart failure and kidney disease"
+    },
+    "key_findings": {
+      "history": [
+        "usually no symptoms",
+        "headache only when blood pressure is very high"
+      ],
+      "exam": [
+        "blood pressure of 130/80 mmHg or higher on repeated readings",
+        "hypertensive retinopathy: arteriovenous nicking and cotton wool spots",
+        "left ventricular heave in long-standing disease"
+      ],
+      "labs": [
+        "basic metabolic panel with creatinine and potassium",
+        "urinalysis and urine albumin",
+        "fasting glucose or HbA1c and a lipid panel"
+      ],
+      "imaging": [
+        "ECG to look for left ventricular hypertrophy"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "repeated office readings confirmed with ambulatory or home blood pressure monitoring"
+      ],
+      "criteria": [
+        "AHA/ACC 2025: stage 1 hypertension is 130 to 139 systolic or 80 to 89 diastolic",
+        "AHA/ACC 2025: stage 2 hypertension is 140 systolic or 90 diastolic and above"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "lifestyle: weight loss, DASH diet, less salt, exercise and less alcohol",
+        "first-line drug classes: thiazide diuretic, ACE inhibitor, ARB or dihydropyridine calcium channel blocker",
+        "ACE inhibitor or ARB when there is diabetes with albuminuria or chronic kidney disease",
+        "a target under 130/80 for most adults"
+      ],
+      "next_line": [
+        "stage 2: start two first-line classes, ideally as a single-pill combination",
+        "add spironolactone for resistant hypertension",
+        "look for a secondary cause when hypertension is resistant or starts young"
+      ]
+    },
+    "complications": [
+      "stroke",
+      "coronary artery disease",
+      "heart failure",
+      "chronic kidney disease",
+      "aortic dissection",
+      "hypertensive retinopathy"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Never combine an ACE inhibitor with an ARB.",
+      "Resistant hypertension is blood pressure above goal despite three drugs, one of them a diuretic.",
+      "Hypertension in a young person, or with a low potassium, should prompt a search for a secondary cause such as primary hyperaldosteronism."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.who"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults"
+      },
+      {
+        "title": "2024 ESC Guidelines for the management of elevated blood pressure and hypertension"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "essential-hypertension.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 52-year-old has readings of 148/94 at three visits, and home readings match. Kidneys, potassium and hormones are normal. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Essential hypertension",
+          "synonyms": [
+            "primary hypertension",
+            "stage 2 hypertension",
+            "essential HTN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Roughly what share of hypertension has no single identifiable cause?",
+      "source_fields": [
+        "epidemiology.who"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "90%",
+          "synonyms": [
+            "90 percent",
+            "about 90%",
+            "ninety percent",
+            "90"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three lifestyle changes that lower blood pressure.",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "weight loss",
+          "synonyms": [
+            "lose weight",
+            "losing weight",
+            "weight reduction"
+          ]
+        },
+        {
+          "answer": "DASH diet",
+          "synonyms": [
+            "DASH"
+          ]
+        },
+        {
+          "answer": "less salt",
+          "synonyms": [
+            "low salt",
+            "salt restriction",
+            "salt reduction",
+            "reduce salt",
+            "low sodium",
+            "less sodium"
+          ]
+        },
+        {
+          "answer": "exercise",
+          "synonyms": [
+            "physical activity",
+            "aerobic exercise"
+          ]
+        },
+        {
+          "answer": "less alcohol",
+          "synonyms": [
+            "reduce alcohol",
+            "limit alcohol",
+            "cut down on alcohol"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "essential-hypertension.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of untreated hypertension.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stroke",
+          "synonyms": [
+            "CVA"
+          ]
+        },
+        {
+          "answer": "coronary artery disease",
+          "synonyms": [
+            "heart attack",
+            "myocardial infarction",
+            "CAD",
+            "coronary disease"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HF"
+          ]
+        },
+        {
+          "answer": "chronic kidney disease",
+          "synonyms": [
+            "CKD",
+            "kidney disease",
+            "kidney failure"
+          ]
+        },
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        },
+        {
+          "answer": "hypertensive retinopathy",
+          "synonyms": [
+            "retinopathy"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "essential-hypertension.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "New hypertension at age 28 with a low potassium. What should you look for?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "secondary cause",
+          "synonyms": [
+            "secondary hypertension",
+            "primary hyperaldosteronism",
+            "hyperaldosteronism",
+            "aldosteronism",
+            "Conn syndrome",
+            "Conn's syndrome",
+            "Conn's"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Under the AHA/ACC guideline, what blood pressure range is stage 1 hypertension?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "130 to 139 systolic or 80 to 89 diastolic",
+          "synonyms": [
+            "130 to 139",
+            "130 to 139 over 80 to 89",
+            "130/80"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "How do you confirm a high office reading before diagnosing hypertension?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ambulatory or home blood pressure monitoring",
+          "synonyms": [
+            "ambulatory blood pressure monitoring",
+            "home blood pressure monitoring",
+            "ABPM",
+            "HBPM",
+            "24-hour ambulatory monitoring",
+            "home readings",
+            "ambulatory monitoring",
+            "home monitoring"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which simple test looks for left ventricular hypertrophy in a new hypertensive patient?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ECG",
+          "synonyms": [
+            "EKG",
+            "electrocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name three of the four first-line drug classes for hypertension.",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thiazide diuretic",
+          "synonyms": [
+            "thiazide",
+            "thiazides",
+            "thiazide diuretics",
+            "chlorthalidone",
+            "hydrochlorothiazide",
+            "HCTZ",
+            "indapamide"
+          ]
+        },
+        {
+          "answer": "ACE inhibitor",
+          "synonyms": [
+            "ACE inhibitors",
+            "ACEi",
+            "lisinopril",
+            "ramipril",
+            "enalapril",
+            "angiotensin-converting enzyme inhibitor"
+          ]
+        },
+        {
+          "answer": "ARB",
+          "synonyms": [
+            "ARBs",
+            "angiotensin receptor blocker",
+            "angiotensin receptor blockers",
+            "angiotensin II receptor blocker",
+            "losartan",
+            "valsartan",
+            "candesartan"
+          ]
+        },
+        {
+          "answer": "dihydropyridine calcium channel blocker",
+          "synonyms": [
+            "calcium channel blocker",
+            "calcium channel blockers",
+            "CCB",
+            "amlodipine",
+            "nifedipine"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "essential-hypertension.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Hypertension with diabetes and albumin in the urine. Which drug class first?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitor",
+          "synonyms": [
+            "ACE inhibitors",
+            "ACEi",
+            "lisinopril",
+            "ramipril",
+            "enalapril",
+            "angiotensin-converting enzyme inhibitor"
+          ]
+        },
+        {
+          "answer": "ARB",
+          "synonyms": [
+            "ARBs",
+            "angiotensin receptor blocker",
+            "angiotensin receptor blockers",
+            "angiotensin II receptor blocker",
+            "losartan",
+            "valsartan",
+            "candesartan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "essential-hypertension.pearl.1",
+      "rung": "pearl",
+      "kind": "list",
+      "prompt": "Which two renin-angiotensin blocker classes should never be combined?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitor",
+          "synonyms": [
+            "ACE inhibitors",
+            "ACEi",
+            "lisinopril",
+            "ramipril",
+            "enalapril",
+            "angiotensin-converting enzyme inhibitor"
+          ]
+        },
+        {
+          "answer": "ARB",
+          "synonyms": [
+            "ARBs",
+            "angiotensin receptor blocker",
+            "angiotensin receptor blockers",
+            "angiotensin II receptor blocker",
+            "losartan",
+            "valsartan",
+            "candesartan"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "essential-hypertension.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Blood pressure stays high on three drugs, one of them a diuretic. Which drug do you add?",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "spironolactone",
+          "synonyms": [
+            "mineralocorticoid receptor antagonist",
+            "MRA",
+            "aldosterone antagonist",
+            "eplerenone"
+          ]
+        }
+      ]
+    }
+  ]
+}

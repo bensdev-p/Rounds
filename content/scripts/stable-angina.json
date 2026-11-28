@@ -1,0 +1,511 @@
+{
+  "script": {
+    "id": "stable-angina",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Stable angina",
+    "aliases": [
+      "chronic stable angina",
+      "angina pectoris"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Middle-aged and older adults with atherosclerotic coronary disease",
+      "risk_factors": [
+        "smoking",
+        "hypertension",
+        "diabetes",
+        "high LDL cholesterol",
+        "family history of premature coronary disease",
+        "older age",
+        "male sex"
+      ]
+    },
+    "pathophysiology": "A fixed atherosclerotic plaque narrows a coronary artery, usually by 70% or more, so blood flow cannot rise to meet the heart's oxygen demand during exertion. The ischemia is brief and reverses with rest, without myocardial necrosis.",
+    "timeline": {
+      "onset": "Predictable chest pain with exertion, building over months",
+      "course": "A stable pattern; pain at rest or a crescendo pattern means unstable angina"
+    },
+    "key_findings": {
+      "history": [
+        "substernal chest pressure brought on by exertion or emotion",
+        "pain relieved by rest or nitroglycerin within minutes",
+        "radiation to the arm, neck or jaw",
+        "dyspnea on exertion"
+      ],
+      "exam": [
+        "often normal between episodes",
+        "signs of atherosclerosis such as carotid bruits or xanthelasma"
+      ],
+      "labs": [
+        "normal troponin",
+        "lipid panel and HbA1c to assess risk"
+      ],
+      "imaging": [
+        "resting ECG often normal",
+        "exercise ECG showing ST depression",
+        "stress echocardiography or nuclear perfusion imaging showing ischemia",
+        "coronary CT angiography showing plaque"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "stress testing: exercise ECG, stress echocardiography or myocardial perfusion imaging",
+        "coronary CT angiography",
+        "invasive coronary angiography when risk is high or symptoms persist"
+      ],
+      "criteria": [
+        "Typical angina has three features: substernal discomfort, brought on by exertion or emotional stress, and relieved by rest or nitroglycerin"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "sublingual nitroglycerin for attacks",
+        "beta blocker or calcium channel blocker for symptom control",
+        "aspirin",
+        "high-intensity statin",
+        "risk factor control: stop smoking, treat blood pressure and diabetes"
+      ],
+      "next_line": [
+        "long-acting nitrates or ranolazine added for persistent angina",
+        "revascularization with PCI or CABG for symptoms despite medical therapy or for high-risk anatomy such as left main disease"
+      ]
+    },
+    "complications": [
+      "acute coronary syndrome",
+      "heart failure",
+      "arrhythmias"
+    ],
+    "confused_with": [
+      {
+        "script_id": "acute-coronary-syndrome",
+        "how_to_tell_apart": "Stable angina comes on with exertion, settles with rest and leaves troponin normal; acute coronary syndrome brings pain at rest or a new crescendo pattern, and a myocardial infarction raises troponin."
+      }
+    ],
+    "pearls": [
+      "Beta blockers can worsen vasospastic (Prinzmetal) angina; calcium channel blockers treat it.",
+      "Nitrates are contraindicated within 24 hours of sildenafil or 48 hours of tadalafil, because the combination causes severe hypotension.",
+      "Nitrates relieve angina mainly by venodilation, which lowers preload and wall stress."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[2]"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2023 AHA/ACC/ACCP/ASPC/NLA/PCNA Guideline for the Management of Patients With Chronic Coronary Disease"
+      },
+      {
+        "title": "2024 ESC Guidelines for the management of chronic coronary syndromes"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "stable-angina.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 60-year-old smoker gets chest tightness walking uphill that eases after two minutes of rest. Troponin is normal. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Stable angina",
+          "synonyms": [
+            "chronic stable angina",
+            "stable angina pectoris",
+            "angina pectoris",
+            "exertional angina",
+            "chronic coronary syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name the three features that make chest pain typical angina.",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "substernal discomfort",
+          "synonyms": [
+            "substernal",
+            "substernal chest pain",
+            "retrosternal",
+            "retrosternal chest pain",
+            "chest pressure"
+          ]
+        },
+        {
+          "answer": "brought on by exertion or emotional stress",
+          "synonyms": [
+            "exertion",
+            "exertional",
+            "brought on by exertion",
+            "emotional stress",
+            "provoked by exertion"
+          ]
+        },
+        {
+          "answer": "relieved by rest or nitroglycerin",
+          "synonyms": [
+            "relieved by rest",
+            "relieved by nitroglycerin",
+            "relieved by nitro",
+            "relieved by nitrates"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "stable-angina.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for stable angina.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "smoking",
+          "synonyms": [
+            "smoker",
+            "tobacco",
+            "cigarettes"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus"
+          ]
+        },
+        {
+          "answer": "high LDL cholesterol",
+          "synonyms": [
+            "high cholesterol",
+            "high LDL",
+            "hyperlipidemia",
+            "dyslipidemia",
+            "hypercholesterolemia"
+          ]
+        },
+        {
+          "answer": "family history of premature coronary disease",
+          "synonyms": [
+            "family history"
+          ]
+        },
+        {
+          "answer": "older age",
+          "synonyms": [
+            "old age",
+            "older people"
+          ]
+        },
+        {
+          "answer": "male sex",
+          "synonyms": [
+            "male",
+            "being male"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "stable-angina.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which medication relieves an angina attack within minutes?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sublingual nitroglycerin",
+          "synonyms": [
+            "nitroglycerin",
+            "nitro",
+            "GTN",
+            "glyceryl trinitrate",
+            "nitroglycerin spray"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which blood test separates stable angina from a myocardial infarction?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "troponin",
+          "synonyms": [
+            "troponin I",
+            "troponin T",
+            "high-sensitivity troponin",
+            "cardiac troponin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Chest pain at rest in the early morning, transient ST elevation and normal coronary arteries. Which drug class treats this vasospastic angina?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "calcium channel blockers",
+          "synonyms": [
+            "calcium channel blocker",
+            "CCB",
+            "diltiazem",
+            "amlodipine",
+            "nifedipine",
+            "verapamil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Typical exertional chest pain and a normal resting ECG. Name a first test to look for ischemia or coronary disease.",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "exercise ECG",
+          "synonyms": [
+            "exercise stress test",
+            "exercise treadmill test",
+            "treadmill test",
+            "stress test",
+            "exercise tolerance test",
+            "ETT"
+          ]
+        },
+        {
+          "answer": "stress echocardiography",
+          "synonyms": [
+            "stress echo",
+            "dobutamine stress echo"
+          ]
+        },
+        {
+          "answer": "myocardial perfusion imaging",
+          "synonyms": [
+            "nuclear stress test",
+            "SPECT",
+            "perfusion scan",
+            "nuclear perfusion"
+          ]
+        },
+        {
+          "answer": "coronary CT angiography",
+          "synonyms": [
+            "CT coronary angiography",
+            "CCTA",
+            "coronary CTA",
+            "CT angiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does the ECG show during ischemia on an exercise test?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ST depression",
+          "synonyms": [
+            "ST segment depression",
+            "ST-segment depression",
+            "ST depressions"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name the two drugs that every patient with stable angina should take to prevent heart attacks.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aspirin",
+          "synonyms": [
+            "ASA",
+            "low-dose aspirin",
+            "acetylsalicylic acid"
+          ]
+        },
+        {
+          "answer": "high-intensity statin",
+          "synonyms": [
+            "statin",
+            "statins",
+            "atorvastatin",
+            "rosuvastatin"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "stable-angina.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Angina keeps limiting daily life despite two anti-anginal drugs. Name a next step.",
+      "source_fields": [
+        "management.next_line",
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "invasive coronary angiography",
+          "synonyms": [
+            "coronary angiography",
+            "cardiac catheterization",
+            "cath",
+            "angiogram"
+          ]
+        },
+        {
+          "answer": "revascularization",
+          "synonyms": [
+            "revascularisation",
+            "coronary revascularization"
+          ]
+        },
+        {
+          "answer": "PCI",
+          "synonyms": [
+            "percutaneous coronary intervention",
+            "stent",
+            "stenting",
+            "angioplasty"
+          ]
+        },
+        {
+          "answer": "CABG",
+          "synonyms": [
+            "coronary artery bypass grafting",
+            "bypass surgery",
+            "coronary artery bypass"
+          ]
+        },
+        {
+          "answer": "ranolazine",
+          "synonyms": [
+            "Ranexa"
+          ]
+        },
+        {
+          "answer": "long-acting nitrates",
+          "synonyms": [
+            "long-acting nitrate",
+            "isosorbide mononitrate",
+            "ISMN",
+            "isosorbide dinitrate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Your patient with angina took sildenafil last night. Which anti-anginal drug class must you not give?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Nitrates",
+          "synonyms": [
+            "nitrate",
+            "nitroglycerin",
+            "isosorbide",
+            "isosorbide mononitrate",
+            "GTN"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "stable-angina.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How do nitrates mainly relieve angina?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "venodilation",
+          "synonyms": [
+            "venous dilation",
+            "dilating veins",
+            "dilate veins",
+            "lowers preload",
+            "lowering preload",
+            "reduce preload",
+            "preload reduction"
+          ]
+        }
+      ]
+    }
+  ]
+}
