@@ -61,7 +61,12 @@
         "methylene blue for methemoglobinemia"
       ]
     },
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "hydralazine",
+        "how_to_tell_apart": "Nitrates dilate veins and lower preload; hydralazine dilates arterioles and lowers afterload. Together, as isosorbide dinitrate with hydralazine, they treat heart failure."
+      }
+    ],
     "pearls": [
       "A nitrate-free interval of 10 to 12 hours each day prevents tolerance.",
       "Workers exposed to nitrates in explosives factories get headaches and dizziness at the start of the week that fade by the weekend (Monday disease).",

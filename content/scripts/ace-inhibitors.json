@@ -68,6 +68,10 @@
       {
         "script_id": "angiotensin-receptor-blockers",
         "how_to_tell_apart": "ACE inhibitors block angiotensin II production and raise bradykinin, causing cough and more angioedema; ARBs block the angiotensin II receptor and do not raise bradykinin."
+      },
+      {
+        "script_id": "sacubitril-valsartan",
+        "how_to_tell_apart": "An ACE inhibitor is the older choice in heart failure with reduced ejection fraction; sacubitril-valsartan lowers mortality further, and the ACE inhibitor must be stopped 36 hours before switching."
       }
     ],
     "pearls": [

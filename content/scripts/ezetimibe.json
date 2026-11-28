@@ -1,0 +1,338 @@
+{
+  "script": {
+    "id": "ezetimibe",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Ezetimibe",
+    "aliases": [
+      "Zetia"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Cholesterol absorption inhibitor",
+    "class_members": [
+      "ezetimibe"
+    ],
+    "mechanism": "Blocks the NPC1L1 transporter on the brush border of the small intestine, reducing absorption of dietary and biliary cholesterol. LDL falls by about 20%.",
+    "pharmacokinetics": [
+      "glucuronidated in the gut and liver, with enterohepatic recycling",
+      "taken once daily"
+    ],
+    "indications": [
+      "primary hyperlipidemia (high LDL)",
+      "added to a statin when LDL stays above goal",
+      "in place of a statin when statins are not tolerated",
+      "sitosterolemia"
+    ],
+    "adverse_effects": [
+      "diarrhea",
+      "raised liver enzymes when combined with a statin",
+      "muscle aches, uncommon"
+    ],
+    "contraindications": [
+      "active liver disease when combined with a statin"
+    ],
+    "interactions": [
+      "bile acid sequestrants reduce absorption, so give ezetimibe 2 hours before or 4 hours after",
+      "cyclosporine raises levels"
+    ],
+    "monitoring": [
+      "lipid panel"
+    ],
+    "overdose": {
+      "features": [],
+      "treatment": []
+    },
+    "confused_with": [
+      {
+        "script_id": "statins",
+        "how_to_tell_apart": "Ezetimibe blocks cholesterol absorption in the gut and lowers LDL by about 20%; statins block cholesterol synthesis in the liver and lower LDL by 30 to 50% or more."
+      },
+      {
+        "script_id": "pcsk9-inhibitors",
+        "how_to_tell_apart": "Ezetimibe is a pill that lowers LDL by about 20%; PCSK9 inhibitors are injected and lower LDL by about 50 to 60%."
+      }
+    ],
+    "pearls": [
+      "The IMPROVE-IT trial showed ezetimibe added to a statin after acute coronary syndrome lowered cardiovascular events.",
+      "Ezetimibe lowers LDL by about 20%; a statin lowers it by 30 to 50% or more.",
+      "It is the usual next step after the highest tolerated statin."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "interactions[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      },
+      {
+        "title": "2022 ACC Expert Consensus Decision Pathway on the Role of Nonstatin Therapies for LDL-Cholesterol Lowering in the Management of Atherosclerotic Cardiovascular Disease Risk"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "ezetimibe.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Ezetimibe belongs to which drug class?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cholesterol absorption inhibitor",
+          "synonyms": [
+            "cholesterol absorption inhibitors",
+            "absorption inhibitor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the brand name of ezetimibe?",
+      "source_fields": [
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Zetia",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which transporter does ezetimibe block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "NPC1L1",
+          "synonyms": [
+            "Niemann-Pick C1-Like 1",
+            "NPC1L1 transporter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where is the transporter that ezetimibe blocks?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "small intestine",
+          "synonyms": [
+            "brush border",
+            "small bowel",
+            "intestinal brush border"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of ezetimibe.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "primary hyperlipidemia",
+          "synonyms": [
+            "high LDL",
+            "hypercholesterolemia",
+            "high cholesterol"
+          ]
+        },
+        {
+          "answer": "added to a statin",
+          "synonyms": [
+            "with a statin",
+            "combined with a statin",
+            "statin add-on"
+          ]
+        },
+        {
+          "answer": "in place of a statin",
+          "synonyms": [
+            "instead of a statin",
+            "statin intolerance",
+            "statins not tolerated"
+          ]
+        },
+        {
+          "answer": "sitosterolemia",
+          "synonyms": [
+            "phytosterolemia"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ezetimibe.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "LDL is above goal on the highest tolerated statin. Usual next drug?",
+      "source_fields": [
+        "name",
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ezetimibe",
+          "synonyms": [
+            "Zetia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which lab result can rise when ezetimibe is combined with a statin?",
+      "source_fields": [
+        "adverse_effects[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raised liver enzymes",
+          "synonyms": [
+            "liver enzymes",
+            "transaminases",
+            "transaminitis",
+            "ALT",
+            "AST",
+            "LFTs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Name a common GI side effect of ezetimibe.",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diarrhea",
+          "synonyms": [
+            "loose stools"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Ezetimibe or a statin: which lowers LDL by only about 20%?",
+      "source_fields": [
+        "name",
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ezetimibe",
+          "synonyms": [
+            "Zetia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How should ezetimibe be timed with a bile acid sequestrant?",
+      "source_fields": [
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "2 hours before or 4 hours after",
+          "synonyms": [
+            "2 hours before",
+            "4 hours after",
+            "separate them"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which trial showed ezetimibe plus a statin lowered events after acute coronary syndrome?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IMPROVE-IT",
+          "synonyms": [
+            "IMPROVE IT",
+            "IMPROVEIT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ezetimibe.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which rare lipid disorder does ezetimibe treat?",
+      "source_fields": [
+        "indications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sitosterolemia",
+          "synonyms": [
+            "phytosterolemia"
+          ]
+        }
+      ]
+    }
+  ]
+}

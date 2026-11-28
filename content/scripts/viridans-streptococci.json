@@ -91,6 +91,10 @@
             "source_field": "lab_features[0]"
           }
         ]
+      },
+      {
+        "script_id": "hacek-organisms",
+        "how_to_tell_apart": "Both cause subacute endocarditis from the mouth, but viridans streptococci are gram-positive cocci in chains that grow readily, while HACEK organisms are fastidious gram-negative rods that grow slowly."
       }
     ],
     "pearls": [

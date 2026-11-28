@@ -1,0 +1,357 @@
+{
+  "script": {
+    "id": "renin-angiotensin-aldosterone-system",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "pathway",
+    "name": "Renin-angiotensin-aldosterone system",
+    "aliases": [
+      "RAAS",
+      "renin-angiotensin system"
+    ],
+    "systems": [
+      "cardio",
+      "renal",
+      "endo"
+    ],
+    "rotation": [],
+    "location": "Kidney (juxtaglomerular cells), liver, lungs, adrenal cortex and blood vessels",
+    "purpose": "Keeps up blood pressure and blood volume by constricting arterioles and making the kidney hold on to sodium and water.",
+    "steps": [
+      "juxtaglomerular cells release renin when renal perfusion falls, when the macula densa senses low sodium chloride, or on beta-1 stimulation",
+      "renin cleaves angiotensinogen, made by the liver, to angiotensin I",
+      "angiotensin-converting enzyme, mostly in the lungs, converts angiotensin I to angiotensin II and breaks down bradykinin",
+      "angiotensin II constricts arterioles and the efferent arteriole, releases aldosterone and ADH, triggers thirst and increases proximal sodium reabsorption",
+      "aldosterone acts on the collecting duct to reabsorb sodium and excrete potassium and hydrogen"
+    ],
+    "rate_limiting_enzyme": "renin",
+    "regulation": [
+      "low renal perfusion pressure raises renin",
+      "low sodium chloride at the macula densa raises renin",
+      "sympathetic beta-1 stimulation raises renin",
+      "angiotensin II and ANP lower renin release",
+      "high potassium stimulates aldosterone directly"
+    ],
+    "cofactors": [],
+    "deficiencies": [
+      "primary hyperaldosteronism: high aldosterone with low renin, causing hypertension and hypokalemia",
+      "renal artery stenosis: high renin with high aldosterone (secondary hyperaldosteronism)",
+      "Addison disease: low aldosterone with high renin, causing hyperkalemia and hypotension",
+      "Bartter and Gitelman syndromes: high renin and aldosterone with normal blood pressure"
+    ],
+    "drug_targets": [
+      "aliskiren inhibits renin",
+      "ACE inhibitors block angiotensin-converting enzyme",
+      "ARBs block the AT1 receptor",
+      "spironolactone and eplerenone block the aldosterone receptor",
+      "beta blockers reduce renin release"
+    ],
+    "treatment": [
+      "primary hyperaldosteronism: spironolactone, or adrenalectomy for a single adenoma",
+      "Addison disease: fludrocortisone with hydrocortisone"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "ANP and BNP oppose the RAAS: they dilate vessels and cause sodium loss.",
+      "The aldosterone-to-renin ratio screens for primary hyperaldosteronism.",
+      "Angiotensin II constricts the efferent arteriole more than the afferent, which keeps GFR up when perfusion falls."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "steps",
+        "regulation"
+      ],
+      "MS3": [
+        "deficiencies",
+        "drug_targets"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "treatment"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Guyton and Hall Textbook of Medical Physiology"
+      },
+      {
+        "title": "Costanzo Physiology"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "renin-angiotensin-aldosterone-system.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which enzyme is the rate-limiting step of the renin-angiotensin-aldosterone system?",
+      "source_fields": [
+        "rate_limiting_enzyme"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renin",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which enzyme converts angiotensin I to angiotensin II?",
+      "source_fields": [
+        "steps[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "angiotensin-converting enzyme",
+          "synonyms": [
+            "ACE",
+            "converting enzyme"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two stimuli for renin release.",
+      "source_fields": [
+        "regulation"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "low renal perfusion pressure",
+          "synonyms": [
+            "low renal perfusion",
+            "low renal blood flow",
+            "low blood pressure",
+            "hypotension"
+          ]
+        },
+        {
+          "answer": "low sodium chloride at the macula densa",
+          "synonyms": [
+            "low NaCl",
+            "low sodium chloride",
+            "low NaCl at the macula densa"
+          ]
+        },
+        {
+          "answer": "beta-1 stimulation",
+          "synonyms": [
+            "sympathetic stimulation",
+            "sympathetic",
+            "beta 1"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which hormone from the heart opposes the RAAS?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ANP",
+          "synonyms": [
+            "atrial natriuretic peptide",
+            "BNP",
+            "natriuretic peptide",
+            "natriuretic peptides"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Hypertension and low potassium, with high aldosterone and low renin. Diagnosis?",
+      "source_fields": [
+        "deficiencies[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "primary hyperaldosteronism",
+          "synonyms": [
+            "primary aldosteronism",
+            "Conn syndrome",
+            "Conn's syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Hyperkalemia and hypotension, with low aldosterone and high renin. Diagnosis?",
+      "source_fields": [
+        "deficiencies[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Addison disease",
+          "synonyms": [
+            "Addison",
+            "Addison's disease",
+            "primary adrenal insufficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Renal artery stenosis or primary hyperaldosteronism: which has a high renin?",
+      "source_fields": [
+        "deficiencies[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renal artery stenosis",
+          "synonyms": [
+            "secondary hyperaldosteronism"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test ratio screens for primary hyperaldosteronism?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aldosterone-to-renin ratio",
+          "synonyms": [
+            "aldosterone renin ratio",
+            "aldosterone to renin ratio",
+            "ARR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name three drug classes that block the RAAS.",
+      "source_fields": [
+        "drug_targets"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitors",
+          "synonyms": [
+            "ACE inhibitor",
+            "ACEi",
+            "ACE-I"
+          ]
+        },
+        {
+          "answer": "ARBs",
+          "synonyms": [
+            "ARB",
+            "angiotensin receptor blockers",
+            "angiotensin receptor blocker",
+            "angiotensin II receptor blockers"
+          ]
+        },
+        {
+          "answer": "aliskiren",
+          "synonyms": [
+            "renin inhibitor",
+            "renin inhibitors",
+            "direct renin inhibitors"
+          ]
+        },
+        {
+          "answer": "spironolactone",
+          "synonyms": [
+            "eplerenone",
+            "MRA",
+            "MRAs",
+            "mineralocorticoid receptor antagonists",
+            "aldosterone antagonist",
+            "aldosterone antagonists"
+          ]
+        },
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug directly inhibits renin?",
+      "source_fields": [
+        "drug_targets[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aliskiren",
+          "synonyms": [
+            "Tekturna"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which arteriole does angiotensin II constrict more, keeping GFR up?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "efferent arteriole",
+          "synonyms": [
+            "efferent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "renin-angiotensin-aldosterone-system.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which mineralocorticoid replaces aldosterone in Addison disease?",
+      "source_fields": [
+        "treatment[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fludrocortisone",
+          "synonyms": [
+            "Florinef"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,362 @@
+{
+  "script": {
+    "id": "hacek-organisms",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "bug",
+    "name": "HACEK organisms",
+    "aliases": [
+      "HACEK group"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "morphology": "Fastidious gram-negative bacilli and coccobacilli of the mouth",
+    "lab_features": [
+      "slow-growing in standard blood cultures",
+      "some need extra carbon dioxide to grow",
+      "modern automated blood cultures detect most within 5 days"
+    ],
+    "transmission": [
+      "normal flora of the mouth and upper airway",
+      "enter the blood with dental disease or procedures"
+    ],
+    "virulence_factors": [
+      "adherence to damaged valves",
+      "some make beta-lactamase"
+    ],
+    "diseases": [
+      "subacute endocarditis, often culture-negative at first, with large vegetations and emboli",
+      "periodontal infections",
+      "bite-wound infections (Eikenella after human bites)"
+    ],
+    "diagnosis": [
+      "blood cultures, with the lab told to look for them",
+      "echocardiogram",
+      "PCR or MALDI-TOF identification"
+    ],
+    "treatment": [
+      "ceftriaxone",
+      "ampicillin-sulbactam or a fluoroquinolone as alternatives"
+    ],
+    "prevention": [
+      "good dental hygiene"
+    ],
+    "confused_with": [
+      {
+        "script_id": "viridans-streptococci",
+        "how_to_tell_apart": "Both cause subacute endocarditis from the mouth, but HACEK organisms are fastidious gram-negative rods that grow slowly, while viridans streptococci are gram-positive cocci in chains that grow readily."
+      },
+      {
+        "script_id": "coxiella-burnetii",
+        "how_to_tell_apart": "Both cause culture-negative endocarditis, but HACEK organisms come from the mouth and eventually grow in blood cultures, while Coxiella comes from farm animals and is diagnosed by serology."
+      }
+    ],
+    "pearls": [
+      "HACEK stands for Haemophilus, Aggregatibacter, Cardiobacterium, Eikenella and Kingella.",
+      "Kingella kingae is a common cause of septic arthritis in young children.",
+      "Eikenella corrodens infects human bite wounds and clenched-fist injuries."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "morphology",
+        "pearls[0]"
+      ],
+      "MS3": [
+        "diseases",
+        "treatment"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Sherris & Ryan's Medical Microbiology"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hacek-organisms.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Endocarditis with large vegetations; blood cultures slowly grow fastidious gram-negative rods from the mouth. Which group?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HACEK organisms",
+          "synonyms": [
+            "HACEK",
+            "HACEK group"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "HACEK organisms or viridans streptococci: which are fastidious gram-negative rods?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HACEK organisms",
+          "synonyms": [
+            "HACEK"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.pearl.3",
+      "rung": "pearl",
+      "kind": "list",
+      "prompt": "Name three HACEK organisms.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Haemophilus",
+          "synonyms": [
+            "Haemophilus parainfluenzae"
+          ]
+        },
+        {
+          "answer": "Aggregatibacter",
+          "synonyms": [
+            "Aggregatibacter actinomycetemcomitans",
+            "Aggregatibacter aphrophilus",
+            "Actinobacillus"
+          ]
+        },
+        {
+          "answer": "Cardiobacterium",
+          "synonyms": [
+            "Cardiobacterium hominis"
+          ]
+        },
+        {
+          "answer": "Eikenella",
+          "synonyms": [
+            "Eikenella corrodens"
+          ]
+        },
+        {
+          "answer": "Kingella",
+          "synonyms": [
+            "Kingella kingae"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hacek-organisms.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Why were HACEK organisms a classic cause of culture-negative endocarditis?",
+      "source_fields": [
+        "lab_features[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "slow-growing",
+          "synonyms": [
+            "slow growing",
+            "grow slowly",
+            "slow growth",
+            "fastidious"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which enzyme do some HACEK organisms make that defeats ampicillin?",
+      "source_fields": [
+        "virulence_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta-lactamase",
+          "synonyms": [
+            "beta lactamase",
+            "penicillinase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which HACEK organism infects human bite wounds?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Eikenella corrodens",
+          "synonyms": [
+            "Eikenella"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which HACEK organism causes septic arthritis in young children?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kingella kingae",
+          "synonyms": [
+            "Kingella"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Within how many days do modern blood cultures detect most HACEK organisms?",
+      "source_fields": [
+        "lab_features[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "5 days",
+          "synonyms": [
+            "five days"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Name a way to identify a slow-growing HACEK isolate.",
+      "source_fields": [
+        "diagnosis[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PCR",
+          "synonyms": [
+            "polymerase chain reaction"
+          ]
+        },
+        {
+          "answer": "MALDI-TOF",
+          "synonyms": [
+            "MALDI",
+            "mass spectrometry"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line antibiotic for HACEK endocarditis?",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ceftriaxone",
+          "synonyms": [
+            "Rocephin",
+            "third-generation cephalosporin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name an alternative to ceftriaxone for HACEK endocarditis.",
+      "source_fields": [
+        "treatment[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ampicillin-sulbactam",
+          "synonyms": [
+            "Unasyn"
+          ]
+        },
+        {
+          "answer": "fluoroquinolone",
+          "synonyms": [
+            "ciprofloxacin",
+            "levofloxacin",
+            "quinolone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What does the H in HACEK stand for?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Haemophilus",
+          "synonyms": [
+            "Haemophilus parainfluenzae"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hacek-organisms.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Where do HACEK organisms normally live?",
+      "source_fields": [
+        "transmission[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mouth",
+          "synonyms": [
+            "oral flora",
+            "mouth flora",
+            "oropharynx",
+            "upper airway"
+          ]
+        }
+      ]
+    }
+  ]
+}

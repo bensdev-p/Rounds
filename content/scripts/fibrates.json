@@ -1,0 +1,352 @@
+{
+  "script": {
+    "id": "fibrates",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Fibrates",
+    "aliases": [
+      "fibric acid derivatives"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Fibric acid derivatives (PPAR-alpha agonists)",
+    "class_members": [
+      "fenofibrate",
+      "fenofibric acid",
+      "gemfibrozil",
+      "bezafibrate"
+    ],
+    "mechanism": "Activate PPAR-alpha, which increases lipoprotein lipase activity and fatty acid oxidation. Triglycerides fall sharply, by up to 50%; HDL rises a little and LDL changes little.",
+    "pharmacokinetics": [
+      "fenofibrate is cleared by the kidneys, so the dose is reduced in kidney disease",
+      "gemfibrozil inhibits statin glucuronidation and CYP2C8"
+    ],
+    "indications": [
+      "severe hypertriglyceridemia, to prevent pancreatitis",
+      "mixed dyslipidemia with high triglycerides"
+    ],
+    "adverse_effects": [
+      "myopathy, especially gemfibrozil with a statin",
+      "gallstones",
+      "raised liver enzymes",
+      "rise in creatinine (fenofibrate)"
+    ],
+    "contraindications": [
+      "gallbladder disease",
+      "severe kidney disease",
+      "severe liver disease",
+      "gemfibrozil with a statin"
+    ],
+    "interactions": [
+      "gemfibrozil raises statin levels and the risk of rhabdomyolysis",
+      "fibrates enhance the effect of warfarin"
+    ],
+    "monitoring": [
+      "lipid panel",
+      "liver enzymes",
+      "creatinine"
+    ],
+    "overdose": {
+      "features": [],
+      "treatment": []
+    },
+    "confused_with": [
+      {
+        "script_id": "statins",
+        "how_to_tell_apart": "Fibrates mainly lower triglycerides by activating PPAR-alpha; statins mainly lower LDL by inhibiting HMG-CoA reductase."
+      }
+    ],
+    "pearls": [
+      "Fibrates increase cholesterol in bile, which causes cholesterol gallstones.",
+      "When a fibrate must be combined with a statin, choose fenofibrate, not gemfibrozil.",
+      "With triglycerides above 500 mg/dL, and especially above 1000, treating them to prevent pancreatitis is reasonable once secondary causes are addressed and a very-low-fat diet started."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "interactions",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "fibrates.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Fenofibrate and gemfibrozil belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Fibrates",
+          "synonyms": [
+            "fibrate",
+            "fibric acid derivatives",
+            "PPAR-alpha agonists",
+            "PPAR-alpha agonist"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two fibrates.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fenofibrate",
+          "synonyms": [
+            "Tricor"
+          ]
+        },
+        {
+          "answer": "fenofibric acid",
+          "synonyms": [
+            "Trilipix"
+          ]
+        },
+        {
+          "answer": "gemfibrozil",
+          "synonyms": [
+            "Lopid"
+          ]
+        },
+        {
+          "answer": "bezafibrate",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "fibrates.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which nuclear receptor do fibrates activate?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PPAR-alpha",
+          "synonyms": [
+            "PPAR alpha",
+            "PPARalpha"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which enzyme's activity rises and clears triglycerides?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lipoprotein lipase",
+          "synonyms": [
+            "LPL"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which lipid do fibrates lower the most?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "triglycerides",
+          "synonyms": [
+            "triglyceride",
+            "TG",
+            "TGs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What is the main reason to treat severe hypertriglyceridemia?",
+      "source_fields": [
+        "indications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prevent pancreatitis",
+          "synonyms": [
+            "pancreatitis",
+            "acute pancreatitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two adverse effects of fibrates.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "myopathy",
+          "synonyms": [
+            "rhabdomyolysis",
+            "muscle pain",
+            "myositis"
+          ]
+        },
+        {
+          "answer": "gallstones",
+          "synonyms": [
+            "cholelithiasis",
+            "cholesterol gallstones"
+          ]
+        },
+        {
+          "answer": "raised liver enzymes",
+          "synonyms": [
+            "transaminitis",
+            "high LFTs"
+          ]
+        },
+        {
+          "answer": "rise in creatinine",
+          "synonyms": [
+            "raised creatinine"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "fibrates.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Why do fibrates cause gallstones?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "increase cholesterol in bile",
+          "synonyms": [
+            "more cholesterol in bile",
+            "cholesterol in bile",
+            "biliary cholesterol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Fibrate or statin: which one mainly lowers LDL?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "statins",
+          "synonyms": [
+            "statin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which fibrate is safer to combine with a statin?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fenofibrate",
+          "synonyms": [
+            "Tricor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which fibrate raises statin levels and the risk of rhabdomyolysis?",
+      "source_fields": [
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "gemfibrozil",
+          "synonyms": [
+            "Lopid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "fibrates.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which anticoagulant do fibrates enhance?",
+      "source_fields": [
+        "interactions[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "warfarin",
+          "synonyms": [
+            "Coumadin"
+          ]
+        }
+      ]
+    }
+  ]
+}

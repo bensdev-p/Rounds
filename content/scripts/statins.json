@@ -59,7 +59,16 @@
       "features": [],
       "treatment": []
     },
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "fibrates",
+        "how_to_tell_apart": "Statins mainly lower LDL by inhibiting HMG-CoA reductase; fibrates mainly lower triglycerides by activating PPAR-alpha."
+      },
+      {
+        "script_id": "ezetimibe",
+        "how_to_tell_apart": "Statins block cholesterol synthesis in the liver and lower LDL by 30 to 50% or more; ezetimibe blocks cholesterol absorption in the gut and lowers LDL by about 20%."
+      }
+    ],
     "pearls": [
       "High-intensity statin therapy (atorvastatin 40 to 80 mg or rosuvastatin 20 to 40 mg) lowers LDL by 50% or more.",
       "Short-acting statins such as simvastatin work best taken in the evening, when the liver makes most of its cholesterol.",
@@ -359,21 +368,17 @@
       "id": "statins.management.2",
       "rung": "management",
       "kind": "single",
-      "prompt": "Name a statin that depends little on CYP3A4.",
+      "prompt": "Statin or fibrate: which one mainly lowers triglycerides?",
       "source_fields": [
-        "pharmacokinetics[1]"
+        "confused_with[0].how_to_tell_apart"
       ],
       "accepted_answers": [
         {
-          "answer": "rosuvastatin",
+          "answer": "fibrates",
           "synonyms": [
-            "Crestor"
-          ]
-        },
-        {
-          "answer": "pravastatin",
-          "synonyms": [
-            "Pravachol"
+            "fibrate",
+            "fenofibrate",
+            "gemfibrozil"
           ]
         }
       ]

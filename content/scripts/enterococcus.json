@@ -98,6 +98,10 @@
             "source_field": "lab_features[1]"
           }
         ]
+      },
+      {
+        "script_id": "streptococcus-gallolyticus",
+        "how_to_tell_apart": "Both are group D and hydrolyze bile esculin, but enterococci grow in 6.5% salt and resist cephalosporins; S. gallolyticus does not grow in 6.5% salt and is penicillin-susceptible."
       }
     ],
     "pearls": [
@@ -155,7 +159,7 @@
       "id": "enterococcus.recall.2",
       "rung": "recall",
       "kind": "single",
-      "prompt": "Gut flora that hydrolyze bile esculin and are catalase-negative, cultured from endocarditis after a urinary procedure. Organism?",
+      "prompt": "Gut flora that hydrolyze bile esculin, grow in 6.5% salt and are catalase-negative, cultured from endocarditis after a urinary procedure. Organism?",
       "source_fields": [
         "name"
       ],
