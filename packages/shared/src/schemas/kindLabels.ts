@@ -42,6 +42,18 @@ export const RUNG_LABELS_BY_KIND: Record<ScriptKind, Record<Rung, string>> = {
   },
 };
 
+/**
+ * The rung whose questions tell a script apart from its look-alikes: the
+ * mix-up drill asks these. Bugs have no "Tell it apart" rung; naming the
+ * organism (Identify) is how one bug is told from another.
+ */
+export const TELL_APART_RUNG: Record<ScriptKind, Rung> = {
+  disease: 'differentiate',
+  drug: 'management',
+  bug: 'recall',
+  pathway: 'workup',
+};
+
 /** A rung's label for a kind of script. Diseases when the kind isn't known. */
 export function rungLabel(rung: Rung, kind: ScriptKind = 'disease'): string {
   return RUNG_LABELS_BY_KIND[kind][rung];

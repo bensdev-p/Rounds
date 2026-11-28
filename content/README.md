@@ -17,7 +17,7 @@ The six rungs keep their ids for every kind (`recall`, `second_order`, `differen
 | `management` | Management | Tell it apart | Treatment | Treatment |
 | `pearl` | Pearl | Pearl | Pearl | Pearl |
 
-So `beta-blockers.workup.1` is a drug's adverse-effects question. The review sheet prints the kind's labels.
+So `beta-blockers.workup.1` is a drug's adverse-effects question. The review sheet prints the kind's labels. The mix-up drill asks the kind's tell-apart rung (`differentiate` for diseases, `management` for drugs, `workup` for pathways, `recall` for bugs), so write those questions to tell the script from its `confused_with` partners.
 
 `topics/` lists every planned topic by kind and system, with its id and a priority (P1 core, P2 the rest of a wave, P3 extras). Use the planned id when writing a script. Point `confused_with` only at scripts that exist and are the same kind (`content:check` enforces both).
 
