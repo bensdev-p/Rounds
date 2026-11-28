@@ -13,6 +13,8 @@ import {
   phiWarning,
   pickDailyLadder,
   pickDailyScript,
+  RUNGS,
+  rungLabel,
   startLadder,
   submitAnswer,
   timeUp,
@@ -99,6 +101,7 @@ function runFrom(
     day,
     script_id: content.script.id,
     script_name: content.script.name,
+    script_kind: content.script.kind,
     cleared: clearedRungs(ladder).length,
     missed: ladder.status === 'missed',
     total: ladder.questions.length,
@@ -442,7 +445,11 @@ function PlayPanel({
         className="hide-phone"
         style={{ display: 'flex', gap: 28, marginTop: 22, alignItems: 'flex-start' }}
       >
-        <Ladder states={states} width={180} />
+        <Ladder
+          states={states}
+          width={180}
+          labels={RUNGS.map((r) => rungLabel(r, content.script.kind))}
+        />
         <p className="q" style={{ flex: 1 }} aria-live="polite">
           {question.prompt}
         </p>

@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "COPD exacerbation",
     "aliases": [
       "acute exacerbation of COPD",
       "AECOPD"
+    ],
+    "systems": [
+      "pulm"
     ],
     "rotation": [
       "IM",

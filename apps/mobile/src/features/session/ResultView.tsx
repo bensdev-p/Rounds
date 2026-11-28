@@ -3,7 +3,7 @@
  * rung reached is the only score. Progress shows here, never mid-session.
  */
 import type { ReactNode } from 'react';
-import type { MissCard, ResultSummary } from '@rounds/shared';
+import type { MissCard, ResultSummary, ScriptKind } from '@rounds/shared';
 import { Flag } from 'lucide-react-native';
 import { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -55,6 +55,7 @@ function roundsLine(r: ResultSummary): string {
 
 export function ResultView({
   scriptName,
+  kind,
   inReview,
   summary,
   missCard,
@@ -70,6 +71,8 @@ export function ResultView({
   extra,
 }: {
   scriptName: string;
+  /** The script's kind: picks the ladder's labels. */
+  kind: ScriptKind;
   /** In-review script (local preview): the miss card says it isn't reviewed yet. */
   inReview: boolean;
   summary: ResultSummary;
@@ -106,7 +109,11 @@ export function ResultView({
       <SessionHeader title={scriptName} onClose={onDone} closeLabel="Done" />
 
       <View style={styles.top}>
-        <Ladder states={rungStates(summary.score, clean ? 'none' : 'miss')} width={150} />
+        <Ladder
+          states={rungStates(summary.score, clean ? 'none' : 'miss')}
+          width={150}
+          kind={kind}
+        />
         <View
           accessible
           accessibilityLabel={`${clean ? 'Top of the ladder' : `${plural(summary.score, 'rung')} climbed`}. ${bestLine(summary)}`}

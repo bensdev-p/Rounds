@@ -1,6 +1,6 @@
 # CLAUDE.md — PimpMe (repo: Rounds)
 
-PimpMe (formerly Rounds, pimpme.app) is a voice-first "pimping" trainer for medical students. It quizzes students the way attendings do on rounds: rapid, escalating, out loud. All content is built on structured **illness scripts**. Full product spec: `docs/PRODUCT.md`. Read it before starting any feature.
+PimpMe (formerly Rounds, pimpme.app) is a voice-first "pimping" trainer for medical students. It quizzes students the way attendings do on rounds: rapid, escalating, out loud. All content is built on structured **scripts** of four kinds: disease (the illness script), drug, bug and pathway. Full product spec: `docs/PRODUCT.md`. Read it before starting any feature.
 
 ## Current stage
 
@@ -9,6 +9,7 @@ PimpMe (formerly Rounds, pimpme.app) is a voice-first "pimping" trainer for medi
 **Stage 4: PimpMe on the web, polish and testers.** Stage 1 (local text prototype, tab shell) was completed on 14 Nov 2026, Stage 2 (Log, Review, accounts, voice, hosting and TestFlight) on 15 Nov 2026 and Stage 3 (Anki bridge) on 16 Nov 2026. Stage 4 renames Rounds to **PimpMe** (domain pimpme.app). It builds the website and the public web app, sets up email, polishes the app and opens testing to a group of medical students, in the milestone order in ROADMAP.md. The repo, bundle id (`com.ben.rounds`) and package names keep "Rounds".
 Do not build anything from later stages unless asked: payments, a production project, the App Store release, Android, Teams. Text mode stays available everywhere.
 The app runs against the private hosted project `rounds-dev` on TestFlight (`docs/HOSTING.md`) and against the local stack via `pnpm start`. Anki add-ons run only in Anki on a computer (Windows, macOS, Linux), not in AnkiMobile on the iPhone.
+**Content library (MC, ahead of M4.4):** a large script library, preclinical first by organ system, then the clinical rotations. Planned topics, by kind and system, are in `content/topics/`. New scripts go straight to `in_review`.
 Content review and user testing are not gates: development doesn't wait for scripts to be approved or for a testing period. The developer tests as he goes.
 
 ## Stack
@@ -64,10 +65,13 @@ pnpm comes from corepack (version pinned in root `package.json`).
 
 ## Core domain rules
 
-1. **The illness script is the source of truth.** Every question, every accepted answer and every grading rubric must trace to fields in an approved script. The AI never invents medical facts at runtime.
+1. **Scripts are the source of truth.** Content comes in four kinds of script: disease (the illness script), drug, bug (microorganism) and pathway (biochemistry and physiology). Every question, every accepted answer and every grading rubric must trace to fields in an approved script of one of these kinds. The AI never invents medical facts at runtime. (Widened from illness scripts only on 27 Nov 2026.)
+   - Each kind has its own content fields (`packages/shared/src/schemas/illnessScript.ts`) and its own rung labels (`kindLabels.ts`; DESIGN.md → Script kinds). The six positional rungs, the score and progression are shared.
+   - Every script carries `systems` (organ systems, for preclinical study); diseases also carry `rotation` for the clinical rotations. One script per disease: clinical work extends a disease script instead of duplicating it.
+   - `confused_with` links stay within a kind.
 2. **Script status:** `draft` → `in_review` → `approved` → `retired`. Only `approved` scripts are used for pimping. Every approved script records `reviewed_by` and `reviewed_at`.
    - **Preview (developer's decisions, 2026-11-13, 2026-11-14 and 2026-11-24):** `in_review` scripts may also be shown, labelled "Not yet reviewed", but only where `app_settings.show_in_review` is on. Only the local seed and `pnpm content:push --preview` turn it on, and the push allows it only for projects in `supabase/hosting.json` → `previewProjects`: the dev project used by the developer, the reviewer and the named tester group (medical students, through TestFlight and the gated web app). Never turn it on for a project that anyone outside that group can reach. Drafts are never shown.
-3. **The pimp ladder** escalates until the student misses, then ends. Score = the rung reached. Partial credit applies to list questions ("name 5 causes").
+3. **The pimp ladder** escalates until the student misses, then ends. Score = the rung reached. Every kind uses the same positional rungs (`recall` … `pearl`, the `ladder_rung` enum); only the labels change. Partial credit applies to list questions ("name 5 causes").
 4. **Miss tagging is automatic:** `unknown`, `slow`, `partial_list`, `confused_with:<script_id>`. The user never fills in a form.
 5. **No patient data (PHI), ever.** The patient log stores a diagnosis label, rotation and date only. Free-text inputs must warn on, and block, anything resembling names, dates of birth, medical record numbers, phone numbers or addresses. Do not add fields that could hold patient details.
 6. **Licensed content:** never store or reproduce AnKing card text or Qbank questions. Reference them by external ID only.

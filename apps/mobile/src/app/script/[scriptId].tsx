@@ -1,8 +1,16 @@
 /**
- * Illness script, read only. Wireframe 10, mockup script.png. Only approved
+ * Script, read only. Wireframe 10, mockup script.png. Only approved
  * scripts are visible; the reviewer line is why students can trust it.
+ * Diseases follow the mockup; drugs, bugs and pathways use the same blocks
+ * with their own sections (DESIGN.md → Script kinds).
  */
-import type { IllnessScript } from '@rounds/shared';
+import {
+  KIND_NAMES,
+  scriptSections,
+  SYSTEM_NAMES,
+  type DiseaseScript,
+  type IllnessScript,
+} from '@rounds/shared';
 import { getLadderContent } from '@rounds/shared/api';
 import { router, useLocalSearchParams } from 'expo-router';
 import { ChevronLeft, Flag, Mic } from 'lucide-react-native';
@@ -28,7 +36,25 @@ const sentence = (text: string) => {
   return /[.!?]$/.test(capped) ? capped : `${capped}.`;
 };
 
+/** Drugs, bugs and pathways: every section, each part as a sentence. */
+function kindSections(s: IllnessScript): { title: string; body: string }[] {
+  return scriptSections(s)
+    .map((section) => ({
+      title: section.title,
+      body: section.parts
+        .filter((p) => p.items.length > 0)
+        .map((p) => (p.label ? `${p.label}: ${sentence(join(p.items))}` : sentence(join(p.items))))
+        .join(' '),
+    }))
+    .filter((section) => section.body.length > 1);
+}
+
 function sections(s: IllnessScript): { title: string; body: string }[] {
+  return s.kind === 'disease' ? diseaseSections(s) : kindSections(s);
+}
+
+/** The blocks script.png draws, in its order. */
+function diseaseSections(s: DiseaseScript): { title: string; body: string }[] {
   const findings = [
     ...s.key_findings.history,
     ...s.key_findings.exam,
@@ -136,9 +162,10 @@ export default function ScriptScreen() {
         </Txt>
       )}
       <View style={[styles.chips, styles.rotations]}>
-        {script.rotation.map((r) => (
-          <Chip key={r} label={ROTATION_NAMES[r]} />
-        ))}
+        {script.kind !== 'disease' && <Chip label={KIND_NAMES[script.kind]} />}
+        {script.rotation.length > 0
+          ? script.rotation.map((r) => <Chip key={r} label={ROTATION_NAMES[r]} />)
+          : script.systems.map((x) => <Chip key={x} label={SYSTEM_NAMES[x]} />)}
       </View>
 
       {sections(script).map((section) => (

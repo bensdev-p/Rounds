@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Adrenal insufficiency",
     "aliases": [
       "Addison disease",
       "adrenal crisis"
+    ],
+    "systems": [
+      "endo"
     ],
     "rotation": [
       "IM"

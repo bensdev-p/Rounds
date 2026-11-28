@@ -485,6 +485,7 @@ function Session({
       <>
         <ResultView
           scriptName={script.name}
+          kind={script.kind}
           inReview={script.status === 'in_review'}
           summary={summary}
           missCard={missCard}
@@ -554,6 +555,7 @@ function Session({
       clock={clock}
       rungs={rungs}
       scriptName={script.name}
+      kind={script.kind}
       inReview={script.status === 'in_review'}
       prompt={shownQuestion?.prompt ?? ''}
       isList={shownQuestion?.kind === 'list'}

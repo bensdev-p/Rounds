@@ -205,6 +205,7 @@ export function Chip({
   tone = 'neutral',
   role = 'link',
   disabled = false,
+  selected,
   accessibilityLabel,
   accessibilityHint,
 }: {
@@ -213,23 +214,28 @@ export function Chip({
   tone?: 'neutral' | 'miss';
   role?: 'link' | 'button';
   disabled?: boolean;
+  /** A filter chip that is on: filled, as "All" in wireframe 03. Undefined for chips that aren't filters. */
+  selected?: boolean;
   accessibilityLabel?: string;
   accessibilityHint?: string | undefined;
 }) {
   const { c } = useTheme();
   const content = (
-    <Txt variant="small" weight="bodyMedium">
+    <Txt variant="small" weight="bodyMedium" style={selected ? { color: c.bg } : undefined}>
       {label}
     </Txt>
   );
-  const style = [styles.chip, { backgroundColor: tone === 'miss' ? c.missSoft : c.surface2 }];
+  const style = [
+    styles.chip,
+    { backgroundColor: selected ? c.text : tone === 'miss' ? c.missSoft : c.surface2 },
+  ];
   if (!onPress) return <View style={style}>{content}</View>;
   return (
     <Pressable
       accessibilityRole={role}
       accessibilityLabel={accessibilityLabel ?? label}
       accessibilityHint={accessibilityHint}
-      accessibilityState={{ disabled }}
+      accessibilityState={selected === undefined ? { disabled } : { disabled, selected }}
       disabled={disabled}
       onPress={onPress}
       // 30 pt chip, 44 pt touch target.

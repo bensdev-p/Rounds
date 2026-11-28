@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Decompensated cirrhosis",
     "aliases": [
       "cirrhosis",
       "end-stage liver disease"
+    ],
+    "systems": [
+      "gi"
     ],
     "rotation": [
       "IM"

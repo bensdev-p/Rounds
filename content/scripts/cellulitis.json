@@ -5,8 +5,12 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Cellulitis",
     "aliases": [],
+    "systems": [
+      "derm"
+    ],
     "rotation": [
       "IM",
       "EM",

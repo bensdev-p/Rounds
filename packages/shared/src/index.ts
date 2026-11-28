@@ -1,5 +1,7 @@
 export * from './schemas/fieldPath.ts';
 export * from './schemas/illnessScript.ts';
+export * from './schemas/kindLabels.ts';
+export * from './schemas/scriptSections.ts';
 export * from './schemas/question.ts';
 export * from './schemas/attempt.ts';
 export * from './schemas/flag.ts';
@@ -23,6 +25,7 @@ export * from './log/patientLog.ts';
 export * from './review/review.ts';
 export * from './review/drill.ts';
 export * from './profile/profile.ts';
+export * from './profile/topicFilters.ts';
 export * from './voice/endOfTurn.ts';
 export * from './voice/keyterms.ts';
 export * from './voice/voice.ts';

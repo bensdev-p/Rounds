@@ -132,8 +132,9 @@ export default function Review() {
       ) : (
         <List>
           {rows.map((row, i) => {
-            const name = byId.get(row.script_id)?.name ?? row.script_id;
-            const subtitle = missSubtitle(row.miss);
+            const rowScript = byId.get(row.script_id);
+            const name = rowScript?.name ?? row.script_id;
+            const subtitle = missSubtitle(row.miss, rowScript?.kind);
             return (
               <Row
                 key={row.script_id}

@@ -5,10 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Acute coronary syndrome",
     "aliases": [
       "ACS",
       "myocardial infarction"
+    ],
+    "systems": [
+      "cardio"
     ],
     "rotation": [
       "IM",

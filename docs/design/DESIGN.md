@@ -136,6 +136,26 @@ Rules:
 - Sentence case everywhere. No all-caps labels, no letter-spaced eyebrows above headings.
 - Keep supporting lines short. If a line wraps to three lines, rewrite it.
 
+## Script kinds
+
+Scripts come in four kinds: disease, drug, bug and pathway (PRODUCT.md → Core entity; developer's decision, 27 Nov 2026). The mockups draw diseases only. The other kinds reuse the same screens and pieces, with these changes and nothing more:
+
+- **Rung labels** change by kind. The six rungs, their numerals, states and motion don't.
+
+  | Rung | Disease | Drug | Bug | Pathway |
+  |---|---|---|---|---|
+  | 1 | Recall | Class | Identify | Step |
+  | 2 | Next most common | Mechanism | Virulence | Regulation |
+  | 3 | Tell it apart | Uses | Diseases | Deficiency |
+  | 4 | Workup | Adverse effects | Diagnosis | Tell it apart |
+  | 5 | Management | Tell it apart | Treatment | Treatment |
+  | 6 | Pearl | Pearl | Pearl | Pearl |
+
+  The miss card and Review use the same label: "Pimped on adverse effects".
+- **Script screen** (`script.png`): diseases keep the drawn blocks. Drugs, bugs and pathways use the same titled blocks, one per section of their kind (Class, Mechanism, Uses… for a drug), with a kind chip ("Drug") before the rotation chips. A script without rotations shows its system chips instead.
+- **Topic picker** (wireframe 03): the drawn filter chips, one on at a time: All, then the organ systems present, then the kinds when there is more than one (Diseases, Drugs, Bugs, Pathways). The chip that's on is filled with `text` and its label is `bg`, as "All" is drawn.
+- **Log** matches disease scripts only: patients are logged by diagnosis.
+
 ## Layout
 
 - 20 pt horizontal screen margin. Section gap 26 pt, inside-list padding 14×16.

@@ -5,9 +5,14 @@
     "version": 1,
     "reviewed_by": null,
     "reviewed_at": null,
+    "kind": "disease",
     "name": "Hyponatremia",
     "aliases": [
       "low sodium"
+    ],
+    "systems": [
+      "renal",
+      "endo"
     ],
     "rotation": [
       "IM"

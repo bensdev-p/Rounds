@@ -316,6 +316,7 @@ function Drill({
       }}
       dontKnowHint="Ends the drill on this question"
       scriptName={shownScript.name}
+      kind={shownScript.kind}
       inReview={shownScript.status === 'in_review'}
       prompt={shownQuestion?.prompt ?? ''}
       isList={shownQuestion?.kind === 'list'}

@@ -27,7 +27,9 @@ const sanitize = (
 describe('buildGradingContext', () => {
   it('includes only script text the question was written from', () => {
     const ctx = buildGradingContext(list, zorblax, confusables);
-    expect(ctx.source_excerpts).toEqual(zorblax.epidemiology.risk_factors);
+    expect(ctx.source_excerpts).toEqual(
+      zorblax.kind === 'disease' ? zorblax.epidemiology.risk_factors : [],
+    );
     expect(ctx.required_count).toBe(3);
     expect(ctx.kind).toBe('list');
   });

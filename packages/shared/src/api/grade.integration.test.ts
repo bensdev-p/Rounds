@@ -30,7 +30,7 @@ describe('grade-answer function (fake model)', () => {
   it('asks the model when the local matcher misses, e.g. a misspelling', async () => {
     const response = await gradeAnswer(await newStudent(), MANAGEMENT, 'zorbicilin');
     expect(response.grader).toBe('llm');
-    expect(response.grader_version).toBe('grade-answer/v1@fake');
+    expect(response.grader_version).toBe('grade-answer/v2@fake');
     expect(response.result).toMatchObject({ grade: 'correct', matched: ['zorbicillin'] });
   });
 

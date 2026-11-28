@@ -16,7 +16,9 @@ import {
   type IllnessScript,
 } from '../schemas/illnessScript.ts';
 import { collectStrings, resolveFieldPath } from '../schemas/fieldPath.ts';
+import { KIND_NAMES, rungLabel, SYSTEM_NAMES } from '../schemas/kindLabels.ts';
 import { QuestionSchema, RUNGS, type Question } from '../schemas/question.ts';
+import { scriptSections } from '../schemas/scriptSections.ts';
 
 export interface ContentFile {
   script: IllnessScript;
@@ -55,6 +57,9 @@ export function parseContentFile(
   if (!script.success) return { file: null, problems: issues(script.error, `${fileId}.script`) };
 
   const problems: string[] = [];
+  if (script.data.systems.length === 0) {
+    problems.push(`${fileId}: needs at least one organ system in "systems"`);
+  }
   if (script.data.id !== fileId) {
     problems.push(`${fileId}: file name must match script id "${script.data.id}"`);
   }
@@ -186,7 +191,12 @@ export function approve(
     file: next,
     approvals: {
       ...approvals,
-      [script.id]: { version: script.version, hash: approvalHash(next, hash), reviewed_by, reviewed_at },
+      [script.id]: {
+        version: script.version,
+        hash: approvalHash(next, hash),
+        reviewed_by,
+        reviewed_at,
+      },
     },
   };
 }
@@ -235,60 +245,35 @@ export function seedable(files: readonly ContentFile[]): {
 const bullets = (items: readonly string[]): string =>
   items.length > 0 ? items.map((i) => `- ${i}`).join('\n') : '- _(none)_';
 
+/** The kind's content sections, except Pearls (printed after Confused with). */
+function renderSections(s: IllnessScript): string[] {
+  return scriptSections(s)
+    .filter((section) => section.title !== 'Pearls')
+    .flatMap((section) => [
+      `## ${section.title}`,
+      ...section.parts.flatMap((p) =>
+        p.label === null && p.items.length === 1
+          ? [p.items[0] ?? '', '']
+          : [...(p.label ? [`**${p.label}**`] : []), bullets(p.items), ''],
+      ),
+    ]);
+}
+
 /** A Markdown sheet a medical reviewer can read top to bottom. */
 export function renderReviewSheet(file: ContentFile, names: ReadonlyMap<string, string>): string {
   const s = file.script;
   const lines: string[] = [
     `# ${s.name}`,
     '',
-    `Status: **${s.status}**, version ${s.version}. Rotations: ${s.rotation.join(', ')}.` +
+    `${KIND_NAMES[s.kind]} script. Status: **${s.status}**, version ${s.version}. ` +
+      `Systems: ${s.systems.length > 0 ? s.systems.map((x) => SYSTEM_NAMES[x]).join(', ') : '_(none)_'}. ` +
+      `Rotations: ${s.rotation.length > 0 ? s.rotation.join(', ') : '_(none)_'}.` +
       (s.aliases.length > 0 ? ` Also called: ${s.aliases.join(', ')}.` : ''),
     '',
     '> Check every fact against current guidance. Students are only ever graded against',
     '> the accepted answers below, so a missing synonym means a right answer is marked wrong.',
     '',
-    '## Who gets it',
-    s.epidemiology.who,
-    '',
-    'Risk factors:',
-    bullets(s.epidemiology.risk_factors),
-    '',
-    '## Pathophysiology',
-    s.pathophysiology,
-    '',
-    '## Timeline',
-    `Onset: ${s.timeline.onset}. Course: ${s.timeline.course}.`,
-    '',
-    '## Key findings',
-    '**History**',
-    bullets(s.key_findings.history),
-    '',
-    '**Exam**',
-    bullets(s.key_findings.exam),
-    '',
-    '**Labs**',
-    bullets(s.key_findings.labs),
-    '',
-    '**Imaging**',
-    bullets(s.key_findings.imaging),
-    '',
-    '## Diagnosis',
-    '**Confirmatory tests**',
-    bullets(s.diagnosis.confirmatory_tests),
-    '',
-    '**Criteria**',
-    bullets(s.diagnosis.criteria),
-    '',
-    '## Management',
-    '**First line**',
-    bullets(s.management.first_line),
-    '',
-    '**Next line**',
-    bullets(s.management.next_line),
-    '',
-    '## Complications',
-    bullets(s.complications),
-    '',
+    ...renderSections(s),
     '## Confused with',
     bullets(
       s.confused_with.map(
@@ -338,7 +323,7 @@ export function renderReviewSheet(file: ContentFile, names: ReadonlyMap<string, 
   // A session asks one question per rung, picked at random.
   RUNGS.forEach((rung, r) => {
     const onRung = file.questions.filter((q) => q.rung === rung);
-    lines.push('', `### ${r + 1}. ${rung.replace('_', ' ')}`);
+    lines.push('', `### ${r + 1}. ${rungLabel(rung, s.kind)}`);
     if (onRung.length > 1) {
       lines.push('', `_${onRung.length} versions; each session asks one._`);
     }

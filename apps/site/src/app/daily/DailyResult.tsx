@@ -1,5 +1,13 @@
 'use client';
-import { dailyShareText, dailySquares, longDay, shortDay, type DayKey } from '@rounds/shared';
+import {
+  dailyShareText,
+  dailySquares,
+  longDay,
+  RUNGS,
+  rungLabel,
+  shortDay,
+  type DayKey,
+} from '@rounds/shared';
 import { Check, Share } from 'lucide-react';
 import Link from 'next/link';
 import { useState } from 'react';
@@ -19,7 +27,11 @@ export function DailyResult({ day, run }: { day: DayKey; run: SavedRun }) {
       <div className="stack-lg">
         <p className="meta">{longDay(day)}</p>
         <div className="daily-score">
-          <Ladder states={states} width={150} />
+          <Ladder
+            states={states}
+            width={150}
+            labels={RUNGS.map((r) => rungLabel(r, run.script_kind))}
+          />
           <div style={{ paddingBottom: 4 }}>
             <p className="num" style={{ fontSize: 88, lineHeight: 0.9 }}>
               {run.cleared}
