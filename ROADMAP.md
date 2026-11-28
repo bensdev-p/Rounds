@@ -66,8 +66,8 @@ This file sets the order of work. `docs/PRODUCT.md` says what Rounds is. `CLAUDE
 
 | Screen | Wireframe | Mockup | Status | Milestone |
 |---|---|---|---|---|
-| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5). "Who's pimping?" (M4.1, brand board). "Topics" link after Change rotation (MC, developer, 28 Nov 2026; not drawn) | Done |
-| Script picker | 03 | — | Matches wireframe (M1.2), reached by the "Topics" link on Home or long-press on Pimp me. Filter chips by system and kind (MC phase 0) | Done |
+| Home (Pimp) | 02 | home, home-light | Matches (M1.2). From today's patients (M2.1). Week line and Change rotation (M2.3). Mic icon on Pimp me (M2.5). "Who's pimping?" (M4.1, brand board) | Done |
+| Script picker | 03 | — | Matches wireframe (M1.2), reached by "Change rotation" or long-press on Pimp me. Filter chips by system and kind (MC phase 0) | Done |
 | Live session, text | 05 | session, session-light | Matches (M1.2); varied questions (M1.1) | Done |
 | List feedback | 06 | list | Matches (M1.2), with the attending's line | Done |
 | Result + miss card | 07 | result | Matches (M1.2). Miss label "Pimped on management" (M4.1, brand board; also on Review). Anki row: Unsuspend N Anki cards, queued state, Connect Anki (M3.4); flag link kept below progress. "Keep your progress" panel once, after the first session (M2.3, not drawn) | Done |

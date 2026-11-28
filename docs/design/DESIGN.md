@@ -154,7 +154,6 @@ Scripts come in four kinds: disease, drug, bug and pathway (PRODUCT.md → Core 
   The miss card and Review use the same label: "Pimped on adverse effects".
 - **Mix-up drill** asks each script's tell-apart rung: Tell it apart for diseases, drugs and pathways, and Identify for bugs (`TELL_APART_RUNG`).
 - **Script screen** (`script.png`): diseases keep the drawn blocks. Drugs, bugs and pathways use the same titled blocks, one per section of their kind (Class, Mechanism, Uses… for a drug), with a kind chip ("Drug") before the rotation chips. A script without rotations shows its system chips instead.
-- **Home** has a "Topics" link after "Change rotation" that opens the topic picker, so a student can pick any script without changing rotation (developer's decision, 28 Nov 2026; not drawn). Long press on Pimp me still opens it too.
 - **Topic picker** (wireframe 03): the drawn filter chips, one on at a time: All, then the organ systems present, then the kinds when there is more than one (Diseases, Drugs, Bugs, Pathways). The chip that's on is filled with `text` and its label is `bg`, as "All" is drawn.
 - **Log** matches disease scripts only: patients are logged by diagnosis.
 
