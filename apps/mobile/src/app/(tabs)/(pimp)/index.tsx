@@ -127,6 +127,11 @@ export default function PimpHome() {
           accessibilityHint="Your year, rotation and week"
           onPress={changeRotation}
         />
+        <Link
+          label="Topics"
+          accessibilityHint="Choose a topic to be pimped on"
+          onPress={chooseTopic}
+        />
       </View>
 
       <Panel level="hero" style={styles.hero}>
@@ -196,7 +201,7 @@ const styles = StyleSheet.create({
   },
   title: { marginTop: 6 },
   // Mockup: "Week 3 of 8 " then the link 10 px further on, about 14 in all.
-  sub: { flexDirection: 'row', alignItems: 'center', gap: 14, marginTop: 6 },
+  sub: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', gap: 14, marginTop: 6 },
   hero: {
     marginTop: 22,
     borderRadius: radius.hero,
