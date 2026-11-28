@@ -1,0 +1,408 @@
+{
+  "script": {
+    "id": "enterococcus",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "bug",
+    "name": "Enterococcus",
+    "aliases": [
+      "enterococci",
+      "Enterococcus faecalis",
+      "Enterococcus faecium"
+    ],
+    "systems": [
+      "cardio",
+      "renal"
+    ],
+    "rotation": [],
+    "morphology": "Gram-positive cocci in pairs and short chains",
+    "lab_features": [
+      "catalase-negative",
+      "grows in 6.5% NaCl",
+      "hydrolyzes bile esculin",
+      "usually gamma-hemolytic (no hemolysis)",
+      "Lancefield group D"
+    ],
+    "transmission": [
+      "normal flora of the gut",
+      "spreads in hospitals on hands and equipment",
+      "enters through the urinary tract, the bowel or catheters"
+    ],
+    "virulence_factors": [
+      "intrinsic resistance to cephalosporins",
+      "acquired vancomycin resistance (VRE), mostly in E. faecium",
+      "biofilm on catheters and devices"
+    ],
+    "diseases": [
+      "urinary tract infections, often catheter-related",
+      "subacute endocarditis, often in older adults after GI or urinary procedures",
+      "biliary and intra-abdominal infections",
+      "bacteremia from intravenous lines"
+    ],
+    "diagnosis": [
+      "blood and urine cultures",
+      "growth in 6.5% NaCl and bile esculin hydrolysis in the lab",
+      "susceptibility testing for ampicillin and vancomycin"
+    ],
+    "treatment": [
+      "ampicillin for susceptible strains",
+      "endocarditis: ampicillin plus ceftriaxone, or ampicillin plus gentamicin",
+      "VRE: linezolid or daptomycin",
+      "vancomycin for ampicillin-resistant, vancomycin-susceptible strains"
+    ],
+    "prevention": [
+      "hand hygiene and contact precautions for VRE",
+      "removing catheters early"
+    ],
+    "confused_with": [
+      {
+        "script_id": "viridans-streptococci",
+        "how_to_tell_apart": "Both cause subacute endocarditis. Enterococci grow in 6.5% salt, come from the gut and urinary tract and follow GI or urinary procedures; viridans streptococci are alpha-hemolytic, come from the mouth and follow dental work.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in pairs, short chains",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Source",
+            "text": "Gut flora",
+            "source_field": "transmission[0]"
+          },
+          {
+            "label": "Key test",
+            "text": "Grows in 6.5% NaCl",
+            "source_field": "lab_features[1]"
+          }
+        ]
+      },
+      {
+        "script_id": "staphylococcus-aureus",
+        "how_to_tell_apart": "Enterococci grow in pairs and short chains, are catalase-negative and grow in 6.5% salt; S. aureus grows in clusters and is catalase- and coagulase-positive.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in pairs, short chains",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Course",
+            "text": "Subacute endocarditis",
+            "source_field": "diseases[1]"
+          },
+          {
+            "label": "Key test",
+            "text": "Grows in 6.5% NaCl",
+            "source_field": "lab_features[1]"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "Enterococci are naturally resistant to all cephalosporins, so ceftriaxone alone never covers them.",
+      "Enterococcal endocarditis needs two drugs; ampicillin plus ceftriaxone works without the kidney toxicity of gentamicin.",
+      "VRE is most often Enterococcus faecium; E. faecalis is usually ampicillin-susceptible."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "morphology",
+        "lab_features"
+      ],
+      "MS3": [
+        "diseases",
+        "treatment[0]"
+      ],
+      "MS4": [
+        "treatment[1]",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Sherris & Ryan's Medical Microbiology"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "enterococcus.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Catalase-negative gram-positive cocci in pairs that grow in 6.5% salt and hydrolyze bile esculin. Organism?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Enterococcus",
+          "synonyms": [
+            "enterococci",
+            "Enterococcus faecalis",
+            "E. faecalis",
+            "Enterococcus faecium",
+            "E. faecium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Gut flora that hydrolyze bile esculin and are catalase-negative, cultured from endocarditis after a urinary procedure. Organism?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Enterococcus",
+          "synonyms": [
+            "enterococci",
+            "Enterococcus faecalis",
+            "E. faecalis",
+            "Enterococcus faecium",
+            "E. faecium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Enterococci are naturally resistant to which antibiotic class?",
+      "source_fields": [
+        "virulence_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cephalosporins",
+          "synonyms": [
+            "cephalosporin",
+            "ceftriaxone",
+            "cefazolin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which enterococcal species is most often vancomycin-resistant?",
+      "source_fields": [
+        "virulence_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "E. faecium",
+          "synonyms": [
+            "Enterococcus faecium",
+            "faecium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two infections enterococci cause.",
+      "source_fields": [
+        "diseases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "urinary tract infections",
+          "synonyms": [
+            "urinary tract infection",
+            "UTI",
+            "CAUTI",
+            "cystitis",
+            "catheter-associated UTI"
+          ]
+        },
+        {
+          "answer": "subacute endocarditis",
+          "synonyms": [
+            "endocarditis",
+            "infective endocarditis"
+          ]
+        },
+        {
+          "answer": "intra-abdominal infections",
+          "synonyms": [
+            "intra-abdominal infection",
+            "biliary infection",
+            "cholangitis",
+            "peritonitis"
+          ]
+        },
+        {
+          "answer": "bacteremia",
+          "synonyms": [
+            "bloodstream infection",
+            "line infection"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "enterococcus.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "An 80-year-old develops endocarditis weeks after a cystoscopy. Likely organism?",
+      "source_fields": [
+        "name",
+        "diseases[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Enterococcus",
+          "synonyms": [
+            "enterococci",
+            "Enterococcus faecalis",
+            "E. faecalis",
+            "Enterococcus faecium",
+            "E. faecium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Enterococcus grows from blood. Name the two antibiotics whose susceptibility decides between first-line and VRE treatment.",
+      "source_fields": [
+        "diagnosis[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ampicillin",
+          "synonyms": [
+            "amoxicillin"
+          ]
+        },
+        {
+          "answer": "vancomycin",
+          "synonyms": [
+            "vanc"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "enterococcus.workup.2",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name the two lab tests that separate enterococci from other catalase-negative cocci.",
+      "source_fields": [
+        "diagnosis[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "growth in 6.5% NaCl",
+          "synonyms": [
+            "6.5% NaCl",
+            "6.5% salt",
+            "salt tolerance",
+            "grows in salt"
+          ]
+        },
+        {
+          "answer": "bile esculin hydrolysis",
+          "synonyms": [
+            "bile esculin",
+            "esculin hydrolysis",
+            "bile esculin test"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "enterococcus.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-choice antibiotic for an ampicillin-susceptible enterococcal infection?",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ampicillin",
+          "synonyms": [
+            "amoxicillin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name an antibiotic for VRE.",
+      "source_fields": [
+        "treatment[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "linezolid",
+          "synonyms": [
+            "Zyvox"
+          ]
+        },
+        {
+          "answer": "daptomycin",
+          "synonyms": [
+            "Cubicin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Enterococcal endocarditis: which drug is paired with ampicillin to avoid the kidney toxicity of gentamicin?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ceftriaxone",
+          "synonyms": [
+            "Rocephin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "enterococcus.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Does ceftriaxone alone ever cover enterococci?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "never",
+          "synonyms": [
+            "naturally resistant",
+            "resistant to all cephalosporins"
+          ]
+        }
+      ]
+    }
+  ]
+}

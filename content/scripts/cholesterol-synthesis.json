@@ -1,0 +1,295 @@
+{
+  "script": {
+    "id": "cholesterol-synthesis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "pathway",
+    "name": "Cholesterol synthesis",
+    "aliases": [
+      "mevalonate pathway"
+    ],
+    "systems": [
+      "cardio",
+      "general"
+    ],
+    "rotation": [],
+    "location": "Cytosol and smooth endoplasmic reticulum, mostly in liver cells",
+    "purpose": "Makes cholesterol from acetyl-CoA, for cell membranes, bile acids, steroid hormones and vitamin D.",
+    "steps": [
+      "acetyl-CoA to HMG-CoA by HMG-CoA synthase",
+      "HMG-CoA to mevalonate by HMG-CoA reductase",
+      "mevalonate to isoprene units (isopentenyl pyrophosphate)",
+      "isoprene units join to make squalene",
+      "squalene to lanosterol by squalene epoxidase and cyclase, then to cholesterol"
+    ],
+    "rate_limiting_enzyme": "HMG-CoA reductase",
+    "regulation": [
+      "insulin activates HMG-CoA reductase",
+      "glucagon inhibits HMG-CoA reductase",
+      "low cell cholesterol turns on synthesis through SREBP",
+      "high cell cholesterol speeds the breakdown of HMG-CoA reductase"
+    ],
+    "cofactors": [
+      "NADPH, from the pentose phosphate pathway"
+    ],
+    "deficiencies": [
+      "Smith-Lemli-Opitz syndrome: 7-dehydrocholesterol reductase deficiency at the last step, with low cholesterol, high 7-dehydrocholesterol, intellectual disability and fused second and third toes"
+    ],
+    "drug_targets": [
+      "statins inhibit HMG-CoA reductase",
+      "terbinafine inhibits squalene epoxidase in the fungal version of the pathway, which makes ergosterol"
+    ],
+    "treatment": [
+      "Smith-Lemli-Opitz syndrome: dietary cholesterol supplementation"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "HMG-CoA is also made in mitochondria for ketone bodies; cholesterol synthesis uses HMG-CoA made in the cytosol.",
+      "The liver makes most of its cholesterol at night, so short-acting statins are taken in the evening.",
+      "Steroid hormones start when cholesterol is cleaved to pregnenolone."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "steps",
+        "rate_limiting_enzyme",
+        "regulation"
+      ],
+      "MS3": [
+        "drug_targets"
+      ],
+      "MS4": [
+        "deficiencies[0]",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Lippincott Illustrated Reviews: Biochemistry"
+      },
+      {
+        "title": "Harper's Illustrated Biochemistry"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "cholesterol-synthesis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the rate-limiting enzyme of cholesterol synthesis?",
+      "source_fields": [
+        "rate_limiting_enzyme"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HMG-CoA reductase",
+          "synonyms": [
+            "HMG CoA reductase",
+            "HMGCR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "HMG-CoA reductase turns HMG-CoA into what?",
+      "source_fields": [
+        "steps[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mevalonate",
+          "synonyms": [
+            "mevalonic acid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which hormone activates HMG-CoA reductase?",
+      "source_fields": [
+        "regulation[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "insulin",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which transcription factor turns on cholesterol synthesis when cell cholesterol is low?",
+      "source_fields": [
+        "regulation[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "SREBP",
+          "synonyms": [
+            "sterol regulatory element-binding protein",
+            "sterol regulatory element binding protein",
+            "SREBP-2",
+            "SREBP2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "A child has low cholesterol, intellectual disability and fused second and third toes. Which disorder?",
+      "source_fields": [
+        "deficiencies[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Smith-Lemli-Opitz syndrome",
+          "synonyms": [
+            "Smith-Lemli-Opitz",
+            "Smith Lemli Opitz",
+            "SLOS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which enzyme is missing in Smith-Lemli-Opitz syndrome?",
+      "source_fields": [
+        "deficiencies[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "7-dehydrocholesterol reductase",
+          "synonyms": [
+            "DHCR7",
+            "7-DHC reductase",
+            "7 dehydrocholesterol reductase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "HMG-CoA for ketone bodies is made in mitochondria. Where is the HMG-CoA for cholesterol made?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cytosol",
+          "synonyms": [
+            "cytoplasm",
+            "cytosolic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In fungi the same sterol pathway makes ergosterol. Which enzyme does terbinafine block?",
+      "source_fields": [
+        "drug_targets[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "squalene epoxidase",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class inhibits the rate-limiting step of cholesterol synthesis?",
+      "source_fields": [
+        "drug_targets[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "statins",
+          "synonyms": [
+            "statin",
+            "atorvastatin",
+            "rosuvastatin",
+            "simvastatin",
+            "pravastatin",
+            "lovastatin",
+            "HMG-CoA reductase inhibitors",
+            "HMG-CoA reductase inhibitor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How is Smith-Lemli-Opitz syndrome treated?",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dietary cholesterol supplementation",
+          "synonyms": [
+            "cholesterol supplementation",
+            "dietary cholesterol",
+            "cholesterol supplements",
+            "cholesterol replacement",
+            "give cholesterol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which reducing cofactor does cholesterol synthesis use?",
+      "source_fields": [
+        "cofactors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "NADPH",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "cholesterol-synthesis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Cholesterol is cleaved into which first precursor of the steroid hormones?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pregnenolone",
+          "synonyms": []
+        }
+      ]
+    }
+  ]
+}

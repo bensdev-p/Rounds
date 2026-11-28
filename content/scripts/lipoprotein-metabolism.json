@@ -1,0 +1,334 @@
+{
+  "script": {
+    "id": "lipoprotein-metabolism",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "pathway",
+    "name": "Lipoprotein metabolism",
+    "aliases": [
+      "lipid transport"
+    ],
+    "systems": [
+      "cardio",
+      "general"
+    ],
+    "rotation": [],
+    "location": "Intestine, blood and liver",
+    "purpose": "Carries triglycerides and cholesterol, which do not dissolve in water, through the blood in lipoproteins: from the gut (the exogenous pathway), from the liver (the endogenous pathway) and back to the liver (reverse cholesterol transport).",
+    "steps": [
+      "the intestine packages dietary fat into chylomicrons, which carry apoB-48",
+      "lipoprotein lipase in capillaries releases fatty acids from chylomicrons and VLDL",
+      "the liver takes up chylomicron remnants through apoE",
+      "the liver secretes VLDL, which carries apoB-100 and becomes IDL and then LDL",
+      "LDL delivers cholesterol to tissues through LDL receptors, which bind apoB-100",
+      "HDL collects cholesterol from tissues and returns it to the liver (reverse cholesterol transport)"
+    ],
+    "regulation": [
+      "insulin activates lipoprotein lipase",
+      "apoC-II activates lipoprotein lipase",
+      "LCAT, activated by apoA-I, esterifies cholesterol in HDL",
+      "cholesteryl ester transfer protein (CETP) moves cholesteryl esters from HDL to VLDL and LDL"
+    ],
+    "cofactors": [
+      "apoC-II for lipoprotein lipase",
+      "apoE for remnant uptake",
+      "apoB-100 for binding the LDL receptor"
+    ],
+    "deficiencies": [
+      "familial chylomicronemia (type I): lipoprotein lipase or apoC-II deficiency, with very high triglycerides, pancreatitis and eruptive xanthomas",
+      "familial hypercholesterolemia (type IIa): a defective LDL receptor, with very high LDL, tendon xanthomas and early heart attacks",
+      "dysbetalipoproteinemia (type III): apoE2 variant, with palmar xanthomas",
+      "abetalipoproteinemia: MTP deficiency, with no apoB lipoproteins, fat malabsorption, acanthocytes and vitamin E deficiency"
+    ],
+    "drug_targets": [
+      "statins raise the number of LDL receptors",
+      "PCSK9 inhibitors stop LDL receptors from being broken down",
+      "fibrates activate PPAR-alpha and lipoprotein lipase, lowering triglycerides",
+      "ezetimibe blocks cholesterol absorption in the intestine"
+    ],
+    "treatment": [
+      "familial hypercholesterolemia: high-intensity statin, then ezetimibe and PCSK9 inhibitors",
+      "familial chylomicronemia: a very low-fat diet",
+      "abetalipoproteinemia: fat-soluble vitamins, especially vitamin E, and a low-fat diet"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Chylomicrons carry apoB-48; VLDL, IDL and LDL carry apoB-100.",
+      "Triglycerides above 1000 mg/dL make the plasma milky and raise the risk of acute pancreatitis.",
+      "Tendon xanthomas, especially of the Achilles tendon, suggest familial hypercholesterolemia."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "steps",
+        "regulation",
+        "deficiencies"
+      ],
+      "MS3": [
+        "drug_targets",
+        "pearls[1]"
+      ],
+      "MS4": [
+        "treatment",
+        "deficiencies[3]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Lippincott Illustrated Reviews: Biochemistry"
+      },
+      {
+        "title": "Harper's Illustrated Biochemistry"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "lipoprotein-metabolism.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which lipoprotein carries dietary fat from the intestine?",
+      "source_fields": [
+        "steps[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "chylomicrons",
+          "synonyms": [
+            "chylomicron"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which lipoprotein carries cholesterol from tissues back to the liver?",
+      "source_fields": [
+        "steps[5]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HDL",
+          "synonyms": [
+            "high-density lipoprotein",
+            "high density lipoprotein"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which apolipoprotein activates lipoprotein lipase?",
+      "source_fields": [
+        "regulation[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "apoC-II",
+          "synonyms": [
+            "apo C-II",
+            "apoC2",
+            "apoC-2",
+            "apo C2",
+            "apolipoprotein C-II"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which enzyme esterifies cholesterol in HDL?",
+      "source_fields": [
+        "regulation[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LCAT",
+          "synonyms": [
+            "lecithin-cholesterol acyltransferase",
+            "lecithin cholesterol acyltransferase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "A child has triglycerides over 2000, eruptive xanthomas and recurrent pancreatitis. Which disorder?",
+      "source_fields": [
+        "deficiencies[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "familial chylomicronemia",
+          "synonyms": [
+            "type I hyperlipoproteinemia",
+            "type 1 hyperlipoproteinemia",
+            "type 1 hyperlipidemia",
+            "lipoprotein lipase deficiency",
+            "LPL deficiency",
+            "FCS",
+            "apoC-II deficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Fat malabsorption, acanthocytes and vitamin E deficiency, with no apoB lipoproteins in the blood. Which disorder?",
+      "source_fields": [
+        "deficiencies[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "abetalipoproteinemia",
+          "synonyms": [
+            "Bassen-Kornzweig syndrome",
+            "MTP deficiency",
+            "microsomal triglyceride transfer protein deficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which apolipoprotein marks chylomicrons, as opposed to VLDL and LDL?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "apoB-48",
+          "synonyms": [
+            "apo B-48",
+            "apoB48",
+            "B-48",
+            "B48",
+            "apolipoprotein B-48"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Very high LDL, Achilles tendon xanthomas and a heart attack at 40. Which receptor is defective?",
+      "source_fields": [
+        "deficiencies[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LDL receptor",
+          "synonyms": [
+            "LDLR",
+            "LDL receptors",
+            "low-density lipoprotein receptor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Familial hypercholesterolemia: LDL is still high on a high-intensity statin. Name a drug to add.",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ezetimibe",
+          "synonyms": [
+            "Zetia"
+          ]
+        },
+        {
+          "answer": "PCSK9 inhibitors",
+          "synonyms": [
+            "PCSK9 inhibitor",
+            "evolocumab",
+            "alirocumab",
+            "Repatha",
+            "Praluent",
+            "inclisiran"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class lowers triglycerides by activating PPAR-alpha?",
+      "source_fields": [
+        "drug_targets[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fibrates",
+          "synonyms": [
+            "fibrate",
+            "fenofibrate",
+            "gemfibrozil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Above what triglyceride level does plasma turn milky and the risk of pancreatitis become high?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1000 mg/dL",
+          "synonyms": [
+            "1000",
+            "over 1000",
+            "above 1000",
+            "a thousand",
+            "one thousand"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "lipoprotein-metabolism.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which vitamin matters most to replace in abetalipoproteinemia?",
+      "source_fields": [
+        "treatment[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vitamin E",
+          "synonyms": [
+            "vit E",
+            "tocopherol"
+          ]
+        }
+      ]
+    }
+  ]
+}

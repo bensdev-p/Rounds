@@ -1,0 +1,445 @@
+{
+  "script": {
+    "id": "staphylococcus-aureus",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "bug",
+    "name": "Staphylococcus aureus",
+    "aliases": [
+      "S. aureus",
+      "Staph aureus"
+    ],
+    "systems": [
+      "cardio",
+      "derm",
+      "msk"
+    ],
+    "rotation": [],
+    "morphology": "Gram-positive cocci in clusters",
+    "lab_features": [
+      "catalase-positive",
+      "coagulase-positive",
+      "beta-hemolytic",
+      "golden-yellow colonies",
+      "ferments mannitol on mannitol salt agar"
+    ],
+    "transmission": [
+      "colonizes the anterior nares of about 30% of people",
+      "spreads by direct contact and on hands",
+      "enters through broken skin, catheters and injection drug use"
+    ],
+    "virulence_factors": [
+      "protein A, which binds the Fc region of IgG and blocks opsonization",
+      "coagulase, which coats the bacteria in fibrin",
+      "Panton-Valentine leukocidin, which kills white cells, in community MRSA",
+      "toxic shock syndrome toxin (TSST-1), a superantigen",
+      "exfoliative toxins, which cause scalded skin syndrome",
+      "preformed enterotoxins, which cause food poisoning"
+    ],
+    "diseases": [
+      "skin and soft tissue infections: abscesses, furuncles, cellulitis and impetigo",
+      "acute endocarditis, often of the tricuspid valve in people who inject drugs",
+      "osteomyelitis",
+      "septic arthritis",
+      "pneumonia, especially after influenza",
+      "toxic shock syndrome",
+      "staphylococcal scalded skin syndrome",
+      "food poisoning with vomiting within hours"
+    ],
+    "diagnosis": [
+      "Gram stain and culture of blood, pus or tissue",
+      "catalase and coagulase tests",
+      "mecA gene PCR or susceptibility testing for MRSA"
+    ],
+    "treatment": [
+      "MSSA: nafcillin, oxacillin or cefazolin",
+      "MRSA bacteremia: vancomycin or daptomycin (daptomycin not for pneumonia)",
+      "MRSA pneumonia or skin infection: linezolid is also an option",
+      "drain abscesses",
+      "remove infected lines and devices"
+    ],
+    "prevention": [
+      "hand hygiene",
+      "nasal mupirocin decolonization before some surgeries"
+    ],
+    "confused_with": [
+      {
+        "script_id": "viridans-streptococci",
+        "how_to_tell_apart": "S. aureus grows in clusters, is catalase- and coagulase-positive and causes acute endocarditis over days; viridans streptococci grow in chains, are catalase-negative and cause subacute endocarditis over weeks.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in clusters",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Course",
+            "text": "Acute endocarditis",
+            "source_field": "diseases[1]"
+          },
+          {
+            "label": "Key test",
+            "text": "Coagulase-positive",
+            "source_field": "lab_features[1]"
+          }
+        ]
+      },
+      {
+        "script_id": "enterococcus",
+        "how_to_tell_apart": "S. aureus grows in clusters and is catalase-positive; enterococci grow in pairs and short chains, are catalase-negative and grow in 6.5% salt.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in clusters",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Course",
+            "text": "Acute endocarditis",
+            "source_field": "diseases[1]"
+          },
+          {
+            "label": "Key test",
+            "text": "Coagulase-positive",
+            "source_field": "lab_features[1]"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "MRSA resists beta-lactams because the mecA gene encodes an altered penicillin-binding protein (PBP2a).",
+      "Daptomycin is inactivated by lung surfactant, so it cannot treat pneumonia.",
+      "S. aureus in a blood culture should never be dismissed as a contaminant: repeat blood cultures and get an echocardiogram."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "morphology",
+        "lab_features",
+        "virulence_factors"
+      ],
+      "MS3": [
+        "diseases",
+        "treatment"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Sherris & Ryan's Medical Microbiology"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      },
+      {
+        "title": "Clinical Practice Guidelines by the Infectious Diseases Society of America for the Treatment of Methicillin-Resistant Staphylococcus aureus Infections in Adults and Children"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "staphylococcus-aureus.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Gram-positive cocci in clusters that are catalase-positive and coagulase-positive. Organism?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Staphylococcus aureus",
+          "synonyms": [
+            "S. aureus",
+            "Staph aureus",
+            "S aureus",
+            "MRSA",
+            "MSSA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Gram-positive cocci in clusters with golden colonies that ferment mannitol. Organism?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Staphylococcus aureus",
+          "synonyms": [
+            "S. aureus",
+            "Staph aureus",
+            "S aureus",
+            "MRSA",
+            "MSSA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which S. aureus protein binds the Fc region of IgG and blocks opsonization?",
+      "source_fields": [
+        "virulence_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "protein A",
+          "synonyms": [
+            "staphylococcal protein A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Name the superantigen behind staphylococcal toxic shock syndrome.",
+      "source_fields": [
+        "virulence_factors[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "toxic shock syndrome toxin",
+          "synonyms": [
+            "TSST-1",
+            "TSST",
+            "toxic shock syndrome toxin 1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three diseases S. aureus causes.",
+      "source_fields": [
+        "diseases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "soft tissue infections",
+          "synonyms": [
+            "skin and soft tissue infections",
+            "skin infections",
+            "abscess",
+            "abscesses",
+            "boils",
+            "furuncles",
+            "cellulitis",
+            "impetigo",
+            "skin infection"
+          ]
+        },
+        {
+          "answer": "acute endocarditis",
+          "synonyms": [
+            "endocarditis",
+            "infective endocarditis"
+          ]
+        },
+        {
+          "answer": "osteomyelitis",
+          "synonyms": [
+            "bone infection"
+          ]
+        },
+        {
+          "answer": "septic arthritis",
+          "synonyms": [
+            "joint infection"
+          ]
+        },
+        {
+          "answer": "pneumonia",
+          "synonyms": [
+            "post-influenza pneumonia"
+          ]
+        },
+        {
+          "answer": "toxic shock syndrome",
+          "synonyms": [
+            "TSS"
+          ]
+        },
+        {
+          "answer": "staphylococcal scalded skin syndrome",
+          "synonyms": [
+            "scalded skin syndrome",
+            "SSSS"
+          ]
+        },
+        {
+          "answer": "food poisoning",
+          "synonyms": [
+            "gastroenteritis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "staphylococcus-aureus.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Vomiting starts two hours after eating potato salad that sat out at a picnic. Which organism made the toxin?",
+      "source_fields": [
+        "name",
+        "diseases[7]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Staphylococcus aureus",
+          "synonyms": [
+            "S. aureus",
+            "Staph aureus",
+            "S aureus",
+            "MRSA",
+            "MSSA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "S. aureus grows in a blood culture. Which heart test do you order?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram",
+            "TEE",
+            "transesophageal echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which gene shows a staph isolate is MRSA?",
+      "source_fields": [
+        "diagnosis[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mecA",
+          "synonyms": [
+            "mecA gene",
+            "mec A"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Empiric IV antibiotic for suspected MRSA bacteremia?",
+      "source_fields": [
+        "treatment[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vancomycin",
+          "synonyms": [
+            "vanc",
+            "IV vancomycin"
+          ]
+        },
+        {
+          "answer": "daptomycin",
+          "synonyms": [
+            "Cubicin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Blood cultures grow methicillin-sensitive S. aureus. Name a preferred antibiotic.",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nafcillin",
+          "synonyms": []
+        },
+        {
+          "answer": "oxacillin",
+          "synonyms": []
+        },
+        {
+          "answer": "cefazolin",
+          "synonyms": [
+            "Ancef"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What does the mecA gene make that lets MRSA resist beta-lactams?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "altered penicillin-binding protein",
+          "synonyms": [
+            "PBP2a",
+            "PBP 2a",
+            "PBP2'",
+            "altered PBP",
+            "altered penicillin binding protein",
+            "penicillin-binding protein 2a"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "staphylococcus-aureus.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why can daptomycin not treat MRSA pneumonia?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lung surfactant",
+          "synonyms": [
+            "surfactant",
+            "inactivated by surfactant"
+          ]
+        }
+      ]
+    }
+  ]
+}
