@@ -1,0 +1,512 @@
+# Disease topics (preclinical)
+
+Format: `- id | Name | priority`, grouped by primary system. `exists` marks one of the 30 scripts already written. P1 is the core of each wave, P2 the rest of the wave, P3 extras written last (or dropped).
+
+## cardio
+- acute-coronary-syndrome | Acute coronary syndrome | P1 | exists
+- aortic-dissection | Aortic dissection | P1 | exists
+- atrial-fibrillation | Atrial fibrillation | P1 | exists
+- heart-failure-exacerbation | Acute decompensated heart failure | P1 | exists
+- infective-endocarditis | Infective endocarditis | P1 | exists
+- heart-failure | Chronic heart failure | P1
+- stable-angina | Stable angina | P1
+- atherosclerosis | Atherosclerosis | P1
+- essential-hypertension | Essential hypertension | P1
+- aortic-stenosis | Aortic stenosis | P1
+- mitral-regurgitation | Mitral regurgitation | P1
+- hypertrophic-cardiomyopathy | Hypertrophic cardiomyopathy | P1
+- dilated-cardiomyopathy | Dilated cardiomyopathy | P1
+- acute-pericarditis | Acute pericarditis | P1
+- cardiac-tamponade | Cardiac tamponade | P1
+- rheumatic-fever | Acute rheumatic fever | P1
+- abdominal-aortic-aneurysm | Abdominal aortic aneurysm | P1
+- tetralogy-of-fallot | Tetralogy of Fallot | P1
+- ventricular-septal-defect | Ventricular septal defect | P1
+- giant-cell-arteritis | Giant cell arteritis | P1
+- kawasaki-disease | Kawasaki disease | P1
+- granulomatosis-with-polyangiitis | Granulomatosis with polyangiitis | P1
+- aortic-regurgitation | Aortic regurgitation | P2
+- mitral-stenosis | Mitral stenosis | P2
+- mitral-valve-prolapse | Mitral valve prolapse | P2
+- restrictive-cardiomyopathy | Restrictive cardiomyopathy | P2
+- myocarditis | Myocarditis | P2
+- constrictive-pericarditis | Constrictive pericarditis | P2
+- atrial-septal-defect | Atrial septal defect | P2
+- patent-ductus-arteriosus | Patent ductus arteriosus | P2
+- coarctation-of-the-aorta | Coarctation of the aorta | P2
+- transposition-of-the-great-arteries | Transposition of the great arteries | P2
+- wolff-parkinson-white-syndrome | Wolff-Parkinson-White syndrome | P2
+- atrioventricular-block | Atrioventricular block | P2
+- atrial-flutter | Atrial flutter | P2
+- supraventricular-tachycardia | Paroxysmal supraventricular tachycardia | P2
+- ventricular-tachycardia | Ventricular tachycardia | P2
+- long-qt-syndrome | Long QT syndrome | P2
+- hypertensive-emergency | Hypertensive emergency | P2
+- cardiogenic-shock | Cardiogenic shock | P2
+- peripheral-artery-disease | Peripheral artery disease | P2
+- familial-hypercholesterolemia | Familial hypercholesterolemia | P2
+- takayasu-arteritis | Takayasu arteritis | P2
+- polyarteritis-nodosa | Polyarteritis nodosa | P2
+- microscopic-polyangiitis | Microscopic polyangiitis | P2
+- eosinophilic-granulomatosis-with-polyangiitis | Eosinophilic granulomatosis with polyangiitis | P2
+- iga-vasculitis | IgA vasculitis (Henoch-Schönlein purpura) | P2
+- takotsubo-cardiomyopathy | Takotsubo cardiomyopathy | P3
+- cardiac-myxoma | Cardiac myxoma | P3
+- truncus-arteriosus | Truncus arteriosus | P3
+- hypoplastic-left-heart-syndrome | Hypoplastic left heart syndrome | P3
+- eisenmenger-syndrome | Eisenmenger syndrome | P3
+- brugada-syndrome | Brugada syndrome | P3
+- thromboangiitis-obliterans | Thromboangiitis obliterans (Buerger disease) | P3
+- behcet-disease | Behçet disease | P3
+
+## pulm
+- asthma-exacerbation | Asthma exacerbation | P1 | exists
+- copd-exacerbation | COPD exacerbation | P1 | exists
+- community-acquired-pneumonia | Community-acquired pneumonia | P1 | exists
+- pulmonary-embolism | Pulmonary embolism | P1 | exists
+- asthma | Asthma | P1
+- copd | Chronic obstructive pulmonary disease | P1
+- non-small-cell-lung-cancer | Non-small cell lung cancer | P1
+- small-cell-lung-cancer | Small cell lung cancer | P1
+- idiopathic-pulmonary-fibrosis | Idiopathic pulmonary fibrosis | P1
+- sarcoidosis | Sarcoidosis | P1
+- acute-respiratory-distress-syndrome | Acute respiratory distress syndrome | P1
+- pneumothorax | Pneumothorax | P1
+- pleural-effusion | Pleural effusion | P1
+- cystic-fibrosis | Cystic fibrosis | P1
+- pulmonary-hypertension | Pulmonary hypertension | P1
+- neonatal-respiratory-distress-syndrome | Neonatal respiratory distress syndrome | P1
+- obstructive-sleep-apnea | Obstructive sleep apnea | P2
+- bronchiectasis | Bronchiectasis | P2
+- asbestosis | Asbestosis | P2
+- silicosis | Silicosis | P2
+- hypersensitivity-pneumonitis | Hypersensitivity pneumonitis | P2
+- mesothelioma | Mesothelioma | P2
+- lung-abscess | Lung abscess | P2
+- aspiration-pneumonia | Aspiration pneumonia | P2
+- hospital-acquired-pneumonia | Hospital-acquired pneumonia | P2
+- alpha-1-antitrypsin-deficiency | Alpha-1 antitrypsin deficiency | P2
+- croup | Croup | P2
+- bronchiolitis | Bronchiolitis | P2
+- coal-workers-pneumoconiosis | Coal workers' pneumoconiosis | P3
+- berylliosis | Berylliosis | P3
+- epiglottitis | Epiglottitis | P3
+- atelectasis | Atelectasis | P3
+- superior-vena-cava-syndrome | Superior vena cava syndrome | P3
+
+## renal
+- acute-kidney-injury | Acute kidney injury | P1 | exists
+- acute-pyelonephritis | Acute pyelonephritis | P1 | exists
+- hyperkalemia | Hyperkalemia | P1 | exists
+- hyponatremia | Hyponatremia | P1 | exists
+- nephritic-syndrome | Nephritic syndrome | P1 | exists
+- nephrotic-syndrome | Nephrotic syndrome | P1 | exists
+- chronic-kidney-disease | Chronic kidney disease | P1
+- acute-tubular-necrosis | Acute tubular necrosis | P1
+- acute-interstitial-nephritis | Acute interstitial nephritis | P1
+- post-streptococcal-glomerulonephritis | Post-streptococcal glomerulonephritis | P1
+- iga-nephropathy | IgA nephropathy | P1
+- goodpasture-syndrome | Anti-GBM disease (Goodpasture syndrome) | P1
+- minimal-change-disease | Minimal change disease | P1
+- membranous-nephropathy | Membranous nephropathy | P1
+- focal-segmental-glomerulosclerosis | Focal segmental glomerulosclerosis | P1
+- diabetic-nephropathy | Diabetic nephropathy | P1
+- nephrolithiasis | Kidney stones | P1
+- autosomal-dominant-polycystic-kidney-disease | Autosomal dominant polycystic kidney disease | P1
+- renal-cell-carcinoma | Renal cell carcinoma | P1
+- wilms-tumor | Wilms tumor | P1
+- renal-tubular-acidosis | Renal tubular acidosis | P1
+- metabolic-acidosis | Metabolic acidosis | P1
+- hypokalemia | Hypokalemia | P1
+- cystitis | Acute cystitis | P1
+- rapidly-progressive-glomerulonephritis | Rapidly progressive glomerulonephritis | P2
+- membranoproliferative-glomerulonephritis | Membranoproliferative glomerulonephritis | P2
+- alport-syndrome | Alport syndrome | P2
+- urothelial-carcinoma | Bladder cancer | P2
+- metabolic-alkalosis | Metabolic alkalosis | P2
+- hypernatremia | Hypernatremia | P2
+- renal-artery-stenosis | Renal artery stenosis | P2
+- respiratory-acidosis | Respiratory acidosis | P3
+- hypomagnesemia | Hypomagnesemia | P3
+- renal-papillary-necrosis | Renal papillary necrosis | P3
+- fanconi-syndrome | Fanconi syndrome | P3
+- bartter-syndrome | Bartter syndrome | P3
+- gitelman-syndrome | Gitelman syndrome | P3
+- liddle-syndrome | Liddle syndrome | P3
+- vesicoureteral-reflux | Vesicoureteral reflux | P3
+- posterior-urethral-valves | Posterior urethral valves | P3
+
+## gi
+- acute-pancreatitis | Acute pancreatitis | P1 | exists
+- clostridioides-difficile-infection | Clostridioides difficile infection | P1 | exists
+- decompensated-cirrhosis | Decompensated cirrhosis | P1 | exists
+- upper-gi-bleeding | Upper GI bleeding | P1 | exists
+- gastroesophageal-reflux-disease | Gastroesophageal reflux disease | P1
+- barrett-esophagus | Barrett esophagus | P1
+- achalasia | Achalasia | P1
+- peptic-ulcer-disease | Peptic ulcer disease | P1
+- crohn-disease | Crohn disease | P1
+- ulcerative-colitis | Ulcerative colitis | P1
+- celiac-disease | Celiac disease | P1
+- colorectal-cancer | Colorectal cancer | P1
+- diverticulitis | Diverticulitis | P1
+- appendicitis | Acute appendicitis | P1
+- small-bowel-obstruction | Small bowel obstruction | P1
+- hirschsprung-disease | Hirschsprung disease | P1
+- pyloric-stenosis | Hypertrophic pyloric stenosis | P1
+- hemochromatosis | Hereditary hemochromatosis | P1
+- wilson-disease | Wilson disease | P1
+- primary-biliary-cholangitis | Primary biliary cholangitis | P1
+- primary-sclerosing-cholangitis | Primary sclerosing cholangitis | P1
+- hepatocellular-carcinoma | Hepatocellular carcinoma | P1
+- acute-cholecystitis | Acute cholecystitis | P1
+- ascending-cholangitis | Acute cholangitis | P1
+- pancreatic-cancer | Pancreatic cancer | P1
+- esophageal-cancer | Esophageal cancer | P2
+- eosinophilic-esophagitis | Eosinophilic esophagitis | P2
+- mallory-weiss-syndrome | Mallory-Weiss syndrome | P2
+- gastric-cancer | Gastric cancer | P2
+- zollinger-ellison-syndrome | Zollinger-Ellison syndrome | P2
+- irritable-bowel-syndrome | Irritable bowel syndrome | P2
+- familial-adenomatous-polyposis | Familial adenomatous polyposis | P2
+- lynch-syndrome | Lynch syndrome | P2
+- mesenteric-ischemia | Acute mesenteric ischemia | P2
+- intussusception | Intussusception | P2
+- meckel-diverticulum | Meckel diverticulum | P2
+- necrotizing-enterocolitis | Necrotizing enterocolitis | P2
+- lower-gi-bleeding | Lower GI bleeding | P2
+- carcinoid-syndrome | Carcinoid syndrome | P2
+- alcoholic-liver-disease | Alcohol-associated liver disease | P2
+- nonalcoholic-fatty-liver-disease | Metabolic dysfunction-associated steatotic liver disease | P2
+- choledocholithiasis | Choledocholithiasis | P2
+- chronic-pancreatitis | Chronic pancreatitis | P2
+- gilbert-syndrome | Gilbert syndrome | P2
+- biliary-atresia | Biliary atresia | P2
+- boerhaave-syndrome | Boerhaave syndrome | P3
+- volvulus | Volvulus | P3
+- duodenal-atresia | Duodenal atresia | P3
+- autoimmune-hepatitis | Autoimmune hepatitis | P3
+- cholangiocarcinoma | Cholangiocarcinoma | P3
+- budd-chiari-syndrome | Budd-Chiari syndrome | P3
+- crigler-najjar-syndrome | Crigler-Najjar syndrome | P3
+- dubin-johnson-syndrome | Dubin-Johnson syndrome | P3
+- plummer-vinson-syndrome | Plummer-Vinson syndrome | P3
+- lactose-intolerance | Lactose intolerance | P3
+- reye-syndrome | Reye syndrome | P3
+
+## endo
+- adrenal-insufficiency | Adrenal insufficiency | P1 | exists
+- diabetic-ketoacidosis | Diabetic ketoacidosis | P1 | exists
+- hyperosmolar-hyperglycemic-state | Hyperosmolar hyperglycemic state | P1 | exists
+- hyperthyroidism | Hyperthyroidism | P1 | exists
+- type-1-diabetes | Type 1 diabetes | P1
+- type-2-diabetes | Type 2 diabetes | P1
+- hypothyroidism | Hypothyroidism | P1
+- cushing-syndrome | Cushing syndrome | P1
+- primary-hyperaldosteronism | Primary hyperaldosteronism | P1
+- pheochromocytoma | Pheochromocytoma | P1
+- congenital-adrenal-hyperplasia | Congenital adrenal hyperplasia | P1
+- primary-hyperparathyroidism | Primary hyperparathyroidism | P1
+- hypercalcemia | Hypercalcemia | P1
+- siadh | Syndrome of inappropriate antidiuretic hormone | P1
+- diabetes-insipidus | Diabetes insipidus | P1
+- prolactinoma | Prolactinoma | P1
+- acromegaly | Acromegaly | P1
+- multiple-endocrine-neoplasia | Multiple endocrine neoplasia | P1
+- thyroid-storm | Thyroid storm | P2
+- thyroid-cancer | Thyroid cancer | P2
+- hypoparathyroidism | Hypoparathyroidism | P2
+- hypocalcemia | Hypocalcemia | P2
+- hypopituitarism | Hypopituitarism | P2
+- insulinoma | Insulinoma | P2
+- subacute-thyroiditis | Subacute granulomatous thyroiditis | P3
+
+## repro
+- polycystic-ovary-syndrome | Polycystic ovary syndrome | P1
+- endometriosis | Endometriosis | P1
+- ectopic-pregnancy | Ectopic pregnancy | P1
+- preeclampsia | Preeclampsia | P1
+- hydatidiform-mole | Hydatidiform mole | P1
+- cervical-cancer | Cervical cancer | P1
+- endometrial-cancer | Endometrial cancer | P1
+- uterine-leiomyoma | Uterine fibroids | P1
+- breast-cancer | Breast cancer | P1
+- benign-prostatic-hyperplasia | Benign prostatic hyperplasia | P1
+- prostate-cancer | Prostate cancer | P1
+- testicular-cancer | Testicular germ cell tumors | P1
+- testicular-torsion | Testicular torsion | P1
+- turner-syndrome | Turner syndrome | P1
+- klinefelter-syndrome | Klinefelter syndrome | P1
+- pelvic-inflammatory-disease | Pelvic inflammatory disease | P1
+- ovarian-cancer | Ovarian neoplasms | P2
+- gestational-diabetes | Gestational diabetes | P2
+- placental-abruption | Placental abruption | P2
+- placenta-previa | Placenta previa | P2
+- postpartum-hemorrhage | Postpartum hemorrhage | P2
+- fibroadenoma | Fibroadenoma | P2
+- cryptorchidism | Cryptorchidism | P2
+- androgen-insensitivity-syndrome | Androgen insensitivity syndrome | P2
+- menopause | Menopause | P2
+- choriocarcinoma | Choriocarcinoma | P3
+- adenomyosis | Adenomyosis | P3
+- varicocele | Varicocele | P3
+- ovarian-torsion | Ovarian torsion | P3
+- five-alpha-reductase-deficiency | 5-alpha-reductase deficiency | P3
+- kallmann-syndrome | Kallmann syndrome | P3
+- asherman-syndrome | Asherman syndrome | P3
+- rh-alloimmunization | Rh alloimmunization | P3
+- erectile-dysfunction | Erectile dysfunction | P3
+
+## heme_onc
+- deep-vein-thrombosis | Deep vein thrombosis | P1 | exists
+- iron-deficiency-anemia | Iron deficiency anemia | P1 | exists
+- anemia-of-chronic-disease | Anemia of chronic disease | P1
+- megaloblastic-anemia | Megaloblastic anemia | P1
+- alpha-thalassemia | Alpha thalassemia | P1
+- beta-thalassemia | Beta thalassemia | P1
+- sickle-cell-disease | Sickle cell disease | P1
+- hereditary-spherocytosis | Hereditary spherocytosis | P1
+- g6pd-deficiency | G6PD deficiency | P1
+- polycythemia-vera | Polycythemia vera | P1
+- chronic-myeloid-leukemia | Chronic myeloid leukemia | P1
+- acute-myeloid-leukemia | Acute myeloid leukemia | P1
+- acute-lymphoblastic-leukemia | Acute lymphoblastic leukemia | P1
+- chronic-lymphocytic-leukemia | Chronic lymphocytic leukemia | P1
+- hodgkin-lymphoma | Hodgkin lymphoma | P1
+- burkitt-lymphoma | Burkitt lymphoma | P1
+- multiple-myeloma | Multiple myeloma | P1
+- immune-thrombocytopenia | Immune thrombocytopenia | P1
+- thrombotic-thrombocytopenic-purpura | Thrombotic thrombocytopenic purpura | P1
+- hemolytic-uremic-syndrome | Hemolytic uremic syndrome | P1
+- disseminated-intravascular-coagulation | Disseminated intravascular coagulation | P1
+- hemophilia | Hemophilia | P1
+- von-willebrand-disease | Von Willebrand disease | P1
+- heparin-induced-thrombocytopenia | Heparin-induced thrombocytopenia | P1
+- sideroblastic-anemia | Sideroblastic anemia | P2
+- lead-poisoning | Lead poisoning | P2
+- autoimmune-hemolytic-anemia | Autoimmune hemolytic anemia | P2
+- paroxysmal-nocturnal-hemoglobinuria | Paroxysmal nocturnal hemoglobinuria | P2
+- aplastic-anemia | Aplastic anemia | P2
+- diffuse-large-b-cell-lymphoma | Diffuse large B-cell lymphoma | P2
+- follicular-lymphoma | Follicular lymphoma | P2
+- factor-v-leiden | Factor V Leiden | P2
+- antiphospholipid-syndrome | Antiphospholipid syndrome | P2
+- transfusion-reactions | Transfusion reactions | P2
+- tumor-lysis-syndrome | Tumor lysis syndrome | P2
+- neuroblastoma | Neuroblastoma | P2
+- pyruvate-kinase-deficiency | Pyruvate kinase deficiency | P3
+- essential-thrombocythemia | Essential thrombocythemia | P3
+- primary-myelofibrosis | Primary myelofibrosis | P3
+- myelodysplastic-syndromes | Myelodysplastic syndromes | P3
+- hairy-cell-leukemia | Hairy cell leukemia | P3
+- mantle-cell-lymphoma | Mantle cell lymphoma | P3
+- waldenstrom-macroglobulinemia | Waldenström macroglobulinemia | P3
+- langerhans-cell-histiocytosis | Langerhans cell histiocytosis | P3
+- bernard-soulier-syndrome | Bernard-Soulier syndrome | P3
+- glanzmann-thrombasthenia | Glanzmann thrombasthenia | P3
+- retinoblastoma | Retinoblastoma | P3
+
+## neuro
+- acute-ischemic-stroke | Acute ischemic stroke | P1 | exists
+- bacterial-meningitis | Bacterial meningitis | P1 | exists
+- intracerebral-hemorrhage | Intracerebral hemorrhage | P1
+- subarachnoid-hemorrhage | Subarachnoid hemorrhage | P1
+- epidural-hematoma | Epidural hematoma | P1
+- subdural-hematoma | Subdural hematoma | P1
+- epilepsy | Epilepsy | P1
+- migraine | Migraine | P1
+- parkinson-disease | Parkinson disease | P1
+- huntington-disease | Huntington disease | P1
+- alzheimer-disease | Alzheimer disease | P1
+- normal-pressure-hydrocephalus | Normal pressure hydrocephalus | P1
+- multiple-sclerosis | Multiple sclerosis | P1
+- guillain-barre-syndrome | Guillain-Barré syndrome | P1
+- myasthenia-gravis | Myasthenia gravis | P1
+- amyotrophic-lateral-sclerosis | Amyotrophic lateral sclerosis | P1
+- glioblastoma | Glioblastoma | P1
+- neurofibromatosis-type-1 | Neurofibromatosis type 1 | P1
+- wernicke-encephalopathy | Wernicke encephalopathy | P1
+- transient-ischemic-attack | Transient ischemic attack | P2
+- status-epilepticus | Status epilepticus | P2
+- cluster-headache | Cluster headache | P2
+- idiopathic-intracranial-hypertension | Idiopathic intracranial hypertension | P2
+- frontotemporal-dementia | Frontotemporal dementia | P2
+- lewy-body-dementia | Dementia with Lewy bodies | P2
+- lambert-eaton-myasthenic-syndrome | Lambert-Eaton myasthenic syndrome | P2
+- spinal-muscular-atrophy | Spinal muscular atrophy | P2
+- friedreich-ataxia | Friedreich ataxia | P2
+- meningioma | Meningioma | P2
+- medulloblastoma | Medulloblastoma | P2
+- pilocytic-astrocytoma | Pilocytic astrocytoma | P2
+- craniopharyngioma | Craniopharyngioma | P2
+- vestibular-schwannoma | Vestibular schwannoma | P2
+- tuberous-sclerosis | Tuberous sclerosis complex | P2
+- von-hippel-lindau-disease | Von Hippel-Lindau disease | P2
+- brown-sequard-syndrome | Brown-Séquard syndrome | P2
+- syringomyelia | Syringomyelia | P2
+- bell-palsy | Bell palsy | P2
+- neural-tube-defects | Neural tube defects | P2
+- horner-syndrome | Horner syndrome | P2
+- febrile-seizure | Febrile seizure | P3
+- vascular-dementia | Vascular dementia | P3
+- ependymoma | Ependymoma | P3
+- neurofibromatosis-type-2 | Neurofibromatosis type 2 | P3
+- sturge-weber-syndrome | Sturge-Weber syndrome | P3
+- trigeminal-neuralgia | Trigeminal neuralgia | P3
+- chiari-malformation | Chiari malformation | P3
+- osmotic-demyelination-syndrome | Osmotic demyelination syndrome | P3
+- glaucoma | Glaucoma | P3
+- age-related-macular-degeneration | Age-related macular degeneration | P3
+
+## psych
+- alcohol-withdrawal | Alcohol withdrawal | P1 | exists
+- major-depressive-disorder | Major depressive disorder | P1
+- bipolar-disorder | Bipolar disorder | P1
+- schizophrenia | Schizophrenia | P1
+- generalized-anxiety-disorder | Generalized anxiety disorder | P1
+- panic-disorder | Panic disorder | P1
+- obsessive-compulsive-disorder | Obsessive-compulsive disorder | P1
+- post-traumatic-stress-disorder | Post-traumatic stress disorder | P1
+- attention-deficit-hyperactivity-disorder | Attention-deficit/hyperactivity disorder | P1
+- anorexia-nervosa | Anorexia nervosa | P1
+- delirium | Delirium | P1
+- opioid-use-disorder | Opioid use disorder | P1
+- neuroleptic-malignant-syndrome | Neuroleptic malignant syndrome | P1
+- serotonin-syndrome | Serotonin syndrome | P1
+- autism-spectrum-disorder | Autism spectrum disorder | P2
+- bulimia-nervosa | Bulimia nervosa | P2
+- personality-disorders | Personality disorders | P2
+- alcohol-use-disorder | Alcohol use disorder | P2
+- stimulant-intoxication | Stimulant intoxication | P2
+- tourette-syndrome | Tourette syndrome | P2
+- somatic-symptom-disorder | Somatic symptom disorder | P3
+- factitious-disorder | Factitious disorder | P3
+- narcolepsy | Narcolepsy | P3
+- disruptive-behavior-disorders | Oppositional defiant and conduct disorders | P3
+
+## msk
+- rheumatoid-arthritis | Rheumatoid arthritis | P1
+- osteoarthritis | Osteoarthritis | P1
+- gout | Gout | P1
+- systemic-lupus-erythematosus | Systemic lupus erythematosus | P1
+- systemic-sclerosis | Systemic sclerosis | P1
+- ankylosing-spondylitis | Ankylosing spondylitis | P1
+- septic-arthritis | Septic arthritis | P1
+- osteomyelitis | Osteomyelitis | P1
+- osteoporosis | Osteoporosis | P1
+- osteogenesis-imperfecta | Osteogenesis imperfecta | P1
+- duchenne-muscular-dystrophy | Duchenne muscular dystrophy | P1
+- marfan-syndrome | Marfan syndrome | P1
+- pseudogout | Calcium pyrophosphate deposition disease | P2
+- sjogren-syndrome | Sjögren syndrome | P2
+- reactive-arthritis | Reactive arthritis | P2
+- psoriatic-arthritis | Psoriatic arthritis | P2
+- polymyalgia-rheumatica | Polymyalgia rheumatica | P2
+- inflammatory-myopathies | Dermatomyositis and polymyositis | P2
+- paget-disease-of-bone | Paget disease of bone | P2
+- achondroplasia | Achondroplasia | P2
+- osteosarcoma | Osteosarcoma | P2
+- ewing-sarcoma | Ewing sarcoma | P2
+- ehlers-danlos-syndrome | Ehlers-Danlos syndrome | P2
+- slipped-capital-femoral-epiphysis | Slipped capital femoral epiphysis | P2
+- carpal-tunnel-syndrome | Carpal tunnel syndrome | P2
+- raynaud-phenomenon | Raynaud phenomenon | P2
+- rhabdomyolysis | Rhabdomyolysis | P2
+- malignant-hyperthermia | Malignant hyperthermia | P2
+- fibromyalgia | Fibromyalgia | P3
+- osteopetrosis | Osteopetrosis | P3
+- giant-cell-tumor-of-bone | Giant cell tumor of bone | P3
+- myotonic-dystrophy | Myotonic dystrophy | P3
+- developmental-dysplasia-of-the-hip | Developmental dysplasia of the hip | P3
+- legg-calve-perthes-disease | Legg-Calvé-Perthes disease | P3
+- compartment-syndrome | Compartment syndrome | P3
+- juvenile-idiopathic-arthritis | Juvenile idiopathic arthritis | P3
+
+## derm
+- cellulitis | Cellulitis | P1 | exists
+- psoriasis | Psoriasis | P1
+- atopic-dermatitis | Atopic dermatitis | P1
+- melanoma | Melanoma | P1
+- basal-cell-carcinoma | Basal cell carcinoma | P1
+- cutaneous-squamous-cell-carcinoma | Cutaneous squamous cell carcinoma | P1
+- pemphigus-vulgaris | Pemphigus vulgaris | P1
+- bullous-pemphigoid | Bullous pemphigoid | P1
+- stevens-johnson-syndrome | Stevens-Johnson syndrome and TEN | P1
+- contact-dermatitis | Contact dermatitis | P2
+- actinic-keratosis | Actinic keratosis | P2
+- dermatitis-herpetiformis | Dermatitis herpetiformis | P2
+- erythema-multiforme | Erythema multiforme | P2
+- urticaria | Urticaria | P2
+- acne-vulgaris | Acne vulgaris | P2
+- impetigo | Impetigo | P2
+- erythema-nodosum | Erythema nodosum | P2
+- lichen-planus | Lichen planus | P2
+- necrotizing-fasciitis | Necrotizing fasciitis | P2
+- seborrheic-keratosis | Seborrheic keratosis | P3
+- rosacea | Rosacea | P3
+- vitiligo | Vitiligo | P3
+- acanthosis-nigricans | Acanthosis nigricans | P3
+- pityriasis-rosea | Pityriasis rosea | P3
+- seborrheic-dermatitis | Seborrheic dermatitis | P3
+- albinism | Albinism | P3
+
+## immuno
+- anaphylaxis | Anaphylaxis | P1
+- x-linked-agammaglobulinemia | X-linked agammaglobulinemia | P1
+- selective-iga-deficiency | Selective IgA deficiency | P1
+- digeorge-syndrome | DiGeorge syndrome | P1
+- severe-combined-immunodeficiency | Severe combined immunodeficiency | P1
+- wiskott-aldrich-syndrome | Wiskott-Aldrich syndrome | P1
+- chronic-granulomatous-disease | Chronic granulomatous disease | P1
+- transplant-rejection | Transplant rejection | P1
+- common-variable-immunodeficiency | Common variable immunodeficiency | P2
+- leukocyte-adhesion-deficiency | Leukocyte adhesion deficiency | P2
+- chediak-higashi-syndrome | Chédiak-Higashi syndrome | P2
+- hyper-igm-syndrome | Hyper-IgM syndrome | P2
+- hyper-ige-syndrome | Hyper-IgE syndrome | P2
+- ataxia-telangiectasia | Ataxia-telangiectasia | P2
+- hereditary-angioedema | Hereditary angioedema | P2
+- graft-versus-host-disease | Graft-versus-host disease | P2
+- amyloidosis | Amyloidosis | P2
+- serum-sickness | Serum sickness | P3
+
+## general
+Genetic syndromes, inborn errors of metabolism and toxicology. The matching pathway scripts teach the biochemistry; these teach the disease.
+- septic-shock | Septic shock | P1 | exists
+- down-syndrome | Down syndrome | P1
+- fragile-x-syndrome | Fragile X syndrome | P1
+- phenylketonuria | Phenylketonuria | P1
+- galactosemia | Classic galactosemia | P1
+- von-gierke-disease | Von Gierke disease | P1
+- pompe-disease | Pompe disease | P1
+- mcardle-disease | McArdle disease | P1
+- gaucher-disease | Gaucher disease | P1
+- tay-sachs-disease | Tay-Sachs disease | P1
+- acute-intermittent-porphyria | Acute intermittent porphyria | P1
+- edwards-syndrome | Edwards syndrome | P2
+- patau-syndrome | Patau syndrome | P2
+- prader-willi-syndrome | Prader-Willi syndrome | P2
+- fetal-alcohol-syndrome | Fetal alcohol syndrome | P2
+- maple-syrup-urine-disease | Maple syrup urine disease | P2
+- homocystinuria | Homocystinuria | P2
+- alkaptonuria | Alkaptonuria | P2
+- ornithine-transcarbamylase-deficiency | Ornithine transcarbamylase deficiency | P2
+- hereditary-fructose-intolerance | Hereditary fructose intolerance | P2
+- mcad-deficiency | Medium-chain acyl-CoA dehydrogenase deficiency | P2
+- niemann-pick-disease | Niemann-Pick disease | P2
+- fabry-disease | Fabry disease | P2
+- hurler-syndrome | Hurler syndrome | P2
+- hunter-syndrome | Hunter syndrome | P2
+- porphyria-cutanea-tarda | Porphyria cutanea tarda | P2
+- organophosphate-poisoning | Organophosphate poisoning | P2
+- carbon-monoxide-poisoning | Carbon monoxide poisoning | P2
+- angelman-syndrome | Angelman syndrome | P3
+- cri-du-chat-syndrome | Cri-du-chat syndrome | P3
+- williams-syndrome | Williams syndrome | P3
+- krabbe-disease | Krabbe disease | P3
+- metachromatic-leukodystrophy | Metachromatic leukodystrophy | P3
+- cori-disease | Cori disease | P3
+- cystinuria | Cystinuria | P3
+- pyruvate-dehydrogenase-deficiency | Pyruvate dehydrogenase deficiency | P3
+- kwashiorkor-and-marasmus | Kwashiorkor and marasmus | P3
+- cyanide-poisoning | Cyanide poisoning | P3
