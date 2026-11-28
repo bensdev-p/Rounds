@@ -390,6 +390,7 @@ Mockups, wireframes and the vision video (finished; M4.1 adds the PimpMe site mo
 - (16 Nov 2026) An Anki row on the mix-up drill result (M3.4 shows it after ladder misses only; the drill result isn't drawn).
 - (16 Nov 2026) Tagging misses from before Anki was connected. M3.4 tags misses from the moment Anki is connected.
 - (16 Nov 2026) Undoing a queued unsuspend from the app before Anki syncs. In Anki, Edit → Undo already reverses it in one step.
+- (28 Nov 2026) A short first-run walkthrough or tip that shows the long press on Pimp me opens the topic picker (developer: keep the long press, no dedicated button). Drugs, bugs and pathways are only reachable from the picker, so students need to know it's there. Not drawn.
 - (27 Nov 2026) Anki linking at scale for the content library (MC). The linker add-on maps AnKing's disease leaves (Management, Diagnosis) to rungs; drugs, bugs and pathways need their own leaf map, and about 1,000 scripts need a faster confirm flow than one script at a time.
 - (27 Nov 2026) Choosing organ systems instead of a rotation in onboarding for MS1–2 (wireframe 01 note 1). Scripts have `systems` since MC phase 0; until then preclinical scripts are reached through the topic picker's chips.
 
