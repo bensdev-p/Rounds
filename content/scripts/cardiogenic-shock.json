@@ -1,0 +1,376 @@
+{
+  "script": {
+    "id": "cardiogenic-shock",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Cardiogenic shock",
+    "aliases": [
+      "cardiac shock"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Patients with acute myocardial infarction, most often a large anterior MI, or with decompensated heart failure",
+      "risk_factors": [
+        "large acute myocardial infarction",
+        "mechanical complications of MI: papillary muscle rupture, ventricular septal rupture, free wall rupture",
+        "acute decompensated heart failure",
+        "myocarditis",
+        "arrhythmias",
+        "severe valve disease"
+      ]
+    },
+    "pathophysiology": "The heart pumps too little to perfuse the organs despite adequate filling: low cardiac output, high filling pressures (a high wedge pressure) and high systemic vascular resistance as the body clamps down.",
+    "timeline": {
+      "onset": "Hours, often within 24 hours of an MI",
+      "course": "Mortality around 40%; early revascularization improves survival"
+    },
+    "key_findings": {
+      "history": [
+        "chest pain",
+        "dyspnea",
+        "confusion"
+      ],
+      "exam": [
+        "systolic pressure below 90",
+        "cold, clammy, mottled skin",
+        "raised JVP",
+        "pulmonary crackles",
+        "low urine output"
+      ],
+      "labs": [
+        "raised lactate",
+        "raised troponin",
+        "raised creatinine and liver enzymes"
+      ],
+      "imaging": [
+        "ECG for ST elevation",
+        "echocardiogram for ventricular function and mechanical complications",
+        "pulmonary artery catheter: low cardiac index, high wedge pressure, high systemic vascular resistance"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical hypoperfusion with hypotension",
+        "echocardiogram",
+        "pulmonary artery catheter in selected patients"
+      ],
+      "criteria": [
+        "systolic pressure below 90 mmHg with signs of hypoperfusion, caused by cardiac failure"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "emergency revascularization (PCI) of the culprit artery in MI-related shock",
+        "norepinephrine for blood pressure",
+        "dobutamine or milrinone for low output"
+      ],
+      "next_line": [
+        "mechanical circulatory support such as Impella or ECMO in selected patients",
+        "surgery for mechanical complications"
+      ]
+    },
+    "complications": [
+      "multiorgan failure",
+      "death",
+      "arrhythmias"
+    ],
+    "confused_with": [
+      {
+        "script_id": "septic-shock",
+        "how_to_tell_apart": "Cardiogenic shock is cold and wet: low cardiac output, a high wedge pressure and high systemic resistance; septic shock is usually warm, with a normal or high cardiac output, low systemic resistance and a low wedge pressure."
+      }
+    ],
+    "pearls": [
+      "Cardiogenic shock is cold and wet: cold extremities and congested lungs.",
+      "The SHOCK trial showed early revascularization improves survival in MI-related cardiogenic shock.",
+      "Norepinephrine is the preferred first vasopressor; dopamine causes more arrhythmias."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.imaging[2]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 ACC/AHA/ACEP/NAEMSP/SCAI Guideline for the Management of Patients With Acute Coronary Syndromes"
+      },
+      {
+        "title": "SCAI SHOCK Stage Classification Expert Consensus Update: A Review and Incorporation of Validation Studies (2022)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "cardiogenic-shock.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Two hours after a large anterior MI: BP 78/50, cold mottled skin, crackles and a raised lactate. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Cardiogenic shock",
+          "synonyms": [
+            "cardiogenic",
+            "cardiac shock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the most common cause of cardiogenic shock?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "large acute myocardial infarction",
+          "synonyms": [
+            "myocardial infarction",
+            "MI",
+            "acute MI",
+            "heart attack",
+            "STEMI"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two mechanical complications of MI that cause shock.",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "papillary muscle rupture",
+          "synonyms": [
+            "papillary muscle",
+            "acute mitral regurgitation"
+          ]
+        },
+        {
+          "answer": "ventricular septal rupture",
+          "synonyms": [
+            "septal rupture",
+            "VSR",
+            "ventricular septal defect",
+            "VSD"
+          ]
+        },
+        {
+          "answer": "free wall rupture",
+          "synonyms": [
+            "ventricular free wall rupture",
+            "ventricular rupture"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "cardiogenic-shock.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "In cardiogenic shock, what does a pulmonary artery catheter show for cardiac index?",
+      "source_fields": [
+        "key_findings.imaging[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "low cardiac index",
+          "synonyms": [
+            "low",
+            "reduced",
+            "decreased"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Cardiogenic or septic shock: which is cold and wet with a high wedge pressure?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Cardiogenic shock",
+          "synonyms": [
+            "cardiogenic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In cardiogenic shock, unlike septic shock, what happens to systemic vascular resistance?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high systemic vascular resistance",
+          "synonyms": [
+            "high",
+            "raised",
+            "increased",
+            "high SVR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which bedside test looks for mechanical complications of MI?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram",
+            "POCUS",
+            "bedside ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which lab result marks tissue hypoperfusion?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raised lactate",
+          "synonyms": [
+            "lactate",
+            "high lactate",
+            "lactic acid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "MI-related cardiogenic shock. Most important treatment?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "emergency revascularization",
+          "synonyms": [
+            "revascularization",
+            "PCI",
+            "primary PCI",
+            "percutaneous coronary intervention",
+            "angioplasty",
+            "cardiac catheterization",
+            "CABG"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Preferred first vasopressor in cardiogenic shock?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "norepinephrine",
+          "synonyms": [
+            "noradrenaline",
+            "Levophed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which trial showed early revascularization improves survival in cardiogenic shock?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "SHOCK trial",
+          "synonyms": [
+            "the SHOCK trial"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiogenic-shock.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a mechanical support device for refractory cardiogenic shock.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Impella",
+          "synonyms": [
+            "microaxial pump"
+          ]
+        },
+        {
+          "answer": "ECMO",
+          "synonyms": [
+            "VA-ECMO",
+            "extracorporeal membrane oxygenation"
+          ]
+        }
+      ]
+    }
+  ]
+}

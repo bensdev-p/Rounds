@@ -1,0 +1,378 @@
+{
+  "script": {
+    "id": "pcsk9-inhibitors",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "PCSK9 inhibitors",
+    "aliases": [
+      "PCSK9 antibodies"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "PCSK9 inhibitors (monoclonal antibodies and small interfering RNA)",
+    "class_members": [
+      "evolocumab",
+      "alirocumab",
+      "inclisiran"
+    ],
+    "mechanism": "Block PCSK9, a protein that tags LDL receptors for breakdown. More LDL receptors recycle to the liver cell surface, so LDL falls by about 50 to 60%.",
+    "pharmacokinetics": [
+      "evolocumab and alirocumab are injected every 2 to 4 weeks",
+      "inclisiran is an siRNA that stops PCSK9 being made, injected twice a year after the first two doses"
+    ],
+    "indications": [
+      "familial hypercholesterolemia",
+      "established atherosclerotic disease with LDL above goal despite a statin and ezetimibe",
+      "statin intolerance with high cardiovascular risk"
+    ],
+    "adverse_effects": [
+      "injection-site reactions",
+      "nasopharyngitis",
+      "muscle aches, uncommon"
+    ],
+    "contraindications": [
+      "hypersensitivity to the drug"
+    ],
+    "interactions": [
+      "few drug interactions; not metabolized by CYP enzymes"
+    ],
+    "monitoring": [
+      "lipid panel"
+    ],
+    "overdose": {
+      "features": [],
+      "treatment": []
+    },
+    "confused_with": [
+      {
+        "script_id": "ezetimibe",
+        "how_to_tell_apart": "PCSK9 inhibitors are injected and lower LDL by about 50 to 60%; ezetimibe is a pill that lowers LDL by about 20%."
+      }
+    ],
+    "pearls": [
+      "The FOURIER (evolocumab) and ODYSSEY OUTCOMES (alirocumab) trials showed fewer cardiovascular events.",
+      "Gain-of-function PCSK9 variants cause familial hypercholesterolemia; loss-of-function variants lower LDL for life.",
+      "Statins raise PCSK9 levels, one reason adding a PCSK9 inhibitor works so well."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pharmacokinetics[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      },
+      {
+        "title": "2022 ACC Expert Consensus Decision Pathway on the Role of Nonstatin Therapies for LDL-Cholesterol Lowering in the Management of Atherosclerotic Cardiovascular Disease Risk"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "pcsk9-inhibitors.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Evolocumab and alirocumab belong to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PCSK9 inhibitors",
+          "synonyms": [
+            "PCSK9 inhibitor",
+            "PCSK9 antibodies",
+            "anti-PCSK9",
+            "PCSK9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which PCSK9 drug is an siRNA injected twice a year?",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "inclisiran",
+          "synonyms": [
+            "Leqvio"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What does PCSK9 normally do to LDL receptors?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tags LDL receptors for breakdown",
+          "synonyms": [
+            "degrades LDL receptors",
+            "breaks down LDL receptors",
+            "destroys LDL receptors",
+            "LDL receptor degradation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "By how much do PCSK9 inhibitors lower LDL?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "50 to 60%",
+          "synonyms": [
+            "50 to 60 percent",
+            "50%",
+            "about 50%",
+            "about 60%",
+            "60 percent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of PCSK9 inhibitors.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "familial hypercholesterolemia",
+          "synonyms": [
+            "FH"
+          ]
+        },
+        {
+          "answer": "established atherosclerotic disease",
+          "synonyms": [
+            "ASCVD",
+            "cardiovascular disease",
+            "coronary artery disease"
+          ]
+        },
+        {
+          "answer": "statin intolerance",
+          "synonyms": [
+            "cannot take statins"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "pcsk9-inhibitors.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Coronary disease, and LDL is still above goal on a statin and ezetimibe. Which class next?",
+      "source_fields": [
+        "name",
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PCSK9 inhibitors",
+          "synonyms": [
+            "PCSK9 inhibitor",
+            "PCSK9 antibodies",
+            "anti-PCSK9",
+            "PCSK9",
+            "evolocumab",
+            "alirocumab",
+            "inclisiran",
+            "Repatha",
+            "Praluent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Name a common adverse effect of PCSK9 inhibitors.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "injection-site reactions",
+          "synonyms": [
+            "injection site reactions",
+            "injection-site reaction",
+            "injection site pain"
+          ]
+        },
+        {
+          "answer": "nasopharyngitis",
+          "synonyms": [
+            "cold symptoms",
+            "URI",
+            "upper respiratory infection",
+            "flu-like symptoms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Do PCSK9 inhibitors have many drug interactions?",
+      "source_fields": [
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "few drug interactions",
+          "synonyms": [
+            "few",
+            "very few",
+            "not many",
+            "not metabolized by CYP enzymes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Gain-of-function or loss-of-function PCSK9 variants: which cause familial hypercholesterolemia?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Gain-of-function",
+          "synonyms": [
+            "gain of function",
+            "gain-of-function variants"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "PCSK9 inhibitor or ezetimibe: which is injected?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PCSK9 inhibitors",
+          "synonyms": [
+            "PCSK9 inhibitor",
+            "PCSK9 antibodies",
+            "anti-PCSK9",
+            "PCSK9",
+            "evolocumab",
+            "alirocumab"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How often are evolocumab and alirocumab injected?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "every 2 to 4 weeks",
+          "synonyms": [
+            "every 2 weeks",
+            "every 4 weeks",
+            "every two to four weeks",
+            "monthly"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name an outcome trial of a PCSK9 inhibitor.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "FOURIER",
+          "synonyms": []
+        },
+        {
+          "answer": "ODYSSEY OUTCOMES",
+          "synonyms": [
+            "ODYSSEY"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pcsk9-inhibitors.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What do statins do to PCSK9 levels?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raise",
+          "synonyms": [
+            "raise them",
+            "increase",
+            "increased",
+            "higher"
+          ]
+        }
+      ]
+    }
+  ]
+}

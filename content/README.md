@@ -65,6 +65,8 @@ Attempts record the script version they were graded against.
 - **Versions of a rung must test different facts** at the same level, not reword one question. Ids run `<script>.<rung>.1`, `.2`, `.3`. Add a third only when the script has a third fact worth asking at that rung.
 - **Quote accepted answers from the source field.** The canonical `answer` must appear word for word in a `source_fields` field. Synonyms don't need to.
 - **Keep synonyms specific.** The local matcher matches whole words, so a short or common synonym can credit wrong answers. For example, "calcium" would credit "low calcium", and "US" would credit "tell us". A test checks that every synonym earns credit; only a reviewer can check that none credits too much.
+- **Plurals don't match.** The matcher doesn't stem, so add the plural form ("beta blockers", "ARBs", "headaches") wherever a student might say it.
+- **No "and" or "or" inside a list answer.** List answers are split on commas, "and" and "or", so a canonical answer like "skin and soft tissue infections" can never match whole; quote the shorter phrase ("soft tissue infections") and keep the long form as a synonym.
 - **List questions** (`"kind": "list"`) pass at 60% of `required_count`. Don't accept anything the prompt excludes; for example, "name three more" shouldn't accept the two causes it already gave.
 - **No AnKing or Qbank text.** Reference AnKing notes by numeric id only, in `anki_refs`.
 - **No patient details,** even in made-up vignettes: no names, dates of birth or record numbers.

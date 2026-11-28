@@ -1,0 +1,347 @@
+{
+  "script": {
+    "id": "atrial-flutter",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Atrial flutter",
+    "aliases": [
+      "typical atrial flutter"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Older adults, often with heart or lung disease",
+      "risk_factors": [
+        "structural heart disease",
+        "COPD",
+        "heart failure",
+        "prior cardiac surgery",
+        "hyperthyroidism",
+        "alcohol"
+      ]
+    },
+    "pathophysiology": "A macroreentrant circuit loops around the right atrium through the cavotricuspid isthmus at about 300 beats per minute. The AV node usually conducts every second beat, giving a ventricular rate of about 150.",
+    "timeline": {
+      "onset": "Sudden palpitations",
+      "course": "Often alternates with atrial fibrillation"
+    },
+    "key_findings": {
+      "history": [
+        "palpitations",
+        "dyspnea",
+        "fatigue",
+        "dizziness"
+      ],
+      "exam": [
+        "regular tachycardia, often about 150 beats per minute"
+      ],
+      "labs": [
+        "thyroid function tests"
+      ],
+      "imaging": [
+        "ECG with sawtooth flutter waves, best seen in II, III and aVF, often with 2:1 block",
+        "echocardiogram for structural disease"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "ECG"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "rate control with beta blockers or calcium channel blockers",
+        "anticoagulation by the same stroke-risk rules as atrial fibrillation",
+        "electrical cardioversion if unstable",
+        "catheter ablation of the cavotricuspid isthmus for recurrent typical flutter, which cures it"
+      ],
+      "next_line": [
+        "antiarrhythmic drugs if ablation is not chosen"
+      ]
+    },
+    "complications": [
+      "stroke",
+      "tachycardia-induced cardiomyopathy",
+      "1:1 conduction with very fast rates"
+    ],
+    "confused_with": [
+      {
+        "script_id": "atrial-fibrillation",
+        "how_to_tell_apart": "Atrial flutter is regular, with sawtooth waves and a ventricular rate often near 150; atrial fibrillation is irregularly irregular with no organized P waves."
+      }
+    ],
+    "pearls": [
+      "A regular narrow-complex tachycardia at exactly 150 beats per minute should make you think of flutter with 2:1 block.",
+      "Adenosine briefly slows the ventricular rate and unmasks flutter waves, but does not stop flutter.",
+      "Ablation of the cavotricuspid isthmus cures typical flutter more reliably than ablation cures atrial fibrillation."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.imaging[0]"
+      ],
+      "MS3": [
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia"
+      },
+      {
+        "title": "2019 ESC Guidelines for the management of patients with supraventricular tachycardia"
+      },
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "atrial-flutter.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Regular narrow-complex tachycardia at 150, with sawtooth waves in leads II, III and aVF. Rhythm?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Atrial flutter",
+          "synonyms": [
+            "flutter",
+            "typical atrial flutter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What do flutter waves look like?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sawtooth",
+          "synonyms": [
+            "saw-tooth",
+            "saw tooth",
+            "sawtooth waves"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What atrial rate is typical of atrial flutter?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "300",
+          "synonyms": [
+            "300 beats per minute",
+            "about 300",
+            "250 to 350"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which part of the right atrium does the typical flutter circuit pass through?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cavotricuspid isthmus",
+          "synonyms": [
+            "CTI",
+            "tricuspid isthmus",
+            "isthmus"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Atrial flutter or atrial fibrillation: which is regular, with a rate near 150?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Atrial flutter",
+          "synonyms": [
+            "flutter",
+            "typical atrial flutter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What does adenosine do to atrial flutter?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "unmasks flutter waves",
+          "synonyms": [
+            "unmasks",
+            "reveals flutter waves",
+            "slows the ventricular rate",
+            "slows the rate",
+            "briefly slows",
+            "transient AV block",
+            "does not terminate it",
+            "does not stop it"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ECG leads show flutter waves best?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "II, III and aVF",
+          "synonyms": [
+            "inferior leads",
+            "II III aVF",
+            "lead II"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In atrial flutter, which conduction ratio gives a ventricular rate of 150?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "2:1",
+          "synonyms": [
+            "2 to 1",
+            "two to one",
+            "2:1 block"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Curative treatment for typical atrial flutter?",
+      "source_fields": [
+        "management.first_line[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "catheter ablation",
+          "synonyms": [
+            "ablation",
+            "cavotricuspid isthmus ablation",
+            "CTI ablation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How is the need for anticoagulation decided in atrial flutter?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "same stroke-risk rules as atrial fibrillation",
+          "synonyms": [
+            "same as atrial fibrillation",
+            "CHA2DS2-VASc",
+            "CHA2DS2VASc",
+            "CHADS-VASc",
+            "chads vasc",
+            "stroke risk score"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which heart muscle disease can persistent fast flutter cause?",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tachycardia-induced cardiomyopathy",
+          "synonyms": [
+            "tachycardiomyopathy",
+            "tachycardia-mediated cardiomyopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atrial-flutter.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A regular narrow-complex tachycardia at exactly 150. What should you suspect?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "flutter with 2:1 block",
+          "synonyms": [
+            "atrial flutter",
+            "flutter"
+          ]
+        }
+      ]
+    }
+  ]
+}

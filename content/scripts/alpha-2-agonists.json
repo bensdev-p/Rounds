@@ -1,0 +1,383 @@
+{
+  "script": {
+    "id": "alpha-2-agonists",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Clonidine and methyldopa",
+    "aliases": [
+      "central alpha-2 agonists",
+      "alpha-2 agonists"
+    ],
+    "systems": [
+      "cardio",
+      "neuro"
+    ],
+    "rotation": [],
+    "class": "Centrally acting alpha-2 adrenergic agonists",
+    "class_members": [
+      "clonidine",
+      "methyldopa",
+      "guanfacine",
+      "dexmedetomidine"
+    ],
+    "mechanism": "Stimulate presynaptic alpha-2 receptors in the brainstem, cutting sympathetic outflow, so heart rate, vascular resistance and blood pressure fall.",
+    "pharmacokinetics": [
+      "methyldopa is a prodrug converted to alpha-methylnorepinephrine",
+      "clonidine comes as a tablet or a weekly patch",
+      "dexmedetomidine is given IV for sedation"
+    ],
+    "indications": [
+      "hypertension (clonidine)",
+      "hypertension in pregnancy (methyldopa, an option alongside labetalol and nifedipine)",
+      "ADHD (clonidine, guanfacine)",
+      "opioid and alcohol withdrawal symptoms (clonidine)",
+      "ICU sedation (dexmedetomidine)"
+    ],
+    "adverse_effects": [
+      "dry mouth",
+      "sedation",
+      "bradycardia",
+      "rebound hypertension if stopped suddenly (clonidine)",
+      "positive Coombs test and hemolytic anemia (methyldopa)"
+    ],
+    "contraindications": [
+      "active liver disease (methyldopa)"
+    ],
+    "interactions": [
+      "beta blockers worsen rebound hypertension when clonidine is stopped"
+    ],
+    "monitoring": [
+      "blood pressure",
+      "heart rate"
+    ],
+    "overdose": {
+      "features": [
+        "bradycardia",
+        "hypotension",
+        "small pupils",
+        "slow breathing"
+      ],
+      "treatment": [
+        "supportive care",
+        "naloxone sometimes helps"
+      ]
+    },
+    "confused_with": [],
+    "pearls": [
+      "Stopping clonidine suddenly causes rebound hypertension, so taper it.",
+      "Methyldopa can cause a positive direct Coombs test, sometimes with hemolytic anemia.",
+      "Clonidine overdose looks like opioid toxicity: small pupils, sedation and slow breathing."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "alpha-2-agonists.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Clonidine and methyldopa belong to which drug class?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "centrally acting alpha-2 adrenergic agonists",
+          "synonyms": [
+            "alpha-2 agonists",
+            "alpha 2 agonists",
+            "alpha-2 agonist",
+            "alpha2 agonists",
+            "central alpha-2 agonists",
+            "alpha-2 adrenergic agonists"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two centrally acting alpha-2 agonists given systemically.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "clonidine",
+          "synonyms": [
+            "Catapres"
+          ]
+        },
+        {
+          "answer": "methyldopa",
+          "synonyms": [
+            "Aldomet"
+          ]
+        },
+        {
+          "answer": "guanfacine",
+          "synonyms": [
+            "Intuniv"
+          ]
+        },
+        {
+          "answer": "dexmedetomidine",
+          "synonyms": [
+            "Precedex"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "alpha-2-agonists.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where do clonidine and methyldopa act to lower blood pressure?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "brainstem",
+          "synonyms": [
+            "brain stem",
+            "medulla",
+            "central nervous system",
+            "CNS",
+            "centrally"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What does methyldopa become in the body?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "alpha-methylnorepinephrine",
+          "synonyms": [
+            "alpha methylnorepinephrine",
+            "methylnorepinephrine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of alpha-2 agonists.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure"
+          ]
+        },
+        {
+          "answer": "ADHD",
+          "synonyms": [
+            "attention deficit hyperactivity disorder"
+          ]
+        },
+        {
+          "answer": "withdrawal symptoms",
+          "synonyms": [
+            "opioid withdrawal",
+            "alcohol withdrawal",
+            "withdrawal"
+          ]
+        },
+        {
+          "answer": "ICU sedation",
+          "synonyms": [
+            "sedation"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "alpha-2-agonists.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which alpha-2 agonist is used for hypertension in pregnancy?",
+      "source_fields": [
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "methyldopa",
+          "synonyms": [
+            "Aldomet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two adverse effects of clonidine.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dry mouth",
+          "synonyms": [
+            "xerostomia"
+          ]
+        },
+        {
+          "answer": "sedation",
+          "synonyms": [
+            "drowsiness",
+            "sleepiness"
+          ]
+        },
+        {
+          "answer": "bradycardia",
+          "synonyms": [
+            "slow heart rate"
+          ]
+        },
+        {
+          "answer": "rebound hypertension",
+          "synonyms": [
+            "rebound"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "alpha-2-agonists.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test can turn positive on methyldopa?",
+      "source_fields": [
+        "adverse_effects[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Coombs test",
+          "synonyms": [
+            "direct Coombs",
+            "Coombs",
+            "DAT",
+            "direct antiglobulin test"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which kind of overdose does clonidine overdose mimic?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "opioid toxicity",
+          "synonyms": [
+            "opioid overdose",
+            "opioids",
+            "opiate overdose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class worsens rebound hypertension after clonidine is stopped?",
+      "source_fields": [
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How should clonidine be stopped?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "taper",
+          "synonyms": [
+            "taper it",
+            "tapered",
+            "slowly",
+            "gradually"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "alpha-2-agonists.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which alpha-2 agonist is used for ICU sedation?",
+      "source_fields": [
+        "indications[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dexmedetomidine",
+          "synonyms": [
+            "Precedex"
+          ]
+        }
+      ]
+    }
+  ]
+}

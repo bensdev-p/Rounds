@@ -1,0 +1,385 @@
+{
+  "script": {
+    "id": "angiotensin-receptor-blockers",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Angiotensin II receptor blockers",
+    "aliases": [
+      "ARBs",
+      "sartans"
+    ],
+    "systems": [
+      "cardio",
+      "renal"
+    ],
+    "rotation": [],
+    "class": "Angiotensin II receptor blockers (AT1 receptor antagonists)",
+    "class_members": [
+      "losartan",
+      "valsartan",
+      "candesartan",
+      "irbesartan",
+      "telmisartan",
+      "olmesartan"
+    ],
+    "mechanism": "Block the AT1 receptor, so angiotensin II cannot constrict vessels or release aldosterone. Unlike ACE inhibitors, they do not raise bradykinin.",
+    "pharmacokinetics": [
+      "losartan is a prodrug with an active metabolite",
+      "most are dosed once daily"
+    ],
+    "indications": [
+      "hypertension",
+      "heart failure with reduced ejection fraction, when an ARNI is not feasible and ACE inhibitors are not tolerated",
+      "diabetic kidney disease and chronic kidney disease with proteinuria",
+      "Marfan syndrome (losartan, to slow aortic dilation)"
+    ],
+    "adverse_effects": [
+      "hyperkalemia",
+      "acute rise in creatinine",
+      "hypotension",
+      "teratogenic: fetal kidney damage",
+      "angioedema, much rarer than with ACE inhibitors"
+    ],
+    "contraindications": [
+      "pregnancy",
+      "bilateral renal artery stenosis",
+      "combined use with an ACE inhibitor"
+    ],
+    "interactions": [
+      "potassium-sparing diuretics and potassium supplements raise potassium",
+      "NSAIDs blunt the effect and add to kidney injury",
+      "raise lithium levels"
+    ],
+    "monitoring": [
+      "potassium and creatinine 1 to 2 weeks after starting"
+    ],
+    "overdose": {
+      "features": [
+        "hypotension"
+      ],
+      "treatment": [
+        "IV fluids"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "ace-inhibitors",
+        "how_to_tell_apart": "ARBs block the angiotensin II receptor and do not raise bradykinin, so they rarely cause cough; ACE inhibitors block angiotensin II production and raise bradykinin, causing cough and more angioedema."
+      }
+    ],
+    "pearls": [
+      "Drugs ending in -sartan are ARBs; drugs ending in -pril are ACE inhibitors.",
+      "Losartan lowers uric acid slightly.",
+      "After angioedema on an ACE inhibitor, an ARB can usually be tried with caution."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "indications[3]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "angiotensin-receptor-blockers.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Losartan and valsartan belong to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Angiotensin II receptor blockers",
+          "synonyms": [
+            "ARB",
+            "ARBs",
+            "angiotensin receptor blockers",
+            "angiotensin receptor blocker",
+            "angiotensin II receptor blocker",
+            "sartans",
+            "AT1 receptor blockers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which drug name ending marks an ARB?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "-sartan",
+          "synonyms": [
+            "sartan",
+            "-sartans"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which receptor do ARBs block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AT1 receptor",
+          "synonyms": [
+            "AT1",
+            "AT1R",
+            "angiotensin II type 1 receptor",
+            "angiotensin type 1 receptor",
+            "angiotensin II receptor",
+            "angiotensin receptor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Besides vasoconstriction, which hormone release do ARBs prevent?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aldosterone",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of ARBs.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HFrEF",
+            "CHF"
+          ]
+        },
+        {
+          "answer": "diabetic kidney disease",
+          "synonyms": [
+            "diabetic nephropathy",
+            "nephropathy",
+            "kidney disease",
+            "proteinuria",
+            "chronic kidney disease",
+            "CKD"
+          ]
+        },
+        {
+          "answer": "Marfan syndrome",
+          "synonyms": [
+            "Marfan"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "angiotensin-receptor-blockers.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ARB is used in Marfan syndrome to slow aortic dilation?",
+      "source_fields": [
+        "indications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "losartan",
+          "synonyms": [
+            "Cozaar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two adverse effects of ARBs.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        },
+        {
+          "answer": "acute rise in creatinine",
+          "synonyms": [
+            "rise in creatinine",
+            "raised creatinine",
+            "kidney injury",
+            "worsening kidney function",
+            "AKI"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure"
+          ]
+        },
+        {
+          "answer": "teratogenic",
+          "synonyms": [
+            "teratogenicity",
+            "birth defects",
+            "fetal harm",
+            "fetal kidney damage"
+          ]
+        },
+        {
+          "answer": "angioedema",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "angiotensin-receptor-blockers.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ACE inhibitor side effect is rare with ARBs because bradykinin does not build up?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cough",
+          "synonyms": [
+            "dry cough"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "ARB or ACE inhibitor: which one raises bradykinin?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitors",
+          "synonyms": [
+            "ACE inhibitor",
+            "ACEi",
+            "ACE-I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class should never be combined with an ARB?",
+      "source_fields": [
+        "contraindications[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitor",
+          "synonyms": [
+            "ACE inhibitors",
+            "ACEi",
+            "ACE-I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which ARB slightly lowers uric acid?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "losartan",
+          "synonyms": [
+            "Cozaar"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "angiotensin-receptor-blockers.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A patient had angioedema on lisinopril. Can an ARB be tried?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "with caution",
+          "synonyms": [
+            "cautiously",
+            "usually, with caution",
+            "yes, with caution",
+            "yes cautiously",
+            "yes"
+          ]
+        }
+      ]
+    }
+  ]
+}

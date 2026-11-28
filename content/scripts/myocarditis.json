@@ -1,0 +1,402 @@
+{
+  "script": {
+    "id": "myocarditis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Myocarditis",
+    "aliases": [
+      "viral myocarditis"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children and young adults, more often males",
+      "risk_factors": [
+        "viral infection, such as coxsackievirus B, parvovirus B19, adenovirus or SARS-CoV-2",
+        "mRNA COVID-19 vaccination, rarely, mostly in young men",
+        "immune checkpoint inhibitors",
+        "Chagas disease",
+        "autoimmune disease, as in giant cell myocarditis",
+        "hypersensitivity to drugs"
+      ]
+    },
+    "pathophysiology": "Inflammation of the heart muscle, usually from a viral infection and the immune response to it, injures myocytes and can lead to heart failure, arrhythmias or dilated cardiomyopathy.",
+    "timeline": {
+      "onset": "Days to weeks after a viral illness",
+      "course": "Most recover; some develop dilated cardiomyopathy; fulminant cases need mechanical support"
+    },
+    "key_findings": {
+      "history": [
+        "recent flu-like or gastrointestinal illness",
+        "chest pain",
+        "dyspnea and fatigue",
+        "palpitations or syncope"
+      ],
+      "exam": [
+        "tachycardia out of proportion to fever",
+        "signs of heart failure",
+        "S3"
+      ],
+      "labs": [
+        "raised troponin",
+        "raised CRP or ESR",
+        "raised BNP"
+      ],
+      "imaging": [
+        "ECG with ST changes, arrhythmias or heart block",
+        "echocardiogram with reduced function and wall motion abnormalities",
+        "cardiac MRI with late gadolinium enhancement in a nonischemic, subepicardial pattern",
+        "coronary angiography to exclude a heart attack"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "cardiac MRI",
+        "endomyocardial biopsy for severe or unexplained cases"
+      ],
+      "criteria": [
+        "raised troponin with typical MRI findings and no significant coronary disease"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "supportive care and guideline-directed heart failure therapy",
+        "no competitive sport for 3 to 6 months"
+      ],
+      "next_line": [
+        "mechanical circulatory support for fulminant myocarditis",
+        "immunosuppression for giant cell or eosinophilic myocarditis",
+        "high-dose glucocorticoids for checkpoint inhibitor myocarditis"
+      ]
+    },
+    "complications": [
+      "dilated cardiomyopathy",
+      "heart failure",
+      "ventricular arrhythmias and sudden death",
+      "heart block"
+    ],
+    "confused_with": [
+      {
+        "script_id": "acute-pericarditis",
+        "how_to_tell_apart": "Myocarditis inflames the heart muscle, raising troponin and weakening contraction; pericarditis inflames the pericardium, causing pleuritic pain, a rub and PR depression, with troponin normal unless the muscle is involved."
+      }
+    ],
+    "pearls": [
+      "Coxsackievirus B is the classic cause.",
+      "Athletes should avoid competitive sport for 3 to 6 months after myocarditis, because of the risk of sudden death.",
+      "Giant cell myocarditis progresses fast, causes heart block and ventricular tachycardia, and needs immunosuppression."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[0]"
+      ],
+      "MS3": [
+        "diagnosis",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 ESC Guidelines for the management of myocarditis and pericarditis"
+      },
+      {
+        "title": "2024 ACC Expert Consensus Decision Pathway on Strategies and Criteria for the Diagnosis and Management of Myocarditis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "myocarditis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 22-year-old has chest pain and dyspnea a week after a flu-like illness. Troponin is raised, coronaries are normal and MRI shows subepicardial enhancement. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Myocarditis",
+          "synonyms": [
+            "viral myocarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the classic viral cause of myocarditis?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coxsackievirus B",
+          "synonyms": [
+            "coxsackie B",
+            "coxsackievirus",
+            "coxsackie",
+            "enterovirus",
+            "enteroviruses"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three types of cause of myocarditis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "viral infection",
+          "synonyms": [
+            "virus",
+            "viral",
+            "coxsackievirus",
+            "parvovirus B19",
+            "adenovirus",
+            "SARS-CoV-2"
+          ]
+        },
+        {
+          "answer": "mRNA COVID-19 vaccination",
+          "synonyms": [
+            "COVID vaccine",
+            "mRNA vaccine",
+            "COVID-19 vaccine"
+          ]
+        },
+        {
+          "answer": "immune checkpoint inhibitors",
+          "synonyms": [
+            "checkpoint inhibitors",
+            "immunotherapy"
+          ]
+        },
+        {
+          "answer": "Chagas disease",
+          "synonyms": [
+            "Chagas",
+            "Trypanosoma cruzi"
+          ]
+        },
+        {
+          "answer": "autoimmune disease",
+          "synonyms": [
+            "autoimmune",
+            "giant cell myocarditis"
+          ]
+        },
+        {
+          "answer": "hypersensitivity",
+          "synonyms": [
+            "drug hypersensitivity",
+            "drug reaction",
+            "drugs"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "myocarditis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which long-term heart muscle disease can follow myocarditis?",
+      "source_fields": [
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dilated cardiomyopathy",
+          "synonyms": [
+            "DCM"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Myocarditis or pericarditis: which raises troponin and weakens contraction?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Myocarditis",
+          "synonyms": [
+            "viral myocarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Young patient, raised troponin, chest pain. Name a test that separates myocarditis from a heart attack.",
+      "source_fields": [
+        "key_findings.imaging"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary angiography",
+          "synonyms": [
+            "angiogram",
+            "cardiac catheterization",
+            "CT coronary angiography"
+          ]
+        },
+        {
+          "answer": "cardiac MRI",
+          "synonyms": [
+            "MRI",
+            "CMR",
+            "cardiac magnetic resonance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test best supports a diagnosis of myocarditis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cardiac MRI",
+          "synonyms": [
+            "MRI",
+            "CMR",
+            "cardiac magnetic resonance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which MRI enhancement pattern suggests myocarditis rather than infarction?",
+      "source_fields": [
+        "key_findings.imaging[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "subepicardial",
+          "synonyms": [
+            "nonischemic",
+            "non-ischemic",
+            "subepicardial enhancement",
+            "patchy midwall"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "How long should an athlete avoid competitive sport after myocarditis?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "3 to 6 months",
+          "synonyms": [
+            "three to six months",
+            "6 months",
+            "3 months"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Fulminant myocarditis with shock. What support is needed?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mechanical circulatory support",
+          "synonyms": [
+            "ECMO",
+            "Impella",
+            "LVAD",
+            "mechanical support",
+            "balloon pump"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which form of myocarditis progresses fast, causes heart block and VT, and needs immunosuppression?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "giant cell myocarditis",
+          "synonyms": [
+            "giant cell"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "myocarditis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which cancer drugs can cause myocarditis?",
+      "source_fields": [
+        "epidemiology.risk_factors[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "immune checkpoint inhibitors",
+          "synonyms": [
+            "checkpoint inhibitors",
+            "immunotherapy",
+            "PD-1 inhibitors",
+            "nivolumab",
+            "pembrolizumab",
+            "ipilimumab"
+          ]
+        }
+      ]
+    }
+  ]
+}

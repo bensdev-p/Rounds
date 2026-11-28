@@ -1,0 +1,375 @@
+{
+  "script": {
+    "id": "coarctation-of-the-aorta",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Coarctation of the aorta",
+    "aliases": [
+      "aortic coarctation"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds",
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Infants and children, more often boys, and girls with Turner syndrome",
+      "risk_factors": [
+        "Turner syndrome",
+        "bicuspid aortic valve",
+        "male sex"
+      ]
+    },
+    "pathophysiology": "A narrowing of the aorta, usually just beyond the left subclavian artery near the ductus. Pressure is high above the narrowing and low below it; collateral arteries, including the intercostals, enlarge to bypass it.",
+    "timeline": {
+      "onset": "Severe coarctation presents in newborns when the duct closes; milder disease presents later with hypertension",
+      "course": "Untreated, it leads to heart failure, aortic dissection and stroke"
+    },
+    "key_findings": {
+      "history": [
+        "headaches and nosebleeds",
+        "leg claudication",
+        "shock in a newborn when the duct closes"
+      ],
+      "exam": [
+        "high blood pressure in the arms with low pressure in the legs",
+        "weak or delayed femoral pulses (brachiofemoral delay)",
+        "systolic murmur heard over the back"
+      ],
+      "labs": [],
+      "imaging": [
+        "chest X-ray with rib notching from enlarged intercostal arteries and a figure-3 sign",
+        "echocardiogram",
+        "CT or MRI angiography"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram",
+        "CT or MRI angiography"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "prostaglandin E1 for a newborn with duct-dependent coarctation",
+        "surgical repair, or balloon angioplasty with stenting"
+      ],
+      "next_line": [
+        "lifelong follow-up for re-narrowing, hypertension and aneurysm"
+      ]
+    },
+    "complications": [
+      "hypertension",
+      "heart failure",
+      "aortic dissection",
+      "intracranial berry aneurysm rupture",
+      "infective endarteritis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "essential-hypertension",
+        "how_to_tell_apart": "Coarctation is a secondary cause of hypertension, with high arm pressure, low leg pressure and weak, delayed femoral pulses; in essential hypertension arm and leg pressures match and the pulses are normal."
+      }
+    ],
+    "pearls": [
+      "Always feel the femoral pulses in a young person with hypertension.",
+      "Rib notching takes years to appear, so it is a sign in older children and adults, not newborns.",
+      "Coarctation is linked with bicuspid aortic valve and Turner syndrome."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "key_findings.imaging[0]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Moss & Adams' Heart Disease in Infants, Children, and Adolescents"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline for the Management of Adults With Congenital Heart Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "coarctation-of-the-aorta.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 15-year-old boy has high blood pressure in his arms, weak delayed femoral pulses and leg cramps when running. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Coarctation of the aorta",
+          "synonyms": [
+            "coarctation",
+            "aortic coarctation",
+            "coarctation of the aorta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which chromosomal syndrome is linked to coarctation?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Turner syndrome",
+          "synonyms": [
+            "Turner",
+            "Turners",
+            "Turners syndrome",
+            "45,X",
+            "monosomy X"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which valve abnormality often comes with coarctation?",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bicuspid aortic valve",
+          "synonyms": [
+            "bicuspid valve",
+            "bicuspid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two complications of coarctation.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": []
+        },
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        },
+        {
+          "answer": "berry aneurysm rupture",
+          "synonyms": [
+            "berry aneurysm",
+            "intracranial aneurysm",
+            "subarachnoid hemorrhage"
+          ]
+        },
+        {
+          "answer": "infective endarteritis",
+          "synonyms": [
+            "endarteritis"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "coarctation-of-the-aorta.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Coarctation or essential hypertension: which has weak, delayed femoral pulses?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Coarctation",
+          "synonyms": [
+            "coarctation",
+            "aortic coarctation",
+            "coarctation of the aorta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What should you always examine in a young person with hypertension?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "femoral pulses",
+          "synonyms": [
+            "femoral pulse",
+            "leg pulses",
+            "radiofemoral delay",
+            "brachiofemoral delay",
+            "four-limb blood pressure",
+            "leg blood pressure",
+            "arm and leg blood pressures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "On chest X-ray in coarctation of the aorta, which rib finding appears in older children?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rib notching",
+          "synonyms": [
+            "notched ribs",
+            "notching of the ribs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What causes rib notching in coarctation?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "enlarged intercostal arteries",
+          "synonyms": [
+            "intercostal collaterals",
+            "collateral intercostal arteries",
+            "collaterals",
+            "intercostal arteries"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A newborn with coarctation goes into shock as the duct closes. Which drug first?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prostaglandin E1",
+          "synonyms": [
+            "alprostadil",
+            "PGE1",
+            "prostaglandin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a definitive treatment for coarctation.",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "surgical repair",
+          "synonyms": [
+            "surgery",
+            "resection"
+          ]
+        },
+        {
+          "answer": "balloon angioplasty",
+          "synonyms": [
+            "angioplasty",
+            "stenting",
+            "stent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why is rib notching absent in newborns with coarctation?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "takes years to appear",
+          "synonyms": [
+            "takes years",
+            "develops over years",
+            "collaterals take years"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "coarctation-of-the-aorta.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In coarctation, where along the aorta is the narrowing usually found?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "just beyond the left subclavian artery",
+          "synonyms": [
+            "beyond the left subclavian",
+            "distal to the left subclavian",
+            "near the ductus",
+            "juxtaductal",
+            "aortic isthmus"
+          ]
+        }
+      ]
+    }
+  ]
+}

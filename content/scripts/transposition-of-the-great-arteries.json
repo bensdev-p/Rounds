@@ -1,0 +1,374 @@
+{
+  "script": {
+    "id": "transposition-of-the-great-arteries",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Transposition of the great arteries",
+    "aliases": [
+      "transposition",
+      "TGA",
+      "D-TGA"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Newborns; the most common cyanotic heart lesion presenting in the first days of life",
+      "risk_factors": [
+        "maternal diabetes",
+        "male sex"
+      ]
+    },
+    "pathophysiology": "The aorta arises from the right ventricle and the pulmonary artery from the left ventricle, creating two parallel circulations. Survival depends on mixing through a patent ductus arteriosus, a patent foramen ovale or a septal defect.",
+    "timeline": {
+      "onset": "Severe cyanosis within hours to days of birth as the duct closes",
+      "course": "Fatal within weeks untreated; excellent outcome after the arterial switch"
+    },
+    "key_findings": {
+      "history": [
+        "cyanosis soon after birth"
+      ],
+      "exam": [
+        "profound cyanosis that does not improve with oxygen",
+        "single loud S2",
+        "often no murmur"
+      ],
+      "labs": [
+        "severe hypoxemia that does not correct with 100% oxygen (a failed hyperoxia test)"
+      ],
+      "imaging": [
+        "chest X-ray with an egg-on-a-string heart",
+        "echocardiogram showing the transposed great arteries"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "prostaglandin E1 to keep the ductus open",
+        "balloon atrial septostomy to improve mixing if needed",
+        "arterial switch operation in the first weeks of life"
+      ],
+      "next_line": [
+        "lifelong follow-up for coronary and neoaortic problems"
+      ]
+    },
+    "complications": [
+      "death without mixing",
+      "coronary problems after the switch",
+      "neoaortic regurgitation"
+    ],
+    "confused_with": [
+      {
+        "script_id": "tetralogy-of-fallot",
+        "how_to_tell_apart": "Transposition causes severe cyanosis in the first days of life with an egg-on-a-string heart; tetralogy of Fallot usually causes cyanosis later in infancy with a boot-shaped heart."
+      }
+    ],
+    "pearls": [
+      "Transposition is the most common cyanotic lesion presenting in the newborn period; tetralogy of Fallot is the most common cyanotic lesion overall.",
+      "Infants of diabetic mothers have a higher risk of transposition.",
+      "The arterial switch swaps the great arteries and reimplants the coronary arteries."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.imaging[0]"
+      ],
+      "MS3": [
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Moss & Adams' Heart Disease in Infants, Children, and Adolescents"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline for the Management of Adults With Congenital Heart Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "transposition-of-the-great-arteries.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A newborn is deeply cyanotic within hours of birth, with no murmur and no improvement on 100% oxygen. X-ray shows an egg-on-a-string heart. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Transposition of the great arteries",
+          "synonyms": [
+            "transposition",
+            "TGA",
+            "D-TGA",
+            "transposition of the great vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What does the heart look like on chest X-ray in transposition?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "egg-on-a-string",
+          "synonyms": [
+            "egg on a string",
+            "egg on string"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which maternal condition raises the risk of transposition?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "maternal diabetes",
+          "synonyms": [
+            "diabetes",
+            "diabetic mother",
+            "pregestational diabetes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two routes that let the circulations mix so the baby survives.",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "patent ductus arteriosus",
+          "synonyms": [
+            "PDA",
+            "ductus"
+          ]
+        },
+        {
+          "answer": "patent foramen ovale",
+          "synonyms": [
+            "PFO",
+            "foramen ovale"
+          ]
+        },
+        {
+          "answer": "septal defect",
+          "synonyms": [
+            "VSD",
+            "ASD"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "transposition-of-the-great-arteries.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Transposition or tetralogy of Fallot: which causes cyanosis in the first days of life?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Transposition of the great arteries",
+          "synonyms": [
+            "transposition",
+            "TGA",
+            "D-TGA",
+            "transposition of the great vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Transposition or tetralogy of Fallot: which shows an egg-on-a-string heart?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Transposition of the great arteries",
+          "synonyms": [
+            "transposition",
+            "TGA",
+            "D-TGA",
+            "transposition of the great vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms transposition?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What is the result of a hyperoxia test in transposition?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "failed hyperoxia test",
+          "synonyms": [
+            "failed",
+            "fails",
+            "no improvement",
+            "does not correct"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.workup.3",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which second heart sound is typical of transposition?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "single loud S2",
+          "synonyms": [
+            "single S2",
+            "loud single S2",
+            "loud S2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First drug for a cyanotic newborn with transposition?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prostaglandin E1",
+          "synonyms": [
+            "alprostadil",
+            "PGE1",
+            "prostaglandin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Definitive operation for transposition?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "arterial switch operation",
+          "synonyms": [
+            "arterial switch",
+            "Jatene operation",
+            "switch operation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "The duct is not enough. Which procedure improves mixing before surgery?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "balloon atrial septostomy",
+          "synonyms": [
+            "atrial septostomy",
+            "septostomy",
+            "Rashkind procedure",
+            "Rashkind"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "transposition-of-the-great-arteries.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which arteries are reimplanted during the arterial switch?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary arteries",
+          "synonyms": [
+            "coronaries",
+            "coronary"
+          ]
+        }
+      ]
+    }
+  ]
+}

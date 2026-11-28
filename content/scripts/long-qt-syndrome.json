@@ -1,0 +1,419 @@
+{
+  "script": {
+    "id": "long-qt-syndrome",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Long QT syndrome",
+    "aliases": [
+      "LQTS",
+      "long QT"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Congenital forms in children and young adults; acquired forms, more common, in adults on QT-prolonging drugs",
+      "risk_factors": [
+        "congenital ion channel variants (KCNQ1, KCNH2, SCN5A)",
+        "QT-prolonging drugs: antiarrhythmics, macrolides, fluoroquinolones, antipsychotics, methadone, ondansetron",
+        "hypokalemia",
+        "hypomagnesemia",
+        "hypocalcemia",
+        "bradycardia",
+        "female sex"
+      ]
+    },
+    "pathophysiology": "Delayed ventricular repolarization lengthens the QT interval. Early afterdepolarizations can trigger torsades de pointes, a polymorphic ventricular tachycardia that can degenerate into ventricular fibrillation.",
+    "timeline": {
+      "onset": "Congenital: syncope or arrest in childhood or youth, often with a trigger; acquired: after a new drug or electrolyte loss",
+      "course": "Torsades can cause sudden death"
+    },
+    "key_findings": {
+      "history": [
+        "syncope with exercise, swimming, a sudden loud noise or emotion",
+        "palpitations",
+        "family history of sudden death",
+        "congenital deafness (Jervell and Lange-Nielsen syndrome)"
+      ],
+      "exam": [
+        "often normal"
+      ],
+      "labs": [
+        "potassium, magnesium and calcium"
+      ],
+      "imaging": [
+        "ECG with a prolonged QTc: 480 ms or more, or 460 ms or more with unexplained syncope, supports the diagnosis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "12-lead ECG with the corrected QT (QTc)",
+        "genetic testing for congenital forms"
+      ],
+      "criteria": [
+        "a QTc of 500 ms or more carries a high risk of torsades"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "stop QT-prolonging drugs",
+        "correct potassium and magnesium",
+        "beta blockers (nadolol or propranolol) for congenital long QT"
+      ],
+      "next_line": [
+        "IV magnesium for torsades de pointes",
+        "overdrive pacing, or isoproterenol for acquired pause-dependent torsades (not in congenital long QT)",
+        "ICD for survivors of cardiac arrest"
+      ]
+    },
+    "complications": [
+      "torsades de pointes",
+      "ventricular fibrillation",
+      "sudden cardiac death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "ventricular-tachycardia",
+        "how_to_tell_apart": "Long QT syndrome causes polymorphic VT (torsades de pointes) with a long QT between episodes, treated with magnesium; scar-related VT is usually monomorphic, with structural heart disease."
+      }
+    ],
+    "pearls": [
+      "Typical triggers by type: exercise or swimming in type 1, a sudden noise in type 2, sleep in type 3.",
+      "Romano-Ward syndrome is autosomal dominant; Jervell and Lange-Nielsen syndrome is autosomal recessive with deafness.",
+      "Check the QTc before starting drugs such as methadone, haloperidol or ondansetron in high-risk patients."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[1]"
+      ],
+      "MS3": [
+        "epidemiology.risk_factors",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death"
+      },
+      {
+        "title": "2022 ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "long-qt-syndrome.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 15-year-old faints while swimming. Her ECG shows a QTc of 520 ms. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Long QT syndrome",
+          "synonyms": [
+            "long QT",
+            "LQTS",
+            "congenital long QT syndrome",
+            "prolonged QT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which polymorphic ventricular tachycardia does long QT syndrome cause?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "torsades de pointes",
+          "synonyms": [
+            "torsades",
+            "TdP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three drugs or drug classes that prolong the QT interval.",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "antiarrhythmics",
+          "synonyms": [
+            "antiarrhythmic",
+            "amiodarone",
+            "sotalol",
+            "class III"
+          ]
+        },
+        {
+          "answer": "macrolides",
+          "synonyms": [
+            "macrolide",
+            "azithromycin",
+            "erythromycin",
+            "clarithromycin"
+          ]
+        },
+        {
+          "answer": "fluoroquinolones",
+          "synonyms": [
+            "fluoroquinolone",
+            "quinolones",
+            "levofloxacin",
+            "ciprofloxacin"
+          ]
+        },
+        {
+          "answer": "antipsychotics",
+          "synonyms": [
+            "antipsychotic",
+            "haloperidol"
+          ]
+        },
+        {
+          "answer": "methadone",
+          "synonyms": []
+        },
+        {
+          "answer": "ondansetron",
+          "synonyms": [
+            "Zofran"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "long-qt-syndrome.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two electrolyte disturbances that prolong the QT.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypokalemia",
+          "synonyms": [
+            "low potassium"
+          ]
+        },
+        {
+          "answer": "hypomagnesemia",
+          "synonyms": [
+            "low magnesium"
+          ]
+        },
+        {
+          "answer": "hypocalcemia",
+          "synonyms": [
+            "low calcium"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "long-qt-syndrome.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Long QT syndrome or scar-related VT: which causes polymorphic VT treated with magnesium?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Long QT syndrome",
+          "synonyms": [
+            "long QT",
+            "LQTS",
+            "congenital long QT syndrome",
+            "prolonged QT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which congenital long QT syndrome comes with deafness?",
+      "source_fields": [
+        "key_findings.history[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Jervell and Lange-Nielsen syndrome",
+          "synonyms": [
+            "Jervell and Lange-Nielsen",
+            "Jervell Lange-Nielsen",
+            "JLNS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Above what QTc is the risk of torsades high?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "500 ms",
+          "synonyms": [
+            "500 milliseconds",
+            "over 500 ms",
+            "500 ms or more"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test identifies the channel variant in congenital long QT syndrome?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "genetic testing",
+          "synonyms": [
+            "genetic test",
+            "gene testing",
+            "genotyping"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Torsades de pointes. First drug?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV magnesium",
+          "synonyms": [
+            "magnesium",
+            "magnesium sulfate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class prevents events in congenital long QT syndrome?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers",
+            "nadolol",
+            "propranolol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.management.3",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Torsades keeps recurring despite magnesium. Name a way to raise the heart rate and stop it.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "overdrive pacing",
+          "synonyms": [
+            "pacing",
+            "temporary pacing"
+          ]
+        },
+        {
+          "answer": "isoproterenol",
+          "synonyms": [
+            "isoprenaline"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In which type of congenital long QT does swimming typically trigger events?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "type 1",
+          "synonyms": [
+            "LQT1",
+            "long QT type 1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "long-qt-syndrome.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which congenital long QT syndrome is autosomal dominant without deafness?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Romano-Ward syndrome",
+          "synonyms": [
+            "Romano-Ward",
+            "Romano Ward"
+          ]
+        }
+      ]
+    }
+  ]
+}

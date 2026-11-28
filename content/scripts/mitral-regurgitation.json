@@ -1,0 +1,419 @@
+{
+  "script": {
+    "id": "mitral-regurgitation",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Mitral regurgitation",
+    "aliases": [
+      "mitral insufficiency",
+      "mitral valve regurgitation"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults; primary disease from a damaged valve such as mitral valve prolapse, secondary disease from a dilated left ventricle",
+      "risk_factors": [
+        "mitral valve prolapse",
+        "myocardial infarction with papillary muscle rupture",
+        "dilated cardiomyopathy",
+        "rheumatic heart disease",
+        "infective endocarditis"
+      ]
+    },
+    "pathophysiology": "Blood leaks back from the left ventricle into the left atrium in systole. In chronic disease the atrium and ventricle dilate to cope with the extra volume. Acute regurgitation, such as papillary muscle rupture after an MI, floods a normal-sized atrium and causes pulmonary edema.",
+    "timeline": {
+      "onset": "Acute (hours, after an MI or endocarditis) or chronic (years)",
+      "course": "Chronic disease is tolerated for years before the ventricle fails"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "fatigue",
+        "palpitations from atrial fibrillation",
+        "sudden pulmonary edema in acute disease"
+      ],
+      "exam": [
+        "holosystolic blowing murmur at the apex radiating to the axilla",
+        "soft S1",
+        "S3 from volume overload",
+        "displaced apex beat"
+      ],
+      "labs": [
+        "raised BNP as the ventricle fails"
+      ],
+      "imaging": [
+        "echocardiogram showing the regurgitant jet and its cause",
+        "chest X-ray with an enlarged left atrium"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram",
+        "transesophageal echocardiogram to plan repair"
+      ],
+      "criteria": [
+        "severe primary regurgitation with symptoms, or with a left ventricular ejection fraction of 60% or less, is an indication for intervention"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "surgical mitral valve repair, preferred over replacement, for severe primary regurgitation with symptoms or ventricular dysfunction",
+        "guideline-directed heart failure therapy for secondary regurgitation"
+      ],
+      "next_line": [
+        "transcatheter edge-to-edge repair (MitraClip) when surgical risk is high",
+        "urgent surgery for acute regurgitation from papillary muscle rupture"
+      ]
+    },
+    "complications": [
+      "atrial fibrillation",
+      "heart failure",
+      "pulmonary hypertension",
+      "infective endocarditis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "aortic-stenosis",
+        "how_to_tell_apart": "Mitral regurgitation is a holosystolic blowing murmur at the apex radiating to the axilla; aortic stenosis is a crescendo-decrescendo murmur at the right upper sternal border radiating to the carotids.",
+        "compare": [
+          {
+            "label": "Murmur",
+            "text": "Holosystolic, at the apex",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Radiates",
+            "text": "To the axilla",
+            "source_field": "key_findings.exam[0]"
+          }
+        ]
+      },
+      {
+        "script_id": "mitral-valve-prolapse",
+        "how_to_tell_apart": "Established mitral regurgitation gives a holosystolic murmur from S1 that radiates to the axilla; mitral valve prolapse gives a midsystolic click with a late systolic murmur."
+      }
+    ],
+    "pearls": [
+      "Papillary muscle rupture, usually 3 to 5 days after an inferior MI, causes acute mitral regurgitation and flash pulmonary edema.",
+      "Repair is preferred to replacement whenever the valve can be repaired.",
+      "The murmur gets louder with handgrip, which raises afterload."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "epidemiology.risk_factors",
+        "management.first_line"
+      ],
+      "MS4": [
+        "diagnosis.criteria",
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+      },
+      {
+        "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "mitral-regurgitation.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A holosystolic blowing murmur at the apex radiates to the axilla. Which valve lesion?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral regurgitation",
+          "synonyms": [
+            "mitral insufficiency",
+            "MR",
+            "mitral valve regurgitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Four days after an inferior MI, sudden pulmonary edema and a new apical holosystolic murmur. Which valve lesion?",
+      "source_fields": [
+        "name",
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral regurgitation",
+          "synonyms": [
+            "mitral insufficiency",
+            "MR",
+            "mitral valve regurgitation",
+            "acute mitral regurgitation",
+            "papillary muscle rupture"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of mitral regurgitation.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mitral valve prolapse",
+          "synonyms": [
+            "MVP",
+            "prolapse"
+          ]
+        },
+        {
+          "answer": "papillary muscle rupture",
+          "synonyms": [
+            "myocardial infarction",
+            "MI",
+            "ischemic",
+            "heart attack",
+            "ischemic heart disease"
+          ]
+        },
+        {
+          "answer": "dilated cardiomyopathy",
+          "synonyms": [
+            "DCM",
+            "dilated left ventricle"
+          ]
+        },
+        {
+          "answer": "rheumatic heart disease",
+          "synonyms": [
+            "rheumatic fever"
+          ]
+        },
+        {
+          "answer": "infective endocarditis",
+          "synonyms": [
+            "endocarditis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "mitral-regurgitation.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Name a complication of chronic mitral regurgitation.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial fibrillation",
+          "synonyms": [
+            "afib",
+            "a fib",
+            "AF"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HF",
+            "CHF",
+            "congestive heart failure"
+          ]
+        },
+        {
+          "answer": "pulmonary hypertension",
+          "synonyms": [
+            "pulmonary HTN"
+          ]
+        },
+        {
+          "answer": "infective endocarditis",
+          "synonyms": [
+            "endocarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Mitral regurgitation or mitral valve prolapse: which has a holosystolic murmur from S1?",
+      "source_fields": [
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mitral regurgitation",
+          "synonyms": [
+            "MR",
+            "mitral insufficiency",
+            "established mitral regurgitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Where does the murmur of mitral regurgitation radiate?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "axilla",
+          "synonyms": [
+            "to the axilla",
+            "left axilla",
+            "armpit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms mitral regurgitation and shows its cause?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echo",
+            "echocardiography",
+            "TTE"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Severe primary mitral regurgitation without symptoms. At what ejection fraction is intervention indicated?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "60% or less",
+          "synonyms": [
+            "60 or less",
+            "60 percent or less",
+            "below 60%",
+            "under 60%",
+            "less than 60%",
+            "at or below 60"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe symptomatic primary mitral regurgitation. Preferred surgery: repair or replacement?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "repair",
+          "synonyms": [
+            "mitral valve repair",
+            "valve repair",
+            "surgical repair"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe mitral regurgitation in a patient too frail for surgery. Name a catheter option.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transcatheter edge-to-edge repair",
+          "synonyms": [
+            "TEER",
+            "MitraClip",
+            "edge-to-edge repair",
+            "transcatheter repair"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How many days after an MI does papillary muscle rupture usually occur?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "3 to 5 days",
+          "synonyms": [
+            "3 to 5",
+            "three to five days",
+            "day 3 to 5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-regurgitation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which MI territory most often causes papillary muscle rupture?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "inferior",
+          "synonyms": [
+            "inferior MI",
+            "inferior wall",
+            "inferior myocardial infarction"
+          ]
+        }
+      ]
+    }
+  ]
+}

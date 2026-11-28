@@ -1,0 +1,346 @@
+{
+  "script": {
+    "id": "eosinophilic-granulomatosis-with-polyangiitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Eosinophilic granulomatosis with polyangiitis",
+    "aliases": [
+      "EGPA",
+      "Churg-Strauss syndrome"
+    ],
+    "systems": [
+      "cardio",
+      "pulm"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults with late-onset asthma, often aged 30 to 50",
+      "risk_factors": [
+        "asthma",
+        "allergic rhinitis",
+        "nasal polyps"
+      ]
+    },
+    "pathophysiology": "A necrotizing small-vessel vasculitis with eosinophil-rich granulomas in people with asthma and eosinophilia. About 40% have MPO-ANCA (p-ANCA).",
+    "timeline": {
+      "onset": "Phases over years: allergic (asthma, rhinitis), then eosinophilic (eosinophilia, lung infiltrates), then vasculitic",
+      "course": "Relapsing; asthma often persists"
+    },
+    "key_findings": {
+      "history": [
+        "adult-onset asthma",
+        "chronic sinusitis and nasal polyps",
+        "numbness or weakness from mononeuritis multiplex",
+        "chest pain or heart failure from cardiac involvement"
+      ],
+      "exam": [
+        "palpable purpura",
+        "foot or wrist drop",
+        "nasal polyps"
+      ],
+      "labs": [
+        "eosinophilia, often over 10% of white cells",
+        "raised IgE",
+        "MPO-ANCA (p-ANCA) in about 40%"
+      ],
+      "imaging": [
+        "chest imaging with migratory pulmonary infiltrates",
+        "echocardiogram or cardiac MRI for heart involvement"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "blood eosinophil count",
+        "biopsy showing eosinophilic granulomatous vasculitis"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "glucocorticoids",
+        "mepolizumab or benralizumab (anti-IL-5 pathway) for non-severe or relapsing disease"
+      ],
+      "next_line": [
+        "cyclophosphamide or rituximab for severe, organ-threatening disease"
+      ]
+    },
+    "complications": [
+      "eosinophilic myocarditis and heart failure, the main cause of death",
+      "mononeuritis multiplex",
+      "glomerulonephritis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "granulomatosis-with-polyangiitis",
+        "how_to_tell_apart": "EGPA comes with asthma and marked eosinophilia and is p-ANCA positive in some; granulomatosis with polyangiitis has destructive sinus and nose disease without asthma or eosinophilia and is usually c-ANCA."
+      }
+    ],
+    "pearls": [
+      "Heart involvement is the most common cause of death in EGPA.",
+      "Asthma plus eosinophilia plus vasculitis: think EGPA.",
+      "Leukotriene receptor antagonists such as montelukast may unmask EGPA as steroids are tapered."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.labs",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[2]",
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Antineutrophil Cytoplasmic Antibody-Associated Vasculitis"
+      },
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 40-year-old with adult-onset asthma and nasal polyps has eosinophils of 18%, foot drop and palpable purpura. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Eosinophilic granulomatosis with polyangiitis",
+          "synonyms": [
+            "EGPA",
+            "Churg-Strauss syndrome",
+            "Churg-Strauss"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which blood finding is the hallmark of EGPA?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "eosinophilia",
+          "synonyms": [
+            "high eosinophils",
+            "raised eosinophils",
+            "high eosinophil count"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which airway disease almost always comes first in EGPA?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "asthma",
+          "synonyms": [
+            "adult-onset asthma"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "About what share of patients with EGPA are ANCA-positive?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "about 40%",
+          "synonyms": [
+            "30 to 40%",
+            "a minority",
+            "about 40 percent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "EGPA or granulomatosis with polyangiitis: which comes with asthma and eosinophilia?",
+      "source_fields": [
+        "aliases",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "EGPA",
+          "synonyms": [
+            "eosinophilic granulomatosis with polyangiitis",
+            "Churg-Strauss"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In EGPA, which nerve problem causes foot or wrist drop?",
+      "source_fields": [
+        "key_findings.history[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mononeuritis multiplex",
+          "synonyms": [
+            "mononeuropathy multiplex"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which chest imaging finding is typical of EGPA?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "migratory pulmonary infiltrates",
+          "synonyms": [
+            "pulmonary infiltrates",
+            "migratory infiltrates",
+            "fleeting infiltrates",
+            "infiltrates"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "When ANCA is positive in EGPA, which type is it?",
+      "source_fields": [
+        "key_findings.labs[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "MPO-ANCA",
+          "synonyms": [
+            "p-ANCA",
+            "pANCA",
+            "anti-MPO",
+            "MPO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment for EGPA?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "glucocorticoids",
+          "synonyms": [
+            "steroids",
+            "prednisone",
+            "corticosteroids",
+            "glucocorticoid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which antibody against the IL-5 pathway treats non-severe or relapsing EGPA?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mepolizumab",
+          "synonyms": [
+            "Nucala"
+          ]
+        },
+        {
+          "answer": "benralizumab",
+          "synonyms": [
+            "Fasenra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Involvement of which organ is the main cause of death in EGPA?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart",
+          "synonyms": [
+            "cardiac",
+            "eosinophilic myocarditis",
+            "heart failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "eosinophilic-granulomatosis-with-polyangiitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which asthma drug may unmask EGPA as steroids are tapered?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "montelukast",
+          "synonyms": [
+            "Singulair",
+            "leukotriene receptor antagonists",
+            "leukotriene receptor antagonist",
+            "LTRA"
+          ]
+        }
+      ]
+    }
+  ]
+}

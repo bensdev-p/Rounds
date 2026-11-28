@@ -1,0 +1,360 @@
+{
+  "script": {
+    "id": "familial-hypercholesterolemia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Familial hypercholesterolemia",
+    "aliases": [
+      "FH"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "About 1 in 250 people have heterozygous FH; homozygous FH is very rare",
+      "risk_factors": [
+        "family history of very high LDL or early heart disease",
+        "an LDL receptor variant, the most common cause",
+        "APOB or gain-of-function PCSK9 variants"
+      ]
+    },
+    "pathophysiology": "Autosomal dominant defects in LDL clearance (LDLR, APOB or gain-of-function PCSK9) raise LDL from birth and cause early atherosclerosis. Homozygotes have extreme LDL levels and can have heart attacks in childhood.",
+    "timeline": {
+      "onset": "High LDL from birth",
+      "course": "Untreated heterozygous men often have coronary disease by their 50s"
+    },
+    "key_findings": {
+      "history": [
+        "premature coronary disease in the patient or relatives",
+        "family history of high cholesterol"
+      ],
+      "exam": [
+        "tendon xanthomas, especially of the Achilles tendons and the extensor tendons of the hands",
+        "xanthelasma",
+        "corneal arcus before age 45"
+      ],
+      "labs": [
+        "LDL above 190 mg/dL in adults, or above 160 in children",
+        "normal triglycerides"
+      ],
+      "imaging": []
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "lipid panel",
+        "genetic testing"
+      ],
+      "criteria": [
+        "the Dutch Lipid Clinic Network or Simon Broome criteria combine LDL, family history, signs and genetics"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "high-intensity statin",
+        "add ezetimibe, then a PCSK9 inhibitor, to reach LDL goals",
+        "cascade screening of first-degree relatives",
+        "statins started in childhood, around age 8 to 10"
+      ],
+      "next_line": [
+        "LDL apheresis, evinacumab or lomitapide for homozygous FH",
+        "lifestyle measures alongside drugs"
+      ]
+    },
+    "complications": [
+      "premature coronary artery disease",
+      "aortic stenosis in homozygous FH"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Tendon xanthomas are nearly diagnostic of FH.",
+      "Cascade screening: test the first-degree relatives of everyone with FH.",
+      "Corneal arcus before age 45 suggests FH."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.risk_factors"
+      ],
+      "MS3": [
+        "key_findings.exam",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "diagnosis.criteria"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      },
+      {
+        "title": "2023 Update on European Atherosclerosis Society Consensus Statement on Homozygous Familial Hypercholesterolaemia: new treatments and clinical guidance"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "familial-hypercholesterolemia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 35-year-old with an LDL of 260 mg/dL has Achilles tendon xanthomas; his father had an MI at 42. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Familial hypercholesterolemia",
+          "synonyms": [
+            "FH",
+            "heterozygous familial hypercholesterolemia",
+            "type IIa hyperlipoproteinemia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "How is familial hypercholesterolemia inherited?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "autosomal dominant",
+          "synonyms": [
+            "autosomal dominant inheritance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which gene is most often affected in familial hypercholesterolemia?",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LDL receptor",
+          "synonyms": [
+            "LDLR",
+            "LDL-R",
+            "LDL receptor gene",
+            "low-density lipoprotein receptor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Besides the LDL receptor, name a gene that causes familial hypercholesterolemia.",
+      "source_fields": [
+        "epidemiology.risk_factors[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "APOB",
+          "synonyms": [
+            "apolipoprotein B",
+            "apoB"
+          ]
+        },
+        {
+          "answer": "PCSK9",
+          "synonyms": [
+            "gain-of-function PCSK9"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which exam finding is nearly diagnostic of familial hypercholesterolemia?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tendon xanthomas",
+          "synonyms": [
+            "tendon xanthoma",
+            "tendinous xanthomas",
+            "Achilles tendon xanthomas",
+            "Achilles xanthomas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Above what LDL level in an adult should you suspect familial hypercholesterolemia?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "190 mg/dL",
+          "synonyms": [
+            "over 190",
+            "above 190",
+            "LDL over 190",
+            "LDL above 190"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Besides the lipid panel, how is familial hypercholesterolemia confirmed?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "genetic testing",
+          "synonyms": [
+            "genetic test",
+            "genotyping"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Name a clinical scoring system for familial hypercholesterolemia.",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Dutch Lipid Clinic Network",
+          "synonyms": [
+            "Dutch criteria",
+            "Dutch Lipid Clinic",
+            "Dutch Lipid Clinic criteria",
+            "DLCN"
+          ]
+        },
+        {
+          "answer": "Simon Broome",
+          "synonyms": [
+            "Simon Broome criteria"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line drug for familial hypercholesterolemia?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high-intensity statin",
+          "synonyms": [
+            "statin",
+            "statins",
+            "atorvastatin",
+            "rosuvastatin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Familial hypercholesterolemia is diagnosed. Who should be tested next?",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "first-degree relatives",
+          "synonyms": [
+            "relatives",
+            "family members",
+            "siblings",
+            "parents and children",
+            "cascade screening"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Around what age are statins started in children with familial hypercholesterolemia?",
+      "source_fields": [
+        "management.first_line[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "8 to 10",
+          "synonyms": [
+            "age 8 to 10",
+            "around 8 to 10 years",
+            "8 to 10 years"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "familial-hypercholesterolemia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a treatment for homozygous familial hypercholesterolemia.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "LDL apheresis",
+          "synonyms": [
+            "apheresis"
+          ]
+        },
+        {
+          "answer": "evinacumab",
+          "synonyms": [
+            "Evkeeza"
+          ]
+        },
+        {
+          "answer": "lomitapide",
+          "synonyms": [
+            "Juxtapid"
+          ]
+        }
+      ]
+    }
+  ]
+}

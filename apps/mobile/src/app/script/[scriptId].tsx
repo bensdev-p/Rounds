@@ -43,7 +43,11 @@ function kindSections(s: IllnessScript): { title: string; body: string }[] {
       title: section.title,
       body: section.parts
         .filter((p) => p.items.length > 0)
-        .map((p) => (p.label ? `${p.label}: ${sentence(join(p.items))}` : sentence(join(p.items))))
+        .map((p) => {
+          // Items that hold commas read better split by semicolons.
+          const text = p.items.some((i) => /[,;]/.test(i)) ? p.items.join('; ') : join(p.items);
+          return p.label ? `${p.label}: ${sentence(text)}` : sentence(text);
+        })
         .join(' '),
     }))
     .filter((section) => section.body.length > 1);

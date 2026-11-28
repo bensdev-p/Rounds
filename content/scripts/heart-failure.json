@@ -1,0 +1,485 @@
+{
+  "script": {
+    "id": "heart-failure",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Chronic heart failure",
+    "aliases": [
+      "heart failure",
+      "congestive heart failure"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Older adults, most often after coronary disease or long-standing hypertension",
+      "risk_factors": [
+        "coronary artery disease",
+        "hypertension",
+        "diabetes",
+        "obesity",
+        "valvular heart disease",
+        "heavy alcohol use",
+        "cardiotoxic chemotherapy"
+      ]
+    },
+    "pathophysiology": "The heart cannot pump enough blood at normal filling pressures. In heart failure with reduced ejection fraction (HFrEF) the ventricle dilates and contracts poorly; in heart failure with preserved ejection fraction (HFpEF) it is stiff and fills poorly. Activation of the renin-angiotensin-aldosterone system and the sympathetic nervous system drives sodium retention and remodeling.",
+    "timeline": {
+      "onset": "Gradual, over months to years",
+      "course": "Progressive, with acute decompensations; guideline-directed therapy lowers mortality in HFrEF"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "orthopnea",
+        "paroxysmal nocturnal dyspnea",
+        "ankle swelling",
+        "fatigue"
+      ],
+      "exam": [
+        "raised jugular venous pressure",
+        "S3 gallop",
+        "bibasilar crackles",
+        "pitting edema",
+        "displaced apex beat"
+      ],
+      "labs": [
+        "raised BNP or NT-proBNP",
+        "hyponatremia in advanced disease"
+      ],
+      "imaging": [
+        "echocardiogram showing the ejection fraction and wall motion",
+        "chest X-ray with cardiomegaly, upper lobe venous diversion and Kerley B lines"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram",
+        "BNP or NT-proBNP"
+      ],
+      "criteria": [
+        "HFrEF: ejection fraction 40% or less",
+        "HFmrEF: ejection fraction 41 to 49%",
+        "HFpEF: ejection fraction 50% or more"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "HFrEF: four drug classes, an ARNI (sacubitril-valsartan) or ACE inhibitor or ARB, an evidence-based beta blocker, a mineralocorticoid receptor antagonist and an SGLT2 inhibitor",
+        "loop diuretics for congestion",
+        "exercise, vaccination and avoiding excess salt"
+      ],
+      "next_line": [
+        "ICD for an ejection fraction of 35% or less despite three months of therapy",
+        "cardiac resynchronization therapy for an ejection fraction of 35% or less with left bundle branch block and a wide QRS",
+        "hydralazine with isosorbide dinitrate, especially for Black patients",
+        "LVAD or heart transplant in advanced disease"
+      ]
+    },
+    "complications": [
+      "acute decompensation",
+      "ventricular arrhythmias and sudden death",
+      "atrial fibrillation",
+      "cardiorenal syndrome",
+      "thromboembolism"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "The beta blockers proven to lower mortality in HFrEF are carvedilol, metoprolol succinate and bisoprolol.",
+      "An S3 gallop signals volume overload; an S4 signals a stiff ventricle.",
+      "SGLT2 inhibitors cut heart failure hospitalizations whether or not the patient has diabetes."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+      },
+      {
+        "title": "2023 Focused Update of the 2021 ESC Guidelines for the diagnosis and treatment of acute and chronic heart failure"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "heart-failure.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 68-year-old with an old MI gets breathless on the stairs, sleeps on three pillows and has swollen ankles. Echo shows an ejection fraction of 30%. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Chronic heart failure",
+          "synonyms": [
+            "heart failure",
+            "HFrEF",
+            "heart failure with reduced ejection fraction",
+            "congestive heart failure",
+            "CHF",
+            "systolic heart failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What ejection fraction defines heart failure with reduced ejection fraction?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "40% or less",
+          "synonyms": [
+            "40 or less",
+            "less than 40%",
+            "under 40%",
+            "at or below 40"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three symptoms of heart failure.",
+      "source_fields": [
+        "key_findings.history"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "exertional dyspnea",
+          "synonyms": [
+            "dyspnea on exertion",
+            "shortness of breath on exertion",
+            "breathlessness",
+            "shortness of breath"
+          ]
+        },
+        {
+          "answer": "orthopnea",
+          "synonyms": [
+            "breathless lying flat",
+            "short of breath lying down"
+          ]
+        },
+        {
+          "answer": "paroxysmal nocturnal dyspnea",
+          "synonyms": [
+            "PND",
+            "waking up breathless"
+          ]
+        },
+        {
+          "answer": "ankle swelling",
+          "synonyms": [
+            "leg swelling",
+            "swollen ankles",
+            "peripheral edema",
+            "edema"
+          ]
+        },
+        {
+          "answer": "fatigue",
+          "synonyms": [
+            "tiredness",
+            "tired"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "heart-failure.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for heart failure.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary artery disease",
+          "synonyms": [
+            "CAD",
+            "coronary disease",
+            "ischemic heart disease",
+            "myocardial infarction",
+            "heart attack",
+            "previous MI"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus"
+          ]
+        },
+        {
+          "answer": "obesity",
+          "synonyms": [
+            "obese"
+          ]
+        },
+        {
+          "answer": "valvular heart disease",
+          "synonyms": [
+            "valve disease",
+            "valvular disease"
+          ]
+        },
+        {
+          "answer": "heavy alcohol use",
+          "synonyms": [
+            "alcohol",
+            "alcohol use",
+            "alcoholism"
+          ]
+        },
+        {
+          "answer": "cardiotoxic chemotherapy",
+          "synonyms": [
+            "chemotherapy",
+            "anthracyclines",
+            "doxorubicin"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "heart-failure.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which extra heart sound signals volume overload in heart failure: S3 or S4?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "S3",
+          "synonyms": [
+            "S3 gallop",
+            "third heart sound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Heart failure symptoms, a stiff ventricle and an ejection fraction of 60%. Which type of heart failure?",
+      "source_fields": [
+        "diagnosis.criteria[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HFpEF",
+          "synonyms": [
+            "heart failure with preserved ejection fraction",
+            "preserved ejection fraction",
+            "diastolic heart failure",
+            "preserved EF"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms heart failure and measures the ejection fraction?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test helps rule heart failure in or out in a breathless patient?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "BNP or NT-proBNP",
+          "synonyms": [
+            "BNP",
+            "NT-proBNP",
+            "proBNP",
+            "NT-pro-BNP",
+            "brain natriuretic peptide",
+            "natriuretic peptide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name the four drug classes that lower mortality in HFrEF.",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ARNI",
+          "synonyms": [
+            "sacubitril-valsartan",
+            "sacubitril",
+            "Entresto",
+            "ACE inhibitor",
+            "ACE inhibitors",
+            "ARB",
+            "ARBs",
+            "angiotensin receptor blocker"
+          ]
+        },
+        {
+          "answer": "beta blocker",
+          "synonyms": [
+            "beta blockers",
+            "beta-blocker",
+            "beta-blockers",
+            "carvedilol",
+            "bisoprolol",
+            "metoprolol succinate"
+          ]
+        },
+        {
+          "answer": "mineralocorticoid receptor antagonist",
+          "synonyms": [
+            "mineralocorticoid receptor antagonists",
+            "MRA",
+            "spironolactone",
+            "eplerenone",
+            "aldosterone antagonist"
+          ]
+        },
+        {
+          "answer": "SGLT2 inhibitor",
+          "synonyms": [
+            "SGLT2 inhibitors",
+            "SGLT2i",
+            "SGLT-2 inhibitor",
+            "dapagliflozin",
+            "empagliflozin"
+          ]
+        }
+      ],
+      "required_count": 4
+    },
+    {
+      "id": "heart-failure.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Ejection fraction is still 30% after three months of full medical therapy. Which device prevents sudden death?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ICD",
+          "synonyms": [
+            "implantable cardioverter-defibrillator",
+            "implantable cardioverter defibrillator",
+            "defibrillator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a beta blocker proven to lower mortality in HFrEF.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "carvedilol",
+          "synonyms": [
+            "Coreg"
+          ]
+        },
+        {
+          "answer": "metoprolol succinate",
+          "synonyms": [
+            "metoprolol XL",
+            "Toprol XL"
+          ]
+        },
+        {
+          "answer": "bisoprolol",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "heart-failure.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A patient with HFrEF has no diabetes. Which diabetes drug class still cuts heart failure hospitalizations?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "SGLT2 inhibitors",
+          "synonyms": [
+            "SGLT2 inhibitor",
+            "SGLT2i",
+            "dapagliflozin",
+            "empagliflozin"
+          ]
+        }
+      ]
+    }
+  ]
+}

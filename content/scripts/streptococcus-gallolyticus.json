@@ -1,0 +1,332 @@
+{
+  "script": {
+    "id": "streptococcus-gallolyticus",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "bug",
+    "name": "Streptococcus gallolyticus",
+    "aliases": [
+      "Streptococcus bovis",
+      "S. bovis"
+    ],
+    "systems": [
+      "cardio",
+      "gi"
+    ],
+    "rotation": [],
+    "morphology": "Gram-positive cocci in chains",
+    "lab_features": [
+      "nonhemolytic (gamma-hemolytic)",
+      "catalase-negative",
+      "Lancefield group D",
+      "grows in bile and hydrolyzes esculin",
+      "does not grow in 6.5% NaCl"
+    ],
+    "transmission": [
+      "normal flora of the colon",
+      "enters the blood through a break in the colonic mucosa"
+    ],
+    "virulence_factors": [
+      "adhesion to collagen on heart valves",
+      "biofilm formation"
+    ],
+    "diseases": [
+      "subacute endocarditis",
+      "bacteremia"
+    ],
+    "diagnosis": [
+      "blood cultures",
+      "echocardiogram",
+      "colonoscopy to look for colorectal cancer"
+    ],
+    "treatment": [
+      "penicillin G, amoxicillin or ampicillin, or ceftriaxone"
+    ],
+    "prevention": [],
+    "confused_with": [
+      {
+        "script_id": "enterococcus",
+        "how_to_tell_apart": "Both are group D and hydrolyze bile esculin, but S. gallolyticus does not grow in 6.5% salt and is usually penicillin-susceptible; enterococci grow in 6.5% salt."
+      }
+    ],
+    "pearls": [
+      "S. gallolyticus bacteremia or endocarditis calls for a colonoscopy, because of its link with colorectal cancer.",
+      "Unlike enterococci, it does not grow in 6.5% salt.",
+      "It used to be called Streptococcus bovis biotype I."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "morphology",
+        "lab_features"
+      ],
+      "MS3": [
+        "diseases",
+        "diagnosis[2]"
+      ],
+      "MS4": [
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Sherris & Ryan's Medical Microbiology"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "streptococcus-gallolyticus.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Group D, nonhemolytic gram-positive cocci in chains that hydrolyze bile esculin but do not grow in 6.5% salt. Organism?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Streptococcus gallolyticus",
+          "synonyms": [
+            "S. gallolyticus",
+            "Strep gallolyticus",
+            "Streptococcus bovis",
+            "S. bovis",
+            "Strep bovis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Endocarditis with a group D streptococcus that lives in the colon and is not an enterococcus. Organism?",
+      "source_fields": [
+        "name",
+        "transmission[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Streptococcus gallolyticus",
+          "synonyms": [
+            "S. gallolyticus",
+            "Strep gallolyticus",
+            "Streptococcus bovis",
+            "S. bovis",
+            "Strep bovis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What does S. gallolyticus stick to on heart valves?",
+      "source_fields": [
+        "virulence_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "collagen",
+          "synonyms": [
+            "valve collagen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Besides collagen adhesion, which virulence factor helps S. gallolyticus persist on valves?",
+      "source_fields": [
+        "virulence_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "biofilm",
+          "synonyms": [
+            "biofilms",
+            "biofilm formation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two infections caused by S. gallolyticus.",
+      "source_fields": [
+        "diseases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "subacute endocarditis",
+          "synonyms": [
+            "endocarditis",
+            "infective endocarditis"
+          ]
+        },
+        {
+          "answer": "bacteremia",
+          "synonyms": [
+            "bloodstream infection"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "streptococcus-gallolyticus.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which lab test do enterococci pass that S. gallolyticus fails?",
+      "source_fields": [
+        "lab_features[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "grow in 6.5% NaCl",
+          "synonyms": [
+            "6.5% NaCl",
+            "6.5% salt",
+            "growth in 6.5% salt",
+            "salt tolerance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "S. gallolyticus grows in blood cultures. Which test of the bowel must follow?",
+      "source_fields": [
+        "diagnosis[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "colonoscopy",
+          "synonyms": [
+            "lower endoscopy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which cancer is S. gallolyticus linked with?",
+      "source_fields": [
+        "diagnosis[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "colorectal cancer",
+          "synonyms": [
+            "colon cancer",
+            "bowel cancer",
+            "colorectal carcinoma"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a treatment for S. gallolyticus endocarditis.",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "penicillin G",
+          "synonyms": [
+            "penicillin",
+            "benzylpenicillin"
+          ]
+        },
+        {
+          "answer": "amoxicillin",
+          "synonyms": [
+            "ampicillin"
+          ]
+        },
+        {
+          "answer": "ceftriaxone",
+          "synonyms": [
+            "Rocephin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "S. gallolyticus or enterococcus: which does not grow in 6.5% salt?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "S. gallolyticus",
+          "synonyms": [
+            "Streptococcus gallolyticus",
+            "Strep gallolyticus",
+            "S. bovis",
+            "Streptococcus bovis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What was S. gallolyticus formerly called?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Streptococcus bovis",
+          "synonyms": [
+            "S. bovis",
+            "Strep bovis",
+            "Streptococcus bovis biotype I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "streptococcus-gallolyticus.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Where does S. gallolyticus normally live?",
+      "source_fields": [
+        "transmission[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "colon",
+          "synonyms": [
+            "gut",
+            "bowel",
+            "large intestine",
+            "colonic flora"
+          ]
+        }
+      ]
+    }
+  ]
+}

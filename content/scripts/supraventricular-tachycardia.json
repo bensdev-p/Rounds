@@ -1,0 +1,344 @@
+{
+  "script": {
+    "id": "supraventricular-tachycardia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Paroxysmal supraventricular tachycardia",
+    "aliases": [
+      "SVT",
+      "PSVT"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Young adults, more often women",
+      "risk_factors": [
+        "caffeine and stimulants",
+        "stress",
+        "an accessory pathway (AVRT)",
+        "often no trigger"
+      ]
+    },
+    "pathophysiology": "A reentrant circuit involving the AV node causes a sudden, regular narrow-complex tachycardia. In AV nodal reentrant tachycardia (AVNRT, the most common) the circuit uses two pathways inside the AV node; in AV reentrant tachycardia (AVRT) it uses an accessory pathway.",
+    "timeline": {
+      "onset": "Starts and stops suddenly",
+      "course": "Recurrent; cured by ablation"
+    },
+    "key_findings": {
+      "history": [
+        "palpitations that start and stop abruptly",
+        "pounding in the neck",
+        "dizziness",
+        "passing a lot of urine after an episode"
+      ],
+      "exam": [
+        "regular tachycardia, often 150 to 250 beats per minute"
+      ],
+      "labs": [
+        "thyroid function tests",
+        "electrolytes"
+      ],
+      "imaging": [
+        "ECG with a regular narrow-complex tachycardia and no visible P waves, or a pseudo-R prime in V1"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "ECG during the episode"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "vagal maneuvers: modified Valsalva or carotid sinus massage",
+        "IV adenosine if vagal maneuvers fail",
+        "synchronized cardioversion if unstable"
+      ],
+      "next_line": [
+        "IV verapamil, diltiazem or a beta blocker if adenosine fails",
+        "catheter ablation for recurrent episodes"
+      ]
+    },
+    "complications": [
+      "syncope",
+      "tachycardia-induced cardiomyopathy, rarely"
+    ],
+    "confused_with": [
+      {
+        "script_id": "wolff-parkinson-white-syndrome",
+        "how_to_tell_apart": "AV nodal reentrant tachycardia (AVNRT) has a normal resting ECG and a circuit inside the AV node; WPW shows a delta wave and short PR at rest from an accessory pathway."
+      },
+      {
+        "script_id": "ventricular-tachycardia",
+        "how_to_tell_apart": "SVT is usually a narrow-complex tachycardia that responds to vagal maneuvers or adenosine; VT is a wide-complex tachycardia with AV dissociation, fusion and capture beats, usually with structural heart disease."
+      }
+    ],
+    "pearls": [
+      "The modified Valsalva maneuver, a strain followed by lying flat with the legs raised, converts more SVT than the standard maneuver.",
+      "AVNRT is the most common type of paroxysmal SVT.",
+      "Avoid carotid sinus massage in patients with a carotid bruit or a prior stroke."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "key_findings.imaging[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia"
+      },
+      {
+        "title": "2019 ESC Guidelines for the management of patients with supraventricular tachycardia"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "supraventricular-tachycardia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 28-year-old woman has pounding palpitations that started abruptly. ECG: regular narrow-complex tachycardia at 190 with no visible P waves. Rhythm?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Paroxysmal supraventricular tachycardia",
+          "synonyms": [
+            "SVT",
+            "PSVT",
+            "supraventricular tachycardia",
+            "AVNRT",
+            "AV nodal reentrant tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the most common type of paroxysmal SVT?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AVNRT",
+          "synonyms": [
+            "AV nodal reentrant tachycardia",
+            "AV nodal reentry",
+            "atrioventricular nodal reentrant tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which structure holds the circuit in AVNRT?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AV node",
+          "synonyms": [
+            "atrioventricular node",
+            "dual AV nodal pathways"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which type of SVT uses an accessory pathway?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AVRT",
+          "synonyms": [
+            "AV reentrant tachycardia",
+            "atrioventricular reentrant tachycardia",
+            "WPW"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "AVNRT or WPW: which has a normal resting ECG?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AVNRT",
+          "synonyms": [
+            "AV nodal reentrant tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "SVT or VT: which is usually narrow-complex and responds to adenosine?",
+      "source_fields": [
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "SVT",
+          "synonyms": [
+            "supraventricular tachycardia",
+            "PSVT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "When must the ECG be recorded to diagnose SVT?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "during the episode",
+          "synonyms": [
+            "during symptoms",
+            "during palpitations",
+            "during the tachycardia",
+            "while tachycardic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ECG clue in V1 suggests AVNRT?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pseudo-R prime",
+          "synonyms": [
+            "pseudo R'",
+            "pseudo-R'",
+            "pseudo R prime",
+            "R prime"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Stable SVT. First step?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "vagal maneuvers",
+          "synonyms": [
+            "vagal maneuver",
+            "Valsalva",
+            "modified Valsalva",
+            "carotid sinus massage"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Vagal maneuvers fail in stable SVT. Next drug?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV adenosine",
+          "synonyms": [
+            "adenosine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which vagal maneuver converts more SVT than the standard Valsalva?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "modified Valsalva maneuver",
+          "synonyms": [
+            "modified Valsalva",
+            "modified Valsalva manoeuvre",
+            "REVERT maneuver",
+            "Valsalva with leg raise"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "supraventricular-tachycardia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "When should carotid sinus massage be avoided?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "carotid bruit",
+          "synonyms": [
+            "prior stroke",
+            "stroke",
+            "TIA",
+            "transient ischemic attack",
+            "carotid disease"
+          ]
+        }
+      ]
+    }
+  ]
+}

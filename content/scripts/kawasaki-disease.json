@@ -1,0 +1,410 @@
+{
+  "script": {
+    "id": "kawasaki-disease",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Kawasaki disease",
+    "aliases": [
+      "Kawasaki syndrome",
+      "mucocutaneous lymph node syndrome"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children under 5, especially of East Asian descent",
+      "risk_factors": [
+        "age under 5",
+        "East Asian ancestry, especially Japanese or Korean",
+        "male sex"
+      ]
+    },
+    "pathophysiology": "An acute medium-vessel vasculitis of unknown cause, possibly an immune response to an infectious trigger in genetically susceptible children. It favors the coronary arteries, where it can cause aneurysms.",
+    "timeline": {
+      "onset": "Fever lasting 5 days or more",
+      "course": "Settles over weeks, but about 25% of untreated children develop coronary aneurysms"
+    },
+    "key_findings": {
+      "history": [
+        "fever for 5 days or more",
+        "irritability",
+        "red eyes without discharge"
+      ],
+      "exam": [
+        "bilateral nonexudative conjunctivitis",
+        "oral changes: strawberry tongue, red cracked lips",
+        "polymorphous rash",
+        "extremity changes: red, swollen hands and feet that later peel",
+        "cervical lymphadenopathy, usually one node over 1.5 cm"
+      ],
+      "labs": [
+        "raised ESR or CRP",
+        "thrombocytosis in the second week",
+        "sterile pyuria",
+        "raised ALT"
+      ],
+      "imaging": [
+        "echocardiogram for coronary aneurysms at diagnosis, then 1 to 2 weeks and 4 to 6 weeks after treatment"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "clinical diagnosis",
+        "echocardiogram"
+      ],
+      "criteria": [
+        "fever for 5 days or more plus at least 4 of 5 features: conjunctivitis, oral changes, rash, extremity changes, cervical lymphadenopathy"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "IV immunoglobulin (IVIG), ideally within 10 days of fever onset",
+        "aspirin"
+      ],
+      "next_line": [
+        "a second dose of IVIG, or glucocorticoids, for fever that persists",
+        "long-term antiplatelet or anticoagulant therapy for large aneurysms"
+      ]
+    },
+    "complications": [
+      "coronary artery aneurysms",
+      "myocardial infarction",
+      "myocarditis",
+      "sudden death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "iga-vasculitis",
+        "how_to_tell_apart": "Kawasaki disease gives prolonged fever, conjunctivitis, oral changes and coronary aneurysms; IgA vasculitis gives palpable purpura on the legs, joint pain, belly pain and hematuria."
+      }
+    ],
+    "pearls": [
+      "Kawasaki disease is one of the few reasons to give aspirin to a child despite the risk of Reye syndrome.",
+      "The features spell CRASH and burn: conjunctivitis, rash, adenopathy, strawberry tongue, hands and feet, with fever (burn) for 5 days.",
+      "Kawasaki disease is the leading cause of acquired heart disease in children in high-income countries."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "diagnosis.criteria"
+      ],
+      "MS3": [
+        "management.first_line",
+        "key_findings.imaging"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Diagnosis, Treatment, and Long-Term Management of Kawasaki Disease: A Scientific Statement for Health Professionals From the American Heart Association (2017)"
+      },
+      {
+        "title": "Nelson Textbook of Pediatrics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "kawasaki-disease.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 3-year-old has had fever for 6 days, red eyes without discharge, cracked lips, a rash and swollen red hands. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kawasaki disease",
+          "synonyms": [
+            "Kawasaki",
+            "Kawasaki syndrome",
+            "mucocutaneous lymph node syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Besides fever, name three diagnostic features of Kawasaki disease.",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "conjunctivitis",
+          "synonyms": [
+            "red eyes",
+            "bilateral conjunctivitis",
+            "conjunctival injection"
+          ]
+        },
+        {
+          "answer": "oral changes",
+          "synonyms": [
+            "strawberry tongue",
+            "cracked lips",
+            "red lips"
+          ]
+        },
+        {
+          "answer": "rash",
+          "synonyms": [
+            "polymorphous rash"
+          ]
+        },
+        {
+          "answer": "extremity changes",
+          "synonyms": [
+            "swollen hands",
+            "swollen feet",
+            "red hands",
+            "peeling skin",
+            "desquamation",
+            "red palms"
+          ]
+        },
+        {
+          "answer": "cervical lymphadenopathy",
+          "synonyms": [
+            "lymphadenopathy",
+            "swollen neck node",
+            "swollen lymph nodes",
+            "enlarged lymph node",
+            "enlarged lymph nodes"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "kawasaki-disease.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which arteries does Kawasaki disease target?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary arteries",
+          "synonyms": [
+            "coronary",
+            "coronaries",
+            "coronary artery"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What size of vessel does Kawasaki disease inflame?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "medium-vessel",
+          "synonyms": [
+            "medium",
+            "medium vessels",
+            "medium-sized arteries",
+            "medium-sized vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "A child has a rash and red eyes. The classic criteria need fever for how many days?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "5 days",
+          "synonyms": [
+            "five days",
+            "5 days or more",
+            "at least 5 days"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Fever, rash and red eyes. Kawasaki disease conjunctivitis: with pus or without discharge?",
+      "source_fields": [
+        "key_findings.history[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "without discharge",
+          "synonyms": [
+            "no discharge",
+            "nonexudative",
+            "non-exudative",
+            "dry"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Kawasaki disease or IgA vasculitis: which gives prolonged fever with conjunctivitis rather than palpable purpura?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kawasaki disease",
+          "synonyms": [
+            "Kawasaki"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test looks for coronary aneurysms?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "After the first echo at diagnosis, when is it repeated?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1 to 2 weeks and 4 to 6 weeks after treatment",
+          "synonyms": [
+            "1 to 2 weeks",
+            "4 to 6 weeks",
+            "2 and 6 weeks",
+            "2 weeks and 6 weeks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name the two drugs used to treat Kawasaki disease.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV immunoglobulin",
+          "synonyms": [
+            "IVIG",
+            "immunoglobulin",
+            "intravenous immunoglobulin"
+          ]
+        },
+        {
+          "answer": "aspirin",
+          "synonyms": [
+            "ASA"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "kawasaki-disease.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Within how many days of fever onset should IVIG ideally be given?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "10 days",
+          "synonyms": [
+            "ten days",
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Aspirin is usually avoided in children. Which syndrome is the worry?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Reye syndrome",
+          "synonyms": [
+            "Reye",
+            "Reye's syndrome",
+            "Reye's"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "kawasaki-disease.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the leading cause of acquired heart disease in children in high-income countries?",
+      "source_fields": [
+        "name",
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Kawasaki disease",
+          "synonyms": [
+            "Kawasaki"
+          ]
+        }
+      ]
+    }
+  ]
+}

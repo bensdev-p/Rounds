@@ -1,0 +1,379 @@
+{
+  "script": {
+    "id": "mitral-stenosis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Mitral stenosis",
+    "aliases": [
+      "mitral valve stenosis"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Women more than men, decades after rheumatic fever; common where rheumatic heart disease persists",
+      "risk_factors": [
+        "rheumatic heart disease",
+        "mitral annular calcification in older adults",
+        "congenital mitral stenosis, rarely"
+      ]
+    },
+    "pathophysiology": "Rheumatic scarring fuses the commissures and thickens the leaflets, narrowing the mitral orifice. Left atrial pressure rises, the atrium enlarges, and pressure backs up into the lungs, causing pulmonary hypertension.",
+    "timeline": {
+      "onset": "Symptoms 20 to 40 years after rheumatic fever",
+      "course": "Slowly progressive; pregnancy, atrial fibrillation or exercise can unmask it"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "orthopnea",
+        "hemoptysis",
+        "palpitations from atrial fibrillation",
+        "hoarseness from left atrial pressure on the recurrent laryngeal nerve (Ortner syndrome)",
+        "stroke from embolism"
+      ],
+      "exam": [
+        "opening snap after S2",
+        "mid-diastolic rumble at the apex, heard best with the bell in the left lateral position",
+        "loud S1",
+        "malar flush"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram showing fused commissures, thickened leaflets and a small valve area",
+        "chest X-ray with an enlarged left atrium",
+        "ECG with left atrial enlargement or atrial fibrillation"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram"
+      ],
+      "criteria": [
+        "severe mitral stenosis: a valve area of 1.5 square centimeters or less"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "percutaneous balloon mitral commissurotomy for severe symptomatic stenosis with favorable valve anatomy",
+        "beta blockers or other rate control to lengthen diastole",
+        "warfarin for atrial fibrillation or prior embolism"
+      ],
+      "next_line": [
+        "surgical mitral valve replacement when balloon commissurotomy is unsuitable",
+        "diuretics for congestion"
+      ]
+    },
+    "complications": [
+      "atrial fibrillation",
+      "left atrial thrombus",
+      "stroke",
+      "pulmonary hypertension",
+      "right heart failure",
+      "hemoptysis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "aortic-regurgitation",
+        "how_to_tell_apart": "Mitral stenosis is a mid-diastolic rumble at the apex after an opening snap; aortic regurgitation is an early diastolic decrescendo murmur at the left sternal border with a wide pulse pressure."
+      }
+    ],
+    "pearls": [
+      "A shorter interval between S2 and the opening snap means more severe stenosis.",
+      "In rheumatic mitral stenosis with atrial fibrillation, warfarin is used rather than a direct oral anticoagulant.",
+      "Pregnancy often unmasks mitral stenosis, because blood volume and heart rate rise."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+      },
+      {
+        "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "mitral-stenosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 35-year-old woman who grew up where rheumatic fever is common has dyspnea, an opening snap and a mid-diastolic rumble at the apex. Which valve lesion?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral stenosis",
+          "synonyms": [
+            "mitral valve stenosis",
+            "rheumatic mitral stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which extra sound follows S2 in mitral stenosis?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "opening snap",
+          "synonyms": [
+            "snap",
+            "an opening snap"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What is by far the most common cause of mitral stenosis?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rheumatic heart disease",
+          "synonyms": [
+            "rheumatic fever",
+            "rheumatic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three complications of mitral stenosis.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial fibrillation",
+          "synonyms": [
+            "afib",
+            "a fib",
+            "AF"
+          ]
+        },
+        {
+          "answer": "left atrial thrombus",
+          "synonyms": [
+            "atrial thrombus",
+            "clot"
+          ]
+        },
+        {
+          "answer": "stroke",
+          "synonyms": [
+            "embolism"
+          ]
+        },
+        {
+          "answer": "pulmonary hypertension",
+          "synonyms": []
+        },
+        {
+          "answer": "right heart failure",
+          "synonyms": [
+            "right ventricular failure"
+          ]
+        },
+        {
+          "answer": "hemoptysis",
+          "synonyms": [
+            "coughing blood"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "mitral-stenosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Mitral stenosis or aortic regurgitation: which diastolic murmur follows an opening snap?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral stenosis",
+          "synonyms": [
+            "mitral valve stenosis",
+            "rheumatic mitral stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What does a shorter S2-to-opening-snap interval mean?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "more severe stenosis",
+          "synonyms": [
+            "more severe",
+            "severe stenosis",
+            "worse stenosis",
+            "higher left atrial pressure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms mitral stenosis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echo",
+            "TTE",
+            "echocardiography",
+            "transthoracic echo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What valve area defines severe mitral stenosis?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "1.5 square centimeters or less",
+          "synonyms": [
+            "1.5 square centimeters",
+            "1.5 cm2",
+            "1.5",
+            "1 point 5",
+            "less than 1.5"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe symptomatic mitral stenosis with pliable leaflets. Procedure of choice?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "percutaneous balloon mitral commissurotomy",
+          "synonyms": [
+            "balloon commissurotomy",
+            "balloon valvuloplasty",
+            "balloon mitral valvuloplasty",
+            "balloon valvotomy",
+            "balloon mitral valvotomy",
+            "percutaneous mitral balloon commissurotomy",
+            "PBMC",
+            "PMBC",
+            "PTMC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Rheumatic mitral stenosis with atrial fibrillation. Which anticoagulant?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "warfarin",
+          "synonyms": [
+            "Coumadin",
+            "vitamin K antagonist"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A big left atrium presses on the recurrent laryngeal nerve and causes hoarseness. Name the syndrome.",
+      "source_fields": [
+        "key_findings.history[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ortner syndrome",
+          "synonyms": [
+            "Ortner",
+            "Ortner's syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-stenosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which life event often unmasks mitral stenosis?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pregnancy",
+          "synonyms": [
+            "pregnant"
+          ]
+        }
+      ]
+    }
+  ]
+}

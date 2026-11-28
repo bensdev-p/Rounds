@@ -1,0 +1,424 @@
+{
+  "script": {
+    "id": "viridans-streptococci",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "bug",
+    "name": "Viridans group streptococci",
+    "aliases": [
+      "viridans streptococci",
+      "Streptococcus viridans"
+    ],
+    "systems": [
+      "cardio",
+      "general"
+    ],
+    "rotation": [],
+    "morphology": "Gram-positive cocci in chains",
+    "lab_features": [
+      "alpha-hemolytic (green, partial hemolysis)",
+      "catalase-negative",
+      "optochin-resistant",
+      "not bile-soluble"
+    ],
+    "transmission": [
+      "normal flora of the mouth",
+      "enter the blood after dental procedures or with poor dental hygiene"
+    ],
+    "virulence_factors": [
+      "dextran, which helps them stick to fibrin and platelets on damaged valves",
+      "Streptococcus mutans makes acid that causes dental caries"
+    ],
+    "diseases": [
+      "subacute endocarditis on damaged or abnormal valves",
+      "dental caries (S. mutans)",
+      "brain and liver abscesses (S. anginosus group)"
+    ],
+    "diagnosis": [
+      "blood cultures",
+      "echocardiogram for endocarditis",
+      "alpha hemolysis and optochin resistance in the lab"
+    ],
+    "treatment": [
+      "endocarditis: penicillin G or ceftriaxone, guided by penicillin susceptibility",
+      "gentamicin may be added for less susceptible strains"
+    ],
+    "prevention": [
+      "good dental hygiene",
+      "amoxicillin before dental work for the highest-risk patients, including those with a prosthetic valve or prosthetic material used for valve repair, prior endocarditis, unrepaired cyanotic congenital heart disease, recently repaired congenital heart disease with prosthetic material, or a heart transplant with valve disease"
+    ],
+    "confused_with": [
+      {
+        "script_id": "staphylococcus-aureus",
+        "how_to_tell_apart": "Viridans streptococci grow in chains, are catalase-negative and cause subacute endocarditis over weeks, often after dental work; S. aureus grows in clusters, is coagulase-positive and causes acute endocarditis over days.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in chains",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Course",
+            "text": "Subacute endocarditis",
+            "source_field": "diseases[0]"
+          },
+          {
+            "label": "Key test",
+            "text": "Catalase-negative",
+            "source_field": "lab_features[1]"
+          }
+        ]
+      },
+      {
+        "script_id": "enterococcus",
+        "how_to_tell_apart": "Both cause subacute endocarditis. Viridans streptococci are alpha-hemolytic, come from the mouth and follow dental work; enterococci grow in 6.5% salt, come from the gut and urinary tract and follow GI or urinary procedures.",
+        "compare": [
+          {
+            "label": "Gram stain",
+            "text": "Cocci in chains",
+            "source_field": "morphology"
+          },
+          {
+            "label": "Source",
+            "text": "Mouth flora",
+            "source_field": "transmission[0]"
+          },
+          {
+            "label": "Key test",
+            "text": "Alpha-hemolytic",
+            "source_field": "lab_features[0]"
+          }
+        ]
+      },
+      {
+        "script_id": "hacek-organisms",
+        "how_to_tell_apart": "Both cause subacute endocarditis from the mouth, but viridans streptococci are gram-positive cocci in chains that grow readily, while HACEK organisms are fastidious gram-negative rods that grow slowly."
+      }
+    ],
+    "pearls": [
+      "Viridans streptococci and S. pneumoniae are both alpha-hemolytic; optochin resistance and no bile solubility mark viridans.",
+      "Subacute endocarditis from viridans streptococci typically follows dental work and causes weeks of low fever and weight loss.",
+      "S. mutans uses sucrose to make dextran, which glues it to teeth."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "morphology",
+        "lab_features",
+        "virulence_factors"
+      ],
+      "MS3": [
+        "diseases[0]",
+        "treatment"
+      ],
+      "MS4": [
+        "prevention[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Sherris & Ryan's Medical Microbiology"
+      },
+      {
+        "title": "2023 ESC Guidelines for the management of endocarditis"
+      },
+      {
+        "title": "Prevention of Viridans Group Streptococcal Infective Endocarditis: A Scientific Statement From the American Heart Association (2021)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "viridans-streptococci.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Alpha-hemolytic gram-positive cocci in chains that are optochin-resistant. Which organism group?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Viridans group streptococci",
+          "synonyms": [
+            "viridans streptococci",
+            "viridans strep",
+            "Strep viridans",
+            "Streptococcus viridans",
+            "viridans",
+            "Streptococcus mutans",
+            "S. mutans",
+            "Streptococcus sanguinis",
+            "S. sanguinis",
+            "Strep sanguinis",
+            "Streptococcus mitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Mouth flora that are alpha-hemolytic and not bile-soluble, cultured from a patient with endocarditis after dental work. Which organism group?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Viridans group streptococci",
+          "synonyms": [
+            "viridans streptococci",
+            "viridans strep",
+            "Strep viridans",
+            "Streptococcus viridans",
+            "viridans",
+            "Streptococcus mutans",
+            "S. mutans",
+            "Streptococcus sanguinis",
+            "S. sanguinis",
+            "Strep sanguinis",
+            "Streptococcus mitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which sticky polysaccharide helps viridans streptococci cling to damaged heart valves?",
+      "source_fields": [
+        "virulence_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dextran",
+          "synonyms": [
+            "dextrans",
+            "glucan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which viridans species makes the acid that causes dental caries?",
+      "source_fields": [
+        "virulence_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Streptococcus mutans",
+          "synonyms": [
+            "S. mutans",
+            "Strep mutans",
+            "mutans"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Endocarditis a few weeks after a dental extraction, with low fevers and weight loss. Which organism group?",
+      "source_fields": [
+        "name",
+        "diseases[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Viridans group streptococci",
+          "synonyms": [
+            "viridans streptococci",
+            "viridans strep",
+            "Strep viridans",
+            "Streptococcus viridans",
+            "viridans",
+            "Streptococcus mutans",
+            "S. mutans",
+            "Streptococcus sanguinis",
+            "S. sanguinis",
+            "Strep sanguinis",
+            "Streptococcus mitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which viridans streptococci cause brain and liver abscesses?",
+      "source_fields": [
+        "diseases[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "S. anginosus group",
+          "synonyms": [
+            "Streptococcus anginosus",
+            "S. anginosus",
+            "Strep anginosus",
+            "anginosus",
+            "Streptococcus milleri",
+            "Strep milleri",
+            "milleri group"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Suspected subacute endocarditis. What do you send before antibiotics?",
+      "source_fields": [
+        "diagnosis[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "blood cultures",
+          "synonyms": [
+            "blood culture",
+            "cultures"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What kind of hemolysis do viridans streptococci show on blood agar?",
+      "source_fields": [
+        "lab_features[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "alpha-hemolytic",
+          "synonyms": [
+            "alpha",
+            "alpha hemolysis",
+            "alpha-hemolysis",
+            "partial hemolysis",
+            "green hemolysis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Viridans streptococcal endocarditis, fully penicillin-susceptible. Name a treatment.",
+      "source_fields": [
+        "treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "penicillin G",
+          "synonyms": [
+            "penicillin",
+            "benzylpenicillin",
+            "pen G",
+            "aqueous penicillin"
+          ]
+        },
+        {
+          "answer": "ceftriaxone",
+          "synonyms": [
+            "Rocephin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a group who should get antibiotics before dental work to prevent endocarditis.",
+      "source_fields": [
+        "prevention[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prosthetic valve",
+          "synonyms": [
+            "prosthetic valves",
+            "prosthetic heart valve",
+            "valve replacement",
+            "mechanical valve"
+          ]
+        },
+        {
+          "answer": "prior endocarditis",
+          "synonyms": [
+            "previous endocarditis",
+            "history of endocarditis"
+          ]
+        },
+        {
+          "answer": "prosthetic material used for valve repair",
+          "synonyms": [
+            "valve repair with prosthetic material",
+            "annuloplasty ring",
+            "TAVI",
+            "TAVR"
+          ]
+        },
+        {
+          "answer": "unrepaired cyanotic congenital heart disease",
+          "synonyms": [
+            "cyanotic congenital heart disease"
+          ]
+        },
+        {
+          "answer": "heart transplant with valve disease",
+          "synonyms": [
+            "heart transplant with valvulopathy",
+            "transplant with valve disease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which antibiotic is given before dental work to high-risk patients?",
+      "source_fields": [
+        "prevention[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amoxicillin",
+          "synonyms": [
+            "Amoxil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "viridans-streptococci.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which sugar does S. mutans use to make dextran?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sucrose",
+          "synonyms": [
+            "table sugar"
+          ]
+        }
+      ]
+    }
+  ]
+}

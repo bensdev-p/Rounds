@@ -1,0 +1,430 @@
+{
+  "script": {
+    "id": "hypertensive-emergency",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Hypertensive emergency",
+    "aliases": [
+      "hypertensive crisis",
+      "malignant hypertension"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Adults with poorly controlled or untreated hypertension",
+      "risk_factors": [
+        "nonadherence to antihypertensives",
+        "cocaine or amphetamine use",
+        "preeclampsia",
+        "renal artery stenosis",
+        "pheochromocytoma",
+        "abrupt clonidine withdrawal"
+      ]
+    },
+    "pathophysiology": "Severely raised blood pressure, usually above 180/120, causes acute damage to the brain, heart, aorta, kidneys and eyes. Without acute organ damage it is called hypertensive urgency.",
+    "timeline": {
+      "onset": "Hours to days",
+      "course": "Life-threatening without prompt, controlled lowering"
+    },
+    "key_findings": {
+      "history": [
+        "headache",
+        "confusion or seizures (hypertensive encephalopathy)",
+        "chest pain",
+        "dyspnea",
+        "visual changes"
+      ],
+      "exam": [
+        "blood pressure usually above 180/120",
+        "papilledema, retinal hemorrhages and exudates",
+        "focal neurologic signs"
+      ],
+      "labs": [
+        "creatinine and urinalysis for acute kidney injury",
+        "troponin",
+        "blood smear for schistocytes (thrombotic microangiopathy)"
+      ],
+      "imaging": [
+        "head CT for stroke or bleeding",
+        "chest X-ray for pulmonary edema",
+        "CT angiography if aortic dissection is suspected"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "severely raised blood pressure with evidence of acute organ damage"
+      ],
+      "criteria": [
+        "emergency: severe hypertension with acute organ damage; urgency: severe hypertension without it"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "ICU admission and an IV titratable drug such as nicardipine, clevidipine, labetalol, esmolol or nitroprusside",
+        "lower blood pressure by no more than 25% in the first hour, then toward 160/100 over the next 2 to 6 hours"
+      ],
+      "next_line": [
+        "aortic dissection: lower systolic pressure below 120 within 20 minutes, with a beta blocker first",
+        "hypertensive urgency: oral drugs and close outpatient follow-up, not rapid IV lowering"
+      ]
+    },
+    "complications": [
+      "stroke",
+      "hypertensive encephalopathy",
+      "acute heart failure with pulmonary edema",
+      "myocardial infarction",
+      "aortic dissection",
+      "acute kidney injury"
+    ],
+    "confused_with": [
+      {
+        "script_id": "essential-hypertension",
+        "how_to_tell_apart": "A hypertensive emergency is severe hypertension with acute organ damage, needing IV drugs in the ICU; essential hypertension is chronic, silent and treated with oral drugs."
+      }
+    ],
+    "pearls": [
+      "Lowering blood pressure too fast can cause stroke or kidney injury, because autoregulation has shifted upward.",
+      "Aortic dissection is the exception: lower the pressure fast, with a beta blocker before any vasodilator.",
+      "In a cocaine-induced hypertensive crisis, give benzodiazepines first and avoid a beta blocker alone."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults"
+      },
+      {
+        "title": "Tintinalli's Emergency Medicine: A Comprehensive Study Guide"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "hypertensive-emergency.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 55-year-old who stopped his medications has a blood pressure of 230/130, confusion and papilledema. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hypertensive emergency",
+          "synonyms": [
+            "hypertensive crisis",
+            "malignant hypertension",
+            "hypertensive encephalopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is severe hypertension without acute organ damage called?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertensive urgency",
+          "synonyms": [
+            "urgency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three triggers of a hypertensive emergency.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nonadherence to antihypertensives",
+          "synonyms": [
+            "stopping medications",
+            "nonadherence",
+            "noncompliance"
+          ]
+        },
+        {
+          "answer": "cocaine",
+          "synonyms": [
+            "cocaine use",
+            "amphetamines",
+            "amphetamine",
+            "methamphetamine",
+            "stimulants"
+          ]
+        },
+        {
+          "answer": "preeclampsia",
+          "synonyms": [
+            "eclampsia"
+          ]
+        },
+        {
+          "answer": "renal artery stenosis",
+          "synonyms": []
+        },
+        {
+          "answer": "pheochromocytoma",
+          "synonyms": []
+        },
+        {
+          "answer": "clonidine withdrawal",
+          "synonyms": [
+            "stopping clonidine"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hypertensive-emergency.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three organs a hypertensive emergency damages.",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "brain",
+          "synonyms": [
+            "stroke",
+            "encephalopathy"
+          ]
+        },
+        {
+          "answer": "heart",
+          "synonyms": [
+            "myocardial infarction",
+            "heart failure"
+          ]
+        },
+        {
+          "answer": "aorta",
+          "synonyms": [
+            "aortic dissection"
+          ]
+        },
+        {
+          "answer": "kidneys",
+          "synonyms": [
+            "kidney",
+            "renal",
+            "acute kidney injury"
+          ]
+        },
+        {
+          "answer": "eyes",
+          "synonyms": [
+            "eye",
+            "retina",
+            "papilledema"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "hypertensive-emergency.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Hypertensive emergency or essential hypertension: which needs IV drugs in the ICU?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Hypertensive emergency",
+          "synonyms": [
+            "hypertensive crisis",
+            "malignant hypertension",
+            "hypertensive encephalopathy",
+            "emergency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which eye finding points to a hypertensive emergency?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "papilledema",
+          "synonyms": [
+            "swollen optic disc",
+            "optic disc swelling"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In a hypertensive emergency, which blood smear finding suggests thrombotic microangiopathy?",
+      "source_fields": [
+        "key_findings.labs[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "schistocytes",
+          "synonyms": [
+            "schistocyte",
+            "fragmented red cells",
+            "helmet cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Confusion and severe hypertension. Which scan first?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "head CT",
+          "synonyms": [
+            "CT head",
+            "CT brain",
+            "CT of the head",
+            "CT scan of the head"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "In a hypertensive emergency, by how much should blood pressure fall in the first hour?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "no more than 25%",
+          "synonyms": [
+            "up to 25%",
+            "less than 25%",
+            "no more than 25 percent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name an IV drug for a hypertensive emergency.",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nicardipine",
+          "synonyms": [
+            "Cardene"
+          ]
+        },
+        {
+          "answer": "clevidipine",
+          "synonyms": [
+            "Cleviprex"
+          ]
+        },
+        {
+          "answer": "labetalol",
+          "synonyms": []
+        },
+        {
+          "answer": "esmolol",
+          "synonyms": []
+        },
+        {
+          "answer": "nitroprusside",
+          "synonyms": [
+            "sodium nitroprusside"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which hypertensive emergency needs the systolic pressure below 120 within 20 minutes?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "hypertensive-emergency.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Cocaine-induced hypertensive crisis. Which drug first?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "benzodiazepines",
+          "synonyms": [
+            "benzodiazepine",
+            "benzos",
+            "lorazepam",
+            "diazepam",
+            "midazolam"
+          ]
+        }
+      ]
+    }
+  ]
+}

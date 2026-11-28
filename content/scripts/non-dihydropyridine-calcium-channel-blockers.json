@@ -1,0 +1,436 @@
+{
+  "script": {
+    "id": "non-dihydropyridine-calcium-channel-blockers",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Verapamil and diltiazem",
+    "aliases": [
+      "non-dihydropyridine calcium channel blockers",
+      "non-dihydropyridines"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Non-dihydropyridine calcium channel blockers (class IV antiarrhythmics)",
+    "class_members": [
+      "verapamil",
+      "diltiazem"
+    ],
+    "mechanism": "Block L-type calcium channels mainly in the heart, slowing the SA node, slowing conduction through the AV node and reducing contractility. They dilate arteries less than dihydropyridines do.",
+    "pharmacokinetics": [
+      "both are metabolized by the liver and inhibit CYP3A4",
+      "IV diltiazem is used for quick rate control"
+    ],
+    "indications": [
+      "rate control in atrial fibrillation or flutter",
+      "supraventricular tachycardia",
+      "stable angina",
+      "vasospastic angina",
+      "hypertension",
+      "cluster headache prevention (verapamil)"
+    ],
+    "adverse_effects": [
+      "bradycardia",
+      "AV block",
+      "constipation, especially with verapamil",
+      "worsening heart failure",
+      "hypotension",
+      "peripheral edema",
+      "gingival hyperplasia"
+    ],
+    "contraindications": [
+      "heart failure with reduced ejection fraction",
+      "second- or third-degree AV block or sick sinus syndrome",
+      "atrial fibrillation with Wolff-Parkinson-White syndrome",
+      "hypotension"
+    ],
+    "interactions": [
+      "beta blockers add to bradycardia and AV block",
+      "they inhibit CYP3A4, raising levels of simvastatin and other drugs",
+      "raise digoxin levels"
+    ],
+    "monitoring": [
+      "heart rate",
+      "blood pressure",
+      "PR interval"
+    ],
+    "overdose": {
+      "features": [
+        "bradycardia",
+        "hypotension",
+        "AV block",
+        "hyperglycemia"
+      ],
+      "treatment": [
+        "IV calcium",
+        "high-dose insulin with glucose",
+        "vasopressors",
+        "pacing"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "dihydropyridine-calcium-channel-blockers",
+        "how_to_tell_apart": "Verapamil and diltiazem act mainly on the heart, slowing the rate and AV conduction; dihydropyridines act mainly on arteries and lower blood pressure without slowing the heart.",
+        "compare": [
+          {
+            "label": "Acts on",
+            "text": "Heart",
+            "source_field": "mechanism"
+          },
+          {
+            "label": "Heart rate",
+            "text": "Slowed",
+            "source_field": "mechanism"
+          }
+        ]
+      },
+      {
+        "script_id": "adenosine",
+        "how_to_tell_apart": "Both stop SVT by blocking the AV node, but verapamil and diltiazem act for hours and also slow the rate in atrial fibrillation, while adenosine works for only seconds."
+      }
+    ],
+    "pearls": [
+      "Verapamil is the calcium channel blocker most likely to cause constipation.",
+      "Never give AV nodal blockers such as verapamil for atrial fibrillation with Wolff-Parkinson-White syndrome; they can speed conduction down the accessory pathway.",
+      "High blood sugar in a bradycardic overdose points to a calcium channel blocker rather than a beta blocker."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "contraindications"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Verapamil and diltiazem belong to which drug class?",
+      "source_fields": [
+        "aliases",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "non-dihydropyridine calcium channel blockers",
+          "synonyms": [
+            "non-dihydropyridines",
+            "non-dihydropyridine",
+            "non-DHP",
+            "class IV antiarrhythmics",
+            "calcium channel blocker",
+            "calcium channel blockers",
+            "CCB",
+            "CCBs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "In the Vaughan Williams scheme, which antiarrhythmic class are verapamil and diltiazem?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "class IV",
+          "synonyms": [
+            "class 4",
+            "class four",
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Through which node do verapamil and diltiazem slow conduction?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AV node",
+          "synonyms": [
+            "atrioventricular node",
+            "AV nodal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Heart or arteries: where do verapamil and diltiazem mainly act?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart",
+          "synonyms": [
+            "the heart",
+            "myocardium",
+            "cardiac"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of verapamil or diltiazem.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rate control in atrial fibrillation",
+          "synonyms": [
+            "atrial fibrillation",
+            "afib",
+            "a fib",
+            "AF",
+            "rate control",
+            "atrial flutter"
+          ]
+        },
+        {
+          "answer": "supraventricular tachycardia",
+          "synonyms": [
+            "SVT",
+            "PSVT"
+          ]
+        },
+        {
+          "answer": "stable angina",
+          "synonyms": [
+            "chronic angina",
+            "exertional angina"
+          ]
+        },
+        {
+          "answer": "vasospastic angina",
+          "synonyms": [
+            "Prinzmetal angina"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "cluster headache prevention",
+          "synonyms": [
+            "cluster headache",
+            "cluster headaches"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which calcium channel blocker prevents cluster headaches?",
+      "source_fields": [
+        "indications[5]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "verapamil",
+          "synonyms": [
+            "Calan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of verapamil or diltiazem.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bradycardia",
+          "synonyms": [
+            "slow heart rate"
+          ]
+        },
+        {
+          "answer": "AV block",
+          "synonyms": [
+            "heart block"
+          ]
+        },
+        {
+          "answer": "constipation",
+          "synonyms": []
+        },
+        {
+          "answer": "worsening heart failure",
+          "synonyms": [
+            "heart failure"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure"
+          ]
+        },
+        {
+          "answer": "peripheral edema",
+          "synonyms": [
+            "edema",
+            "ankle swelling"
+          ]
+        },
+        {
+          "answer": "gingival hyperplasia",
+          "synonyms": [
+            "gum overgrowth"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which calcium channel blocker causes the most constipation?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "verapamil",
+          "synonyms": [
+            "Calan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Why avoid diltiazem in heart failure with reduced ejection fraction?",
+      "source_fields": [
+        "mechanism",
+        "contraindications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "reducing contractility",
+          "synonyms": [
+            "reduces contractility",
+            "decreased contractility",
+            "negative inotrope",
+            "negative inotropic",
+            "negative inotropy",
+            "lowers contractility",
+            "worsens heart failure"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Verapamil or amlodipine: which one slows the heart rate?",
+      "source_fields": [
+        "class_members",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "verapamil",
+          "synonyms": [
+            "Calan",
+            "non-dihydropyridine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why must verapamil not be given for atrial fibrillation with Wolff-Parkinson-White syndrome?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "speed conduction down the accessory pathway",
+          "synonyms": [
+            "accessory pathway",
+            "faster conduction down the accessory pathway",
+            "ventricular fibrillation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "non-dihydropyridine-calcium-channel-blockers.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which cardiac glycoside's level rises with verapamil?",
+      "source_fields": [
+        "interactions[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "digoxin",
+          "synonyms": [
+            "Lanoxin"
+          ]
+        }
+      ]
+    }
+  ]
+}

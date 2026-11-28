@@ -1,0 +1,399 @@
+{
+  "script": {
+    "id": "cardiac-tamponade",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Cardiac tamponade",
+    "aliases": [
+      "pericardial tamponade"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM",
+      "surgery"
+    ],
+    "epidemiology": {
+      "who": "Patients with a pericardial effusion from cancer, infection, uremia, surgery or trauma",
+      "risk_factors": [
+        "malignancy",
+        "pericarditis",
+        "uremia",
+        "chest trauma",
+        "cardiac surgery or procedures",
+        "aortic dissection into the pericardium"
+      ]
+    },
+    "pathophysiology": "Fluid in the pericardial sac raises the pressure around the heart until the chambers cannot fill. Stroke volume and blood pressure fall. Fluid that collects quickly causes tamponade even in small volumes.",
+    "timeline": {
+      "onset": "Minutes (trauma, rupture) to weeks (a slowly growing effusion)",
+      "course": "Fatal without drainage"
+    },
+    "key_findings": {
+      "history": [
+        "dyspnea",
+        "chest pain or pressure",
+        "light-headedness or syncope"
+      ],
+      "exam": [
+        "Beck triad: hypotension, raised jugular venous pressure and muffled heart sounds",
+        "pulsus paradoxus",
+        "tachycardia",
+        "clear lungs"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram showing an effusion with right atrial collapse in late diastole and systole, or right ventricular collapse in diastole",
+        "ECG with low voltage and electrical alternans",
+        "chest X-ray with a large, water-bottle-shaped heart"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "bedside echocardiogram"
+      ],
+      "criteria": [
+        "a clinical diagnosis, supported by echo signs of chamber collapse"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "urgent pericardiocentesis",
+        "IV fluids to support filling while preparing"
+      ],
+      "next_line": [
+        "surgical pericardial window for recurrent or loculated effusions",
+        "emergency thoracotomy for traumatic tamponade with arrest"
+      ]
+    },
+    "complications": [
+      "obstructive shock",
+      "cardiac arrest with pulseless electrical activity"
+    ],
+    "confused_with": [
+      {
+        "script_id": "constrictive-pericarditis",
+        "how_to_tell_apart": "Tamponade is fluid under pressure with pulsus paradoxus that can develop in minutes; constrictive pericarditis is a rigid pericardium with a knock and Kussmaul sign that develops over months."
+      }
+    ],
+    "pearls": [
+      "Avoid positive-pressure ventilation and diuretics, which reduce filling further.",
+      "Pulsus paradoxus is a fall in systolic pressure of more than 10 mmHg on inspiration.",
+      "Electrical alternans comes from the heart swinging in the fluid."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases"
+      },
+      {
+        "title": "Tintinalli's Emergency Medicine: A Comprehensive Study Guide"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "cardiac-tamponade.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "After a stab wound to the chest: low blood pressure, distended neck veins and muffled heart sounds. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Cardiac tamponade",
+          "synonyms": [
+            "tamponade",
+            "pericardial tamponade"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name the three signs of the Beck triad.",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure",
+            "low BP"
+          ]
+        },
+        {
+          "answer": "raised jugular venous pressure",
+          "synonyms": [
+            "raised JVP",
+            "elevated JVP",
+            "high JVP",
+            "JVD",
+            "jugular venous distension",
+            "jugular venous distention",
+            "distended neck veins"
+          ]
+        },
+        {
+          "answer": "muffled heart sounds",
+          "synonyms": [
+            "distant heart sounds",
+            "quiet heart sounds"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "cardiac-tamponade.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of cardiac tamponade.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "malignancy",
+          "synonyms": [
+            "cancer",
+            "cancers",
+            "malignant effusion"
+          ]
+        },
+        {
+          "answer": "pericarditis",
+          "synonyms": []
+        },
+        {
+          "answer": "uremia",
+          "synonyms": [
+            "kidney failure",
+            "renal failure"
+          ]
+        },
+        {
+          "answer": "chest trauma",
+          "synonyms": [
+            "trauma",
+            "stab wound"
+          ]
+        },
+        {
+          "answer": "cardiac surgery",
+          "synonyms": [
+            "heart surgery",
+            "after cardiac surgery"
+          ]
+        },
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "cardiac-tamponade.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What is a fall in systolic pressure of more than 10 mmHg on inspiration called?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulsus paradoxus",
+          "synonyms": [
+            "paradoxical pulse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ECG sign comes from the heart swinging in the fluid?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "electrical alternans",
+          "synonyms": [
+            "alternans"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Tamponade or constrictive pericarditis: which has pulsus paradoxus, usually without Kussmaul sign?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Tamponade",
+          "synonyms": [
+            "cardiac tamponade",
+            "pericardial tamponade"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which bedside test confirms tamponade?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bedside echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echocardiography",
+            "echo",
+            "TTE",
+            "POCUS",
+            "point-of-care ultrasound",
+            "bedside ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "On echo, which chambers collapse in diastole in tamponade?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right ventricular",
+          "synonyms": [
+            "right ventricle",
+            "RV",
+            "right atrial",
+            "right atrium",
+            "right-sided chambers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Definitive emergency treatment for tamponade?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericardiocentesis",
+          "synonyms": [
+            "pericardial drainage",
+            "needle drainage",
+            "drain the effusion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Effusions keep coming back. Which operation drains the pericardium for good?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericardial window",
+          "synonyms": [
+            "window",
+            "surgical window"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a treatment that makes tamponade worse.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "positive-pressure ventilation",
+          "synonyms": [
+            "positive pressure ventilation",
+            "PPV",
+            "intubation",
+            "mechanical ventilation"
+          ]
+        },
+        {
+          "answer": "diuretics",
+          "synonyms": [
+            "diuretic",
+            "furosemide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cardiac-tamponade.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which arrest rhythm does untreated tamponade cause?",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulseless electrical activity",
+          "synonyms": [
+            "PEA"
+          ]
+        }
+      ]
+    }
+  ]
+}

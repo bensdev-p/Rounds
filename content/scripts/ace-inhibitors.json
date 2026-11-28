@@ -1,0 +1,427 @@
+{
+  "script": {
+    "id": "ace-inhibitors",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "ACE inhibitors",
+    "aliases": [
+      "angiotensin-converting enzyme inhibitors"
+    ],
+    "systems": [
+      "cardio",
+      "renal"
+    ],
+    "rotation": [],
+    "class": "Angiotensin-converting enzyme inhibitors",
+    "class_members": [
+      "lisinopril",
+      "enalapril",
+      "ramipril",
+      "captopril",
+      "benazepril"
+    ],
+    "mechanism": "Block angiotensin-converting enzyme, so less angiotensin I becomes angiotensin II. Aldosterone falls, the efferent arteriole dilates, and bradykinin builds up because ACE also breaks bradykinin down.",
+    "pharmacokinetics": [
+      "most are prodrugs activated in the liver; captopril and lisinopril are not",
+      "cleared by the kidneys"
+    ],
+    "indications": [
+      "hypertension",
+      "heart failure with reduced ejection fraction",
+      "after myocardial infarction",
+      "diabetic kidney disease and chronic kidney disease with proteinuria"
+    ],
+    "adverse_effects": [
+      "dry cough",
+      "angioedema",
+      "hyperkalemia",
+      "acute rise in creatinine",
+      "hypotension after the first dose",
+      "teratogenic: fetal kidney damage"
+    ],
+    "contraindications": [
+      "pregnancy",
+      "history of angioedema",
+      "bilateral renal artery stenosis",
+      "within 36 hours of sacubitril-valsartan"
+    ],
+    "interactions": [
+      "potassium-sparing diuretics and potassium supplements raise potassium further",
+      "NSAIDs blunt the effect and add to kidney injury",
+      "raise lithium levels"
+    ],
+    "monitoring": [
+      "potassium and creatinine 1 to 2 weeks after starting or raising the dose"
+    ],
+    "overdose": {
+      "features": [
+        "hypotension"
+      ],
+      "treatment": [
+        "IV fluids"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "angiotensin-receptor-blockers",
+        "how_to_tell_apart": "ACE inhibitors block angiotensin II production and raise bradykinin, causing cough and more angioedema; ARBs block the angiotensin II receptor and do not raise bradykinin."
+      },
+      {
+        "script_id": "sacubitril-valsartan",
+        "how_to_tell_apart": "An ACE inhibitor is the older choice in heart failure with reduced ejection fraction; sacubitril-valsartan lowers mortality further, and the ACE inhibitor must be stopped 36 hours before switching."
+      }
+    ],
+    "pearls": [
+      "A creatinine rise of up to 30% after starting is expected, and the drug can be continued.",
+      "The cough comes from bradykinin; switch to an ARB, which does not raise bradykinin.",
+      "ACE inhibitors slow diabetic kidney disease by dilating the efferent arteriole, which lowers pressure in the glomerulus."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "monitoring"
+      ],
+      "MS4": [
+        "contraindications[3]",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "KDIGO 2024 Clinical Practice Guideline for the Evaluation and Management of Chronic Kidney Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "ace-inhibitors.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Lisinopril, ramipril and enalapril belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitors",
+          "synonyms": [
+            "ACE inhibitor",
+            "ACEi",
+            "ACE-I",
+            "angiotensin-converting enzyme inhibitors",
+            "angiotensin converting enzyme inhibitors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two ACE inhibitors.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lisinopril",
+          "synonyms": [
+            "Zestril",
+            "Prinivil"
+          ]
+        },
+        {
+          "answer": "enalapril",
+          "synonyms": [
+            "Vasotec"
+          ]
+        },
+        {
+          "answer": "ramipril",
+          "synonyms": [
+            "Altace"
+          ]
+        },
+        {
+          "answer": "captopril",
+          "synonyms": []
+        },
+        {
+          "answer": "benazepril",
+          "synonyms": [
+            "Lotensin"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ace-inhibitors.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which hormone do ACE inhibitors reduce?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "angiotensin II",
+          "synonyms": [
+            "angiotensin 2",
+            "angiotensin-2",
+            "ang II"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which peptide builds up on an ACE inhibitor and causes the cough?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bradykinin",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of ACE inhibitors.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "heart failure with reduced ejection fraction",
+          "synonyms": [
+            "heart failure",
+            "HFrEF",
+            "CHF"
+          ]
+        },
+        {
+          "answer": "after myocardial infarction",
+          "synonyms": [
+            "myocardial infarction",
+            "post-MI",
+            "heart attack"
+          ]
+        },
+        {
+          "answer": "diabetic kidney disease",
+          "synonyms": [
+            "diabetic nephropathy",
+            "proteinuria",
+            "chronic kidney disease with proteinuria",
+            "chronic kidney disease",
+            "CKD"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "ace-inhibitors.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which arteriole do ACE inhibitors dilate to protect the kidney in diabetes?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "efferent arteriole",
+          "synonyms": [
+            "efferent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of ACE inhibitors.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dry cough",
+          "synonyms": [
+            "cough"
+          ]
+        },
+        {
+          "answer": "angioedema",
+          "synonyms": [
+            "lip swelling",
+            "tongue swelling"
+          ]
+        },
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        },
+        {
+          "answer": "acute rise in creatinine",
+          "synonyms": [
+            "rise in creatinine",
+            "raised creatinine",
+            "kidney injury",
+            "AKI"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure",
+            "first-dose hypotension"
+          ]
+        },
+        {
+          "answer": "teratogenic",
+          "synonyms": [
+            "teratogenicity",
+            "birth defects",
+            "fetal harm"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "ace-inhibitors.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "The lips and tongue swell suddenly a year after starting lisinopril. Which adverse effect?",
+      "source_fields": [
+        "adverse_effects[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "angioedema",
+          "synonyms": [
+            "angio-oedema",
+            "angiooedema"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A patient cannot tolerate the cough from an ACE inhibitor. Which drug class do you switch to?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ARB",
+          "synonyms": [
+            "ARBs",
+            "angiotensin receptor blocker",
+            "angiotensin receptor blockers",
+            "angiotensin II receptor blocker",
+            "losartan",
+            "valsartan",
+            "candesartan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "ACE inhibitor or ARB: which one raises bradykinin?",
+      "source_fields": [
+        "name",
+        "mechanism",
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ACE inhibitors",
+          "synonyms": [
+            "ACE inhibitor",
+            "ACEi",
+            "ACE-I"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Creatinine rises 20% two weeks after starting ramipril. Expected, or a reason to stop?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "expected",
+          "synonyms": [
+            "continue",
+            "can be continued",
+            "acceptable",
+            "keep it"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ace-inhibitors.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How long after the last ACE inhibitor dose before starting sacubitril-valsartan?",
+      "source_fields": [
+        "contraindications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "36 hours",
+          "synonyms": [
+            "36 h",
+            "36 hrs",
+            "thirty-six hours"
+          ]
+        }
+      ]
+    }
+  ]
+}

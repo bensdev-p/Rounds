@@ -1,0 +1,372 @@
+{
+  "script": {
+    "id": "takayasu-arteritis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Takayasu arteritis",
+    "aliases": [
+      "pulseless disease",
+      "Takayasu"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Women under 40, especially of East Asian descent",
+      "risk_factors": [
+        "female sex",
+        "age under 40",
+        "East Asian ancestry"
+      ]
+    },
+    "pathophysiology": "Granulomatous inflammation of the aorta and its major branches thickens the walls and narrows the lumen, causing stenoses, occlusions and aneurysms.",
+    "timeline": {
+      "onset": "An early systemic phase of fever, malaise and joint pain, then a vascular phase over months to years",
+      "course": "Chronic and relapsing"
+    },
+    "key_findings": {
+      "history": [
+        "fever, weight loss and fatigue",
+        "arm claudication",
+        "dizziness or visual changes",
+        "chest pain"
+      ],
+      "exam": [
+        "weak or absent arm pulses",
+        "systolic blood pressure differing by 20 mmHg or more between the arms",
+        "bruits over the subclavian arteries or aorta",
+        "hypertension from renal artery stenosis"
+      ],
+      "labs": [
+        "raised ESR or CRP"
+      ],
+      "imaging": [
+        "CT or MR angiography showing aortic wall thickening and branch stenoses",
+        "PET for active inflammation"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "CT or MR angiography"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "high-dose glucocorticoids",
+        "a steroid-sparing drug such as methotrexate, azathioprine, mycophenolate, leflunomide or a TNF inhibitor"
+      ],
+      "next_line": [
+        "tocilizumab",
+        "revascularization for critical stenoses, preferably when inflammation is quiet"
+      ]
+    },
+    "complications": [
+      "aortic regurgitation",
+      "renovascular hypertension",
+      "stroke",
+      "aortic aneurysm",
+      "heart failure"
+    ],
+    "confused_with": [
+      {
+        "script_id": "giant-cell-arteritis",
+        "how_to_tell_apart": "Takayasu arteritis affects women under 40 and narrows the aorta and its branches, causing weak arm pulses; giant cell arteritis affects people over 50 and favors the temporal and other cranial arteries."
+      }
+    ],
+    "pearls": [
+      "Takayasu arteritis is called pulseless disease because the arm pulses fade.",
+      "Age separates it from giant cell arteritis: under 40 versus over 50.",
+      "Measure blood pressure in both arms and the legs; renal artery stenosis can cause hypertension."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.who"
+      ],
+      "MS3": [
+        "key_findings.exam",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Giant Cell Arteritis and Takayasu Arteritis"
+      },
+      {
+        "title": "2022 American College of Rheumatology/EULAR Classification Criteria for Takayasu Arteritis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "takayasu-arteritis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 25-year-old woman gets arm pain with use, has weak radial pulses and a 30 mmHg difference in arm blood pressures. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Takayasu arteritis",
+          "synonyms": [
+            "Takayasu",
+            "pulseless disease",
+            "Takayasu's arteritis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Why is Takayasu arteritis called pulseless disease?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "arm pulses fade",
+          "synonyms": [
+            "weak arm pulses",
+            "absent pulses",
+            "weak pulses",
+            "pulses disappear",
+            "absent arm pulses"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which vessels does Takayasu arteritis affect?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aorta",
+          "synonyms": [
+            "the aorta",
+            "aorta and its branches",
+            "aortic arch",
+            "large vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What kind of inflammation does Takayasu arteritis cause?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "granulomatous",
+          "synonyms": [
+            "granulomatous inflammation",
+            "granulomas"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Takayasu or giant cell arteritis: which affects women under 40?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Takayasu arteritis",
+          "synonyms": [
+            "Takayasu",
+            "pulseless disease",
+            "Takayasu's arteritis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ages separate Takayasu arteritis from giant cell arteritis?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "under 40 versus over 50",
+          "synonyms": [
+            "under 40 vs over 50",
+            "under 40 and over 50"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test confirms Takayasu arteritis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CT or MR angiography",
+          "synonyms": [
+            "CT angiography",
+            "MR angiography",
+            "CTA",
+            "MRA",
+            "angiography"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In Takayasu arteritis, which imaging test shows active vessel inflammation?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PET",
+          "synonyms": [
+            "PET scan",
+            "PET-CT",
+            "FDG-PET"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "First-line treatment for Takayasu arteritis?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high-dose glucocorticoids",
+          "synonyms": [
+            "glucocorticoids",
+            "steroids",
+            "prednisone",
+            "corticosteroids",
+            "glucocorticoid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a steroid-sparing drug for Takayasu arteritis.",
+      "source_fields": [
+        "management.first_line[1]",
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "methotrexate",
+          "synonyms": []
+        },
+        {
+          "answer": "azathioprine",
+          "synonyms": []
+        },
+        {
+          "answer": "mycophenolate",
+          "synonyms": [
+            "CellCept"
+          ]
+        },
+        {
+          "answer": "leflunomide",
+          "synonyms": []
+        },
+        {
+          "answer": "TNF inhibitor",
+          "synonyms": [
+            "TNF inhibitors",
+            "TNF alpha inhibitor",
+            "anti-TNF",
+            "infliximab",
+            "adalimumab"
+          ]
+        },
+        {
+          "answer": "tocilizumab",
+          "synonyms": [
+            "Actemra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which valve lesion can Takayasu arteritis cause?",
+      "source_fields": [
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic regurgitation",
+          "synonyms": [
+            "aortic insufficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "takayasu-arteritis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why is hypertension common in Takayasu arteritis?",
+      "source_fields": [
+        "key_findings.exam[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renal artery stenosis",
+          "synonyms": [
+            "renovascular hypertension",
+            "renal artery narrowing"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,487 @@
+{
+  "script": {
+    "id": "beta-blockers",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Beta blockers",
+    "aliases": [
+      "beta-blockers",
+      "beta-adrenergic blockers"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Beta-adrenergic receptor antagonists (class II antiarrhythmics)",
+    "class_members": [
+      "metoprolol",
+      "atenolol",
+      "bisoprolol",
+      "esmolol",
+      "nebivolol",
+      "propranolol",
+      "nadolol",
+      "carvedilol",
+      "labetalol"
+    ],
+    "mechanism": "Block beta-1 receptors in the heart, lowering heart rate, contractility and renin release, and slowing conduction through the AV node. Nonselective agents also block beta-2 receptors in the airways and vessels. Carvedilol and labetalol also block alpha-1 receptors.",
+    "pharmacokinetics": [
+      "esmolol is very short-acting and given IV",
+      "atenolol is cleared by the kidneys; metoprolol and propranolol by the liver",
+      "propranolol is lipophilic and crosses into the brain"
+    ],
+    "indications": [
+      "angina",
+      "after myocardial infarction",
+      "heart failure with reduced ejection fraction (carvedilol, metoprolol succinate, bisoprolol)",
+      "rate control in atrial fibrillation",
+      "hypertension",
+      "hypertrophic cardiomyopathy",
+      "thyrotoxicosis symptoms",
+      "migraine prevention and essential tremor (propranolol)",
+      "variceal bleeding prevention (nonselective agents)"
+    ],
+    "adverse_effects": [
+      "bradycardia",
+      "hypotension",
+      "AV block",
+      "bronchospasm, mostly with nonselective agents",
+      "fatigue",
+      "erectile dysfunction",
+      "masked signs of hypoglycemia, such as tremor and palpitations",
+      "worsening of acute decompensated heart failure"
+    ],
+    "contraindications": [
+      "asthma, for nonselective agents",
+      "second- or third-degree AV block or symptomatic bradycardia",
+      "acute decompensated heart failure",
+      "vasospastic angina"
+    ],
+    "interactions": [
+      "verapamil or diltiazem add to bradycardia and AV block"
+    ],
+    "monitoring": [
+      "heart rate",
+      "blood pressure"
+    ],
+    "overdose": {
+      "features": [
+        "bradycardia",
+        "hypotension",
+        "hypoglycemia"
+      ],
+      "treatment": [
+        "IV glucagon",
+        "atropine",
+        "high-dose insulin with glucose"
+      ]
+    },
+    "confused_with": [],
+    "pearls": [
+      "Most beta-1 selective blockers start with A to M (atenolol, bisoprolol, esmolol, metoprolol), plus nebivolol; nonselective ones start with N to Z (nadolol, propranolol, timolol).",
+      "Stopping a beta blocker suddenly can cause rebound tachycardia and angina.",
+      "Glucagon reverses beta blocker overdose because it raises cAMP in heart cells without using beta receptors."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "contraindications"
+      ],
+      "MS4": [
+        "overdose.treatment",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "beta-blockers.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Metoprolol, atenolol and propranolol belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers",
+            "beta-blocker",
+            "beta-adrenergic blockers",
+            "beta antagonists",
+            "beta-adrenergic antagonists"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "In the Vaughan Williams scheme, which antiarrhythmic class are beta blockers?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "class II",
+          "synonyms": [
+            "class 2",
+            "class two"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which receptor do beta blockers block to slow the heart?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta-1 receptors",
+          "synonyms": [
+            "beta-1",
+            "beta 1",
+            "beta1",
+            "beta one",
+            "beta-1 receptor",
+            "beta-1 adrenergic receptors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Besides heart rate and contractility, which hormone release from the kidney do beta blockers lower?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "renin",
+          "synonyms": [
+            "renin release"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of beta blockers.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "angina",
+          "synonyms": [
+            "chest pain"
+          ]
+        },
+        {
+          "answer": "after myocardial infarction",
+          "synonyms": [
+            "myocardial infarction",
+            "post-MI",
+            "heart attack"
+          ]
+        },
+        {
+          "answer": "heart failure with reduced ejection fraction",
+          "synonyms": [
+            "heart failure",
+            "HFrEF",
+            "CHF"
+          ]
+        },
+        {
+          "answer": "rate control in atrial fibrillation",
+          "synonyms": [
+            "atrial fibrillation",
+            "afib",
+            "rate control"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "hypertrophic cardiomyopathy",
+          "synonyms": [
+            "HCM",
+            "HOCM"
+          ]
+        },
+        {
+          "answer": "thyrotoxicosis symptoms",
+          "synonyms": [
+            "thyrotoxicosis",
+            "hyperthyroidism",
+            "thyroid storm"
+          ]
+        },
+        {
+          "answer": "migraine prevention",
+          "synonyms": [
+            "migraine",
+            "migraine prophylaxis"
+          ]
+        },
+        {
+          "answer": "essential tremor",
+          "synonyms": [
+            "tremor"
+          ]
+        },
+        {
+          "answer": "variceal bleeding prevention",
+          "synonyms": [
+            "varices",
+            "variceal bleeding",
+            "esophageal varices"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "beta-blockers.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which beta blocker prevents migraine and treats essential tremor?",
+      "source_fields": [
+        "indications[7]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "propranolol",
+          "synonyms": [
+            "Inderal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of beta blockers.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bradycardia",
+          "synonyms": [
+            "slow heart rate"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure"
+          ]
+        },
+        {
+          "answer": "AV block",
+          "synonyms": [
+            "heart block",
+            "atrioventricular block"
+          ]
+        },
+        {
+          "answer": "bronchospasm",
+          "synonyms": [
+            "wheeze",
+            "wheezing",
+            "bronchoconstriction",
+            "asthma attack"
+          ]
+        },
+        {
+          "answer": "fatigue",
+          "synonyms": [
+            "tiredness"
+          ]
+        },
+        {
+          "answer": "erectile dysfunction",
+          "synonyms": [
+            "impotence"
+          ]
+        },
+        {
+          "answer": "masked signs of hypoglycemia",
+          "synonyms": [
+            "masked hypoglycemia",
+            "hypoglycemia unawareness"
+          ]
+        },
+        {
+          "answer": "worsening of acute decompensated heart failure",
+          "synonyms": [
+            "worse heart failure",
+            "heart failure decompensation"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "beta-blockers.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "A patient on insulin starts propranolol. Which warning signs might the drug hide?",
+      "source_fields": [
+        "adverse_effects[6]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypoglycemia",
+          "synonyms": [
+            "low blood sugar",
+            "signs of hypoglycemia",
+            "tremor and palpitations",
+            "palpitations"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name a beta-1 selective beta blocker.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "metoprolol",
+          "synonyms": [
+            "Lopressor",
+            "Toprol"
+          ]
+        },
+        {
+          "answer": "atenolol",
+          "synonyms": [
+            "Tenormin"
+          ]
+        },
+        {
+          "answer": "bisoprolol",
+          "synonyms": []
+        },
+        {
+          "answer": "esmolol",
+          "synonyms": [
+            "Brevibloc"
+          ]
+        },
+        {
+          "answer": "nebivolol",
+          "synonyms": [
+            "Bystolic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.management.2",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Which two beta blockers also block alpha-1 receptors?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "carvedilol",
+          "synonyms": [
+            "Coreg"
+          ]
+        },
+        {
+          "answer": "labetalol",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "beta-blockers.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In beta blocker overdose, which hormone raises cAMP in heart cells without using beta receptors?",
+      "source_fields": [
+        "overdose.treatment",
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "glucagon",
+          "synonyms": [
+            "IV glucagon"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "beta-blockers.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What happens if a beta blocker is stopped suddenly?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rebound tachycardia",
+          "synonyms": [
+            "rebound",
+            "tachycardia",
+            "rebound angina",
+            "angina",
+            "rebound hypertension"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,427 @@
+{
+  "script": {
+    "id": "thiazide-diuretics",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Thiazide diuretics",
+    "aliases": [
+      "thiazides",
+      "thiazide-like diuretics"
+    ],
+    "systems": [
+      "cardio",
+      "renal"
+    ],
+    "rotation": [],
+    "class": "Thiazide and thiazide-like diuretics",
+    "class_members": [
+      "hydrochlorothiazide",
+      "chlorthalidone",
+      "indapamide",
+      "metolazone"
+    ],
+    "mechanism": "Block the sodium-chloride cotransporter (NCC) in the distal convoluted tubule. They also increase calcium reabsorption, so urine calcium falls.",
+    "pharmacokinetics": [
+      "chlorthalidone lasts longer than hydrochlorothiazide and still works in advanced chronic kidney disease",
+      "metolazone is often added to a loop diuretic for resistant edema"
+    ],
+    "indications": [
+      "hypertension",
+      "edema, alone or added to a loop diuretic",
+      "calcium kidney stones from hypercalciuria",
+      "nephrogenic diabetes insipidus"
+    ],
+    "adverse_effects": [
+      "hypokalemia",
+      "hyponatremia",
+      "hypercalcemia",
+      "hyperuricemia and gout",
+      "hyperglycemia",
+      "hyperlipidemia",
+      "metabolic alkalosis",
+      "sulfonamide allergy reactions"
+    ],
+    "contraindications": [
+      "gout, as a relative caution",
+      "hyponatremia"
+    ],
+    "interactions": [
+      "raise lithium levels",
+      "hypokalemia raises the risk of digoxin toxicity"
+    ],
+    "monitoring": [
+      "sodium, potassium and calcium",
+      "uric acid and glucose"
+    ],
+    "overdose": {
+      "features": [
+        "dehydration",
+        "electrolyte loss"
+      ],
+      "treatment": [
+        "IV fluids and electrolyte replacement"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "loop-diuretics",
+        "how_to_tell_apart": "Thiazides act on the distal convoluted tubule and keep calcium; loop diuretics act on the thick ascending limb, are stronger and lose calcium.",
+        "compare": [
+          {
+            "label": "Site",
+            "text": "Distal convoluted tubule",
+            "source_field": "mechanism"
+          },
+          {
+            "label": "Calcium",
+            "text": "Kept: hypercalcemia",
+            "source_field": "adverse_effects[2]"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "The hyper side effects: hyperglycemia, hyperlipidemia, hyperuricemia and hypercalcemia.",
+      "Thiazides cause hyponatremia more often than loop diuretics, especially in older women.",
+      "Thiazides paradoxically reduce urine output in nephrogenic diabetes insipidus."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "monitoring"
+      ],
+      "MS4": [
+        "pharmacokinetics",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2025 AHA/ACC Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "thiazide-diuretics.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Hydrochlorothiazide and chlorthalidone belong to which drug class?",
+      "source_fields": [
+        "name",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Thiazide diuretics",
+          "synonyms": [
+            "thiazide",
+            "thiazides",
+            "thiazide diuretic",
+            "thiazide-like diuretics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two thiazide or thiazide-like diuretics.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hydrochlorothiazide",
+          "synonyms": [
+            "HCTZ"
+          ]
+        },
+        {
+          "answer": "chlorthalidone",
+          "synonyms": []
+        },
+        {
+          "answer": "indapamide",
+          "synonyms": []
+        },
+        {
+          "answer": "metolazone",
+          "synonyms": [
+            "Zaroxolyn"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "thiazide-diuretics.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which transporter do thiazides block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sodium-chloride cotransporter",
+          "synonyms": [
+            "NCC",
+            "Na-Cl cotransporter",
+            "sodium chloride cotransporter",
+            "NaCl cotransporter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where in the nephron do thiazides act?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "distal convoluted tubule",
+          "synonyms": [
+            "DCT",
+            "distal tubule"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of thiazide diuretics.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "edema",
+          "synonyms": [
+            "fluid overload",
+            "swelling"
+          ]
+        },
+        {
+          "answer": "calcium kidney stones",
+          "synonyms": [
+            "kidney stones",
+            "kidney stone",
+            "renal stones",
+            "hypercalciuria",
+            "nephrolithiasis"
+          ]
+        },
+        {
+          "answer": "nephrogenic diabetes insipidus",
+          "synonyms": [
+            "diabetes insipidus",
+            "nephrogenic DI"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "thiazide-diuretics.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which kind of diabetes insipidus do thiazides treat?",
+      "source_fields": [
+        "indications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nephrogenic",
+          "synonyms": [
+            "nephrogenic diabetes insipidus",
+            "nephrogenic DI"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three metabolic side effects of thiazides.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hypokalemia",
+          "synonyms": [
+            "low potassium"
+          ]
+        },
+        {
+          "answer": "hyponatremia",
+          "synonyms": [
+            "low sodium"
+          ]
+        },
+        {
+          "answer": "hypercalcemia",
+          "synonyms": [
+            "high calcium"
+          ]
+        },
+        {
+          "answer": "hyperuricemia",
+          "synonyms": [
+            "high uric acid",
+            "gout"
+          ]
+        },
+        {
+          "answer": "hyperglycemia",
+          "synonyms": [
+            "high blood sugar",
+            "high glucose"
+          ]
+        },
+        {
+          "answer": "hyperlipidemia",
+          "synonyms": [
+            "high cholesterol",
+            "dyslipidemia"
+          ]
+        },
+        {
+          "answer": "metabolic alkalosis",
+          "synonyms": [
+            "alkalosis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "thiazide-diuretics.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "An older woman on hydrochlorothiazide becomes confused. Which electrolyte is likely low?",
+      "source_fields": [
+        "adverse_effects[1]",
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyponatremia",
+          "synonyms": [
+            "sodium",
+            "low sodium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Thiazide or loop diuretic: which one raises blood calcium?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart",
+        "adverse_effects[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Thiazides",
+          "synonyms": [
+            "thiazide",
+            "thiazides",
+            "thiazide diuretic",
+            "thiazide diuretics",
+            "hydrochlorothiazide",
+            "HCTZ",
+            "chlorthalidone"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Thiazide or loop diuretic: which one is stronger?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "loop diuretics",
+          "synonyms": [
+            "loop diuretic",
+            "loop",
+            "loops",
+            "furosemide",
+            "bumetanide",
+            "torsemide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which thiazide-like diuretic lasts longer than hydrochlorothiazide and still works in advanced chronic kidney disease?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "chlorthalidone",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "thiazide-diuretics.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which thiazide-like diuretic is often added to a loop diuretic for resistant edema?",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "metolazone",
+          "synonyms": [
+            "Zaroxolyn"
+          ]
+        }
+      ]
+    }
+  ]
+}

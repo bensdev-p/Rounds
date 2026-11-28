@@ -1,0 +1,388 @@
+{
+  "script": {
+    "id": "digoxin",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Digoxin",
+    "aliases": [
+      "digitalis",
+      "Lanoxin"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Cardiac glycoside",
+    "class_members": [
+      "digoxin"
+    ],
+    "mechanism": "Inhibits the sodium-potassium ATPase (Na/K ATPase) in heart muscle. Intracellular sodium rises, so the sodium-calcium exchanger removes less calcium, and more calcium is available for contraction. It also raises vagal tone, slowing the AV node.",
+    "pharmacokinetics": [
+      "cleared by the kidneys, so the dose is cut in kidney disease",
+      "narrow therapeutic range",
+      "long half-life of about 36 to 48 hours"
+    ],
+    "indications": [
+      "rate control in atrial fibrillation, especially with heart failure",
+      "symptom control in heart failure with reduced ejection fraction"
+    ],
+    "adverse_effects": [
+      "nausea, vomiting and abdominal pain",
+      "yellow-green vision (xanthopsia) or blurred vision",
+      "confusion",
+      "arrhythmias of almost any kind, classically atrial tachycardia with block or bidirectional ventricular tachycardia",
+      "hyperkalemia in acute overdose"
+    ],
+    "contraindications": [
+      "atrial fibrillation with Wolff-Parkinson-White syndrome",
+      "second- or third-degree AV block",
+      "hypertrophic obstructive cardiomyopathy"
+    ],
+    "interactions": [
+      "hypokalemia, hypomagnesemia and hypercalcemia increase toxicity",
+      "amiodarone, verapamil and quinidine raise digoxin levels",
+      "loop and thiazide diuretics cause hypokalemia, which increases toxicity"
+    ],
+    "monitoring": [
+      "digoxin level",
+      "potassium and kidney function"
+    ],
+    "overdose": {
+      "features": [
+        "nausea and vomiting",
+        "visual changes",
+        "arrhythmias",
+        "hyperkalemia"
+      ],
+      "treatment": [
+        "digoxin-specific antibody fragments (DigiFab)",
+        "correct potassium and magnesium"
+      ]
+    },
+    "confused_with": [],
+    "pearls": [
+      "In acute digoxin poisoning, hyperkalemia predicts death and is an indication for antibody fragments.",
+      "Digoxin improves symptoms and cuts hospitalizations in heart failure but does not lower mortality.",
+      "Scooped ST segments (the Salvador Dali sag) on the ECG are a digoxin effect, not toxicity."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications",
+        "interactions",
+        "monitoring"
+      ],
+      "MS4": [
+        "overdose.treatment",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      },
+      {
+        "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "digoxin.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which drug class does digoxin belong to?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cardiac glycoside",
+          "synonyms": [
+            "cardiac glycosides",
+            "digitalis glycoside",
+            "glycoside"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Digoxin has a narrow therapeutic range. Which organ clears it?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "kidneys",
+          "synonyms": [
+            "kidney",
+            "renal",
+            "renal excretion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which pump does digoxin inhibit?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sodium-potassium ATPase",
+          "synonyms": [
+            "Na/K ATPase",
+            "Na-K ATPase",
+            "sodium potassium pump",
+            "sodium-potassium pump",
+            "Na+/K+ ATPase"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "How does digoxin slow the AV node?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raises vagal tone",
+          "synonyms": [
+            "vagal tone",
+            "increases vagal tone",
+            "vagal",
+            "vagus",
+            "parasympathetic",
+            "vagomimetic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two uses of digoxin.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rate control in atrial fibrillation",
+          "synonyms": [
+            "atrial fibrillation",
+            "afib",
+            "a fib",
+            "AF",
+            "rate control"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "HFrEF",
+            "CHF"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "digoxin.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Digoxin does not lower mortality in heart failure. What does it reduce?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hospitalizations",
+          "synonyms": [
+            "hospitalisations",
+            "admissions",
+            "hospital admissions",
+            "symptoms"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three signs of digoxin toxicity.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "nausea",
+          "synonyms": [
+            "vomiting",
+            "abdominal pain"
+          ]
+        },
+        {
+          "answer": "yellow-green vision",
+          "synonyms": [
+            "xanthopsia",
+            "yellow vision",
+            "visual changes",
+            "blurred vision",
+            "blurry vision"
+          ]
+        },
+        {
+          "answer": "confusion",
+          "synonyms": []
+        },
+        {
+          "answer": "arrhythmias",
+          "synonyms": [
+            "arrhythmia",
+            "bidirectional ventricular tachycardia",
+            "ventricular tachycardia",
+            "bradycardia",
+            "heart block",
+            "AV block"
+          ]
+        },
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "digoxin.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ventricular rhythm is classic for digoxin toxicity?",
+      "source_fields": [
+        "adverse_effects[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bidirectional ventricular tachycardia",
+          "synonyms": [
+            "bidirectional VT",
+            "bidirectional tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which ECG change is a digoxin effect, not a sign of toxicity?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "scooped ST segments",
+          "synonyms": [
+            "scooped ST",
+            "Salvador Dali sag",
+            "sagging ST segments",
+            "ST scooping"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "In acute digoxin overdose, which lab result predicts death?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium",
+            "raised potassium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the antidote for digoxin toxicity?",
+      "source_fields": [
+        "overdose.treatment[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "digoxin-specific antibody fragments",
+          "synonyms": [
+            "DigiFab",
+            "Digibind",
+            "digoxin immune Fab",
+            "digoxin Fab",
+            "anti-digoxin Fab",
+            "digoxin antibody fragments",
+            "anti-digoxin antibody",
+            "Fab fragments"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "digoxin.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a drug that raises digoxin levels.",
+      "source_fields": [
+        "interactions[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amiodarone",
+          "synonyms": []
+        },
+        {
+          "answer": "verapamil",
+          "synonyms": []
+        },
+        {
+          "answer": "quinidine",
+          "synonyms": []
+        }
+      ]
+    }
+  ]
+}

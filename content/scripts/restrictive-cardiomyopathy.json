@@ -1,0 +1,432 @@
+{
+  "script": {
+    "id": "restrictive-cardiomyopathy",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Restrictive cardiomyopathy",
+    "aliases": [
+      "restrictive heart disease"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults; the least common cardiomyopathy",
+      "risk_factors": [
+        "amyloidosis",
+        "sarcoidosis",
+        "hemochromatosis",
+        "radiation",
+        "endomyocardial fibrosis",
+        "Loeffler endocarditis (hypereosinophilia)",
+        "Fabry disease"
+      ]
+    },
+    "pathophysiology": "Stiff ventricles fill poorly in diastole, with normal or near-normal wall thickness and systolic function (thick walls in infiltrative disease such as amyloidosis). Filling pressures rise, causing heart failure with a preserved ejection fraction and large atria.",
+    "timeline": {
+      "onset": "Gradual",
+      "course": "Progressive; the outlook depends on the cause and is poor in amyloidosis"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "fatigue",
+        "leg swelling",
+        "abdominal swelling"
+      ],
+      "exam": [
+        "raised jugular venous pressure that rises on inspiration (Kussmaul sign)",
+        "S3",
+        "edema and ascites"
+      ],
+      "labs": [
+        "raised BNP",
+        "serum free light chains and immunofixation for AL amyloidosis"
+      ],
+      "imaging": [
+        "echocardiogram with normal-sized ventricles, large atria and diastolic dysfunction",
+        "low-voltage ECG despite thick walls in amyloidosis",
+        "cardiac MRI with late gadolinium enhancement",
+        "technetium pyrophosphate scan, which diagnoses transthyretin amyloidosis without a biopsy once light-chain tests rule out AL amyloidosis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram",
+        "cardiac MRI",
+        "endomyocardial biopsy when the cause is unclear"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "diuretics for congestion",
+        "treat the cause: tafamidis or acoramidis (stabilizers) or vutrisiran (a silencer) for transthyretin amyloidosis, chemotherapy for AL amyloidosis, phlebotomy for hemochromatosis"
+      ],
+      "next_line": [
+        "heart transplant in selected patients"
+      ]
+    },
+    "complications": [
+      "heart failure",
+      "atrial fibrillation",
+      "thromboembolism",
+      "sudden death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "constrictive-pericarditis",
+        "how_to_tell_apart": "Both fill poorly and raise venous pressure, but restrictive cardiomyopathy has stiff heart muscle, a high BNP and a normal pericardium; constrictive pericarditis has a thick, often calcified pericardium, a pericardial knock and a lower BNP.",
+        "compare": [
+          {
+            "label": "Problem",
+            "text": "Stiff ventricles",
+            "source_field": "pathophysiology"
+          },
+          {
+            "label": "BNP",
+            "text": "Raised",
+            "source_field": "key_findings.labs[0]"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "Amyloidosis is the classic cause: a low-voltage ECG with thick ventricular walls on echo.",
+      "In cardiac amyloidosis, avoid non-dihydropyridine calcium channel blockers and use digoxin only with caution, because they bind the fibrils and cause toxicity.",
+      "Kussmaul sign, a rise in JVP on inspiration, occurs in both restrictive cardiomyopathy and constrictive pericarditis."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.risk_factors"
+      ],
+      "MS3": [
+        "key_findings.imaging",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "key_findings.imaging[3]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2023 ESC Guidelines for the management of cardiomyopathies"
+      },
+      {
+        "title": "2023 ACC Expert Consensus Decision Pathway on Comprehensive Multidisciplinary Care for the Patient With Cardiac Amyloidosis"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "restrictive-cardiomyopathy.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Heart failure with a normal ejection fraction, large atria and normal-sized ventricles, and a low-voltage ECG despite thick walls. Which cardiomyopathy?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Restrictive cardiomyopathy",
+          "synonyms": [
+            "restrictive",
+            "restrictive heart disease",
+            "cardiac amyloidosis",
+            "amyloid cardiomyopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the classic cause of restrictive cardiomyopathy?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amyloidosis",
+          "synonyms": [
+            "amyloid",
+            "cardiac amyloidosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of restrictive cardiomyopathy.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "amyloidosis",
+          "synonyms": [
+            "amyloid"
+          ]
+        },
+        {
+          "answer": "sarcoidosis",
+          "synonyms": [
+            "sarcoid"
+          ]
+        },
+        {
+          "answer": "hemochromatosis",
+          "synonyms": [
+            "iron overload"
+          ]
+        },
+        {
+          "answer": "radiation",
+          "synonyms": [
+            "radiotherapy"
+          ]
+        },
+        {
+          "answer": "endomyocardial fibrosis",
+          "synonyms": []
+        },
+        {
+          "answer": "Loeffler endocarditis",
+          "synonyms": [
+            "hypereosinophilia",
+            "eosinophilia"
+          ]
+        },
+        {
+          "answer": "Fabry disease",
+          "synonyms": [
+            "Fabry"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "restrictive-cardiomyopathy.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "In restrictive cardiomyopathy, what does the JVP do on inspiration?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rises",
+          "synonyms": [
+            "goes up",
+            "increases",
+            "Kussmaul sign",
+            "Kussmaul"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Restrictive cardiomyopathy or constrictive pericarditis: which has a high BNP?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Restrictive cardiomyopathy",
+          "synonyms": [
+            "restrictive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Restrictive cardiomyopathy or constrictive pericarditis: which has a normal pericardium?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Restrictive cardiomyopathy",
+          "synonyms": [
+            "restrictive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Light-chain tests are normal. Which nuclear scan diagnoses transthyretin amyloidosis without a biopsy?",
+      "source_fields": [
+        "key_findings.imaging[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "technetium pyrophosphate scan",
+          "synonyms": [
+            "PYP scan",
+            "PYP",
+            "pyrophosphate scan",
+            "technetium scan",
+            "DPD scan",
+            "bone scintigraphy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood tests look for AL amyloidosis?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "serum free light chains",
+          "synonyms": [
+            "free light chains",
+            "free light chain",
+            "light chains",
+            "light chain",
+            "immunofixation",
+            "serum protein electrophoresis",
+            "SPEP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug treats transthyretin amyloid cardiomyopathy?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tafamidis",
+          "synonyms": [
+            "Vyndaqel",
+            "Vyndamax"
+          ]
+        },
+        {
+          "answer": "acoramidis",
+          "synonyms": [
+            "Attruby"
+          ]
+        },
+        {
+          "answer": "vutrisiran",
+          "synonyms": [
+            "Amvuttra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.management.2",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two drugs to avoid or use only with caution in cardiac amyloidosis.",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "digoxin",
+          "synonyms": []
+        },
+        {
+          "answer": "non-dihydropyridine calcium channel blockers",
+          "synonyms": [
+            "calcium channel blockers",
+            "calcium channel blocker",
+            "CCB",
+            "verapamil",
+            "diltiazem"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "restrictive-cardiomyopathy.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Thick walls on echo in cardiac amyloidosis, but what does the ECG show?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "low-voltage ECG",
+          "synonyms": [
+            "low voltage",
+            "low QRS voltage",
+            "small complexes"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which iron disorder causes a treatable restrictive cardiomyopathy?",
+      "source_fields": [
+        "epidemiology.risk_factors[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hemochromatosis",
+          "synonyms": [
+            "iron overload",
+            "hereditary hemochromatosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "restrictive-cardiomyopathy.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How is the cardiomyopathy of hemochromatosis treated?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "phlebotomy",
+          "synonyms": [
+            "venesection",
+            "bloodletting"
+          ]
+        }
+      ]
+    }
+  ]
+}

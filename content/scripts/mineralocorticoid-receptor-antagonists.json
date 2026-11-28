@@ -1,0 +1,379 @@
+{
+  "script": {
+    "id": "mineralocorticoid-receptor-antagonists",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Spironolactone and eplerenone",
+    "aliases": [
+      "mineralocorticoid receptor antagonists",
+      "MRAs",
+      "aldosterone antagonists"
+    ],
+    "systems": [
+      "cardio",
+      "renal",
+      "endo"
+    ],
+    "rotation": [],
+    "class": "Mineralocorticoid receptor antagonists (potassium-sparing diuretics)",
+    "class_members": [
+      "spironolactone",
+      "eplerenone",
+      "finerenone"
+    ],
+    "mechanism": "Block the aldosterone (mineralocorticoid) receptor in the collecting duct, so less sodium is reabsorbed and less potassium and hydrogen are excreted. They also block aldosterone's fibrosis-promoting effects on the heart.",
+    "pharmacokinetics": [
+      "spironolactone has active metabolites and takes days to reach full effect",
+      "eplerenone is more selective and metabolized by CYP3A4"
+    ],
+    "indications": [
+      "heart failure with reduced ejection fraction",
+      "primary hyperaldosteronism",
+      "resistant hypertension",
+      "ascites from cirrhosis",
+      "diabetic kidney disease (finerenone)",
+      "acne and hirsutism (spironolactone)"
+    ],
+    "adverse_effects": [
+      "hyperkalemia",
+      "gynecomastia with spironolactone",
+      "menstrual irregularity",
+      "metabolic acidosis",
+      "rise in creatinine"
+    ],
+    "contraindications": [
+      "potassium above 5.0",
+      "eGFR below 30, for heart failure use"
+    ],
+    "interactions": [
+      "ACE inhibitors, ARBs and potassium supplements raise potassium further",
+      "strong CYP3A4 inhibitors raise eplerenone levels"
+    ],
+    "monitoring": [
+      "potassium and creatinine at 3 days, 1 week, then monthly for 3 months"
+    ],
+    "overdose": {
+      "features": [
+        "hyperkalemia"
+      ],
+      "treatment": [
+        "stop the drug and treat hyperkalemia"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "loop-diuretics",
+        "how_to_tell_apart": "Spironolactone keeps potassium and can cause hyperkalemia; loop diuretics such as furosemide waste potassium and cause hypokalemia, which is why the two are often combined.",
+        "compare": [
+          {
+            "label": "Potassium",
+            "text": "Kept: hyperkalemia",
+            "source_field": "adverse_effects[0]"
+          },
+          {
+            "label": "Site",
+            "text": "Collecting duct",
+            "source_field": "mechanism"
+          }
+        ]
+      }
+    ],
+    "pearls": [
+      "Spironolactone also blocks androgen receptors, causing gynecomastia; eplerenone rarely does.",
+      "In cirrhotic ascites, spironolactone is combined with furosemide in a 100 to 40 ratio.",
+      "Spironolactone is the treatment of choice for bilateral adrenal hyperplasia causing primary hyperaldosteronism."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects",
+        "monitoring"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "mineralocorticoid-receptor-antagonists.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Spironolactone and eplerenone belong to which drug class?",
+      "source_fields": [
+        "aliases",
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mineralocorticoid receptor antagonists",
+          "synonyms": [
+            "mineralocorticoid receptor antagonist",
+            "MRA",
+            "MRAs",
+            "aldosterone antagonists",
+            "aldosterone antagonist",
+            "potassium-sparing diuretics",
+            "potassium-sparing diuretic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Name the MRA used for diabetic kidney disease.",
+      "source_fields": [
+        "indications[4]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "finerenone",
+          "synonyms": [
+            "Kerendia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which receptor do these drugs block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aldosterone",
+          "synonyms": [
+            "aldosterone receptor",
+            "mineralocorticoid receptor",
+            "mineralocorticoid"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where in the nephron do they act?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "collecting duct",
+          "synonyms": [
+            "cortical collecting duct",
+            "collecting tubule"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of spironolactone.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart failure with reduced ejection fraction",
+          "synonyms": [
+            "heart failure",
+            "HFrEF",
+            "CHF"
+          ]
+        },
+        {
+          "answer": "primary hyperaldosteronism",
+          "synonyms": [
+            "hyperaldosteronism",
+            "Conn syndrome",
+            "Conn's syndrome"
+          ]
+        },
+        {
+          "answer": "resistant hypertension",
+          "synonyms": [
+            "hypertension"
+          ]
+        },
+        {
+          "answer": "ascites",
+          "synonyms": [
+            "cirrhosis",
+            "cirrhotic ascites"
+          ]
+        },
+        {
+          "answer": "acne",
+          "synonyms": []
+        },
+        {
+          "answer": "hirsutism",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In cirrhotic ascites, which diuretic is paired with spironolactone?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "furosemide",
+          "synonyms": [
+            "Lasix",
+            "loop diuretic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What is the most dangerous adverse effect of MRAs?",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperkalemia",
+          "synonyms": [
+            "high potassium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "A man on spironolactone has tender breast swelling. Why?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "blocks androgen receptors",
+          "synonyms": [
+            "blocks the androgen receptor",
+            "antiandrogen",
+            "antiandrogenic",
+            "anti-androgenic",
+            "anti-androgen effect",
+            "androgen receptor blockade",
+            "androgen receptor antagonism",
+            "androgen blockade"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Gynecomastia on spironolactone. Which MRA do you switch to?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "eplerenone",
+          "synonyms": [
+            "Inspra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Spironolactone or furosemide: which one raises potassium?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Spironolactone",
+          "synonyms": [
+            "eplerenone",
+            "MRA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What spironolactone-to-furosemide ratio is used for ascites?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "100 to 40",
+          "synonyms": [
+            "100 to 40 ratio",
+            "100:40",
+            "100 mg to 40 mg",
+            "5 to 2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mineralocorticoid-receptor-antagonists.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which cause of primary hyperaldosteronism is treated with spironolactone rather than surgery?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bilateral adrenal hyperplasia",
+          "synonyms": [
+            "adrenal hyperplasia",
+            "bilateral hyperplasia",
+            "idiopathic hyperaldosteronism"
+          ]
+        }
+      ]
+    }
+  ]
+}

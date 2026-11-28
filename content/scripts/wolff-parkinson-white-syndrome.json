@@ -1,0 +1,382 @@
+{
+  "script": {
+    "id": "wolff-parkinson-white-syndrome",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Wolff-Parkinson-White syndrome",
+    "aliases": [
+      "WPW",
+      "Wolff-Parkinson-White"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children and young adults; the pattern is found in about 1 to 3 per 1000 people",
+      "risk_factors": [
+        "Ebstein anomaly",
+        "hypertrophic cardiomyopathy",
+        "family history"
+      ]
+    },
+    "pathophysiology": "An accessory pathway (bundle of Kent) connects the atria and ventricles, bypassing the AV node. The ventricles are pre-excited, and the pathway can carry reentrant tachycardias or conduct atrial fibrillation very fast to the ventricles.",
+    "timeline": {
+      "onset": "Palpitations often begin in childhood or adolescence",
+      "course": "Many have no symptoms; a small risk of sudden death from pre-excited atrial fibrillation"
+    },
+    "key_findings": {
+      "history": [
+        "episodes of palpitations",
+        "dizziness or syncope",
+        "sudden death, rarely, as the first sign"
+      ],
+      "exam": [
+        "often normal between episodes"
+      ],
+      "labs": [],
+      "imaging": [
+        "ECG with a short PR interval, a delta wave and a wide QRS",
+        "echocardiogram to look for structural disease such as Ebstein anomaly"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "ECG",
+        "electrophysiology study"
+      ],
+      "criteria": [
+        "WPW syndrome: pre-excitation on the ECG plus a tachyarrhythmia"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "catheter ablation of the accessory pathway for patients with symptoms",
+        "vagal maneuvers or adenosine for orthodromic reentrant tachycardia with a narrow QRS"
+      ],
+      "next_line": [
+        "procainamide, ibutilide or electrical cardioversion for pre-excited atrial fibrillation",
+        "avoid AV nodal blockers (adenosine, beta blockers, verapamil, diltiazem, digoxin) and IV amiodarone in pre-excited atrial fibrillation"
+      ]
+    },
+    "complications": [
+      "atrioventricular reentrant tachycardia",
+      "pre-excited atrial fibrillation turning into ventricular fibrillation",
+      "sudden cardiac death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "supraventricular-tachycardia",
+        "how_to_tell_apart": "WPW shows a delta wave and short PR at rest from an accessory pathway; AV nodal reentrant tachycardia has a normal resting ECG and a circuit inside the AV node."
+      }
+    ],
+    "pearls": [
+      "Pre-excited atrial fibrillation looks like an irregular, very fast, wide-complex tachycardia with changing QRS shapes.",
+      "Ablation cures most patients.",
+      "Ebstein anomaly is often associated with accessory pathways."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.imaging[0]"
+      ],
+      "MS3": [
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2015 ACC/AHA/HRS Guideline for the Management of Adult Patients With Supraventricular Tachycardia"
+      },
+      {
+        "title": "2019 ESC Guidelines for the management of patients with supraventricular tachycardia"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "wolff-parkinson-white-syndrome.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 19-year-old with recurrent palpitations has a short PR interval, a slurred upstroke of the QRS and a wide QRS on his resting ECG. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Wolff-Parkinson-White syndrome",
+          "synonyms": [
+            "WPW",
+            "Wolff-Parkinson-White",
+            "pre-excitation syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the slurred upstroke of the QRS called?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "delta wave",
+          "synonyms": [
+            "delta waves"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What is the accessory pathway in WPW called?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bundle of Kent",
+          "synonyms": [
+            "Kent bundle",
+            "Kent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which congenital tricuspid valve anomaly is linked to accessory pathways?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ebstein anomaly",
+          "synonyms": [
+            "Ebstein",
+            "Ebstein's anomaly",
+            "Ebsteins anomaly"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "WPW or AV nodal reentrant tachycardia: which shows a delta wave at rest?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "WPW",
+          "synonyms": [
+            "Wolff-Parkinson-White",
+            "Wolff-Parkinson-White syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What does pre-excited atrial fibrillation look like on the ECG?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "irregular, very fast, wide-complex tachycardia",
+          "synonyms": [
+            "irregular wide complex tachycardia",
+            "irregular wide-complex tachycardia",
+            "fast irregular wide QRS"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name the three ECG signs of pre-excitation.",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "short PR interval",
+          "synonyms": [
+            "short PR",
+            "short PR intervals"
+          ]
+        },
+        {
+          "answer": "delta wave",
+          "synonyms": [
+            "delta waves",
+            "slurred upstroke"
+          ]
+        },
+        {
+          "answer": "wide QRS",
+          "synonyms": [
+            "broad QRS"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In WPW, which test maps the accessory pathway before ablation?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "electrophysiology study",
+          "synonyms": [
+            "EP study",
+            "EPS",
+            "electrophysiological study"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Definitive treatment of symptomatic WPW?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "catheter ablation",
+          "synonyms": [
+            "ablation",
+            "radiofrequency ablation",
+            "RF ablation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Stable pre-excited atrial fibrillation. Name a treatment.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "procainamide",
+          "synonyms": [
+            "Pronestyl"
+          ]
+        },
+        {
+          "answer": "ibutilide",
+          "synonyms": [
+            "Corvert"
+          ]
+        },
+        {
+          "answer": "electrical cardioversion",
+          "synonyms": [
+            "cardioversion",
+            "DC cardioversion"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.pearl.1",
+      "rung": "pearl",
+      "kind": "list",
+      "prompt": "Name two drugs to avoid in pre-excited atrial fibrillation.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "adenosine",
+          "synonyms": []
+        },
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers"
+          ]
+        },
+        {
+          "answer": "verapamil",
+          "synonyms": [
+            "calcium channel blockers",
+            "calcium channel blocker"
+          ]
+        },
+        {
+          "answer": "diltiazem",
+          "synonyms": []
+        },
+        {
+          "answer": "digoxin",
+          "synonyms": []
+        },
+        {
+          "answer": "IV amiodarone",
+          "synonyms": [
+            "amiodarone"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "wolff-parkinson-white-syndrome.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which fatal rhythm can pre-excited atrial fibrillation turn into?",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ventricular fibrillation",
+          "synonyms": [
+            "VF",
+            "v fib"
+          ]
+        }
+      ]
+    }
+  ]
+}

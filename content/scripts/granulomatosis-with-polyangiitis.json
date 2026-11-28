@@ -1,0 +1,405 @@
+{
+  "script": {
+    "id": "granulomatosis-with-polyangiitis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Granulomatosis with polyangiitis",
+    "aliases": [
+      "GPA",
+      "Wegener granulomatosis"
+    ],
+    "systems": [
+      "cardio",
+      "pulm",
+      "renal"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults, usually aged 40 to 65",
+      "risk_factors": [
+        "age 40 to 65",
+        "white ancestry",
+        "nasal carriage of Staphylococcus aureus, linked to relapse"
+      ]
+    },
+    "pathophysiology": "A small-vessel vasculitis with necrotizing granulomas, linked to ANCA against proteinase 3 (PR3-ANCA, c-ANCA). It classically affects the upper airway, the lungs and the kidneys.",
+    "timeline": {
+      "onset": "Weeks to months of sinus and systemic symptoms",
+      "course": "Fatal untreated; treatment brings remission, but relapses are common"
+    },
+    "key_findings": {
+      "history": [
+        "chronic sinusitis or nosebleeds",
+        "hemoptysis",
+        "hematuria",
+        "fever, weight loss and joint pain"
+      ],
+      "exam": [
+        "saddle nose deformity",
+        "nasal crusting or ulcers",
+        "palpable purpura"
+      ],
+      "labs": [
+        "positive PR3-ANCA (c-ANCA)",
+        "hematuria with red cell casts",
+        "rising creatinine",
+        "raised ESR or CRP"
+      ],
+      "imaging": [
+        "chest CT with lung nodules, often cavitating"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "PR3-ANCA (c-ANCA)",
+        "biopsy of an affected organ showing necrotizing granulomatous vasculitis"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "induction with high-dose glucocorticoids plus rituximab or cyclophosphamide"
+      ],
+      "next_line": [
+        "maintenance with rituximab or azathioprine",
+        "plasma exchange only in selected cases, such as severe kidney disease",
+        "trimethoprim-sulfamethoxazole to prevent Pneumocystis pneumonia during treatment"
+      ]
+    },
+    "complications": [
+      "rapidly progressive glomerulonephritis",
+      "pulmonary hemorrhage",
+      "saddle nose deformity",
+      "subglottic stenosis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "microscopic-polyangiitis",
+        "how_to_tell_apart": "Granulomatosis with polyangiitis involves the sinuses and nose, has granulomas and is usually PR3-ANCA; microscopic polyangiitis has no granulomas or upper airway disease and is usually MPO-ANCA."
+      },
+      {
+        "script_id": "eosinophilic-granulomatosis-with-polyangiitis",
+        "how_to_tell_apart": "Granulomatosis with polyangiitis has destructive sinus and nose disease without asthma or eosinophilia and is usually c-ANCA; EGPA comes with asthma and marked eosinophilia and is p-ANCA positive in some."
+      }
+    ],
+    "pearls": [
+      "Upper airway disease separates granulomatosis with polyangiitis from microscopic polyangiitis, which has no granulomas and is usually MPO-ANCA (p-ANCA).",
+      "c-ANCA is aimed at proteinase 3.",
+      "The classic triad is upper airway, lung and kidney involvement."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[1]"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Antineutrophil Cytoplasmic Antibody-Associated Vasculitis"
+      },
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "granulomatosis-with-polyangiitis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 50-year-old has chronic sinusitis with nosebleeds, hemoptysis and blood in the urine. c-ANCA is positive. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Granulomatosis with polyangiitis",
+          "synonyms": [
+            "GPA",
+            "Wegener granulomatosis",
+            "Wegener",
+            "Wegener's granulomatosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name the three sites in the classic triad of granulomatosis with polyangiitis.",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "upper airway",
+          "synonyms": [
+            "sinuses",
+            "nose",
+            "ENT",
+            "upper respiratory tract"
+          ]
+        },
+        {
+          "answer": "lung",
+          "synonyms": [
+            "lungs",
+            "pulmonary"
+          ]
+        },
+        {
+          "answer": "kidney",
+          "synonyms": [
+            "kidneys",
+            "renal"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which antibody is typical of granulomatosis with polyangiitis?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PR3-ANCA",
+          "synonyms": [
+            "c-ANCA",
+            "cANCA",
+            "cytoplasmic ANCA",
+            "anti-PR3",
+            "anti-proteinase 3",
+            "proteinase 3",
+            "PR3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What size of vessel does granulomatosis with polyangiitis affect?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "small-vessel",
+          "synonyms": [
+            "small",
+            "small vessels",
+            "small-sized vessels",
+            "small to medium vessels"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Granulomatosis with polyangiitis or microscopic polyangiitis: which has upper airway disease and granulomas?",
+      "source_fields": [
+        "name",
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Granulomatosis with polyangiitis",
+          "synonyms": [
+            "GPA",
+            "Wegener granulomatosis",
+            "Wegener",
+            "Wegener's granulomatosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ANCA is typical of microscopic polyangiitis?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "MPO-ANCA",
+          "synonyms": [
+            "p-ANCA",
+            "pANCA",
+            "perinuclear ANCA",
+            "anti-MPO",
+            "myeloperoxidase",
+            "MPO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.differentiate.3",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Granulomatosis with polyangiitis or EGPA: which comes without asthma or eosinophilia?",
+      "source_fields": [
+        "name",
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Granulomatosis with polyangiitis",
+          "synonyms": [
+            "GPA",
+            "Wegener granulomatosis",
+            "Wegener"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does the chest CT show?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lung nodules",
+          "synonyms": [
+            "nodules",
+            "lung nodule",
+            "pulmonary nodules",
+            "cavitating nodules",
+            "cavitary nodules",
+            "cavitating lesions",
+            "cavities"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Kidney involvement: what does urine microscopy show?",
+      "source_fields": [
+        "key_findings.labs[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "red cell casts",
+          "synonyms": [
+            "RBC casts",
+            "red blood cell casts",
+            "red cell cast",
+            "RBC cast"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Induction therapy is glucocorticoids plus which drug?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rituximab",
+          "synonyms": [
+            "Rituxan",
+            "anti-CD20"
+          ]
+        },
+        {
+          "answer": "cyclophosphamide",
+          "synonyms": [
+            "Cytoxan"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which antibiotic prevents Pneumocystis pneumonia during treatment?",
+      "source_fields": [
+        "management.next_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "trimethoprim-sulfamethoxazole",
+          "synonyms": [
+            "TMP-SMX",
+            "Bactrim",
+            "co-trimoxazole",
+            "cotrimoxazole",
+            "Septra"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What nasal deformity follows destruction of the septal cartilage?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "saddle nose deformity",
+          "synonyms": [
+            "saddle nose"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "granulomatosis-with-polyangiitis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which airway narrowing is a late complication?",
+      "source_fields": [
+        "complications[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "subglottic stenosis",
+          "synonyms": [
+            "tracheal stenosis"
+          ]
+        }
+      ]
+    }
+  ]
+}

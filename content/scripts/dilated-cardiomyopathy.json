@@ -1,0 +1,429 @@
+{
+  "script": {
+    "id": "dilated-cardiomyopathy",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Dilated cardiomyopathy",
+    "aliases": [
+      "DCM",
+      "congestive cardiomyopathy"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults of any age; the most common cardiomyopathy",
+      "risk_factors": [
+        "genetic variants, often in titin",
+        "heavy alcohol use",
+        "myocarditis, often viral",
+        "doxorubicin and other anthracyclines",
+        "the peripartum period",
+        "cocaine use",
+        "Chagas disease",
+        "hemochromatosis",
+        "thyroid disease"
+      ]
+    },
+    "pathophysiology": "The ventricles dilate and contract weakly, causing heart failure with a reduced ejection fraction. The heart shows eccentric hypertrophy, with sarcomeres added in series.",
+    "timeline": {
+      "onset": "Usually gradual heart failure symptoms",
+      "course": "Progressive; ventricular arrhythmias and sudden death are risks"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "orthopnea",
+        "fatigue",
+        "leg swelling"
+      ],
+      "exam": [
+        "S3",
+        "displaced apex beat",
+        "raised jugular venous pressure",
+        "murmur of functional mitral regurgitation"
+      ],
+      "labs": [
+        "raised BNP",
+        "iron studies, thyroid tests and HIV testing to look for causes"
+      ],
+      "imaging": [
+        "echocardiogram showing a dilated left ventricle with a low ejection fraction",
+        "cardiac MRI to look for myocarditis or infiltration",
+        "chest X-ray with a large, globular heart"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram"
+      ],
+      "criteria": [
+        "a dilated left ventricle with reduced systolic function, not explained by coronary disease or abnormal loading conditions"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "guideline-directed therapy for heart failure with reduced ejection fraction",
+        "treat the cause: stop alcohol or the toxic drug"
+      ],
+      "next_line": [
+        "ICD for an ejection fraction of 35% or less despite therapy",
+        "heart transplant in end-stage disease"
+      ]
+    },
+    "complications": [
+      "heart failure",
+      "ventricular arrhythmias and sudden death",
+      "thromboembolism from a mural thrombus",
+      "functional mitral regurgitation"
+    ],
+    "confused_with": [
+      {
+        "script_id": "hypertrophic-cardiomyopathy",
+        "how_to_tell_apart": "Dilated cardiomyopathy has a big, thin-walled ventricle that pumps weakly, with a low ejection fraction; hypertrophic cardiomyopathy has a thick, stiff ventricle that pumps normally or too well."
+      }
+    ],
+    "pearls": [
+      "Dilated cardiomyopathy shows eccentric hypertrophy; hypertrophic cardiomyopathy shows concentric, often asymmetric, hypertrophy.",
+      "Peripartum cardiomyopathy appears in the last month of pregnancy or up to 5 months after delivery.",
+      "Doxorubicin cardiotoxicity is dose-dependent and largely irreversible; dexrazoxane helps prevent it."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.risk_factors"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2023 ESC Guidelines for the management of cardiomyopathies"
+      },
+      {
+        "title": "2022 AHA/ACC/HFSA Guideline for the Management of Heart Failure"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "dilated-cardiomyopathy.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 45-year-old who drinks heavily has orthopnea. Echo shows a dilated left ventricle with an ejection fraction of 20%, and his coronaries are normal. Which cardiomyopathy?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Dilated cardiomyopathy",
+          "synonyms": [
+            "DCM",
+            "alcoholic cardiomyopathy",
+            "congestive cardiomyopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which heart failure phenotype does dilated cardiomyopathy cause?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart failure with a reduced ejection fraction",
+          "synonyms": [
+            "HFrEF",
+            "reduced ejection fraction",
+            "systolic heart failure",
+            "low ejection fraction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of dilated cardiomyopathy.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "genetic variants",
+          "synonyms": [
+            "genetic",
+            "familial",
+            "inherited",
+            "titin"
+          ]
+        },
+        {
+          "answer": "heavy alcohol use",
+          "synonyms": [
+            "alcohol",
+            "alcoholism",
+            "drinking"
+          ]
+        },
+        {
+          "answer": "myocarditis",
+          "synonyms": [
+            "viral myocarditis",
+            "coxsackievirus",
+            "coxsackie",
+            "viral infection"
+          ]
+        },
+        {
+          "answer": "doxorubicin",
+          "synonyms": [
+            "anthracyclines",
+            "anthracycline",
+            "chemotherapy",
+            "Adriamycin"
+          ]
+        },
+        {
+          "answer": "peripartum",
+          "synonyms": [
+            "pregnancy",
+            "peripartum cardiomyopathy",
+            "postpartum"
+          ]
+        },
+        {
+          "answer": "cocaine use",
+          "synonyms": [
+            "cocaine"
+          ]
+        },
+        {
+          "answer": "Chagas disease",
+          "synonyms": [
+            "Chagas",
+            "Chagas'",
+            "Trypanosoma cruzi"
+          ]
+        },
+        {
+          "answer": "hemochromatosis",
+          "synonyms": [
+            "iron overload"
+          ]
+        },
+        {
+          "answer": "thyroid disease",
+          "synonyms": [
+            "hyperthyroidism",
+            "hypothyroidism"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "dilated-cardiomyopathy.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which drug helps prevent doxorubicin cardiotoxicity?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dexrazoxane",
+          "synonyms": [
+            "Zinecard"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Dilated or hypertrophic cardiomyopathy: which shows eccentric hypertrophy?",
+      "source_fields": [
+        "name",
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Dilated cardiomyopathy",
+          "synonyms": [
+            "DCM",
+            "dilated"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "A dilated, weak left ventricle. What must be ruled out before calling it dilated cardiomyopathy?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary disease",
+          "synonyms": [
+            "coronary artery disease",
+            "CAD",
+            "ischemic heart disease",
+            "ischemia"
+          ]
+        },
+        {
+          "answer": "abnormal loading conditions",
+          "synonyms": [
+            "hypertension",
+            "valve disease",
+            "valvular disease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms dilated cardiomyopathy?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test looks for myocarditis or infiltration as the cause?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cardiac MRI",
+          "synonyms": [
+            "MRI",
+            "cardiac magnetic resonance",
+            "CMR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Alcoholic dilated cardiomyopathy. Besides heart failure drugs, what is the key step?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stop alcohol",
+          "synonyms": [
+            "abstinence",
+            "alcohol cessation",
+            "stop drinking",
+            "quit alcohol",
+            "quit drinking",
+            "abstain from alcohol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Ejection fraction is still 30% after three months of therapy. Which device prevents sudden death?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ICD",
+          "synonyms": [
+            "implantable cardioverter-defibrillator",
+            "implantable cardioverter defibrillator",
+            "defibrillator",
+            "AICD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Up to how long after delivery can peripartum cardiomyopathy appear?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "5 months",
+          "synonyms": [
+            "five months",
+            "up to 5 months after delivery",
+            "5 months postpartum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "dilated-cardiomyopathy.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Where can emboli come from in dilated cardiomyopathy?",
+      "source_fields": [
+        "complications[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mural thrombus",
+          "synonyms": [
+            "ventricular thrombus",
+            "LV thrombus",
+            "left ventricular thrombus",
+            "thrombus",
+            "left ventricle"
+          ]
+        }
+      ]
+    }
+  ]
+}

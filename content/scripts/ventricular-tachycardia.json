@@ -1,0 +1,420 @@
+{
+  "script": {
+    "id": "ventricular-tachycardia",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Ventricular tachycardia",
+    "aliases": [
+      "VT"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Adults with structural heart disease, most often a prior myocardial infarction",
+      "risk_factors": [
+        "prior myocardial infarction with scar",
+        "cardiomyopathy",
+        "heart failure with a low ejection fraction",
+        "electrolyte disturbances such as low potassium or magnesium",
+        "long QT, causing torsades de pointes",
+        "drug toxicity"
+      ]
+    },
+    "pathophysiology": "A rapid rhythm starting in the ventricles, usually from reentry around scar after an MI, at rates above 100 and usually 150 to 250, with wide QRS complexes. It can degenerate into ventricular fibrillation.",
+    "timeline": {
+      "onset": "Sudden",
+      "course": "Sustained VT lasts over 30 seconds or needs earlier termination because of hemodynamic compromise; it can cause shock and cardiac arrest"
+    },
+    "key_findings": {
+      "history": [
+        "palpitations",
+        "dizziness or syncope",
+        "chest pain",
+        "cardiac arrest"
+      ],
+      "exam": [
+        "tachycardia",
+        "hypotension or no pulse",
+        "cannon A waves from AV dissociation"
+      ],
+      "labs": [
+        "potassium and magnesium",
+        "troponin"
+      ],
+      "imaging": [
+        "ECG: regular wide-complex tachycardia with AV dissociation, fusion beats and capture beats",
+        "echocardiogram, cardiac MRI and coronary assessment after recovery"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "12-lead ECG"
+      ],
+      "criteria": [
+        "a wide-complex tachycardia in a patient with structural heart disease is VT until proven otherwise"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "pulseless VT: defibrillation and advanced life support",
+        "unstable VT with a pulse: synchronized cardioversion",
+        "stable VT: synchronized cardioversion, or IV procainamide, amiodarone or sotalol"
+      ],
+      "next_line": [
+        "ICD for secondary prevention",
+        "catheter ablation for recurrent VT",
+        "IV magnesium for torsades de pointes"
+      ]
+    },
+    "complications": [
+      "ventricular fibrillation",
+      "cardiac arrest",
+      "sudden death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "supraventricular-tachycardia",
+        "how_to_tell_apart": "VT is a wide-complex tachycardia with AV dissociation, fusion and capture beats, usually with structural heart disease; SVT is usually narrow-complex and responds to vagal maneuvers or adenosine."
+      },
+      {
+        "script_id": "long-qt-syndrome",
+        "how_to_tell_apart": "Scar-related VT is usually monomorphic, with structural heart disease; long QT syndrome causes polymorphic VT (torsades de pointes) with a long QT between episodes, treated with magnesium."
+      }
+    ],
+    "pearls": [
+      "Treat any wide-complex tachycardia as VT if in doubt, especially after an MI.",
+      "Fusion and capture beats prove AV dissociation and make the diagnosis VT.",
+      "Torsades de pointes is polymorphic VT with a long QT; give IV magnesium."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology"
+      ],
+      "MS3": [
+        "key_findings.imaging[0]",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death"
+      },
+      {
+        "title": "2022 ESC Guidelines for the management of patients with ventricular arrhythmias and the prevention of sudden cardiac death"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "ventricular-tachycardia.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 70-year-old with a prior MI has palpitations and a regular wide-complex tachycardia at 180 with AV dissociation. Rhythm?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ventricular tachycardia",
+          "synonyms": [
+            "VT",
+            "v tach",
+            "vtach",
+            "monomorphic VT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the most common cause of monomorphic VT?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prior myocardial infarction with scar",
+          "synonyms": [
+            "prior MI",
+            "old MI",
+            "MI",
+            "myocardial infarction",
+            "heart attack",
+            "scar",
+            "ischemic heart disease",
+            "coronary artery disease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes or triggers of VT.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prior myocardial infarction",
+          "synonyms": [
+            "MI",
+            "scar",
+            "heart attack"
+          ]
+        },
+        {
+          "answer": "cardiomyopathy",
+          "synonyms": []
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "low ejection fraction",
+            "HFrEF"
+          ]
+        },
+        {
+          "answer": "electrolyte disturbances",
+          "synonyms": [
+            "low potassium",
+            "hypokalemia",
+            "low magnesium",
+            "hypomagnesemia"
+          ]
+        },
+        {
+          "answer": "long QT",
+          "synonyms": [
+            "long QT syndrome"
+          ]
+        },
+        {
+          "answer": "drug toxicity",
+          "synonyms": [
+            "drugs",
+            "digoxin toxicity"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "ventricular-tachycardia.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "How long must VT last to be called sustained?",
+      "source_fields": [
+        "timeline.course"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "over 30 seconds",
+          "synonyms": [
+            "more than 30 seconds",
+            "longer than 30 seconds",
+            "needs earlier termination"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name two ECG signs that prove VT rather than SVT with aberrancy.",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AV dissociation",
+          "synonyms": [
+            "atrioventricular dissociation"
+          ]
+        },
+        {
+          "answer": "fusion beats",
+          "synonyms": [
+            "fusion"
+          ]
+        },
+        {
+          "answer": "capture beats",
+          "synonyms": [
+            "capture"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ventricular-tachycardia.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Wide-complex tachycardia after an MI, and you are unsure. Treat it as what?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "VT",
+          "synonyms": [
+            "ventricular tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Which two electrolytes do you check in VT?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "potassium",
+          "synonyms": [
+            "K"
+          ]
+        },
+        {
+          "answer": "magnesium",
+          "synonyms": [
+            "Mg"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ventricular-tachycardia.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "After recovery, name a test that looks for the cause of VT.",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo"
+          ]
+        },
+        {
+          "answer": "cardiac MRI",
+          "synonyms": [
+            "MRI",
+            "CMR"
+          ]
+        },
+        {
+          "answer": "coronary assessment",
+          "synonyms": [
+            "coronary angiography",
+            "angiogram",
+            "cardiac catheterization"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Pulseless VT. First action?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "defibrillation",
+          "synonyms": [
+            "defibrillate",
+            "unsynchronized shock",
+            "DC shock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Stable monomorphic VT. Name a drug.",
+      "source_fields": [
+        "management.first_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "procainamide",
+          "synonyms": []
+        },
+        {
+          "answer": "amiodarone",
+          "synonyms": []
+        },
+        {
+          "answer": "sotalol",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which drug treats torsades de pointes?",
+      "source_fields": [
+        "management.next_line[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV magnesium",
+          "synonyms": [
+            "magnesium",
+            "magnesium sulfate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-tachycardia.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which device prevents sudden death after a VT arrest?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ICD",
+          "synonyms": [
+            "implantable cardioverter-defibrillator",
+            "implantable cardioverter defibrillator",
+            "defibrillator"
+          ]
+        }
+      ]
+    }
+  ]
+}
