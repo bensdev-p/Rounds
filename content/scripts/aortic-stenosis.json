@@ -99,6 +99,22 @@
             "source_field": "epidemiology.who"
           }
         ]
+      },
+      {
+        "script_id": "mitral-regurgitation",
+        "how_to_tell_apart": "Aortic stenosis is a crescendo-decrescendo murmur at the right upper sternal border radiating to the carotids; mitral regurgitation is a holosystolic blowing murmur at the apex radiating to the axilla.",
+        "compare": [
+          {
+            "label": "Murmur",
+            "text": "Crescendo-decrescendo, RUSB",
+            "source_field": "key_findings.exam[0]"
+          },
+          {
+            "label": "Radiates",
+            "text": "To the carotids",
+            "source_field": "key_findings.exam[0]"
+          }
+        ]
       }
     ],
     "pearls": [

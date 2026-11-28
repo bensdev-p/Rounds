@@ -1,0 +1,387 @@
+{
+  "script": {
+    "id": "giant-cell-arteritis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Giant cell arteritis",
+    "aliases": [
+      "temporal arteritis",
+      "GCA"
+    ],
+    "systems": [
+      "cardio",
+      "msk"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults over 50, more often women",
+      "risk_factors": [
+        "age over 50",
+        "female sex",
+        "polymyalgia rheumatica",
+        "northern European ancestry"
+      ]
+    },
+    "pathophysiology": "Granulomatous inflammation of large and medium arteries, especially branches of the external carotid artery. The wall thickens, with giant cells, and the lumen narrows, causing ischemia.",
+    "timeline": {
+      "onset": "Weeks of headache and systemic symptoms",
+      "course": "Treatment lasts 1 to 2 years; vision loss can be sudden and permanent"
+    },
+    "key_findings": {
+      "history": [
+        "new headache, often temporal",
+        "jaw claudication",
+        "scalp tenderness",
+        "visual loss or diplopia",
+        "shoulder and hip girdle stiffness from polymyalgia rheumatica",
+        "fever, weight loss and fatigue"
+      ],
+      "exam": [
+        "tender, thickened or pulseless temporal artery",
+        "reduced vision"
+      ],
+      "labs": [
+        "raised ESR",
+        "raised CRP",
+        "normocytic anemia",
+        "raised platelet count"
+      ],
+      "imaging": [
+        "temporal artery ultrasound showing a halo sign",
+        "PET or CT angiography for large-vessel involvement"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "temporal artery biopsy",
+        "temporal artery ultrasound"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "high-dose glucocorticoids started right away, without waiting for the biopsy",
+        "IV methylprednisolone if vision is affected"
+      ],
+      "next_line": [
+        "tocilizumab to spare glucocorticoids",
+        "methotrexate as an alternative steroid-sparing drug"
+      ]
+    },
+    "complications": [
+      "permanent vision loss from anterior ischemic optic neuropathy",
+      "stroke",
+      "thoracic aortic aneurysm",
+      "glucocorticoid side effects"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Start steroids before the biopsy; the biopsy stays positive for at least 1 to 2 weeks.",
+      "A biopsy can be falsely negative because the inflammation leaves gaps (skip lesions).",
+      "About half of patients with giant cell arteritis also have polymyalgia rheumatica."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.history"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2021 American College of Rheumatology/Vasculitis Foundation Guideline for the Management of Giant Cell Arteritis and Takayasu Arteritis"
+      },
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "giant-cell-arteritis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old woman has a new temporal headache, pain in her jaw when she chews and an ESR of 95. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Giant cell arteritis",
+          "synonyms": [
+            "GCA",
+            "temporal arteritis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is pain in the jaw muscles on chewing called, in giant cell arteritis?",
+      "source_fields": [
+        "key_findings.history[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "jaw claudication",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which disorder of shoulder and hip girdle stiffness often comes with giant cell arteritis?",
+      "source_fields": [
+        "epidemiology.risk_factors[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "polymyalgia rheumatica",
+          "synonyms": [
+            "PMR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three symptoms of giant cell arteritis.",
+      "source_fields": [
+        "key_findings.history"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "headache",
+          "synonyms": [
+            "headaches",
+            "temporal headache"
+          ]
+        },
+        {
+          "answer": "jaw claudication",
+          "synonyms": [
+            "jaw pain"
+          ]
+        },
+        {
+          "answer": "scalp tenderness",
+          "synonyms": [
+            "tender scalp"
+          ]
+        },
+        {
+          "answer": "visual loss",
+          "synonyms": [
+            "vision loss",
+            "loss of vision",
+            "visual disturbance",
+            "blindness",
+            "diplopia",
+            "double vision"
+          ]
+        },
+        {
+          "answer": "shoulder",
+          "synonyms": [
+            "hip girdle stiffness",
+            "polymyalgia rheumatica",
+            "shoulder stiffness"
+          ]
+        },
+        {
+          "answer": "fever",
+          "synonyms": []
+        },
+        {
+          "answer": "weight loss",
+          "synonyms": []
+        },
+        {
+          "answer": "fatigue",
+          "synonyms": [
+            "tiredness"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "giant-cell-arteritis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Why can a temporal artery biopsy be falsely negative?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "skip lesions",
+          "synonyms": [
+            "skip",
+            "patchy",
+            "patchy inflammation",
+            "segmental involvement"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What kind of inflammation does the biopsy show?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "granulomatous",
+          "synonyms": [
+            "granulomatous inflammation",
+            "granulomas",
+            "giant cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms giant cell arteritis?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "temporal artery biopsy",
+          "synonyms": [
+            "biopsy",
+            "temporal biopsy",
+            "temporal artery ultrasound"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ultrasound sign suggests giant cell arteritis?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "halo sign",
+          "synonyms": [
+            "halo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Suspected giant cell arteritis, with the biopsy booked for next week. When do you start steroids?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "right away",
+          "synonyms": [
+            "now",
+            "immediately",
+            "today",
+            "before the biopsy",
+            "straight away"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which biologic spares glucocorticoids in giant cell arteritis?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tocilizumab",
+          "synonyms": [
+            "Actemra",
+            "IL-6 inhibitor",
+            "IL-6 inhibitors",
+            "IL-6 receptor antagonist",
+            "anti-IL-6"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which eye complication is most feared?",
+      "source_fields": [
+        "complications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "permanent vision loss",
+          "synonyms": [
+            "vision loss",
+            "visual loss",
+            "loss of vision",
+            "blindness",
+            "anterior ischemic optic neuropathy",
+            "AION",
+            "AAION",
+            "arteritic AION"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "giant-cell-arteritis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which large-vessel complication can appear years later?",
+      "source_fields": [
+        "complications[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thoracic aortic aneurysm",
+          "synonyms": [
+            "aortic aneurysm"
+          ]
+        }
+      ]
+    }
+  ]
+}

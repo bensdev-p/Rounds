@@ -101,6 +101,10 @@
             "source_field": "epidemiology.who"
           }
         ]
+      },
+      {
+        "script_id": "dilated-cardiomyopathy",
+        "how_to_tell_apart": "Hypertrophic cardiomyopathy has a thick, stiff ventricle that pumps normally or too well; dilated cardiomyopathy has a big, thin-walled ventricle that pumps weakly, with a low ejection fraction."
       }
     ],
     "pearls": [

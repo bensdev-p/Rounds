@@ -1,0 +1,389 @@
+{
+  "script": {
+    "id": "abdominal-aortic-aneurysm",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Abdominal aortic aneurysm",
+    "aliases": [
+      "AAA"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "surgery",
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Men over 65 who have smoked",
+      "risk_factors": [
+        "smoking",
+        "male sex",
+        "age over 65",
+        "family history",
+        "hypertension",
+        "atherosclerosis"
+      ]
+    },
+    "pathophysiology": "Inflammation and matrix metalloproteinases break down elastin and collagen in the wall of the infrarenal aorta, which dilates to 3 cm or more.",
+    "timeline": {
+      "onset": "Grows silently over years",
+      "course": "The risk of rupture rises sharply above 5.5 cm"
+    },
+    "key_findings": {
+      "history": [
+        "usually no symptoms",
+        "abdominal or back pain if expanding",
+        "sudden severe pain and collapse if ruptured"
+      ],
+      "exam": [
+        "pulsatile abdominal mass",
+        "hypotension in rupture"
+      ],
+      "labs": [],
+      "imaging": [
+        "abdominal ultrasound for screening and surveillance",
+        "CT angiography to plan repair, or in a stable patient with suspected rupture"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "abdominal ultrasound",
+        "CT angiography"
+      ],
+      "criteria": [
+        "an aortic diameter of 3 cm or more"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "one-time ultrasound screening for men aged 65 to 75 who have ever smoked",
+        "stop smoking",
+        "surveillance ultrasound for small aneurysms"
+      ],
+      "next_line": [
+        "elective repair, endovascular (EVAR) or open, at 5.5 cm or more in men, 5.0 cm in women, rapid growth (0.5 cm or more in a year under the 2022 ACC/AHA guideline), or symptoms",
+        "emergency repair for rupture"
+      ]
+    },
+    "complications": [
+      "rupture",
+      "distal embolism",
+      "aortoenteric fistula after repair"
+    ],
+    "confused_with": [
+      {
+        "script_id": "aortic-dissection",
+        "how_to_tell_apart": "An abdominal aortic aneurysm is a dilated aorta, silent until it expands or ruptures; aortic dissection is a tear in the intima with sudden tearing chest pain that radiates to the back."
+      }
+    ],
+    "pearls": [
+      "The classic triad of rupture is abdominal or back pain, hypotension and a pulsatile mass.",
+      "Most abdominal aortic aneurysms are infrarenal.",
+      "Diabetes is linked to a lower risk of abdominal aortic aneurysm."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.risk_factors"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2022 ACC/AHA Guideline for the Diagnosis and Management of Aortic Disease"
+      },
+      {
+        "title": "Screening for Abdominal Aortic Aneurysm: US Preventive Services Task Force Recommendation Statement (2019)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "abdominal-aortic-aneurysm.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 72-year-old former smoker has a pulsatile mass above the umbilicus. Ultrasound shows a 4.2 cm aorta. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Abdominal aortic aneurysm",
+          "synonyms": [
+            "AAA",
+            "aortic aneurysm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What aortic diameter defines an abdominal aortic aneurysm?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "3 cm or more",
+          "synonyms": [
+            "3 cm",
+            "3 centimeters",
+            "30 mm",
+            "over 3 cm"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for abdominal aortic aneurysm.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "smoking",
+          "synonyms": [
+            "smoker",
+            "tobacco",
+            "cigarettes"
+          ]
+        },
+        {
+          "answer": "male sex",
+          "synonyms": [
+            "male",
+            "being male"
+          ]
+        },
+        {
+          "answer": "age over 65",
+          "synonyms": [
+            "older age",
+            "old age",
+            "age",
+            "elderly"
+          ]
+        },
+        {
+          "answer": "family history",
+          "synonyms": []
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "atherosclerosis",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where along the aorta do most abdominal aortic aneurysms form?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "infrarenal",
+          "synonyms": [
+            "below the renal arteries",
+            "infrarenal aorta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name the classic triad of a ruptured abdominal aortic aneurysm.",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "back pain",
+          "synonyms": [
+            "abdominal pain",
+            "flank pain"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure",
+            "shock"
+          ]
+        },
+        {
+          "answer": "pulsatile mass",
+          "synonyms": [
+            "pulsatile abdominal mass"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Abdominal aortic aneurysm or aortic dissection: which is a tear in the intima with sudden tearing pain to the back?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Who should get a one-time ultrasound screen for abdominal aortic aneurysm?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "men aged 65 to 75 who have ever smoked",
+          "synonyms": [
+            "men 65 to 75 who have ever smoked",
+            "men 65 75 who have ever smoked",
+            "men aged 65 to 75 who smoked",
+            "men 65 to 75 who smoked",
+            "male smokers 65 to 75",
+            "men who have smoked",
+            "male smokers over 65",
+            "older men who smoked"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test screens for and follows an abdominal aortic aneurysm?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "abdominal ultrasound",
+          "synonyms": [
+            "ultrasound",
+            "ultrasonography"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "At what diameter is elective repair offered to a man?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "5.5 cm",
+          "synonyms": [
+            "5.5",
+            "55 mm",
+            "5.5 centimeters"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Name the minimally invasive repair.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "EVAR",
+          "synonyms": [
+            "endovascular aneurysm repair",
+            "endovascular repair",
+            "endovascular",
+            "stent graft"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which common disease is linked to a lower risk of abdominal aortic aneurysm?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "abdominal-aortic-aneurysm.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What growth rate prompts repair whatever the size?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "0.5 cm or more in a year",
+          "synonyms": [
+            "0.5 cm a year",
+            "0.5 cm per year",
+            "5 mm a year",
+            "half a centimeter a year"
+          ]
+        }
+      ]
+    }
+  ]
+}

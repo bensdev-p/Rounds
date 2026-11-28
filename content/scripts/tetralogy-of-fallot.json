@@ -1,0 +1,390 @@
+{
+  "script": {
+    "id": "tetralogy-of-fallot",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Tetralogy of Fallot",
+    "aliases": [
+      "TOF",
+      "Fallot tetralogy"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Infants; the most common cyanotic congenital heart disease beyond the newborn period",
+      "risk_factors": [
+        "22q11.2 deletion (DiGeorge syndrome)",
+        "maternal diabetes",
+        "trisomy 21"
+      ]
+    },
+    "pathophysiology": "Anterosuperior displacement of the infundibular septum causes four features: pulmonary stenosis (right ventricular outflow obstruction), right ventricular hypertrophy, an overriding aorta and a ventricular septal defect. The degree of outflow obstruction decides how much blood shunts right to left, and so how cyanotic the child is.",
+    "timeline": {
+      "onset": "Cyanosis in infancy, sometimes within days",
+      "course": "Repaired surgically in the first year; most now survive into adulthood"
+    },
+    "key_findings": {
+      "history": [
+        "cyanotic spells (tet spells) with crying or feeding",
+        "squatting in older children"
+      ],
+      "exam": [
+        "cyanosis",
+        "harsh systolic ejection murmur at the left upper sternal border from the pulmonary stenosis",
+        "clubbing in older children"
+      ],
+      "labs": [
+        "polycythemia from chronic hypoxemia"
+      ],
+      "imaging": [
+        "boot-shaped heart on chest X-ray",
+        "echocardiogram showing the four features"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "tet spell: knees to chest, oxygen, morphine and IV fluids",
+        "complete surgical repair in the first year of life"
+      ],
+      "next_line": [
+        "phenylephrine to raise systemic vascular resistance in a spell that does not settle",
+        "propranolol to prevent spells before repair"
+      ]
+    },
+    "complications": [
+      "tet spells",
+      "pulmonary regurgitation after repair",
+      "arrhythmias",
+      "paradoxical embolism"
+    ],
+    "confused_with": [
+      {
+        "script_id": "ventricular-septal-defect",
+        "how_to_tell_apart": "Tetralogy of Fallot causes cyanosis because outflow obstruction drives blood right to left across the VSD; an isolated VSD shunts left to right, so the child stays pink unless Eisenmenger syndrome develops."
+      }
+    ],
+    "pearls": [
+      "Squatting raises systemic vascular resistance, which pushes more blood through the lungs and relieves cyanosis.",
+      "The mnemonic PROVe: pulmonary stenosis, right ventricular hypertrophy, overriding aorta, VSD.",
+      "A tet spell is treated by raising systemic resistance and calming the child, never with inotropes."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "epidemiology.risk_factors"
+      ],
+      "MS3": [
+        "key_findings.imaging",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Moss & Adams' Heart Disease in Infants, Children, and Adolescents"
+      },
+      {
+        "title": "Nelson Textbook of Pediatrics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "tetralogy-of-fallot.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 4-month-old turns blue when crying. Chest X-ray shows a boot-shaped heart. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Tetralogy of Fallot",
+          "synonyms": [
+            "TOF",
+            "tetralogy",
+            "Fallot tetralogy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name the four features of tetralogy of Fallot.",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary stenosis",
+          "synonyms": [
+            "pulmonic stenosis",
+            "pulmonary valve stenosis",
+            "right ventricular outflow obstruction",
+            "right ventricular outflow tract obstruction",
+            "RVOT obstruction"
+          ]
+        },
+        {
+          "answer": "right ventricular hypertrophy",
+          "synonyms": [
+            "RVH",
+            "RV hypertrophy"
+          ]
+        },
+        {
+          "answer": "overriding aorta",
+          "synonyms": [
+            "aortic override",
+            "overriding of the aorta"
+          ]
+        },
+        {
+          "answer": "ventricular septal defect",
+          "synonyms": [
+            "VSD"
+          ]
+        }
+      ],
+      "required_count": 4
+    },
+    {
+      "id": "tetralogy-of-fallot.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which deletion syndrome is linked to tetralogy of Fallot?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "22q11.2 deletion",
+          "synonyms": [
+            "22q11 deletion",
+            "DiGeorge syndrome",
+            "DiGeorge",
+            "velocardiofacial syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which of the four features decides how cyanotic a child with tetralogy of Fallot is?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "outflow obstruction",
+          "synonyms": [
+            "pulmonary stenosis",
+            "pulmonic stenosis",
+            "right ventricular outflow obstruction",
+            "right ventricular outflow tract obstruction",
+            "RVOT obstruction",
+            "degree of pulmonary stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Tetralogy of Fallot or an isolated VSD: which one shunts right to left?",
+      "source_fields": [
+        "name",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Tetralogy of Fallot",
+          "synonyms": [
+            "TOF",
+            "tetralogy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Why does squatting relieve cyanosis in tetralogy of Fallot?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raises systemic vascular resistance",
+          "synonyms": [
+            "increases systemic vascular resistance",
+            "raises systemic resistance",
+            "increases systemic resistance",
+            "raises SVR",
+            "increases SVR",
+            "increases afterload",
+            "more blood through the lungs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What shape is the heart on the chest X-ray?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "boot-shaped",
+          "synonyms": [
+            "boot shaped",
+            "boot",
+            "coeur en sabot"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms tetralogy of Fallot?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "An infant is in a tet spell. Name two first steps.",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "knees to chest",
+          "synonyms": [
+            "knee-chest position",
+            "knee chest",
+            "knees to the chest",
+            "squat"
+          ]
+        },
+        {
+          "answer": "oxygen",
+          "synonyms": [
+            "O2"
+          ]
+        },
+        {
+          "answer": "morphine",
+          "synonyms": []
+        },
+        {
+          "answer": "IV fluids",
+          "synonyms": [
+            "IV fluid",
+            "fluids",
+            "fluid bolus"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "tetralogy-of-fallot.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "When is complete surgical repair usually done?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "first year of life",
+          "synonyms": [
+            "first year",
+            "in the first year",
+            "before 1 year",
+            "before age 1",
+            "3 to 6 months",
+            "infancy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "A tet spell does not settle with the first steps. Which vasopressor raises systemic resistance?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "phenylephrine",
+          "synonyms": [
+            "Neo-Synephrine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tetralogy-of-fallot.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which valve problem often follows repair of tetralogy of Fallot?",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pulmonary regurgitation",
+          "synonyms": [
+            "pulmonary insufficiency",
+            "pulmonic regurgitation"
+          ]
+        }
+      ]
+    }
+  ]
+}

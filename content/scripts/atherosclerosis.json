@@ -1,0 +1,437 @@
+{
+  "script": {
+    "id": "atherosclerosis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Atherosclerosis",
+    "aliases": [
+      "atherosclerotic disease",
+      "atheroma"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults, rising with age; the underlying cause of most heart attacks, ischemic strokes and peripheral artery disease",
+      "risk_factors": [
+        "smoking",
+        "high LDL cholesterol",
+        "hypertension",
+        "diabetes",
+        "older age",
+        "male sex",
+        "family history of premature cardiovascular disease",
+        "obesity"
+      ]
+    },
+    "pathophysiology": "Endothelial injury lets LDL into the arterial intima, where it is oxidized. Monocytes follow, become macrophages and take up the lipid to become foam cells, forming a fatty streak. Smooth muscle cells migrate in and lay down collagen, forming a fibrous cap over a lipid core. A plaque with a thin cap can rupture and trigger thrombosis.",
+    "timeline": {
+      "onset": "Fatty streaks begin in childhood; plaques grow silently for decades",
+      "course": "Stable plaques narrow arteries and cause ischemia on exertion; ruptured plaques cause acute coronary syndrome or stroke"
+    },
+    "key_findings": {
+      "history": [
+        "often silent until a plaque narrows or ruptures",
+        "exertional chest pain",
+        "claudication",
+        "transient neurologic symptoms"
+      ],
+      "exam": [
+        "weak peripheral pulses",
+        "arterial bruits",
+        "xanthelasma"
+      ],
+      "labs": [
+        "raised LDL cholesterol",
+        "raised HbA1c in diabetes",
+        "raised high-sensitivity CRP"
+      ],
+      "imaging": [
+        "coronary artery calcium score on CT",
+        "carotid ultrasound showing plaque",
+        "angiography showing stenosis"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "imaging of the affected arteries: coronary CT angiography, carotid ultrasound or the ankle-brachial index"
+      ],
+      "criteria": [
+        "the AHA PREVENT equations estimate 10-year cardiovascular risk to guide prevention"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "stop smoking",
+        "statin",
+        "blood pressure and diabetes control",
+        "exercise and a Mediterranean-style diet"
+      ],
+      "next_line": [
+        "aspirin for established disease",
+        "revascularization for critical stenosis"
+      ]
+    },
+    "complications": [
+      "myocardial infarction",
+      "ischemic stroke",
+      "peripheral artery disease",
+      "abdominal aortic aneurysm",
+      "mesenteric ischemia"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "The most common sites, in order, are the abdominal aorta, the coronary arteries, the popliteal arteries and the carotid arteries.",
+      "Foam cells, lipid-laden macrophages, are the first sign of atherosclerosis, in the fatty streak.",
+      "Plaques with a thin fibrous cap and a large lipid core are the ones that rupture."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[1]"
+      ],
+      "MS3": [
+        "epidemiology.risk_factors",
+        "management.first_line"
+      ],
+      "MS4": [
+        "diagnosis.criteria",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Robbins and Cotran Pathologic Basis of Disease"
+      },
+      {
+        "title": "2019 ACC/AHA Guideline on the Primary Prevention of Cardiovascular Disease"
+      },
+      {
+        "title": "Development and Validation of the American Heart Association's PREVENT Equations (Circulation, 2024)"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "atherosclerosis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Lipid-laden macrophages fill the intima of a young adult's aorta. What are these cells called?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "foam cells",
+          "synonyms": [
+            "foam cell"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What lesion is the earliest visible sign of atherosclerosis?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fatty streak",
+          "synonyms": [
+            "fatty streaks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three risk factors for atherosclerosis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "smoking",
+          "synonyms": [
+            "smoker",
+            "tobacco",
+            "cigarettes"
+          ]
+        },
+        {
+          "answer": "high LDL cholesterol",
+          "synonyms": [
+            "high cholesterol",
+            "high LDL",
+            "hyperlipidemia",
+            "hyperlipidaemia",
+            "hypercholesterolemia",
+            "dyslipidemia"
+          ]
+        },
+        {
+          "answer": "hypertension",
+          "synonyms": [
+            "high blood pressure",
+            "HTN"
+          ]
+        },
+        {
+          "answer": "diabetes",
+          "synonyms": [
+            "diabetes mellitus",
+            "DM"
+          ]
+        },
+        {
+          "answer": "older age",
+          "synonyms": [
+            "old age",
+            "age",
+            "aging"
+          ]
+        },
+        {
+          "answer": "male sex",
+          "synonyms": [
+            "male",
+            "being male"
+          ]
+        },
+        {
+          "answer": "family history of premature cardiovascular disease",
+          "synonyms": [
+            "family history"
+          ]
+        },
+        {
+          "answer": "obesity",
+          "synonyms": [
+            "obese"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "atherosclerosis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which artery is most often affected by atherosclerosis?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "abdominal aorta",
+          "synonyms": [
+            "the abdominal aorta",
+            "aorta"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which kind of plaque ruptures: one with a thick fibrous cap or a thin one?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "thin fibrous cap",
+          "synonyms": [
+            "thin cap",
+            "thin-capped",
+            "thin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which cells migrate into a plaque and lay down the collagen of the fibrous cap?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "smooth muscle cells",
+          "synonyms": [
+            "smooth muscle cell",
+            "smooth muscle",
+            "vascular smooth muscle cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which CT test measures coronary plaque in a patient without symptoms?",
+      "source_fields": [
+        "key_findings.imaging[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "coronary artery calcium score",
+          "synonyms": [
+            "calcium score",
+            "CAC score",
+            "coronary calcium score",
+            "CAC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which bedside test screens for peripheral artery disease?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ankle-brachial index",
+          "synonyms": [
+            "ABI",
+            "ankle brachial index",
+            "ankle-brachial pressure index"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class is the backbone of treatment to stabilize plaques?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "statin",
+          "synonyms": [
+            "statins",
+            "atorvastatin",
+            "rosuvastatin",
+            "HMG-CoA reductase inhibitor",
+            "HMG-CoA reductase inhibitors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.management.2",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two lifestyle changes that slow atherosclerosis.",
+      "source_fields": [
+        "management.first_line"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stop smoking",
+          "synonyms": [
+            "smoking cessation",
+            "quit smoking",
+            "quitting smoking"
+          ]
+        },
+        {
+          "answer": "exercise",
+          "synonyms": [
+            "physical activity"
+          ]
+        },
+        {
+          "answer": "Mediterranean-style diet",
+          "synonyms": [
+            "Mediterranean diet",
+            "healthy diet",
+            "diet"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "atherosclerosis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which AHA equations now estimate 10-year cardiovascular risk?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PREVENT",
+          "synonyms": [
+            "PREVENT equations",
+            "AHA PREVENT",
+            "PREVENT calculator"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "atherosclerosis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a complication of atherosclerosis other than a heart attack.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ischemic stroke",
+          "synonyms": [
+            "stroke",
+            "strokes",
+            "CVA"
+          ]
+        },
+        {
+          "answer": "peripheral artery disease",
+          "synonyms": [
+            "PAD",
+            "peripheral vascular disease"
+          ]
+        },
+        {
+          "answer": "abdominal aortic aneurysm",
+          "synonyms": [
+            "AAA",
+            "aortic aneurysm"
+          ]
+        },
+        {
+          "answer": "mesenteric ischemia",
+          "synonyms": [
+            "bowel ischemia"
+          ]
+        }
+      ]
+    }
+  ]
+}

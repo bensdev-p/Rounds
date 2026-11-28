@@ -1,0 +1,402 @@
+{
+  "script": {
+    "id": "rheumatic-fever",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Acute rheumatic fever",
+    "aliases": [
+      "rheumatic fever"
+    ],
+    "systems": [
+      "cardio",
+      "msk"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Children aged 5 to 15, 2 to 4 weeks after untreated group A streptococcal pharyngitis; now rare in high-income countries",
+      "risk_factors": [
+        "untreated group A streptococcal pharyngitis",
+        "crowded housing",
+        "poverty",
+        "prior rheumatic fever"
+      ]
+    },
+    "pathophysiology": "Antibodies against the streptococcal M protein cross-react with heart, joint, brain and skin tissue (molecular mimicry, a type II hypersensitivity). Carditis can leave lasting valve damage, called rheumatic heart disease.",
+    "timeline": {
+      "onset": "2 to 4 weeks after a sore throat",
+      "course": "The acute illness settles over weeks to months; valve damage can progress for decades"
+    },
+    "key_findings": {
+      "history": [
+        "recent sore throat",
+        "migrating joint pain",
+        "jerky involuntary movements (Sydenham chorea)"
+      ],
+      "exam": [
+        "migratory polyarthritis of large joints",
+        "carditis with a new murmur, often mitral regurgitation",
+        "erythema marginatum",
+        "subcutaneous nodules",
+        "Sydenham chorea"
+      ],
+      "labs": [
+        "raised ASO or anti-DNase B titers",
+        "raised ESR or CRP",
+        "prolonged PR interval on ECG"
+      ],
+      "imaging": [
+        "echocardiogram showing valvulitis, most often mitral regurgitation"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "evidence of recent group A strep infection: ASO or anti-DNase B titers, or a positive throat culture"
+      ],
+      "criteria": [
+        "Jones criteria (2015 revision): 2 major, or 1 major plus 2 minor, with evidence of strep infection; recurrences can also be diagnosed with 3 minor criteria",
+        "major criteria: carditis, clinical or found only on echo, arthritis, chorea, erythema marginatum, subcutaneous nodules",
+        "minor criteria: fever, arthralgia, raised ESR or CRP, prolonged PR interval",
+        "thresholds for arthritis and the minor criteria are lower in moderate- and high-risk populations; a prolonged PR does not count when carditis is counted, nor arthralgia when arthritis is"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "penicillin to clear the streptococcus",
+        "high-dose aspirin or NSAIDs for the arthritis"
+      ],
+      "next_line": [
+        "secondary prophylaxis with benzathine penicillin G injections every 3 to 4 weeks for years",
+        "glucocorticoids considered for severe carditis"
+      ]
+    },
+    "complications": [
+      "rheumatic heart disease",
+      "mitral stenosis decades later",
+      "heart failure",
+      "atrial fibrillation"
+    ],
+    "confused_with": [],
+    "pearls": [
+      "Mitral stenosis is the classic late valve lesion of rheumatic heart disease.",
+      "Treating strep throat within 9 days prevents rheumatic fever; it does not prevent post-streptococcal glomerulonephritis.",
+      "Aschoff bodies, which contain Anitschkow cells, are the histologic hallmark of rheumatic carditis."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "pearls[2]"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Revision of the Jones Criteria for the Diagnosis of Acute Rheumatic Fever in the Era of Doppler Echocardiography (AHA Scientific Statement, 2015)"
+      },
+      {
+        "title": "Nelson Textbook of Pediatrics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "rheumatic-fever.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 9-year-old has painful joints that move from knee to ankle to elbow and a new mitral murmur, three weeks after a sore throat. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute rheumatic fever",
+          "synonyms": [
+            "rheumatic fever"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name three major Jones criteria.",
+      "source_fields": [
+        "diagnosis.criteria[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "carditis",
+          "synonyms": [
+            "myocarditis",
+            "valvulitis"
+          ]
+        },
+        {
+          "answer": "arthritis",
+          "synonyms": [
+            "polyarthritis",
+            "migratory polyarthritis"
+          ]
+        },
+        {
+          "answer": "chorea",
+          "synonyms": [
+            "Sydenham chorea"
+          ]
+        },
+        {
+          "answer": "erythema marginatum",
+          "synonyms": []
+        },
+        {
+          "answer": "subcutaneous nodules",
+          "synonyms": [
+            "nodules"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "rheumatic-fever.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which infection triggers rheumatic fever?",
+      "source_fields": [
+        "epidemiology.risk_factors[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "group A streptococcal pharyngitis",
+          "synonyms": [
+            "strep throat",
+            "strep pharyngitis",
+            "GAS pharyngitis",
+            "group A strep",
+            "group A streptococcus",
+            "Streptococcus pyogenes",
+            "S. pyogenes",
+            "streptococcal pharyngitis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which streptococcal protein do the cross-reacting antibodies target?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "M protein",
+          "synonyms": [
+            "streptococcal M protein"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which valve lesion is the classic late result of rheumatic heart disease?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mitral stenosis",
+          "synonyms": [
+            "rheumatic mitral stenosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Prompt antibiotics for strep throat prevent which: rheumatic fever or post-streptococcal glomerulonephritis?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "rheumatic fever",
+          "synonyms": [
+            "only rheumatic fever",
+            "rheumatic fever only"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which blood test shows a recent strep infection?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ASO",
+          "synonyms": [
+            "antistreptolysin O",
+            "anti-streptolysin O",
+            "ASO titer",
+            "ASO titre",
+            "ASOT",
+            "anti-DNase B"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.workup.2",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two minor Jones criteria.",
+      "source_fields": [
+        "diagnosis.criteria[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fever",
+          "synonyms": []
+        },
+        {
+          "answer": "arthralgia",
+          "synonyms": [
+            "arthralgias",
+            "joint pain"
+          ]
+        },
+        {
+          "answer": "raised ESR",
+          "synonyms": [
+            "ESR",
+            "CRP",
+            "raised CRP",
+            "inflammatory markers"
+          ]
+        },
+        {
+          "answer": "prolonged PR interval",
+          "synonyms": [
+            "prolonged PR",
+            "long PR",
+            "first-degree heart block",
+            "first degree AV block"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "rheumatic-fever.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which antibiotic, given by injection every few weeks for years, prevents recurrences?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "benzathine penicillin G",
+          "synonyms": [
+            "benzathine penicillin",
+            "penicillin G benzathine",
+            "Bicillin",
+            "Bicillin L-A",
+            "IM penicillin",
+            "intramuscular penicillin",
+            "penicillin injections"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class treats the arthritis of rheumatic fever?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "high-dose aspirin",
+          "synonyms": [
+            "aspirin",
+            "ASA",
+            "salicylates"
+          ]
+        },
+        {
+          "answer": "NSAIDs",
+          "synonyms": [
+            "NSAID",
+            "naproxen",
+            "ibuprofen"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the histologic hallmark of rheumatic carditis?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aschoff bodies",
+          "synonyms": [
+            "Aschoff body",
+            "Aschoff nodules",
+            "Anitschkow cells",
+            "caterpillar cells"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "rheumatic-fever.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Within how many days of a sore throat must antibiotics start to prevent rheumatic fever?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "9 days",
+          "synonyms": [
+            "nine days",
+            "9"
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,450 @@
+{
+  "script": {
+    "id": "acute-pericarditis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Acute pericarditis",
+    "aliases": [
+      "pericarditis"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM",
+      "EM"
+    ],
+    "epidemiology": {
+      "who": "Young and middle-aged adults, more often men",
+      "risk_factors": [
+        "recent viral infection",
+        "myocardial infarction, early or weeks later (Dressler syndrome)",
+        "cardiac surgery",
+        "uremia",
+        "lupus and other autoimmune diseases",
+        "tuberculosis",
+        "cancer"
+      ]
+    },
+    "pathophysiology": "Inflammation of the pericardium, most often idiopathic or viral. The inflamed layers rub together, causing sharp pain and a friction rub, and may produce an effusion.",
+    "timeline": {
+      "onset": "Sudden chest pain over hours",
+      "course": "Usually settles in 1 to 3 weeks; recurs in up to 30% without colchicine"
+    },
+    "key_findings": {
+      "history": [
+        "sharp pleuritic chest pain",
+        "pain eased by sitting up and leaning forward",
+        "pain worse lying flat",
+        "recent viral illness"
+      ],
+      "exam": [
+        "pericardial friction rub",
+        "fever"
+      ],
+      "labs": [
+        "raised CRP",
+        "troponin may rise if the myocardium is involved (myopericarditis)"
+      ],
+      "imaging": [
+        "ECG with diffuse ST elevation and PR depression",
+        "echocardiogram to look for an effusion"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "ECG",
+        "echocardiogram"
+      ],
+      "criteria": [
+        "at least two of four: typical chest pain, friction rub, diffuse ST elevation or PR depression, a new or worsening pericardial effusion"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "NSAID such as ibuprofen, or high-dose aspirin, plus colchicine for 3 months",
+        "limit strenuous exercise until symptoms and CRP settle"
+      ],
+      "next_line": [
+        "low-dose glucocorticoids if NSAIDs fail or are contraindicated",
+        "admission for high-risk features: fever above 38 C, a large effusion, tamponade or failure of NSAIDs"
+      ]
+    },
+    "complications": [
+      "recurrent pericarditis",
+      "pericardial effusion",
+      "cardiac tamponade",
+      "constrictive pericarditis"
+    ],
+    "confused_with": [
+      {
+        "script_id": "acute-coronary-syndrome",
+        "how_to_tell_apart": "Pericarditis pain is sharp, pleuritic and eased by leaning forward, with ST elevation in most leads and PR depression; a myocardial infarction causes ST elevation in one coronary territory with reciprocal depression."
+      }
+    ],
+    "pearls": [
+      "After a myocardial infarction, aspirin is preferred over other NSAIDs for pericarditis.",
+      "Colchicine halves the risk of recurrence.",
+      "PR depression is a characteristic ECG sign of pericarditis; reciprocal ST depression points to an MI instead."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "management.next_line",
+        "pearls[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 ESC Guidelines for the management of myocarditis and pericarditis"
+      },
+      {
+        "title": "2015 ESC Guidelines for the diagnosis and management of pericardial diseases"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "acute-pericarditis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 30-year-old has sharp chest pain a week after a cold. It eases when he leans forward. ECG shows ST elevation in most leads. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Acute pericarditis",
+          "synonyms": [
+            "pericarditis",
+            "viral pericarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which sound on auscultation is characteristic of pericarditis?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericardial friction rub",
+          "synonyms": [
+            "friction rub",
+            "pericardial rub",
+            "rub"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of pericarditis.",
+      "source_fields": [
+        "epidemiology.risk_factors",
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "idiopathic",
+          "synonyms": [
+            "unknown cause"
+          ]
+        },
+        {
+          "answer": "viral infection",
+          "synonyms": [
+            "viral",
+            "virus",
+            "viruses",
+            "coxsackievirus"
+          ]
+        },
+        {
+          "answer": "myocardial infarction",
+          "synonyms": [
+            "MI",
+            "heart attack",
+            "Dressler syndrome",
+            "post-MI"
+          ]
+        },
+        {
+          "answer": "cardiac surgery",
+          "synonyms": [
+            "heart surgery",
+            "postpericardiotomy",
+            "post pericardiotomy"
+          ]
+        },
+        {
+          "answer": "uremia",
+          "synonyms": [
+            "kidney failure",
+            "renal failure",
+            "uremic"
+          ]
+        },
+        {
+          "answer": "lupus",
+          "synonyms": [
+            "SLE",
+            "autoimmune disease",
+            "autoimmune"
+          ]
+        },
+        {
+          "answer": "tuberculosis",
+          "synonyms": [
+            "TB"
+          ]
+        },
+        {
+          "answer": "cancer",
+          "synonyms": [
+            "malignancy",
+            "metastases"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "acute-pericarditis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What is pericarditis weeks after a myocardial infarction called?",
+      "source_fields": [
+        "epidemiology.risk_factors[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Dressler syndrome",
+          "synonyms": [
+            "Dressler",
+            "Dressler's syndrome",
+            "Dressler's",
+            "post-MI syndrome",
+            "postmyocardial infarction syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which ECG finding, besides widespread ST elevation, is characteristic of pericarditis?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "PR depression",
+          "synonyms": [
+            "PR segment depression",
+            "PR-segment depression",
+            "depressed PR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Pericarditis or MI: which has ST elevation in most leads without reciprocal depression?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Pericarditis",
+          "synonyms": [
+            "acute pericarditis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name the four diagnostic criteria for pericarditis.",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "typical chest pain",
+          "synonyms": [
+            "chest pain",
+            "pleuritic chest pain"
+          ]
+        },
+        {
+          "answer": "friction rub",
+          "synonyms": [
+            "pericardial rub",
+            "rub"
+          ]
+        },
+        {
+          "answer": "diffuse ST elevation",
+          "synonyms": [
+            "ST elevation",
+            "PR depression",
+            "ECG changes"
+          ]
+        },
+        {
+          "answer": "pericardial effusion",
+          "synonyms": [
+            "effusion"
+          ]
+        }
+      ],
+      "required_count": 4
+    },
+    {
+      "id": "acute-pericarditis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging test looks for a pericardial effusion?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.management.1",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name the two first-line drugs for acute viral pericarditis.",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "NSAID",
+          "synonyms": [
+            "NSAIDs",
+            "ibuprofen",
+            "high-dose aspirin",
+            "aspirin",
+            "naproxen"
+          ]
+        },
+        {
+          "answer": "colchicine",
+          "synonyms": []
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "acute-pericarditis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Pericarditis three days after an MI. Which anti-inflammatory is preferred?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aspirin",
+          "synonyms": [
+            "high-dose aspirin",
+            "ASA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a feature that means a patient with pericarditis should be admitted.",
+      "source_fields": [
+        "management.next_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fever above 38 C",
+          "synonyms": [
+            "fever",
+            "high fever"
+          ]
+        },
+        {
+          "answer": "large effusion",
+          "synonyms": [
+            "big effusion",
+            "large pericardial effusion"
+          ]
+        },
+        {
+          "answer": "tamponade",
+          "synonyms": [
+            "cardiac tamponade"
+          ]
+        },
+        {
+          "answer": "failure of NSAIDs",
+          "synonyms": [
+            "no response to NSAIDs",
+            "NSAID failure",
+            "NSAIDs failed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "acute-pericarditis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "By how much does colchicine cut the risk of recurrent pericarditis?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "halves",
+          "synonyms": [
+            "half",
+            "by half",
+            "50%",
+            "fifty percent"
+          ]
+        }
+      ]
+    }
+  ]
+}

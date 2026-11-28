@@ -1,0 +1,382 @@
+{
+  "script": {
+    "id": "ventricular-septal-defect",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Ventricular septal defect",
+    "aliases": [
+      "VSD"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "peds"
+    ],
+    "epidemiology": {
+      "who": "Infants and children; the most common congenital heart defect, apart from a bicuspid aortic valve",
+      "risk_factors": [
+        "trisomy 21",
+        "trisomy 13",
+        "trisomy 18",
+        "fetal alcohol syndrome"
+      ]
+    },
+    "pathophysiology": "A hole in the ventricular septum, most often membranous, lets blood shunt left to right. A large defect floods the lungs and causes heart failure; untreated, rising pulmonary resistance can reverse the shunt (Eisenmenger syndrome).",
+    "timeline": {
+      "onset": "The murmur appears days to weeks after birth as pulmonary resistance falls",
+      "course": "Many small muscular defects close on their own; large ones need repair"
+    },
+    "key_findings": {
+      "history": [
+        "often no symptoms if small",
+        "poor feeding, sweating and failure to thrive if large",
+        "fast breathing"
+      ],
+      "exam": [
+        "harsh holosystolic murmur at the left lower sternal border",
+        "a louder murmur often means a smaller defect",
+        "signs of heart failure in large defects"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram showing the defect and the shunt",
+        "chest X-ray with increased pulmonary vascular markings in large defects"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "echocardiogram"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "watch small defects, since many close by themselves",
+        "diuretics for heart failure while waiting"
+      ],
+      "next_line": [
+        "surgical or device closure for large defects with heart failure, failure to thrive or rising pulmonary pressure"
+      ]
+    },
+    "complications": [
+      "heart failure",
+      "Eisenmenger syndrome",
+      "infective endocarditis",
+      "aortic regurgitation"
+    ],
+    "confused_with": [
+      {
+        "script_id": "tetralogy-of-fallot",
+        "how_to_tell_apart": "An isolated VSD shunts left to right, so the child is pink with a holosystolic murmur; tetralogy of Fallot adds outflow obstruction that drives blood right to left and causes cyanosis."
+      }
+    ],
+    "pearls": [
+      "Smaller defects are louder, because blood jets through a small hole at high speed.",
+      "Once Eisenmenger syndrome sets in, the defect can no longer be closed.",
+      "Muscular defects are the ones most likely to close on their own."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "management.first_line",
+        "management.next_line"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "complications[3]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Moss & Adams' Heart Disease in Infants, Children, and Adolescents"
+      },
+      {
+        "title": "Nelson Textbook of Pediatrics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "ventricular-septal-defect.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A thriving 6-week-old has a harsh holosystolic murmur at the left lower sternal border. Most likely defect?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ventricular septal defect",
+          "synonyms": [
+            "VSD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What is the most common congenital heart defect?",
+      "source_fields": [
+        "name",
+        "epidemiology.who"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Ventricular septal defect",
+          "synonyms": [
+            "VSD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two conditions linked to VSD.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "trisomy 21",
+          "synonyms": [
+            "Down syndrome",
+            "Downs syndrome"
+          ]
+        },
+        {
+          "answer": "trisomy 13",
+          "synonyms": [
+            "Patau syndrome"
+          ]
+        },
+        {
+          "answer": "trisomy 18",
+          "synonyms": [
+            "Edwards syndrome",
+            "Edward syndrome"
+          ]
+        },
+        {
+          "answer": "fetal alcohol syndrome",
+          "synonyms": [
+            "FAS"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ventricular-septal-defect.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "A large VSD is never repaired, pulmonary resistance rises and the shunt reverses. What is this called?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Eisenmenger syndrome",
+          "synonyms": [
+            "Eisenmenger",
+            "Eisenmenger's syndrome"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Large VSD or small VSD: which has the louder murmur?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "small",
+          "synonyms": [
+            "small VSD",
+            "smaller",
+            "small defect",
+            "smaller defect",
+            "the small one"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "VSD or tetralogy of Fallot: which child stays pink?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "VSD",
+          "synonyms": [
+            "ventricular septal defect",
+            "isolated VSD"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms a VSD?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "echocardiogram",
+          "synonyms": [
+            "echo",
+            "echocardiography",
+            "TTE",
+            "transthoracic echocardiogram"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What does the chest X-ray show with a large VSD?",
+      "source_fields": [
+        "key_findings.imaging[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "increased pulmonary vascular markings",
+          "synonyms": [
+            "increased pulmonary markings",
+            "pulmonary plethora",
+            "increased vascular markings"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "A small VSD in a thriving infant. Plan?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "watch",
+          "synonyms": [
+            "observation",
+            "observe",
+            "watchful waiting",
+            "monitor",
+            "monitoring",
+            "reassurance",
+            "serial echo",
+            "wait for it to close"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.management.2",
+      "rung": "management",
+      "kind": "list",
+      "prompt": "Name two reasons to close a VSD.",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "heart failure",
+          "synonyms": [
+            "CHF"
+          ]
+        },
+        {
+          "answer": "failure to thrive",
+          "synonyms": [
+            "FTT",
+            "poor growth",
+            "poor weight gain"
+          ]
+        },
+        {
+          "answer": "rising pulmonary pressure",
+          "synonyms": [
+            "pulmonary hypertension",
+            "high pulmonary pressure"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "ventricular-septal-defect.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which type of VSD is most likely to close on its own?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "muscular",
+          "synonyms": [
+            "muscular VSD",
+            "muscular defects"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "ventricular-septal-defect.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a complication of a VSD other than heart failure.",
+      "source_fields": [
+        "complications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Eisenmenger syndrome",
+          "synonyms": [
+            "Eisenmenger"
+          ]
+        },
+        {
+          "answer": "infective endocarditis",
+          "synonyms": [
+            "endocarditis"
+          ]
+        },
+        {
+          "answer": "aortic regurgitation",
+          "synonyms": [
+            "aortic insufficiency"
+          ]
+        }
+      ]
+    }
+  ]
+}
