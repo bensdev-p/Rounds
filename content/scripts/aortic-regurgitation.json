@@ -1,0 +1,439 @@
+{
+  "script": {
+    "id": "aortic-regurgitation",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Aortic regurgitation",
+    "aliases": [
+      "aortic insufficiency"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults; chronic disease from a bicuspid valve or a dilated aortic root, acute disease from endocarditis or aortic dissection",
+      "risk_factors": [
+        "bicuspid aortic valve",
+        "aortic root dilation (Marfan syndrome, hypertension, aging)",
+        "rheumatic heart disease",
+        "infective endocarditis",
+        "aortic dissection",
+        "syphilitic aortitis",
+        "ankylosing spondylitis"
+      ]
+    },
+    "pathophysiology": "Blood leaks back from the aorta into the left ventricle in diastole. In chronic disease the ventricle dilates and hypertrophies eccentrically, stroke volume rises and the pulse pressure widens. Acute regurgitation floods a ventricle that has not adapted, causing pulmonary edema and shock.",
+    "timeline": {
+      "onset": "Acute (dissection, endocarditis) or chronic over years",
+      "course": "Chronic disease is silent for years until the ventricle fails"
+    },
+    "key_findings": {
+      "history": [
+        "exertional dyspnea",
+        "palpitations",
+        "pounding heartbeat when lying down",
+        "sudden pulmonary edema in acute disease"
+      ],
+      "exam": [
+        "early diastolic decrescendo murmur at the left sternal border, louder sitting forward in expiration",
+        "wide pulse pressure",
+        "water-hammer (Corrigan) pulse",
+        "head bobbing (de Musset sign)",
+        "Austin Flint murmur",
+        "other signs: Quincke pulsations in the nail beds, Duroziez murmur over the femoral artery, Traube pistol-shot sounds, Hill sign (leg pressure far above arm pressure)"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram showing the regurgitant jet, its cause and the size of the left ventricle",
+        "CT or MRI of the aorta when the root is dilated"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram"
+      ],
+      "criteria": [
+        "severe chronic regurgitation with symptoms, an ejection fraction of 55% or less, or a left ventricular end-systolic dimension above 50 mm is an indication for valve replacement"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "aortic valve replacement for severe regurgitation with symptoms, or with left ventricular dysfunction or dilation",
+        "vasodilators (ACE inhibitors, ARBs, dihydropyridines) to control blood pressure"
+      ],
+      "next_line": [
+        "urgent surgery for acute regurgitation",
+        "treat the cause: dissection repair, antibiotics for endocarditis"
+      ]
+    },
+    "complications": [
+      "heart failure",
+      "acute pulmonary edema in acute disease",
+      "sudden death"
+    ],
+    "confused_with": [
+      {
+        "script_id": "aortic-stenosis",
+        "how_to_tell_apart": "Aortic regurgitation is an early diastolic decrescendo murmur with a wide pulse pressure and bounding pulses; aortic stenosis is a systolic crescendo-decrescendo murmur with a slow-rising pulse."
+      },
+      {
+        "script_id": "mitral-stenosis",
+        "how_to_tell_apart": "Aortic regurgitation is an early diastolic decrescendo murmur at the left sternal border with a wide pulse pressure; mitral stenosis is a mid-diastolic rumble at the apex after an opening snap."
+      }
+    ],
+    "pearls": [
+      "Avoid slowing the heart with a beta blocker alone in severe aortic regurgitation; a longer diastole worsens the leak.",
+      "Acute aortic regurgitation lacks the wide pulse pressure and bounding pulses, because the ventricle has not dilated.",
+      "The Austin Flint murmur is a mid-diastolic rumble at the apex from the regurgitant jet hitting the mitral leaflet."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam[0]"
+      ],
+      "MS3": [
+        "epidemiology.risk_factors",
+        "management.first_line"
+      ],
+      "MS4": [
+        "diagnosis.criteria",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+      },
+      {
+        "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "aortic-regurgitation.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 50-year-old has a wide pulse pressure, bounding pulses and an early diastolic decrescendo murmur at the left sternal border. Which valve lesion?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic regurgitation",
+          "synonyms": [
+            "aortic insufficiency",
+            "aortic valve regurgitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "How is the murmur of aortic regurgitation heard best?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sitting forward in expiration",
+          "synonyms": [
+            "sitting forward",
+            "leaning forward",
+            "sitting up and leaning forward",
+            "in expiration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of aortic regurgitation.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bicuspid aortic valve",
+          "synonyms": [
+            "bicuspid valve",
+            "bicuspid"
+          ]
+        },
+        {
+          "answer": "aortic root dilation",
+          "synonyms": [
+            "aortic root dilatation",
+            "Marfan syndrome",
+            "Marfan",
+            "Marfans",
+            "dilated aortic root"
+          ]
+        },
+        {
+          "answer": "rheumatic heart disease",
+          "synonyms": [
+            "rheumatic fever"
+          ]
+        },
+        {
+          "answer": "infective endocarditis",
+          "synonyms": [
+            "endocarditis"
+          ]
+        },
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        },
+        {
+          "answer": "syphilitic aortitis",
+          "synonyms": [
+            "syphilis"
+          ]
+        },
+        {
+          "answer": "ankylosing spondylitis",
+          "synonyms": []
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "aortic-regurgitation.second-order.2",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two peripheral signs of chronic aortic regurgitation.",
+      "source_fields": [
+        "key_findings.exam"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "wide pulse pressure",
+          "synonyms": [
+            "widened pulse pressure"
+          ]
+        },
+        {
+          "answer": "water-hammer",
+          "synonyms": [
+            "water hammer pulse",
+            "bounding pulse",
+            "bounding pulses",
+            "collapsing pulse",
+            "Corrigan pulse"
+          ]
+        },
+        {
+          "answer": "head bobbing",
+          "synonyms": [
+            "de Musset sign",
+            "de Musset"
+          ]
+        },
+        {
+          "answer": "Quincke",
+          "synonyms": [
+            "Quincke pulse",
+            "Quincke sign",
+            "nail bed pulsations"
+          ]
+        },
+        {
+          "answer": "Duroziez",
+          "synonyms": [
+            "Duroziez sign",
+            "Duroziez murmur"
+          ]
+        },
+        {
+          "answer": "Traube",
+          "synonyms": [
+            "Traube sign",
+            "pistol-shot sounds"
+          ]
+        },
+        {
+          "answer": "Hill sign",
+          "synonyms": [
+            "Hill"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "aortic-regurgitation.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Aortic regurgitation or aortic stenosis: which has a wide pulse pressure?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Aortic regurgitation",
+          "synonyms": [
+            "aortic insufficiency",
+            "aortic valve regurgitation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What is the mid-diastolic apical rumble of severe aortic regurgitation called?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Austin Flint murmur",
+          "synonyms": [
+            "Austin Flint",
+            "Austin-Flint murmur"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms and grades aortic regurgitation?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echo",
+            "TTE",
+            "echocardiography",
+            "transthoracic echo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Under the 2020 ACC/AHA guideline, at what ejection fraction is valve replacement indicated in severe chronic aortic regurgitation?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "55% or less",
+          "synonyms": [
+            "55 or less",
+            "55 percent or less",
+            "below 55%",
+            "under 55%",
+            "less than 55%",
+            "at or below 55"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Severe aortic regurgitation with symptoms. Definitive treatment?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic valve replacement",
+          "synonyms": [
+            "valve replacement",
+            "AVR",
+            "SAVR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which heart-slowing drug class should not be used alone in severe aortic regurgitation?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta blocker",
+          "synonyms": [
+            "beta blockers",
+            "beta-blocker",
+            "beta-blockers"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why does acute aortic regurgitation lack bounding pulses?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "the ventricle has not dilated",
+          "synonyms": [
+            "ventricle not dilated",
+            "no time to dilate",
+            "not dilated",
+            "no ventricular dilation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "aortic-regurgitation.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a cause of acute aortic regurgitation.",
+      "source_fields": [
+        "epidemiology.who"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aortic dissection",
+          "synonyms": [
+            "dissection"
+          ]
+        },
+        {
+          "answer": "endocarditis",
+          "synonyms": [
+            "infective endocarditis"
+          ]
+        }
+      ]
+    }
+  ]
+}

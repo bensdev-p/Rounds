@@ -1,0 +1,405 @@
+{
+  "script": {
+    "id": "class-ia-antiarrhythmics",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Class IA antiarrhythmics",
+    "aliases": [
+      "class IA"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Class IA antiarrhythmics (sodium channel blockers that also block potassium channels)",
+    "class_members": [
+      "quinidine",
+      "procainamide",
+      "disopyramide"
+    ],
+    "mechanism": "Block fast sodium channels moderately, slowing phase 0 depolarization, and block potassium channels, prolonging the action potential, the refractory period and the QT interval.",
+    "pharmacokinetics": [
+      "procainamide is acetylated to NAPA, an active metabolite with class III effects; slow acetylators accumulate the parent drug",
+      "quinidine inhibits CYP2D6"
+    ],
+    "indications": [
+      "atrial and ventricular arrhythmias, now rarely",
+      "procainamide for stable wide-complex tachycardia and for atrial fibrillation with Wolff-Parkinson-White syndrome"
+    ],
+    "adverse_effects": [
+      "QT prolongation and torsades de pointes",
+      "cinchonism with quinidine: tinnitus, headache, hearing loss",
+      "drug-induced lupus with procainamide",
+      "anticholinergic effects and heart failure with disopyramide",
+      "diarrhea and thrombocytopenia with quinidine"
+    ],
+    "contraindications": [
+      "long QT",
+      "heart failure (disopyramide)"
+    ],
+    "interactions": [
+      "quinidine raises digoxin levels",
+      "other QT-prolonging drugs add to the risk of torsades"
+    ],
+    "monitoring": [
+      "QT interval",
+      "ANA, and procainamide levels with NAPA"
+    ],
+    "overdose": {
+      "features": [
+        "QT prolongation",
+        "torsades de pointes",
+        "wide QRS"
+      ],
+      "treatment": [
+        "IV magnesium for torsades",
+        "sodium bicarbonate for a wide QRS",
+        "overdrive pacing"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "class-ib-antiarrhythmics",
+        "how_to_tell_apart": "Class IA drugs block sodium and potassium channels and prolong the QT interval; class IB drugs block sodium weakly, shorten the action potential and act mainly on ischemic ventricles."
+      }
+    ],
+    "pearls": [
+      "Class IA drugs: quinidine, procainamide and disopyramide.",
+      "Procainamide is a classic choice for atrial fibrillation with Wolff-Parkinson-White syndrome, because it slows the accessory pathway.",
+      "Procainamide and hydralazine both cause drug-induced lupus, more often in slow acetylators."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "adverse_effects",
+        "indications"
+      ],
+      "MS4": [
+        "pharmacokinetics[0]",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "class-ia-antiarrhythmics.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Quinidine, procainamide and disopyramide belong to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IA antiarrhythmics",
+          "synonyms": [
+            "class IA",
+            "class 1A",
+            "class 1 A",
+            "class IA antiarrhythmic",
+            "class 1A antiarrhythmics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.recall.2",
+      "rung": "recall",
+      "kind": "list",
+      "prompt": "Name two class IA antiarrhythmics.",
+      "source_fields": [
+        "class_members"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "quinidine",
+          "synonyms": []
+        },
+        {
+          "answer": "procainamide",
+          "synonyms": [
+            "Pronestyl"
+          ]
+        },
+        {
+          "answer": "disopyramide",
+          "synonyms": [
+            "Norpace"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "class-ia-antiarrhythmics.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Which two kinds of ion channel do class IA drugs block?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "sodium channels",
+          "synonyms": [
+            "sodium",
+            "Na channels",
+            "fast sodium channels"
+          ]
+        },
+        {
+          "answer": "potassium channels",
+          "synonyms": [
+            "potassium",
+            "K channels"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "class-ia-antiarrhythmics.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What do class IA drugs do to the QT interval?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prolonging",
+          "synonyms": [
+            "prolong",
+            "prolonged",
+            "prolongs",
+            "prolongation",
+            "lengthen",
+            "lengthens",
+            "longer",
+            "increases",
+            "QT prolongation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which class IA drug is used for atrial fibrillation with Wolff-Parkinson-White syndrome?",
+      "source_fields": [
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "procainamide",
+          "synonyms": [
+            "Pronestyl"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Besides atrial fibrillation with WPW, which stable tachycardia does procainamide treat?",
+      "source_fields": [
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "stable wide-complex tachycardia",
+          "synonyms": [
+            "wide complex tachycardia",
+            "wide-complex tachycardia",
+            "ventricular tachycardia",
+            "stable VT",
+            "VT",
+            "monomorphic VT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two adverse effects of class IA drugs.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "torsades de pointes",
+          "synonyms": [
+            "torsades",
+            "QT prolongation",
+            "long QT"
+          ]
+        },
+        {
+          "answer": "cinchonism",
+          "synonyms": [
+            "tinnitus",
+            "hearing loss"
+          ]
+        },
+        {
+          "answer": "drug-induced lupus",
+          "synonyms": [
+            "lupus"
+          ]
+        },
+        {
+          "answer": "anticholinergic effects",
+          "synonyms": [
+            "dry mouth",
+            "urinary retention"
+          ]
+        },
+        {
+          "answer": "heart failure",
+          "synonyms": []
+        },
+        {
+          "answer": "diarrhea",
+          "synonyms": []
+        },
+        {
+          "answer": "thrombocytopenia",
+          "synonyms": [
+            "low platelets"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "class-ia-antiarrhythmics.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Tinnitus, headache and hearing loss on quinidine. What is this called?",
+      "source_fields": [
+        "adverse_effects[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cinchonism",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IA or class IB: which one prolongs the QT interval?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IA",
+          "synonyms": [
+            "class 1A",
+            "class 1 A",
+            "IA drugs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IA or class IB: which also blocks potassium channels?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IA",
+          "synonyms": [
+            "class 1A",
+            "class 1 A",
+            "IA drugs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which class IA drug causes drug-induced lupus, as hydralazine does?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "procainamide",
+          "synonyms": [
+            "Pronestyl"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What is the active metabolite of procainamide?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "NAPA",
+          "synonyms": [
+            "N-acetylprocainamide",
+            "N-acetyl procainamide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ia-antiarrhythmics.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "How does quinidine affect digoxin?",
+      "source_fields": [
+        "interactions[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raises digoxin levels",
+          "synonyms": [
+            "increases digoxin levels",
+            "raises digoxin",
+            "higher digoxin levels",
+            "digoxin toxicity"
+          ]
+        }
+      ]
+    }
+  ]
+}

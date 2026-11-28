@@ -75,7 +75,12 @@
       "obstructive shock",
       "cardiac arrest with pulseless electrical activity"
     ],
-    "confused_with": [],
+    "confused_with": [
+      {
+        "script_id": "constrictive-pericarditis",
+        "how_to_tell_apart": "Tamponade is fluid under pressure with pulsus paradoxus that can develop in minutes; constrictive pericarditis is a rigid pericardium with a knock and Kussmaul sign that develops over months."
+      }
+    ],
     "pearls": [
       "Avoid positive-pressure ventilation and diuretics, which reduce filling further.",
       "Pulsus paradoxus is a fall in systolic pressure of more than 10 mmHg on inspiration.",
@@ -251,16 +256,16 @@
       "id": "cardiac-tamponade.differentiate.2",
       "rung": "differentiate",
       "kind": "single",
-      "prompt": "Hypotension and raised JVP. Are the lungs clear or crackly in tamponade?",
+      "prompt": "Tamponade or constrictive pericarditis: which has pulsus paradoxus, usually without Kussmaul sign?",
       "source_fields": [
-        "key_findings.exam[3]"
+        "confused_with[0].how_to_tell_apart"
       ],
       "accepted_answers": [
         {
-          "answer": "clear lungs",
+          "answer": "Tamponade",
           "synonyms": [
-            "clear",
-            "clear lung fields"
+            "cardiac tamponade",
+            "pericardial tamponade"
           ]
         }
       ]

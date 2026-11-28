@@ -59,6 +59,10 @@
       {
         "script_id": "statins",
         "how_to_tell_apart": "Fibrates mainly lower triglycerides by activating PPAR-alpha; statins mainly lower LDL by inhibiting HMG-CoA reductase."
+      },
+      {
+        "script_id": "niacin",
+        "how_to_tell_apart": "Fibrates mainly lower triglycerides by activating PPAR-alpha; niacin raises HDL the most and works by inhibiting lipolysis in fat."
       }
     ],
     "pearls": [

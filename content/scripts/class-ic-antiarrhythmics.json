@@ -1,0 +1,361 @@
+{
+  "script": {
+    "id": "class-ic-antiarrhythmics",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Class IC antiarrhythmics",
+    "aliases": [
+      "class IC"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Class IC antiarrhythmics (strong sodium channel blockers)",
+    "class_members": [
+      "flecainide",
+      "propafenone"
+    ],
+    "mechanism": "Block sodium channels strongly and dissociate slowly, markedly slowing conduction and widening the QRS, with little effect on the length of the action potential. Propafenone also blocks beta receptors.",
+    "pharmacokinetics": [
+      "both are metabolized by CYP2D6"
+    ],
+    "indications": [
+      "atrial fibrillation in a structurally normal heart, including the pill-in-the-pocket approach",
+      "supraventricular tachycardias"
+    ],
+    "adverse_effects": [
+      "proarrhythmia, especially ventricular tachycardia",
+      "atrial flutter with fast 1:1 conduction",
+      "QRS widening",
+      "dizziness and blurred vision"
+    ],
+    "contraindications": [
+      "structural heart disease: prior myocardial infarction, heart failure or marked left ventricular hypertrophy",
+      "coronary artery disease"
+    ],
+    "interactions": [
+      "CYP2D6 inhibitors raise levels",
+      "given with an AV nodal blocker to prevent 1:1 flutter conduction"
+    ],
+    "monitoring": [
+      "QRS width on the ECG, especially at higher doses or faster heart rates"
+    ],
+    "overdose": {
+      "features": [
+        "wide QRS",
+        "ventricular arrhythmias",
+        "hypotension"
+      ],
+      "treatment": [
+        "sodium bicarbonate",
+        "supportive care"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "class-ib-antiarrhythmics",
+        "how_to_tell_apart": "Class IC drugs block sodium strongly, widen the QRS and raise mortality after a myocardial infarction; class IB drugs block sodium weakly and target ischemic ventricular tissue."
+      }
+    ],
+    "pearls": [
+      "The CAST trial showed flecainide and encainide raised mortality after myocardial infarction.",
+      "Pill in the pocket: a single dose of flecainide or propafenone at the onset of atrial fibrillation, with a beta blocker or calcium channel blocker.",
+      "Class IC drugs show use-dependence: QRS widening is worse at faster heart rates."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "contraindications"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2023 ACC/AHA/ACCP/HRS Guideline for the Diagnosis and Management of Atrial Fibrillation"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "class-ic-antiarrhythmics.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Flecainide and propafenone belong to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IC antiarrhythmics",
+          "synonyms": [
+            "class IC",
+            "class 1C",
+            "class 1 C",
+            "class IC antiarrhythmic",
+            "class 1C antiarrhythmics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which class IC drug also blocks beta receptors?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "propafenone",
+          "synonyms": [
+            "Rythmol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Weak or strong sodium channel block: which do class IC drugs cause?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "strongly",
+          "synonyms": [
+            "strong",
+            "strong sodium channel block",
+            "potent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which part of the ECG do class IC drugs widen?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "QRS",
+          "synonyms": [
+            "QRS complex",
+            "QRS duration",
+            "QRS interval"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Name a use of class IC drugs.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial fibrillation in a structurally normal heart",
+          "synonyms": [
+            "atrial fibrillation",
+            "afib",
+            "a fib",
+            "AF",
+            "pill in the pocket"
+          ]
+        },
+        {
+          "answer": "supraventricular tachycardias",
+          "synonyms": [
+            "SVT",
+            "supraventricular tachycardia"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "What is a single dose of flecainide or propafenone, taken at the onset of atrial fibrillation, called?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pill in the pocket",
+          "synonyms": [
+            "pill-in-the-pocket"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which ECG change shows the effect of a class IC drug, and limits its dose?",
+      "source_fields": [
+        "adverse_effects[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "QRS widening",
+          "synonyms": [
+            "wide QRS",
+            "widened QRS",
+            "prolonged QRS",
+            "QRS prolongation"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Flecainide can turn atrial fibrillation into which dangerous rhythm?",
+      "source_fields": [
+        "adverse_effects[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "atrial flutter with fast 1:1 conduction",
+          "synonyms": [
+            "atrial flutter",
+            "flutter",
+            "1:1 flutter",
+            "1 to 1 conduction"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IB or class IC: which must be avoided after a myocardial infarction?",
+      "source_fields": [
+        "name",
+        "contraindications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IC",
+          "synonyms": [
+            "class 1C",
+            "class 1 C",
+            "IC drugs",
+            "flecainide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IB or class IC: which blocks sodium strongly and widens the QRS?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IC",
+          "synonyms": [
+            "class 1C",
+            "class 1 C",
+            "IC drugs",
+            "flecainide"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which kind of drug is given with flecainide to prevent 1:1 flutter conduction?",
+      "source_fields": [
+        "interactions[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "AV nodal blocker",
+          "synonyms": [
+            "AV nodal blockers",
+            "AV nodal blocking agent",
+            "beta blocker",
+            "beta blockers",
+            "calcium channel blocker",
+            "calcium channel blockers",
+            "diltiazem",
+            "verapamil",
+            "metoprolol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which trial showed class IC drugs raised mortality after myocardial infarction?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "CAST",
+          "synonyms": [
+            "Cardiac Arrhythmia Suppression Trial"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ic-antiarrhythmics.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "QRS widening from flecainide is worse at fast heart rates. What is this property called?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "use-dependence",
+          "synonyms": [
+            "use dependence",
+            "use-dependent block",
+            "use dependent"
+          ]
+        }
+      ]
+    }
+  ]
+}

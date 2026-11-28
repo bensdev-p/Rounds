@@ -115,6 +115,10 @@
             "source_field": "key_findings.exam[0]"
           }
         ]
+      },
+      {
+        "script_id": "aortic-regurgitation",
+        "how_to_tell_apart": "Aortic stenosis is a systolic crescendo-decrescendo murmur with a slow-rising pulse; aortic regurgitation is an early diastolic decrescendo murmur with a wide pulse pressure and bounding pulses."
       }
     ],
     "pearls": [

@@ -98,6 +98,10 @@
             "source_field": "mechanism"
           }
         ]
+      },
+      {
+        "script_id": "carbonic-anhydrase-inhibitors",
+        "how_to_tell_apart": "Loop diuretics act on the thick ascending limb and cause a metabolic alkalosis; acetazolamide acts on the proximal tubule and causes a metabolic acidosis."
       }
     ],
     "pearls": [
@@ -385,15 +389,17 @@
       "id": "loop-diuretics.management.2",
       "rung": "management",
       "kind": "single",
-      "prompt": "Which loop diuretic has no sulfonamide group?",
+      "prompt": "Loop diuretic or acetazolamide: which causes a metabolic alkalosis?",
       "source_fields": [
-        "pearls[1]"
+        "confused_with[2].how_to_tell_apart"
       ],
       "accepted_answers": [
         {
-          "answer": "ethacrynic acid",
+          "answer": "Loop diuretics",
           "synonyms": [
-            "ethacrynic"
+            "loop diuretic",
+            "furosemide",
+            "loops"
           ]
         }
       ]

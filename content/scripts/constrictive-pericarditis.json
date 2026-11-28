@@ -1,0 +1,388 @@
+{
+  "script": {
+    "id": "constrictive-pericarditis",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Constrictive pericarditis",
+    "aliases": [
+      "pericardial constriction"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "Adults after pericarditis, cardiac surgery, radiation or tuberculosis",
+      "risk_factors": [
+        "prior viral or idiopathic pericarditis",
+        "cardiac surgery",
+        "chest radiation",
+        "tuberculosis, the leading cause in low-income countries",
+        "connective tissue disease"
+      ]
+    },
+    "pathophysiology": "The pericardium thickens, scars and sometimes calcifies into a rigid shell. Early diastolic filling is rapid and then stops abruptly, so venous pressures rise and the two ventricles compete for space (interventricular dependence).",
+    "timeline": {
+      "onset": "Months to years after the injury",
+      "course": "Progressive right-sided heart failure; cured by pericardiectomy"
+    },
+    "key_findings": {
+      "history": [
+        "fatigue",
+        "leg swelling",
+        "abdominal swelling",
+        "exertional dyspnea"
+      ],
+      "exam": [
+        "raised JVP that rises on inspiration (Kussmaul sign)",
+        "pericardial knock in early diastole",
+        "ascites and edema out of proportion to lung findings",
+        "hepatomegaly"
+      ],
+      "labs": [
+        "BNP lower than expected for the degree of congestion"
+      ],
+      "imaging": [
+        "CT or MRI showing a thickened pericardium",
+        "chest X-ray showing pericardial calcification",
+        "echocardiogram with septal bounce and respiratory variation in filling"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "cardiac CT or MRI",
+        "echocardiogram",
+        "cardiac catheterization showing equalized diastolic pressures and interventricular dependence"
+      ],
+      "criteria": []
+    },
+    "management": {
+      "first_line": [
+        "diuretics for symptoms",
+        "anti-inflammatory therapy if the constriction is new and still inflamed (transient constriction)"
+      ],
+      "next_line": [
+        "surgical pericardiectomy for chronic constriction"
+      ]
+    },
+    "complications": [
+      "right heart failure",
+      "cardiac cirrhosis",
+      "protein-losing enteropathy"
+    ],
+    "confused_with": [
+      {
+        "script_id": "restrictive-cardiomyopathy",
+        "how_to_tell_apart": "Both fill poorly and raise venous pressure, but constrictive pericarditis has a thick, often calcified pericardium, a pericardial knock and a lower BNP; restrictive cardiomyopathy has stiff heart muscle, a high BNP and a normal pericardium.",
+        "compare": [
+          {
+            "label": "Problem",
+            "text": "Rigid pericardium",
+            "source_field": "pathophysiology"
+          },
+          {
+            "label": "BNP",
+            "text": "Lower than expected",
+            "source_field": "key_findings.labs[0]"
+          }
+        ]
+      },
+      {
+        "script_id": "cardiac-tamponade",
+        "how_to_tell_apart": "Both limit filling, but constrictive pericarditis is a rigid pericardium with a knock and Kussmaul sign that develops over months; tamponade is fluid under pressure with pulsus paradoxus that can develop in minutes."
+      }
+    ],
+    "pearls": [
+      "Kussmaul sign is typical of constrictive pericarditis and usually absent in tamponade, where pulsus paradoxus dominates.",
+      "A pericardial knock is an early diastolic sound made as filling stops abruptly.",
+      "Tuberculosis is the most common cause worldwide."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "diagnosis.confirmatory_tests",
+        "management.next_line"
+      ],
+      "MS4": [
+        "pearls[0]",
+        "key_findings.imaging[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2025 ESC Guidelines for the management of myocarditis and pericarditis"
+      },
+      {
+        "title": "Braunwald's Heart Disease: A Textbook of Cardiovascular Medicine"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "constrictive-pericarditis.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Years after chest radiation: ascites, edema and a JVP that rises on inspiration. CT shows a thick, calcified pericardium. Diagnosis?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Constrictive pericarditis",
+          "synonyms": [
+            "constriction",
+            "pericardial constriction",
+            "constrictive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which early diastolic sound is typical of constrictive pericarditis?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericardial knock",
+          "synonyms": [
+            "knock"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name three causes of constrictive pericarditis.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericarditis",
+          "synonyms": [
+            "viral pericarditis",
+            "idiopathic"
+          ]
+        },
+        {
+          "answer": "cardiac surgery",
+          "synonyms": [
+            "heart surgery"
+          ]
+        },
+        {
+          "answer": "radiation",
+          "synonyms": [
+            "radiotherapy",
+            "chest radiation"
+          ]
+        },
+        {
+          "answer": "tuberculosis",
+          "synonyms": [
+            "TB"
+          ]
+        },
+        {
+          "answer": "connective tissue disease",
+          "synonyms": [
+            "lupus",
+            "rheumatoid arthritis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "constrictive-pericarditis.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which cause of constrictive pericarditis is most common worldwide?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "tuberculosis",
+          "synonyms": [
+            "TB"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Constrictive pericarditis or restrictive cardiomyopathy: which has a thick pericardium on CT?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Constrictive pericarditis",
+          "synonyms": [
+            "constriction",
+            "pericardial constriction",
+            "constrictive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Constrictive pericarditis or tamponade: which typically shows Kussmaul sign?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "constrictive pericarditis",
+          "synonyms": [
+            "constriction",
+            "pericardial constriction",
+            "constrictive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which imaging shows a thickened pericardium?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "cardiac CT",
+          "synonyms": [
+            "CT",
+            "CT scan",
+            "MRI",
+            "cardiac MRI",
+            "CMR"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "In constrictive pericarditis, what does cardiac catheterization show?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "equalized diastolic pressures",
+          "synonyms": [
+            "equalization of diastolic pressures",
+            "equal diastolic pressures",
+            "interventricular dependence",
+            "dip and plateau",
+            "square root sign"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Definitive treatment of chronic constrictive pericarditis?",
+      "source_fields": [
+        "management.next_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pericardiectomy",
+          "synonyms": [
+            "surgical pericardiectomy",
+            "pericardial stripping"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "New constriction with active inflammation. What do you try before surgery?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "anti-inflammatory therapy",
+          "synonyms": [
+            "anti-inflammatories",
+            "anti-inflammatory drugs",
+            "NSAIDs",
+            "NSAID",
+            "ibuprofen",
+            "colchicine",
+            "steroids",
+            "corticosteroids"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In constriction, is the BNP higher or lower than the congestion suggests?",
+      "source_fields": [
+        "key_findings.labs[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lower",
+          "synonyms": [
+            "lower than expected",
+            "low",
+            "normal"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "constrictive-pericarditis.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which echo sign reflects interventricular dependence?",
+      "source_fields": [
+        "key_findings.imaging[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "septal bounce",
+          "synonyms": [
+            "septal shift",
+            "ventricular septal bounce"
+          ]
+        }
+      ]
+    }
+  ]
+}

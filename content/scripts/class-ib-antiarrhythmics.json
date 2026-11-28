@@ -1,0 +1,373 @@
+{
+  "script": {
+    "id": "class-ib-antiarrhythmics",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Class IB antiarrhythmics",
+    "aliases": [
+      "class IB"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Class IB antiarrhythmics (weak sodium channel blockers)",
+    "class_members": [
+      "lidocaine",
+      "mexiletine",
+      "phenytoin"
+    ],
+    "mechanism": "Block sodium channels with fast on-off kinetics, preferring depolarized (ischemic) tissue, and shorten the action potential. They act mainly on the ventricles and barely change the QT interval.",
+    "pharmacokinetics": [
+      "lidocaine has high first-pass metabolism, so it is given IV",
+      "mexiletine is the oral analogue"
+    ],
+    "indications": [
+      "ventricular arrhythmias, especially with ischemia or after myocardial infarction",
+      "ventricular fibrillation or pulseless VT that persists after shocks (lidocaine, as an alternative to amiodarone)",
+      "ventricular arrhythmias from digoxin toxicity"
+    ],
+    "adverse_effects": [
+      "neurologic toxicity: perioral numbness, tremor, confusion and seizures",
+      "bradycardia and hypotension at high levels"
+    ],
+    "contraindications": [
+      "severe heart block without a pacemaker"
+    ],
+    "interactions": [
+      "beta blockers and cimetidine slow lidocaine clearance"
+    ],
+    "monitoring": [
+      "neurologic symptoms",
+      "lidocaine levels during long infusions"
+    ],
+    "overdose": {
+      "features": [
+        "seizures",
+        "perioral numbness",
+        "bradycardia"
+      ],
+      "treatment": [
+        "benzodiazepines for seizures",
+        "IV lipid emulsion for severe toxicity"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "class-ia-antiarrhythmics",
+        "how_to_tell_apart": "Class IB drugs block sodium weakly, shorten the action potential and act mainly on ischemic ventricles; class IA drugs block sodium and potassium channels and prolong the QT interval."
+      },
+      {
+        "script_id": "class-ic-antiarrhythmics",
+        "how_to_tell_apart": "Class IB drugs block sodium weakly and target ischemic ventricular tissue; class IC drugs block sodium strongly, widen the QRS and raise mortality after a myocardial infarction."
+      }
+    ],
+    "pearls": [
+      "Class IB drugs target ischemic, depolarized ventricular tissue; unlike class IC, they are not linked to excess mortality after MI, though lidocaine is not given routinely to prevent arrhythmias.",
+      "Lidocaine toxicity often starts with perioral numbness and ends in seizures.",
+      "Phenytoin, an antiseizure drug, is also a class IB antiarrhythmic."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "class",
+        "mechanism"
+      ],
+      "MS3": [
+        "indications",
+        "adverse_effects"
+      ],
+      "MS4": [
+        "overdose.treatment",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2017 AHA/ACC/HRS Guideline for Management of Patients With Ventricular Arrhythmias and the Prevention of Sudden Cardiac Death"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "class-ib-antiarrhythmics.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Lidocaine and mexiletine belong to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IB antiarrhythmics",
+          "synonyms": [
+            "class IB",
+            "class 1B",
+            "class 1 B",
+            "class IB antiarrhythmic",
+            "class 1B antiarrhythmics"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Which class IB drug is the oral analogue of lidocaine?",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mexiletine",
+          "synonyms": []
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which kind of tissue do class IB drugs prefer?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ischemic",
+          "synonyms": [
+            "ischemic tissue",
+            "depolarized",
+            "depolarized tissue",
+            "damaged myocardium"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "What do class IB drugs do to the length of the action potential?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "shorten",
+          "synonyms": [
+            "shortens",
+            "shortened",
+            "shorter",
+            "decrease"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Name a use of lidocaine as an antiarrhythmic.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "ventricular arrhythmias",
+          "synonyms": [
+            "ventricular tachycardia",
+            "VT",
+            "ventricular arrhythmia"
+          ]
+        },
+        {
+          "answer": "ventricular fibrillation",
+          "synonyms": [
+            "VF",
+            "pulseless VT",
+            "cardiac arrest"
+          ]
+        },
+        {
+          "answer": "digoxin toxicity",
+          "synonyms": [
+            "digoxin-induced arrhythmias"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Ventricular fibrillation persists after shocks. Which class IB drug is an alternative to amiodarone?",
+      "source_fields": [
+        "indications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lidocaine",
+          "synonyms": [
+            "Xylocaine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which body system shows lidocaine toxicity first?",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "neurologic",
+          "synonyms": [
+            "neurological",
+            "nervous system",
+            "CNS",
+            "brain"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.workup.2",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name two signs of lidocaine toxicity.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "perioral numbness",
+          "synonyms": [
+            "numb lips",
+            "numbness",
+            "circumoral numbness",
+            "tingling around the mouth"
+          ]
+        },
+        {
+          "answer": "tremor",
+          "synonyms": [
+            "tremors"
+          ]
+        },
+        {
+          "answer": "confusion",
+          "synonyms": []
+        },
+        {
+          "answer": "seizures",
+          "synonyms": [
+            "seizure"
+          ]
+        },
+        {
+          "answer": "bradycardia",
+          "synonyms": [
+            "slow heart rate"
+          ]
+        },
+        {
+          "answer": "hypotension",
+          "synonyms": [
+            "low blood pressure"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "class-ib-antiarrhythmics.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IA or class IB: which barely changes the QT interval?",
+      "source_fields": [
+        "name",
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IB",
+          "synonyms": [
+            "class 1B",
+            "class 1 B",
+            "IB drugs"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Class IB or class IC: which targets ischemic ventricular tissue?",
+      "source_fields": [
+        "confused_with[1].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Class IB",
+          "synonyms": [
+            "class 1B",
+            "class 1 B",
+            "IB drugs",
+            "lidocaine"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Besides benzodiazepines, what treats severe lidocaine toxicity?",
+      "source_fields": [
+        "overdose.treatment[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "IV lipid emulsion",
+          "synonyms": [
+            "lipid emulsion",
+            "intralipid",
+            "lipid rescue"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "class-ib-antiarrhythmics.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which antiseizure drug is also a class IB antiarrhythmic?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "phenytoin",
+          "synonyms": [
+            "Dilantin"
+          ]
+        }
+      ]
+    }
+  ]
+}

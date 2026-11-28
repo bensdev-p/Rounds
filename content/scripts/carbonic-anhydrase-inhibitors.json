@@ -1,0 +1,377 @@
+{
+  "script": {
+    "id": "carbonic-anhydrase-inhibitors",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Carbonic anhydrase inhibitors",
+    "aliases": [
+      "acetazolamide"
+    ],
+    "systems": [
+      "renal",
+      "neuro"
+    ],
+    "rotation": [],
+    "class": "Carbonic anhydrase inhibitors",
+    "class_members": [
+      "acetazolamide",
+      "methazolamide",
+      "dorzolamide and brinzolamide, as eye drops"
+    ],
+    "mechanism": "Inhibit carbonic anhydrase in the proximal tubule, so less bicarbonate is reabsorbed. Bicarbonate, sodium and water are lost in the urine, causing a mild diuresis and a hyperchloremic metabolic acidosis.",
+    "pharmacokinetics": [
+      "the effect fades within days as plasma bicarbonate falls",
+      "dorzolamide and brinzolamide are used as eye drops"
+    ],
+    "indications": [
+      "glaucoma",
+      "acute mountain sickness prevention",
+      "idiopathic intracranial hypertension",
+      "metabolic alkalosis",
+      "urinary alkalinization for uric acid or cystine stones"
+    ],
+    "adverse_effects": [
+      "hyperchloremic metabolic acidosis (normal anion gap)",
+      "hypokalemia",
+      "paresthesias",
+      "calcium phosphate kidney stones",
+      "sulfonamide allergy reactions"
+    ],
+    "contraindications": [
+      "cirrhosis, because alkaline urine raises ammonia absorption",
+      "severe hypokalemia or acidosis"
+    ],
+    "interactions": [
+      "raise the risk of salicylate toxicity"
+    ],
+    "monitoring": [
+      "electrolytes and bicarbonate"
+    ],
+    "overdose": {
+      "features": [
+        "metabolic acidosis",
+        "hypokalemia"
+      ],
+      "treatment": [
+        "supportive care"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "loop-diuretics",
+        "how_to_tell_apart": "Acetazolamide acts on the proximal tubule and causes a metabolic acidosis; loop diuretics act on the thick ascending limb and cause a metabolic alkalosis."
+      }
+    ],
+    "pearls": [
+      "Acetazolamide causes a normal anion gap (hyperchloremic) metabolic acidosis, like a proximal renal tubular acidosis.",
+      "In mountain sickness, the acidosis drives breathing and offsets the respiratory alkalosis of altitude.",
+      "Alkaline urine favors calcium phosphate stones but helps dissolve uric acid and cystine stones."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "contraindications[0]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "carbonic-anhydrase-inhibitors.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Acetazolamide belongs to which drug class?",
+      "source_fields": [
+        "name"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Carbonic anhydrase inhibitors",
+          "synonyms": [
+            "carbonic anhydrase inhibitor",
+            "CA inhibitor",
+            "CA inhibitors"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Name a carbonic anhydrase inhibitor used as eye drops.",
+      "source_fields": [
+        "pharmacokinetics[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "dorzolamide",
+          "synonyms": [
+            "Trusopt"
+          ]
+        },
+        {
+          "answer": "brinzolamide",
+          "synonyms": [
+            "Azopt"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Where in the nephron does acetazolamide act?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "proximal tubule",
+          "synonyms": [
+            "proximal convoluted tubule",
+            "PCT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "With acetazolamide, which ion is lost in the urine, causing the acidosis?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "bicarbonate",
+          "synonyms": [
+            "HCO3",
+            "bicarb"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.differentiate.1",
+      "rung": "differentiate",
+      "kind": "list",
+      "prompt": "Name three uses of acetazolamide.",
+      "source_fields": [
+        "indications"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "glaucoma",
+          "synonyms": []
+        },
+        {
+          "answer": "acute mountain sickness",
+          "synonyms": [
+            "altitude sickness",
+            "mountain sickness"
+          ]
+        },
+        {
+          "answer": "idiopathic intracranial hypertension",
+          "synonyms": [
+            "IIH",
+            "pseudotumor cerebri"
+          ]
+        },
+        {
+          "answer": "metabolic alkalosis",
+          "synonyms": [
+            "alkalosis"
+          ]
+        },
+        {
+          "answer": "urinary alkalinization",
+          "synonyms": [
+            "uric acid stones",
+            "cystine stones"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "How does acetazolamide prevent mountain sickness?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "the acidosis drives breathing",
+          "synonyms": [
+            "drives breathing",
+            "stimulates breathing",
+            "increases ventilation",
+            "offsets respiratory alkalosis"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which acid-base disturbance does acetazolamide cause?",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "hyperchloremic metabolic acidosis",
+          "synonyms": [
+            "metabolic acidosis",
+            "hyperchloremic acidosis",
+            "normal anion gap acidosis",
+            "normal anion gap metabolic acidosis",
+            "non-anion gap metabolic acidosis",
+            "NAGMA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which kind of kidney stone does acetazolamide promote?",
+      "source_fields": [
+        "adverse_effects[3]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "calcium phosphate",
+          "synonyms": [
+            "calcium phosphate stones"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Acetazolamide or furosemide: which causes a metabolic acidosis?",
+      "source_fields": [
+        "aliases",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acetazolamide",
+          "synonyms": [
+            "Diamox"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Loop diuretic or acetazolamide: which acts on the proximal tubule?",
+      "source_fields": [
+        "aliases",
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "acetazolamide",
+          "synonyms": [
+            "Diamox"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Why avoid acetazolamide in cirrhosis?",
+      "source_fields": [
+        "contraindications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "raises ammonia absorption",
+          "synonyms": [
+            "ammonia",
+            "more ammonia",
+            "hyperammonemia",
+            "hepatic encephalopathy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which type of renal tubular acidosis does acetazolamide mimic?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "proximal renal tubular acidosis",
+          "synonyms": [
+            "proximal RTA",
+            "type 2 RTA",
+            "type II RTA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "carbonic-anhydrase-inhibitors.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which kidney stones does alkaline urine help dissolve?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "uric acid",
+          "synonyms": [
+            "uric acid stones",
+            "urate"
+          ]
+        },
+        {
+          "answer": "cystine",
+          "synonyms": [
+            "cystine stones"
+          ]
+        }
+      ]
+    }
+  ]
+}

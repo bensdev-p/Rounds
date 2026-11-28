@@ -1,0 +1,359 @@
+{
+  "script": {
+    "id": "mitral-valve-prolapse",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "disease",
+    "name": "Mitral valve prolapse",
+    "aliases": [
+      "MVP",
+      "floppy mitral valve",
+      "Barlow syndrome"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [
+      "IM"
+    ],
+    "epidemiology": {
+      "who": "About 2 to 3% of people, more often in people with connective tissue disorders",
+      "risk_factors": [
+        "Marfan syndrome",
+        "Ehlers-Danlos syndrome",
+        "autosomal dominant polycystic kidney disease",
+        "family history"
+      ]
+    },
+    "pathophysiology": "Myxomatous degeneration thickens and lengthens the mitral leaflets and chordae, so one or both leaflets bulge back into the left atrium in systole. Some develop mitral regurgitation.",
+    "timeline": {
+      "onset": "Usually found incidentally",
+      "course": "Mostly benign; a minority progress to significant mitral regurgitation or chordal rupture"
+    },
+    "key_findings": {
+      "history": [
+        "usually no symptoms",
+        "palpitations",
+        "atypical chest pain"
+      ],
+      "exam": [
+        "midsystolic click followed by a late systolic murmur",
+        "the click moves earlier with Valsalva or standing and later with squatting or handgrip"
+      ],
+      "labs": [],
+      "imaging": [
+        "echocardiogram showing a leaflet displaced more than 2 mm into the left atrium"
+      ]
+    },
+    "diagnosis": {
+      "confirmatory_tests": [
+        "transthoracic echocardiogram"
+      ],
+      "criteria": [
+        "systolic displacement of a mitral leaflet more than 2 mm above the annulus"
+      ]
+    },
+    "management": {
+      "first_line": [
+        "reassurance and periodic echocardiography",
+        "beta blockers for palpitations"
+      ],
+      "next_line": [
+        "mitral valve repair for severe regurgitation"
+      ]
+    },
+    "complications": [
+      "mitral regurgitation",
+      "chordal rupture with acute regurgitation",
+      "arrhythmias",
+      "infective endocarditis",
+      "sudden death, rarely"
+    ],
+    "confused_with": [
+      {
+        "script_id": "mitral-regurgitation",
+        "how_to_tell_apart": "Mitral valve prolapse gives a midsystolic click with a late systolic murmur; established mitral regurgitation gives a holosystolic murmur from S1 that radiates to the axilla."
+      }
+    ],
+    "pearls": [
+      "Maneuvers that shrink the ventricle, such as Valsalva or standing, make the click come earlier.",
+      "Mitral valve prolapse is the most common cause of primary mitral regurgitation needing surgery in high-income countries.",
+      "Routine endocarditis prophylaxis is not recommended for mitral valve prolapse."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "pathophysiology",
+        "key_findings.exam"
+      ],
+      "MS3": [
+        "diagnosis.criteria",
+        "management.first_line"
+      ],
+      "MS4": [
+        "pearls[1]",
+        "pearls[2]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "2020 ACC/AHA Guideline for the Management of Patients With Valvular Heart Disease"
+      },
+      {
+        "title": "2025 ESC/EACTS Guidelines for the management of valvular heart disease"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "mitral-valve-prolapse.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "A 25-year-old woman with palpitations has a midsystolic click followed by a late systolic murmur. Diagnosis?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral valve prolapse",
+          "synonyms": [
+            "MVP",
+            "floppy mitral valve",
+            "Barlow syndrome",
+            "mitral prolapse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "What extra sound is the hallmark of mitral valve prolapse?",
+      "source_fields": [
+        "key_findings.exam[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "midsystolic click",
+          "synonyms": [
+            "mid-systolic click",
+            "systolic click",
+            "click"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.second-order.1",
+      "rung": "second_order",
+      "kind": "list",
+      "prompt": "Name two conditions linked to mitral valve prolapse.",
+      "source_fields": [
+        "epidemiology.risk_factors"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Marfan syndrome",
+          "synonyms": [
+            "Marfan",
+            "Marfans"
+          ]
+        },
+        {
+          "answer": "Ehlers-Danlos syndrome",
+          "synonyms": [
+            "Ehlers-Danlos",
+            "EDS"
+          ]
+        },
+        {
+          "answer": "autosomal dominant polycystic kidney disease",
+          "synonyms": [
+            "ADPKD",
+            "polycystic kidney disease"
+          ]
+        }
+      ],
+      "required_count": 2
+    },
+    {
+      "id": "mitral-valve-prolapse.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which change in the leaflets causes prolapse?",
+      "source_fields": [
+        "pathophysiology"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "myxomatous degeneration",
+          "synonyms": [
+            "myxomatous",
+            "myxomatous change",
+            "myxoid degeneration"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Mitral valve prolapse or established mitral regurgitation: which gives a holosystolic murmur?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "mitral regurgitation",
+          "synonyms": [
+            "MR",
+            "mitral insufficiency"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "In mitral valve prolapse, does Valsalva make the click come earlier or later?",
+      "source_fields": [
+        "key_findings.exam[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "earlier",
+          "synonyms": [
+            "earlier in systole",
+            "sooner"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.workup.1",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "Which test confirms mitral valve prolapse?",
+      "source_fields": [
+        "diagnosis.confirmatory_tests[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "transthoracic echocardiogram",
+          "synonyms": [
+            "echocardiogram",
+            "echo",
+            "TTE",
+            "echocardiography",
+            "transthoracic echo"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "On echo, how far above the annulus must a leaflet bulge?",
+      "source_fields": [
+        "diagnosis.criteria[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "more than 2 mm",
+          "synonyms": [
+            "2 mm",
+            "over 2 mm",
+            "greater than 2 mm",
+            "2 millimeters"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Mitral valve prolapse without symptoms and with mild regurgitation. Plan?",
+      "source_fields": [
+        "management.first_line[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "reassurance",
+          "synonyms": [
+            "reassure",
+            "periodic echocardiography",
+            "serial echo",
+            "observation",
+            "monitor"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Which drug class helps palpitations in mitral valve prolapse?",
+      "source_fields": [
+        "management.first_line[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "beta blockers",
+          "synonyms": [
+            "beta blocker",
+            "beta-blockers",
+            "propranolol",
+            "metoprolol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Name a sudden complication of mitral valve prolapse that causes acute regurgitation.",
+      "source_fields": [
+        "complications[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "chordal rupture",
+          "synonyms": [
+            "ruptured chordae",
+            "chordae tendineae rupture",
+            "flail leaflet"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "mitral-valve-prolapse.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "In high-income countries, what is the most common cause of primary mitral regurgitation needing surgery?",
+      "source_fields": [
+        "pearls[1]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Mitral valve prolapse",
+          "synonyms": [
+            "MVP",
+            "myxomatous degeneration",
+            "degenerative mitral valve disease"
+          ]
+        }
+      ]
+    }
+  ]
+}

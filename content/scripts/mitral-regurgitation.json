@@ -94,6 +94,10 @@
             "source_field": "key_findings.exam[0]"
           }
         ]
+      },
+      {
+        "script_id": "mitral-valve-prolapse",
+        "how_to_tell_apart": "Established mitral regurgitation gives a holosystolic murmur from S1 that radiates to the axilla; mitral valve prolapse gives a midsystolic click with a late systolic murmur."
       }
     ],
     "pearls": [
@@ -258,16 +262,17 @@
       "id": "mitral-regurgitation.differentiate.1",
       "rung": "differentiate",
       "kind": "single",
-      "prompt": "Which maneuver makes the murmur of mitral regurgitation louder: handgrip or Valsalva?",
+      "prompt": "Mitral regurgitation or mitral valve prolapse: which has a holosystolic murmur from S1?",
       "source_fields": [
-        "pearls[2]"
+        "confused_with[1].how_to_tell_apart"
       ],
       "accepted_answers": [
         {
-          "answer": "handgrip",
+          "answer": "mitral regurgitation",
           "synonyms": [
-            "hand grip",
-            "sustained handgrip"
+            "MR",
+            "mitral insufficiency",
+            "established mitral regurgitation"
           ]
         }
       ]

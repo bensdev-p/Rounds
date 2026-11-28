@@ -1,0 +1,363 @@
+{
+  "script": {
+    "id": "niacin",
+    "status": "in_review",
+    "version": 1,
+    "reviewed_by": null,
+    "reviewed_at": null,
+    "kind": "drug",
+    "name": "Niacin",
+    "aliases": [
+      "nicotinic acid"
+    ],
+    "systems": [
+      "cardio"
+    ],
+    "rotation": [],
+    "class": "Lipid-lowering vitamin (vitamin B3, nicotinic acid)",
+    "class_members": [
+      "niacin, immediate-release",
+      "niacin, extended-release"
+    ],
+    "mechanism": "Inhibits lipolysis in adipose tissue and reduces VLDL production by the liver, so LDL and triglycerides fall and HDL rises more than with any other drug.",
+    "pharmacokinetics": [
+      "immediate-release niacin causes more flushing; extended-release causes less flushing but more liver toxicity"
+    ],
+    "indications": [
+      "rarely used now: outcome trials (AIM-HIGH, HPS2-THRIVE) showed no benefit added to a statin",
+      "historically for low HDL and mixed dyslipidemia"
+    ],
+    "adverse_effects": [
+      "flushing and itching from prostaglandin release",
+      "hepatotoxicity",
+      "hyperglycemia",
+      "hyperuricemia and gout",
+      "myopathy with statins"
+    ],
+    "contraindications": [
+      "active liver disease",
+      "active peptic ulcer disease"
+    ],
+    "interactions": [
+      "raises the risk of myopathy with statins"
+    ],
+    "monitoring": [
+      "liver enzymes",
+      "glucose and uric acid"
+    ],
+    "overdose": {
+      "features": [
+        "flushing",
+        "liver injury"
+      ],
+      "treatment": [
+        "stop the drug"
+      ]
+    },
+    "confused_with": [
+      {
+        "script_id": "fibrates",
+        "how_to_tell_apart": "Niacin raises HDL the most and works by inhibiting lipolysis in fat; fibrates mainly lower triglycerides by activating PPAR-alpha."
+      }
+    ],
+    "pearls": [
+      "Aspirin taken 30 minutes before niacin reduces the flushing, which is prostaglandin-mediated.",
+      "Niacin raises HDL more than any other drug, but raising HDL this way did not prevent heart attacks.",
+      "Niacin deficiency causes pellagra: dermatitis, diarrhea and dementia."
+    ],
+    "difficulty_tiers": {
+      "MS1-2": [
+        "mechanism",
+        "adverse_effects"
+      ],
+      "MS3": [
+        "indications"
+      ],
+      "MS4": [
+        "pharmacokinetics",
+        "pearls[1]"
+      ]
+    },
+    "anki_refs": [],
+    "sources": [
+      {
+        "title": "Katzung's Basic and Clinical Pharmacology"
+      },
+      {
+        "title": "Goodman & Gilman's The Pharmacological Basis of Therapeutics"
+      },
+      {
+        "title": "2018 AHA/ACC Guideline on the Management of Blood Cholesterol"
+      }
+    ]
+  },
+  "questions": [
+    {
+      "id": "niacin.recall.1",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Nicotinic acid, used as a lipid drug, is which vitamin?",
+      "source_fields": [
+        "name",
+        "aliases"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "Niacin",
+          "synonyms": [
+            "vitamin B3",
+            "B3"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.recall.2",
+      "rung": "recall",
+      "kind": "single",
+      "prompt": "Vitamin B3 in high doses is used as which kind of drug?",
+      "source_fields": [
+        "class"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "lipid-lowering",
+          "synonyms": [
+            "lipid lowering",
+            "cholesterol-lowering",
+            "lipid drug"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.pearl.3",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Immediate-release or extended-release niacin: which causes more flushing?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "immediate-release",
+          "synonyms": [
+            "immediate release"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.second-order.1",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "In which tissue does niacin inhibit lipolysis?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "adipose tissue",
+          "synonyms": [
+            "adipose",
+            "fat",
+            "fat tissue"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.second-order.2",
+      "rung": "second_order",
+      "kind": "single",
+      "prompt": "Which lipoprotein does niacin make the liver produce less of?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "VLDL",
+          "synonyms": [
+            "very low-density lipoprotein"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.differentiate.1",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Which lipid does niacin raise more than any other drug?",
+      "source_fields": [
+        "mechanism"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "HDL",
+          "synonyms": [
+            "high-density lipoprotein",
+            "high density lipoprotein",
+            "good cholesterol"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.differentiate.2",
+      "rung": "differentiate",
+      "kind": "single",
+      "prompt": "Why is niacin rarely used for lipids now?",
+      "source_fields": [
+        "indications[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "no benefit added to a statin",
+          "synonyms": [
+            "no benefit",
+            "no outcome benefit",
+            "trials showed no benefit",
+            "did not prevent heart attacks"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.workup.1",
+      "rung": "workup",
+      "kind": "list",
+      "prompt": "Name three adverse effects of niacin.",
+      "source_fields": [
+        "adverse_effects"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "flushing",
+          "synonyms": [
+            "itching"
+          ]
+        },
+        {
+          "answer": "hepatotoxicity",
+          "synonyms": [
+            "liver toxicity",
+            "liver injury",
+            "liver damage"
+          ]
+        },
+        {
+          "answer": "hyperglycemia",
+          "synonyms": [
+            "high blood sugar",
+            "high glucose"
+          ]
+        },
+        {
+          "answer": "hyperuricemia",
+          "synonyms": [
+            "gout",
+            "high uric acid"
+          ]
+        },
+        {
+          "answer": "myopathy",
+          "synonyms": [
+            "muscle pain",
+            "myositis",
+            "rhabdomyolysis"
+          ]
+        }
+      ],
+      "required_count": 3
+    },
+    {
+      "id": "niacin.workup.2",
+      "rung": "workup",
+      "kind": "single",
+      "prompt": "What causes niacin flushing?",
+      "source_fields": [
+        "adverse_effects[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "prostaglandin release",
+          "synonyms": [
+            "prostaglandins",
+            "prostaglandin",
+            "PGD2"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.management.1",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Niacin or a fibrate: which mainly lowers triglycerides by activating PPAR-alpha?",
+      "source_fields": [
+        "confused_with[0].how_to_tell_apart"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "fibrates",
+          "synonyms": [
+            "fibrate",
+            "fenofibrate",
+            "gemfibrozil"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.management.2",
+      "rung": "management",
+      "kind": "single",
+      "prompt": "Immediate-release or extended-release niacin: which is more toxic to the liver?",
+      "source_fields": [
+        "pharmacokinetics[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "extended-release",
+          "synonyms": [
+            "extended release",
+            "sustained-release",
+            "sustained release"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.pearl.1",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "What taken 30 minutes before niacin reduces the flushing?",
+      "source_fields": [
+        "pearls[0]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "aspirin",
+          "synonyms": [
+            "ASA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "niacin.pearl.2",
+      "rung": "pearl",
+      "kind": "single",
+      "prompt": "Which disease does niacin deficiency cause?",
+      "source_fields": [
+        "pearls[2]"
+      ],
+      "accepted_answers": [
+        {
+          "answer": "pellagra",
+          "synonyms": []
+        }
+      ]
+    }
+  ]
+}
